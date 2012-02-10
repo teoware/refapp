@@ -1,0 +1,16 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.teoware</groupId>
+  <artifactId>refapp</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>refapp</name>
+  <description>Reference application</description>
+  <modules>
+  	<module>refapp.ear</module>
+  	<module>refapp.web</module>
+  	<module>refapp.dao</module>
+  	<module>refapp.service</module>
+  	<module>refapp.rest</module>
+  </modules>
+</project>

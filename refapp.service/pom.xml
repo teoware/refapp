@@ -1,0 +1,14 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>refapp</artifactId>
+    <groupId>com.teoware</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>..</relativePath>
+  </parent>
+  <artifactId>service</artifactId>
+  <name>refapp.service</name>
+  <description>Business logic service layer</description>
+  <groupId>com.teoware.refapp</groupId>
+  <version>0.0.1-SNAPSHOT</version>
+</project>
