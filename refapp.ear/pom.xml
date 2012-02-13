@@ -1,30 +1,84 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  
-  <parent>
-    <artifactId>refapp</artifactId>
-    <groupId>com.teoware</groupId>
-    <version>${app-version}</version>
-    <relativePath>..</relativePath>
-  </parent>
-  
-  <artifactId>ear</artifactId>
-  <groupId>com.teoware.refapp</groupId>
-  <version>${app-version}</version>
-  <packaging>ear</packaging>
-  <name>refapp.ear</name>
-  
-  <properties>
-  	<app-version>0.0.1-SNAPSHOT</app-version>
-  </properties>
-  
-  <dependencies>
-  	<dependency>
-  		<groupId>com.teoware.refapp</groupId>
-  		<artifactId>web</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  		<type>war</type>
-  	</dependency>
-  </dependencies>
-  
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>com.teoware.refapp</groupId>
+		<artifactId>refapp.app</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	
+	<artifactId>refapp.ear</artifactId>
+	<packaging>ear</packaging>
+	<name>refapp.ear</name>
+	
+	<!-- PROPERTIES -->
+	<properties>
+	</properties>
+	
+	<!-- REPOSITORIES -->
+	<repositories>
+	</repositories>
+	
+	<!-- PLUGIN REPOSITORIES -->
+	<pluginRepositories>
+	</pluginRepositories>
+	
+	<!-- DEPENDENCIES -->
+	<dependencies>
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp.web</artifactId>
+			<version>${project.version}</version>
+			<type>war</type>
+		</dependency>
+	</dependencies>
+	
+	<!-- MAVEN PLUGINS -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${source.encoding}</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>${maven.ear.version}</version>
+				<configuration>
+					<version>5</version>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<webModule>
+						<groupId>com.teoware.refapp</groupId>
+						<artifactId>refapp.web</artifactId>
+						<bundleFileName>refapp.web.war</bundleFileName>
+						<unpack>true</unpack>
+					</webModule>
+					<jarModule>
+						<groupId>com.teoware.refapp</groupId>
+						<artifactId>refapp.rest</artifactId>
+						<bundleFileName>refapp.rest.jar</bundleFileName>
+						<unpack>true</unpack>
+					</jarModule>
+					<ejbModule>
+						<groupId>com.teoware.refapp</groupId>
+						<artifactId>refapp.service</artifactId>
+						<bundleFileName>refapp.service.jar</bundleFileName>
+						<unpack>true</unpack>
+					</ejbModule>
+					<ejbModule>
+						<groupId>com.teoware.refapp</groupId>
+						<artifactId>refapp.dao</artifactId>
+						<bundleFileName>refapp.dao.jar</bundleFileName>
+						<unpack>true</unpack>
+					</ejbModule>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

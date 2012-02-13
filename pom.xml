@@ -1,16 +1,87 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.teoware</groupId>
-  <artifactId>refapp</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <name>refapp</name>
-  <description>Reference application</description>
-  <modules>
-  	<module>refapp.ear</module>
-  	<module>refapp.web</module>
-  	<module>refapp.dao</module>
-  	<module>refapp.service</module>
-  	<module>refapp.rest</module>
-  </modules>
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>com.teoware.refapp</groupId>
+	<artifactId>refapp.app</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>refapp.app</name>
+	<description>Reference application</description>
+	
+	<!-- PROPERTIES -->
+	<properties>
+		<app.name>refapp</app.name>
+		<java.version>1.6</java.version>
+		<source.encoding>UTF-8</source.encoding>
+		<maven.compiler.version>2.0.2</maven.compiler.version>
+		<maven.ejb.version>2.1</maven.ejb.version>
+		<maven.ear.version>2.4.1</maven.ear.version>
+		
+		<java.faces.api.version>2.1.6</java.faces.api.version>
+		<java.faces.impl.version>2.1.6</java.faces.impl.version>
+		<javax.servlet.api.version>2.5</javax.servlet.api.version>
+		<javax.servlet.jstl.version>1.2</javax.servlet.jstl.version>
+	</properties>
+	
+	<!-- MODULES -->
+	<modules>
+		<module>refapp.dao</module>
+		<module>refapp.service</module>
+		<module>refapp.rest</module>
+		<module>refapp.web</module>
+		<module>refapp.ear</module>
+	</modules>
+	
+	<!-- REPOSITORIES -->
+	<repositories>
+	</repositories>
+	
+	<!-- PLUGIN REPOSITORIES -->
+	<pluginRepositories>
+	</pluginRepositories>
+	
+	<!-- DEPENDENCIES -->
+	<dependencyManagement>
+		<dependencies>
+		</dependencies>
+	</dependencyManagement>
+	
+	<!-- MAVEN PLUGINS -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${source.encoding}</encoding>
+				</configuration>
+			</plugin>
+			<!--
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptors>
+						<descriptor>./src/assemble/bin.xml</descriptor>
+					</descriptors>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.8</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			-->
+		</plugins>
+	</build>
 </project>
