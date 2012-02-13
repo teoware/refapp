@@ -27,7 +27,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp.web</artifactId>
+			<artifactId>refapp.interface.web</artifactId>
 			<version>${project.version}</version>
 			<type>war</type>
 		</dependency>
@@ -56,13 +56,14 @@
 					<webModule>
 						<groupId>com.teoware.refapp</groupId>
 						<artifactId>refapp.web</artifactId>
-						<bundleFileName>refapp.web.war</bundleFileName>
+						<!-- <bundleFileName>refapp.interface.web.war</bundleFileName>
 						<unpack>true</unpack>
+						<contextRoot>/</contextRoot> -->
 					</webModule>
 					<jarModule>
 						<groupId>com.teoware.refapp</groupId>
 						<artifactId>refapp.rest</artifactId>
-						<bundleFileName>refapp.rest.jar</bundleFileName>
+						<bundleFileName>refapp.interface.rest.jar</bundleFileName>
 						<unpack>true</unpack>
 					</jarModule>
 					<ejbModule>

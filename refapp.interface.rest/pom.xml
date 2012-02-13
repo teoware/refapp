@@ -7,9 +7,9 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>refapp.rest</artifactId>
+	<artifactId>refapp.interface.rest</artifactId>
 	<packaging>jar</packaging>
-	<name>refapp.rest</name>
+	<name>refapp.interface.rest</name>
 	<description>REST service layer</description>
 	
 	<!-- PROPERTIES -->
