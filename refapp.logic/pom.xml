@@ -7,9 +7,9 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>refapp.service</artifactId>
+	<artifactId>refapp.logic</artifactId>
 	<packaging>ejb</packaging>
-	<name>refapp.service</name>
+	<name>refapp.logic</name>
 	<description>Business logic service layer</description>
 	
 	<!-- PROPERTIES -->

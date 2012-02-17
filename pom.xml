@@ -26,7 +26,7 @@
 	<!-- MODULES -->
 	<modules>
 		<module>refapp.dao</module>
-		<module>refapp.service</module>
+		<module>refapp.logic</module>
 		<module>refapp.interface.rest</module>
 		<module>refapp.interface.web</module>
 		<module>refapp.ear</module>

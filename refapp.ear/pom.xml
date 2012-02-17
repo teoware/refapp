@@ -68,8 +68,8 @@
 					</jarModule>
 					<ejbModule>
 						<groupId>com.teoware.refapp</groupId>
-						<artifactId>refapp.service</artifactId>
-						<bundleFileName>refapp.service.jar</bundleFileName>
+						<artifactId>refapp.logic</artifactId>
+						<bundleFileName>refapp.logic.jar</bundleFileName>
 						<unpack>true</unpack>
 					</ejbModule>
 					<ejbModule>
