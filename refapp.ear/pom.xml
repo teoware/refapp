@@ -10,6 +10,7 @@
 	<artifactId>refapp.ear</artifactId>
 	<packaging>ear</packaging>
 	<name>refapp.ear</name>
+	<description>EAR packaging</description>
 	
 	<!-- PROPERTIES -->
 	<properties>
@@ -27,7 +28,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp.interface.web</artifactId>
+			<artifactId>refapp.web</artifactId>
 			<version>${project.version}</version>
 			<type>war</type>
 		</dependency>
@@ -56,14 +57,14 @@
 					<webModule>
 						<groupId>com.teoware.refapp</groupId>
 						<artifactId>refapp.web</artifactId>
-						<!-- <bundleFileName>refapp.interface.web.war</bundleFileName>
-						<unpack>true</unpack> -->
+						<bundleFileName>refapp.web.war</bundleFileName>
+						<unpack>true</unpack>
 						<contextRoot>/</contextRoot>
 					</webModule>
 					<jarModule>
 						<groupId>com.teoware.refapp</groupId>
 						<artifactId>refapp.rest</artifactId>
-						<bundleFileName>refapp.interface.rest.jar</bundleFileName>
+						<bundleFileName>refapp.rest.jar</bundleFileName>
 						<unpack>true</unpack>
 					</jarModule>
 					<ejbModule>

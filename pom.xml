@@ -27,8 +27,8 @@
 	<modules>
 		<module>refapp.dao</module>
 		<module>refapp.logic</module>
-		<module>refapp.interface.rest</module>
-		<module>refapp.interface.web</module>
+		<module>refapp.rest</module>
+		<module>refapp.web</module>
 		<module>refapp.ear</module>
 	</modules>
 	
