@@ -13,9 +13,9 @@
 		<app.name>refapp</app.name>
 		<java.version>1.6</java.version>
 		<source.encoding>UTF-8</source.encoding>
-		<maven.compiler.version>2.0.2</maven.compiler.version>
-		<maven.ejb.version>2.1</maven.ejb.version>
-		<maven.ear.version>2.4.1</maven.ear.version>
+		<maven.compiler.version>2.3.2</maven.compiler.version>
+		<maven.ejb.version>2.3</maven.ejb.version>
+		<maven.ear.version>2.7</maven.ear.version>
 		
 		<java.faces.api.version>2.1.6</java.faces.api.version>
 		<java.faces.impl.version>2.1.6</java.faces.impl.version>
