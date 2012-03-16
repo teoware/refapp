@@ -7,7 +7,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>com.teoware.refapp</artifactId>
+	<artifactId>refapp.interface</artifactId>
 	<packaging>jar</packaging>
 	<name>refapp.interface</name>
 	<description>Interface layer</description>
