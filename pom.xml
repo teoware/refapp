@@ -27,6 +27,7 @@
 	
 	<!-- MODULES -->
 	<modules>
+		<module>refapp.interface</module>
 		<module>refapp.dao</module>
 		<module>refapp.logic</module>
 		<module>refapp.rest</module>
