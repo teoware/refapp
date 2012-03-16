@@ -26,6 +26,22 @@
 	
 	<!-- DEPENDENCIES -->
 	<dependencies>
+		<!-- J2EE -->
+		<dependency>
+			<groupId>javax.ejb</groupId>
+			<artifactId>ejb-api</artifactId>
+		</dependency>
+		
+		<!-- Project -->
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp.interface</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp.dao</artifactId>
+		</dependency>
 	</dependencies>
 	
 	<!-- MAVEN PLUGINS -->

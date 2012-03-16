@@ -81,6 +81,19 @@
 				<version>${javax.servlet-jstl.version}</version>
 				<scope>provided</scope>
 			</dependency>
+			
+			<!-- Project -->
+			<dependency>
+				<groupId>com.teoware.refapp</groupId>
+				<artifactId>refapp.interface</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.teoware.refapp</groupId>
+				<artifactId>refapp.dao</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	
