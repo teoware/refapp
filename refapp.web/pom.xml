@@ -7,9 +7,9 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>refapp.interface.web</artifactId>
+	<artifactId>refapp.web</artifactId>
 	<packaging>war</packaging>
-	<name>refapp.interface.web</name>
+	<name>refapp.web</name>
 	<description>Web presentation layer</description>
 	
 	<!-- PROPERTIES -->
@@ -29,27 +29,21 @@
 		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-api</artifactId>
-			<version>${java.faces.api.version}</version>
-			<scope>compile</scope>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-impl</artifactId>
-			<version>${java.faces.impl.version}</version>
-			<scope>compile</scope>
 		</dependency>
 		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
-			<version>${javax.servlet.api.version}</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
-			<version>${javax.servlet.jstl.version}</version>
 		</dependency>
 	</dependencies>
 	
