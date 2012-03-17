@@ -7,9 +7,11 @@ import com.teoware.refapp.dao.NotesDao;
 import com.teoware.refapp.dto.NoteCreateRequest;
 import com.teoware.refapp.dto.NoteCreateResponse;
 
-@Stateless(mappedName = "/refapp/")
+@Stateless(mappedName = "/ejb/")
 @Remote(value = NotesDao.class)
 public class NotesDaoImpl implements NotesDao {
+
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public NoteCreateResponse createNote(NoteCreateRequest noteCreateRequest) {

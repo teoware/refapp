@@ -4,15 +4,12 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html">
-
+ 
 	<h:head>
-        <title>JSF 2.0 Hello World</title>
+    	<title>JSF 2.0 Hello World</title>
     </h:head>
-    <h:body>
+    <h:body bgcolor="white">
     	<h3>JSF 2.0 Hello World Example</h3>
-    	<h:form>
-    	   <h:inputText value="#{indexPageBean.name}"></h:inputText>
-    	   <h:commandButton value="Welcome Me" action="hello"></h:commandButton>
-    	</h:form>
+    	<h4>Welcome #{indexPageBean.name}</h4>
     </h:body>
 </html>

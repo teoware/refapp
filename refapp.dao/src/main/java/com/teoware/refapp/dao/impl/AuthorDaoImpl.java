@@ -7,9 +7,11 @@ import com.teoware.refapp.dao.AuthorDao;
 import com.teoware.refapp.dto.AuthorCreateRequest;
 import com.teoware.refapp.dto.AuthorCreateResponse;
 
-@Stateless(mappedName = "/refapp/")
+@Stateless(mappedName = "/ejb/")
 @Remote(value = AuthorDao.class)
 public class AuthorDaoImpl implements AuthorDao {
+
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public AuthorCreateResponse createAuthor(AuthorCreateRequest authorCreateRequest) {

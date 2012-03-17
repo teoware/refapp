@@ -1,5 +1,7 @@
 package com.teoware.refapp.service;
 
-public interface NotesService {
+import java.io.Serializable;
+
+public interface NotesService extends Serializable {
 
 }

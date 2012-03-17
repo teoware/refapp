@@ -9,4 +9,5 @@ import com.teoware.refapp.service.AuthorService;
 @Remote(value = AuthorService.class)
 public class AuthorServiceImpl implements AuthorService {
 
+	private static final long serialVersionUID = 1L;
 }

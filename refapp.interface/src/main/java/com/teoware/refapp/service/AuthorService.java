@@ -1,5 +1,7 @@
 package com.teoware.refapp.service;
 
-public interface AuthorService {
+import java.io.Serializable;
+
+public interface AuthorService extends Serializable {
 
 }

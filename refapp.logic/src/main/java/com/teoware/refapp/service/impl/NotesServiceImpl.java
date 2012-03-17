@@ -9,4 +9,5 @@ import com.teoware.refapp.service.NotesService;
 @Remote(value = NotesService.class)
 public class NotesServiceImpl implements NotesService {
 
+	private static final long serialVersionUID = 1L;
 }

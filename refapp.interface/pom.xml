@@ -26,6 +26,11 @@
 	
 	<!-- DEPENDENCIES -->
 	<dependencies>
+		<!-- J2EE -->
+		<dependency>
+			<groupId>javax.ejb</groupId>
+			<artifactId>ejb-api</artifactId>
+		</dependency>
 	</dependencies>
 	
 	<!-- MAVEN PLUGINS -->

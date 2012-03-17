@@ -6,6 +6,8 @@ import com.teoware.refapp.dto.NoteCreateResponse;
 
 public class NotesDaoMock implements NotesDao {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	public NoteCreateResponse createNote(NoteCreateRequest noteCreateRequest) {
 		// TODO Auto-generated method stub

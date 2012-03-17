@@ -32,6 +32,20 @@
 			<version>${project.version}</version>
 			<type>war</type>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp.logic</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp.dao</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
 	</dependencies>
 	
 	<!-- MAVEN PLUGINS -->
@@ -65,6 +79,12 @@
 						<groupId>com.teoware.refapp</groupId>
 						<artifactId>refapp.rest</artifactId>
 						<bundleFileName>refapp.rest.jar</bundleFileName>
+						<unpack>true</unpack>
+					</jarModule>
+					<jarModule>
+						<groupId>com.teoware.refapp</groupId>
+						<artifactId>refapp.interface</artifactId>
+						<bundleFileName>refapp.interface.jar</bundleFileName>
 						<unpack>true</unpack>
 					</jarModule>
 					<ejbModule>
