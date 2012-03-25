@@ -26,6 +26,7 @@
 	
 	<!-- DEPENDENCIES -->
 	<dependencies>
+		<!-- J2EE -->
 		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-api</artifactId>
@@ -44,6 +45,17 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.ejb</groupId>
+			<artifactId>ejb-api</artifactId>
+		</dependency>
+		
+		<!-- Project -->
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp.interface</artifactId>
 		</dependency>
 	</dependencies>
 	

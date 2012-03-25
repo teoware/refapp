@@ -7,7 +7,7 @@ import com.teoware.refapp.dao.AuthorDao;
 import com.teoware.refapp.dto.AuthorCreateRequest;
 import com.teoware.refapp.dto.AuthorCreateResponse;
 
-@Stateless(mappedName = "/ejb/")
+@Stateless(mappedName = "AuthorDao")
 @Remote(value = AuthorDao.class)
 public class AuthorDaoImpl implements AuthorDao {
 

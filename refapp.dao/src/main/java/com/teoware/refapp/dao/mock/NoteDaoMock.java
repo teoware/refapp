@@ -1,15 +1,10 @@
-package com.teoware.refapp.dao.impl;
+package com.teoware.refapp.dao.mock;
 
-import javax.ejb.Remote;
-import javax.ejb.Stateless;
-
-import com.teoware.refapp.dao.NotesDao;
+import com.teoware.refapp.dao.NoteDao;
 import com.teoware.refapp.dto.NoteCreateRequest;
 import com.teoware.refapp.dto.NoteCreateResponse;
 
-@Stateless(mappedName = "/ejb/")
-@Remote(value = NotesDao.class)
-public class NotesDaoImpl implements NotesDao {
+public class NoteDaoMock implements NoteDao {
 
 	private static final long serialVersionUID = 1L;
 

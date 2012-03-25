@@ -1,15 +1,10 @@
-package com.teoware.refapp.dao.impl;
+package com.teoware.refapp.dao.mock;
 
-import javax.ejb.Remote;
-import javax.ejb.Stateless;
-
-import com.teoware.refapp.dao.TasksDao;
+import com.teoware.refapp.dao.TaskDao;
 import com.teoware.refapp.dto.TaskCreateRequest;
 import com.teoware.refapp.dto.TaskCreateResponse;
 
-@Stateless(mappedName = "/ejb/")
-@Remote(value = TasksDao.class)
-public class TasksDaoImpl implements TasksDao {
+public class TaskDaoMock implements TaskDao {
 
 	private static final long serialVersionUID = 1L;
 
@@ -18,5 +13,4 @@ public class TasksDaoImpl implements TasksDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
