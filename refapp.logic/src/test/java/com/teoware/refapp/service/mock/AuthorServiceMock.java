@@ -1,14 +1,10 @@
-package com.teoware.refapp.service.impl;
-
-import javax.ejb.Stateless;
+package com.teoware.refapp.service.mock;
 
 import com.teoware.refapp.dto.AuthorCreateRequest;
 import com.teoware.refapp.dto.AuthorCreateResponse;
 import com.teoware.refapp.service.AuthorServiceLocal;
-import com.teoware.refapp.service.AuthorServiceRemote;
 
-@Stateless(name="AuthorService", mappedName="/ejb/")
-public class AuthorServiceImpl implements AuthorServiceLocal, AuthorServiceRemote {
+public class AuthorServiceMock implements AuthorServiceLocal {
 
 	private static final long serialVersionUID = 1L;
 
@@ -19,6 +15,7 @@ public class AuthorServiceImpl implements AuthorServiceLocal, AuthorServiceRemot
 
 	@Override
 	public String getName() {
-		return "Thomas";
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

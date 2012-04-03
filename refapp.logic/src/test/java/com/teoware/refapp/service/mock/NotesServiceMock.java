@@ -1,14 +1,10 @@
-package com.teoware.refapp.service.impl;
-
-import javax.ejb.Stateless;
+package com.teoware.refapp.service.mock;
 
 import com.teoware.refapp.dto.NoteCreateRequest;
 import com.teoware.refapp.dto.NoteCreateResponse;
 import com.teoware.refapp.service.NoteServiceLocal;
-import com.teoware.refapp.service.NoteServiceRemote;
 
-@Stateless(name="NoteService", mappedName="/ejb/")
-public class NoteServiceImpl implements NoteServiceLocal, NoteServiceRemote {
+public class NotesServiceMock implements NoteServiceLocal {
 
 	private static final long serialVersionUID = 1L;
 

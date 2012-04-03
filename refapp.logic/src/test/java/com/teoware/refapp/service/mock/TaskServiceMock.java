@@ -1,14 +1,10 @@
-package com.teoware.refapp.service.impl;
-
-import javax.ejb.Stateless;
+package com.teoware.refapp.service.mock;
 
 import com.teoware.refapp.dto.TaskCreateRequest;
 import com.teoware.refapp.dto.TaskCreateResponse;
 import com.teoware.refapp.service.TaskServiceLocal;
-import com.teoware.refapp.service.TaskServiceRemote;
 
-@Stateless(name="TaskService", mappedName="/ejb/")
-public class TaskServiceImpl implements TaskServiceLocal, TaskServiceRemote {
+public class TaskServiceMock implements TaskServiceLocal {
 
 	private static final long serialVersionUID = 1L;
 
