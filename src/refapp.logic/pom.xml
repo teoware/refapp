@@ -1,0 +1,70 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>com.teoware.refapp</groupId>
+		<artifactId>refapp.app</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	
+	<artifactId>refapp.logic</artifactId>
+	<packaging>ejb</packaging>
+	<name>refapp.logic</name>
+	<description>Business logic service layer</description>
+	
+	<!-- PROPERTIES -->
+	<properties>
+	</properties>
+	
+	<!-- REPOSITORIES -->
+	<repositories>
+	</repositories>
+	
+	<!-- PLUGIN REPOSITORIES -->
+	<pluginRepositories>
+	</pluginRepositories>
+	
+	<!-- DEPENDENCIES -->
+	<dependencies>
+		<!-- J2EE -->
+		<dependency>
+			<groupId>javax.ejb</groupId>
+			<artifactId>ejb-api</artifactId>
+		</dependency>
+		
+		<!-- Project -->
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp.interface</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp.dao</artifactId>
+		</dependency>
+	</dependencies>
+	
+	<!-- MAVEN PLUGINS -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${source.encoding}</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ejb-plugin</artifactId>
+				<version>${maven.ejb.version}</version>
+				<configuration>
+					<ejbVersion>3.0</ejbVersion>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
