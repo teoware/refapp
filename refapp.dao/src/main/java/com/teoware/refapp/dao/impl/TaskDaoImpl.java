@@ -1,15 +1,13 @@
 package com.teoware.refapp.dao.impl;
 
-import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
-import com.teoware.refapp.dao.TaskDao;
+import com.teoware.refapp.dao.TaskDaoLocal;
 import com.teoware.refapp.dto.TaskCreateRequest;
 import com.teoware.refapp.dto.TaskCreateResponse;
 
 @Stateless(mappedName = "TaskDao")
-@Remote(value = TaskDao.class)
-public class TaskDaoImpl implements TaskDao {
+public class TaskDaoImpl implements TaskDaoLocal {
 
 	private static final long serialVersionUID = 1L;
 

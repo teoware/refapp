@@ -1,15 +1,13 @@
 package com.teoware.refapp.dao.impl;
 
-import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
-import com.teoware.refapp.dao.AuthorDao;
+import com.teoware.refapp.dao.AuthorDaoLocal;
 import com.teoware.refapp.dto.AuthorCreateRequest;
 import com.teoware.refapp.dto.AuthorCreateResponse;
 
 @Stateless(mappedName = "AuthorDao")
-@Remote(value = AuthorDao.class)
-public class AuthorDaoImpl implements AuthorDao {
+public class AuthorDaoImpl implements AuthorDaoLocal {
 
 	private static final long serialVersionUID = 1L;
 
