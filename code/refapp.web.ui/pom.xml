@@ -7,9 +7,9 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>refapp.web</artifactId>
+	<artifactId>refapp.web.ui</artifactId>
 	<packaging>war</packaging>
-	<name>refapp.web</name>
+	<name>refapp.web.ui</name>
 	<description>Web presentation layer</description>
 	
 	<!-- PROPERTIES -->

@@ -30,8 +30,8 @@
 		<module>refapp.interface</module>
 		<module>refapp.dao</module>
 		<module>refapp.logic</module>
-		<module>refapp.rest</module>
-		<module>refapp.web</module>
+		<module>refapp.web.rest</module>
+		<module>refapp.web.ui</module>
 		<module>refapp.ear</module>
 	</modules>
 	
@@ -91,13 +91,13 @@
 			
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp.web</artifactId>
+				<artifactId>refapp.web.ui</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp.rest</artifactId>
+				<artifactId>refapp.web.rest</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			
