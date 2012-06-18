@@ -1,0 +1,117 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.teoware.refapp</groupId>
+	<artifactId>database.derby</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>database.derby</name>
+	<description>Derby database scripts</description>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>sql-maven-plugin</artifactId>
+				<version>1.5</version>
+
+				<dependencies>
+					<!-- specify the dependent jdbc driver here -->
+					<dependency>
+						<groupId>org.apache.derby</groupId>
+						<artifactId>derby</artifactId>
+						<version>10.8.2.2</version>
+					</dependency>
+				</dependencies>
+
+				<!-- common configuration shared by all executions -->
+				<configuration>
+					<driver>org.apache.derby.jdbc.EmbeddedDriver</driver>
+					<url>jdbc:derby:/Tech/Eclipse/JavaEE/database/derby/refapp;create=true</url>
+					<username>refapp</username>
+					<password>abcd1234</password>
+					<!-- You can comment out username/password configurations and
+					have maven to look them up in your settings.xml using ${settingsKey} -->
+					<settingsKey>sensibleKey</settingsKey>
+					<!--all executions are ignored if -Dmaven.test.skip=true-->
+					<skip>${maven.test.skip}</skip>
+				</configuration>
+
+				<executions>
+					<execution>
+						<id>drop-db-before-test-if-any</id>
+						<phase>process-test-resources</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<configuration>
+							<!-- need another database to drop the targeted one -->
+							<url>jdbc:derby:sun-appserv-samples</url>
+							<autocommit>true</autocommit>
+							<sqlCommand>drop database refapp</sqlCommand>
+							<!-- ignore error when database is not avaiable -->
+							<onError>continue</onError>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>create-db</id>
+						<phase>process-test-resources</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<configuration>
+							<url>jdbc:derby:refapp</url>
+							<!-- no transaction -->
+							<autocommit>true</autocommit>
+							<sqlCommand>create database yourdb</sqlCommand>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>create-schema</id>
+						<phase>process-test-resources</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<configuration>
+							<autocommit>true</autocommit>
+							<srcFiles>
+								<srcFile>src/main/sql/create.sql</srcFile>
+							</srcFiles>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>create-data</id>
+						<phase>process-test-resources</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<configuration>
+							<orderFile>ascending</orderFile>
+							<fileset>
+							<basedir>${basedir}</basedir>
+							<includes>
+								<include>src/test/sql/data.sql</include>
+							</includes>
+							</fileset>
+						</configuration>
+					</execution>
+
+					<!-- drop db after test -->
+					<execution>
+						<id>drop-db-after-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<configuration>
+							<autocommit>true</autocommit>
+							<sqlCommand>drop database refdata</sqlCommand>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
