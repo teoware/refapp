@@ -7,7 +7,7 @@ import com.teoware.refapp.dto.NoteCreateResponse;
 import com.teoware.refapp.service.NoteServiceLocal;
 import com.teoware.refapp.service.NoteServiceRemote;
 
-@Stateless(name="NoteService", mappedName="/ejb/")
+@Stateless(mappedName="NoteService")
 public class NoteServiceImpl implements NoteServiceLocal, NoteServiceRemote {
 
 	private static final long serialVersionUID = 1L;

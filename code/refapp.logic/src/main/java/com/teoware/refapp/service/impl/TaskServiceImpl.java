@@ -7,7 +7,7 @@ import com.teoware.refapp.dto.TaskCreateResponse;
 import com.teoware.refapp.service.TaskServiceLocal;
 import com.teoware.refapp.service.TaskServiceRemote;
 
-@Stateless(name="TaskService", mappedName="/ejb/")
+@Stateless(mappedName="TaskService")
 public class TaskServiceImpl implements TaskServiceLocal, TaskServiceRemote {
 
 	private static final long serialVersionUID = 1L;

@@ -32,6 +32,12 @@
 			<artifactId>ejb-api</artifactId>
 		</dependency>
 		
+		<!-- Testing -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		
 		<!-- Project -->
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
@@ -50,7 +56,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven.compiler.version}</version>
+				<version>${version.maven-compiler-plugin}</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
@@ -60,7 +66,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-ejb-plugin</artifactId>
-				<version>${maven.ejb.version}</version>
+				<version>${version.maven-ejb-plugin}</version>
 				<configuration>
 					<ejbVersion>3.0</ejbVersion>
 				</configuration>

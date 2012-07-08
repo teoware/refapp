@@ -7,7 +7,7 @@ import com.teoware.refapp.dto.AuthorCreateResponse;
 import com.teoware.refapp.service.AuthorServiceLocal;
 import com.teoware.refapp.service.AuthorServiceRemote;
 
-@Stateless(name="AuthorService", mappedName="/ejb/")
+@Stateless(mappedName="AuthorService")
 public class AuthorServiceImpl implements AuthorServiceLocal, AuthorServiceRemote {
 
 	private static final long serialVersionUID = 1L;

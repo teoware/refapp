@@ -7,10 +7,10 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>refapp.web.rest</artifactId>
+	<artifactId>refapp.web.consumer</artifactId>
 	<packaging>jar</packaging>
-	<name>refapp.web.rest</name>
-	<description>REST service layer</description>
+	<name>refapp.web.consumer</name>
+	<description>Service consumer for web presentation layer</description>
 	
 	<!-- PROPERTIES -->
 	<properties>
@@ -26,10 +26,32 @@
 	
 	<!-- DEPENDENCIES -->
 	<dependencies>
+		<!-- J2EE -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.ejb</groupId>
+			<artifactId>ejb-api</artifactId>
+		</dependency>
+		
 		<!-- Testing -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
+		</dependency>
+		
+		<!-- Project -->
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp.interface</artifactId>
 		</dependency>
 	</dependencies>
 	

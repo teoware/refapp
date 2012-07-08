@@ -11,18 +11,25 @@
 	<!-- PROPERTIES -->
 	<properties>
 		<app.name>refapp</app.name>
+		<app.release.version>${project.version}</app.release.version>
+		
 		<java.version>1.6</java.version>
 		<source.encoding>UTF-8</source.encoding>
-		<maven.compiler.version>2.3.2</maven.compiler.version>
-		<maven.compiler.version>2.0.2</maven.compiler.version>
-		<maven.ejb.version>2.1</maven.ejb.version>
-		<maven.ear.version>2.4.1</maven.ear.version>
 		
-		<javax.ejb-api.version>3.0</javax.ejb-api.version>
-		<java.faces-api.version>2.1.6</java.faces-api.version>
-		<java.faces-impl.version>2.1.6</java.faces-impl.version>
-		<javax.servlet-api.version>2.5</javax.servlet-api.version>
-		<javax.servlet-jstl.version>1.2</javax.servlet-jstl.version>
+		<!-- Plugins -->
+		<version.maven-compiler-plugin>2.3.2</version.maven-compiler-plugin>
+		<version.maven-javadoc-plugin>2.8</version.maven-javadoc-plugin>
+		<!-- <maven.compiler.version>2.0.2</maven.compiler.version> -->
+		<version.maven-ejb-plugin>2.1</version.maven-ejb-plugin>
+		<version.maven-ear-plugin>2.4.1</version.maven-ear-plugin>
+		
+		<!-- Dependencies -->
+		<version.javax.ejb-api>3.0</version.javax.ejb-api>
+		<version.java.faces-api>2.1.6</version.java.faces-api>
+		<version.java.faces-impl>2.1.6</version.java.faces-impl>
+		<version.javax.servlet-api>2.5</version.javax.servlet-api>
+		<version.javax.servlet-jstl>1.2</version.javax.servlet-jstl>
+		<version.junit>4.9</version.junit>
 	</properties>
 	
 	<!-- MODULES -->
@@ -30,6 +37,7 @@
 		<module>refapp.interface</module>
 		<module>refapp.dao</module>
 		<module>refapp.logic</module>
+		<module>refapp.web.consumer</module>
 		<module>refapp.web.rest</module>
 		<module>refapp.web.ui</module>
 		<module>refapp.ear</module>
@@ -50,36 +58,43 @@
 			<dependency>
 				<groupId>javax.ejb</groupId>
 				<artifactId>ejb-api</artifactId>
-				<version>${javax.ejb-api.version}</version>
+				<version>${version.javax.ejb-api}</version>
 				<scope>provided</scope>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.sun.faces</groupId>
 				<artifactId>jsf-api</artifactId>
-				<version>${java.faces-api.version}</version>
+				<version>${version.java.faces-api}</version>
 				<scope>provided</scope>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.sun.faces</groupId>
 				<artifactId>jsf-impl</artifactId>
-				<version>${java.faces-impl.version}</version>
+				<version>${version.java.faces-impl}</version>
 				<scope>provided</scope>
 			</dependency>
 			
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>servlet-api</artifactId>
-				<version>${javax.servlet-api.version}</version>
+				<version>${version.javax.servlet-api}</version>
 				<scope>provided</scope>
 			</dependency>
 			
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>jstl</artifactId>
-				<version>${javax.servlet-jstl.version}</version>
+				<version>${version.javax.servlet-jstl}</version>
 				<scope>provided</scope>
+			</dependency>
+			
+			<!-- Testing -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${version.junit}</version>
 			</dependency>
 			
 			<!-- Project -->
@@ -121,7 +136,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven.compiler.version}</version>
+				<version>${version.maven-compiler-plugin}</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>

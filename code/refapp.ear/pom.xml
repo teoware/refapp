@@ -28,7 +28,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp.web</artifactId>
+			<artifactId>refapp.web.ui</artifactId>
 			<version>${project.version}</version>
 			<type>war</type>
 		</dependency>
@@ -54,7 +54,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven.compiler.version}</version>
+				<version>${version.maven-compiler-plugin}</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
@@ -64,21 +64,21 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-ear-plugin</artifactId>
-				<version>${maven.ear.version}</version>
+				<version>${version.maven-ear-plugin}</version>
 				<configuration>
 					<version>5</version>
 					<defaultLibBundleDir>lib</defaultLibBundleDir>
 					<webModule>
 						<groupId>com.teoware.refapp</groupId>
-						<artifactId>refapp.web</artifactId>
-						<bundleFileName>refapp.web.war</bundleFileName>
+						<artifactId>refapp.web.ui</artifactId>
+						<bundleFileName>refapp.web.ui.war</bundleFileName>
 						<unpack>true</unpack>
 						<contextRoot>/</contextRoot>
 					</webModule>
 					<jarModule>
 						<groupId>com.teoware.refapp</groupId>
-						<artifactId>refapp.rest</artifactId>
-						<bundleFileName>refapp.rest.jar</bundleFileName>
+						<artifactId>refapp.web.rest</artifactId>
+						<bundleFileName>refapp.web.rest.jar</bundleFileName>
 						<unpack>true</unpack>
 					</jarModule>
 					<jarModule>
