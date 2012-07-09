@@ -3,10 +3,10 @@ package com.teoware.refapp.web.ui.frontpage;
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 
-@ManagedBean(name="hello")
-@SessionScoped
+@ManagedBean
+@RequestScoped
 public class FrontPageBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;

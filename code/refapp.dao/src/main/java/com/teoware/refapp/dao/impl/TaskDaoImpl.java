@@ -3,8 +3,8 @@ package com.teoware.refapp.dao.impl;
 import javax.ejb.Stateless;
 
 import com.teoware.refapp.dao.TaskDaoLocal;
-import com.teoware.refapp.dto.TaskCreateRequest;
-import com.teoware.refapp.dto.TaskCreateResponse;
+import com.teoware.refapp.dao.message.InsertTaskRequest;
+import com.teoware.refapp.dao.message.InsertTaskResponse;
 
 @Stateless(mappedName = "TaskDao")
 public class TaskDaoImpl implements TaskDaoLocal {
@@ -12,7 +12,7 @@ public class TaskDaoImpl implements TaskDaoLocal {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public TaskCreateResponse createTask(TaskCreateRequest taskCreateRequest) {
+	public InsertTaskResponse insertTask(InsertTaskRequest insertTaskRequest) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -2,10 +2,10 @@ package com.teoware.refapp.service.impl;
 
 import javax.ejb.Stateless;
 
-import com.teoware.refapp.dto.AuthorCreateRequest;
-import com.teoware.refapp.dto.AuthorCreateResponse;
 import com.teoware.refapp.service.AuthorServiceLocal;
 import com.teoware.refapp.service.AuthorServiceRemote;
+import com.teoware.refapp.service.message.RegisterAuthorRequest;
+import com.teoware.refapp.service.message.RegisterAuthorResponse;
 
 @Stateless(mappedName="AuthorService")
 public class AuthorServiceImpl implements AuthorServiceLocal, AuthorServiceRemote {
@@ -13,7 +13,7 @@ public class AuthorServiceImpl implements AuthorServiceLocal, AuthorServiceRemot
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public AuthorCreateResponse createAuthor(AuthorCreateRequest authorCreateRequest) {
+	public RegisterAuthorResponse registerAuthor(RegisterAuthorRequest registerAuthorRequest) {
 		return null;
 	}
 

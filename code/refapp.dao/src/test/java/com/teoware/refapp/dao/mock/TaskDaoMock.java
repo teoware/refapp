@@ -1,15 +1,15 @@
 package com.teoware.refapp.dao.mock;
 
 import com.teoware.refapp.dao.TaskDaoLocal;
-import com.teoware.refapp.dto.TaskCreateRequest;
-import com.teoware.refapp.dto.TaskCreateResponse;
+import com.teoware.refapp.dao.message.InsertTaskRequest;
+import com.teoware.refapp.dao.message.InsertTaskResponse;
 
 public class TaskDaoMock implements TaskDaoLocal {
 
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public TaskCreateResponse createTask(TaskCreateRequest taskCreateRequest) {
+	public InsertTaskResponse insertTask(InsertTaskRequest insertTaskRequest) {
 		// TODO Auto-generated method stub
 		return null;
 	}

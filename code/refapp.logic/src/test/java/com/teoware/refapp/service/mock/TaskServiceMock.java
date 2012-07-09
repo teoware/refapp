@@ -1,15 +1,15 @@
 package com.teoware.refapp.service.mock;
 
-import com.teoware.refapp.dto.TaskCreateRequest;
-import com.teoware.refapp.dto.TaskCreateResponse;
 import com.teoware.refapp.service.TaskServiceLocal;
+import com.teoware.refapp.service.message.CreateTaskRequest;
+import com.teoware.refapp.service.message.CreateTaskResponse;
 
 public class TaskServiceMock implements TaskServiceLocal {
 
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public TaskCreateResponse createTask(TaskCreateRequest taskCreateRequest) {
+	public CreateTaskResponse createTask(CreateTaskRequest taskCreateRequest) {
 		return null;
 	}
 

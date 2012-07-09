@@ -24,12 +24,19 @@
 		<version.maven-ear-plugin>2.4.1</version.maven-ear-plugin>
 		
 		<!-- Dependencies -->
+		<!-- J2EE -->
 		<version.javax.ejb-api>3.0</version.javax.ejb-api>
 		<version.java.faces-api>2.1.6</version.java.faces-api>
 		<version.java.faces-impl>2.1.6</version.java.faces-impl>
 		<version.javax.servlet-api>2.5</version.javax.servlet-api>
 		<version.javax.servlet-jstl>1.2</version.javax.servlet-jstl>
+		<!-- Logging -->
+		<version.slf4j-log4j12>1.6.2</version.slf4j-log4j12>
+		<version.slf4j-api>1.6.2</version.slf4j-api>
+		<!-- Testing -->
 		<version.junit>4.9</version.junit>
+		<version.easymock>3.0</version.easymock>
+		<version.mockito-core>1.9.0</version.mockito-core>
 	</properties>
 	
 	<!-- MODULES -->
@@ -90,13 +97,40 @@
 				<scope>provided</scope>
 			</dependency>
 			
+			<!-- Logging -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${version.slf4j-log4j12}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${version.slf4j-api}</version>
+			</dependency>
+			
 			<!-- Testing -->
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>${version.junit}</version>
 			</dependency>
+			<!-- 
+			<dependency>
+				<groupId>org.easymock</groupId>
+				<artifactId>easymock</artifactId>
+				<scope>test</scope>
+				<version>${version.easymock}</version>
+			</dependency>
 			
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>  
+				<version>${version.mockito-core}</version> 
+				<scope>test</scope>
+			</dependency>
+			-->
 			<!-- Project -->
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
