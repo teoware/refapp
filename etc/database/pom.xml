@@ -1,0 +1,96 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>com.teoware.refapp</groupId>
+	<artifactId>refapp.database</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>rafapp.database</name>
+	<description>Database scripts</description>
+	
+	<!-- PROPERTIES -->
+	<properties>
+		<java.version>1.6</java.version>
+		<source.encoding>UTF-8</source.encoding>
+		
+		<!-- Plugins -->
+		<version.maven-compiler-plugin>2.3.2</version.maven-compiler-plugin>
+		<version.sql-maven-plugin>1.5</version.sql-maven-plugin>
+		<version.m2e.lifecycle-mapping>1.0.0</version.m2e.lifecycle-mapping>
+		
+		<!-- Dependencies -->
+		<version.derby>10.8.2.2</version.derby>
+	</properties>
+	
+	<modules>
+		<module>refapp.database.derby</module>
+	</modules>
+	
+	<!-- REPOSITORIES -->
+	<repositories>
+	</repositories>
+	
+	<!-- PLUGIN REPOSITORIES -->
+	<pluginRepositories>
+	</pluginRepositories>
+	
+	<!-- DEPENDENCIES -->
+	<dependencyManagement>
+		<dependencies>
+			<!-- specify the dependent jdbc driver here -->
+			<dependency>
+				<groupId>org.apache.derby</groupId>
+				<artifactId>derby</artifactId>
+				<version>${version.derby}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${version.maven-compiler-plugin}</version>
+					<configuration>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+						<encoding>${source.encoding}</encoding>
+					</configuration>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>sql-maven-plugin</artifactId>
+					<version>${version.sql-maven-plugin}</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>${version.m2e.lifecycle-mapping}</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.codehaus.mojo</groupId>
+										<artifactId>sql-maven-plugin</artifactId>
+										<versionRange>[1.4,)</versionRange>
+										<goals>
+											<goal>execute</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>

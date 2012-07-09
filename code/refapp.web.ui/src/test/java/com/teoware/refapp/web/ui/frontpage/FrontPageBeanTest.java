@@ -1,6 +1,6 @@
 package com.teoware.refapp.web.ui.frontpage;
 
-import junit.framework.Assert;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,13 +10,13 @@ public class FrontPageBeanTest {
 	private FrontPageBean frontPage;
 	
 	@Before
-	public void setup() {
+	public void setUp() {
 		frontPage = new FrontPageBean();
 	}
 	
 	@Test
 	public void testFrontPage() {
 		frontPage.setName("Ego");
-		Assert.assertEquals("Ego", frontPage.getName());
+		assertEquals("Ego", frontPage.getName());
 	}
 }

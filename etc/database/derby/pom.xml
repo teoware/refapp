@@ -1,27 +1,47 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.teoware.refapp</groupId>
+	
+	<parent>
+		<groupId>com.teoware.refapp</groupId>
+		<artifactId>refapp.database</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	
 	<artifactId>refapp.database.derby</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>rafapp.database.derby</name>
 	<description>Derby database scripts</description>
 	
+	<!-- PROPERTIES -->
+	<properties>
+	</properties>
+	
+	<!-- REPOSITORIES -->
+	<repositories>
+	</repositories>
+	
+	<!-- PLUGIN REPOSITORIES -->
+	<pluginRepositories>
+	</pluginRepositories>
+	
+	<!-- DEPENDENCIES -->
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+		</dependency>
+	</dependencies>
+	
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			
+			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>sql-maven-plugin</artifactId>
-				<version>1.5</version>
-
-				<dependencies>
-					<!-- specify the dependent jdbc driver here -->
-					<dependency>
-						<groupId>org.apache.derby</groupId>
-						<artifactId>derby</artifactId>
-						<version>10.8.2.2</version>
-					</dependency>
-				</dependencies>
 
 				<!-- common configuration shared by all executions -->
 				<configuration>
@@ -31,7 +51,7 @@
 					<password>abcd1234</password>
 					<!-- You can comment out username/password configurations and
 					have maven to look them up in your settings.xml using ${settingsKey} -->
-					<settingsKey>sensibleKey</settingsKey>
+					<!-- <settingsKey>sensibleKey</settingsKey> -->
 					<!--all executions are ignored if -Dmaven.test.skip=true-->
 					<skip>${maven.test.skip}</skip>
 				</configuration>

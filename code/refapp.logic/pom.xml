@@ -38,6 +38,11 @@
 			<artifactId>junit</artifactId>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.apache.openejb</groupId>
+			<artifactId>openejb-core</artifactId>
+		</dependency>
+		
 		<!-- Project -->
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
@@ -56,20 +61,10 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${version.maven-compiler-plugin}</version>
-				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-					<encoding>${source.encoding}</encoding>
-				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-ejb-plugin</artifactId>
-				<version>${version.maven-ejb-plugin}</version>
-				<configuration>
-					<ejbVersion>3.0</ejbVersion>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
