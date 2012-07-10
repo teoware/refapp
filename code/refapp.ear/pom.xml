@@ -28,6 +28,13 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp.model</artifactId>
+			<version>${app.release.version}</version><!--$NO-MVN-MAN-VER$-->
+			<type>jar</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
 			<artifactId>refapp.web.ui</artifactId>
 			<version>${app.release.version}</version><!--$NO-MVN-MAN-VER$-->
 			<type>war</type>
@@ -75,6 +82,12 @@
 				<configuration>
 					<version>${ear.version}</version>
 					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<jarModule>
+						<groupId>com.teoware.refapp</groupId>
+						<artifactId>refapp.model</artifactId>
+						<!-- <bundleFileName>refapp.model.jar</bundleFileName> -->
+						<unpack>true</unpack>
+					</jarModule>
 					<webModule>
 						<groupId>com.teoware.refapp</groupId>
 						<artifactId>refapp.web.ui</artifactId>

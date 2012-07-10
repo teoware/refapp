@@ -43,6 +43,7 @@
 	
 	<!-- MODULES -->
 	<modules>
+		<module>refapp.model</module>
 		<module>refapp.dao</module>
 		<module>refapp.logic.interface</module>
 		<module>refapp.logic</module>
@@ -141,6 +142,12 @@
 			</dependency>
 			
 			<!-- Project -->
+			<dependency>
+				<groupId>com.teoware.refapp</groupId>
+				<artifactId>refapp.model</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
 				<artifactId>refapp.web.consumer</artifactId>
