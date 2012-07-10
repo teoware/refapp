@@ -19,7 +19,7 @@ import org.junit.Test;
 import com.teoware.refapp.service.AuthorService;
 import com.teoware.refapp.service.AuthorServiceLocal;
 
-public class AuthorServiceIntTest {
+public class AuthorServiceTest {
 
 	private InitialContext context;
 	
