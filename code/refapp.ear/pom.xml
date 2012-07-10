@@ -29,21 +29,35 @@
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
 			<artifactId>refapp.web.ui</artifactId>
-			<version>${project.version}</version>
+			<version>${app.release.version}</version><!--$NO-MVN-MAN-VER$-->
 			<type>war</type>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp.web.consumer</artifactId>
+			<version>${app.release.version}</version><!--$NO-MVN-MAN-VER$-->
+			<type>jar</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp.logic.interface</artifactId>
+			<version>${app.release.version}</version><!--$NO-MVN-MAN-VER$-->
+			<type>jar</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
 			<artifactId>refapp.logic</artifactId>
-			<version>${project.version}</version>
+			<version>${app.release.version}</version><!--$NO-MVN-MAN-VER$-->
 			<type>ejb</type>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
 			<artifactId>refapp.dao</artifactId>
-			<version>${project.version}</version>
+			<version>${app.release.version}</version><!--$NO-MVN-MAN-VER$-->
 			<type>ejb</type>
 		</dependency>
 	</dependencies>
@@ -54,19 +68,12 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${version.maven-compiler-plugin}</version>
-				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-					<encoding>${source.encoding}</encoding>
-				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-ear-plugin</artifactId>
-				<version>${version.maven-ear-plugin}</version>
 				<configuration>
-					<version>5</version>
+					<version>${ear.version}</version>
 					<defaultLibBundleDir>lib</defaultLibBundleDir>
 					<webModule>
 						<groupId>com.teoware.refapp</groupId>
@@ -83,8 +90,14 @@
 					</jarModule>
 					<jarModule>
 						<groupId>com.teoware.refapp</groupId>
-						<artifactId>refapp.interface</artifactId>
-						<bundleFileName>refapp.interface.jar</bundleFileName>
+						<artifactId>refapp.web.consumer</artifactId>
+						<bundleFileName>refapp.web.consumer.jar</bundleFileName>
+						<unpack>true</unpack>
+					</jarModule>
+					<jarModule>
+						<groupId>com.teoware.refapp</groupId>
+						<artifactId>refapp.logic.interface</artifactId>
+						<bundleFileName>refapp.logic.interface.jar</bundleFileName>
 						<unpack>true</unpack>
 					</jarModule>
 					<ejbModule>

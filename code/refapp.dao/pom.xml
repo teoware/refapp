@@ -39,10 +39,10 @@
 		</dependency>
 		
 		<!-- Project -->
-		<dependency>
+		<!--<dependency>
 			<groupId>com.teoware.refapp</groupId>
 			<artifactId>refapp.interface</artifactId>
-		</dependency>
+		</dependency>-->
 	</dependencies>
 	
 	<!-- MAVEN PLUGINS -->

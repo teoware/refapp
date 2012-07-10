@@ -7,5 +7,5 @@ import com.teoware.refapp.dao.message.InsertNoteResponse;
 
 public interface NoteDao extends Serializable {
 
-	public InsertNoteResponse insertNote(InsertNoteRequest insertNoteRequest);
+	public InsertNoteResponse insertNote(InsertNoteRequest request);
 }

@@ -12,7 +12,7 @@ public class NoteDaoImpl implements NoteDaoLocal {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public InsertNoteResponse insertNote(InsertNoteRequest insertNoteRequest) {
+	public InsertNoteResponse insertNote(InsertNoteRequest request) {
 		// TODO Auto-generated method stub
 		return null;
 	}

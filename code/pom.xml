@@ -16,6 +16,7 @@
 		<java.version>1.6</java.version>
 		<source.encoding>UTF-8</source.encoding>
 		<ejb.version>3.0</ejb.version>
+		<ear.version>5</ear.version>
 		
 		<!-- Plugins -->
 		<version.maven-compiler-plugin>2.3.2</version.maven-compiler-plugin>
@@ -42,8 +43,8 @@
 	
 	<!-- MODULES -->
 	<modules>
-		<module>refapp.interface</module>
 		<module>refapp.dao</module>
+		<module>refapp.logic.interface</module>
 		<module>refapp.logic</module>
 		<module>refapp.web.consumer</module>
 		<module>refapp.web.rest</module>
@@ -142,7 +143,7 @@
 			<!-- Project -->
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp.interface</artifactId>
+				<artifactId>refapp.web.consumer</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			
@@ -155,6 +156,12 @@
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
 				<artifactId>refapp.web.rest</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.teoware.refapp</groupId>
+				<artifactId>refapp.logic.interface</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			
@@ -186,6 +193,7 @@
 						<encoding>${source.encoding}</encoding>
 					</configuration>
 				</plugin>
+				
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-ejb-plugin</artifactId>
@@ -193,6 +201,12 @@
 					<configuration>
 						<ejbVersion>${ejb.version}</ejbVersion>
 					</configuration>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-ear-plugin</artifactId>
+					<version>${version.maven-ear-plugin}</version>
 				</plugin>
 				<!--
 				<plugin>
@@ -203,6 +217,7 @@
 						</descriptors>
 					</configuration>
 				</plugin>
+				
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
@@ -215,8 +230,44 @@
 							</goals>
 						</execution>
 					</executions>
+				</plugin> -->
+				
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>default-test</id>
+							<phase>test</phase>
+							<goals>
+								<goal>test</goal>
+							</goals>
+							<configuration>
+								<!-- <testFailureIgnore>true</testFailureIgnore> -->
+								<excludes>
+									<exclude>**/itest/**</exclude>
+								</excludes>
+								<skip>${skip.unit.test}</skip>
+							</configuration>
+						</execution>
+						<execution>
+							<id>surefire-it</id>
+							<phase>integration-test</phase>
+							<goals>
+								<goal>test</goal>
+							</goals>
+							<configuration>
+								<!-- <testFailureIgnore>true</testFailureIgnore> -->
+								<excludes>
+									<exclude>**/*.xml</exclude>
+								</excludes>
+								<includes>
+									<include>**/itest/**</include>
+								</includes>
+								<skip>${skip.intergration.test}</skip>
+							</configuration>
+						</execution>
+					</executions>
 				</plugin>
-				-->
 			</plugins>
 		</pluginManagement>
 	</build>

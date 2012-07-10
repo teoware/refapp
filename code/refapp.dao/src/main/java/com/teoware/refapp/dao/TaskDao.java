@@ -6,5 +6,5 @@ import com.teoware.refapp.dao.message.InsertTaskResponse;
 
 public interface TaskDao extends Serializable {
 
-	public InsertTaskResponse insertTask(InsertTaskRequest insertTaskRequest);
+	public InsertTaskResponse insertTask(InsertTaskRequest request);
 }

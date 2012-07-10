@@ -61,7 +61,7 @@
 		<!-- Project -->
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp.logic</artifactId>
+			<artifactId>refapp.web.consumer</artifactId>
 		</dependency>
 	</dependencies>
 	

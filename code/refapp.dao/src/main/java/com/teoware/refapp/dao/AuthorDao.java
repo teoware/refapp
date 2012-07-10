@@ -7,5 +7,5 @@ import com.teoware.refapp.dao.message.InsertAuthorResponse;
 
 public interface AuthorDao extends Serializable {
 
-	public InsertAuthorResponse insertAuthor(InsertAuthorRequest insertAuthorRequest);
+	public InsertAuthorResponse insertAuthor(InsertAuthorRequest request);
 }
