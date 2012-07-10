@@ -7,10 +7,10 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>refapp.logic</artifactId>
-	<packaging>ejb</packaging>
-	<name>refapp.logic</name>
-	<description>Business logic service layer</description>
+	<artifactId>refapp.logic.interface</artifactId>
+	<packaging>jar</packaging>
+	<name>refapp.logic.interface</name>
+	<description>Business logic interface layer</description>
 	
 	<!-- PROPERTIES -->
 	<properties>
@@ -38,21 +38,7 @@
 			<artifactId>junit</artifactId>
 		</dependency>
 		
-		<dependency>
-			<groupId>org.apache.openejb</groupId>
-			<artifactId>openejb-core</artifactId>
-		</dependency>
-		
 		<!-- Project -->
-		<dependency>
-			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp.logic.interface</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp.dao</artifactId>
-		</dependency>
 	</dependencies>
 	
 	<!-- MAVEN PLUGINS -->
@@ -61,10 +47,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-ejb-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
