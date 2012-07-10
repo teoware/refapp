@@ -78,38 +78,38 @@
 					<webModule>
 						<groupId>com.teoware.refapp</groupId>
 						<artifactId>refapp.web.ui</artifactId>
-						<bundleFileName>refapp.web.ui.war</bundleFileName>
+						<!-- <bundleFileName>refapp.web.ui.war</bundleFileName> -->
 						<unpack>true</unpack>
-						<contextRoot>/</contextRoot>
+						<!-- <contextRoot>/</contextRoot> -->
 					</webModule>
 					<jarModule>
 						<groupId>com.teoware.refapp</groupId>
 						<artifactId>refapp.web.rest</artifactId>
-						<bundleFileName>refapp.web.rest.jar</bundleFileName>
+						<!-- <bundleFileName>refapp.web.rest.jar</bundleFileName> -->
 						<unpack>true</unpack>
 					</jarModule>
 					<jarModule>
 						<groupId>com.teoware.refapp</groupId>
 						<artifactId>refapp.web.consumer</artifactId>
-						<bundleFileName>refapp.web.consumer.jar</bundleFileName>
+						<!-- <bundleFileName>refapp.web.consumer.jar</bundleFileName> -->
 						<unpack>true</unpack>
 					</jarModule>
 					<jarModule>
 						<groupId>com.teoware.refapp</groupId>
 						<artifactId>refapp.logic.interface</artifactId>
-						<bundleFileName>refapp.logic.interface.jar</bundleFileName>
+						<!-- <bundleFileName>refapp.logic.interface.jar</bundleFileName> -->
 						<unpack>true</unpack>
 					</jarModule>
 					<ejbModule>
 						<groupId>com.teoware.refapp</groupId>
 						<artifactId>refapp.logic</artifactId>
-						<bundleFileName>refapp.logic.jar</bundleFileName>
+						<!-- <bundleFileName>refapp.logic.jar</bundleFileName> -->
 						<unpack>true</unpack>
 					</ejbModule>
 					<ejbModule>
 						<groupId>com.teoware.refapp</groupId>
 						<artifactId>refapp.dao</artifactId>
-						<bundleFileName>refapp.dao.jar</bundleFileName>
+						<!-- <bundleFileName>refapp.dao.jar</bundleFileName> -->
 						<unpack>true</unpack>
 					</ejbModule>
 				</configuration>
