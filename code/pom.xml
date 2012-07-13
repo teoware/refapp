@@ -252,6 +252,7 @@
 								<!-- <testFailureIgnore>true</testFailureIgnore> -->
 								<excludes>
 									<exclude>**/itest/**</exclude>
+									<exclude>**/test/util/**</exclude>
 								</excludes>
 								<skip>${skip.unit.test}</skip>
 							</configuration>
