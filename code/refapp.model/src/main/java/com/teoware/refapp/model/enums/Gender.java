@@ -1,6 +1,6 @@
 package com.teoware.refapp.model.enums;
 
-public enum Result {
+public enum Gender {
 
-	SUCCESS, ERROR
+	MALE, FEMALE
 }

@@ -1,9 +1,13 @@
 package com.teoware.refapp.service.test;
 
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import static org.easymock.EasyMock.*;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -13,8 +17,6 @@ import org.junit.Test;
 import com.teoware.refapp.dao.AuthorDaoLocal;
 import com.teoware.refapp.dao.DaoException;
 import com.teoware.refapp.dao.message.InsertAuthorRequest;
-import com.teoware.refapp.model.author.Author;
-import com.teoware.refapp.model.author.AuthorId;
 import com.teoware.refapp.model.common.OperationResult;
 import com.teoware.refapp.model.enums.Result;
 import com.teoware.refapp.service.ServiceException;
@@ -22,6 +24,7 @@ import com.teoware.refapp.service.ValidationException;
 import com.teoware.refapp.service.message.RegisterAuthorRequest;
 import com.teoware.refapp.service.message.RegisterAuthorResponse;
 import com.teoware.refapp.service.mock.AuthorServiceMock;
+import com.teoware.refapp.service.test.util.TestHelper;
 
 public class AuthorServiceTest {
 
@@ -48,14 +51,8 @@ public class AuthorServiceTest {
 	}
 
 	private RegisterAuthorRequest createValidRegisterAuthorRequest() {
-		AuthorId authorId = new AuthorId();
-		Author author = new Author(authorId, null, null);
-		return new RegisterAuthorRequest(author);
-	}
-
-	private RegisterAuthorRequest createInvalidRegisterAuthorRequest() {
-		Author author = new Author(null, null, null);
-		return new RegisterAuthorRequest(author);
+		RegisterAuthorRequest request = TestHelper.populateRegisterAuthorRequest();
+		return request;
 	}
 
 	@Test
@@ -123,7 +120,8 @@ public class AuthorServiceTest {
 
 	@Test(expected=ValidationException.class)
 	public void testRegisterAuthorThrowsValidationException() throws ValidationException, ServiceException {
-		RegisterAuthorRequest request = createInvalidRegisterAuthorRequest();
+		RegisterAuthorRequest request = createValidRegisterAuthorRequest();
+		request.getBody().setAuthorId(null);
 		authorService.registerAuthor(request);
 	}
 
@@ -133,5 +131,6 @@ public class AuthorServiceTest {
 		replay(authorDaoMock);
 		RegisterAuthorRequest request = createValidRegisterAuthorRequest();
 		authorService.registerAuthor(request);
+		verify(authorDaoMock);
 	}
 }

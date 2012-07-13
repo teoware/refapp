@@ -3,6 +3,9 @@ package com.teoware.refapp.service.impl;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.teoware.refapp.dao.AuthorDaoLocal;
 import com.teoware.refapp.dao.DaoException;
 import com.teoware.refapp.dao.message.InsertAuthorRequest;
@@ -24,12 +27,14 @@ import com.teoware.refapp.service.message.RegisterAuthorResponse;
 public class AuthorServiceImpl implements AuthorServiceLocal, AuthorServiceRemote {
 
 	private static final long serialVersionUID = 1L;
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@EJB
 	protected AuthorDaoLocal authorDao;
 
 	@Override
 	public RegisterAuthorResponse registerAuthor(RegisterAuthorRequest request) throws ValidationException, ServiceException {
+		logger.debug("YEYYEYEYYEYEYEYYEYE!!!!!!!!!!!!");
 		Header header = request.getHeader();
 		Author author = request.getBody();
 		if (author.getAuthorId() == null) {

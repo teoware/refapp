@@ -4,25 +4,31 @@ import com.teoware.refapp.model.base.BaseBody;
 
 public class Author extends BaseBody {
 
-	private AuthorId authorId;
-	private AuthorInfo authorInfo;
-	private AuthorAddress authorAddress;
-
-	public Author(AuthorId authorId, AuthorInfo authorInfo, AuthorAddress authorAddress) {
-		this.authorId = authorId;
-		this.authorInfo = authorInfo;
-		this.authorAddress = authorAddress;
-	}
+	protected AuthorId authorId;
+	protected AuthorInfo authorInfo;
+	protected AuthorAddress authorAddress;
 
 	public AuthorId getAuthorId() {
 		return authorId;
+	}
+
+	public void setAuthorId(AuthorId authorId) {
+		this.authorId = authorId;
 	}
 
 	public AuthorInfo getAuthorInfo() {
 		return authorInfo;
 	}
 
+	public void setAuthorInfo(AuthorInfo authorInfo) {
+		this.authorInfo = authorInfo;
+	}
+
 	public AuthorAddress getAuthorAddress() {
 		return authorAddress;
+	}
+
+	public void setAuthorAddress(AuthorAddress authorAddress) {
+		this.authorAddress = authorAddress;
 	}
 }
