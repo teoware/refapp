@@ -3,6 +3,7 @@ package com.teoware.refapp.dao.impl;
 import javax.ejb.Stateless;
 
 import com.teoware.refapp.dao.AuthorDaoLocal;
+import com.teoware.refapp.dao.DaoException;
 import com.teoware.refapp.dao.message.InsertAuthorRequest;
 import com.teoware.refapp.dao.message.InsertAuthorResponse;
 import com.teoware.refapp.dao.message.SelectAuthorRequest;
@@ -16,7 +17,7 @@ public class AuthorDaoImpl implements AuthorDaoLocal {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public InsertAuthorResponse insertAuthor(InsertAuthorRequest request) {
+	public InsertAuthorResponse insertAuthor(InsertAuthorRequest request) throws DaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}

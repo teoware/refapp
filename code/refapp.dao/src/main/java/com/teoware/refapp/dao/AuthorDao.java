@@ -11,7 +11,7 @@ import com.teoware.refapp.dao.message.UpdateAuthorResponse;
 
 public interface AuthorDao extends Serializable {
 
-	public InsertAuthorResponse insertAuthor(InsertAuthorRequest request);
+	public InsertAuthorResponse insertAuthor(InsertAuthorRequest request) throws DaoException;
 	
 	public UpdateAuthorResponse updateAuthor(UpdateAuthorRequest request);
 	

@@ -6,18 +6,18 @@ import com.teoware.refapp.model.enums.Result;
 public class OperationResult extends BaseBody {
 
 	private Result result;
-	private String message;
+	private String description;
 
-	public OperationResult(Result result, String message) {
+	public OperationResult(Result result, String description) {
 		this.result = result;
-		this.message = message;
+		this.description = description;
 	}
 
 	public Result getResult() {
 		return result;
 	}
 
-	public String getMessage() {
-		return message;
+	public String getDescription() {
+		return description;
 	}
 }

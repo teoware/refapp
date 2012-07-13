@@ -10,11 +10,9 @@ import com.teoware.refapp.service.message.RegisterAuthorResponse;
 
 public interface AuthorService extends Serializable {
 
-	public RegisterAuthorResponse registerAuthor(RegisterAuthorRequest registerAuthorRequest);
+	public RegisterAuthorResponse registerAuthor(RegisterAuthorRequest request) throws ValidationException, ServiceException;
 	
 	public FindAuthorResponse findAuthor(FindAuthorRequest request);
 	
 	public ListAuthorsResponse listAuthors();
-	
-	public String getName();
 }
