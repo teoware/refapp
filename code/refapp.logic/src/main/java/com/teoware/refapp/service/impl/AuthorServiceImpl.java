@@ -2,6 +2,7 @@ package com.teoware.refapp.service.impl;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,12 +17,14 @@ import com.teoware.refapp.model.enums.Result;
 import com.teoware.refapp.service.AuthorServiceLocal;
 import com.teoware.refapp.service.AuthorServiceRemote;
 import com.teoware.refapp.service.ServiceException;
-import com.teoware.refapp.service.ValidationException;
+import com.teoware.refapp.service.interceptor.ValidationInterceptor;
 import com.teoware.refapp.service.message.FindAuthorRequest;
 import com.teoware.refapp.service.message.FindAuthorResponse;
 import com.teoware.refapp.service.message.ListAuthorsResponse;
 import com.teoware.refapp.service.message.RegisterAuthorRequest;
 import com.teoware.refapp.service.message.RegisterAuthorResponse;
+import com.teoware.refapp.service.validation.Validate;
+import com.teoware.refapp.service.validation.ValidationException;
 
 @Stateless(mappedName="AuthorService")
 public class AuthorServiceImpl implements AuthorServiceLocal, AuthorServiceRemote {
@@ -32,15 +35,15 @@ public class AuthorServiceImpl implements AuthorServiceLocal, AuthorServiceRemot
 	@EJB
 	protected AuthorDaoLocal authorDao;
 
+	@Interceptors({ValidationInterceptor.class})
+	@Validate(com.teoware.refapp.service.validation.group.RegisterAuthorRequestGroup.class)
 	@Override
-	public RegisterAuthorResponse registerAuthor(RegisterAuthorRequest request) throws ValidationException, ServiceException {
+	public RegisterAuthorResponse registerAuthor(@Validate RegisterAuthorRequest request) throws ValidationException, ServiceException {
 		logger.debug("YEYYEYEYYEYEYEYYEYE!!!!!!!!!!!!");
+		
 		Header header = request.getHeader();
 		Author author = request.getBody();
-		if (author.getAuthorId() == null) {
-			throw new ValidationException();
-		}
-		InsertAuthorRequest insertRequest = new InsertAuthorRequest();
+		InsertAuthorRequest insertRequest = new InsertAuthorRequest(author);
 		try {
 			authorDao.insertAuthor(insertRequest);
 		} catch (DaoException e) {

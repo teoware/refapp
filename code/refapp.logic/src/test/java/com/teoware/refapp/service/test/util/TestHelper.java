@@ -6,6 +6,7 @@ import java.util.Date;
 
 import com.teoware.refapp.model.enums.Gender;
 import com.teoware.refapp.service.message.RegisterAuthorRequest;
+import com.teoware.refapp.service.util.BeanFactory;
 
 public class TestHelper {
 

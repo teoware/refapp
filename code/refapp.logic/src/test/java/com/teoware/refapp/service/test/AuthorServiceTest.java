@@ -20,11 +20,11 @@ import com.teoware.refapp.dao.message.InsertAuthorRequest;
 import com.teoware.refapp.model.common.OperationResult;
 import com.teoware.refapp.model.enums.Result;
 import com.teoware.refapp.service.ServiceException;
-import com.teoware.refapp.service.ValidationException;
 import com.teoware.refapp.service.message.RegisterAuthorRequest;
 import com.teoware.refapp.service.message.RegisterAuthorResponse;
 import com.teoware.refapp.service.mock.AuthorServiceMock;
 import com.teoware.refapp.service.test.util.TestHelper;
+import com.teoware.refapp.service.validation.ValidationException;
 
 public class AuthorServiceTest {
 
@@ -42,12 +42,16 @@ public class AuthorServiceTest {
 	@Before
 	public void setUp() throws Exception {
 		authorService = new AuthorServiceMock();
-		authorDaoMock = createMock(AuthorDaoLocal.class);
-		authorService.setAuthorDao(authorDaoMock);
+		createAndSetDaoMock();
 	}
 
 	@After
 	public void tearDown() throws Exception {
+	}
+
+	private void createAndSetDaoMock() {
+		authorDaoMock = createMock(AuthorDaoLocal.class);
+		authorService.setAuthorDao(authorDaoMock);
 	}
 
 	private RegisterAuthorRequest createValidRegisterAuthorRequest() {
@@ -116,13 +120,6 @@ public class AuthorServiceTest {
 		RegisterAuthorResponse response = authorService.registerAuthor(request);
 		assertTrue(Result.SUCCESS.equals(response.getBody().getResult()));
 		assertTrue(response.getBody().getDescription() == null);
-	}
-
-	@Test(expected=ValidationException.class)
-	public void testRegisterAuthorThrowsValidationException() throws ValidationException, ServiceException {
-		RegisterAuthorRequest request = createValidRegisterAuthorRequest();
-		request.getBody().setAuthorId(null);
-		authorService.registerAuthor(request);
 	}
 
 	@Test(expected=ServiceException.class)

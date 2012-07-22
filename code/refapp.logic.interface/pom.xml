@@ -31,11 +31,21 @@
 			<groupId>javax.ejb</groupId>
 			<artifactId>ejb-api</artifactId>
 		</dependency>
-		
+		<!-- 
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+		</dependency>
+		 -->
 		<!-- Testing -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.openejb</groupId>
+			<artifactId>openejb-core</artifactId>
 		</dependency>
 		
 		<!-- Project -->

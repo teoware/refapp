@@ -1,4 +1,4 @@
-package com.teoware.refapp.service.test.util;
+package com.teoware.refapp.service.util;
 
 import com.teoware.refapp.model.author.Author;
 import com.teoware.refapp.model.author.AuthorAddress;

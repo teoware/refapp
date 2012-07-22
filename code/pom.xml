@@ -27,6 +27,7 @@
 		<!-- Dependencies -->
 		<!-- J2EE -->
 		<version.javax.ejb-api>3.0</version.javax.ejb-api>
+		<version.javax.validation-api>1.0.0.GA</version.javax.validation-api>
 		<version.java.faces-api>2.1.6</version.java.faces-api>
 		<version.java.faces-impl>2.1.6</version.java.faces-impl>
 		<version.javax.servlet-api>2.5</version.javax.servlet-api>
@@ -69,6 +70,13 @@
 				<groupId>javax.ejb</groupId>
 				<artifactId>ejb-api</artifactId>
 				<version>${version.javax.ejb-api}</version>
+				<scope>provided</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>${version.javax.validation-api}</version>
 				<scope>provided</scope>
 			</dependency>
 			
