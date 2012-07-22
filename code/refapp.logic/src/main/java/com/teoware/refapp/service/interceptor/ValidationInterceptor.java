@@ -55,7 +55,7 @@ public class ValidationInterceptor {
 		Object[] params = context.getParameters();
 		Annotation[][] annotations = method.getParameterAnnotations();
 		
-		List<? super Object> list = mapValidatableParams(annotations, params);
+		List<? super Object> list = findValidateAnnotatedParams(annotations, params);
 		
 		if (!list.isEmpty()) {
 			try {
@@ -70,7 +70,7 @@ public class ValidationInterceptor {
 		return context.proceed();
 	}
 	
-	protected List<? super Object> mapValidatableParams(Annotation[][] annotations, Object[] params) {
+	protected List<? super Object> findValidateAnnotatedParams(Annotation[][] annotations, Object[] params) {
 		List<? super Object> list = new ArrayList();
 		
 		for (int i = 0; i < annotations.length; i++) {
