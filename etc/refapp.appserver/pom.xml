@@ -1,0 +1,119 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>com.teoware.refapp</groupId>
+	<artifactId>refapp.appserver</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>rafapp.appserver</name>
+	<description>Appserver control</description>
+	
+	<!-- PROPERTIES -->
+	<properties>
+		<java.version>1.6</java.version>
+		<source.encoding>UTF-8</source.encoding>
+		
+		<!-- Plugins -->
+		<version.maven-compiler-plugin>2.3.2</version.maven-compiler-plugin>
+		<version.asadmin-maven-plugin>0.3</version.asadmin-maven-plugin>
+		<version.m2e.lifecycle-mapping>1.0.0</version.m2e.lifecycle-mapping>
+		
+		<!-- Dependencies -->
+	</properties>
+	
+	<modules>
+		<module>refapp.appserver.glassfish</module>
+	</modules>
+	
+	<!-- REPOSITORIES -->
+	<repositories>
+	</repositories>
+	
+	<!-- PLUGIN REPOSITORIES -->
+	<pluginRepositories>
+		<pluginRepository>
+			<id>asadmin-maven-plugin-releases-repository</id>
+			<name>asadmin-maven-plugin-releases-repository</name>
+			<url>http://asadmin-maven-plugin.googlecode.com/svn/trunk/repository/releases</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>asadmin-maven-plugin-snapshots-repository</id>
+			<name>asadmin-maven-plugin-snapshots-repository</name>
+			<url>http://asadmin-maven-plugin.googlecode.com/svn/trunk/repository/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+	
+	<!-- DEPENDENCIES -->
+	<dependencyManagement>
+		<dependencies>
+		</dependencies>
+	</dependencyManagement>
+	
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${version.maven-compiler-plugin}</version>
+					<configuration>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+						<encoding>${source.encoding}</encoding>
+					</configuration>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.n0pe.mojo</groupId>
+					<artifactId>asadmin-maven-plugin</artifactId>
+					<version>${version.asadmin-maven-plugin}</version>
+					<configuration>
+						<domain>domain1</domain>
+						<host>localhost</host>
+						<port>4848</port>
+						<user>admin</user>
+						<passwordfile>src/auth/.asadmintruststore</passwordfile>
+						<skip>true</skip>
+					</configuration>
+				</plugin>
+				
+				<!--<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>${version.m2e.lifecycle-mapping}</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.n0pe.mojo</groupId>
+										<artifactId>asadmin-maven-plugin</artifactId>
+										<versionRange>[0.3,)</versionRange>
+										<goals>
+											<goal>execute</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>-->
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
