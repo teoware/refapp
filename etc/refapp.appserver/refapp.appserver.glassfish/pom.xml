@@ -36,7 +36,12 @@
 			</plugin>
 			
 			<plugin>
-				<groupId>org.n0pe.mojo</groupId>
+				<groupId>org.glassfish.maven.plugin</groupId>
+				<artifactId>maven-glassfish-plugin</artifactId>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.codeartisans.asadmin</groupId>
 				<artifactId>asadmin-maven-plugin</artifactId>
 			</plugin>
 		</plugins>

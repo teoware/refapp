@@ -1,0 +1,5 @@
+-- Clean views
+
+DROP VIEW APP.NOTES_V;
+
+DROP VIEW APP.AUTHOR_V;

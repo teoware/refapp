@@ -13,10 +13,19 @@
 		<java.version>1.6</java.version>
 		<source.encoding>UTF-8</source.encoding>
 		
+		<!-- Glassfish -->
+		<glassfish.domain>domain1</glassfish.domain>
+		<glassfish.host>localhost</glassfish.host>
+		<glassfish.httpPort>8080</glassfish.httpPort>
+		<glassfish.adminPort>4848</glassfish.adminPort>
+		<glassfish.username>admin</glassfish.username>
+		<glassfish.password>abcd1234</glassfish.password>
+		<glassfish.passwordfile>${env.HOMEDRIVE}${env.HOMEPATH}\.asadminpass</glassfish.passwordfile>
+		
 		<!-- Plugins -->
 		<version.maven-compiler-plugin>2.3.2</version.maven-compiler-plugin>
-		<version.asadmin-maven-plugin>0.3</version.asadmin-maven-plugin>
-		<version.m2e.lifecycle-mapping>1.0.0</version.m2e.lifecycle-mapping>
+		<version.maven-glassfish-plugin>2.1</version.maven-glassfish-plugin>
+		<version.asadmin-maven-plugin>0.9</version.asadmin-maven-plugin>
 		
 		<!-- Dependencies -->
 	</properties>
@@ -31,28 +40,6 @@
 	
 	<!-- PLUGIN REPOSITORIES -->
 	<pluginRepositories>
-		<pluginRepository>
-			<id>asadmin-maven-plugin-releases-repository</id>
-			<name>asadmin-maven-plugin-releases-repository</name>
-			<url>http://asadmin-maven-plugin.googlecode.com/svn/trunk/repository/releases</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-		<pluginRepository>
-			<id>asadmin-maven-plugin-snapshots-repository</id>
-			<name>asadmin-maven-plugin-snapshots-repository</name>
-			<url>http://asadmin-maven-plugin.googlecode.com/svn/trunk/repository/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
 	</pluginRepositories>
 	
 	<!-- DEPENDENCIES -->
@@ -76,43 +63,32 @@
 				</plugin>
 				
 				<plugin>
-					<groupId>org.n0pe.mojo</groupId>
-					<artifactId>asadmin-maven-plugin</artifactId>
-					<version>${version.asadmin-maven-plugin}</version>
+					<groupId>org.glassfish.maven.plugin</groupId>
+					<artifactId>maven-glassfish-plugin</artifactId>
+					<version>${version.maven-glassfish-plugin}</version>
 					<configuration>
-						<domain>domain1</domain>
-						<host>localhost</host>
-						<port>4848</port>
-						<user>admin</user>
-						<passwordfile>src/auth/.asadmintruststore</passwordfile>
-						<skip>true</skip>
+						<user>${glassfish.username}</user>
+						<adminPassword>${glassfish.password}</adminPassword>
+						<domain>
+							<name>${glassfish.domain}</name>
+							<httpPort>${glassfish.httpPort}</httpPort>
+							<adminPort>${glassfish.adminPort}</adminPort>
+						</domain>
 					</configuration>
 				</plugin>
 				
-				<!--<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>${version.m2e.lifecycle-mapping}</version>
+				<plugin>
+					<groupId>org.codeartisans.asadmin</groupId>
+					<artifactId>asadmin-maven-plugin</artifactId>
+					<version>${version.asadmin-maven-plugin}</version>
 					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.n0pe.mojo</groupId>
-										<artifactId>asadmin-maven-plugin</artifactId>
-										<versionRange>[0.3,)</versionRange>
-										<goals>
-											<goal>execute</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
+						<domain>${glassfish.domain}</domain>
+						<host>${glassfish.host}</host>
+						<port>${glassfish.adminPort}</port>
+						<user>${glassfish.username}</user>
+						<passwordfile>${glassfish.passwordfile}</passwordfile>
 					</configuration>
-				</plugin>-->
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>

@@ -20,6 +20,7 @@
 		
 		<!-- Dependencies -->
 		<version.derby>10.8.2.2</version.derby>
+		<version.derbyclient>10.8.2.2</version.derbyclient>
 	</properties>
 	
 	<modules>
@@ -37,11 +38,17 @@
 	<!-- DEPENDENCIES -->
 	<dependencyManagement>
 		<dependencies>
-			<!-- specify the dependent jdbc driver here -->
+			<!-- Derby DB -->
 			<dependency>
 				<groupId>org.apache.derby</groupId>
 				<artifactId>derby</artifactId>
 				<version>${version.derby}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.apache.derby</groupId>
+				<artifactId>derbyclient</artifactId>
+				<version>${version.derbyclient}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
