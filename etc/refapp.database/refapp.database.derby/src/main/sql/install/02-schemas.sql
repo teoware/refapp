@@ -1,0 +1,3 @@
+-- Schemas
+
+CREATE SCHEMA REFAPP;

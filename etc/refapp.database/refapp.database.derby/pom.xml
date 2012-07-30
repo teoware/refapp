@@ -14,11 +14,14 @@
 	
 	<!-- PROPERTIES -->
 	<properties>
+		<!-- Derby connection properties -->
 		<derby.host>localhost</derby.host>
 		<derby.port>1527</derby.port>
 		<derby.database>refapp</derby.database>
 		<derby.username>refapp</derby.username>
 		<derby.password>abcd1234</derby.password>
+		
+		<derby.skip.tests>false</derby.skip.tests>
 	</properties>
 	
 	<!-- REPOSITORIES -->
@@ -178,6 +181,27 @@
 								</includes>
 							</fileset>
 							<onError>abort</onError>
+						</configuration>
+					</execution>
+					
+					<!-- Insert dummy data, for test only -->
+					<execution>
+						<id>insert-dummy-data</id>
+						<phase>test</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<configuration>
+							<autocommit>true</autocommit>
+							<orderFile>ascending</orderFile>
+							<fileset>
+								<basedir>${project.basedir}/src/test/sql/data</basedir>
+								<includes>
+									<include>**/*.sql</include>
+								</includes>
+							</fileset>
+							<onError>continue</onError>
+							<skip>${derby.skip.tests}</skip>
 						</configuration>
 					</execution>
 				</executions>
