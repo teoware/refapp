@@ -1,4 +1,4 @@
-package com.teoware.refapp.dao.test;
+package com.teoware.refapp.dao.itest;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
