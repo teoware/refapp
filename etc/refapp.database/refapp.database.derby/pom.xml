@@ -67,7 +67,7 @@
 					<!-- Clean all objects -->
 					<execution>
 						<id>clean-all</id>
-						<phase>compile</phase>
+						<phase>clean</phase>
 						<goals>
 							<goal>execute</goal>
 						</goals>

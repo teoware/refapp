@@ -1,7 +1,5 @@
 package com.teoware.refapp.service.validation.test;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,18 +10,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.teoware.refapp.service.ServiceException;
-import com.teoware.refapp.service.interceptor.ValidationInterceptor;
 import com.teoware.refapp.service.message.RegisterAuthorRequest;
-import com.teoware.refapp.service.mock.AuthorServiceMock;
-import com.teoware.refapp.service.util.BeanFactory;
+import com.teoware.refapp.service.util.MessageFactory;
 import com.teoware.refapp.service.validation.ValidationException;
 import com.teoware.refapp.service.validation.group.RegisterAuthorRequestGroup;
 import com.teoware.refapp.service.validation.mock.ValidationInterceptorMock;
-import com.teoware.refapp.service.validation.util.ValidationUtils;
 
 public class ValidationInterceptorTest {
 
-	private ValidationInterceptor validationInterceptor;
+	private ValidationInterceptorMock validationInterceptor;
 
 	@BeforeClass
 	public static void oneTimeSetUp() {
@@ -35,20 +30,20 @@ public class ValidationInterceptorTest {
 
 	@Before
 	public void setUp() throws Exception {
-		validationInterceptor = new ValidationInterceptor();
+		validationInterceptor = new ValidationInterceptorMock();
 	}
 
 	@After
 	public void tearDown() throws Exception {
 	}
 
-	@Test
+	@Test(expected=ValidationException.class)
 	public void testValidateRegisterAuthorRequestThrowsValidationException() throws ValidationException, ServiceException {
-		RegisterAuthorRequest request = BeanFactory.createRegisterAuthorRequestBean();
+		RegisterAuthorRequest request = MessageFactory.createRegisterAuthorRequestBean();
 		request.getBody().setAuthorId(null);
-		List<? super Object> list = new ArrayList();
-		list.add(request);
-		new ValidationInterceptorMock().validateParams(list, RegisterAuthorRequestGroup.class);
+		List<? super Object> params = new ArrayList<Object>();
+		params.add(request);
+		validationInterceptor.validateParams(params, RegisterAuthorRequestGroup.class);
 	}
 
 }

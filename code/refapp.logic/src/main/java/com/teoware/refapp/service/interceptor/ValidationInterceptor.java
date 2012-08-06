@@ -55,13 +55,13 @@ public class ValidationInterceptor {
 		Object[] params = context.getParameters();
 		Annotation[][] annotations = method.getParameterAnnotations();
 		
-		List<? super Object> list = findValidateAnnotatedParams(annotations, params);
+		List<? super Object> annotatedParams = findValidateAnnotatedParams(annotations, params);
 		
-		if (!list.isEmpty()) {
+		if (!annotatedParams.isEmpty()) {
 			try {
-				validateParams(list, group);
+				validateParams(annotatedParams, group);
 			} catch (ValidationException e) {
-				String message = printDebug(method.getName(), e);
+				String message = printDebug(method.getName(), e.getConstraintViolations());
 				logger.info(message);
 				throw e;
 			}
@@ -71,28 +71,28 @@ public class ValidationInterceptor {
 	}
 	
 	protected List<? super Object> findValidateAnnotatedParams(Annotation[][] annotations, Object[] params) {
-		List<? super Object> list = new ArrayList();
+		List<? super Object> annotatedParams = new ArrayList<Object>();
 		
 		for (int i = 0; i < annotations.length; i++) {
 			for (Annotation a : annotations[i]) {
 				if (a.annotationType() == Validate.class) {
-					list.add(params[i]);
+					annotatedParams.add(params[i]);
 					break;
 				}
 			}
 		}
-		return list;
+		return annotatedParams;
 	}
 
-	protected void validateParams(List<? super Object> list, Class<? extends ValidationGroup> group)
+	protected void validateParams(List<? super Object> annotatedParams, Class<? extends ValidationGroup> group)
 			throws ValidationException, ServiceException {
 		final Set<ConstraintViolation<?>> errors = new HashSet<ConstraintViolation<?>>();
-
+		
 		ServiceFacadeHolder.setServiceFacade(serviceFacade);
-
-		for (Object o : list) {
+		
+		for (Object param : annotatedParams) {
 			try {
-				ValidationUtils.validate(o, group);
+				ValidationUtils.validate(param, group);
 			} catch (ValidationException e) {
 				errors.addAll(e.getConstraintViolations());
 			} catch (RuntimeException e) {
@@ -100,21 +100,20 @@ public class ValidationInterceptor {
 				throw e;
 			}
 		}
-
+		
 		if (errors.isEmpty()) {
-			return;
+			throw new ServiceException();
 		}
-
+		
 		throw new ValidationException(errors);
 	}
 
-	private String printDebug(String methodName, ValidationException e) {
+	private String printDebug(String methodName, final Set<? extends ConstraintViolation<?>> errors) {
 		// for debug...
 		final StringBuilder buf = new StringBuilder("Validation failed for method: ");
 		buf.append(methodName);
 		buf.append('\n');
-
-		final Set<? extends ConstraintViolation<?>> errors = e.getConstraintViolations();
+		
 		for (ConstraintViolation<?> item : errors) {
 			buf.append("path: ");
 			buf.append(item.getPropertyPath().toString());

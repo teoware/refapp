@@ -13,6 +13,9 @@
 		<java.version>1.6</java.version>
 		<source.encoding>UTF-8</source.encoding>
 		
+		<!-- Env -->
+		<user.home>${env.HOMEDRIVE}${env.HOMEPATH}</user.home>
+		
 		<!-- Glassfish -->
 		<glassfish.domain>domain1</glassfish.domain>
 		<glassfish.host>localhost</glassfish.host>
@@ -20,7 +23,8 @@
 		<glassfish.adminPort>4848</glassfish.adminPort>
 		<glassfish.username>admin</glassfish.username>
 		<glassfish.password>abcd1234</glassfish.password>
-		<glassfish.passwordfile>${env.HOMEDRIVE}${env.HOMEPATH}\.asadminpass</glassfish.passwordfile>
+		<glassfish.passwordfile>${user.home}/.asadmintruststore</glassfish.passwordfile>
+<!-- 		<glassfish.passwordfile>${project.basedir}/refapp.appserver.glassfish/src/auth/.asadmintruststore</glassfish.passwordfile> -->
 		
 		<!-- Plugins -->
 		<version.maven-compiler-plugin>2.3.2</version.maven-compiler-plugin>
@@ -87,6 +91,24 @@
 						<port>${glassfish.adminPort}</port>
 						<user>${glassfish.username}</user>
 						<passwordfile>${glassfish.passwordfile}</passwordfile>
+						
+						JDBC connection pool
+						<poolName>MyTestPool</poolName>
+						<poolDataSource>org.apache.derby.jdbc.ClientDataSource</poolDataSource>
+						<restype>javax.sql.DataSource</restype>
+						<poolProperties>
+							<User>refapp</User>
+							<Password>abcd1234</Password>
+							<DatabaseName>refapp</DatabaseName>
+							<ServerName>localhost</ServerName>
+							<PortNumber>1527</PortNumber>
+							<connectionAttributes>;create\=true</connectionAttributes>
+						</poolProperties>
+						
+						JDBC resource
+						<resourceName>jdbc/myres</resourceName>
+						
+						<onError>continue</onError>
 					</configuration>
 				</plugin>
 			</plugins>
