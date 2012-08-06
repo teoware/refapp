@@ -21,14 +21,15 @@ import com.teoware.refapp.dao.util.RowMapperResultSetExtractor;
 public abstract class BaseDao<T> {
 
 	@Resource(mappedName = "jdbc/refapp")
-	private DataSource dataSource;
-	private Connection connection;
+	protected DataSource dataSource;
+	
+	protected Connection connection;
 
-	public DataSource getDataSource() {
+	protected DataSource getDataSource() {
 		return dataSource;
 	}
 
-	private Connection getConnection() throws SQLException {
+	protected Connection getConnection() throws SQLException {
 		if (connection == null) {
 			connection = ConnectionHandler.createConnection(dataSource);
 		}
@@ -95,7 +96,7 @@ public abstract class BaseDao<T> {
 				statement.close();
 			}
 			
-			ConnectionHandler.closeConnection(connection, persistConnection);
+			ConnectionHandler.closeConnection(getConnection(), persistConnection);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

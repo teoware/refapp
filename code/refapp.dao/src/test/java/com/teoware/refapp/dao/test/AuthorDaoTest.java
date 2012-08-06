@@ -1,4 +1,4 @@
-package com.teoware.refapp.dao;
+package com.teoware.refapp.dao.test;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -9,8 +9,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.teoware.refapp.dao.impl.AuthorDaoImpl;
+import com.teoware.refapp.dao.AuthorDaoLocal;
+import com.teoware.refapp.dao.DaoException;
 import com.teoware.refapp.dao.message.SelectAuthorResponse;
+import com.teoware.refapp.dao.mock.AuthorDaoMock;
 import com.teoware.refapp.model.author.Author;
 import com.teoware.refapp.model.enums.Gender;
 
@@ -28,7 +30,7 @@ public class AuthorDaoTest {
 
 	@Before
 	public void setUp() throws Exception {
-		authorDao = new AuthorDaoImpl();
+		authorDao = new AuthorDaoMock();
 	}
 
 	@After
