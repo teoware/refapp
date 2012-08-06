@@ -1,6 +1,8 @@
-INSERT INTO REFAPP.AUTHOR VALUES ('thomas', 'Thomas', 'thomas@tow.no');
+INSERT INTO REFAPP.AUTHOR VALUES ('thomas', 'Thomas', 'Johansen', DATE('1975-07-04'), 'MALE', 'thomas@tow.no', '+47 99292477');
 
 INSERT INTO REFAPP.AUTHOR_STATUS VALUES ('thomas', 'ACTIVE', CURRENT_DATE, CURRENT_DATE);
+
+INSERT INTO REFAPP.AUTHOR_ADDRESS VALUES ('thomas', NULL, NULL, NULL, NULL, NULL);
 
 INSERT INTO REFAPP.NOTES VALUES ('aaaaa', 'thomas', 'This is a new note', 'Blah blah...');
 
