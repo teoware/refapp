@@ -12,6 +12,7 @@ import org.junit.Test;
 import com.teoware.refapp.dao.impl.AuthorDaoImpl;
 import com.teoware.refapp.dao.message.SelectAuthorResponse;
 import com.teoware.refapp.model.author.Author;
+import com.teoware.refapp.model.enums.Gender;
 
 public class AuthorDaoTest {
 
@@ -41,7 +42,14 @@ public class AuthorDaoTest {
 		assertNotNull(response.getAuthorList());
 		assertTrue(response.getAuthorList().size() > 0);
 		Author author = response.getAuthorList().get(0);
+		
 		assertNotNull(author.getAuthorId());
 		assertTrue(author.getAuthorId().getUserName().length() > 0);
+		
+		assertNotNull(author.getAuthorInfo());
+		assertTrue(author.getAuthorInfo().getFirstName().length() > 0 && author.getAuthorInfo().getLastName().length() > 0);
+		assertNotNull(author.getAuthorInfo().getBirthDate());
+		assertNotNull(author.getAuthorInfo().getGender());
+		assertTrue(author.getAuthorInfo().getGender().equals(Gender.MALE));
 	}
 }
