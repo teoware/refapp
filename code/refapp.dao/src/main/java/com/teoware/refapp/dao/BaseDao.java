@@ -24,26 +24,27 @@ public abstract class BaseDao<T> {
 	protected DataSource dataSource;
 	
 	protected Connection connection;
+	protected boolean persistConnection;
 
-	protected DataSource getDataSource() {
-		return dataSource;
-	}
-
-	protected Connection getConnection() throws SQLException {
-		if (connection == null) {
-			connection = ConnectionHandler.createConnection(dataSource);
+	protected int insert(SqlStatement sql, Object[] parameters) throws DaoException {
+		try {
+			return update(sql, parameters);
+		} catch (DaoException e) {
+			throw new DaoException("Insert operation failed.", e.getCause());
 		}
-		return connection;
 	}
 
-	protected int insert(SqlStatement sql) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	protected int update(SqlStatement sql) {
-		// TODO Auto-generated method stub
-		return 0;
+	protected int update(SqlStatement sql, Object[] parameters) throws DaoException {
+		PreparedStatement statement = null;
+		try {
+			statement = generatePreparedStatement(sql, parameters);
+			int rowsAffected = statement.executeUpdate();
+			return rowsAffected;
+		} catch (SQLException e) {
+			throw new DaoException("Update operation failed.", e);
+		} finally {
+			closeConnection(statement);
+		}
 	}
 
 	@TransactionAttribute
@@ -70,12 +71,16 @@ public abstract class BaseDao<T> {
 		}
 	}
 
-	protected int delete(SqlStatement sql) {
-		// TODO Auto-generated method stub
-		return 0;
+	protected int delete(SqlStatement sql, Object[] parameters) throws DaoException {
+		try {
+			return update(sql, parameters);
+		} catch (DaoException e) {
+			throw new DaoException("Delete operation failed.", e.getCause());
+		}
 	}
 
-	private PreparedStatement generatePreparedStatement(SqlStatement sql, Object[] parameters) throws SQLException {
+	protected PreparedStatement generatePreparedStatement(SqlStatement sql, Object[] parameters) throws SQLException {
+		createOrReuseConnection();
 		PreparedStatement statement = getConnection().prepareStatement(sql.getStatement());
 		if (parameters != null) {
 			for (int i = 0; i < parameters.length; i++) {
@@ -85,12 +90,18 @@ public abstract class BaseDao<T> {
 		return statement;
 	}
 
-	private void closeConnection(PreparedStatement statement) {
-		 boolean persistConnection = false;
-		closeConnection(statement, persistConnection);
+	protected Connection createOrReuseConnection() throws SQLException {
+		if (connection == null) {
+			connection = ConnectionHandler.createConnection(getDataSource());
+		}
+		return connection;
+	}
+	
+	protected void closeConnection(PreparedStatement statement) {
+		closeConnection(statement, isPersistConnection());
 	}
 
-	private void closeConnection(PreparedStatement statement, boolean persistConnection) {
+	protected void closeConnection(PreparedStatement statement, boolean persistConnection) {
 		try {
 			if (statement != null) {
 				statement.close();
@@ -98,8 +109,23 @@ public abstract class BaseDao<T> {
 			
 			ConnectionHandler.closeConnection(getConnection(), persistConnection);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// Ignore
 		}
+	}
+
+	protected DataSource getDataSource() {
+		return dataSource;
+	}
+
+	protected Connection getConnection() {
+		return connection;
+	}
+
+	protected boolean isPersistConnection() {
+		return persistConnection;
+	}
+
+	protected void setPersistConnection(boolean persistConnection) {
+		this.persistConnection = persistConnection;
 	}
 }

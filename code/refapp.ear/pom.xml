@@ -3,7 +3,7 @@
 	
 	<parent>
 		<groupId>com.teoware.refapp</groupId>
-		<artifactId>refapp.app</artifactId>
+		<artifactId>refapp</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
@@ -29,6 +29,13 @@
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
 			<artifactId>refapp.model</artifactId>
+			<version>${app.release.version}</version><!--$NO-MVN-MAN-VER$-->
+			<type>jar</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp.util</artifactId>
 			<version>${app.release.version}</version><!--$NO-MVN-MAN-VER$-->
 			<type>jar</type>
 		</dependency>
@@ -85,6 +92,12 @@
 					<jarModule>
 						<groupId>com.teoware.refapp</groupId>
 						<artifactId>refapp.model</artifactId>
+						<!-- <bundleFileName>refapp.model.jar</bundleFileName> -->
+						<unpack>true</unpack>
+					</jarModule>
+					<jarModule>
+						<groupId>com.teoware.refapp</groupId>
+						<artifactId>refapp.util</artifactId>
 						<!-- <bundleFileName>refapp.model.jar</bundleFileName> -->
 						<unpack>true</unpack>
 					</jarModule>

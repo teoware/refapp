@@ -3,7 +3,7 @@
 
 	<parent>
 		<groupId>com.teoware.refapp</groupId>
-		<artifactId>refapp.app</artifactId>
+		<artifactId>refapp</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	

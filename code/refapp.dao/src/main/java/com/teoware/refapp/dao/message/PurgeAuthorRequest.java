@@ -1,13 +1,13 @@
 package com.teoware.refapp.dao.message;
 
-public class SelectAuthorRequest {
+public class PurgeAuthorRequest {
 
 	private String userName;
 
-	public SelectAuthorRequest() {
+	public PurgeAuthorRequest() {
 	}
 
-	public SelectAuthorRequest(String userName) {
+	public PurgeAuthorRequest(String userName) {
 		this.userName = userName;
 	}
 

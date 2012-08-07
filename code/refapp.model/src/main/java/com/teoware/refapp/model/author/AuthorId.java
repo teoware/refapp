@@ -1,9 +1,15 @@
 package com.teoware.refapp.model.author;
 
+import java.util.Calendar;
+
+import com.teoware.refapp.model.enums.AuthorStatus;
+
 public class AuthorId {
 
 	protected String userName;
-	protected String password;
+	protected AuthorStatus status;
+	protected Calendar created;
+	protected Calendar modified;
 
 	public String getUserName() {
 		return userName;
@@ -13,11 +19,27 @@ public class AuthorId {
 		this.userName = userName;
 	}
 
-	public String getPassword() {
-		return password;
+	public AuthorStatus getStatus() {
+		return status;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setStatus(AuthorStatus status) {
+		this.status = status;
+	}
+
+	public Calendar getCreated() {
+		return created;
+	}
+
+	public void setCreated(Calendar created) {
+		this.created = created;
+	}
+
+	public Calendar getModified() {
+		return modified;
+	}
+
+	public void setModified(Calendar modified) {
+		this.modified = modified;
 	}
 }

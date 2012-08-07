@@ -1,10 +1,10 @@
 package com.teoware.refapp.dao.message;
 
-public class DeleteAuthorResponse {
+public class PurgeAuthorResponse {
 
 	private int rowsAffected;
 
-	public DeleteAuthorResponse(int rowsAffected) {
+	public PurgeAuthorResponse(int rowsAffected) {
 		this.rowsAffected = rowsAffected;
 	}
 

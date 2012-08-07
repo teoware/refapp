@@ -2,11 +2,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<groupId>com.teoware.refapp</groupId>
-	<artifactId>refapp.app</artifactId>
+	<artifactId>refapp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>refapp.app</name>
-	<description>Reference application</description>
+	<name>refapp</name>
+	<description>Reference application parent project</description>
 	
 	<!-- PROPERTIES -->
 	<properties>
@@ -34,9 +34,12 @@
 		<!-- Validation -->
 		<version.javax.validation-api>1.0.0.GA</version.javax.validation-api>
 		<version.hibernate-validator>4.2.0.Final</version.hibernate-validator>
+		<version.commons-validator>1.4.0</version.commons-validator>
 		<!-- Logging -->
 		<version.slf4j-api>1.6.2</version.slf4j-api>
 		<version.slf4j-log4j12>1.6.2</version.slf4j-log4j12>
+		<!-- Security -->
+		<version.jasypt>1.9.0</version.jasypt>
 		<!-- Database -->
 		<version.derby>10.8.2.2</version.derby>
 		<version.derbyclient>10.8.2.2</version.derbyclient>
@@ -51,6 +54,7 @@
 	<!-- MODULES -->
 	<modules>
 		<module>refapp.model</module>
+		<module>refapp.util</module>
 		<module>refapp.dao</module>
 		<module>refapp.logic.interface</module>
 		<module>refapp.logic</module>
@@ -120,6 +124,12 @@
 				<version>${version.hibernate-validator}</version>
 			</dependency>
 			
+			<dependency>
+				<groupId>commons-validator</groupId>
+				<artifactId>commons-validator</artifactId>
+				<version>${version.commons-validator}</version>
+			</dependency>
+			
 			<!-- Logging -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
@@ -131,6 +141,13 @@
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-log4j12</artifactId>
 				<version>${version.slf4j-log4j12}</version>
+			</dependency>
+			
+			<!-- Security -->
+			<dependency>
+				<groupId>org.jasypt</groupId>
+				<artifactId>jasypt</artifactId>
+				<version>${version.jasypt}</version>
 			</dependency>
 			
 			<!-- Database -->
@@ -185,6 +202,12 @@
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
 				<artifactId>refapp.model</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.teoware.refapp</groupId>
+				<artifactId>refapp.util</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			
