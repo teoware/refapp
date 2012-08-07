@@ -1,0 +1,57 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.teoware.refapp</groupId>
+		<artifactId>refapp</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	
+	<artifactId>refapp.util</artifactId>
+	<packaging>jar</packaging>
+	<name>refapp.util</name>
+	<description>Utility module</description>
+	
+	<!-- PROPERTIES -->
+	<properties>
+	</properties>
+	
+	<!-- REPOSITORIES -->
+	<repositories>
+	</repositories>
+	
+	<!-- PLUGIN REPOSITORIES -->
+	<pluginRepositories>
+	</pluginRepositories>
+	
+	<!-- DEPENDENCIES -->
+	<dependencies>
+		<!-- Security -->
+		<dependency>
+			<groupId>org.jasypt</groupId>
+			<artifactId>jasypt</artifactId>
+		</dependency>
+		
+		<!-- Testing -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		
+		<!-- Project -->
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp.model</artifactId>
+		</dependency>
+	</dependencies>
+	
+	<!-- MAVEN PLUGINS -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>
