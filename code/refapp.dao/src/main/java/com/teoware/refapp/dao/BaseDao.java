@@ -11,6 +11,9 @@ import javax.annotation.Resource;
 import javax.ejb.TransactionAttribute;
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.teoware.refapp.dao.rowmapper.RowMapper;
 import com.teoware.refapp.dao.sql.SqlStatement;
 import com.teoware.refapp.dao.util.ConnectionHandler;
@@ -20,6 +23,8 @@ import com.teoware.refapp.dao.util.RowMapperResultSetExtractor;
 
 public abstract class BaseDao<T> {
 
+	private final Logger logger = LoggerFactory.getLogger(getClass());
+	
 	@Resource(mappedName = "jdbc/refapp")
 	protected DataSource dataSource;
 	
@@ -30,17 +35,21 @@ public abstract class BaseDao<T> {
 		try {
 			return update(sql, parameters);
 		} catch (DaoException e) {
+			logger.error("Insert operation failed.");
 			throw new DaoException("Insert operation failed.", e.getCause());
 		}
 	}
 
 	protected int update(SqlStatement sql, Object[] parameters) throws DaoException {
+		logger.debug("Executing SQL statement: " + sql.getStatement());
+		
 		PreparedStatement statement = null;
 		try {
 			statement = generatePreparedStatement(sql, parameters);
 			int rowsAffected = statement.executeUpdate();
 			return rowsAffected;
 		} catch (SQLException e) {
+			logger.error("Update operation failed.");
 			throw new DaoException("Update operation failed.", e);
 		} finally {
 			closeConnection(statement);
@@ -55,6 +64,8 @@ public abstract class BaseDao<T> {
 
 	@TransactionAttribute
 	protected List<T> select(SqlStatement sql, RowMapper<T> rowMapper, Object[] parameters) throws DaoException {
+		logger.debug("Executing SQL statement: " + sql.getStatement());
+		
 		PreparedStatement statement = null;
 		try {
 			statement = generatePreparedStatement(sql, parameters);
@@ -63,8 +74,10 @@ public abstract class BaseDao<T> {
 			ResultSetExtractor<List<T>> resultSetExtractor = new RowMapperResultSetExtractor<T>(rowMapper, rowsExpected);
 			return resultSetExtractor.extractData(result);
 		} catch (SQLException e) {
+			logger.error("Select operation failed.");
 			throw new DaoException("Select operation failed.", e);
 		} catch (ParseException e) {
+			logger.error("Select operation failed.");
 			throw new DaoException("Select operation failed.", e);
 		} finally {
 			closeConnection(statement);
@@ -75,6 +88,7 @@ public abstract class BaseDao<T> {
 		try {
 			return update(sql, parameters);
 		} catch (DaoException e) {
+			logger.error("Delete operation failed.");
 			throw new DaoException("Delete operation failed.", e.getCause());
 		}
 	}

@@ -24,7 +24,9 @@
 		<version.maven-compiler-plugin>2.3.2</version.maven-compiler-plugin>
 		<version.maven-javadoc-plugin>2.8</version.maven-javadoc-plugin>
 		<version.maven-ejb-plugin>2.1</version.maven-ejb-plugin>
-		<version.maven-ear-plugin>2.4.1</version.maven-ear-plugin>
+		<version.maven-jar-plugin>2.4</version.maven-jar-plugin>
+		<version.maven-ear-plugin>2.7</version.maven-ear-plugin>
+		<version.maven-war-plugin>2.2</version.maven-war-plugin>
 		
 		<!-- Dependencies -->
 		<!-- J2EE -->
@@ -283,8 +285,20 @@
 				
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>${version.maven-jar-plugin}</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-ear-plugin</artifactId>
 					<version>${version.maven-ear-plugin}</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>${version.maven-war-plugin}</version>
 				</plugin>
 				<!--
 				<plugin>
