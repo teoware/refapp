@@ -1,4 +1,4 @@
-package com.teoware.refapp.dao.util;
+package com.teoware.refapp.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -7,15 +7,15 @@ import java.util.Date;
 
 public class DateUtils {
 
-	public static final String dateMask = "yyyy-MM-dd";
-	public static final String timestampMask = "yyyy-MM-dd HH:mm:ss.S";
+	public static final String DATE_MASK = "yyyy-MM-dd";
+	public static final String TIMESTAMP_MASK = "yyyy-MM-dd HH:mm:ss.S";
 
 	public static Date stringToDate(String dateString) throws ParseException {
-		return stringToDate(dateString, dateMask);
+		return stringToDate(dateString, DATE_MASK);
 	}
 
 	public static Date timestampToDate(String timestampString) throws ParseException {
-		return stringToDate(timestampString, timestampMask);
+		return stringToDate(timestampString, TIMESTAMP_MASK);
 	}
 
 	public static Date stringToDate(String dateString, String mask) throws ParseException {
@@ -26,11 +26,11 @@ public class DateUtils {
 	}
 
 	public static Calendar stringToCalendar(String dateString) throws ParseException {
-		return stringToCalendar(dateString, dateMask);
+		return stringToCalendar(dateString, DATE_MASK);
 	}
 
 	public static Calendar timestampToCalendar(String dateString) throws ParseException {
-		return stringToCalendar(dateString, timestampMask);
+		return stringToCalendar(dateString, TIMESTAMP_MASK);
 	}
 
 	public static Calendar stringToCalendar(String dateString, String mask) throws ParseException {
@@ -43,11 +43,11 @@ public class DateUtils {
 	}
 
 	public static String dateToString(Date date) {
-		return dateToString(date, dateMask);
+		return dateToString(date, DATE_MASK);
 	}
 
 	public static String dateToTimestamp(Date date) {
-		return dateToString(date, timestampMask);
+		return dateToString(date, TIMESTAMP_MASK);
 	}
 
 	public static String dateToString(Date date, String mask) {
@@ -58,10 +58,20 @@ public class DateUtils {
 	}
 
 	public static String calendarToString(Calendar calendar) {
-		return dateToString(calendar.getTime(), dateMask);
+		return dateToString(calendar.getTime(), DATE_MASK);
 	}
 
 	public static String calendarToTimestamp(Calendar calendar) {
-		return dateToString(calendar.getTime(), timestampMask);
+		return dateToString(calendar.getTime(), TIMESTAMP_MASK);
+	}
+
+	public static Calendar createCalendar(int field, int amount) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(field, amount);
+		return calendar;
+	}
+
+	public static Date createDate(int field, int amount) {
+		return createCalendar(field, amount).getTime();
 	}
 }

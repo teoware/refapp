@@ -21,7 +21,7 @@ import com.teoware.refapp.dao.util.DaoHelper;
 import com.teoware.refapp.dao.util.ResultSetExtractor;
 import com.teoware.refapp.dao.util.RowMapperResultSetExtractor;
 
-public abstract class BaseDao<T> {
+public abstract class BaseDao {
 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
@@ -57,13 +57,13 @@ public abstract class BaseDao<T> {
 	}
 
 	@TransactionAttribute
-	protected List<T> select(SqlStatement sql, RowMapper<T> rowMapper) throws DaoException {
+	protected <T> List<T> select(SqlStatement sql, RowMapper<T> rowMapper) throws DaoException {
 		Object[] parameters = null;
 		return select(sql, rowMapper, parameters);
 	}
 
 	@TransactionAttribute
-	protected List<T> select(SqlStatement sql, RowMapper<T> rowMapper, Object[] parameters) throws DaoException {
+	protected <T> List<T> select(SqlStatement sql, RowMapper<T> rowMapper, Object[] parameters) throws DaoException {
 		logger.debug("Executing SQL statement: " + sql.getStatement());
 		
 		PreparedStatement statement = null;

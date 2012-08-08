@@ -8,6 +8,10 @@ public class SqlStatement {
 		this.statement = statement;
 	}
 
+	public void appendStatement(String append) {
+		statement += append;
+	}
+
 	public String getStatement() {
 		return statement;
 	}
