@@ -21,9 +21,10 @@
 		<ear.version>5</ear.version>
 		
 		<!-- Plugins -->
-		<version.maven-compiler-plugin>2.3.2</version.maven-compiler-plugin>
+		<version.maven-clean-plugin>2.5</version.maven-clean-plugin>
+		<version.maven-compiler-plugin>2.5</version.maven-compiler-plugin>
 		<version.maven-javadoc-plugin>2.8</version.maven-javadoc-plugin>
-		<version.maven-ejb-plugin>2.1</version.maven-ejb-plugin>
+		<version.maven-ejb-plugin>2.3</version.maven-ejb-plugin>
 		<version.maven-jar-plugin>2.4</version.maven-jar-plugin>
 		<version.maven-ear-plugin>2.7</version.maven-ear-plugin>
 		<version.maven-war-plugin>2.2</version.maven-war-plugin>
@@ -263,6 +264,12 @@
 	<build>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>${version.maven-clean-plugin}</version>
+				</plugin>
+				
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>

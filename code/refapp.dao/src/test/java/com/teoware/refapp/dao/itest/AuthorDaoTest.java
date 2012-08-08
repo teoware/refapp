@@ -44,6 +44,8 @@ public class AuthorDaoTest {
 	@Before
 	public void setUp() throws Exception {
 		authorDao = new AuthorDaoMock();
+		purgeAuthor("john.doe");
+		purgeAuthor("jane.doe");
 	}
 
 	@After
