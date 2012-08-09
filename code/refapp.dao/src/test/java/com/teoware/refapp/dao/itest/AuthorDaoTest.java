@@ -53,24 +53,11 @@ public class AuthorDaoTest {
 
 	@After
 	public void tearDown() throws Exception {
-		//deleteAuthor("john.doe");
-		//deleteAuthor("jane.doe");
-		//deleteAuthor("jonah.doe");
+		deleteAuthor("john.doe");
+		deleteAuthor("jane.doe");
+		deleteAuthor("jonah.doe");
 		authorDao.closeAll();
 	}
-
-	/*@Test
-	public void testInsert() throws ParseException, DaoException {
-		Author john = createAuthorJohn();
-		AuthorPassword johnsPassword = createAuthorJohnPassword();			
-		insertAuthor(john, johnsPassword);
-		Author jane = createAuthorJane();
-		AuthorPassword janesPassword = createAuthorJanePassword();			
-		insertAuthor(jane, janesPassword);
-		Author jonah = createAuthorJonah();
-		AuthorPassword jonahsPassword = createAuthorJonahPassword();			
-		insertAuthor(jonah, jonahsPassword);
-	}*/
 
 	@Test
 	public void testInsertAndSelectAuthor() {
