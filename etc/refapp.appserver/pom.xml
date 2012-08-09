@@ -47,6 +47,11 @@
 	<!-- DEPENDENCIES -->
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.codeartisans.asadmin</groupId>
+				<artifactId>asadmin-maven-plugin</artifactId>
+				<version>${version.asadmin-maven-plugin}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	
