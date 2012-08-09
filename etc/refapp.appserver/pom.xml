@@ -48,6 +48,12 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
+				<groupId>org.glassfish.maven.plugin</groupId>
+				<artifactId>maven-glassfish-plugin</artifactId>
+				<version>${version.maven-glassfish-plugin}</version>
+			</dependency>
+			
+			<dependency>
 				<groupId>org.codeartisans.asadmin</groupId>
 				<artifactId>asadmin-maven-plugin</artifactId>
 				<version>${version.asadmin-maven-plugin}</version>

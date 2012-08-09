@@ -26,6 +26,15 @@
 	
 	<!-- DEPENDENCIES -->
 	<dependencies>
+		<dependency>
+			<groupId>org.glassfish.maven.plugin</groupId>
+			<artifactId>maven-glassfish-plugin</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.codeartisans.asadmin</groupId>
+			<artifactId>asadmin-maven-plugin</artifactId>
+		</dependency>
 	</dependencies>
 	
 	<build>
