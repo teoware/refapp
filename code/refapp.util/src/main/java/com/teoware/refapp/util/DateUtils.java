@@ -74,4 +74,20 @@ public class DateUtils {
 	public static Date createDate(int field, int amount) {
 		return createCalendar(field, amount).getTime();
 	}
+
+	public static java.sql.Date calendarToSqlDate(Calendar calendar) {
+		return new java.sql.Date(calendar.getTimeInMillis());
+	}
+
+	public static java.sql.Timestamp calendarToSqlTimestamp(Calendar calendar) {
+		return new java.sql.Timestamp(calendar.getTimeInMillis());
+	}
+
+	public static java.sql.Date dateToSqlDate(Date date) {
+		return new java.sql.Date(date.getTime());
+	}
+
+	public static java.sql.Timestamp dateToSqlTimestamp(Date date) {
+		return new java.sql.Timestamp(date.getTime());
+	}
 }

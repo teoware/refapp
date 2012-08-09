@@ -3,8 +3,6 @@ package com.teoware.refapp.dao.itest;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.text.ParseException;
-import java.util.Calendar;
 import java.util.List;
 
 import org.junit.After;
@@ -25,12 +23,11 @@ import com.teoware.refapp.dao.message.SelectAuthorResponse;
 import com.teoware.refapp.dao.message.UpdateAuthorRequest;
 import com.teoware.refapp.dao.message.UpdateAuthorResponse;
 import com.teoware.refapp.dao.mock.AuthorDaoMock;
+import com.teoware.refapp.dao.test.util.TestDataFactory;
 import com.teoware.refapp.model.author.Author;
 import com.teoware.refapp.model.author.AuthorPassword;
 import com.teoware.refapp.model.enums.AuthorStatus;
 import com.teoware.refapp.model.enums.Gender;
-import com.teoware.refapp.model.util.BeanFactory;
-import com.teoware.refapp.util.DateUtils;
 import com.teoware.refapp.util.PasswordHandler;
 
 public class AuthorDaoTest {
@@ -78,8 +75,8 @@ public class AuthorDaoTest {
 	@Test
 	public void testInsertAndSelectAuthor() {
 		try {
-			Author john = createAuthorJohn();
-			AuthorPassword johnsPassword = createAuthorJohnPassword();
+			Author john = TestDataFactory.createAuthorJohn();
+			AuthorPassword johnsPassword = TestDataFactory.createAuthorJohnPassword();
 			
 			int rowsAffected = insertAuthor(john, johnsPassword);
 			assertTrue(rowsAffected == 4);
@@ -120,8 +117,8 @@ public class AuthorDaoTest {
 	public void testInsertUpdateAndSelectAuthor() {
 		try {
 			
-			Author jane = createAuthorJane();
-			AuthorPassword janesPassword = createAuthorJanePassword();
+			Author jane = TestDataFactory.createAuthorJane();
+			AuthorPassword janesPassword = TestDataFactory.createAuthorJanePassword();
 			
 			int rowsAffected = insertAuthor(jane, janesPassword);
 			assertTrue(rowsAffected == 4);
@@ -199,8 +196,8 @@ public class AuthorDaoTest {
 	@Test
 	public void testInsertAndSelectAuthorPassword() {
 		try {
-			Author jonah = createAuthorJonah();
-			AuthorPassword jonahsPassword = createAuthorJonahPassword();			
+			Author jonah = TestDataFactory.createAuthorJonah();
+			AuthorPassword jonahsPassword = TestDataFactory.createAuthorJonahPassword();			
 			
 			int rowsAffected = insertAuthor(jonah, jonahsPassword);
 			assertTrue(rowsAffected == 4 || rowsAffected == 5);
@@ -217,84 +214,6 @@ public class AuthorDaoTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	private Author createAuthorJohn() throws ParseException {
-		Calendar calendar = Calendar.getInstance();
-		Author author = BeanFactory.createAuthorBean();
-		author.getAuthorId().setUserName("john.doe");
-		author.getAuthorId().setCreated(calendar);
-		author.getAuthorId().setModified(calendar);
-		author.getAuthorInfo().setFirstName("John");
-		author.getAuthorInfo().setLastName("Doe");
-		author.getAuthorInfo().setBirthDate(DateUtils.stringToDate("1975-01-01"));
-		author.getAuthorInfo().setGender(Gender.MALE);
-		author.getAuthorInfo().setEmail("john.doe@email.com");
-		author.getAuthorInfo().setPhone("+47 23456789");
-		author.getAuthorAddress().setAddress("Storgata 1");
-		author.getAuthorAddress().setPostalCode("1234");
-		author.getAuthorAddress().setMunicipality("Oslo");
-		author.getAuthorAddress().setRegion("Oslo");
-		author.getAuthorAddress().setCountry("Norway");
-		return author;
-	}
-
-	private AuthorPassword createAuthorJohnPassword() {
-		AuthorPassword authorPassword = new AuthorPassword();
-		authorPassword.setPassword(PasswordHandler.encryptPassword("johnsPassword"));
-		return authorPassword;
-	}
-
-	private Author createAuthorJane() throws ParseException {
-		Calendar calendar = Calendar.getInstance();
-		Author author = BeanFactory.createAuthorBean();
-		author.getAuthorId().setUserName("jane.doe");
-		author.getAuthorId().setCreated(calendar);
-		author.getAuthorId().setModified(calendar);
-		author.getAuthorInfo().setFirstName("Jane");
-		author.getAuthorInfo().setLastName("Doe");
-		author.getAuthorInfo().setBirthDate(DateUtils.stringToDate("1970-12-30"));
-		author.getAuthorInfo().setGender(Gender.FEMALE);
-		author.getAuthorInfo().setEmail("jane.doe@email.com");
-		author.getAuthorInfo().setPhone("+47 98765432");
-		author.getAuthorAddress().setAddress("Lillegata 1");
-		author.getAuthorAddress().setPostalCode("1010");
-		author.getAuthorAddress().setMunicipality("Oslo");
-		author.getAuthorAddress().setRegion("Oslo");
-		author.getAuthorAddress().setCountry("Norway");
-		return author;
-	}
-
-	private AuthorPassword createAuthorJanePassword() {
-		AuthorPassword authorPassword = new AuthorPassword();
-		authorPassword.setPassword(PasswordHandler.encryptPassword("janesPassword"));
-		return authorPassword;
-	}
-
-	private Author createAuthorJonah() throws ParseException {
-		Calendar calendar = Calendar.getInstance();
-		Author author = BeanFactory.createAuthorBean();
-		author.getAuthorId().setUserName("jonah.doe");
-		author.getAuthorId().setCreated(calendar);
-		author.getAuthorId().setModified(calendar);
-		author.getAuthorInfo().setFirstName("Jonah");
-		author.getAuthorInfo().setLastName("Doe");
-		author.getAuthorInfo().setBirthDate(DateUtils.stringToDate("1975-01-01"));
-		author.getAuthorInfo().setGender(Gender.MALE);
-		author.getAuthorInfo().setEmail("jonah.doe@email.com");
-		author.getAuthorInfo().setPhone("+47 19283746");
-		author.getAuthorAddress().setAddress("Mellomgata 1");
-		author.getAuthorAddress().setPostalCode("1221");
-		author.getAuthorAddress().setMunicipality("Oslo");
-		author.getAuthorAddress().setRegion("Oslo");
-		author.getAuthorAddress().setCountry("Norway");
-		return author;
-	}
-
-	private AuthorPassword createAuthorJonahPassword() {
-		AuthorPassword authorPassword = new AuthorPassword();
-		authorPassword.setPassword(PasswordHandler.encryptPassword("jonahsPassword"));
-		return authorPassword;
 	}
 
 	private int insertAuthor(Author author, AuthorPassword authorPassword) throws DaoException {

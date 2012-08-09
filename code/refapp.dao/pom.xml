@@ -71,6 +71,11 @@
 			<artifactId>btm</artifactId>
 		</dependency>
 		
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
+		
 		<!-- Project -->
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
