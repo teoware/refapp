@@ -16,6 +16,18 @@
 		<!-- Env -->
 		<user.home>${env.HOME}</user.home>
 		
+		<!-- Derby database settings -->
+		<derby.database.name>refapp</derby.database.name>
+		<derby.server.name>localhost</derby.server.name>
+		<derby.server.port>1527</derby.server.port>
+		<derby.username>refapp</derby.username>
+		<derby.password>abcd1234</derby.password>
+		<derby.connection.attributes>;create\=true</derby.connection.attributes>
+		<derby.connectionpool.name>RefappDerbyPool</derby.connectionpool.name>
+		<derby.connectionpool.datasource>org.apache.derby.jdbc.ClientDataSource</derby.connectionpool.datasource>
+		<derby.connectionpool.resource.type>javax.sql.DataSource</derby.connectionpool.resource.type>
+		<derby.jdbc.resource.name>jdbc/refapp</derby.jdbc.resource.name>
+		
 		<!-- Glassfish -->
 		<glassfish.domain>domain1</glassfish.domain>
 		<glassfish.host>localhost</glassfish.host>
@@ -25,7 +37,8 @@
 		<glassfish.passwordfile>${user.home}/.asadmintruststore</glassfish.passwordfile>
 		
 		<!-- Plugins -->
-		<version.maven-compiler-plugin>2.3.2</version.maven-compiler-plugin>
+		<version.maven-clean-plugin>2.5</version.maven-clean-plugin>
+		<version.maven-compiler-plugin>2.5</version.maven-compiler-plugin>
 		<version.maven-glassfish-plugin>2.1</version.maven-glassfish-plugin>
 		<version.asadmin-maven-plugin>0.9</version.asadmin-maven-plugin>
 		
@@ -46,24 +59,17 @@
 	
 	<!-- DEPENDENCIES -->
 	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.glassfish.maven.plugin</groupId>
-				<artifactId>maven-glassfish-plugin</artifactId>
-				<version>${version.maven-glassfish-plugin}</version>
-			</dependency>
-			
-			<dependency>
-				<groupId>org.codeartisans.asadmin</groupId>
-				<artifactId>asadmin-maven-plugin</artifactId>
-				<version>${version.asadmin-maven-plugin}</version>
-			</dependency>
-		</dependencies>
 	</dependencyManagement>
 	
 	<build>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>${version.maven-clean-plugin}</version>
+				</plugin>
+				
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
@@ -102,20 +108,20 @@
 						<passwordfile>${glassfish.passwordfile}</passwordfile>
 						
 						<!-- JDBC connection pool -->
-						<poolName>RefappDerbyPool</poolName>
-						<poolDataSource>org.apache.derby.jdbc.ClientDataSource</poolDataSource>
-						<restype>javax.sql.DataSource</restype>
+						<poolName>${derby.connectionpool.name}</poolName>
+						<poolDataSource>${derby.connectionpool.datasource}</poolDataSource>
+						<restype>${derby.connectionpool.resource.type}</restype>
 						<poolProperties>
-							<User>refapp</User>
-							<Password>abcd1234</Password>
-							<DatabaseName>refapp</DatabaseName>
-							<ServerName>localhost</ServerName>
-							<PortNumber>1527</PortNumber>
-							<connectionAttributes>;create\=true</connectionAttributes>
+							<User>${derby.username}</User>
+							<Password>${derby.password}</Password>
+							<DatabaseName>${derby.database.name}</DatabaseName>
+							<ServerName>${derby.server.name}</ServerName>
+							<PortNumber>${derby.server.port}</PortNumber>
+							<connectionAttributes>${derby.connection.attributes}</connectionAttributes>
 						</poolProperties>
 						
 						<!-- JDBC resource -->
-						<resourceName>jdbc/refapp</resourceName>
+						<resourceName>${derby.jdbc.resource.name}</resourceName>
 						
 						<onError>continue</onError>
 					</configuration>

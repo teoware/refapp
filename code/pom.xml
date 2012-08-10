@@ -28,6 +28,7 @@
 		<version.maven-jar-plugin>2.4</version.maven-jar-plugin>
 		<version.maven-ear-plugin>2.7</version.maven-ear-plugin>
 		<version.maven-war-plugin>2.2</version.maven-war-plugin>
+		<version.m2e.lifecycle-mapping>1.0.0</version.m2e.lifecycle-mapping>
 		
 		<!-- Dependencies -->
 		<!-- J2EE -->
@@ -375,6 +376,31 @@
 							</configuration>
 						</execution>
 					</executions>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>${version.m2e.lifecycle-mapping}</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-ear-plugin</artifactId>
+										<versionRange>[2.2,)</versionRange>
+										<goals>
+											<goal>execute</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
