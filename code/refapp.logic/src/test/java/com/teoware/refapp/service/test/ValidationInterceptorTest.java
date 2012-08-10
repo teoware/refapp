@@ -1,4 +1,4 @@
-package com.teoware.refapp.service.validation.test;
+package com.teoware.refapp.service.test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +11,10 @@ import org.junit.Test;
 
 import com.teoware.refapp.service.ServiceException;
 import com.teoware.refapp.service.message.RegisterAuthorRequest;
+import com.teoware.refapp.service.mock.ValidationInterceptorMock;
 import com.teoware.refapp.service.util.MessageFactory;
 import com.teoware.refapp.service.validation.ValidationException;
 import com.teoware.refapp.service.validation.group.RegisterAuthorRequestGroup;
-import com.teoware.refapp.service.validation.mock.ValidationInterceptorMock;
 
 public class ValidationInterceptorTest {
 

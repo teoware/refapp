@@ -1,4 +1,4 @@
-package com.teoware.refapp.service.validation.mock;
+package com.teoware.refapp.service.mock;
 
 import java.util.List;
 
