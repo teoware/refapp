@@ -13,29 +13,6 @@
 		<java.version>1.6</java.version>
 		<source.encoding>UTF-8</source.encoding>
 		
-		<!-- Env -->
-		<user.home>${env.HOME}</user.home>
-		
-		<!-- Derby database settings -->
-		<derby.database.name>refapp</derby.database.name>
-		<derby.server.name>localhost</derby.server.name>
-		<derby.server.port>1527</derby.server.port>
-		<derby.username>refapp</derby.username>
-		<derby.password>abcd1234</derby.password>
-		<derby.connection.attributes>;create\=true</derby.connection.attributes>
-		<derby.connectionpool.name>RefappDerbyPool</derby.connectionpool.name>
-		<derby.connectionpool.datasource>org.apache.derby.jdbc.ClientDataSource</derby.connectionpool.datasource>
-		<derby.connectionpool.resource.type>javax.sql.DataSource</derby.connectionpool.resource.type>
-		<derby.jdbc.resource.name>jdbc/refapp</derby.jdbc.resource.name>
-		
-		<!-- Glassfish -->
-		<glassfish.domain>domain1</glassfish.domain>
-		<glassfish.host>localhost</glassfish.host>
-		<glassfish.httpPort>8080</glassfish.httpPort>
-		<glassfish.adminPort>4848</glassfish.adminPort>
-		<glassfish.username>admin</glassfish.username>
-		<glassfish.passwordfile>${user.home}/.asadmintruststore</glassfish.passwordfile>
-		
 		<!-- Plugins -->
 		<version.maven-clean-plugin>2.5</version.maven-clean-plugin>
 		<version.maven-compiler-plugin>2.5</version.maven-compiler-plugin>
@@ -86,13 +63,7 @@
 					<artifactId>maven-glassfish-plugin</artifactId>
 					<version>${version.maven-glassfish-plugin}</version>
 					<configuration>
-						<user>${glassfish.username}</user>
-						<passFile>${glassfish.passwordfile}</passFile>
-						<domain>
-							<name>${glassfish.domain}</name>
-							<httpPort>${glassfish.httpPort}</httpPort>
-							<adminPort>${glassfish.adminPort}</adminPort>
-						</domain>
+						<skip>true</skip>
 					</configuration>
 				</plugin>
 				
@@ -101,29 +72,7 @@
 					<artifactId>asadmin-maven-plugin</artifactId>
 					<version>${version.asadmin-maven-plugin}</version>
 					<configuration>
-						<domain>${glassfish.domain}</domain>
-						<host>${glassfish.host}</host>
-						<port>${glassfish.adminPort}</port>
-						<user>${glassfish.username}</user>
-						<passwordfile>${glassfish.passwordfile}</passwordfile>
-						
-						<!-- JDBC connection pool -->
-						<poolName>${derby.connectionpool.name}</poolName>
-						<poolDataSource>${derby.connectionpool.datasource}</poolDataSource>
-						<restype>${derby.connectionpool.resource.type}</restype>
-						<poolProperties>
-							<User>${derby.username}</User>
-							<Password>${derby.password}</Password>
-							<DatabaseName>${derby.database.name}</DatabaseName>
-							<ServerName>${derby.server.name}</ServerName>
-							<PortNumber>${derby.server.port}</PortNumber>
-							<connectionAttributes>${derby.connection.attributes}</connectionAttributes>
-						</poolProperties>
-						
-						<!-- JDBC resource -->
-						<resourceName>${derby.jdbc.resource.name}</resourceName>
-						
-						<onError>continue</onError>
+						<skip>true</skip>
 					</configuration>
 				</plugin>
 			</plugins>

@@ -14,6 +14,35 @@
 	
 	<!-- PROPERTIES -->
 	<properties>
+		<!-- Env -->
+		<user.home>${env.HOME}</user.home>
+		
+		<!-- Glassfish -->
+		<glassfish.domain>domain1</glassfish.domain>
+		<glassfish.host>localhost</glassfish.host>
+		<glassfish.httpPort>8080</glassfish.httpPort>
+		<glassfish.adminPort>4848</glassfish.adminPort>
+		<glassfish.username>admin</glassfish.username>
+		<glassfish.passwordfile>${user.home}/.asadmintruststore</glassfish.passwordfile>
+		
+		<!-- Deployment -->
+		<glassfish.deploy.name>refapp</glassfish.deploy.name>
+		<glassfish.deploy.archive.path>../../code/refapp.ear/target</glassfish.deploy.archive.path>
+		<glassfish.deploy.archive.file>*.ear</glassfish.deploy.archive.file>
+		<glassfish.deploy.archive>${glassfish.deploy.archive.path}/${glassfish.deploy.archive.file}</glassfish.deploy.archive>
+		<glassfish.deploy.contextroot>refapp</glassfish.deploy.contextroot>
+		
+		<!-- Derby database settings -->
+		<derby.database.name>refapp</derby.database.name>
+		<derby.server.name>localhost</derby.server.name>
+		<derby.server.port>1527</derby.server.port>
+		<derby.username>refapp</derby.username>
+		<derby.password>abcd1234</derby.password>
+		<derby.connection.attributes>;create\=true</derby.connection.attributes>
+		<derby.connectionpool.name>RefappDerbyPool</derby.connectionpool.name>
+		<derby.connectionpool.datasource>org.apache.derby.jdbc.ClientDataSource</derby.connectionpool.datasource>
+		<derby.connectionpool.resource.type>javax.sql.DataSource</derby.connectionpool.resource.type>
+		<derby.jdbc.resource.name>jdbc/refapp</derby.jdbc.resource.name>
 	</properties>
 	
 	<!-- REPOSITORIES -->
@@ -32,42 +61,63 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 			</plugin>
 			
 			<plugin>
 				<groupId>org.glassfish.maven.plugin</groupId>
 				<artifactId>maven-glassfish-plugin</artifactId>
+				<configuration>
+					<user>${glassfish.username}</user>
+					<passFile>${glassfish.passwordfile}</passFile>
+					<domain>
+						<name>${glassfish.domain}</name>
+						<httpPort>${glassfish.httpPort}</httpPort>
+						<adminPort>${glassfish.adminPort}</adminPort>
+					</domain>
+					
+					<skip>false</skip>
+				</configuration>
 			</plugin>
 			
 			<plugin>
 				<groupId>org.codeartisans.asadmin</groupId>
 				<artifactId>asadmin-maven-plugin</artifactId>
-<!-- 				<configuration> -->
-<!-- 					<domain>${glassfish.domain}</domain> -->
-<!-- 					<host>${glassfish.host}</host> -->
-<!-- 					<port>${glassfish.adminPort}</port> -->
-<!-- 					<user>${glassfish.username}</user> -->
-<!-- 					<passwordfile>${glassfish.passwordfile}</passwordfile> -->
+				<configuration>
+					<domain>${glassfish.domain}</domain>
+					<host>${glassfish.host}</host>
+					<port>${glassfish.adminPort}</port>
+					<user>${glassfish.username}</user>
+					<passwordfile>${glassfish.passwordfile}</passwordfile>
 					
-<!-- 					JDBC connection pool -->
-<!-- 					<poolName>MyTestPool</poolName> -->
-<!-- 					<poolDataSource>org.apache.derby.jdbc.ClientDataSource</poolDataSource> -->
-<!-- 					<restype>javax.sql.DataSource</restype> -->
-<!-- 					<poolProperties> -->
-<!-- 						<User>refapp</User> -->
-<!-- 						<Password>abcd1234</Password> -->
-<!-- 						<DatabaseName>refapp</DatabaseName> -->
-<!-- 						<ServerName>localhost</ServerName> -->
-<!-- 						<PortNumber>1527</PortNumber> -->
-<!-- 						<connectionAttributes>;create\=true</connectionAttributes> -->
-<!-- 					</poolProperties> -->
+					<!-- Deployment -->
+					<appName>${glassfish.deploy.name}</appName>
+					<appArchive>${glassfish.deploy.archive}</appArchive>
+					<contextRoot>${glassfish.deploy.contextroot}</contextRoot>
 					
-<!-- 					JDBC resource -->
-<!-- 					<resourceName>jdbc/myres</resourceName> -->
+					<!-- JDBC connection pool -->
+					<poolName>${derby.connectionpool.name}</poolName>
+					<poolDataSource>${derby.connectionpool.datasource}</poolDataSource>
+					<restype>${derby.connectionpool.resource.type}</restype>
+					<poolProperties>
+						<User>${derby.username}</User>
+						<Password>${derby.password}</Password>
+						<DatabaseName>${derby.database.name}</DatabaseName>
+						<ServerName>${derby.server.name}</ServerName>
+						<PortNumber>${derby.server.port}</PortNumber>
+						<connectionAttributes>${derby.connection.attributes}</connectionAttributes>
+					</poolProperties>
 					
-<!-- 					<onError>continue</onError> -->
-<!-- 				</configuration> -->
+					<!-- JDBC resource -->
+					<resourceName>${derby.jdbc.resource.name}</resourceName>
+					
+					<skip>false</skip>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
