@@ -18,6 +18,7 @@
 		<user.home>${env.HOME}</user.home>
 		
 		<!-- Glassfish -->
+		<glassfish.home>${env.GLASSFISH_HOME}</glassfish.home>
 		<glassfish.domain>domain1</glassfish.domain>
 		<glassfish.host>localhost</glassfish.host>
 		<glassfish.httpPort>8080</glassfish.httpPort>
@@ -89,6 +90,7 @@
 				<groupId>org.codeartisans.asadmin</groupId>
 				<artifactId>asadmin-maven-plugin</artifactId>
 				<configuration>
+					<glassfishHome>${glassfish.home}</glassfishHome>
 					<domain>${glassfish.domain}</domain>
 					<host>${glassfish.host}</host>
 					<port>${glassfish.adminPort}</port>
