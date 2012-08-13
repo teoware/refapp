@@ -24,13 +24,15 @@
 		<glassfish.httpPort>8080</glassfish.httpPort>
 		<glassfish.adminPort>4848</glassfish.adminPort>
 		<glassfish.username>admin</glassfish.username>
-		<glassfish.passwordfile>${user.home}/.asadmintruststore</glassfish.passwordfile>
+		<glassfish.passwordfile.path>${user.home}</glassfish.passwordfile.path>
+		<glassfish.passwordfile.name>.asadmintruststore</glassfish.passwordfile.name>
+		<glassfish.passwordfile>${glassfish.passwordfile.path}/${glassfish.passwordfile.name}</glassfish.passwordfile>
 		
 		<!-- Deployment -->
 		<glassfish.deploy.name>refapp</glassfish.deploy.name>
 		<glassfish.deploy.archive.path>../../code/refapp.ear/target</glassfish.deploy.archive.path>
-		<glassfish.deploy.archive.file>*.ear</glassfish.deploy.archive.file>
-		<glassfish.deploy.archive>${glassfish.deploy.archive.path}/${glassfish.deploy.archive.file}</glassfish.deploy.archive>
+		<glassfish.deploy.archive.name>*.ear</glassfish.deploy.archive.name>
+		<glassfish.deploy.archive>${glassfish.deploy.archive.path}/${glassfish.deploy.archive.name}</glassfish.deploy.archive>
 		<glassfish.deploy.contextroot>refapp</glassfish.deploy.contextroot>
 		
 		<!-- Derby database settings -->

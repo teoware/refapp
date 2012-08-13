@@ -65,9 +65,9 @@ public class DateUtils {
 		return dateToString(calendar.getTime(), TIMESTAMP_MASK);
 	}
 
-	public static Calendar createCalendar(int field, int amount) {
+	public static Calendar createCalendar(int field, int offset) {
 		Calendar calendar = Calendar.getInstance();
-		calendar.add(field, amount);
+		calendar.add(field, offset);
 		return calendar;
 	}
 
