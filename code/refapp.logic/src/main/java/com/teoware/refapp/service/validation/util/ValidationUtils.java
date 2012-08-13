@@ -12,7 +12,7 @@ import javax.validation.metadata.ConstraintDescriptor;
 
 import com.teoware.refapp.dao.DaoException;
 import com.teoware.refapp.service.ServiceException;
-import com.teoware.refapp.service.message.RegisterAuthorRequest;
+import com.teoware.refapp.service.dto.RegisterAuthorRequest;
 import com.teoware.refapp.service.validation.InternalValidationException;
 import com.teoware.refapp.service.validation.ValidationException;
 import com.teoware.refapp.service.validation.group.ValidationGroup;

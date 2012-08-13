@@ -4,8 +4,8 @@ import javax.ejb.Stateless;
 
 import com.teoware.refapp.service.TaskServiceLocal;
 import com.teoware.refapp.service.TaskServiceRemote;
-import com.teoware.refapp.service.message.CreateTaskRequest;
-import com.teoware.refapp.service.message.CreateTaskResponse;
+import com.teoware.refapp.service.dto.CreateTaskRequest;
+import com.teoware.refapp.service.dto.CreateTaskResponse;
 
 @Stateless(mappedName="TaskService")
 public class TaskServiceImpl implements TaskServiceLocal, TaskServiceRemote {

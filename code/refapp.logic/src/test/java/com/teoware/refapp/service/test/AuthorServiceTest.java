@@ -16,12 +16,12 @@ import org.junit.Test;
 
 import com.teoware.refapp.dao.AuthorDaoLocal;
 import com.teoware.refapp.dao.DaoException;
-import com.teoware.refapp.dao.message.InsertAuthorRequest;
+import com.teoware.refapp.dao.dto.InsertAuthorRequest;
 import com.teoware.refapp.model.common.OperationResult;
 import com.teoware.refapp.model.enums.Result;
 import com.teoware.refapp.service.ServiceException;
-import com.teoware.refapp.service.message.RegisterAuthorRequest;
-import com.teoware.refapp.service.message.RegisterAuthorResponse;
+import com.teoware.refapp.service.dto.RegisterAuthorRequest;
+import com.teoware.refapp.service.dto.RegisterAuthorResponse;
 import com.teoware.refapp.service.mock.AuthorServiceMock;
 import com.teoware.refapp.service.test.util.TestHelper;
 import com.teoware.refapp.service.validation.ValidationException;

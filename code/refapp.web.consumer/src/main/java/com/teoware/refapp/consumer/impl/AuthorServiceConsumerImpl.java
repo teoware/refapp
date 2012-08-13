@@ -5,11 +5,11 @@ import javax.ejb.EJB;
 import com.teoware.refapp.consumer.AuthorServiceConsumer;
 import com.teoware.refapp.service.AuthorService;
 import com.teoware.refapp.service.ServiceException;
-import com.teoware.refapp.service.message.FindAuthorRequest;
-import com.teoware.refapp.service.message.FindAuthorResponse;
-import com.teoware.refapp.service.message.ListAuthorsResponse;
-import com.teoware.refapp.service.message.RegisterAuthorRequest;
-import com.teoware.refapp.service.message.RegisterAuthorResponse;
+import com.teoware.refapp.service.dto.FindAuthorRequest;
+import com.teoware.refapp.service.dto.FindAuthorResponse;
+import com.teoware.refapp.service.dto.ListAuthorsResponse;
+import com.teoware.refapp.service.dto.RegisterAuthorRequest;
+import com.teoware.refapp.service.dto.RegisterAuthorResponse;
 import com.teoware.refapp.service.validation.ValidationException;
 
 public class AuthorServiceConsumerImpl implements AuthorServiceConsumer {

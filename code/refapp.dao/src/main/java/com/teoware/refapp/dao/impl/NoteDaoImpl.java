@@ -3,8 +3,8 @@ package com.teoware.refapp.dao.impl;
 import javax.ejb.Stateless;
 
 import com.teoware.refapp.dao.NoteDaoLocal;
-import com.teoware.refapp.dao.message.InsertNoteRequest;
-import com.teoware.refapp.dao.message.InsertNoteResponse;
+import com.teoware.refapp.dao.dto.InsertNoteRequest;
+import com.teoware.refapp.dao.dto.InsertNoteResponse;
 
 @Stateless(mappedName = "NoteDao")
 public class NoteDaoImpl implements NoteDaoLocal {

@@ -10,9 +10,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.teoware.refapp.service.ServiceException;
-import com.teoware.refapp.service.message.RegisterAuthorRequest;
+import com.teoware.refapp.service.dto.RegisterAuthorRequest;
 import com.teoware.refapp.service.mock.ValidationInterceptorMock;
-import com.teoware.refapp.service.util.MessageFactory;
+import com.teoware.refapp.service.util.ServiceBeanFactory;
 import com.teoware.refapp.service.validation.ValidationException;
 import com.teoware.refapp.service.validation.group.RegisterAuthorRequestGroup;
 
@@ -39,7 +39,7 @@ public class ValidationInterceptorTest {
 
 	@Test(expected=ValidationException.class)
 	public void testValidateRegisterAuthorRequestThrowsValidationException() throws ValidationException, ServiceException {
-		RegisterAuthorRequest request = MessageFactory.createRegisterAuthorRequestBean();
+		RegisterAuthorRequest request = ServiceBeanFactory.createRegisterAuthorRequestBean();
 		request.getBody().setAuthorId(null);
 		List<? super Object> params = new ArrayList<Object>();
 		params.add(request);

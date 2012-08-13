@@ -4,8 +4,8 @@ import javax.ejb.Stateless;
 
 import com.teoware.refapp.service.NoteServiceLocal;
 import com.teoware.refapp.service.NoteServiceRemote;
-import com.teoware.refapp.service.message.CreateNoteRequest;
-import com.teoware.refapp.service.message.CreateNoteResponse;
+import com.teoware.refapp.service.dto.CreateNoteRequest;
+import com.teoware.refapp.service.dto.CreateNoteResponse;
 
 @Stateless(mappedName="NoteService")
 public class NoteServiceImpl implements NoteServiceLocal, NoteServiceRemote {

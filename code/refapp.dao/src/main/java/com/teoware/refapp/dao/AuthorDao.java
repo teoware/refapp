@@ -2,18 +2,18 @@ package com.teoware.refapp.dao;
 
 import java.io.Serializable;
 
-import com.teoware.refapp.dao.message.DeleteAuthorRequest;
-import com.teoware.refapp.dao.message.DeleteAuthorResponse;
-import com.teoware.refapp.dao.message.InsertAuthorRequest;
-import com.teoware.refapp.dao.message.InsertAuthorResponse;
-import com.teoware.refapp.dao.message.PurgeAuthorsRequest;
-import com.teoware.refapp.dao.message.PurgeAuthorsResponse;
-import com.teoware.refapp.dao.message.SelectAuthorPasswordRequest;
-import com.teoware.refapp.dao.message.SelectAuthorPasswordResponse;
-import com.teoware.refapp.dao.message.SelectAuthorRequest;
-import com.teoware.refapp.dao.message.SelectAuthorResponse;
-import com.teoware.refapp.dao.message.UpdateAuthorRequest;
-import com.teoware.refapp.dao.message.UpdateAuthorResponse;
+import com.teoware.refapp.dao.dto.DeleteAuthorRequest;
+import com.teoware.refapp.dao.dto.DeleteAuthorResponse;
+import com.teoware.refapp.dao.dto.InsertAuthorRequest;
+import com.teoware.refapp.dao.dto.InsertAuthorResponse;
+import com.teoware.refapp.dao.dto.PurgeAuthorsRequest;
+import com.teoware.refapp.dao.dto.PurgeAuthorsResponse;
+import com.teoware.refapp.dao.dto.SelectAuthorPasswordRequest;
+import com.teoware.refapp.dao.dto.SelectAuthorPasswordResponse;
+import com.teoware.refapp.dao.dto.SelectAuthorRequest;
+import com.teoware.refapp.dao.dto.SelectAuthorResponse;
+import com.teoware.refapp.dao.dto.UpdateAuthorRequest;
+import com.teoware.refapp.dao.dto.UpdateAuthorResponse;
 
 public interface AuthorDao extends Serializable {
 

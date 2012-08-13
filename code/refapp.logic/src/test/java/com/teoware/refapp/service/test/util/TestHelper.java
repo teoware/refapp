@@ -5,8 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.teoware.refapp.model.enums.Gender;
-import com.teoware.refapp.service.message.RegisterAuthorRequest;
-import com.teoware.refapp.service.util.MessageFactory;
+import com.teoware.refapp.service.dto.RegisterAuthorRequest;
+import com.teoware.refapp.service.util.ServiceBeanFactory;
 
 public class TestHelper {
 
@@ -16,7 +16,7 @@ public class TestHelper {
 
 	public static RegisterAuthorRequest populateRegisterAuthorRequest(RegisterAuthorRequest request) {
 		if (request == null) {
-			request = MessageFactory.createRegisterAuthorRequestBean();
+			request = ServiceBeanFactory.createRegisterAuthorRequestBean();
 		}
 		if (request.getBody() != null) {
 			if (request.getBody().getAuthorId() != null) {
