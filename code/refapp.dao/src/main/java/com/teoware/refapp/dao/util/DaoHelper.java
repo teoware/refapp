@@ -23,12 +23,12 @@ public class DaoHelper {
 		}
 	}
 
-	private static boolean isString(Object object) {
+	public static boolean isString(Object object) {
 		Class<?> clazz = object.getClass();
 		return (CharSequence.class.isAssignableFrom(clazz) || StringWriter.class.isAssignableFrom(clazz));
 	}
 
-	private static boolean isDate(Object object) {
+	public static boolean isDate(Object object) {
 		Class<?> clazz = object.getClass();
 		return (java.util.Date.class.isAssignableFrom(clazz) &&
 				!(java.sql.Date.class.isAssignableFrom(clazz) ||
@@ -36,7 +36,7 @@ public class DaoHelper {
 						java.sql.Timestamp.class.isAssignableFrom(clazz)));
 	}
 
-	private static boolean isCalendar(Object object) {
+	public static boolean isCalendar(Object object) {
 		return object instanceof Calendar;
 	}
 
