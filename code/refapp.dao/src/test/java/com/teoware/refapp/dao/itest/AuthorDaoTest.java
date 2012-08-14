@@ -1,5 +1,6 @@
 package com.teoware.refapp.dao.itest;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -75,25 +76,25 @@ public class AuthorDaoTest {
 			Author author = authorList.get(0);
 			
 			assertNotNull(author.getAuthorId());
-			assertTrue("john.doe".equals(author.getAuthorId().getUserName()));
-			assertTrue(AuthorStatus.PENDING.equals(author.getAuthorId().getStatus()));
+			assertEquals("john.doe", author.getAuthorId().getUserName());
+			assertEquals(AuthorStatus.PENDING, author.getAuthorId().getStatus());
 			assertTrue(author.getAuthorId().getCreated().before(author.getAuthorId().getModified()) ||
 					author.getAuthorId().getCreated().equals(author.getAuthorId().getModified()));
 			
 			assertNotNull(author.getAuthorInfo());
-			assertTrue("John".equals(author.getAuthorInfo().getFirstName()));
-			assertTrue("Doe".equals(author.getAuthorInfo().getLastName()));
+			assertEquals("John", author.getAuthorInfo().getFirstName());
+			assertEquals("Doe", author.getAuthorInfo().getLastName());
 			assertNotNull(author.getAuthorInfo().getBirthDate());
-			assertTrue(Gender.MALE.equals(author.getAuthorInfo().getGender()));
-			assertTrue("john.doe@email.com".equals(author.getAuthorInfo().getEmail()));
-			assertTrue("+47 23456789".equals(author.getAuthorInfo().getPhone()));
+			assertEquals(Gender.MALE, author.getAuthorInfo().getGender());
+			assertEquals("john.doe@email.com", author.getAuthorInfo().getEmail());
+			assertEquals("+47 23456789", author.getAuthorInfo().getPhone());
 			
 			assertNotNull(author.getAuthorAddress());
-			assertTrue("Storgata 1".equals(author.getAuthorAddress().getAddress()));
-			assertTrue("1234".equals(author.getAuthorAddress().getPostalCode()));
-			assertTrue("Oslo".equals(author.getAuthorAddress().getMunicipality()));
-			assertTrue("Oslo".equals(author.getAuthorAddress().getRegion()));
-			assertTrue("Norway".equals(author.getAuthorAddress().getCountry()));
+			assertEquals("Storgata 1", author.getAuthorAddress().getAddress());
+			assertEquals("1234", author.getAuthorAddress().getPostalCode());
+			assertEquals("Oslo", author.getAuthorAddress().getMunicipality());
+			assertEquals("Oslo", author.getAuthorAddress().getRegion());
+			assertEquals("Norway", author.getAuthorAddress().getCountry());
 			
 		} catch (Exception e) {
 			e.printStackTrace();

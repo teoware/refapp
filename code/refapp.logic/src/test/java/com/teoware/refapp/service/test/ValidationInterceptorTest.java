@@ -1,5 +1,7 @@
 package com.teoware.refapp.service.test;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,4 +48,15 @@ public class ValidationInterceptorTest {
 		validationInterceptor.validateParams(params, RegisterAuthorRequestGroup.class);
 	}
 
+	public void testValidateRegisterAuthorRequestHasOneConstraintViolation() throws ServiceException {
+		RegisterAuthorRequest request = ServiceBeanFactory.createRegisterAuthorRequestBean();
+		request.getBody().setAuthorId(null);
+		List<? super Object> params = new ArrayList<Object>();
+		params.add(request);
+		try {
+			validationInterceptor.validateParams(params, RegisterAuthorRequestGroup.class);
+		} catch (ValidationException e) {
+			assertEquals(1, e.getConstraintViolations().size());
+		}
+	}
 }

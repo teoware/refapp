@@ -54,8 +54,8 @@ public class RowMapperResultSetExtractorTest {
 		assertNotNull(author.getAuthorInfo());
 		assertNotNull(author.getAuthorAddress());
 		
-		assertTrue("john.doe".equals(author.getAuthorId().getUserName()));
-		assertTrue("John".equals(author.getAuthorInfo().getFirstName()));
-		assertTrue("Storgata 1".equals(author.getAuthorAddress().getAddress()));
+		assertEquals("john.doe", author.getAuthorId().getUserName());
+		assertEquals("John", author.getAuthorInfo().getFirstName());
+		assertEquals("Storgata 1", author.getAuthorAddress().getAddress());
 	}
 }

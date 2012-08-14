@@ -1,6 +1,7 @@
 package com.teoware.refapp.util.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 
@@ -37,6 +38,6 @@ public class PropertiesFileTest {
 		String value = properties.get("testKey");
 		
 		assertNotNull(value);
-		assertTrue("testValue".equals(value));
+		assertEquals("testValue", value);
 	}
 }

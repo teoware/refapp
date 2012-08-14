@@ -2,10 +2,18 @@ package com.teoware.refapp.model.author;
 
 import java.util.Calendar;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import com.teoware.refapp.model.enums.AuthorStatus;
+import com.teoware.refapp.model.util.ValidationRegex;
 
 public class AuthorId {
 
+	@NotNull
+	@Size(min=6, max=20)
+	@Pattern(regexp = ValidationRegex.USERNAME)
 	protected String userName;
 	protected AuthorStatus status;
 	protected Calendar created;

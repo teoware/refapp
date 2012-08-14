@@ -1,11 +1,18 @@
 package com.teoware.refapp.model.author;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import com.teoware.refapp.model.base.BaseBody;
 
 public class Author extends BaseBody {
 
+	@NotNull
+	@Valid
 	protected AuthorId authorId;
+	@NotNull
 	protected AuthorInfo authorInfo;
+	@NotNull
 	protected AuthorAddress authorAddress;
 
 	public AuthorId getAuthorId() {

@@ -11,13 +11,10 @@ import com.teoware.refapp.service.util.ServiceBeanFactory;
 public class TestHelper {
 
 	public static RegisterAuthorRequest populateRegisterAuthorRequest() {
-		return populateRegisterAuthorRequest(null);
+		return populateRegisterAuthorRequest(ServiceBeanFactory.createRegisterAuthorRequestBean());
 	}
 
 	public static RegisterAuthorRequest populateRegisterAuthorRequest(RegisterAuthorRequest request) {
-		if (request == null) {
-			request = ServiceBeanFactory.createRegisterAuthorRequestBean();
-		}
 		if (request.getBody() != null) {
 			if (request.getBody().getAuthorId() != null) {
 				request.getBody().getAuthorId().setUserName("johndoe");

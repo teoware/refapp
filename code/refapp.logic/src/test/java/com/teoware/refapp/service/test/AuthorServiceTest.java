@@ -5,6 +5,7 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -118,7 +119,7 @@ public class AuthorServiceTest {
 	public void testRegisterAuthorResponseBodyHasSuccessResult() throws ValidationException, ServiceException {
 		RegisterAuthorRequest request = createValidRegisterAuthorRequest();
 		RegisterAuthorResponse response = authorService.registerAuthor(request);
-		assertTrue(Result.SUCCESS.equals(response.getBody().getResult()));
+		assertEquals(Result.SUCCESS, response.getBody().getResult());
 		assertTrue(response.getBody().getDescription() == null);
 	}
 
