@@ -25,7 +25,7 @@ import org.h2.tools.SimpleResultSet;
 import com.teoware.refapp.model.author.Author;
 import com.teoware.refapp.util.DateUtils;
 
-public class ResultSetFactory {
+public class TestResultSetFactory {
 
 	public static ResultSet createSelectAuthorResultSet() throws ParseException {
 		SimpleResultSet resultSet = new SimpleResultSet();

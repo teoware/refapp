@@ -8,7 +8,7 @@
 	</parent>
 	
 	<artifactId>refapp.appserver.glassfish</artifactId>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 	<name>rafapp.appserver.glassfish</name>
 	<description>Glassfish appserver control</description>
 	

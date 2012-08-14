@@ -51,7 +51,7 @@ public class ValidationInterceptor {
 		}
 		
 		final Class<? extends ValidationGroup> group = annotation.value();
-
+		
 		Object[] params = context.getParameters();
 		Annotation[][] annotations = method.getParameterAnnotations();
 		
@@ -127,8 +127,9 @@ public class ValidationInterceptor {
 			buf.append(item.getMessage());
 			buf.append('\n');
 		}
+		
 		buf.append("Validation.");
-
+		
 		System.out.println(buf);
 		// for debug...
 		return buf.toString();

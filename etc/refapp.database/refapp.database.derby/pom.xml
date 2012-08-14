@@ -8,7 +8,7 @@
 	</parent>
 	
 	<artifactId>refapp.database.derby</artifactId>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 	<name>rafapp.database.derby</name>
 	<description>Derby database scripts</description>
 	

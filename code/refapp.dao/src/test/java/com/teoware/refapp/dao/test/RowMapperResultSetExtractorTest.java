@@ -14,7 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.teoware.refapp.dao.rowmapper.AuthorRowMapper;
-import com.teoware.refapp.dao.test.util.ResultSetFactory;
+import com.teoware.refapp.dao.test.util.TestResultSetFactory;
 import com.teoware.refapp.dao.util.ResultSetExtractor;
 import com.teoware.refapp.dao.util.RowMapperResultSetExtractor;
 import com.teoware.refapp.model.author.Author;
@@ -41,7 +41,7 @@ public class RowMapperResultSetExtractorTest {
 	@Test
 	public void testExtractDataFromAuthorResultSet() throws SQLException, ParseException {
 		ResultSetExtractor<List<Author>> resultSetExtractor = new RowMapperResultSetExtractor<Author>(new AuthorRowMapper(), 0);
-		ResultSet resultSet = ResultSetFactory.createSelectAuthorResultSet();
+		ResultSet resultSet = TestResultSetFactory.createSelectAuthorResultSet();
 		List<Author> authorList = resultSetExtractor.extractData(resultSet);
 		
 		assertNotNull(authorList);
