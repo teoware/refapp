@@ -20,6 +20,8 @@
 		<ejb.version>3.0</ejb.version>
 		<ear.version>5</ear.version>
 		
+		<skip.intergration.test>true</skip.intergration.test>
+		
 		<!-- Plugins -->
 		<version.maven-clean-plugin>2.5</version.maven-clean-plugin>
 		<version.maven-compiler-plugin>2.5</version.maven-compiler-plugin>
