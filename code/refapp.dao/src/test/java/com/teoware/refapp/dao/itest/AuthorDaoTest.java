@@ -67,12 +67,12 @@ public class AuthorDaoTest {
 			AuthorPassword johnsPassword = TestDataFactory.createAuthorJohnPassword();
 			
 			int rowsAffected = insertAuthor(john, johnsPassword);
-			assertTrue(rowsAffected == 4);
+			assertEquals(4, rowsAffected);
 			
 			List<Author> authorList = selectAuthor("john.doe");
 			
 			assertNotNull(authorList);
-			assertTrue(authorList.size() == 1);
+			assertEquals(1, authorList.size());
 			Author author = authorList.get(0);
 			
 			assertNotNull(author.getAuthorId());
@@ -109,12 +109,12 @@ public class AuthorDaoTest {
 			AuthorPassword janesPassword = TestDataFactory.createAuthorJanePassword();
 			
 			int rowsAffected = insertAuthor(jane, janesPassword);
-			assertTrue(rowsAffected == 4);
+			assertEquals(4, rowsAffected);
 			
 			List<Author> authorList = selectAuthor("jane.doe");
 			
 			assertNotNull(authorList);
-			assertTrue(authorList.size() == 1);
+			assertEquals(1, authorList.size());
 			Author author = authorList.get(0);
 			
 			assertNotNull(author.getAuthorId());
@@ -124,19 +124,19 @@ public class AuthorDaoTest {
 					author.getAuthorId().getCreated().equals(author.getAuthorId().getModified()));
 			
 			assertNotNull(author.getAuthorInfo());
-			assertTrue("Jane".equals(author.getAuthorInfo().getFirstName()));
-			assertTrue("Doe".equals(author.getAuthorInfo().getLastName()));
+			assertEquals("Jane", author.getAuthorInfo().getFirstName());
+			assertEquals("Doe", author.getAuthorInfo().getLastName());
 			assertNotNull(author.getAuthorInfo().getBirthDate());
-			assertTrue(Gender.FEMALE.equals(author.getAuthorInfo().getGender()));
-			assertTrue("jane.doe@email.com".equals(author.getAuthorInfo().getEmail()));
-			assertTrue("+47 98765432".equals(author.getAuthorInfo().getPhone()));
+			assertEquals(Gender.FEMALE, author.getAuthorInfo().getGender());
+			assertEquals("jane.doe@email.com", author.getAuthorInfo().getEmail());
+			assertEquals("+47 98765432", author.getAuthorInfo().getPhone());
 			
 			assertNotNull(author.getAuthorAddress());
-			assertTrue("Lillegata 1".equals(author.getAuthorAddress().getAddress()));
-			assertTrue("1010".equals(author.getAuthorAddress().getPostalCode()));
-			assertTrue("Oslo".equals(author.getAuthorAddress().getMunicipality()));
-			assertTrue("Oslo".equals(author.getAuthorAddress().getRegion()));
-			assertTrue("Norway".equals(author.getAuthorAddress().getCountry()));
+			assertEquals("Lillegata 1", author.getAuthorAddress().getAddress());
+			assertEquals("1010", author.getAuthorAddress().getPostalCode());
+			assertEquals("Oslo", author.getAuthorAddress().getMunicipality());
+			assertEquals("Oslo", author.getAuthorAddress().getRegion());
+			assertEquals("Norway", author.getAuthorAddress().getCountry());
 			
 			jane.getAuthorId().setStatus(AuthorStatus.ACTIVE);
 			jane.getAuthorInfo().setEmail("jane.doe@epost.net");
@@ -147,34 +147,34 @@ public class AuthorDaoTest {
 			janesPassword = null;
 			
 			rowsAffected = updateAuthor(jane, janesPassword);
-			assertTrue(rowsAffected == 3);
+			assertEquals(3, rowsAffected);
 			
 			authorList = selectAuthor("jane.doe");
 			
 			assertNotNull(authorList);
-			assertTrue(authorList.size() == 1);
+			assertEquals(1, authorList.size());
 			author = authorList.get(0);
 			
 			assertNotNull(author.getAuthorId());
-			assertTrue("jane.doe".equals(author.getAuthorId().getUserName()));
-			assertTrue(AuthorStatus.ACTIVE.equals(author.getAuthorId().getStatus()));
+			assertEquals("jane.doe", author.getAuthorId().getUserName());
+			assertEquals(AuthorStatus.ACTIVE, author.getAuthorId().getStatus());
 			assertTrue(author.getAuthorId().getCreated().before(author.getAuthorId().getModified()) ||
 					author.getAuthorId().getCreated().equals(author.getAuthorId().getModified()));
 			
 			assertNotNull(author.getAuthorInfo());
-			assertTrue("Jane".equals(author.getAuthorInfo().getFirstName()));
-			assertTrue("Doe".equals(author.getAuthorInfo().getLastName()));
+			assertEquals("Jane", author.getAuthorInfo().getFirstName());
+			assertEquals("Doe", author.getAuthorInfo().getLastName());
 			assertNotNull(author.getAuthorInfo().getBirthDate());
-			assertTrue(Gender.FEMALE.equals(author.getAuthorInfo().getGender()));
-			assertTrue("jane.doe@epost.net".equals(author.getAuthorInfo().getEmail()));
-			assertTrue("+47 22334455".equals(author.getAuthorInfo().getPhone()));
+			assertEquals(Gender.FEMALE, author.getAuthorInfo().getGender());
+			assertEquals("jane.doe@epost.net", author.getAuthorInfo().getEmail());
+			assertEquals("+47 22334455", author.getAuthorInfo().getPhone());
 			
 			assertNotNull(author.getAuthorAddress());
-			assertTrue("Nygata 2".equals(author.getAuthorAddress().getAddress()));
-			assertTrue("1122".equals(author.getAuthorAddress().getPostalCode()));
-			assertTrue("Oslo".equals(author.getAuthorAddress().getMunicipality()));
-			assertTrue("Oslo".equals(author.getAuthorAddress().getRegion()));
-			assertTrue("Norway".equals(author.getAuthorAddress().getCountry()));
+			assertEquals("Nygata 2", author.getAuthorAddress().getAddress());
+			assertEquals("1122", author.getAuthorAddress().getPostalCode());
+			assertEquals("Oslo", author.getAuthorAddress().getMunicipality());
+			assertEquals("Oslo", author.getAuthorAddress().getRegion());
+			assertEquals("Norway", author.getAuthorAddress().getCountry());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -193,7 +193,7 @@ public class AuthorDaoTest {
 			List<AuthorPassword> authorPasswordList = selectAuthorPassword("jonah.doe");
 			
 			assertNotNull(authorPasswordList);
-			assertTrue(authorPasswordList.size() == 1);
+			assertEquals(1, authorPasswordList.size());
 			AuthorPassword authorPassword = authorPasswordList.get(0);
 			
 			assertNotNull(authorPassword.getPassword());

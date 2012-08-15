@@ -14,6 +14,10 @@
 	
 	<!-- PROPERTIES -->
 	<properties>
+		<!-- JAXB -->
+		<jaxb.schema.directory>${project.basedir}/src/main/resources/xsd</jaxb.schema.directory>
+		<jaxb.binding.directory>${project.basedir}/src/main/resources/xjb</jaxb.binding.directory>
+		<jaxb.generate.directory>${project.basedir}/src/main/generated</jaxb.generate.directory>
 	</properties>
 	
 	<!-- REPOSITORIES -->
@@ -44,12 +48,34 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>${jaxb.generate.directory}</directory>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 			</plugin>
 			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<artifactId>maven-jaxb2-plugin</artifactId>
+				<configuration>
+					<schemaDirectory>${jaxb.schema.directory}</schemaDirectory>
+					<bindingDirectory>${jaxb.binding.directory}</bindingDirectory>
+					<generateDirectory>${jaxb.generate.directory}</generateDirectory>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
