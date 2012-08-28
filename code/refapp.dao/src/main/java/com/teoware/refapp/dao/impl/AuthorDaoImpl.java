@@ -22,7 +22,7 @@ import static com.teoware.refapp.dao.metadata.AuthorTableMetaData.POSTALCODE_COL
 import static com.teoware.refapp.dao.metadata.AuthorTableMetaData.REGION_COLUMN_NAME;
 import static com.teoware.refapp.dao.metadata.AuthorTableMetaData.STATUS_COLUMN_NAME;
 import static com.teoware.refapp.dao.metadata.AuthorTableMetaData.USERNAME_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.SchemaMetaData.SCHEMA_NAME;
+import static com.teoware.refapp.dao.metadata.SchemaMetaData.REFAPP_SCHEMA_NAME;
 
 import java.util.Calendar;
 import java.util.List;
@@ -57,11 +57,11 @@ import com.teoware.refapp.util.DateUtils;
 public class AuthorDaoImpl extends BaseDao implements AuthorDaoLocal {
 
 	private static final long serialVersionUID = 1L;
-	private static final String AUTHOR_VIEW = SCHEMA_NAME + "." + AUTHOR_VIEW_NAME;
-	private static final String AUTHOR_TABLE = SCHEMA_NAME + "." + AUTHOR_TABLE_NAME;
-	private static final String AUTHOR_STATUS_TABLE = SCHEMA_NAME + "." + AUTHOR_STATUS_TABLE_NAME;
-	private static final String AUTHOR_ADDRESS_TABLE = SCHEMA_NAME + "." + AUTHOR_ADDRESS_TABLE_NAME;
-	private static final String AUTHOR_PASSWORD_TABLE = SCHEMA_NAME + "." + AUTHOR_PASSWORD_TABLE_NAME;
+	private static final String AUTHOR_VIEW = REFAPP_SCHEMA_NAME + "." + AUTHOR_VIEW_NAME;
+	private static final String AUTHOR_TABLE = REFAPP_SCHEMA_NAME + "." + AUTHOR_TABLE_NAME;
+	private static final String AUTHOR_STATUS_TABLE = REFAPP_SCHEMA_NAME + "." + AUTHOR_STATUS_TABLE_NAME;
+	private static final String AUTHOR_ADDRESS_TABLE = REFAPP_SCHEMA_NAME + "." + AUTHOR_ADDRESS_TABLE_NAME;
+	private static final String AUTHOR_PASSWORD_TABLE = REFAPP_SCHEMA_NAME + "." + AUTHOR_PASSWORD_TABLE_NAME;
 	
 	private AuthorRowMapper authorRowMapper = new AuthorRowMapper();
 	private AuthorPasswordRowMapper authorPasswordRowMapper = new AuthorPasswordRowMapper();

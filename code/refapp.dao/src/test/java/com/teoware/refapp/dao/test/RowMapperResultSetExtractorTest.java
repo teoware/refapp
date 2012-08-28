@@ -23,7 +23,6 @@ public class RowMapperResultSetExtractorTest {
 
 	@BeforeClass
 	public static void oneTimeSetUp() {
-		
 	}
 
 	@AfterClass
