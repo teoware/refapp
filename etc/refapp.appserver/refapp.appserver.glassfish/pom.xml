@@ -31,7 +31,7 @@
 		<!-- Deployment -->
 		<glassfish.deploy.name>refapp</glassfish.deploy.name>
 		<glassfish.deploy.archive.path>../../code/refapp.ear/target</glassfish.deploy.archive.path>
-		<glassfish.deploy.archive.name>refapp.ear-1.0.0-SNAPSHOT.ear</glassfish.deploy.archive.name>
+		<glassfish.deploy.archive.name>refapp.ear-0.0.1-SNAPSHOT.ear</glassfish.deploy.archive.name>
 		<glassfish.deploy.archive>${glassfish.deploy.archive.path}/${glassfish.deploy.archive.name}</glassfish.deploy.archive>
 		<glassfish.deploy.contextroot>refapp</glassfish.deploy.contextroot>
 		
