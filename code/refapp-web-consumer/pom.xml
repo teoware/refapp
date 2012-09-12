@@ -7,9 +7,9 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>refapp.web.consumer</artifactId>
+	<artifactId>refapp-web-consumer</artifactId>
 	<packaging>jar</packaging>
-	<name>refapp.web.consumer</name>
+	<name>refapp-web-consumer</name>
 	<description>Service consumer for web presentation layer</description>
 	
 	<!-- PROPERTIES -->
@@ -51,7 +51,7 @@
 		<!-- Project -->
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp.logic.interface</artifactId>
+			<artifactId>refapp-logic-interface</artifactId>
 		</dependency>
 	</dependencies>
 	

@@ -7,9 +7,9 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>refapp.util</artifactId>
+	<artifactId>refapp-util</artifactId>
 	<packaging>jar</packaging>
-	<name>refapp.util</name>
+	<name>refapp-util</name>
 	<description>Utility module</description>
 	
 	<!-- PROPERTIES -->
@@ -41,7 +41,7 @@
 		<!-- Project -->
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp.model</artifactId>
+			<artifactId>refapp-domain</artifactId>
 		</dependency>
 	</dependencies>
 	

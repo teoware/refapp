@@ -65,15 +65,15 @@
 	
 	<!-- MODULES -->
 	<modules>
-		<module>refapp.model</module>
-		<module>refapp.util</module>
-		<module>refapp.dao</module>
-		<module>refapp.logic.interface</module>
-		<module>refapp.logic</module>
-		<module>refapp.web.consumer</module>
-		<module>refapp.web.rest</module>
-		<module>refapp.web.ui</module>
-		<module>refapp.ear</module>
+		<module>refapp-domain</module>
+		<module>refapp-util</module>
+		<module>refapp-dao</module>
+		<module>refapp-logic-interface</module>
+		<module>refapp-logic</module>
+		<module>refapp-web-consumer</module>
+		<module>refapp-web-rest</module>
+		<module>refapp-web-ui</module>
+		<module>refapp-ear</module>
 	</modules>
 	
 	<!-- REPOSITORIES -->
@@ -226,49 +226,49 @@
 			<!-- Project -->
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp.model</artifactId>
+				<artifactId>refapp-domain</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp.util</artifactId>
+				<artifactId>refapp-util</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp.dao</artifactId>
+				<artifactId>refapp-dao</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp.logic.interface</artifactId>
+				<artifactId>refapp-logic-interface</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp.logic</artifactId>
+				<artifactId>refapp-logic</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 						
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp.web.consumer</artifactId>
+				<artifactId>refapp-web-consumer</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp.web.ui</artifactId>
+				<artifactId>refapp-web-ui</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp.web.rest</artifactId>
+				<artifactId>refapp-web-rest</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>

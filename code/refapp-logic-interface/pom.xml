@@ -7,9 +7,9 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>refapp.logic.interface</artifactId>
+	<artifactId>refapp-logic-interface</artifactId>
 	<packaging>jar</packaging>
-	<name>refapp.logic.interface</name>
+	<name>refapp-logic-interface</name>
 	<description>Business logic interface layer</description>
 	
 	<!-- PROPERTIES -->
@@ -52,7 +52,7 @@
 		<!-- Project -->
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp.model</artifactId>
+			<artifactId>refapp-domain</artifactId>
 		</dependency>
 	</dependencies>
 	

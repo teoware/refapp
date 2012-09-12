@@ -7,10 +7,10 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>refapp.model</artifactId>
+	<artifactId>refapp-domain</artifactId>
 	<packaging>jar</packaging>
-	<name>refapp.model</name>
-	<description>Data model entities</description>
+	<name>refapp-domain</name>
+	<description>Domain model</description>
 	
 	<!-- PROPERTIES -->
 	<properties>

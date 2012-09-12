@@ -7,9 +7,9 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>refapp.logic</artifactId>
+	<artifactId>refapp-logic</artifactId>
 	<packaging>ejb</packaging>
-	<name>refapp.logic</name>
+	<name>refapp-logic</name>
 	<description>Business logic service layer</description>
 	
 	<!-- PROPERTIES -->
@@ -68,12 +68,12 @@
 		<!-- Project -->
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp.logic.interface</artifactId>
+			<artifactId>refapp-logic-interface</artifactId>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp.dao</artifactId>
+			<artifactId>refapp-dao</artifactId>
 		</dependency>
 	</dependencies>
 	

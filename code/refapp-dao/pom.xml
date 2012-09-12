@@ -7,9 +7,9 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>refapp.dao</artifactId>
+	<artifactId>refapp-dao</artifactId>
 	<packaging>ejb</packaging>
-	<name>refapp.dao</name>
+	<name>refapp-dao</name>
 	<description>Data access layer</description>
 	
 	<!-- PROPERTIES -->
@@ -79,12 +79,12 @@
 		<!-- Project -->
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp.util</artifactId>
+			<artifactId>refapp-domain</artifactId>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp.model</artifactId>
+			<artifactId>refapp-util</artifactId>
 		</dependency>
 	</dependencies>
 	
