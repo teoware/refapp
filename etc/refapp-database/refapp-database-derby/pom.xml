@@ -3,13 +3,13 @@
 	
 	<parent>
 		<groupId>com.teoware.refapp</groupId>
-		<artifactId>refapp.database</artifactId>
+		<artifactId>refapp-database</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>refapp.database.derby</artifactId>
+	<artifactId>refapp-database-derby</artifactId>
 	<packaging>pom</packaging>
-	<name>rafapp.database.derby</name>
+	<name>rafapp-database-derby</name>
 	<description>Derby database scripts</description>
 	
 	<!-- PROPERTIES -->

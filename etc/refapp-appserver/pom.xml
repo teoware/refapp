@@ -2,10 +2,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<groupId>com.teoware.refapp</groupId>
-	<artifactId>refapp.appserver</artifactId>
+	<artifactId>refapp-appserver</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>rafapp.appserver</name>
+	<name>rafapp-appserver</name>
 	<description>Appserver control</description>
 	
 	<!-- PROPERTIES -->
@@ -23,7 +23,7 @@
 	</properties>
 	
 	<modules>
-		<module>refapp.appserver.glassfish</module>
+		<module>refapp-appserver-glassfish</module>
 	</modules>
 	
 	<!-- REPOSITORIES -->
