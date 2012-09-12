@@ -238,19 +238,7 @@
 			
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp.web.consumer</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			
-			<dependency>
-				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp.web.ui</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			
-			<dependency>
-				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp.web.rest</artifactId>
+				<artifactId>refapp.dao</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			
@@ -265,10 +253,22 @@
 				<artifactId>refapp.logic</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+						
+			<dependency>
+				<groupId>com.teoware.refapp</groupId>
+				<artifactId>refapp.web.consumer</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 			
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp.dao</artifactId>
+				<artifactId>refapp.web.ui</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.teoware.refapp</groupId>
+				<artifactId>refapp.web.rest</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
@@ -314,12 +314,19 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-ear-plugin</artifactId>
 					<version>${version.maven-ear-plugin}</version>
+					<configuration>
+						<version>${ear.version}</version>
+						<defaultLibBundleDir>lib</defaultLibBundleDir>
+					</configuration>
 				</plugin>
 				
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
 					<version>${version.maven-war-plugin}</version>
+					<configuration>
+						<failOnMissingWebXml>false</failOnMissingWebXml>
+					</configuration>
 				</plugin>
 				<!--
 				<plugin>

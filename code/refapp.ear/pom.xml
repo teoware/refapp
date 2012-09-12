@@ -29,50 +29,57 @@
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
 			<artifactId>refapp.model</artifactId>
-			<version>${app.release.version}</version><!--$NO-MVN-MAN-VER$-->
 			<type>jar</type>
+			<version>${project.version}</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
 			<artifactId>refapp.util</artifactId>
-			<version>${app.release.version}</version><!--$NO-MVN-MAN-VER$-->
 			<type>jar</type>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp.web.ui</artifactId>
-			<version>${app.release.version}</version><!--$NO-MVN-MAN-VER$-->
-			<type>war</type>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp.web.consumer</artifactId>
-			<version>${app.release.version}</version><!--$NO-MVN-MAN-VER$-->
-			<type>jar</type>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp.logic.interface</artifactId>
-			<version>${app.release.version}</version><!--$NO-MVN-MAN-VER$-->
-			<type>jar</type>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp.logic</artifactId>
-			<version>${app.release.version}</version><!--$NO-MVN-MAN-VER$-->
-			<type>ejb</type>
+			<version>${project.version}</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
 			<artifactId>refapp.dao</artifactId>
-			<version>${app.release.version}</version><!--$NO-MVN-MAN-VER$-->
 			<type>ejb</type>
+			<version>${project.version}</version><!--$NO-MVN-MAN-VER$-->
+		</dependency>
+		
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp.logic.interface</artifactId>
+			<type>jar</type>
+			<version>${project.version}</version><!--$NO-MVN-MAN-VER$-->
+		</dependency>
+		
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp.logic</artifactId>
+			<type>ejb</type>
+			<version>${project.version}</version><!--$NO-MVN-MAN-VER$-->
+		</dependency>
+		
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp.web.consumer</artifactId>
+			<type>jar</type>
+			<version>${project.version}</version><!--$NO-MVN-MAN-VER$-->
+		</dependency>
+		
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp.web.rest</artifactId>
+			<type>jar</type>
+			<version>${project.version}</version><!--$NO-MVN-MAN-VER$-->
+		</dependency>
+		
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp.web.ui</artifactId>
+			<type>war</type>
+			<version>${project.version}</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 	</dependencies>
 	
@@ -87,57 +94,55 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-ear-plugin</artifactId>
 				<configuration>
-					<version>${ear.version}</version>
-					<defaultLibBundleDir>lib</defaultLibBundleDir>
-					<jarModule>
-						<groupId>com.teoware.refapp</groupId>
-						<artifactId>refapp.model</artifactId>
-						<!-- <bundleFileName>refapp.model.jar</bundleFileName> -->
-						<unpack>true</unpack>
-					</jarModule>
-					<jarModule>
-						<groupId>com.teoware.refapp</groupId>
-						<artifactId>refapp.util</artifactId>
-						<!-- <bundleFileName>refapp.model.jar</bundleFileName> -->
-						<unpack>true</unpack>
-					</jarModule>
-					<webModule>
-						<groupId>com.teoware.refapp</groupId>
-						<artifactId>refapp.web.ui</artifactId>
-						<!-- <bundleFileName>refapp.web.ui.war</bundleFileName> -->
-						<unpack>true</unpack>
-						<!-- <contextRoot>/</contextRoot> -->
-					</webModule>
-					<jarModule>
-						<groupId>com.teoware.refapp</groupId>
-						<artifactId>refapp.web.rest</artifactId>
-						<!-- <bundleFileName>refapp.web.rest.jar</bundleFileName> -->
-						<unpack>true</unpack>
-					</jarModule>
-					<jarModule>
-						<groupId>com.teoware.refapp</groupId>
-						<artifactId>refapp.web.consumer</artifactId>
-						<!-- <bundleFileName>refapp.web.consumer.jar</bundleFileName> -->
-						<unpack>true</unpack>
-					</jarModule>
-					<jarModule>
-						<groupId>com.teoware.refapp</groupId>
-						<artifactId>refapp.logic.interface</artifactId>
-						<!-- <bundleFileName>refapp.logic.interface.jar</bundleFileName> -->
-						<unpack>true</unpack>
-					</jarModule>
-					<ejbModule>
-						<groupId>com.teoware.refapp</groupId>
-						<artifactId>refapp.logic</artifactId>
-						<!-- <bundleFileName>refapp.logic.jar</bundleFileName> -->
-						<unpack>true</unpack>
-					</ejbModule>
-					<ejbModule>
-						<groupId>com.teoware.refapp</groupId>
-						<artifactId>refapp.dao</artifactId>
-						<!-- <bundleFileName>refapp.dao.jar</bundleFileName> -->
-						<unpack>true</unpack>
-					</ejbModule>
+					<modules>
+						<jarModule>
+							<groupId>com.teoware.refapp</groupId>
+							<artifactId>refapp.model</artifactId>
+							<unpack>true</unpack>
+						</jarModule>
+						
+						<jarModule>
+							<groupId>com.teoware.refapp</groupId>
+							<artifactId>refapp.util</artifactId>
+							<unpack>true</unpack>
+						</jarModule>
+						
+						<ejbModule>
+							<groupId>com.teoware.refapp</groupId>
+							<artifactId>refapp.dao</artifactId>
+							<unpack>true</unpack>
+						</ejbModule>
+						
+						<jarModule>
+							<groupId>com.teoware.refapp</groupId>
+							<artifactId>refapp.logic.interface</artifactId>
+							<unpack>true</unpack>
+						</jarModule>
+						
+						<ejbModule>
+							<groupId>com.teoware.refapp</groupId>
+							<artifactId>refapp.logic</artifactId>
+							<unpack>true</unpack>
+						</ejbModule>
+						
+						<jarModule>
+							<groupId>com.teoware.refapp</groupId>
+							<artifactId>refapp.web.consumer</artifactId>
+							<unpack>true</unpack>
+						</jarModule>
+						
+						<jarModule>
+							<groupId>com.teoware.refapp</groupId>
+							<artifactId>refapp.web.rest</artifactId>
+							<unpack>true</unpack>
+						</jarModule>
+						
+						<webModule>
+							<groupId>com.teoware.refapp</groupId>
+							<artifactId>refapp.web.ui</artifactId>
+							<unpack>true</unpack>
+						</webModule>
+					</modules>
 				</configuration>
 			</plugin>
 		</plugins>
