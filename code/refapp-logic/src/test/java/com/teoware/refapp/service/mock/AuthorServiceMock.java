@@ -1,9 +1,9 @@
 package com.teoware.refapp.service.mock;
 
 import com.teoware.refapp.dao.AuthorDaoLocal;
-import com.teoware.refapp.service.impl.AuthorServiceImpl;
+import com.teoware.refapp.service.AuthorServiceBean;
 
-public class AuthorServiceMock extends AuthorServiceImpl {
+public class AuthorServiceMock extends AuthorServiceBean {
 
 	private static final long serialVersionUID = 1L;
 

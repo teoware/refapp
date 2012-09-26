@@ -4,11 +4,11 @@ import java.sql.SQLException;
 
 import bitronix.tm.resource.jdbc.PoolingDataSource;
 
+import com.teoware.refapp.dao.AuthorDaoBean;
 import com.teoware.refapp.dao.DaoException;
-import com.teoware.refapp.dao.impl.AuthorDaoImpl;
 import com.teoware.refapp.dao.test.util.TestDataSourceHandler;
 
-public class AuthorDaoMock extends AuthorDaoImpl {
+public class AuthorDaoMock extends AuthorDaoBean {
 
 	private static final long serialVersionUID = 1L;
 
