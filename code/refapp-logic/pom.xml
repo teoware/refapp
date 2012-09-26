@@ -68,7 +68,7 @@
 		<!-- Project -->
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-logic-interface</artifactId>
+			<artifactId>refapp-logic-facade</artifactId>
 		</dependency>
 		
 		<dependency>

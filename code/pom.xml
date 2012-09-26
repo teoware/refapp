@@ -68,7 +68,7 @@
 		<module>refapp-domain</module>
 		<module>refapp-util</module>
 		<module>refapp-dao</module>
-		<module>refapp-logic-interface</module>
+		<module>refapp-logic-facade</module>
 		<module>refapp-logic</module>
 		<module>refapp-web-consumer</module>
 		<module>refapp-web-rest</module>
@@ -244,7 +244,7 @@
 			
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp-logic-interface</artifactId>
+				<artifactId>refapp-logic-facade</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			

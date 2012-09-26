@@ -7,10 +7,10 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>refapp-logic-interface</artifactId>
+	<artifactId>refapp-logic-facade</artifactId>
 	<packaging>jar</packaging>
-	<name>refapp-logic-interface</name>
-	<description>Business logic interface layer</description>
+	<name>refapp-logic-facade</name>
+	<description>Business logic facade layer</description>
 	
 	<!-- PROPERTIES -->
 	<properties>
