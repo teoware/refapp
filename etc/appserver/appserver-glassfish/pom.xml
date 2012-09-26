@@ -3,13 +3,13 @@
 	
 	<parent>
 		<groupId>com.teoware.refapp</groupId>
-		<artifactId>refapp-appserver</artifactId>
+		<artifactId>appserver</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>refapp-appserver-glassfish</artifactId>
+	<artifactId>appserver-glassfish</artifactId>
 	<packaging>pom</packaging>
-	<name>rafapp-appserver-glassfish</name>
+	<name>appserver-glassfish</name>
 	<description>Glassfish appserver control</description>
 	
 	<!-- PROPERTIES -->
