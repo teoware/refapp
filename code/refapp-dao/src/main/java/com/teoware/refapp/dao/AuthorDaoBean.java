@@ -249,7 +249,7 @@ public class AuthorDaoBean extends BaseDao implements AuthorDaoLocal {
 		Object[] parameters = DaoHelper.generateArray(AuthorStatus.DELETED.toString());
 		
 		if (request.isGreedy()) {
-			sql.appendStatement(" AND (" + STATUS_COLUMN_NAME + " = ? AND " + CREATED_COLUMN_NAME + " >= ?");
+			sql.append(" AND (" + STATUS_COLUMN_NAME + " = ? AND " + CREATED_COLUMN_NAME + " >= ?");
 			parameters = DaoHelper.generateArray(
 					AuthorStatus.DELETED.toString(),
 					AuthorStatus.PENDING.toString(),

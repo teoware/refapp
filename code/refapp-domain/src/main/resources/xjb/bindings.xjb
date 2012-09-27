@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jaxb:bindings version="2.0" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"  xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	<jaxb:globalBindings generateElementProperty="false" />
-</jaxb:bindings>
+<jxb:bindings version="2.0" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" jxb:extensionBindingPrefixes="xjc" xmlns:annox="http://annox.dev.java.net" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<jxb:bindings schemaLocation="../xsd/author.xsd" node="/xs:schema" >
+<!-- 		<jxb:schemaBindings> -->
+<!-- 			<jxb:package name="com.teoware.refapp.domain" /> -->
+<!-- 		</jxb:schemaBindings> -->
+<!-- 		<jxb:bindings node="//xs:complexType[@name='Author']"> -->
+<!-- 			<annox:annotate target="field"> -->
+<!-- 				<annox:annotate annox:class="javax.validation.constraints.NotNull" name="username" /> -->
+<!-- 			</annox:annotate> -->
+<!-- 		</jxb:bindings> -->
+	</jxb:bindings>
+	
+	<jxb:globalBindings generateElementProperty="false">
+		<xjc:serializable uid="-1" />
+	</jxb:globalBindings>
+</jxb:bindings>

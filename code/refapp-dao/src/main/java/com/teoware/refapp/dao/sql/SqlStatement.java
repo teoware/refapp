@@ -8,15 +8,15 @@ public class SqlStatement {
 		this.statement = statement;
 	}
 
-	public void appendStatement(String append) {
-		statement += append;
+	public SqlStatement append(String append) {
+		if (this.statement == null) {
+			this.statement = "";
+		}
+		this.statement += append;
+		return this;
 	}
 
-	public String getStatement() {
+	public String build() {
 		return statement;
-	}
-
-	public void setStatement(String statement) {
-		this.statement = statement;
 	}
 }

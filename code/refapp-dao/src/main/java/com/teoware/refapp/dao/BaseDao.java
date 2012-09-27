@@ -41,7 +41,7 @@ public abstract class BaseDao {
 	}
 
 	protected int update(SqlStatement sql, Object[] parameters) throws DaoException {
-		logger.debug("Executing SQL statement: " + sql.getStatement());
+		logger.debug("Executing SQL statement: " + sql.build());
 		
 		PreparedStatement statement = null;
 		try {
@@ -64,7 +64,7 @@ public abstract class BaseDao {
 
 	@TransactionAttribute
 	protected <T> List<T> select(SqlStatement sql, RowMapper<T> rowMapper, Object[] parameters) throws DaoException {
-		logger.debug("Executing SQL statement: " + sql.getStatement());
+		logger.debug("Executing SQL statement: " + sql.build());
 		
 		PreparedStatement statement = null;
 		try {
@@ -95,7 +95,7 @@ public abstract class BaseDao {
 
 	protected PreparedStatement generatePreparedStatement(SqlStatement sql, Object[] parameters) throws SQLException {
 		createOrReuseConnection();
-		PreparedStatement statement = getConnection().prepareStatement(sql.getStatement());
+		PreparedStatement statement = getConnection().prepareStatement(sql.build());
 		if (parameters != null) {
 			for (int i = 0; i < parameters.length; i++) {
 				DaoHelper.processParameter(statement, parameters[i], i+1);

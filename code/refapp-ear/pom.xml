@@ -98,49 +98,41 @@
 						<jarModule>
 							<groupId>com.teoware.refapp</groupId>
 							<artifactId>refapp-domain</artifactId>
-							<unpack>true</unpack>
 						</jarModule>
 						
 						<jarModule>
 							<groupId>com.teoware.refapp</groupId>
 							<artifactId>refapp-util</artifactId>
-							<unpack>true</unpack>
 						</jarModule>
 						
 						<ejbModule>
 							<groupId>com.teoware.refapp</groupId>
 							<artifactId>refapp-dao</artifactId>
-							<unpack>true</unpack>
 						</ejbModule>
 						
 						<jarModule>
 							<groupId>com.teoware.refapp</groupId>
 							<artifactId>refapp-logic-facade</artifactId>
-							<unpack>true</unpack>
 						</jarModule>
 						
 						<ejbModule>
 							<groupId>com.teoware.refapp</groupId>
 							<artifactId>refapp-logic</artifactId>
-							<unpack>true</unpack>
 						</ejbModule>
 						
 						<jarModule>
 							<groupId>com.teoware.refapp</groupId>
 							<artifactId>refapp-web-consumer</artifactId>
-							<unpack>true</unpack>
 						</jarModule>
 						
 						<jarModule>
 							<groupId>com.teoware.refapp</groupId>
 							<artifactId>refapp-web-rest</artifactId>
-							<unpack>true</unpack>
 						</jarModule>
 						
 						<webModule>
 							<groupId>com.teoware.refapp</groupId>
 							<artifactId>refapp-web-ui</artifactId>
-							<unpack>true</unpack>
 						</webModule>
 					</modules>
 				</configuration>

@@ -10,7 +10,7 @@
 	<artifactId>refapp-domain</artifactId>
 	<packaging>jar</packaging>
 	<name>refapp-domain</name>
-	<description>Domain model</description>
+	<description>Domain model objects</description>
 	
 	<!-- PROPERTIES -->
 	<properties>
@@ -72,6 +72,7 @@
 				<groupId>org.jvnet.jaxb2.maven2</groupId>
 				<artifactId>maven-jaxb2-plugin</artifactId>
 				<configuration>
+					<extension>true</extension>
 					<schemaDirectory>${jaxb.schema.directory}</schemaDirectory>
 					<bindingDirectory>${jaxb.binding.directory}</bindingDirectory>
 					<generateDirectory>${jaxb.generate.directory}</generateDirectory>
