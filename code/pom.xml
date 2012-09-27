@@ -330,15 +330,6 @@
 				</plugin>
 				<!--
 				<plugin>
-					<artifactId>maven-assembly-plugin</artifactId>
-					<configuration>
-						<descriptors>
-							<descriptor>./src/assemble/bin.xml</descriptor>
-						</descriptors>
-					</configuration>
-				</plugin>
-				
-				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
 					<version>${version.maven-javadoc-plugin}</version>
@@ -350,8 +341,8 @@
 							</goals>
 						</execution>
 					</executions>
-				</plugin> -->
-				
+				</plugin>
+				-->
 				<plugin>
 					<groupId>org.jvnet.jaxb2.maven2</groupId>
 					<artifactId>maven-jaxb2-plugin</artifactId>
@@ -371,33 +362,32 @@
 					<version>${version.maven-surefire-plugin}</version>
 					<executions>
 						<execution>
-							<id>default-test</id>
+							<id>unit-tests</id>
 							<phase>test</phase>
 							<goals>
 								<goal>test</goal>
 							</goals>
 							<configuration>
-								<!-- <testFailureIgnore>true</testFailureIgnore> -->
+								<includes>
+									<include>**/test/**</include>
+									<include>**/*Test.java</include>
+								</includes>
 								<excludes>
 									<exclude>**/itest/**</exclude>
-									<exclude>**/test/util/**</exclude>
+									<exclude>**/*ITest.java</exclude>
 								</excludes>
-								<skip>${skip.unit.test}</skip>
 							</configuration>
 						</execution>
 						<execution>
-							<id>surefire-it</id>
+							<id>integration-tests</id>
 							<phase>integration-test</phase>
 							<goals>
 								<goal>test</goal>
 							</goals>
 							<configuration>
-								<!-- <testFailureIgnore>true</testFailureIgnore> -->
-								<excludes>
-									<exclude>**/*.xml</exclude>
-								</excludes>
 								<includes>
 									<include>**/itest/**</include>
+									<include>**/*ITest.java</include>
 								</includes>
 								<skip>${skip.intergration.test}</skip>
 							</configuration>

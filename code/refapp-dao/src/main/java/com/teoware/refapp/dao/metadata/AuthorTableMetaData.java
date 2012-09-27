@@ -1,6 +1,6 @@
 package com.teoware.refapp.dao.metadata;
 
-public class AuthorTableMetaData {
+public final class AuthorTableMetaData {
 
 	public static final String AUTHOR_TABLE_NAME = "AUTHOR";
 	public static final String AUTHOR_STATUS_TABLE_NAME = "AUTHOR_STATUS";

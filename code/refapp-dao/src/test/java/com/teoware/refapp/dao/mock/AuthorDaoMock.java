@@ -6,7 +6,7 @@ import bitronix.tm.resource.jdbc.PoolingDataSource;
 
 import com.teoware.refapp.dao.AuthorDaoBean;
 import com.teoware.refapp.dao.DaoException;
-import com.teoware.refapp.dao.test.util.TestDataSourceHandler;
+import com.teoware.refapp.dao.util.TestDataSourceHandler;
 
 public class AuthorDaoMock extends AuthorDaoBean {
 

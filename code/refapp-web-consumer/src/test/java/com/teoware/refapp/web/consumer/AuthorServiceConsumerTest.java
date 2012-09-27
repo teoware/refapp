@@ -1,4 +1,4 @@
-package com.teoware.refapp.web.consumer.test;
+package com.teoware.refapp.web.consumer;
 
 import static org.junit.Assert.*;
 
