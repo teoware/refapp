@@ -24,11 +24,11 @@ import com.teoware.refapp.dao.dto.SelectAuthorResponse;
 import com.teoware.refapp.dao.dto.UpdateAuthorRequest;
 import com.teoware.refapp.dao.dto.UpdateAuthorResponse;
 import com.teoware.refapp.dao.mock.AuthorDaoMock;
-import com.teoware.refapp.dao.util.TestDataFactory;
 import com.teoware.refapp.model.author.Author;
 import com.teoware.refapp.model.author.AuthorPassword;
 import com.teoware.refapp.model.enums.AuthorStatus;
 import com.teoware.refapp.model.enums.Gender;
+import com.teoware.refapp.test.util.TestDataFactory;
 import com.teoware.refapp.util.PasswordHandler;
 
 public class AuthorDaoITest {

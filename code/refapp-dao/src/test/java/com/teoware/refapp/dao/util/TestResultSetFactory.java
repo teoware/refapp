@@ -23,6 +23,7 @@ import org.apache.derby.client.am.Types;
 import org.h2.tools.SimpleResultSet;
 
 import com.teoware.refapp.model.author.Author;
+import com.teoware.refapp.test.util.TestDataFactory;
 import com.teoware.refapp.util.DateUtils;
 
 public class TestResultSetFactory {
