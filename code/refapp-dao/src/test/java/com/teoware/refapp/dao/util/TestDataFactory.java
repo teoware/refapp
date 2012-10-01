@@ -1,4 +1,4 @@
-package com.teoware.refapp.test.util;
+package com.teoware.refapp.dao.util;
 
 import java.text.ParseException;
 import java.util.Calendar;

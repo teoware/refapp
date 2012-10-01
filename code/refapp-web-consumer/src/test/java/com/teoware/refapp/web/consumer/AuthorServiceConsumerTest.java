@@ -18,7 +18,7 @@ import com.teoware.refapp.service.AuthorService;
 import com.teoware.refapp.service.ServiceException;
 import com.teoware.refapp.service.dto.RegisterAuthorRequest;
 import com.teoware.refapp.service.validation.ValidationException;
-import com.teoware.refapp.test.util.TestDataFactory;
+import com.teoware.refapp.web.consumer.util.TestDataFactory;
 
 public class AuthorServiceConsumerTest {
 
