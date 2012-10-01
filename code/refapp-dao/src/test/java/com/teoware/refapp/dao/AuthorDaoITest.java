@@ -12,7 +12,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.teoware.refapp.dao.DaoException;
 import com.teoware.refapp.dao.dto.DeleteAuthorRequest;
 import com.teoware.refapp.dao.dto.DeleteAuthorResponse;
 import com.teoware.refapp.dao.dto.InsertAuthorRequest;
@@ -33,20 +32,20 @@ import com.teoware.refapp.util.PasswordHandler;
 
 public class AuthorDaoITest {
 
-	private AuthorDaoMock authorDao;
+	private static AuthorDaoMock authorDao;
 
 	@BeforeClass
 	public static void oneTimeSetUp() {
-		
+		authorDao = new AuthorDaoMock();
 	}
 
 	@AfterClass
 	public static void oneTimeTearDown() {
+		authorDao.closeAll();
 	}
 
 	@Before
 	public void setUp() throws Exception {
-		authorDao = new AuthorDaoMock();
 		deleteAuthor("john.doe");
 		deleteAuthor("jane.doe");
 		deleteAuthor("jonah.doe");
@@ -57,7 +56,7 @@ public class AuthorDaoITest {
 		deleteAuthor("john.doe");
 		deleteAuthor("jane.doe");
 		deleteAuthor("jonah.doe");
-		authorDao.closeAll();
+		
 	}
 
 	@Test

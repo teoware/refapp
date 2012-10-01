@@ -31,8 +31,8 @@ public class AuthorServiceConsumerITest {
 		assertNotNull(AuthorServiceConsumerBean.getInstance());
 	}
 
-	@Test
-	public void testThatAuthorServiceDoesNotReturnNullForAuthorList() {
-		assertNotNull(AuthorServiceConsumerBean.getInstance().listAuthors());
-	}
+//	@Test
+//	public void testThatAuthorServiceDoesNotReturnNullForAuthorList() {
+//		assertNotNull(AuthorServiceConsumerBean.getInstance().listAuthors());
+//	}
 }
