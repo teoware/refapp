@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:com:teoware:refapp:domain" targetNamespace="urn:com:teoware:refapp:domain" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:complexType name="Author">
+		<xs:sequence>
+			<xs:element name="authorId" type="tns:AuthorId" minOccurs="1" maxOccurs="1" />
+			<xs:element name="authorInfo" type="tns:AuthorInfo" minOccurs="1" maxOccurs="1" />
+			<xs:element name="authorAddress" type="tns:AuthorAddress" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="AuthorPassword">
+		<xs:sequence>
+			<xs:element name="password" type="xs:string" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="AuthorId">
+		<xs:sequence>
+			<xs:element name="userName" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="created" type="xs:dateTime" minOccurs="1" maxOccurs="1" />
+			<xs:element name="modified" type="xs:dateTime" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="AuthorInfo">
+		<xs:sequence>
+			<xs:element name="firstName" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="lastName" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="birthDate" type="xs:date" minOccurs="1" maxOccurs="1" />
+			<xs:element name="gender" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="email" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="phone" type="xs:string" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="AuthorAddress">
+		<xs:sequence>
+			<xs:element name="address" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="postalCode" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="municipality" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="region" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="country" type="xs:string" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
