@@ -2,6 +2,8 @@ package com.teoware.refapp.dao;
 
 import java.io.Serializable;
 
+import javax.ejb.Local;
+
 import com.teoware.refapp.dao.dto.DeleteAuthorRequest;
 import com.teoware.refapp.dao.dto.DeleteAuthorResponse;
 import com.teoware.refapp.dao.dto.InsertAuthorRequest;
@@ -15,6 +17,7 @@ import com.teoware.refapp.dao.dto.SelectAuthorResponse;
 import com.teoware.refapp.dao.dto.UpdateAuthorRequest;
 import com.teoware.refapp.dao.dto.UpdateAuthorResponse;
 
+@Local
 public interface AuthorDao extends Serializable {
 
 	public InsertAuthorResponse insertAuthor(InsertAuthorRequest request) throws DaoException;

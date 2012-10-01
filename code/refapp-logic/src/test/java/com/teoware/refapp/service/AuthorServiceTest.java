@@ -15,12 +15,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.teoware.refapp.dao.AuthorDaoLocal;
+import com.teoware.refapp.dao.AuthorDao;
 import com.teoware.refapp.dao.DaoException;
 import com.teoware.refapp.dao.dto.InsertAuthorRequest;
 import com.teoware.refapp.model.common.OperationResult;
 import com.teoware.refapp.model.enums.Result;
-import com.teoware.refapp.service.ServiceException;
 import com.teoware.refapp.service.dto.RegisterAuthorRequest;
 import com.teoware.refapp.service.dto.RegisterAuthorResponse;
 import com.teoware.refapp.service.mock.AuthorServiceMock;
@@ -30,7 +29,7 @@ import com.teoware.refapp.service.validation.ValidationException;
 public class AuthorServiceTest {
 
 	private AuthorServiceMock authorService;
-	private AuthorDaoLocal authorDaoMock;
+	private AuthorDao authorDaoMock;
 
 	@BeforeClass
 	public static void oneTimeSetUp() {
@@ -51,7 +50,7 @@ public class AuthorServiceTest {
 	}
 
 	private void createAndSetDaoMock() {
-		authorDaoMock = createMock(AuthorDaoLocal.class);
+		authorDaoMock = createMock(AuthorDao.class);
 		authorService.setAuthorDao(authorDaoMock);
 	}
 

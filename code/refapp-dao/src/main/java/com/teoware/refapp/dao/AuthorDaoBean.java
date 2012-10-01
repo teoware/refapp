@@ -28,6 +28,8 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 
 import com.teoware.refapp.dao.dto.DeleteAuthorRequest;
 import com.teoware.refapp.dao.dto.DeleteAuthorResponse;
@@ -50,8 +52,9 @@ import com.teoware.refapp.model.author.AuthorPassword;
 import com.teoware.refapp.model.enums.AuthorStatus;
 import com.teoware.refapp.util.DateUtils;
 
-@Stateless(mappedName = "AuthorDao")
-public class AuthorDaoBean extends BaseDao implements AuthorDaoLocal {
+@Stateless
+@TransactionAttribute(TransactionAttributeType.MANDATORY)
+public class AuthorDaoBean extends BaseDao implements AuthorDao {
 
 	private static final long serialVersionUID = 1L;
 	private static final String AUTHOR_VIEW = REFAPP_SCHEMA_NAME + "." + AUTHOR_VIEW_NAME;
