@@ -1,7 +1,6 @@
 package com.teoware.refapp.web.consumer;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -34,6 +33,6 @@ public class AuthorServiceConsumerITest {
 
 	@Test
 	public void testThatAuthorServiceDoesNotReturnNullForAuthorList() {
-		assertNull(AuthorServiceConsumerBean.getInstance().listAuthors());
+		assertNotNull(AuthorServiceConsumerBean.getInstance().listAuthors());
 	}
 }

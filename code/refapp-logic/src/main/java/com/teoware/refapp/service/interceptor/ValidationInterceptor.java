@@ -19,8 +19,8 @@ import com.teoware.refapp.service.ServiceException;
 import com.teoware.refapp.service.validation.Validate;
 import com.teoware.refapp.service.validation.ValidationException;
 import com.teoware.refapp.service.validation.group.ValidationGroup;
+import com.teoware.refapp.service.validation.util.ServiceFacade;
 import com.teoware.refapp.service.validation.util.ServiceFacadeHolder;
-import com.teoware.refapp.service.validation.util.ServiceFacadeLocal;
 import com.teoware.refapp.service.validation.util.ValidationUtils;
 
 /**
@@ -35,7 +35,7 @@ public class ValidationInterceptor {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@EJB
-	private ServiceFacadeLocal serviceFacade;
+	private ServiceFacade serviceFacade;
 	
 	@AroundInvoke
 	public Object validate(InvocationContext context) throws Exception {

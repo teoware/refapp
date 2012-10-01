@@ -33,7 +33,7 @@ public class AuthorServiceBean implements AuthorServiceLocal, AuthorServiceRemot
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@EJB
-	protected AuthorDao authorDao;
+	private AuthorDao authorDao;
 
 	@Interceptors({ValidationInterceptor.class})
 	@Validate(com.teoware.refapp.service.validation.group.RegisterAuthorRequestGroup.class)
