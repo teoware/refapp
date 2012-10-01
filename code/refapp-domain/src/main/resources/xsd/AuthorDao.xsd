@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:com:teoware:refapp:domain:dao" targetNamespace="urn:com:teoware:refapp:domain:dao" xmlns:dom="urn:com:teoware:refapp:domain" version="1.0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="urn:com:teoware:refapp:domain" schemaLocation="Author.xsd"/>
+	
+	<xs:complexType name="DeleteAuthorRequest">
+		<xs:sequence>
+			<xs:element name="userName" type="xs:string" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="DeleteAuthorResponse">
+		<xs:sequence>
+			<xs:element name="rowsAffected" type="xs:int" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="InsertAuthorRequest">
+		<xs:sequence>
+			<xs:element name="author" type="dom:Author" minOccurs="1" maxOccurs="1" />
+			<xs:element name="authorPassword" type="dom:AuthorPassword" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="InsertAuthorResponse">
+		<xs:sequence>
+			<xs:element name="rowsAffected" type="xs:int" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
