@@ -26,6 +26,12 @@
 	
 	<!-- DEPENDENCIES -->
 	<dependencies>
+		<!-- Utils -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
+		
 		<!-- Security -->
 		<dependency>
 			<groupId>org.jasypt</groupId>
