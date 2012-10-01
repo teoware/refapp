@@ -47,6 +47,6 @@ public class AuthorServiceConsumerBean implements AuthorServiceConsumer {
 
 	@Override
 	public ListAuthorsResponse listAuthors() {
-		return null;//authorService.listAuthors();
+		return authorService.listAuthors();
 	}
 }
