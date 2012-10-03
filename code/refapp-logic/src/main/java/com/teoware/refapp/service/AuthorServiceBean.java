@@ -30,7 +30,7 @@ import com.teoware.refapp.service.validation.ValidationException;
 public class AuthorServiceBean implements AuthorServiceLocal, AuthorServiceRemote {
 
 	private static final long serialVersionUID = 1L;
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private final Logger LOG = LoggerFactory.getLogger(AuthorServiceBean.class);
 
 	@EJB
 	private AuthorDao authorDao;
@@ -39,7 +39,7 @@ public class AuthorServiceBean implements AuthorServiceLocal, AuthorServiceRemot
 	@Validate(com.teoware.refapp.service.validation.group.RegisterAuthorRequestGroup.class)
 	@Override
 	public RegisterAuthorResponse registerAuthor(@Validate RegisterAuthorRequest request) throws ValidationException, ServiceException {
-		logger.debug("YEYYEYEYYEYEYEYYEYE!!!!!!!!!!!!");
+		LOG.debug("YEYYEYEYYEYEYEYYEYE!!!!!!!!!!!!");
 		
 		Header header = request.getHeader();
 		Author author = request.getBody();

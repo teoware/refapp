@@ -15,7 +15,7 @@ import com.teoware.refapp.service.validation.ValidationException;
 import com.teoware.refapp.service.validation.group.ValidationGroup;
 
 public class ValidationUtils {
-	
+
 	private static Validator validator;
 
 	public static final String NOT_NULL_ERR_MSG = "1";
@@ -30,17 +30,17 @@ public class ValidationUtils {
 	public static void validate(Object param, Class<? extends ValidationGroup> group) throws ValidationException,
 			ServiceException {
 		final Set<ConstraintViolation<?>> result = new HashSet<ConstraintViolation<?>>();
-		
+
 		if (group == null) {
 			throw new ServiceException("Validation group can not be null");
 		}
-		
+
 		try {
 			result.addAll(validator.validate(param, group));
 		} catch (InternalValidationException e) {
 			Exception ex = (Exception) e.getCause();
 			ex.printStackTrace(); // additional logging of error
-			
+
 			if (ex instanceof DaoException) {
 				throw new ServiceException("DAO error", ex);
 			} else if (ex instanceof ServiceException) {
@@ -51,7 +51,7 @@ public class ValidationUtils {
 				throw new ServiceException(ex);
 			}
 		}
-		
+
 		if (!result.isEmpty()) {
 			throw new ValidationException(result);
 		}

@@ -24,55 +24,62 @@ import com.teoware.refapp.service.validation.util.ServiceFacadeHolder;
 import com.teoware.refapp.service.validation.util.ValidationUtils;
 
 /**
- * EJB 3 Interceptor to validate method parameters which marked with
- * {@link Validate}. Calls {@link ValidationUtils} for validation processing.
+ * EJB 3 Interceptor to validate method parameters which marked with {@link Validate}. Calls {@link ValidationUtils} for
+ * validation processing.
  * 
  * @author thomas.johansen
- *
+ * 
  */
 public class ValidationInterceptor {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+	private final Logger LOG = LoggerFactory.getLogger(ValidationInterceptor.class);
+
 	@EJB
 	private ServiceFacade serviceFacade;
-	
+
 	@AroundInvoke
 	public Object validate(InvocationContext context) throws Exception {
-		Method method = context.getMethod();
+		Method method = context.getMethod();System.out.println("Processing: " + method.getName());
+
 		Validate annotation = method.getAnnotation(Validate.class);
-		
+
 		if (annotation == null) {
 			return context.proceed();
 		}
-		
+
 		if (annotation.value() == ValidationGroup.class) {
 			throw new ServiceException("Validate annotation on method should have group parameter");
 		}
-		
+
 		final Class<? extends ValidationGroup> group = annotation.value();
-		
+
 		Object[] params = context.getParameters();
 		Annotation[][] annotations = method.getParameterAnnotations();
-		
+
+		String a = annotations == null ? null : "" + annotations.length;
+		String p = params == null ? null : "" + params.length;
+		System.out.println("\ta=" + a);
+		System.out.println("\tp=" + p);
+
 		List<? super Object> annotatedParams = findValidateAnnotatedParams(annotations, params);
-		
+		System.out.println("\tap=" + annotatedParams.size());
+
 		if (!annotatedParams.isEmpty()) {
 			try {
 				validateParams(annotatedParams, group);
 			} catch (ValidationException e) {
 				String message = printDebug(method.getName(), e.getConstraintViolations());
-				logger.info(message);
+				LOG.info(message);
 				throw e;
 			}
 		}
-		
+
 		return context.proceed();
 	}
-	
+
 	protected List<? super Object> findValidateAnnotatedParams(Annotation[][] annotations, Object[] params) {
 		List<? super Object> annotatedParams = new ArrayList<Object>();
-		
+
 		for (int i = 0; i < annotations.length; i++) {
 			for (Annotation a : annotations[i]) {
 				if (a.annotationType() == Validate.class) {
@@ -87,9 +94,9 @@ public class ValidationInterceptor {
 	protected void validateParams(List<? super Object> annotatedParams, Class<? extends ValidationGroup> group)
 			throws ValidationException, ServiceException {
 		final Set<ConstraintViolation<?>> errors = new HashSet<ConstraintViolation<?>>();
-		
+
 		ServiceFacadeHolder.setServiceFacade(serviceFacade);
-		
+
 		for (Object param : annotatedParams) {
 			try {
 				ValidationUtils.validate(param, group);
@@ -100,11 +107,11 @@ public class ValidationInterceptor {
 				throw e;
 			}
 		}
-		
+
 		if (errors.isEmpty()) {
 			throw new ServiceException();
 		}
-		
+
 		throw new ValidationException(errors);
 	}
 
@@ -113,7 +120,7 @@ public class ValidationInterceptor {
 		final StringBuilder buf = new StringBuilder("Validation failed for method: ");
 		buf.append(methodName);
 		buf.append('\n');
-		
+
 		for (ConstraintViolation<?> item : errors) {
 			buf.append("path: ");
 			buf.append(item.getPropertyPath().toString());
@@ -127,9 +134,9 @@ public class ValidationInterceptor {
 			buf.append(item.getMessage());
 			buf.append('\n');
 		}
-		
+
 		buf.append("Validation.");
-		
+
 		System.out.println(buf);
 		// for debug...
 		return buf.toString();
