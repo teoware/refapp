@@ -8,7 +8,6 @@ import java.lang.reflect.Method;
 
 import javax.interceptor.InvocationContext;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -33,10 +32,6 @@ public class ValidationInterceptorTest {
 	@Before
 	public void setUp() throws Exception {
 		initMocks(this);
-	}
-
-	@After
-	public void tearDown() throws Exception {
 	}
 
 	@Test

@@ -9,6 +9,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -23,6 +24,7 @@ import com.teoware.refapp.service.dto.RegisterAuthorResponse;
 import com.teoware.refapp.service.util.TestHelper;
 import com.teoware.refapp.service.validation.ValidationException;
 
+@Category(com.teoware.refapp.test.UnitTestGroup.class)
 public class AuthorServiceRegisterAuthorTest {
 
 	@InjectMocks

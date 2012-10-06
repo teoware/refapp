@@ -1,42 +1,39 @@
 package com.teoware.refapp.util;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 public class DateUtils {
 
 	public static final String DATE_MASK = "yyyy-MM-dd";
 	public static final String TIMESTAMP_MASK = "yyyy-MM-dd HH:mm:ss.S";
 
-	public static Date stringToDate(String dateString) throws ParseException {
+	public static Date stringToDate(String dateString) {
 		return stringToDate(dateString, DATE_MASK);
 	}
 
-	public static Date timestampToDate(String timestampString) throws ParseException {
+	public static Date timestampToDate(String timestampString) {
 		return stringToDate(timestampString, TIMESTAMP_MASK);
 	}
 
-	public static Date stringToDate(String dateString, String mask) throws ParseException {
-		if (dateString == null) {
-			return null;
-		}
-		return new SimpleDateFormat(mask).parse(dateString);
+	public static Date stringToDate(String dateString, String mask) {
+		DateTimeFormatter formatter = DateTimeFormat.forPattern(mask);
+		return formatter.parseDateTime(dateString).toDate();
 	}
 
-	public static Calendar stringToCalendar(String dateString) throws ParseException {
+	public static Calendar stringToCalendar(String dateString) {
 		return stringToCalendar(dateString, DATE_MASK);
 	}
 
-	public static Calendar timestampToCalendar(String dateString) throws ParseException {
+	public static Calendar timestampToCalendar(String dateString) {
 		return stringToCalendar(dateString, TIMESTAMP_MASK);
 	}
 
-	public static Calendar stringToCalendar(String dateString, String mask) throws ParseException {
-		if (dateString == null) {
-			return null;
-		}
+	public static Calendar stringToCalendar(String dateString, String mask) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(stringToDate(dateString, mask));
 		return calendar;
@@ -51,18 +48,19 @@ public class DateUtils {
 	}
 
 	public static String dateToString(Date date, String mask) {
-		if (date == null) {
-			return null;
-		}
-		return new SimpleDateFormat(mask).format(date);
+		return LocalDate.fromDateFields(date).toString(mask);
 	}
 
 	public static String calendarToString(Calendar calendar) {
-		return dateToString(calendar.getTime(), DATE_MASK);
+		return calendarToString(calendar, DATE_MASK);
 	}
 
 	public static String calendarToTimestamp(Calendar calendar) {
-		return dateToString(calendar.getTime(), TIMESTAMP_MASK);
+		return calendarToString(calendar, TIMESTAMP_MASK);
+	}
+
+	public static String calendarToString(Calendar calendar, String mask) {
+		return LocalDate.fromCalendarFields(calendar).toString(mask);
 	}
 
 	public static Calendar createCalendar(int field, int offset) {

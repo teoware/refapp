@@ -10,9 +10,11 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import com.teoware.refapp.util.PropertiesFile;
 
+@Category(com.teoware.refapp.test.UnitTestGroup.class)
 public class PropertiesFileTest {
 
 	@BeforeClass

@@ -24,8 +24,8 @@ import com.teoware.refapp.service.validation.util.ServiceFacadeHolder;
 import com.teoware.refapp.service.validation.util.ValidationUtils;
 
 /**
- * EJB 3 Interceptor to validate method parameters which marked with {@link Validate}. Calls {@link ValidationUtils} for
- * validation processing.
+ * EJB 3 Interceptor to validate method parameters which is marked with {@link Validate}. Calls {@link ValidationUtils}
+ * for validation processing.
  * 
  * @author thomas.johansen
  * 
@@ -39,7 +39,7 @@ public class ValidationInterceptor {
 
 	@AroundInvoke
 	public Object validate(InvocationContext context) throws Exception {
-		Method method = context.getMethod();System.out.println("Processing: " + method.getName());
+		Method method = context.getMethod();
 
 		Validate annotation = method.getAnnotation(Validate.class);
 
@@ -56,13 +56,7 @@ public class ValidationInterceptor {
 		Object[] params = context.getParameters();
 		Annotation[][] annotations = method.getParameterAnnotations();
 
-		String a = annotations == null ? null : "" + annotations.length;
-		String p = params == null ? null : "" + params.length;
-		System.out.println("\ta=" + a);
-		System.out.println("\tp=" + p);
-
 		List<? super Object> annotatedParams = findValidateAnnotatedParams(annotations, params);
-		System.out.println("\tap=" + annotatedParams.size());
 
 		if (!annotatedParams.isEmpty()) {
 			try {
