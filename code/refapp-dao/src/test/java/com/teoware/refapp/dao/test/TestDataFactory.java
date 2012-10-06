@@ -1,8 +1,12 @@
-package com.teoware.refapp.dao.util;
+package com.teoware.refapp.dao.test;
 
-import java.text.ParseException;
 import java.util.Calendar;
 
+import com.teoware.refapp.dao.dto.DeleteAuthorRequest;
+import com.teoware.refapp.dao.dto.InsertAuthorRequest;
+import com.teoware.refapp.dao.dto.PurgeAuthorsRequest;
+import com.teoware.refapp.dao.dto.SelectAuthorRequest;
+import com.teoware.refapp.dao.dto.UpdateAuthorRequest;
 import com.teoware.refapp.model.author.Author;
 import com.teoware.refapp.model.author.AuthorPassword;
 import com.teoware.refapp.model.enums.AuthorStatus;
@@ -11,9 +15,9 @@ import com.teoware.refapp.model.util.BeanFactory;
 import com.teoware.refapp.util.DateUtils;
 import com.teoware.refapp.util.PasswordHandler;
 
-public class TestDataFactory {
+public final class TestDataFactory {
 
-	public static Author createAuthorJohn() throws ParseException {
+	public static Author createAuthorJohn() {
 		Calendar calendar = Calendar.getInstance();
 		Author author = BeanFactory.createAuthorBean();
 		author.getAuthorId().setUserName("john.doe");
@@ -34,7 +38,7 @@ public class TestDataFactory {
 		return author;
 	}
 
-	public static Author createAuthorJane() throws ParseException {
+	public static Author createAuthorJane() {
 		Calendar calendar = Calendar.getInstance();
 		Author author = BeanFactory.createAuthorBean();
 		author.getAuthorId().setUserName("jane.doe");
@@ -55,7 +59,7 @@ public class TestDataFactory {
 		return author;
 	}
 
-	public static Author createAuthorJonah() throws ParseException {
+	public static Author createAuthorJonah() {
 		Calendar calendar = Calendar.getInstance();
 		Author author = BeanFactory.createAuthorBean();
 		author.getAuthorId().setUserName("jonah.doe");
@@ -92,5 +96,57 @@ public class TestDataFactory {
 		AuthorPassword authorPassword = new AuthorPassword();
 		authorPassword.setPassword(PasswordHandler.encryptPassword("jonahsPassword"));
 		return authorPassword;
+	}
+
+	public static InsertAuthorRequest createInsertAuthorJohnRequest() {
+		return new InsertAuthorRequest(createAuthorJohn(), createAuthorJohnPassword());
+	}
+
+	public static InsertAuthorRequest createInsertAuthorJaneRequest() {
+		return new InsertAuthorRequest(createAuthorJohn(), createAuthorJanePassword());
+	}
+
+	public static InsertAuthorRequest createInsertAuthorJonahRequest() {
+		return new InsertAuthorRequest(createAuthorJohn(), createAuthorJonahPassword());
+	}
+
+	public static UpdateAuthorRequest createUpdateAuthorJohnRequest() {
+		return new UpdateAuthorRequest(createAuthorJohn(), createAuthorJohnPassword());
+	}
+
+	public static UpdateAuthorRequest createUpdateAuthorJaneRequest() {
+		return new UpdateAuthorRequest(createAuthorJohn(), createAuthorJanePassword());
+	}
+
+	public static UpdateAuthorRequest createUpdateAuthorJonahRequest() {
+		return new UpdateAuthorRequest(createAuthorJohn(), createAuthorJonahPassword());
+	}
+
+	public static SelectAuthorRequest createSelectAuthorJohnRequest() {
+		return new SelectAuthorRequest("john.doe");
+	}
+
+	public static SelectAuthorRequest createSelectAuthorJaneRequest() {
+		return new SelectAuthorRequest("jane.doe");
+	}
+
+	public static SelectAuthorRequest createSelectAuthorJonahRequest() {
+		return new SelectAuthorRequest("jonah.doe");
+	}
+
+	public static DeleteAuthorRequest createDeleteAuthorJohnRequest() {
+		return new DeleteAuthorRequest("john.doe");
+	}
+
+	public static DeleteAuthorRequest createDeleteAuthorJaneRequest() {
+		return new DeleteAuthorRequest("jane.doe");
+	}
+
+	public static DeleteAuthorRequest createDeleteAuthorJonahRequest() {
+		return new DeleteAuthorRequest("jonah.doe");
+	}
+
+	public static PurgeAuthorsRequest createPurgeAuthorsRequest() {
+		return new PurgeAuthorsRequest();
 	}
 }

@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
-public class ConnectionHandler {
+public final class ConnectionHandler {
 
 	public static Connection createConnection(DataSource dataSource) throws SQLException {
 		return dataSource.getConnection();

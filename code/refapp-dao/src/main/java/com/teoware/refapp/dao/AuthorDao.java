@@ -26,7 +26,7 @@ public interface AuthorDao extends Serializable {
 
 	public SelectAuthorResponse selectAuthor(SelectAuthorRequest request) throws DaoException;
 
-	public SelectAuthorResponse selectAuthor() throws DaoException;
+	public SelectAuthorResponse selectAllAuthors() throws DaoException;
 
 	public SelectAuthorPasswordResponse selectAuthorPassword(SelectAuthorPasswordRequest request) throws DaoException;
 

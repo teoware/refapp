@@ -6,7 +6,7 @@ import bitronix.tm.resource.jdbc.PoolingDataSource;
 
 import com.teoware.refapp.dao.AuthorDaoBean;
 import com.teoware.refapp.dao.DaoException;
-import com.teoware.refapp.dao.util.TestDataSourceHandler;
+import com.teoware.refapp.dao.test.TestDataSourceHandler;
 
 public class AuthorDaoMock extends AuthorDaoBean {
 
@@ -25,11 +25,6 @@ public class AuthorDaoMock extends AuthorDaoBean {
 		if (super.dataSource == null || !(super.dataSource instanceof PoolingDataSource)) {
 			super.dataSource = TestDataSourceHandler.createDataSourceForTest();
 		}
-	}
-
-	@Override
-	protected boolean isPersistConnection() {
-		return true;
 	}
 
 	public void closeAll() {

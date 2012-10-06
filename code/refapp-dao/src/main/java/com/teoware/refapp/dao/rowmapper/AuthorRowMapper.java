@@ -1,20 +1,20 @@
 package com.teoware.refapp.dao.rowmapper;
 
-import static com.teoware.refapp.dao.metadata.AuthorTableMetaData.ADDRESS_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.AuthorTableMetaData.BIRTHDATE_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.AuthorTableMetaData.COUNTRY_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.AuthorTableMetaData.CREATED_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.AuthorTableMetaData.EMAIL_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.AuthorTableMetaData.FIRSTNAME_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.AuthorTableMetaData.GENDER_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.AuthorTableMetaData.LASTNAME_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.AuthorTableMetaData.MODIFIED_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.AuthorTableMetaData.MUNICIPALITY_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.AuthorTableMetaData.PHONE_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.AuthorTableMetaData.POSTALCODE_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.AuthorTableMetaData.REGION_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.AuthorTableMetaData.STATUS_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.AuthorTableMetaData.USERNAME_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.AuthorsTableMetaData.ADDRESS_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.AuthorsTableMetaData.BIRTHDATE_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.AuthorsTableMetaData.COUNTRY_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.AuthorsTableMetaData.CREATED_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.AuthorsTableMetaData.EMAIL_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.AuthorsTableMetaData.FIRSTNAME_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.AuthorsTableMetaData.GENDER_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.AuthorsTableMetaData.LASTNAME_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.AuthorsTableMetaData.MODIFIED_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.AuthorsTableMetaData.MUNICIPALITY_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.AuthorsTableMetaData.PHONE_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.AuthorsTableMetaData.POSTALCODE_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.AuthorsTableMetaData.REGION_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.AuthorsTableMetaData.STATUS_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.AuthorsTableMetaData.USERNAME_COLUMN_NAME;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

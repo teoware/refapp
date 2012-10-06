@@ -1,11 +1,11 @@
-package com.teoware.refapp.dao.util;
+package com.teoware.refapp.dao.test;
 
 import java.io.IOException;
 
+import bitronix.tm.resource.jdbc.PoolingDataSource;
+
 import com.teoware.refapp.dao.DaoException;
 import com.teoware.refapp.util.PropertiesFile;
-
-import bitronix.tm.resource.jdbc.PoolingDataSource;
 
 public class TestDataSourceHandler {
 
@@ -16,7 +16,7 @@ public class TestDataSourceHandler {
 		} catch (IOException e) {
 			throw new DaoException("Creation of test data source failed.", e);
 		}
-		
+
 		PoolingDataSource dataSource = new PoolingDataSource();
 		dataSource.setClassName(properties.get("className"));
 		dataSource.setUniqueName(properties.get("uniqueName"));

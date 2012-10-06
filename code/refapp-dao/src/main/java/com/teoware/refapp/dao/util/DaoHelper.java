@@ -5,9 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Calendar;
 
-public class DaoHelper {
+public final class DaoHelper {
 
-	public static void processParameter(PreparedStatement statement, Object parameter, int parameterIndex) throws SQLException {
+	public static void processParameter(PreparedStatement statement, Object parameter, int parameterIndex)
+			throws SQLException {
 		if (parameter == null) {
 			statement.setObject(parameterIndex, parameter);
 		} else if (isString(parameter)) {
@@ -25,15 +26,18 @@ public class DaoHelper {
 
 	public static boolean isString(Object object) {
 		Class<?> clazz = object.getClass();
-		return (CharSequence.class.isAssignableFrom(clazz) || StringWriter.class.isAssignableFrom(clazz));
+		return CharSequence.class.isAssignableFrom(clazz) || StringWriter.class.isAssignableFrom(clazz);
 	}
 
 	public static boolean isDate(Object object) {
 		Class<?> clazz = object.getClass();
-		return (java.util.Date.class.isAssignableFrom(clazz) &&
-				!(java.sql.Date.class.isAssignableFrom(clazz) ||
-						java.sql.Time.class.isAssignableFrom(clazz) ||
-						java.sql.Timestamp.class.isAssignableFrom(clazz)));
+		return java.util.Date.class.isAssignableFrom(clazz) && !isSqlDateTime(object);
+	}
+
+	public static boolean isSqlDateTime(Object object) {
+		Class<?> clazz = object.getClass();
+		return java.sql.Date.class.isAssignableFrom(clazz) || java.sql.Time.class.isAssignableFrom(clazz)
+				|| java.sql.Timestamp.class.isAssignableFrom(clazz);
 	}
 
 	public static boolean isCalendar(Object object) {

@@ -23,11 +23,11 @@ import com.teoware.refapp.dao.util.RowMapperResultSetExtractor;
 
 public abstract class BaseDao {
 
-	private final Logger logger = LoggerFactory.getLogger(getClass());
-	
+	private static final Logger LOG = LoggerFactory.getLogger(BaseDao.class);
+
 	@Resource(mappedName = "jdbc/refapp")
 	protected DataSource dataSource;
-	
+
 	protected Connection connection;
 	protected boolean persistConnection;
 
@@ -35,21 +35,21 @@ public abstract class BaseDao {
 		try {
 			return update(sql, parameters);
 		} catch (DaoException e) {
-			logger.error("Insert operation failed.");
+			LOG.error("Insert operation failed.");
 			throw new DaoException("Insert operation failed.", e.getCause());
 		}
 	}
 
 	protected int update(SqlStatement sql, Object[] parameters) throws DaoException {
-		logger.debug("Executing SQL statement: " + sql.build());
-		
+		LOG.debug("Executing SQL statement: " + sql.build());
+
 		PreparedStatement statement = null;
 		try {
 			statement = generatePreparedStatement(sql, parameters);
 			int rowsAffected = statement.executeUpdate();
 			return rowsAffected;
 		} catch (SQLException e) {
-			logger.error("Update operation failed.");
+			LOG.error("Update operation failed.");
 			throw new DaoException("Update operation failed.", e);
 		} finally {
 			closeConnection(statement);
@@ -64,8 +64,8 @@ public abstract class BaseDao {
 
 	@TransactionAttribute
 	protected <T> List<T> select(SqlStatement sql, RowMapper<T> rowMapper, Object[] parameters) throws DaoException {
-		logger.debug("Executing SQL statement: " + sql.build());
-		
+		LOG.debug("Executing SQL statement: " + sql.build());
+
 		PreparedStatement statement = null;
 		try {
 			statement = generatePreparedStatement(sql, parameters);
@@ -74,10 +74,10 @@ public abstract class BaseDao {
 			ResultSetExtractor<List<T>> resultSetExtractor = new RowMapperResultSetExtractor<T>(rowMapper, rowsExpected);
 			return resultSetExtractor.extractData(result);
 		} catch (SQLException e) {
-			logger.error("Select operation failed.");
+			LOG.error("Select operation failed.");
 			throw new DaoException("Select operation failed.", e);
 		} catch (ParseException e) {
-			logger.error("Select operation failed.");
+			LOG.error("Select operation failed.");
 			throw new DaoException("Select operation failed.", e);
 		} finally {
 			closeConnection(statement);
@@ -88,17 +88,17 @@ public abstract class BaseDao {
 		try {
 			return update(sql, parameters);
 		} catch (DaoException e) {
-			logger.error("Delete operation failed.");
+			LOG.error("Delete operation failed.");
 			throw new DaoException("Delete operation failed.", e.getCause());
 		}
 	}
 
 	protected PreparedStatement generatePreparedStatement(SqlStatement sql, Object[] parameters) throws SQLException {
 		createOrReuseConnection();
-		PreparedStatement statement = getConnection().prepareStatement(sql.build());
+		PreparedStatement statement = connection.prepareStatement(sql.build());
 		if (parameters != null) {
 			for (int i = 0; i < parameters.length; i++) {
-				DaoHelper.processParameter(statement, parameters[i], i+1);
+				DaoHelper.processParameter(statement, parameters[i], i + 1);
 			}
 		}
 		return statement;
@@ -106,13 +106,13 @@ public abstract class BaseDao {
 
 	protected Connection createOrReuseConnection() throws SQLException {
 		if (connection == null) {
-			connection = ConnectionHandler.createConnection(getDataSource());
+			connection = ConnectionHandler.createConnection(dataSource);
 		}
 		return connection;
 	}
-	
+
 	protected void closeConnection(PreparedStatement statement) {
-		closeConnection(statement, isPersistConnection());
+		closeConnection(statement, persistConnection);
 	}
 
 	protected void closeConnection(PreparedStatement statement, boolean persistConnection) {
@@ -120,26 +120,18 @@ public abstract class BaseDao {
 			if (statement != null) {
 				statement.close();
 			}
-			
-			ConnectionHandler.closeConnection(getConnection(), persistConnection);
+
+			ConnectionHandler.closeConnection(connection, persistConnection);
 		} catch (SQLException e) {
 			// Ignore
 		}
 	}
 
-	protected DataSource getDataSource() {
-		return dataSource;
+	protected void doCloseConnection() {
+		this.persistConnection = false;
 	}
 
-	protected Connection getConnection() {
-		return connection;
-	}
-
-	protected boolean isPersistConnection() {
-		return persistConnection;
-	}
-
-	protected void setPersistConnection(boolean persistConnection) {
-		this.persistConnection = persistConnection;
+	protected void doPersistConnection() {
+		this.persistConnection = true;
 	}
 }
