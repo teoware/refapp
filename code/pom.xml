@@ -53,12 +53,12 @@
 		<version.slf4j-log4j12>1.6.2</version.slf4j-log4j12>
 		<!-- Security -->
 		<version.jasypt>1.9.0</version.jasypt>
+		<version.commons-codec>1.7</version.commons-codec>
 		<!-- Database -->
 		<version.derby>10.8.2.2</version.derby>
 		<version.derbyclient>10.8.2.2</version.derbyclient>
 		<!-- Testing -->
 		<version.junit>4.9</version.junit>
-		<version.easymock>3.0</version.easymock>
 		<version.mockito-core>1.9.0</version.mockito-core>
 		<version.openejb-core>4.0.0</version.openejb-core>
 		<version.btm>2.1.3</version.btm>
@@ -171,6 +171,12 @@
 				<version>${version.jasypt}</version>
 			</dependency>
 			
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>${version.commons-codec}</version>
+			</dependency>
+			
 			<!-- Database -->
 			<dependency>
 				<groupId>org.apache.derby</groupId>
@@ -189,13 +195,6 @@
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>${version.junit}</version>
-			</dependency>
-			
-			<dependency>
-				<groupId>org.easymock</groupId>
-				<artifactId>easymock</artifactId>
-				<version>${version.easymock}</version>
-				<scope>test</scope>
 			</dependency>
 			
 			<dependency>
@@ -337,7 +336,7 @@
 						<failOnMissingWebXml>false</failOnMissingWebXml>
 					</configuration>
 				</plugin>
-				<!--
+				
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
@@ -351,7 +350,7 @@
 						</execution>
 					</executions>
 				</plugin>
-				-->
+				
 				<plugin>
 					<groupId>org.jvnet.jaxb2.maven2</groupId>
 					<artifactId>maven-jaxb2-plugin</artifactId>
@@ -369,6 +368,15 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>${version.maven-surefire-plugin}</version>
+					<configuration>
+						<parallel>methods</parallel>
+						<threadCount>10</threadCount>
+						<excludes>
+							<exclude>**/com/teoware/refapp/**/*SysTest.java</exclude>
+							<exclude>**/com/teoware/refapp/**/systest/*.java</exclude>
+						</excludes>
+<!-- 						<excludedGroups>com.teoware.refapp.test.SystemTestGroup</excludedGroups> -->
+					</configuration>
 					<executions>
 						<execution>
 							<id>unit-tests</id>
@@ -377,14 +385,15 @@
 								<goal>test</goal>
 							</goals>
 							<configuration>
-								<includes>
-									<include>**/test/**</include>
-									<include>**/*Test.java</include>
-								</includes>
 								<excludes>
-									<exclude>**/itest/**</exclude>
-									<exclude>**/*ITest.java</exclude>
+									<exclude>**/com/teoware/refapp/**/*ITest.java</exclude>
+									<exclude>**/com/teoware/refapp/**/itest/*.java</exclude>
 								</excludes>
+								<includes>                  
+									<include>**/com/teoware/refapp/**/*Test.java</include>
+									<include>**/com/teoware/refapp/**/test/*.java</include>
+								</includes>
+<!-- 								<groups>com.teoware.refapp.test.UnitTestGroup</groups> -->
 							</configuration>
 						</execution>
 						<execution>
@@ -394,10 +403,15 @@
 								<goal>test</goal>
 							</goals>
 							<configuration>
-								<includes>
-									<include>**/itest/**</include>
-									<include>**/*ITest.java</include>
+								<excludes>
+									<exclude>**/com/teoware/refapp/**/*Test.java</exclude>
+									<exclude>**/com/teoware/refapp/**/test/*.java</exclude>
+								</excludes>
+								<includes>                  
+									<include>**/com/teoware/refapp/**/*ITest.java</include>
+									<include>**/com/teoware/refapp/**/itest/*.java</include>
 								</includes>
+<!-- 								<groups>com.teoware.refapp.test.IntegrationTestGroup</groups> -->
 								<skip>${skip.intergration.test}</skip>
 							</configuration>
 						</execution>
