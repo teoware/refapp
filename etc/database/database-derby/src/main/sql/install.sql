@@ -1,3 +1,3 @@
 -- Install users and schemas
 
-@./install/02-schemas.sql
+@./install/01-schemas.sql
