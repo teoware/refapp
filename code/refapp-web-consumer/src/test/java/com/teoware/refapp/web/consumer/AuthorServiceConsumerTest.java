@@ -6,11 +6,9 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 import java.text.ParseException;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
@@ -20,6 +18,7 @@ import com.teoware.refapp.service.dto.RegisterAuthorRequest;
 import com.teoware.refapp.service.validation.ValidationException;
 import com.teoware.refapp.web.consumer.util.TestDataFactory;
 
+@Category(com.teoware.refapp.test.UnitTestGroup.class)
 public class AuthorServiceConsumerTest {
 
 	@InjectMocks
@@ -28,21 +27,9 @@ public class AuthorServiceConsumerTest {
 	@Mock
 	private AuthorService authorService;
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
 	@Before
 	public void setUp() throws Exception {
 		initMocks(this);
-	}
-
-	@After
-	public void tearDown() throws Exception {
 	}
 
 	@Test

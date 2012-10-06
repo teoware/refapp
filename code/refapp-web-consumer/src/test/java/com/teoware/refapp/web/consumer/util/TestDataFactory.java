@@ -1,6 +1,5 @@
 package com.teoware.refapp.web.consumer.util;
 
-import java.text.ParseException;
 import java.util.Calendar;
 
 import com.teoware.refapp.model.author.Author;
@@ -13,7 +12,7 @@ import com.teoware.refapp.util.PasswordHandler;
 
 public class TestDataFactory {
 
-	public static Author createAuthorJohn() throws ParseException {
+	public static Author createAuthorJohn() {
 		Calendar calendar = Calendar.getInstance();
 		Author author = BeanFactory.createAuthorBean();
 		author.getAuthorId().setUserName("john.doe");
@@ -34,7 +33,7 @@ public class TestDataFactory {
 		return author;
 	}
 
-	public static Author createAuthorJane() throws ParseException {
+	public static Author createAuthorJane() {
 		Calendar calendar = Calendar.getInstance();
 		Author author = BeanFactory.createAuthorBean();
 		author.getAuthorId().setUserName("jane.doe");
@@ -55,7 +54,7 @@ public class TestDataFactory {
 		return author;
 	}
 
-	public static Author createAuthorJonah() throws ParseException {
+	public static Author createAuthorJonah() {
 		Calendar calendar = Calendar.getInstance();
 		Author author = BeanFactory.createAuthorBean();
 		author.getAuthorId().setUserName("jonah.doe");
