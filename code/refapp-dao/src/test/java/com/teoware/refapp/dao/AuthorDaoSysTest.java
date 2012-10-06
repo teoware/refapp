@@ -54,7 +54,7 @@ public class AuthorDaoSysTest {
 	public void tearDown() {
 	}
 
-	@Test
+//	@Test
 	public void testInsertAndSelectAuthor() {
 		try {
 			int rowsAffected = insertAuthorJohn();
@@ -74,7 +74,7 @@ public class AuthorDaoSysTest {
 		}
 	}
 
-	@Test
+//	@Test
 	public void testInsertUpdateAndSelectAuthor() {
 		try {
 			int rowsAffected = insertAuthorJane();
@@ -110,7 +110,7 @@ public class AuthorDaoSysTest {
 		}
 	}
 
-	@Test
+//	@Test
 	public void testInsertAndSelectAuthorPassword() {
 		try {
 			int rowsAffected = insertAuthorJonah();
