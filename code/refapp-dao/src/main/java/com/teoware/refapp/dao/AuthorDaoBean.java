@@ -57,11 +57,11 @@ import com.teoware.refapp.util.DateUtils;
 public class AuthorDaoBean extends BaseDao implements AuthorDao {
 
 	private static final long serialVersionUID = 1L;
-	private static final String AUTHORS_VIEW = REFAPP_SCHEMA_NAME + "." + AUTHORS_VIEW_NAME;
-	private static final String AUTHORS_TABLE = REFAPP_SCHEMA_NAME + "." + AUTHORS_TABLE_NAME;
-	private static final String AUTHORS_STATUS_TABLE = REFAPP_SCHEMA_NAME + "." + AUTHORS_STATUS_TABLE_NAME;
-	private static final String AUTHORS_ADDRESS_TABLE = REFAPP_SCHEMA_NAME + "." + AUTHORS_ADDRESS_TABLE_NAME;
-	private static final String AUTHORS_PASSWORD_TABLE = REFAPP_SCHEMA_NAME + "." + AUTHORS_PASSWORD_TABLE_NAME;
+	public static final String AUTHORS_VIEW = REFAPP_SCHEMA_NAME + "." + AUTHORS_VIEW_NAME;
+	public static final String AUTHORS_TABLE = REFAPP_SCHEMA_NAME + "." + AUTHORS_TABLE_NAME;
+	public static final String AUTHORS_STATUS_TABLE = REFAPP_SCHEMA_NAME + "." + AUTHORS_STATUS_TABLE_NAME;
+	public static final String AUTHORS_ADDRESS_TABLE = REFAPP_SCHEMA_NAME + "." + AUTHORS_ADDRESS_TABLE_NAME;
+	public static final String AUTHORS_PASSWORD_TABLE = REFAPP_SCHEMA_NAME + "." + AUTHORS_PASSWORD_TABLE_NAME;
 
 	private AuthorRowMapper authorRowMapper = new AuthorRowMapper();
 	private AuthorPasswordRowMapper authorPasswordRowMapper = new AuthorPasswordRowMapper();
@@ -188,8 +188,10 @@ public class AuthorDaoBean extends BaseDao implements AuthorDao {
 
 	@Override
 	public SelectAuthorPasswordResponse selectAuthorPassword(SelectAuthorPasswordRequest request) throws DaoException {
-		SqlStatement sql = new SqlStatement("SELECT * FROM " + AUTHORS_PASSWORD_TABLE);
-		List<AuthorPassword> authorPasswordList = super.select(sql, authorPasswordRowMapper);
+		SqlStatement sql = new SqlStatement("SELECT * FROM " + AUTHORS_PASSWORD_TABLE + " WHERE " + AUTHOR_COLUMN_NAME
+				+ " = ?");
+		Object[] parameters = DaoHelper.generateArray(request.getUserName());
+		List<AuthorPassword> authorPasswordList = super.select(sql, authorPasswordRowMapper, parameters);
 		return new SelectAuthorPasswordResponse(authorPasswordList);
 	}
 

@@ -26,7 +26,8 @@ public final class DaoHelper {
 
 	public static boolean isString(Object object) {
 		Class<?> clazz = object.getClass();
-		return CharSequence.class.isAssignableFrom(clazz) || StringWriter.class.isAssignableFrom(clazz);
+		return String.class.isAssignableFrom(clazz) || CharSequence.class.isAssignableFrom(clazz)
+				|| StringWriter.class.isAssignableFrom(clazz);
 	}
 
 	public static boolean isDate(Object object) {

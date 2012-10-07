@@ -1,5 +1,9 @@
 package com.teoware.refapp.dao;
 
+import static com.teoware.refapp.dao.AuthorDaoBean.AUTHORS_ADDRESS_TABLE;
+import static com.teoware.refapp.dao.AuthorDaoBean.AUTHORS_PASSWORD_TABLE;
+import static com.teoware.refapp.dao.AuthorDaoBean.AUTHORS_STATUS_TABLE;
+import static com.teoware.refapp.dao.AuthorDaoBean.AUTHORS_TABLE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -24,6 +28,7 @@ import com.teoware.refapp.dao.dto.SelectAuthorResponse;
 import com.teoware.refapp.dao.dto.UpdateAuthorRequest;
 import com.teoware.refapp.dao.dto.UpdateAuthorResponse;
 import com.teoware.refapp.dao.mock.AuthorDaoMock;
+import com.teoware.refapp.dao.sql.SqlStatement;
 import com.teoware.refapp.dao.test.TestDataFactory;
 import com.teoware.refapp.model.author.Author;
 import com.teoware.refapp.model.author.AuthorPassword;
@@ -37,30 +42,43 @@ public class AuthorDaoSysTest {
 	private static AuthorDaoMock authorDao;
 
 	@BeforeClass
-	public static void oneTimeSetUp() {
+	public static void oneTimeSetUp() throws Exception {
 		authorDao = new AuthorDaoMock();
+
+		cleanTables();
 	}
 
 	@AfterClass
-	public static void oneTimeTearDown() {
+	public static void oneTimeTearDown() throws Exception {
+		cleanTables();
+
 		authorDao.closeAll();
 	}
-	
+
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
+
 	}
 
 	@After
-	public void tearDown() {
+	public void tearDown() throws Exception {
+
 	}
 
-//	@Test
-	public void testInsertAndSelectAuthor() {
+	@Test
+	public void testInsertAuthorJohn() {
 		try {
 			int rowsAffected = insertAuthorJohn();
 
 			assertEquals(4, rowsAffected);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
+	@Test
+	public void testSelectAuthorJohn() {
+		try {
 			List<Author> authorList = selectAuthor("john.doe");
 
 			assertNotNull(authorList);
@@ -68,14 +86,13 @@ public class AuthorDaoSysTest {
 			Author author = authorList.get(0);
 
 			assertInsertAuthorJohn(author);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-//	@Test
-	public void testInsertUpdateAndSelectAuthor() {
+	@Test
+	public void testInsertUpdateAndSelectAuthorJane() {
 		try {
 			int rowsAffected = insertAuthorJane();
 			assertEquals(4, rowsAffected);
@@ -104,17 +121,16 @@ public class AuthorDaoSysTest {
 			author = authorList.get(0);
 
 			assertUpdateAuthorJane(author);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-//	@Test
-	public void testInsertAndSelectAuthorPassword() {
+	@Test
+	public void testInsertAuthorJonahAndSelectPassword() {
 		try {
 			int rowsAffected = insertAuthorJonah();
-			assertTrue(rowsAffected == 4 || rowsAffected == 5);
+			assertEquals(4, rowsAffected);
 
 			List<AuthorPassword> authorPasswordList = selectAuthorPassword("jonah.doe");
 
@@ -124,7 +140,41 @@ public class AuthorDaoSysTest {
 
 			assertNotNull(authorPassword.getPassword());
 			assertTrue(PasswordHandler.verifyPassword("jonahsPassword", authorPassword.getPassword()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
+	@Test
+	public void testSelectAllAuthorsShouldBeThree() {
+		try {
+			List<Author> authorList = selectAllAuthors();
+
+			assertNotNull(authorList);
+			assertEquals(3, authorList.size());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testDeleteAuthorJohn() {
+		try {
+			int rowsAffected = deleteAuthor("john.doe");
+
+			assertEquals(1, rowsAffected);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testSelectAllAuthorsShouldBeTwo() {
+		try {
+			List<Author> authorList = selectAllAuthors();
+
+			assertNotNull(authorList);
+			assertEquals(2, authorList.size());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -152,6 +202,11 @@ public class AuthorDaoSysTest {
 		SelectAuthorPasswordRequest request = new SelectAuthorPasswordRequest(userName);
 		SelectAuthorPasswordResponse response = authorDao.selectAuthorPassword(request);
 		return response.getAuthorPasswordList();
+	}
+
+	private List<Author> selectAllAuthors() throws DaoException {
+		SelectAuthorResponse response = authorDao.selectAllAuthors();
+		return response.getAuthorList();
 	}
 
 	private int deleteAuthor(String userName) throws DaoException {
@@ -245,5 +300,27 @@ public class AuthorDaoSysTest {
 		assertEquals("Oslo", author.getAuthorAddress().getMunicipality());
 		assertEquals("Oslo", author.getAuthorAddress().getRegion());
 		assertEquals("Norway", author.getAuthorAddress().getCountry());
+	}
+
+	private static void cleanTables() {
+		try {
+			if (authorDao.rowCount(AUTHORS_TABLE) > 0) {
+				authorDao.delete(new SqlStatement("DELETE FROM " + AUTHORS_TABLE), null);
+			}
+
+			if (authorDao.rowCount(AUTHORS_STATUS_TABLE) > 0) {
+				authorDao.delete(new SqlStatement("DELETE FROM " + AUTHORS_STATUS_TABLE), null);
+			}
+
+			if (authorDao.rowCount(AUTHORS_ADDRESS_TABLE) > 0) {
+				authorDao.delete(new SqlStatement("DELETE FROM " + AUTHORS_ADDRESS_TABLE), null);
+			}
+
+			if (authorDao.rowCount(AUTHORS_PASSWORD_TABLE) > 0) {
+				authorDao.delete(new SqlStatement("DELETE FROM " + AUTHORS_PASSWORD_TABLE), null);
+			}
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
 	}
 }

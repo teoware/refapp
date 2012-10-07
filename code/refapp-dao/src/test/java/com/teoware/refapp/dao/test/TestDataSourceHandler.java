@@ -1,6 +1,9 @@
 package com.teoware.refapp.dao.test;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import bitronix.tm.resource.jdbc.PoolingDataSource;
 
@@ -35,5 +38,11 @@ public class TestDataSourceHandler {
 
 	private static PropertiesFile getDataSourceProperties() throws IOException {
 		return PropertiesFile.createFromClasspath("/properties/testdatasource.properties");
+	}
+
+	public static Connection createJdbcConnection() throws ClassNotFoundException, SQLException {
+		Class.forName("org.apache.derby.jdbc.ClientDataSource");
+		String url = "jdbc:derby://localhost/refapp";
+		return DriverManager.getConnection(url, "refapp", "abcd1234");
 	}
 }
