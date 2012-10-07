@@ -44,25 +44,21 @@ public class AuthorDaoSysTest {
 	@BeforeClass
 	public static void oneTimeSetUp() throws Exception {
 		authorDao = new AuthorDaoMock();
-
-		cleanTables();
 	}
 
 	@AfterClass
 	public static void oneTimeTearDown() throws Exception {
-		cleanTables();
-
 		authorDao.closeAll();
 	}
 
 	@Before
 	public void setUp() throws Exception {
-
+		cleanTables();
 	}
 
 	@After
 	public void tearDown() throws Exception {
-
+		cleanTables();
 	}
 
 	@Test
