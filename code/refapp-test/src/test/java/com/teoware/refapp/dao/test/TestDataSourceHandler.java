@@ -1,4 +1,4 @@
-package com.teoware.refapp.dao.mock;
+package com.teoware.refapp.dao.test;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -40,7 +40,7 @@ public class TestDataSourceHandler {
 		return PropertiesFile.createFromClasspath("/properties/testdatasource.properties");
 	}
 
-	public static Connection createJdbcConnection() throws ClassNotFoundException, SQLException {
+	public static Connection createDataSourceConnection() throws ClassNotFoundException, SQLException {
 		Class.forName("org.apache.derby.jdbc.ClientXADataSource");
 		String url = "jdbc:derby://localhost/refapp";
 		Connection connection = DriverManager.getConnection(url, "refapp", "abcd1234");

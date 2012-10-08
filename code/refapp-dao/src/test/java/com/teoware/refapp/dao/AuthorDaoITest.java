@@ -1,25 +1,19 @@
 package com.teoware.refapp.dao;
 
-import static com.teoware.refapp.dao.AuthorDaoBean.AUTHORS_ADDRESS_TABLE;
-import static com.teoware.refapp.dao.AuthorDaoBean.AUTHORS_PASSWORD_TABLE;
-import static com.teoware.refapp.dao.AuthorDaoBean.AUTHORS_STATUS_TABLE;
-import static com.teoware.refapp.dao.AuthorDaoBean.AUTHORS_TABLE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
-import com.teoware.refapp.dao.sql.SqlStatement;
+import com.teoware.refapp.dao.mock.AuthorDaoMock;
 import com.teoware.refapp.dao.test.AuthorDaoTestHelper;
 import com.teoware.refapp.dao.test.TestDataSourceHandler;
 import com.teoware.refapp.model.author.Author;
@@ -27,15 +21,16 @@ import com.teoware.refapp.model.author.AuthorPassword;
 import com.teoware.refapp.model.enums.AuthorStatus;
 import com.teoware.refapp.util.PasswordHandler;
 
-@Category(com.teoware.refapp.test.SystemTestGroup.class)
-public class AuthorDaoSysTest extends AuthorDaoTestHelper {
+@Category(com.teoware.refapp.test.IntegrationTestGroup.class)
+public class AuthorDaoITest extends AuthorDaoTestHelper {
 
 	private static Connection connection;
 	private static AuthorDaoMock authorDao;
 
 	@BeforeClass
 	public static void oneTimeSetUp() throws Exception {
-		connection = TestDataSourceHandler.createDataSourceConnection();
+		connection = TestDataSourceHandler.initializeDatabase();
+		authorDao = new AuthorDaoMock(connection);
 	}
 
 	@AfterClass
@@ -44,32 +39,17 @@ public class AuthorDaoSysTest extends AuthorDaoTestHelper {
 	}
 
 	@Before
-	public void setUp() throws Exception {
-		authorDao = new AuthorDaoMock();
-		authorDao.setConnection(connection);
-		cleanTables();
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		cleanTables();
+	public void setUp() {
 	}
 
 	@Test
-	public void testInsertAuthorJohn() {
+	public void testInsertAndSelectAuthorJohn() {
 		try {
 			int rowsAffected = insertAuthorJohn(authorDao);
 
 			assertEquals(4, rowsAffected);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
-	@Test
-	public void testSelectAuthorJohn() {
-		try {
-			List<Author> authorList = selectAuthor(authorDao, "john.doe");
+			List<Author> authorList = selectAuthorJohn(authorDao);
 
 			assertNotNull(authorList);
 			assertEquals(1, authorList.size());
@@ -87,7 +67,7 @@ public class AuthorDaoSysTest extends AuthorDaoTestHelper {
 			int rowsAffected = insertAuthorJane(authorDao);
 			assertEquals(4, rowsAffected);
 
-			List<Author> authorList = selectAuthor(authorDao, "jane.doe");
+			List<Author> authorList = selectAuthorJane(authorDao);
 
 			assertNotNull(authorList);
 			assertEquals(1, authorList.size());
@@ -104,7 +84,7 @@ public class AuthorDaoSysTest extends AuthorDaoTestHelper {
 			rowsAffected = updateAuthor(authorDao, author, null);
 			assertEquals(3, rowsAffected);
 
-			authorList = selectAuthor(authorDao, "jane.doe");
+			authorList = selectAuthorJane(authorDao);
 
 			assertNotNull(authorList);
 			assertEquals(1, authorList.size());
@@ -122,7 +102,7 @@ public class AuthorDaoSysTest extends AuthorDaoTestHelper {
 			int rowsAffected = insertAuthorJonah(authorDao);
 			assertEquals(4, rowsAffected);
 
-			List<AuthorPassword> authorPasswordList = selectAuthorPassword(authorDao, "jonah.doe");
+			List<AuthorPassword> authorPasswordList = selectAuthorPasswordJonah(authorDao);
 
 			assertNotNull(authorPasswordList);
 			assertEquals(1, authorPasswordList.size());
@@ -136,21 +116,13 @@ public class AuthorDaoSysTest extends AuthorDaoTestHelper {
 	}
 
 	@Test
-	public void testSelectAllAuthorsShouldBeThree() {
+	public void testInsertAndDeleteAuthorJohn() {
 		try {
-			List<Author> authorList = selectAllAuthors(authorDao);
+			int rowsAffected = insertAuthorJohn(authorDao);
 
-			assertNotNull(authorList);
-			assertEquals(3, authorList.size());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+			assertEquals(4, rowsAffected);
 
-	@Test
-	public void testDeleteAuthorJohn() {
-		try {
-			int rowsAffected = deleteAuthor(authorDao, "john.doe");
+			rowsAffected = deleteAuthorJohn(authorDao);
 
 			assertEquals(1, rowsAffected);
 		} catch (Exception e) {
@@ -159,56 +131,20 @@ public class AuthorDaoSysTest extends AuthorDaoTestHelper {
 	}
 
 	@Test
-	public void testSelectAllAuthorsShouldBeTwo() {
+	public void testInsertSelectAllAuthorsShouldBeThree() {
 		try {
+			int rowsAffected = insertAuthorJohn(authorDao);
+			rowsAffected += insertAuthorJane(authorDao);
+			rowsAffected += insertAuthorJonah(authorDao);
+
+			assertEquals(12, rowsAffected);
+
 			List<Author> authorList = selectAllAuthors(authorDao);
 
 			assertNotNull(authorList);
-			assertEquals(2, authorList.size());
+			assertEquals(3, authorList.size());
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-	}
-
-	private static void cleanTables() {
-		try {
-			if (authorDao.rowCount(AUTHORS_TABLE) > 0) {
-				authorDao.delete(new SqlStatement("DELETE FROM " + AUTHORS_TABLE), null);
-			}
-
-			if (authorDao.rowCount(AUTHORS_STATUS_TABLE) > 0) {
-				authorDao.delete(new SqlStatement("DELETE FROM " + AUTHORS_STATUS_TABLE), null);
-			}
-
-			if (authorDao.rowCount(AUTHORS_ADDRESS_TABLE) > 0) {
-				authorDao.delete(new SqlStatement("DELETE FROM " + AUTHORS_ADDRESS_TABLE), null);
-			}
-
-			if (authorDao.rowCount(AUTHORS_PASSWORD_TABLE) > 0) {
-				authorDao.delete(new SqlStatement("DELETE FROM " + AUTHORS_PASSWORD_TABLE), null);
-			}
-		} catch (DaoException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public class AuthorDaoMock extends AuthorDaoBean {
-
-		private static final long serialVersionUID = 1L;
-
-		@Override
-		protected Connection createOrReuseConnection() throws SQLException {
-			return super.connection;
-		}
-
-		protected void setConnection(Connection connection) {
-			super.connection = connection;
-		}
-
-		public void closeAll() throws SQLException {
-			if (super.connection != null) {
-				super.connection.close();
-			}
 		}
 	}
 }

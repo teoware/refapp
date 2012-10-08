@@ -64,6 +64,11 @@
 			<artifactId>h2</artifactId>
 		</dependency>
 		
+		<dependency>
+			<groupId>hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+		</dependency>
+		
 		<!-- Project -->
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
