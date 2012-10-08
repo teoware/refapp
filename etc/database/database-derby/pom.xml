@@ -74,7 +74,7 @@
 							<autocommit>true</autocommit>
 							<orderFile>ascending</orderFile>
 							<fileset>
-								<basedir>${project.basedir}/src/main/sql/clean</basedir>
+								<basedir>${project.basedir}/src/main/resources/sql/clean</basedir>
 								<includes>
 									<include>**/*.sql</include>
 								</includes>
@@ -94,7 +94,7 @@
 							<autocommit>true</autocommit>
 							<orderFile>ascending</orderFile>
 							<fileset>
-								<basedir>${project.basedir}/src/main/sql/sequences</basedir>
+								<basedir>${project.basedir}/src/main/resources/sql/sequences</basedir>
 								<includes>
 									<include>**/*.sql</include>
 								</includes>
@@ -114,7 +114,7 @@
 							<autocommit>true</autocommit>
 							<orderFile>ascending</orderFile>
 							<fileset>
-								<basedir>${project.basedir}/src/main/sql/tables</basedir>
+								<basedir>${project.basedir}/src/main/resources/sql/tables</basedir>
 								<includes>
 									<include>**/*.sql</include>
 								</includes>
@@ -134,7 +134,7 @@
 							<autocommit>true</autocommit>
 							<orderFile>ascending</orderFile>
 							<fileset>
-								<basedir>${project.basedir}/src/main/sql/indexes</basedir>
+								<basedir>${project.basedir}/src/main/resources/sql/indexes</basedir>
 								<includes>
 									<include>**/*.sql</include>
 								</includes>
@@ -154,7 +154,7 @@
 							<autocommit>true</autocommit>
 							<orderFile>ascending</orderFile>
 							<fileset>
-								<basedir>${project.basedir}/src/main/sql/triggers</basedir>
+								<basedir>${project.basedir}/src/main/resources/sql/triggers</basedir>
 								<includes>
 									<include>**/*.sql</include>
 								</includes>
@@ -174,7 +174,7 @@
 							<autocommit>true</autocommit>
 							<orderFile>ascending</orderFile>
 							<fileset>
-								<basedir>${project.basedir}/src/main/sql/views</basedir>
+								<basedir>${project.basedir}/src/main/resources/sql/views</basedir>
 								<includes>
 									<include>**/*.sql</include>
 								</includes>
@@ -194,7 +194,7 @@
 							<autocommit>true</autocommit>
 							<orderFile>ascending</orderFile>
 							<fileset>
-								<basedir>${project.basedir}/src/main/sql/data</basedir>
+								<basedir>${project.basedir}/src/main/resources/sql/data</basedir>
 								<includes>
 									<include>**/*.sql</include>
 								</includes>
@@ -214,7 +214,7 @@
 							<autocommit>true</autocommit>
 							<orderFile>ascending</orderFile>
 							<fileset>
-								<basedir>${project.basedir}/src/test/sql/data</basedir>
+								<basedir>${project.basedir}/src/test/resources/sql/data</basedir>
 								<includes>
 									<include>**/*.sql</include>
 								</includes>
