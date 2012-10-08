@@ -9,7 +9,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.After;
@@ -19,6 +18,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
+import com.teoware.refapp.dao.mock.AuthorDaoMock;
 import com.teoware.refapp.dao.sql.SqlStatement;
 import com.teoware.refapp.dao.test.AuthorDaoTestHelper;
 import com.teoware.refapp.dao.test.TestDataSourceHandler;
@@ -36,6 +36,7 @@ public class AuthorDaoSysTest extends AuthorDaoTestHelper {
 	@BeforeClass
 	public static void oneTimeSetUp() throws Exception {
 		connection = TestDataSourceHandler.createDataSourceConnection();
+		authorDao = new AuthorDaoMock(connection);
 	}
 
 	@AfterClass
@@ -45,8 +46,6 @@ public class AuthorDaoSysTest extends AuthorDaoTestHelper {
 
 	@Before
 	public void setUp() throws Exception {
-		authorDao = new AuthorDaoMock();
-		authorDao.setConnection(connection);
 		cleanTables();
 	}
 
@@ -56,19 +55,12 @@ public class AuthorDaoSysTest extends AuthorDaoTestHelper {
 	}
 
 	@Test
-	public void testInsertAuthorJohn() {
+	public void testInsertAndSelectAuthorJohn() {
 		try {
 			int rowsAffected = insertAuthorJohn(authorDao);
 
 			assertEquals(4, rowsAffected);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
-	@Test
-	public void testSelectAuthorJohn() {
-		try {
 			List<Author> authorList = selectAuthor(authorDao, "john.doe");
 
 			assertNotNull(authorList);
@@ -85,6 +77,7 @@ public class AuthorDaoSysTest extends AuthorDaoTestHelper {
 	public void testInsertUpdateAndSelectAuthorJane() {
 		try {
 			int rowsAffected = insertAuthorJane(authorDao);
+
 			assertEquals(4, rowsAffected);
 
 			List<Author> authorList = selectAuthor(authorDao, "jane.doe");
@@ -120,6 +113,7 @@ public class AuthorDaoSysTest extends AuthorDaoTestHelper {
 	public void testInsertAuthorJonahAndSelectPassword() {
 		try {
 			int rowsAffected = insertAuthorJonah(authorDao);
+
 			assertEquals(4, rowsAffected);
 
 			List<AuthorPassword> authorPasswordList = selectAuthorPassword(authorDao, "jonah.doe");
@@ -136,8 +130,14 @@ public class AuthorDaoSysTest extends AuthorDaoTestHelper {
 	}
 
 	@Test
-	public void testSelectAllAuthorsShouldBeThree() {
+	public void testInsertAndSelectAllAuthorsShouldBeThree() {
 		try {
+			int rowsAffected = insertAuthorJohn(authorDao);
+			rowsAffected += insertAuthorJane(authorDao);
+			rowsAffected += insertAuthorJonah(authorDao);
+
+			assertEquals(12, rowsAffected);
+
 			List<Author> authorList = selectAllAuthors(authorDao);
 
 			assertNotNull(authorList);
@@ -148,19 +148,18 @@ public class AuthorDaoSysTest extends AuthorDaoTestHelper {
 	}
 
 	@Test
-	public void testDeleteAuthorJohn() {
+	public void testInsertDeleteOneSelectAllAuthorsShouldBeTwo() {
 		try {
-			int rowsAffected = deleteAuthor(authorDao, "john.doe");
+			int rowsAffected = insertAuthorJohn(authorDao);
+			rowsAffected += insertAuthorJane(authorDao);
+			rowsAffected += insertAuthorJonah(authorDao);
+
+			assertEquals(12, rowsAffected);
+
+			rowsAffected = deleteAuthor(authorDao, "john.doe");
 
 			assertEquals(1, rowsAffected);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
-	@Test
-	public void testSelectAllAuthorsShouldBeTwo() {
-		try {
 			List<Author> authorList = selectAllAuthors(authorDao);
 
 			assertNotNull(authorList);
@@ -189,26 +188,6 @@ public class AuthorDaoSysTest extends AuthorDaoTestHelper {
 			}
 		} catch (DaoException e) {
 			e.printStackTrace();
-		}
-	}
-
-	public class AuthorDaoMock extends AuthorDaoBean {
-
-		private static final long serialVersionUID = 1L;
-
-		@Override
-		protected Connection createOrReuseConnection() throws SQLException {
-			return super.connection;
-		}
-
-		protected void setConnection(Connection connection) {
-			super.connection = connection;
-		}
-
-		public void closeAll() throws SQLException {
-			if (super.connection != null) {
-				super.connection.close();
-			}
 		}
 	}
 }
