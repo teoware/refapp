@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:com:teoware:refapp:domain:dao" targetNamespace="urn:com:teoware:refapp:domain:dao" xmlns:dom="urn:com:teoware:refapp:domain" version="1.0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema targetNamespace="urn:com:teoware:refapp:domain:dao" xmlns:tns="urn:com:teoware:refapp:domain:dao" xmlns:dom="urn:com:teoware:refapp:domain" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="Types.xsd"/>
 	<xs:import namespace="urn:com:teoware:refapp:domain" schemaLocation="Author.xsd"/>
 	
 	<xs:complexType name="DeleteAuthorRequest">
 		<xs:sequence>
-			<xs:element name="userName" type="xs:string" minOccurs="1" maxOccurs="1" />
+			<xs:element name="userName" type="tns:userNameType" />
 		</xs:sequence>
 	</xs:complexType>
 	

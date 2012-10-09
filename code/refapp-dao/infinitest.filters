@@ -1,5 +1,3 @@
 .*\$.*
-.*\.itest\..*
-.*ITest
 .*\.systest\..*
 .*SysTest

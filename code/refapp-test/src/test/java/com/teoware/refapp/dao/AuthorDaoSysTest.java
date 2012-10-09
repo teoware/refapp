@@ -11,7 +11,6 @@ import static org.junit.Assert.assertTrue;
 import java.sql.Connection;
 import java.util.List;
 
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -41,16 +40,12 @@ public class AuthorDaoSysTest extends AuthorDaoTestHelper {
 
 	@AfterClass
 	public static void oneTimeTearDown() throws Exception {
+		cleanTables();
 		authorDao.closeAll();
 	}
 
 	@Before
 	public void setUp() throws Exception {
-		cleanTables();
-	}
-
-	@After
-	public void tearDown() throws Exception {
 		cleanTables();
 	}
 
@@ -169,25 +164,21 @@ public class AuthorDaoSysTest extends AuthorDaoTestHelper {
 		}
 	}
 
-	private static void cleanTables() {
-		try {
-			if (authorDao.rowCount(AUTHORS_TABLE) > 0) {
-				authorDao.delete(new SqlStatement("DELETE FROM " + AUTHORS_TABLE), null);
-			}
+	private static void cleanTables() throws DaoException {
+		if (authorDao.rowCount(AUTHORS_TABLE) > 0) {
+			authorDao.delete(new SqlStatement("DELETE FROM " + AUTHORS_TABLE), null);
+		}
 
-			if (authorDao.rowCount(AUTHORS_STATUS_TABLE) > 0) {
-				authorDao.delete(new SqlStatement("DELETE FROM " + AUTHORS_STATUS_TABLE), null);
-			}
+		if (authorDao.rowCount(AUTHORS_STATUS_TABLE) > 0) {
+			authorDao.delete(new SqlStatement("DELETE FROM " + AUTHORS_STATUS_TABLE), null);
+		}
 
-			if (authorDao.rowCount(AUTHORS_ADDRESS_TABLE) > 0) {
-				authorDao.delete(new SqlStatement("DELETE FROM " + AUTHORS_ADDRESS_TABLE), null);
-			}
+		if (authorDao.rowCount(AUTHORS_ADDRESS_TABLE) > 0) {
+			authorDao.delete(new SqlStatement("DELETE FROM " + AUTHORS_ADDRESS_TABLE), null);
+		}
 
-			if (authorDao.rowCount(AUTHORS_PASSWORD_TABLE) > 0) {
-				authorDao.delete(new SqlStatement("DELETE FROM " + AUTHORS_PASSWORD_TABLE), null);
-			}
-		} catch (DaoException e) {
-			e.printStackTrace();
+		if (authorDao.rowCount(AUTHORS_PASSWORD_TABLE) > 0) {
+			authorDao.delete(new SqlStatement("DELETE FROM " + AUTHORS_PASSWORD_TABLE), null);
 		}
 	}
 }

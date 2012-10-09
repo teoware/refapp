@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:com:teoware:refapp:domain" targetNamespace="urn:com:teoware:refapp:domain" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema targetNamespace="urn:com:teoware:refapp:domain" xmlns:tns="urn:com:teoware:refapp:domain" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:complexType name="Author">
 		<xs:sequence>
 			<xs:element name="authorId" type="tns:AuthorId" minOccurs="1" maxOccurs="1" />
