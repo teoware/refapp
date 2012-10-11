@@ -23,6 +23,10 @@
 		<derby.skip.tests>false</derby.skip.tests>
 	</properties>
 	
+	<!-- MODULES -->
+	<modules>
+	</modules>
+	
 	<!-- REPOSITORIES -->
 	<repositories>
 	</repositories>

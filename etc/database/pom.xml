@@ -23,6 +23,7 @@
 		<version.derbyclient>10.8.2.2</version.derbyclient>
 	</properties>
 	
+	<!-- MODULES -->
 	<modules>
 		<module>database-derby</module>
 	</modules>

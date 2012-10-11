@@ -16,6 +16,10 @@
 	<properties>
 	</properties>
 	
+	<!-- MODULES -->
+	<modules>
+	</modules>
+	
 	<!-- REPOSITORIES -->
 	<repositories>
 	</repositories>

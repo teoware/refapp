@@ -20,6 +20,10 @@
 		<jaxb.generate.directory>${project.basedir}/src/main/generated</jaxb.generate.directory>
 	</properties>
 	
+	<!-- MODULES -->
+	<modules>
+	</modules>
+	
 	<!-- REPOSITORIES -->
 	<repositories>
 	</repositories>

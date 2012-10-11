@@ -48,6 +48,10 @@
 		<derby.jdbc.resource.name>jdbc/refapp</derby.jdbc.resource.name>
 	</properties>
 	
+	<!-- MODULES -->
+	<modules>
+	</modules>
+	
 	<!-- REPOSITORIES -->
 	<repositories>
 	</repositories>
