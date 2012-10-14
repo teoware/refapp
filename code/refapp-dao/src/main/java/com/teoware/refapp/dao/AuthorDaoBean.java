@@ -14,7 +14,6 @@ import static com.teoware.refapp.dao.metadata.AuthorsTableMetaData.EMAIL_COLUMN_
 import static com.teoware.refapp.dao.metadata.AuthorsTableMetaData.FIRSTNAME_COLUMN_NAME;
 import static com.teoware.refapp.dao.metadata.AuthorsTableMetaData.GENDER_COLUMN_NAME;
 import static com.teoware.refapp.dao.metadata.AuthorsTableMetaData.LASTNAME_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.AuthorsTableMetaData.MODIFIED_COLUMN_NAME;
 import static com.teoware.refapp.dao.metadata.AuthorsTableMetaData.MUNICIPALITY_COLUMN_NAME;
 import static com.teoware.refapp.dao.metadata.AuthorsTableMetaData.PASSWORD_COLUMN_NAME;
 import static com.teoware.refapp.dao.metadata.AuthorsTableMetaData.PHONE_COLUMN_NAME;
@@ -131,12 +130,13 @@ public class AuthorDaoBean extends BaseDao implements AuthorDao {
 				rowsAffected += super.update(sql, parameters);
 			}
 
-			Calendar calendar = Calendar.getInstance();
-			sql = new SqlStatement("UPDATE " + AUTHORS_STATUS_TABLE + " SET " + STATUS_COLUMN_NAME + " = ?, "
-					+ MODIFIED_COLUMN_NAME + " = ? WHERE " + AUTHOR_COLUMN_NAME + " = ?");
-			parameters = DaoHelper.generateArray(request.getAuthor().getAuthorId().getStatus().toString(), calendar,
-					request.getAuthor().getAuthorId().getUserName());
-			rowsAffected += super.update(sql, parameters);
+			if (request.getAuthor().getAuthorId().getStatus() != null) {
+				sql = new SqlStatement("UPDATE " + AUTHORS_STATUS_TABLE + " SET " + STATUS_COLUMN_NAME + " = ? "
+						+ " WHERE " + AUTHOR_COLUMN_NAME + " = ?");
+				parameters = DaoHelper.generateArray(request.getAuthor().getAuthorId().getStatus().toString(), request
+						.getAuthor().getAuthorId().getUserName());
+				rowsAffected += super.update(sql, parameters);
+			}
 
 			if (request.getAuthorPassword() != null) {
 				sql = new SqlStatement("UPDATE " + AUTHORS_PASSWORD_TABLE + " SET " + PASSWORD_COLUMN_NAME
