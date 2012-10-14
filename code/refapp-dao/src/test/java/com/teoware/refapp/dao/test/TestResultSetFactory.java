@@ -22,7 +22,7 @@ import org.apache.derby.client.am.Types;
 import org.h2.tools.SimpleResultSet;
 
 import com.teoware.refapp.model.author.Author;
-import com.teoware.refapp.util.DateUtils;
+import com.teoware.refapp.util.time.DateTimeUtils;
 
 public final class TestResultSetFactory {
 
@@ -75,36 +75,36 @@ public final class TestResultSetFactory {
 	private static void populateAuthorJohnViewRow(SimpleResultSet resultSet) {
 		Author john = TestDataFactory.createAuthorJohn();
 		resultSet.addRow(john.getAuthorId().getUserName(), john.getAuthorInfo().getFirstName(), john.getAuthorInfo()
-				.getLastName(), DateUtils.dateToSqlDate(john.getAuthorInfo().getBirthDate()), john.getAuthorInfo()
+				.getLastName(), DateTimeUtils.dateToSqlDate(john.getAuthorInfo().getBirthDate()), john.getAuthorInfo()
 				.getGender().toString(), john.getAuthorInfo().getEmail(), john.getAuthorInfo().getPhone(), john
 				.getAuthorAddress().getAddress(), john.getAuthorAddress().getPostalCode(), john.getAuthorAddress()
 				.getMunicipality(), john.getAuthorAddress().getRegion(), john.getAuthorAddress().getCountry(), john
-				.getAuthorId().getStatus().toString(), DateUtils
-				.calendarToSqlTimestamp(john.getAuthorId().getCreated()), DateUtils.calendarToSqlTimestamp(john
+				.getAuthorId().getStatus().toString(), DateTimeUtils
+				.calendarToSqlTimestamp(john.getAuthorId().getCreated()), DateTimeUtils.calendarToSqlTimestamp(john
 				.getAuthorId().getModified()));
 	}
 
 	private static void populateAuthorJaneViewRow(SimpleResultSet resultSet) {
 		Author jane = TestDataFactory.createAuthorJane();
 		resultSet.addRow(jane.getAuthorId().getUserName(), jane.getAuthorInfo().getFirstName(), jane.getAuthorInfo()
-				.getLastName(), DateUtils.dateToSqlDate(jane.getAuthorInfo().getBirthDate()), jane.getAuthorInfo()
+				.getLastName(), DateTimeUtils.dateToSqlDate(jane.getAuthorInfo().getBirthDate()), jane.getAuthorInfo()
 				.getGender().toString(), jane.getAuthorInfo().getEmail(), jane.getAuthorInfo().getPhone(), jane
 				.getAuthorAddress().getAddress(), jane.getAuthorAddress().getPostalCode(), jane.getAuthorAddress()
 				.getMunicipality(), jane.getAuthorAddress().getRegion(), jane.getAuthorAddress().getCountry(), jane
-				.getAuthorId().getStatus().toString(), DateUtils
-				.calendarToSqlTimestamp(jane.getAuthorId().getCreated()), DateUtils.calendarToSqlTimestamp(jane
+				.getAuthorId().getStatus().toString(), DateTimeUtils
+				.calendarToSqlTimestamp(jane.getAuthorId().getCreated()), DateTimeUtils.calendarToSqlTimestamp(jane
 				.getAuthorId().getModified()));
 	}
 
 	private static void populateAuthorJonahViewRow(SimpleResultSet resultSet) {
 		Author jonah = TestDataFactory.createAuthorJonah();
 		resultSet.addRow(jonah.getAuthorId().getUserName(), jonah.getAuthorInfo().getFirstName(), jonah.getAuthorInfo()
-				.getLastName(), DateUtils.dateToSqlDate(jonah.getAuthorInfo().getBirthDate()), jonah.getAuthorInfo()
+				.getLastName(), DateTimeUtils.dateToSqlDate(jonah.getAuthorInfo().getBirthDate()), jonah.getAuthorInfo()
 				.getGender().toString(), jonah.getAuthorInfo().getEmail(), jonah.getAuthorInfo().getPhone(), jonah
 				.getAuthorAddress().getAddress(), jonah.getAuthorAddress().getPostalCode(), jonah.getAuthorAddress()
 				.getMunicipality(), jonah.getAuthorAddress().getRegion(), jonah.getAuthorAddress().getCountry(), jonah
-				.getAuthorId().getStatus().toString(), DateUtils.calendarToSqlTimestamp(jonah.getAuthorId()
-				.getCreated()), DateUtils.calendarToSqlTimestamp(jonah.getAuthorId().getModified()));
+				.getAuthorId().getStatus().toString(), DateTimeUtils.calendarToSqlTimestamp(jonah.getAuthorId()
+				.getCreated()), DateTimeUtils.calendarToSqlTimestamp(jonah.getAuthorId().getModified()));
 	}
 
 	private static void populateAllAuthorsViewRows(SimpleResultSet resultSet) {

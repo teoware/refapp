@@ -50,7 +50,7 @@ import com.teoware.refapp.dao.util.DaoHelper;
 import com.teoware.refapp.model.author.Author;
 import com.teoware.refapp.model.author.AuthorPassword;
 import com.teoware.refapp.model.enums.AuthorStatus;
-import com.teoware.refapp.util.DateUtils;
+import com.teoware.refapp.util.time.DateTimeUtils;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
@@ -211,7 +211,7 @@ public class AuthorDaoBean extends BaseDao implements AuthorDao {
 		if (request.isGreedy()) {
 			sql.append(" AND (" + STATUS_COLUMN_NAME + " = ? AND " + CREATED_COLUMN_NAME + " >= ?");
 			parameters = DaoHelper.generateArray(AuthorStatus.DELETED.toString(), AuthorStatus.PENDING.toString(),
-					DateUtils.createCalendar(Calendar.DATE, -7));
+					DateTimeUtils.createCalendar(Calendar.DATE, -7));
 		}
 
 		int rowsAffected = super.delete(sql, parameters);

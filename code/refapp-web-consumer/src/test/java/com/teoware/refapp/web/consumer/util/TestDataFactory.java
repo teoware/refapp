@@ -7,8 +7,8 @@ import com.teoware.refapp.model.author.AuthorPassword;
 import com.teoware.refapp.model.enums.AuthorStatus;
 import com.teoware.refapp.model.enums.Gender;
 import com.teoware.refapp.model.util.BeanFactory;
-import com.teoware.refapp.util.DateUtils;
 import com.teoware.refapp.util.PasswordHandler;
+import com.teoware.refapp.util.time.DateTimeUtils;
 
 public class TestDataFactory {
 
@@ -21,7 +21,7 @@ public class TestDataFactory {
 		author.getAuthorId().setModified(calendar);
 		author.getAuthorInfo().setFirstName("John");
 		author.getAuthorInfo().setLastName("Doe");
-		author.getAuthorInfo().setBirthDate(DateUtils.stringToDate("1975-01-01"));
+		author.getAuthorInfo().setBirthDate(DateTimeUtils.stringToDate("1975-01-01"));
 		author.getAuthorInfo().setGender(Gender.MALE);
 		author.getAuthorInfo().setEmail("john.doe@email.com");
 		author.getAuthorInfo().setPhone("+47 23456789");
@@ -42,7 +42,7 @@ public class TestDataFactory {
 		author.getAuthorId().setModified(calendar);
 		author.getAuthorInfo().setFirstName("Jane");
 		author.getAuthorInfo().setLastName("Doe");
-		author.getAuthorInfo().setBirthDate(DateUtils.stringToDate("1970-12-30"));
+		author.getAuthorInfo().setBirthDate(DateTimeUtils.stringToDate("1970-12-30"));
 		author.getAuthorInfo().setGender(Gender.FEMALE);
 		author.getAuthorInfo().setEmail("jane.doe@email.com");
 		author.getAuthorInfo().setPhone("+47 98765432");
@@ -63,7 +63,7 @@ public class TestDataFactory {
 		author.getAuthorId().setModified(calendar);
 		author.getAuthorInfo().setFirstName("Jonah");
 		author.getAuthorInfo().setLastName("Doe");
-		author.getAuthorInfo().setBirthDate(DateUtils.stringToDate("1975-01-01"));
+		author.getAuthorInfo().setBirthDate(DateTimeUtils.stringToDate("1975-01-01"));
 		author.getAuthorInfo().setGender(Gender.MALE);
 		author.getAuthorInfo().setEmail("jonah.doe@email.com");
 		author.getAuthorInfo().setPhone("+47 19283746");

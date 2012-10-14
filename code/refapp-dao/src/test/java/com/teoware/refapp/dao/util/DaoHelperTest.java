@@ -10,7 +10,7 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import com.teoware.refapp.util.DateUtils;
+import com.teoware.refapp.util.time.DateTimeUtils;
 
 public class DaoHelperTest {
 
@@ -22,49 +22,49 @@ public class DaoHelperTest {
 
 	@Test
 	public void testIsDate() {
-		Date date = DateUtils.stringToDate("2012-01-01");
+		Date date = DateTimeUtils.stringToDate("2012-01-01");
 		assertTrue(DaoHelper.isDate(date));
 	}
 
 	@Test
 	public void testIsDateWithSqlDate() {
-		java.sql.Date date = DateUtils.stringToSqlDate("2012-01-01");
+		java.sql.Date date = DateTimeUtils.stringToSqlDate("2012-01-01");
 		assertFalse(DaoHelper.isDate(date));
 	}
 
 	@Test
 	public void testIsDateWithSqlTime() {
-		Time time = DateUtils.stringToSqlTime("2012-01-01");
+		Time time = DateTimeUtils.stringToSqlTime("2012-01-01");
 		assertFalse(DaoHelper.isDate(time));
 	}
 
 	@Test
 	public void testIsDateWithSqlTimestamp() {
-		Timestamp timestamp = DateUtils.stringToSqlTimestamp("2012-01-01");
+		Timestamp timestamp = DateTimeUtils.stringToSqlTimestamp("2012-01-01");
 		assertFalse(DaoHelper.isDate(timestamp));
 	}
 
 	@Test
 	public void testIsCalendar() {
-		Calendar calendar = DateUtils.stringToCalendar("2012-01-01");
+		Calendar calendar = DateTimeUtils.stringToCalendar("2012-01-01");
 		assertTrue(DaoHelper.isCalendar(calendar));
 	}
 
 	@Test
 	public void testIsSqlDate() {
-		java.sql.Date date = DateUtils.stringToSqlDate("2012-01-01");
+		java.sql.Date date = DateTimeUtils.stringToSqlDate("2012-01-01");
 		assertTrue(DaoHelper.isSqlDateTime(date));
 	}
 
 	@Test
 	public void testIsSqlTime() {
-		Time time = DateUtils.stringToSqlTime("2012-01-01");
+		Time time = DateTimeUtils.stringToSqlTime("2012-01-01");
 		assertTrue(DaoHelper.isSqlDateTime(time));
 	}
 
 	@Test
 	public void testIsSqlTimestamp() {
-		Timestamp timestamp = DateUtils.stringToSqlTimestamp("2012-01-01");
+		Timestamp timestamp = DateTimeUtils.stringToSqlTimestamp("2012-01-01");
 		assertTrue(DaoHelper.isSqlDateTime(timestamp));
 	}
 }
