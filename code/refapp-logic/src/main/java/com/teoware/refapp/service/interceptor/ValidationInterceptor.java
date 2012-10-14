@@ -62,7 +62,7 @@ public class ValidationInterceptor {
 			try {
 				validateParams(annotatedParams, group);
 			} catch (ValidationException e) {
-				String message = printDebug(method.getName(), e.getConstraintViolations());
+				String message = processDebugInfo(method.getName(), e.getConstraintViolations());
 				LOG.info(message);
 				throw e;
 			}
@@ -103,14 +103,13 @@ public class ValidationInterceptor {
 		}
 
 		if (errors.isEmpty()) {
-			throw new ServiceException();
+			return; // No error found
 		}
 
 		throw new ValidationException(errors);
 	}
 
-	private String printDebug(String methodName, final Set<? extends ConstraintViolation<?>> errors) {
-		// for debug...
+	private String processDebugInfo(String methodName, final Set<? extends ConstraintViolation<?>> errors) {
 		final StringBuilder buf = new StringBuilder("Validation failed for method: ");
 		buf.append(methodName);
 		buf.append('\n');
@@ -132,7 +131,7 @@ public class ValidationInterceptor {
 		buf.append("Validation.");
 
 		System.out.println(buf);
-		// for debug...
+		
 		return buf.toString();
 	}
 }

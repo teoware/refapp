@@ -92,7 +92,7 @@ public class ValidationInterceptorTest {
 		assertNull(object);
 	}
 
-	@Test(expected = ServiceException.class)
+	@Test
 	public void testValidationOfMethodWithAnnotatedParamsAndValidationGroup() throws Exception {
 		String method = "methodWithAnnotatedParamsAndValidationGroup";
 		Class<?>[] params = { Object.class };
