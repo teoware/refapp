@@ -21,6 +21,9 @@
 		<derby.password>abcd1234</derby.password>
 		
 		<derby.skip.tests>false</derby.skip.tests>
+		
+		<sql.file.root>${project.basedir}/src/main/resources/sql</sql.file.root>
+		<sql.test.file.root>${project.basedir}/src/test/resources/sql</sql.test.file.root>
 	</properties>
 	
 	<!-- MODULES -->
@@ -75,13 +78,8 @@
 							<goal>execute</goal>
 						</goals>
 						<configuration>
-							<autocommit>true</autocommit>
-							<orderFile>ascending</orderFile>
 							<fileset>
-								<basedir>${project.basedir}/src/main/resources/sql/clean</basedir>
-								<includes>
-									<include>**/*.sql</include>
-								</includes>
+								<basedir>${sql.file.root}/clean</basedir>
 							</fileset>
 							<onError>continue</onError>
 						</configuration>
@@ -95,15 +93,9 @@
 							<goal>execute</goal>
 						</goals>
 						<configuration>
-							<autocommit>true</autocommit>
-							<orderFile>ascending</orderFile>
 							<fileset>
-								<basedir>${project.basedir}/src/main/resources/sql/sequences</basedir>
-								<includes>
-									<include>**/*.sql</include>
-								</includes>
+								<basedir>${sql.file.root}/sequences</basedir>
 							</fileset>
-							<onError>abort</onError>
 						</configuration>
 					</execution>
 					
@@ -115,15 +107,9 @@
 							<goal>execute</goal>
 						</goals>
 						<configuration>
-							<autocommit>true</autocommit>
-							<orderFile>ascending</orderFile>
 							<fileset>
-								<basedir>${project.basedir}/src/main/resources/sql/tables</basedir>
-								<includes>
-									<include>**/*.sql</include>
-								</includes>
+								<basedir>${sql.file.root}/tables</basedir>
 							</fileset>
-							<onError>abort</onError>
 						</configuration>
 					</execution>
 					
@@ -135,15 +121,9 @@
 							<goal>execute</goal>
 						</goals>
 						<configuration>
-							<autocommit>true</autocommit>
-							<orderFile>ascending</orderFile>
 							<fileset>
-								<basedir>${project.basedir}/src/main/resources/sql/indexes</basedir>
-								<includes>
-									<include>**/*.sql</include>
-								</includes>
+								<basedir>${sql.file.root}/indexes</basedir>
 							</fileset>
-							<onError>abort</onError>
 						</configuration>
 					</execution>
 					
@@ -155,15 +135,9 @@
 							<goal>execute</goal>
 						</goals>
 						<configuration>
-							<autocommit>true</autocommit>
-							<orderFile>ascending</orderFile>
 							<fileset>
-								<basedir>${project.basedir}/src/main/resources/sql/triggers</basedir>
-								<includes>
-									<include>**/*.sql</include>
-								</includes>
+								<basedir>${sql.file.root}/triggers</basedir>
 							</fileset>
-							<onError>abort</onError>
 						</configuration>
 					</execution>
 					
@@ -175,15 +149,9 @@
 							<goal>execute</goal>
 						</goals>
 						<configuration>
-							<autocommit>true</autocommit>
-							<orderFile>ascending</orderFile>
 							<fileset>
-								<basedir>${project.basedir}/src/main/resources/sql/views</basedir>
-								<includes>
-									<include>**/*.sql</include>
-								</includes>
+								<basedir>${sql.file.root}/views</basedir>
 							</fileset>
-							<onError>abort</onError>
 						</configuration>
 					</execution>
 					
@@ -195,15 +163,9 @@
 							<goal>execute</goal>
 						</goals>
 						<configuration>
-							<autocommit>true</autocommit>
-							<orderFile>ascending</orderFile>
 							<fileset>
-								<basedir>${project.basedir}/src/main/resources/sql/data</basedir>
-								<includes>
-									<include>**/*.sql</include>
-								</includes>
+								<basedir>${sql.file.root}/data</basedir>
 							</fileset>
-							<onError>abort</onError>
 						</configuration>
 					</execution>
 					
@@ -215,13 +177,8 @@
 							<goal>execute</goal>
 						</goals>
 						<configuration>
-							<autocommit>true</autocommit>
-							<orderFile>ascending</orderFile>
 							<fileset>
-								<basedir>${project.basedir}/src/test/resources/sql/data</basedir>
-								<includes>
-									<include>**/*.sql</include>
-								</includes>
+								<basedir>${sql.test.file.root}/data</basedir>
 							</fileset>
 							<onError>continue</onError>
 							<skip>${derby.skip.tests}</skip>

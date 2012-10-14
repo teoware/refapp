@@ -72,6 +72,16 @@
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>sql-maven-plugin</artifactId>
 					<version>${version.sql-maven-plugin}</version>
+					<configuration>
+						<autocommit>true</autocommit>
+						<orderFile>ascending</orderFile>
+						<onError>abort</onError>
+						<fileset>
+							<includes>
+								<include>**/*.sql</include>
+							</includes>
+						</fileset>
+					</configuration>
 				</plugin>
 				
 				<plugin>
