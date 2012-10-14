@@ -7,6 +7,8 @@ import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_TABLE_AU
 import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_TABLE_AUTHORS_STATUS_STATEMENT;
 import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_TABLE_REF_AUTHORS_STATUS_STATEMENT;
 import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_TABLE_REF_GENDER_STATEMENT;
+import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_TRIGGER_AUTHORS_TRG01_STATEMENT;
+import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_TRIGGER_AUTHORS_TRG02_STATEMENT;
 import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_VIEW_AUTHORS_V_STATEMENT;
 import static com.teoware.refapp.dao.test.TestDataSourceMetaData.INSERT_REF_AUTHORS_STATUS_STATEMENT_1;
 import static com.teoware.refapp.dao.test.TestDataSourceMetaData.INSERT_REF_AUTHORS_STATUS_STATEMENT_2;
@@ -48,6 +50,8 @@ public final class TestDataSourceHandler {
 		connection.prepareStatement(CREATE_TABLE_AUTHORS_PASSWORD_STATEMENT).execute();
 		connection.prepareStatement(CREATE_TABLE_AUTHORS_ADDRESS_STATEMENT).execute();
 		connection.prepareStatement(CREATE_VIEW_AUTHORS_V_STATEMENT).execute();
+		connection.prepareStatement(CREATE_TRIGGER_AUTHORS_TRG01_STATEMENT).execute();
+		connection.prepareStatement(CREATE_TRIGGER_AUTHORS_TRG02_STATEMENT).execute();
 		return connection;
 	}
 

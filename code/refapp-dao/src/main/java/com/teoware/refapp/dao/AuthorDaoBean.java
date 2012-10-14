@@ -86,14 +86,6 @@ public class AuthorDaoBean extends BaseDao implements AuthorDao {
 					.getPhone());
 			rowsAffected += super.insert(sql, parameters);
 
-			Calendar calendar = Calendar.getInstance();
-			sql = new SqlStatement("INSERT INTO " + AUTHORS_STATUS_TABLE + " (" + AUTHOR_COLUMN_NAME + ", "
-					+ STATUS_COLUMN_NAME + ", " + CREATED_COLUMN_NAME + ", " + MODIFIED_COLUMN_NAME
-					+ ") VALUES (?, ?, ?, ?)");
-			parameters = DaoHelper.generateArray(request.getAuthor().getAuthorId().getUserName(),
-					AuthorStatus.PENDING.toString(), calendar, calendar);
-			rowsAffected += super.insert(sql, parameters);
-
 			sql = new SqlStatement("INSERT INTO " + AUTHORS_PASSWORD_TABLE + " (" + AUTHOR_COLUMN_NAME + ", "
 					+ PASSWORD_COLUMN_NAME + ") VALUES (?, ?)");
 			parameters = DaoHelper.generateArray(request.getAuthor().getAuthorId().getUserName(), request

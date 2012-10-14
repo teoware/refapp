@@ -69,7 +69,7 @@ public class AuthorDaoTest {
 
 		authorDao.insertAuthor(insertRequest);
 
-		verify(connection, times(4)).prepareStatement(anyString());
+		verify(connection, times(3)).prepareStatement(anyString());
 	}
 
 	@Test(expected = DaoException.class)
@@ -86,7 +86,7 @@ public class AuthorDaoTest {
 		insertRequest.getAuthor().setAuthorAddress(null);
 		authorDao.insertAuthor(insertRequest);
 
-		verify(connection, times(3)).prepareStatement(anyString());
+		verify(connection, times(2)).prepareStatement(anyString());
 	}
 
 	@Test

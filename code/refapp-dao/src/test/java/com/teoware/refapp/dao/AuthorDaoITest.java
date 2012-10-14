@@ -52,7 +52,7 @@ public class AuthorDaoITest extends AuthorDaoTestHelper {
 	public void testInsertAndSelectAuthorJohn() throws DaoException {
 		int rowsAffected = insertAuthorJohn(authorDao);
 
-		assertEquals(4, rowsAffected);
+		assertEquals(3, rowsAffected);
 
 		List<Author> authorList = selectAuthorJohn(authorDao);
 
@@ -67,7 +67,7 @@ public class AuthorDaoITest extends AuthorDaoTestHelper {
 	public void testInsertUpdateAndSelectAuthorJane() throws DaoException {
 		int rowsAffected = insertAuthorJane(authorDao);
 
-		assertEquals(4, rowsAffected);
+		assertEquals(3, rowsAffected);
 
 		List<Author> authorList = selectAuthorJane(authorDao);
 
@@ -99,7 +99,7 @@ public class AuthorDaoITest extends AuthorDaoTestHelper {
 	public void testInsertAndSelectPasswordForAuthorJonah() throws DaoException {
 		int rowsAffected = insertAuthorJonah(authorDao);
 
-		assertEquals(4, rowsAffected);
+		assertEquals(3, rowsAffected);
 
 		List<AuthorPassword> authorPasswordList = selectAuthorPasswordJonah(authorDao);
 
@@ -117,7 +117,7 @@ public class AuthorDaoITest extends AuthorDaoTestHelper {
 		rowsAffected += insertAuthorJane(authorDao);
 		rowsAffected += insertAuthorJonah(authorDao);
 
-		assertEquals(12, rowsAffected);
+		assertEquals(9, rowsAffected);
 
 		List<Author> authorList = selectAllAuthors(authorDao);
 
@@ -131,7 +131,7 @@ public class AuthorDaoITest extends AuthorDaoTestHelper {
 		rowsAffected += insertAuthorJane(authorDao);
 		rowsAffected += insertAuthorJonah(authorDao);
 
-		assertEquals(12, rowsAffected);
+		assertEquals(9, rowsAffected);
 
 		rowsAffected = deleteAuthorJohn(authorDao);
 
