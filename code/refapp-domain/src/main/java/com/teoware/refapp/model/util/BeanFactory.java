@@ -4,6 +4,7 @@ import com.teoware.refapp.model.author.Author;
 import com.teoware.refapp.model.author.AuthorAddress;
 import com.teoware.refapp.model.author.AuthorId;
 import com.teoware.refapp.model.author.AuthorInfo;
+import com.teoware.refapp.model.author.AuthorPassword;
 
 public class BeanFactory {
 
@@ -28,5 +29,9 @@ public class BeanFactory {
 		author.setAuthorInfo(createAuthorInfoBean());
 		author.setAuthorAddress(createAuthorAddressBean());
 		return author;
+	}
+
+	public static AuthorPassword createAuthorPasswordBean() {
+		return new AuthorPassword();
 	}
 }

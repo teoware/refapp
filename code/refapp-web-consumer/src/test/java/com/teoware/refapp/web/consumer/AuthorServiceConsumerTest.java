@@ -12,7 +12,9 @@ import org.junit.experimental.categories.Category;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import com.teoware.refapp.service.AuthorService;
+import com.teoware.refapp.model.author.Author;
+import com.teoware.refapp.model.author.AuthorPassword;
+import com.teoware.refapp.service.AuthorServiceLocal;
 import com.teoware.refapp.service.ServiceException;
 import com.teoware.refapp.service.dto.RegisterAuthorRequest;
 import com.teoware.refapp.service.validation.ValidationException;
@@ -25,7 +27,7 @@ public class AuthorServiceConsumerTest {
 	private AuthorServiceConsumer authorServiceConsumer = new AuthorServiceConsumerBean();
 
 	@Mock
-	private AuthorService authorService;
+	private AuthorServiceLocal authorService;
 
 	@Before
 	public void setUp() throws Exception {
@@ -34,7 +36,9 @@ public class AuthorServiceConsumerTest {
 
 	@Test
 	public void testThatRegisterAuthorIsSuccessful() throws ParseException, ValidationException, ServiceException {
-		RegisterAuthorRequest request = new RegisterAuthorRequest(TestDataFactory.createAuthorJohn());
+		Author john = TestDataFactory.createAuthorJohn();
+		AuthorPassword johnPassword = TestDataFactory.createAuthorJohnPassword();
+		RegisterAuthorRequest request = new RegisterAuthorRequest(john, johnPassword);
 
 		authorServiceConsumer.registerAuthor(request);
 

@@ -43,7 +43,7 @@ public class RegisterAuthorRequestValidationConstraintsTest {
 
 	@Test
 	public void testRegisterAuthorRequestHeaderAndBodyNull() {
-		RegisterAuthorRequest request = new RegisterAuthorRequest(null, null);
+		RegisterAuthorRequest request = new RegisterAuthorRequest(null, null, null);
 		
 		Set<ConstraintViolation<RegisterAuthorRequest>> constraintViolations = validator.validate(request);
 		
