@@ -4,6 +4,9 @@ public class SqlStatement {
 
 	private String statement;
 
+	public SqlStatement() {
+	}
+
 	public SqlStatement(String statement) {
 		this.statement = statement;
 	}
