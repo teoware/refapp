@@ -37,16 +37,14 @@
 		<version.m2e.lifecycle-mapping>1.0.0</version.m2e.lifecycle-mapping>
 		
 		<!-- Dependencies -->
-		<!-- J2EE -->
-		<version.javax.ejb-api>3.0</version.javax.ejb-api>
-		<version.java.faces-api>2.1.6</version.java.faces-api>
-		<version.java.faces-impl>2.1.6</version.java.faces-impl>
-		<version.javax.servlet-api>2.5</version.javax.servlet-api>
-		<version.javax.servlet-jstl>1.2</version.javax.servlet-jstl>
+		<!-- Java EE -->
+		<version.geronimo-jpa_2.0_spec>1.1</version.geronimo-jpa_2.0_spec>
+		<version.geronimo-ejb_3.1_spec>1.0.2</version.geronimo-ejb_3.1_spec>
+		<version.geronimo-validation_1.0_spec>1.1</version.geronimo-validation_1.0_spec>
+		<version.javaee-api>6.0</version.javaee-api>
 		<!-- Utils -->
 		<version.joda-time>2.1</version.joda-time>
 		<!-- Validation -->
-		<version.javax.validation-api>1.0.0.GA</version.javax.validation-api>
 		<version.hibernate-validator>4.2.0.Final</version.hibernate-validator>
 		<version.commons-validator>1.4.0</version.commons-validator>
 		<!-- Logging -->
@@ -90,39 +88,32 @@
 	<!-- DEPENDENCIES -->
 	<dependencyManagement>
 		<dependencies>
-			<!-- J2EE -->
+			<!-- Java EE -->
 			<dependency>
-				<groupId>javax.ejb</groupId>
-				<artifactId>ejb-api</artifactId>
-				<version>${version.javax.ejb-api}</version>
+				<groupId>org.apache.geronimo.specs</groupId>
+				<artifactId>geronimo-jpa_2.0_spec</artifactId>
+				<version>${version.geronimo-jpa_2.0_spec}</version>
 				<scope>provided</scope>
 			</dependency>
 			
 			<dependency>
-				<groupId>com.sun.faces</groupId>
-				<artifactId>jsf-api</artifactId>
-				<version>${version.java.faces-api}</version>
+				<groupId>org.apache.geronimo.specs</groupId>
+				<artifactId>geronimo-ejb_3.1_spec</artifactId>
+				<version>${version.geronimo-ejb_3.1_spec}</version>
 				<scope>provided</scope>
 			</dependency>
 			
 			<dependency>
-				<groupId>com.sun.faces</groupId>
-				<artifactId>jsf-impl</artifactId>
-				<version>${version.java.faces-impl}</version>
+				<groupId>org.apache.geronimo.specs</groupId>
+				<artifactId>geronimo-validation_1.0_spec</artifactId>
+				<version>${version.geronimo-validation_1.0_spec}</version>
 				<scope>provided</scope>
 			</dependency>
 			
 			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>servlet-api</artifactId>
-				<version>${version.javax.servlet-api}</version>
-				<scope>provided</scope>
-			</dependency>
-			
-			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>jstl</artifactId>
-				<version>${version.javax.servlet-jstl}</version>
+				<groupId>javax</groupId>
+				<artifactId>javaee-api</artifactId>
+				<version>${version.javaee-api}</version>
 				<scope>provided</scope>
 			</dependency>
 			
@@ -134,12 +125,6 @@
 			</dependency>
 			
 			<!-- Validation -->
-			<dependency>
-				<groupId>javax.validation</groupId>
-				<artifactId>validation-api</artifactId>
-				<version>${version.javax.validation-api}</version>
-			</dependency>
-			
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-validator</artifactId>
@@ -196,6 +181,7 @@
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>${version.junit}</version>
+				<scope>test</scope>
 			</dependency>
 			
 			<dependency>
