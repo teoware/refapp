@@ -16,16 +16,12 @@ public class SqlStatement {
 		sql += append;
 	}
 
-	public String build() {
-		return sql;
-	}
+	public static class Builder {
 
-	public class Builder {
-
-		private StringBuffer sql;
+		private StringBuilder sql;
 
 		public Builder() {
-			sql = new StringBuffer();
+			sql = new StringBuilder();
 		}
 
 		public Builder doInsert(String tableName) {
@@ -33,13 +29,13 @@ public class SqlStatement {
 			return this;
 		}
 
-		public Builder withColumns(String... columns) {
+		public Builder withInsertColumns(String... columns) {
 			sql.append(" (" + join(columns, ", ") + ")");
-			sql.append(withValues(columns.length));
+			withInsertValues(columns.length);
 			return this;
 		}
 
-		private Builder withValues(int length) {
+		public Builder withInsertValues(int length) {
 			String values = "?";
 			for (int i = 1; i < length; i++) {
 				values += ", ?";
@@ -53,7 +49,7 @@ public class SqlStatement {
 			return this;
 		}
 
-		public Builder setColumnsTo(String... columns) {
+		public Builder withUpdateColumns(String... columns) {
 			sql.append(" SET (" + join(append(columns, " = ?"), ", ") + ")");
 			return this;
 		}
@@ -63,8 +59,28 @@ public class SqlStatement {
 			return this;
 		}
 
+		public Builder doDelete(String tableName) {
+			sql.append("DELETE FROM " + tableName);
+			return this;
+		}
+
+		public Builder from() {
+			sql.append(" FROM");
+			return this;
+		}
+
 		public Builder from(String table) {
 			sql.append(" FROM " + table);
+			return this;
+		}
+
+		public Builder table(String table) {
+			sql.append(" " + table);
+			return this;
+		}
+
+		public Builder where() {
+			sql.append(" WHERE");
 			return this;
 		}
 
@@ -78,13 +94,28 @@ public class SqlStatement {
 			return this;
 		}
 
+		public Builder column(String column) {
+			sql.append(" " + column + " = ?");
+			return this;
+		}
+
+		public Builder and() {
+			sql.append(" AND");
+			return this;
+		}
+
 		public Builder and(String column) {
 			sql.append(" AND " + column + " = ?");
 			return this;
 		}
 
 		public Builder and(String... column) {
-			sql.append(" AND (" + join(append(column, " = ?"), " AND ") + ")");
+			sql.append(" (" + join(append(column, " = ?"), " AND ") + ")");
+			return this;
+		}
+
+		public Builder or() {
+			sql.append(" OR");
 			return this;
 		}
 
@@ -94,13 +125,13 @@ public class SqlStatement {
 		}
 
 		public Builder or(String... column) {
-			sql.append(" OR (" + join(append(column, " = ?"), " OR ") + ")");
+			sql.append(" (" + join(append(column, " = ?"), " OR ") + ")");
 			return this;
 		}
 
 		private String[] append(String[] strings, String append) {
 			for (int i = 0; i < strings.length; i++) {
-				strings[i] = strings[1] + append;
+				strings[i] = strings[i] + append;
 			}
 			return strings;
 		}
@@ -112,6 +143,10 @@ public class SqlStatement {
 				string += join + strings[i];
 			}
 			return string;
+		}
+
+		public SqlStatement build() {
+			return new SqlStatement(sql.toString());
 		}
 	}
 }

@@ -70,37 +70,13 @@ public class AuthorDaoBean extends BaseDao implements AuthorDao {
 		super.doPersistConnection();
 
 		int rowsAffected = 0;
-		SqlStatement sql;
-		Object[] parameters;
 
 		if (request.getAuthor().getAuthorId() != null && request.getAuthor().getAuthorInfo() != null) {
-			sql = new SqlStatement("INSERT INTO " + AUTHORS_TABLE + " (" + USERNAME_COLUMN_NAME + ", "
-					+ FIRSTNAME_COLUMN_NAME + ", " + LASTNAME_COLUMN_NAME + ", " + BIRTHDATE_COLUMN_NAME + ", "
-					+ GENDER_COLUMN_NAME + ", " + EMAIL_COLUMN_NAME + ", " + PHONE_COLUMN_NAME
-					+ ") VALUES (?, ?, ?, ?, ?, ?, ?)");
-			parameters = DaoHelper.generateArray(request.getAuthor().getAuthorId().getUserName(), request.getAuthor()
-					.getAuthorInfo().getFirstName(), request.getAuthor().getAuthorInfo().getLastName(), request
-					.getAuthor().getAuthorInfo().getBirthDate(), request.getAuthor().getAuthorInfo().getGender()
-					.toString(), request.getAuthor().getAuthorInfo().getEmail(), request.getAuthor().getAuthorInfo()
-					.getPhone());
-			rowsAffected += super.insert(sql, parameters);
+			rowsAffected += localInsertAuthor(request);
 
-			sql = new SqlStatement("INSERT INTO " + AUTHORS_PASSWORD_TABLE + " (" + AUTHOR_COLUMN_NAME + ", "
-					+ PASSWORD_COLUMN_NAME + ") VALUES (?, ?)");
-			parameters = DaoHelper.generateArray(request.getAuthor().getAuthorId().getUserName(), request
-					.getAuthorPassword().getPassword());
-			rowsAffected += super.insert(sql, parameters);
+			rowsAffected += localInsertAuthorPassword(request);
 
-			if (request.getAuthor().getAuthorAddress() != null) {
-				sql = new SqlStatement("INSERT INTO " + AUTHORS_ADDRESS_TABLE + " (" + AUTHOR_COLUMN_NAME + ", "
-						+ ADDRESS_COLUMN_NAME + ", " + POSTALCODE_COLUMN_NAME + ", " + MUNICIPALITY_COLUMN_NAME + ", "
-						+ REGION_COLUMN_NAME + ", " + COUNTRY_COLUMN_NAME + ") VALUES (?, ?, ?, ?, ?, ?)");
-				parameters = DaoHelper.generateArray(request.getAuthor().getAuthorId().getUserName(), request
-						.getAuthor().getAuthorAddress().getAddress(), request.getAuthor().getAuthorAddress()
-						.getPostalCode(), request.getAuthor().getAuthorAddress().getMunicipality(), request.getAuthor()
-						.getAuthorAddress().getRegion(), request.getAuthor().getAuthorAddress().getCountry());
-				rowsAffected += super.insert(sql, parameters);
-			}
+			rowsAffected += localInsertAuthorAddress(request);
 		}
 
 		super.doCloseConnection();
@@ -108,59 +84,117 @@ public class AuthorDaoBean extends BaseDao implements AuthorDao {
 		return new InsertAuthorResponse(rowsAffected);
 	}
 
+	private int localInsertAuthor(InsertAuthorRequest request) throws DaoException {
+		SqlStatement sql = new SqlStatement("INSERT INTO " + AUTHORS_TABLE + " (" + USERNAME_COLUMN_NAME + ", "
+				+ FIRSTNAME_COLUMN_NAME + ", " + LASTNAME_COLUMN_NAME + ", " + BIRTHDATE_COLUMN_NAME + ", "
+				+ GENDER_COLUMN_NAME + ", " + EMAIL_COLUMN_NAME + ", " + PHONE_COLUMN_NAME
+				+ ") VALUES (?, ?, ?, ?, ?, ?, ?)");
+		Object[] parameters = DaoHelper.generateArray(request.getAuthor().getAuthorId().getUserName(), request
+				.getAuthor().getAuthorInfo().getFirstName(), request.getAuthor().getAuthorInfo().getLastName(), request
+				.getAuthor().getAuthorInfo().getBirthDate(),
+				request.getAuthor().getAuthorInfo().getGender().toString(), request.getAuthor().getAuthorInfo()
+						.getEmail(), request.getAuthor().getAuthorInfo().getPhone());
+		return super.insert(sql, parameters);
+	}
+
+	private int localInsertAuthorPassword(InsertAuthorRequest request) throws DaoException {
+		SqlStatement sql = new SqlStatement("INSERT INTO " + AUTHORS_PASSWORD_TABLE + " (" + AUTHOR_COLUMN_NAME + ", "
+				+ PASSWORD_COLUMN_NAME + ") VALUES (?, ?)");
+		Object[] parameters = DaoHelper.generateArray(request.getAuthor().getAuthorId().getUserName(), request
+				.getAuthorPassword().getPassword());
+		return super.insert(sql, parameters);
+	}
+
+	private int localInsertAuthorAddress(InsertAuthorRequest request) throws DaoException {
+		if (request.getAuthor().getAuthorAddress() != null) {
+			SqlStatement sql = new SqlStatement("INSERT INTO " + AUTHORS_ADDRESS_TABLE + " (" + AUTHOR_COLUMN_NAME
+					+ ", " + ADDRESS_COLUMN_NAME + ", " + POSTALCODE_COLUMN_NAME + ", " + MUNICIPALITY_COLUMN_NAME
+					+ ", " + REGION_COLUMN_NAME + ", " + COUNTRY_COLUMN_NAME + ") VALUES (?, ?, ?, ?, ?, ?)");
+			Object[] parameters = DaoHelper.generateArray(request.getAuthor().getAuthorId().getUserName(), request
+					.getAuthor().getAuthorAddress().getAddress(), request.getAuthor().getAuthorAddress()
+					.getPostalCode(), request.getAuthor().getAuthorAddress().getMunicipality(), request.getAuthor()
+					.getAuthorAddress().getRegion(), request.getAuthor().getAuthorAddress().getCountry());
+			return super.insert(sql, parameters);
+		} else {
+			return 0;
+		}
+	}
+
 	@Override
 	public UpdateAuthorResponse updateAuthor(UpdateAuthorRequest request) throws DaoException {
 		super.doPersistConnection();
 
 		int rowsAffected = 0;
-		SqlStatement sql;
-		Object[] parameters;
 
 		if (request.getAuthor().getAuthorId() != null) {
-			if (request.getAuthor().getAuthorInfo() != null) {
-				sql = new SqlStatement("UPDATE " + AUTHORS_TABLE + " SET " + FIRSTNAME_COLUMN_NAME + " = ?, "
-						+ LASTNAME_COLUMN_NAME + " = ?, " + BIRTHDATE_COLUMN_NAME + " = ?, " + GENDER_COLUMN_NAME
-						+ " = ?, " + EMAIL_COLUMN_NAME + " = ?, " + PHONE_COLUMN_NAME + " = ? WHERE "
-						+ USERNAME_COLUMN_NAME + " = ?");
-				parameters = DaoHelper.generateArray(request.getAuthor().getAuthorInfo().getFirstName(), request
-						.getAuthor().getAuthorInfo().getLastName(), request.getAuthor().getAuthorInfo().getBirthDate(),
-						request.getAuthor().getAuthorInfo().getGender().toString(), request.getAuthor().getAuthorInfo()
-								.getEmail(), request.getAuthor().getAuthorInfo().getPhone(), request.getAuthor()
-								.getAuthorId().getUserName());
-				rowsAffected += super.update(sql, parameters);
-			}
+			rowsAffected += localUpdateAuthor(request);
 
-			if (request.getAuthor().getAuthorId().getStatus() != null) {
-				sql = new SqlStatement("UPDATE " + AUTHORS_STATUS_TABLE + " SET " + STATUS_COLUMN_NAME + " = ? "
-						+ " WHERE " + AUTHOR_COLUMN_NAME + " = ?");
-				parameters = DaoHelper.generateArray(request.getAuthor().getAuthorId().getStatus().toString(), request
-						.getAuthor().getAuthorId().getUserName());
-				rowsAffected += super.update(sql, parameters);
-			}
+			rowsAffected += localUpdateAuthorStatus(request);
 
-			if (request.getAuthorPassword() != null) {
-				sql = new SqlStatement("UPDATE " + AUTHORS_PASSWORD_TABLE + " SET " + PASSWORD_COLUMN_NAME
-						+ " = ? WHERE " + AUTHOR_COLUMN_NAME + " = ?");
-				parameters = DaoHelper.generateArray(request.getAuthorPassword().getPassword(), request.getAuthor()
-						.getAuthorId().getUserName());
-				rowsAffected += super.update(sql, parameters);
-			}
+			rowsAffected += localUpdateAuthorPassword(request);
 
-			if (request.getAuthor().getAuthorAddress() != null) {
-				sql = new SqlStatement("UPDATE " + AUTHORS_ADDRESS_TABLE + " SET " + ADDRESS_COLUMN_NAME + " = ?, "
-						+ POSTALCODE_COLUMN_NAME + " = ?, " + MUNICIPALITY_COLUMN_NAME + " = ?, " + REGION_COLUMN_NAME
-						+ " = ?, " + COUNTRY_COLUMN_NAME + " = ? WHERE " + AUTHOR_COLUMN_NAME + " = ?");
-				parameters = DaoHelper.generateArray(request.getAuthor().getAuthorAddress().getAddress(), request
-						.getAuthor().getAuthorAddress().getPostalCode(), request.getAuthor().getAuthorAddress()
-						.getMunicipality(), request.getAuthor().getAuthorAddress().getRegion(), request.getAuthor()
-						.getAuthorAddress().getCountry(), request.getAuthor().getAuthorId().getUserName());
-				rowsAffected += super.update(sql, parameters);
-			}
+			rowsAffected += localUpdateAuthorAddress(request);
 		}
 
 		super.doCloseConnection();
 
 		return new UpdateAuthorResponse(rowsAffected);
+	}
+
+	private int localUpdateAuthor(UpdateAuthorRequest request) throws DaoException {
+		if (request.getAuthor().getAuthorInfo() != null) {
+			SqlStatement sql = new SqlStatement("UPDATE " + AUTHORS_TABLE + " SET " + FIRSTNAME_COLUMN_NAME + " = ?, "
+					+ LASTNAME_COLUMN_NAME + " = ?, " + BIRTHDATE_COLUMN_NAME + " = ?, " + GENDER_COLUMN_NAME
+					+ " = ?, " + EMAIL_COLUMN_NAME + " = ?, " + PHONE_COLUMN_NAME + " = ? WHERE "
+					+ USERNAME_COLUMN_NAME + " = ?");
+			Object[] parameters = DaoHelper.generateArray(request.getAuthor().getAuthorInfo().getFirstName(), request
+					.getAuthor().getAuthorInfo().getLastName(), request.getAuthor().getAuthorInfo().getBirthDate(),
+					request.getAuthor().getAuthorInfo().getGender().toString(), request.getAuthor().getAuthorInfo()
+							.getEmail(), request.getAuthor().getAuthorInfo().getPhone(), request.getAuthor()
+							.getAuthorId().getUserName());
+			return super.update(sql, parameters);
+		} else {
+			return 0;
+		}
+	}
+
+	private int localUpdateAuthorStatus(UpdateAuthorRequest request) throws DaoException {
+		if (request.getAuthor().getAuthorId().getStatus() != null) {
+			SqlStatement sql = new SqlStatement("UPDATE " + AUTHORS_STATUS_TABLE + " SET " + STATUS_COLUMN_NAME
+					+ " = ? " + " WHERE " + AUTHOR_COLUMN_NAME + " = ?");
+			Object[] parameters = DaoHelper.generateArray(request.getAuthor().getAuthorId().getStatus().toString(),
+					request.getAuthor().getAuthorId().getUserName());
+			return super.update(sql, parameters);
+		} else {
+			return 0;
+		}
+	}
+
+	private int localUpdateAuthorPassword(UpdateAuthorRequest request) throws DaoException {
+		if (request.getAuthorPassword() != null) {
+			SqlStatement sql = new SqlStatement("UPDATE " + AUTHORS_PASSWORD_TABLE + " SET " + PASSWORD_COLUMN_NAME
+					+ " = ? WHERE " + AUTHOR_COLUMN_NAME + " = ?");
+			Object[] parameters = DaoHelper.generateArray(request.getAuthorPassword().getPassword(), request
+					.getAuthor().getAuthorId().getUserName());
+			return super.update(sql, parameters);
+		} else {
+			return 0;
+		}
+	}
+
+	private int localUpdateAuthorAddress(UpdateAuthorRequest request) throws DaoException {
+		if (request.getAuthor().getAuthorAddress() != null) {
+			SqlStatement sql = new SqlStatement("UPDATE " + AUTHORS_ADDRESS_TABLE + " SET " + ADDRESS_COLUMN_NAME
+					+ " = ?, " + POSTALCODE_COLUMN_NAME + " = ?, " + MUNICIPALITY_COLUMN_NAME + " = ?, "
+					+ REGION_COLUMN_NAME + " = ?, " + COUNTRY_COLUMN_NAME + " = ? WHERE " + AUTHOR_COLUMN_NAME + " = ?");
+			Object[] parameters = DaoHelper.generateArray(request.getAuthor().getAuthorAddress().getAddress(), request
+					.getAuthor().getAuthorAddress().getPostalCode(), request.getAuthor().getAuthorAddress()
+					.getMunicipality(), request.getAuthor().getAuthorAddress().getRegion(), request.getAuthor()
+					.getAuthorAddress().getCountry(), request.getAuthor().getAuthorId().getUserName());
+			return super.update(sql, parameters);
+		} else {
+			return 0;
+		}
 	}
 
 	@Override

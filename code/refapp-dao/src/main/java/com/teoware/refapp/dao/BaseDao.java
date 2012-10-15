@@ -45,7 +45,7 @@ public abstract class BaseDao {
 	}
 
 	protected int update(SqlStatement sql, Object[] parameters) throws DaoException {
-		LOG.debug("Executing SQL statement: " + sql.build());
+		LOG.debug("Executing SQL statement: " + sql.getSql());
 
 		PreparedStatement statement = null;
 		try {
@@ -68,7 +68,7 @@ public abstract class BaseDao {
 
 	@TransactionAttribute
 	protected <T> List<T> select(SqlStatement sql, RowMapper<T> rowMapper, Object[] parameters) throws DaoException {
-		LOG.debug("Executing SQL statement: " + sql.build());
+		LOG.debug("Executing SQL statement: " + sql.getSql());
 
 		PreparedStatement statement = null;
 		try {
@@ -102,8 +102,7 @@ public abstract class BaseDao {
 		try {
 			String sql = "SELECT * FROM " + table;
 			createOrReuseConnection();
-			statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY);
+			statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			ResultSet result = statement.executeQuery();
 			result.last();
 			int rowCount = result.getRow();
@@ -119,7 +118,7 @@ public abstract class BaseDao {
 
 	protected PreparedStatement generatePreparedStatement(SqlStatement sql, Object[] parameters) throws SQLException {
 		createOrReuseConnection();
-		PreparedStatement statement = connection.prepareStatement(sql.build());
+		PreparedStatement statement = connection.prepareStatement(sql.getSql());
 		if (parameters != null) {
 			for (int i = 0; i < parameters.length; i++) {
 				DaoHelper.processParameter(statement, parameters[i], i + 1);
