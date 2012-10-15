@@ -29,18 +29,23 @@ public class SqlStatement {
 			return this;
 		}
 
-		public Builder withInsertColumns(String... columns) {
+		public Builder columns(String... columns) {
 			sql.append(" (" + join(columns, ", ") + ")");
-			withInsertValues(columns.length);
 			return this;
 		}
-
-		public Builder withInsertValues(int length) {
+		
+		public Builder values(int length) {
 			String values = "?";
 			for (int i = 1; i < length; i++) {
 				values += ", ?";
 			}
 			sql.append(" VALUES (" + values + ")");
+			return this;
+		}
+		
+		public Builder columnValues(String... columns) {
+			columns(columns);
+			values(columns.length);
 			return this;
 		}
 
@@ -49,11 +54,21 @@ public class SqlStatement {
 			return this;
 		}
 
-		public Builder withUpdateColumns(String... columns) {
-			sql.append(" SET (" + join(append(columns, " = ?"), ", ") + ")");
+		public Builder setColumn(String column) {
+			sql.append(" SET " + column + " = ?");
+			return this;
+		}
+		
+		public Builder setColumns(String... columns) {
+			sql.append(" SET " + join(append(columns, " = ?"), ", "));
 			return this;
 		}
 
+		public Builder doSelect(String column) {
+			sql.append("SELECT " + column);
+			return this;
+		}
+		
 		public Builder doSelect(String... columns) {
 			sql.append("SELECT (" + join(columns, ", ") + ")");
 			return this;
@@ -91,11 +106,6 @@ public class SqlStatement {
 
 		public Builder where(String... column) {
 			sql.append(" WHERE (" + join(append(column, " = ?"), " AND ") + ")");
-			return this;
-		}
-
-		public Builder column(String column) {
-			sql.append(" " + column + " = ?");
 			return this;
 		}
 

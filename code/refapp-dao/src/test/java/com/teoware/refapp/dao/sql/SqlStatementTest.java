@@ -8,7 +8,7 @@ public class SqlStatementTest {
 
 	@Test
 	public void testInsertOneColumnSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doInsert("TABLE").withInsertColumns("COLUMN").build();
+		SqlStatement sql = new SqlStatement.Builder().doInsert("TABLE").columnValues("COLUMN").build();
 		String expectedSql = "INSERT INTO TABLE (COLUMN) VALUES (?)";
 
 		assertEquals(expectedSql, sql.getSql());
@@ -16,8 +16,8 @@ public class SqlStatementTest {
 
 	@Test
 	public void testInsertThreeColumnsSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doInsert("TABLE")
-				.withInsertColumns("COLUMN1", "COLUMN2", "COLUMN3").build();
+		SqlStatement sql = new SqlStatement.Builder().doInsert("TABLE").columnValues("COLUMN1", "COLUMN2", "COLUMN3")
+				.build();
 		String expectedSql = "INSERT INTO TABLE (COLUMN1, COLUMN2, COLUMN3) VALUES (?, ?, ?)";
 
 		assertEquals(expectedSql, sql.getSql());
@@ -25,7 +25,7 @@ public class SqlStatementTest {
 
 	@Test
 	public void testInsertThreeValuesSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doInsert("TABLE").withInsertValues(3).build();
+		SqlStatement sql = new SqlStatement.Builder().doInsert("TABLE").values(3).build();
 		String expectedSql = "INSERT INTO TABLE VALUES (?, ?, ?)";
 
 		assertEquals(expectedSql, sql.getSql());
@@ -33,35 +33,35 @@ public class SqlStatementTest {
 
 	@Test
 	public void testUpdateOneColumnSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doUpdate("TABLE").withUpdateColumns("COLUMN").build();
-		String expectedSql = "UPDATE TABLE SET (COLUMN = ?)";
+		SqlStatement sql = new SqlStatement.Builder().doUpdate("TABLE").setColumn("COLUMN").build();
+		String expectedSql = "UPDATE TABLE SET COLUMN = ?";
 
 		assertEquals(expectedSql, sql.getSql());
 	}
 
 	@Test
 	public void testUpdateThreeColumnSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doUpdate("TABLE")
-				.withUpdateColumns("COLUMN1", "COLUMN2", "COLUMN3").build();
-		String expectedSql = "UPDATE TABLE SET (COLUMN1 = ?, COLUMN2 = ?, COLUMN3 = ?)";
+		SqlStatement sql = new SqlStatement.Builder().doUpdate("TABLE").setColumns("COLUMN1", "COLUMN2", "COLUMN3")
+				.build();
+		String expectedSql = "UPDATE TABLE SET COLUMN1 = ?, COLUMN2 = ?, COLUMN3 = ?";
 
 		assertEquals(expectedSql, sql.getSql());
 	}
 
 	@Test
 	public void testUpdateThreeColumnWhereOneSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doUpdate("TABLE")
-				.withUpdateColumns("COLUMN1", "COLUMN2", "COLUMN3").where("COLUMN4").build();
-		String expectedSql = "UPDATE TABLE SET (COLUMN1 = ?, COLUMN2 = ?, COLUMN3 = ?) WHERE COLUMN4 = ?";
+		SqlStatement sql = new SqlStatement.Builder().doUpdate("TABLE").setColumns("COLUMN1", "COLUMN2", "COLUMN3")
+				.where("COLUMN4").build();
+		String expectedSql = "UPDATE TABLE SET COLUMN1 = ?, COLUMN2 = ?, COLUMN3 = ? WHERE COLUMN4 = ?";
 
 		assertEquals(expectedSql, sql.getSql());
 	}
 
 	@Test
 	public void testUpdateThreeColumnWhereThreeSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doUpdate("TABLE")
-				.withUpdateColumns("COLUMN1", "COLUMN2", "COLUMN3").where("COLUMN4", "COLUMN5", "COLUMN6").build();
-		String expectedSql = "UPDATE TABLE SET (COLUMN1 = ?, COLUMN2 = ?, COLUMN3 = ?) "
+		SqlStatement sql = new SqlStatement.Builder().doUpdate("TABLE").setColumns("COLUMN1", "COLUMN2", "COLUMN3")
+				.where("COLUMN4", "COLUMN5", "COLUMN6").build();
+		String expectedSql = "UPDATE TABLE SET COLUMN1 = ?, COLUMN2 = ?, COLUMN3 = ? "
 				+ "WHERE (COLUMN4 = ? AND COLUMN5 = ? AND COLUMN6 = ?)";
 
 		assertEquals(expectedSql, sql.getSql());
@@ -70,7 +70,7 @@ public class SqlStatementTest {
 	@Test
 	public void testSelectAllFromSqlStatementBuilder() {
 		SqlStatement sql = new SqlStatement.Builder().doSelect("*").from("TABLE").build();
-		String expectedSql = "SELECT (*) FROM TABLE";
+		String expectedSql = "SELECT * FROM TABLE";
 
 		assertEquals(expectedSql, sql.getSql());
 	}
@@ -78,7 +78,7 @@ public class SqlStatementTest {
 	@Test
 	public void testSelectAllFromWhereOneSqlStatementBuilder() {
 		SqlStatement sql = new SqlStatement.Builder().doSelect("*").from("TABLE").where("COLUMN").build();
-		String expectedSql = "SELECT (*) FROM TABLE WHERE COLUMN = ?";
+		String expectedSql = "SELECT * FROM TABLE WHERE COLUMN = ?";
 
 		assertEquals(expectedSql, sql.getSql());
 	}
@@ -157,20 +157,20 @@ public class SqlStatementTest {
 
 		assertEquals(expectedSql, sql.getSql());
 	}
-	
+
 	@Test
 	public void testDeleteSqlStatementBuilder() {
 		SqlStatement sql = new SqlStatement.Builder().doDelete("TABLE").build();
 		String expectedSql = "DELETE FROM TABLE";
-		
+
 		assertEquals(expectedSql, sql.getSql());
 	}
-	
+
 	@Test
 	public void testDeleteWhereSqlStatementBuilder() {
 		SqlStatement sql = new SqlStatement.Builder().doDelete("TABLE").where("COLUMN").build();
 		String expectedSql = "DELETE FROM TABLE WHERE COLUMN = ?";
-		
+
 		assertEquals(expectedSql, sql.getSql());
 	}
 }
