@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import com.teoware.refapp.dao.AuthorDao;
 import com.teoware.refapp.dao.DaoException;
 import com.teoware.refapp.dao.dto.InsertAuthorRequest;
+import com.teoware.refapp.dao.dto.SelectAuthorResponse;
 import com.teoware.refapp.model.Header;
 import com.teoware.refapp.model.author.Author;
 import com.teoware.refapp.model.author.AuthorPassword;
@@ -68,7 +69,15 @@ public class AuthorServiceBean implements AuthorServiceLocal, AuthorServiceRemot
 
 	@Override
 	public ListAuthorsResponse listAuthors() throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
+		LOG.info(SERVICE_NAME + ": List authors operation invoked.");
+
+		try {
+			SelectAuthorResponse selectResponse = authorDao.selectAllAuthors();
+
+			return new ListAuthorsResponse(selectResponse.getAuthorList());
+		} catch (DaoException e) {
+			LOG.error(SERVICE_NAME + ": List authors operation failed.");
+			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
+		}
 	}
 }
