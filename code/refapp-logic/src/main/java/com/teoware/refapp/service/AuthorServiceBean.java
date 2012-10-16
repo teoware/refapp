@@ -61,13 +61,13 @@ public class AuthorServiceBean implements AuthorServiceLocal, AuthorServiceRemot
 	}
 
 	@Override
-	public FindAuthorResponse findAuthor(FindAuthorRequest request) {
+	public FindAuthorResponse findAuthor(FindAuthorRequest request) throws ValidationException, ServiceException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ListAuthorsResponse listAuthors() {
+	public ListAuthorsResponse listAuthors() throws ServiceException {
 		// TODO Auto-generated method stub
 		return null;
 	}

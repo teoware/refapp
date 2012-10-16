@@ -13,7 +13,7 @@ public interface AuthorService extends Serializable {
 
 	public RegisterAuthorResponse registerAuthor(RegisterAuthorRequest request) throws ValidationException, ServiceException;
 	
-	public FindAuthorResponse findAuthor(FindAuthorRequest request);
+	public FindAuthorResponse findAuthor(FindAuthorRequest request) throws ValidationException, ServiceException;
 	
-	public ListAuthorsResponse listAuthors();
+	public ListAuthorsResponse listAuthors() throws ServiceException;
 }
