@@ -26,12 +26,13 @@ public class AuthorServiceConsumerBean implements AuthorServiceConsumer {
 	}
 
 	@Override
-	public FindAuthorResponse findAuthor(FindAuthorRequest request) {
+	public FindAuthorResponse findAuthor(FindAuthorRequest request) throws ValidationException,
+			ServiceException {
 		return authorService.findAuthor(request);
 	}
 
 	@Override
-	public ListAuthorsResponse listAuthors() {
+	public ListAuthorsResponse listAuthors() throws ServiceException {
 		return authorService.listAuthors();
 	}
 }
