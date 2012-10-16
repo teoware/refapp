@@ -67,7 +67,7 @@
 	<!-- MODULES -->
 	<modules>
 		<module>refapp-domain</module>
-		<module>refapp-util</module>
+		<module>refapp-common</module>
 		<module>refapp-dao</module>
 		<module>refapp-logic-facade</module>
 		<module>refapp-logic</module>
@@ -227,7 +227,7 @@
 			
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp-util</artifactId>
+				<artifactId>refapp-common</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			

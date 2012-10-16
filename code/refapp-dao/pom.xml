@@ -82,7 +82,7 @@
 		
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-util</artifactId>
+			<artifactId>refapp-common</artifactId>
 		</dependency>
 	</dependencies>
 	
