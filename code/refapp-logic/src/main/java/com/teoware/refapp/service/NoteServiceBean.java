@@ -9,7 +9,7 @@ import com.teoware.refapp.service.dto.CreateNoteResponse;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-public class NoteServiceBean implements NoteServiceLocal, NoteServiceRemote {
+public class NoteServiceBean implements NoteService {
 
 	private static final long serialVersionUID = 1L;
 

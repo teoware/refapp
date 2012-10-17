@@ -28,8 +28,8 @@ import com.teoware.refapp.service.validation.Validate;
 import com.teoware.refapp.service.validation.ValidationException;
 
 @Stateless
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
-public class AuthorServiceBean implements AuthorServiceLocal, AuthorServiceRemote {
+@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+public class AuthorServiceBean implements AuthorService {
 
 	private static final long serialVersionUID = 1L;
 
