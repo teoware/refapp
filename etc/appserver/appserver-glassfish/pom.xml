@@ -14,38 +14,11 @@
 	
 	<!-- PROPERTIES -->
 	<properties>
-		<!-- Env -->
-		<user.home>${env.HOME}</user.home>
-		
 		<!-- Glassfish -->
-		<glassfish.home>${env.GLASSFISH_HOME}</glassfish.home>
-		<glassfish.domain>domain1</glassfish.domain>
-		<glassfish.host>localhost</glassfish.host>
-		<glassfish.httpPort>8080</glassfish.httpPort>
-		<glassfish.adminPort>4848</glassfish.adminPort>
 		<glassfish.username>admin</glassfish.username>
 		<glassfish.passwordfile.path>${user.home}</glassfish.passwordfile.path>
 		<glassfish.passwordfile.name>.asadmintruststore</glassfish.passwordfile.name>
 		<glassfish.passwordfile>${glassfish.passwordfile.path}/${glassfish.passwordfile.name}</glassfish.passwordfile>
-		
-		<!-- Deployment -->
-		<glassfish.deploy.name>refapp</glassfish.deploy.name>
-		<glassfish.deploy.archive.path>../../code/refapp-ear/target</glassfish.deploy.archive.path>
-		<glassfish.deploy.archive.name>refapp-ear-0.0.1-SNAPSHOT.ear</glassfish.deploy.archive.name>
-		<glassfish.deploy.archive>${glassfish.deploy.archive.path}/${glassfish.deploy.archive.name}</glassfish.deploy.archive>
-		<glassfish.deploy.contextroot>refapp</glassfish.deploy.contextroot>
-		
-		<!-- Derby database settings -->
-		<derby.database.name>refapp</derby.database.name>
-		<derby.server.name>localhost</derby.server.name>
-		<derby.server.port>1527</derby.server.port>
-		<derby.username>refapp</derby.username>
-		<derby.password>abcd1234</derby.password>
-		<derby.connection.attributes>;create\=true</derby.connection.attributes>
-		<derby.connectionpool.name>RefappDerbyPool</derby.connectionpool.name>
-		<derby.connectionpool.datasource>org.apache.derby.jdbc.ClientDataSource</derby.connectionpool.datasource>
-		<derby.connectionpool.resource.type>javax.sql.DataSource</derby.connectionpool.resource.type>
-		<derby.jdbc.resource.name>jdbc/refapp</derby.jdbc.resource.name>
 	</properties>
 	
 	<!-- MODULES -->

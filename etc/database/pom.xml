@@ -111,4 +111,8 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+	
+	<!-- PROFILES -->
+	<profiles>
+	</profiles>
 </project>

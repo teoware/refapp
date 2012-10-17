@@ -2,10 +2,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<groupId>com.teoware.refapp</groupId>
-	<artifactId>refapp-parent</artifactId>
+	<artifactId>parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>refapp-parent</name>
+	<name>parent</name>
 	<description>Super parent POM</description>
 	
 	<!-- PROPERTIES -->
@@ -14,6 +14,7 @@
 	
 	<!-- MODULES -->
 	<modules>
+		<module>etc</module>
 		<module>code</module>
 	</modules>
 	
@@ -34,4 +35,8 @@
 		<plugins>
 		</plugins>
 	</build>
+	
+	<!-- PROFILES -->
+	<profiles>
+	</profiles>
 </project>
