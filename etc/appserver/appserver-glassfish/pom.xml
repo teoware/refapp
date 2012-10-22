@@ -77,9 +77,9 @@
 					<passwordfile>${glassfish.passwordfile}</passwordfile>
 					
 					<!-- Deployment -->
-					<appName>${glassfish.deploy.name}</appName>
-					<appArchive>${glassfish.deploy.archive}</appArchive>
-					<contextRoot>${glassfish.deploy.contextroot}</contextRoot>
+					<appName>${deploy.name}</appName>
+					<appArchive>${deploy.archive}</appArchive>
+					<contextRoot>${deploy.contextroot}</contextRoot>
 					
 					<!-- JDBC connection pool -->
 					<poolName>${derby.connectionpool.name}</poolName>
@@ -99,6 +99,11 @@
 					
 					<skip>false</skip>
 				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven2-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>

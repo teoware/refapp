@@ -6,44 +6,56 @@ import java.io.StringWriter;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import com.teoware.refapp.model.author.Author;
 import com.teoware.refapp.model.author.AuthorPassword;
 import com.teoware.refapp.model.enums.AuthorStatus;
 import com.teoware.refapp.model.enums.Gender;
 import com.teoware.refapp.model.util.BeanFactory;
+import com.teoware.refapp.service.ServiceException;
 import com.teoware.refapp.service.dto.ListAuthorsResponse;
 import com.teoware.refapp.service.dto.RegisterAuthorRequest;
 import com.teoware.refapp.web.consumer.AuthorServiceConsumer;
 
-@ManagedBean(name="author")
+@Named("author")
 @RequestScoped
 public class AuthorPageBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private String action;
-	
-//	@Inject
-//	AuthorServiceConsumer consumer;
-	
+
+	@Inject
+	AuthorServiceConsumer serviceConsumer;
+
 	public void onClickRegisterButton() {
 		action = "onClickRegisterButton";
-//		RegisterAuthorRequest req = createRegisterAuthorRequest();
-//		consumer.registerAuthor(req);
+		RegisterAuthorRequest req = createRegisterAuthorRequest();
+		try {
+			serviceConsumer.registerAuthor(req);
+		} catch (Exception e) {
+			action = getStackTrace(e);
+		}
 	}
-	
+
 	public void onClickListButton() {
 		action = "onClickListButton";
-//		ListAuthorsResponse res = consumer.listAuthors();
-//		List<Author> list = res.getAuthorList();
-//		for (Author author : list) {
-//		}
+		try {
+			ListAuthorsResponse res = serviceConsumer.listAuthors();
+			List<Author> list = res.getAuthorList();
+
+			action = "";
+			for (Author author : list) {
+				action += getAuthorString(author) + "\n";
+			}
+		} catch (ServiceException e) {
+			action = getStackTrace(e);
+		}
 	}
-	
+
 	public String getAction() {
 		return action;
 	}
@@ -73,7 +85,11 @@ public class AuthorPageBean implements Serializable {
 
 		return new RegisterAuthorRequest(author, authorPassword);
 	}
-	
+
+	private String getAuthorString(Author author) {
+		return author.getAuthorId().getUserName();
+	}
+
 	private String getStackTrace(Exception e) {
 		StringWriter stringWriter = new StringWriter();
 		PrintWriter printWriter = new PrintWriter(stringWriter);
