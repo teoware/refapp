@@ -84,7 +84,7 @@ public class RegisterAuthorRequestValidationConstraintsTest {
 	@Test
 	public void testRegisterAuthorRequestAuthorIdUserNameExactlyToShortString() {
 		RegisterAuthorRequest request = TestHelper.populateRegisterAuthorRequest();
-		request.getBody().getAuthorId().setUserName("abcde");
+		request.getBody().getAuthorId().setUserName("ab");
 		
 		Set<ConstraintViolation<RegisterAuthorRequest>> constraintViolations = validator.validate(request);
 		
@@ -94,7 +94,7 @@ public class RegisterAuthorRequestValidationConstraintsTest {
 	@Test
 	public void testRegisterAuthorRequestAuthorIdUserNameExactlyLongEnoughString() {
 		RegisterAuthorRequest request = TestHelper.populateRegisterAuthorRequest();
-		request.getBody().getAuthorId().setUserName("abcdef");
+		request.getBody().getAuthorId().setUserName("abc");
 		
 		Set<ConstraintViolation<RegisterAuthorRequest>> constraintViolations = validator.validate(request);
 		

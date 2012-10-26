@@ -12,7 +12,7 @@ import com.teoware.refapp.model.util.ValidationRegex;
 public class AuthorId {
 
 	@NotNull
-	@Size(min=6, max=20)
+	@Size(min=3, max=20)
 	@Pattern(regexp = ValidationRegex.USERNAME)
 	protected String userName;
 	protected AuthorStatus status;
