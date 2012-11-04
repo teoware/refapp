@@ -28,6 +28,13 @@ public class AuthorPageBean implements Serializable {
 
 	private String action;
 
+	private String username;
+	private String firstName;
+	private String lastName;
+	private String gender;
+	private String email;
+	private String phone;
+
 	@Inject
 	AuthorServiceConsumer serviceConsumer;
 
@@ -49,7 +56,7 @@ public class AuthorPageBean implements Serializable {
 
 			action = "";
 			for (Author author : list) {
-				action += getAuthorString(author) + "\n";
+				action += getAuthorString(author) + "<br />\n";
 			}
 		} catch (ServiceException e) {
 			action = getStackTrace(e);
@@ -60,19 +67,67 @@ public class AuthorPageBean implements Serializable {
 		return action;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	private RegisterAuthorRequest createRegisterAuthorRequest() {
 		Author author = BeanFactory.createAuthorBean();
 
-		author.getAuthorId().setUserName("thomas");
+		author.getAuthorId().setUserName(username);
 		author.getAuthorId().setStatus(AuthorStatus.PENDING);
 		author.getAuthorId().setCreated(Calendar.getInstance());
 
-		author.getAuthorInfo().setFirstName("Thomas");
-		author.getAuthorInfo().setLastName("Johansen");
+		author.getAuthorInfo().setFirstName(firstName);
+		author.getAuthorInfo().setLastName(lastName);
 		author.getAuthorInfo().setGender(Gender.MALE);
 		author.getAuthorInfo().setBirthDate(Calendar.getInstance().getTime());
-		author.getAuthorInfo().setEmail("thomas@tow.no");
-		author.getAuthorInfo().setPhone("12345678");
+		author.getAuthorInfo().setEmail(email);
+		author.getAuthorInfo().setPhone(phone);
 
 		author.getAuthorAddress().setAddress("Abc street 1");
 		author.getAuthorAddress().setPostalCode("1234");
