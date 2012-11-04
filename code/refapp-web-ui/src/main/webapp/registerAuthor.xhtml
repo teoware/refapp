@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="templates/common.xhtml">
+
+	<ui:define name="content">
+		<h2>Register author</h2>
+		<h:form>
+			<h:panelGrid>
+				<h:outputLabel value="Username: " style="font-weight:bold" />
+				<h:inputText value="#{registerAuthor.username}" />
+				<h:outputLabel value="First name: " style="font-weight:bold" />
+				<h:inputText value="#{registerAuthor.firstName}" />
+				<h:outputLabel value="Last name: " style="font-weight:bold" />
+				<h:inputText value="#{registerAuthor.lastName}" />
+				<h:outputLabel value="Email: " style="font-weight:bold" />
+				<h:inputText value="#{registerAuthor.email}" />
+				<h:outputLabel value="Phone: " style="font-weight:bold" />
+				<h:inputText value="#{registerAuthor.phone}" />
+				<h:commandButton value="Register" type="submit"
+					action="#{registerAuthor.onClickRegisterButton}" />
+			</h:panelGrid>
+		</h:form>
+		<h4>Action: #{registerAuthor.action}</h4>
+	</ui:define>
+
+</ui:composition>
+
+</html>

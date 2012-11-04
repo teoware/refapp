@@ -372,6 +372,7 @@
 					<version>${version.maven-failsafe-plugin}</version>
 					<executions>
 						<execution>
+							<id>integration-tests</id>
 							<goals>
 								<goal>integration-test</goal>
 								<goal>verify</goal>

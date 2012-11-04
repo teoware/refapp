@@ -4,7 +4,6 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringWriter;
 import java.util.Calendar;
-import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -15,16 +14,16 @@ import com.teoware.refapp.model.author.AuthorPassword;
 import com.teoware.refapp.model.enums.AuthorStatus;
 import com.teoware.refapp.model.enums.Gender;
 import com.teoware.refapp.model.util.BeanFactory;
-import com.teoware.refapp.service.ServiceException;
-import com.teoware.refapp.service.dto.ListAuthorsResponse;
 import com.teoware.refapp.service.dto.RegisterAuthorRequest;
 import com.teoware.refapp.web.consumer.AuthorServiceConsumer;
+import com.teoware.refapp.web.ui.AbstractPageBean;
 
-@Named("author")
+@Named("registerAuthor")
 @RequestScoped
-public class AuthorPageBean implements Serializable {
+public class RegisterAuthorPageBean extends AbstractPageBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	private static final String PAGE_TITLE = "Register author";
 
 	private String action;
 
@@ -48,19 +47,37 @@ public class AuthorPageBean implements Serializable {
 		}
 	}
 
-	public void onClickListButton() {
-		action = "onClickListButton";
-		try {
-			ListAuthorsResponse res = serviceConsumer.listAuthors();
-			List<Author> list = res.getAuthorList();
+	private RegisterAuthorRequest createRegisterAuthorRequest() {
+		Author author = BeanFactory.createAuthorBean();
 
-			action = "";
-			for (Author author : list) {
-				action += getAuthorString(author) + "<br />\n";
-			}
-		} catch (ServiceException e) {
-			action = getStackTrace(e);
-		}
+		author.getAuthorId().setUserName(username);
+		author.getAuthorId().setStatus(AuthorStatus.PENDING);
+		author.getAuthorId().setCreated(Calendar.getInstance());
+
+		author.getAuthorInfo().setFirstName(firstName);
+		author.getAuthorInfo().setLastName(lastName);
+		author.getAuthorInfo().setGender(Gender.MALE);
+		author.getAuthorInfo().setBirthDate(Calendar.getInstance().getTime());
+		author.getAuthorInfo().setEmail(email);
+		author.getAuthorInfo().setPhone(phone);
+
+		author.getAuthorAddress().setAddress("Abc street 1");
+		author.getAuthorAddress().setPostalCode("1234");
+		author.getAuthorAddress().setMunicipality("Oslo");
+		author.getAuthorAddress().setRegion("Oslo");
+		author.getAuthorAddress().setCountry("Norway");
+
+		AuthorPassword authorPassword = BeanFactory.createAuthorPasswordBean();
+		authorPassword.setPassword("myPassword");
+
+		return new RegisterAuthorRequest(author, authorPassword);
+	}
+
+	private String getStackTrace(Exception e) {
+		StringWriter stringWriter = new StringWriter();
+		PrintWriter printWriter = new PrintWriter(stringWriter);
+		e.printStackTrace(printWriter);
+		return stringWriter.toString();
 	}
 
 	public String getAction() {
@@ -115,40 +132,8 @@ public class AuthorPageBean implements Serializable {
 		this.phone = phone;
 	}
 
-	private RegisterAuthorRequest createRegisterAuthorRequest() {
-		Author author = BeanFactory.createAuthorBean();
-
-		author.getAuthorId().setUserName(username);
-		author.getAuthorId().setStatus(AuthorStatus.PENDING);
-		author.getAuthorId().setCreated(Calendar.getInstance());
-
-		author.getAuthorInfo().setFirstName(firstName);
-		author.getAuthorInfo().setLastName(lastName);
-		author.getAuthorInfo().setGender(Gender.MALE);
-		author.getAuthorInfo().setBirthDate(Calendar.getInstance().getTime());
-		author.getAuthorInfo().setEmail(email);
-		author.getAuthorInfo().setPhone(phone);
-
-		author.getAuthorAddress().setAddress("Abc street 1");
-		author.getAuthorAddress().setPostalCode("1234");
-		author.getAuthorAddress().setMunicipality("Oslo");
-		author.getAuthorAddress().setRegion("Oslo");
-		author.getAuthorAddress().setCountry("Norway");
-
-		AuthorPassword authorPassword = BeanFactory.createAuthorPasswordBean();
-		authorPassword.setPassword("myPassword");
-
-		return new RegisterAuthorRequest(author, authorPassword);
-	}
-
-	private String getAuthorString(Author author) {
-		return author.getAuthorId().getUserName();
-	}
-
-	private String getStackTrace(Exception e) {
-		StringWriter stringWriter = new StringWriter();
-		PrintWriter printWriter = new PrintWriter(stringWriter);
-		e.printStackTrace(printWriter);
-		return stringWriter.toString();
+	@Override
+	public String getTitle() {
+		return super.getTitle() + PAGE_TITLE;
 	}
 }
