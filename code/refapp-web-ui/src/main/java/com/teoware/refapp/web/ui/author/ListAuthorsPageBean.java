@@ -10,9 +10,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.teoware.refapp.model.author.Author;
-import com.teoware.refapp.service.ServiceException;
-import com.teoware.refapp.service.dto.ListAuthorsResponse;
 import com.teoware.refapp.web.consumer.AuthorServiceConsumer;
+import com.teoware.refapp.web.consumer.vo.AuthorListVO;
 import com.teoware.refapp.web.ui.AbstractPageBean;
 
 @Named("listAuthors")
@@ -30,9 +29,9 @@ public class ListAuthorsPageBean extends AbstractPageBean implements Serializabl
 	AuthorServiceConsumer serviceConsumer;
 
 	@SuppressWarnings("unused")
-	private void doLoadAuthorList() throws ServiceException {
-		ListAuthorsResponse response = serviceConsumer.listAuthors();
-		authorList = response.getAuthorList();
+	private void doLoadAuthorList() {
+		AuthorListVO vo = serviceConsumer.listAuthors();
+		authorList = vo.getAuthorList();
 		action = "Size: " + authorList.size();
 	}
 

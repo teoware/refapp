@@ -1,7 +1,9 @@
 package com.teoware.refapp.web.consumer;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 import java.text.ParseException;
@@ -17,8 +19,10 @@ import com.teoware.refapp.model.author.AuthorPassword;
 import com.teoware.refapp.service.AuthorServiceLocal;
 import com.teoware.refapp.service.ServiceException;
 import com.teoware.refapp.service.dto.RegisterAuthorRequest;
+import com.teoware.refapp.service.dto.RegisterAuthorResponse;
 import com.teoware.refapp.service.validation.ValidationException;
 import com.teoware.refapp.web.consumer.util.TestDataFactory;
+import com.teoware.refapp.web.consumer.vo.RegisterAuthorRequestVO;
 
 @Category(com.teoware.refapp.test.UnitTestGroup.class)
 public class AuthorServiceConsumerTest {
@@ -38,11 +42,14 @@ public class AuthorServiceConsumerTest {
 	public void testThatRegisterAuthorIsSuccessful() throws ParseException, ValidationException, ServiceException {
 		Author john = TestDataFactory.createAuthorJohn();
 		AuthorPassword johnPassword = TestDataFactory.createAuthorJohnPassword();
-		RegisterAuthorRequest request = new RegisterAuthorRequest(john, johnPassword);
+		RegisterAuthorRequestVO vo = new RegisterAuthorRequestVO(john, johnPassword);
 
-		authorServiceConsumer.registerAuthor(request);
+		when(authorService.registerAuthor(any(RegisterAuthorRequest.class))).thenReturn(
+				new RegisterAuthorResponse(null, null));
 
-		verify(authorService).registerAuthor(request);
+		authorServiceConsumer.registerAuthor(vo);
+
+		verify(authorService).registerAuthor(any(RegisterAuthorRequest.class));
 		verifyNoMoreInteractions(authorService);
 	}
 }

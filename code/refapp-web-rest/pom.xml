@@ -8,7 +8,7 @@
 	</parent>
 	
 	<artifactId>refapp-web-rest</artifactId>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<name>refapp-web-rest</name>
 	<description>REST service layer</description>
 	
@@ -30,6 +30,12 @@
 	
 	<!-- DEPENDENCIES -->
 	<dependencies>
+		<!-- Java EE -->
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+		</dependency>
+		
 		<!-- Testing -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -39,7 +45,17 @@
 		<!-- Project -->
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp-domain</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
 			<artifactId>refapp-common</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp-web-consumer</artifactId>
 		</dependency>
 	</dependencies>
 	
@@ -49,6 +65,11 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
 			</plugin>
 			
 			<plugin>

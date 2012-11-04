@@ -14,8 +14,8 @@ import com.teoware.refapp.model.author.AuthorPassword;
 import com.teoware.refapp.model.enums.AuthorStatus;
 import com.teoware.refapp.model.enums.Gender;
 import com.teoware.refapp.model.util.BeanFactory;
-import com.teoware.refapp.service.dto.RegisterAuthorRequest;
 import com.teoware.refapp.web.consumer.AuthorServiceConsumer;
+import com.teoware.refapp.web.consumer.vo.RegisterAuthorRequestVO;
 import com.teoware.refapp.web.ui.AbstractPageBean;
 
 @Named("registerAuthor")
@@ -39,15 +39,15 @@ public class RegisterAuthorPageBean extends AbstractPageBean implements Serializ
 
 	public void onClickRegisterButton() {
 		action = "onClickRegisterButton";
-		RegisterAuthorRequest req = createRegisterAuthorRequest();
+		RegisterAuthorRequestVO vo = createRegisterAuthorRequest();
 		try {
-			serviceConsumer.registerAuthor(req);
+			serviceConsumer.registerAuthor(vo);
 		} catch (Exception e) {
 			action = getStackTrace(e);
 		}
 	}
 
-	private RegisterAuthorRequest createRegisterAuthorRequest() {
+	private RegisterAuthorRequestVO createRegisterAuthorRequest() {
 		Author author = BeanFactory.createAuthorBean();
 
 		author.getAuthorId().setUserName(username);
@@ -70,7 +70,7 @@ public class RegisterAuthorPageBean extends AbstractPageBean implements Serializ
 		AuthorPassword authorPassword = BeanFactory.createAuthorPasswordBean();
 		authorPassword.setPassword("myPassword");
 
-		return new RegisterAuthorRequest(author, authorPassword);
+		return new RegisterAuthorRequestVO(author, authorPassword);
 	}
 
 	private String getStackTrace(Exception e) {

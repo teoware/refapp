@@ -45,6 +45,11 @@
 		<!-- Project -->
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp-domain</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
 			<artifactId>refapp-common</artifactId>
 		</dependency>
 		

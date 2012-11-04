@@ -65,17 +65,17 @@
 			<version>${project.version}</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.teoware.refapp</groupId> -->
-<!-- 			<artifactId>refapp-web-consumer</artifactId> -->
-<!-- 			<type>jar</type> -->
-<!-- 			<version>${project.version}</version>$NO-MVN-MAN-VER$ -->
-<!-- 		</dependency> -->
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp-web-consumer</artifactId>
+			<type>jar</type>
+			<version>${project.version}</version><!--$NO-MVN-MAN-VER$-->
+		</dependency>
 		
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
 			<artifactId>refapp-web-rest</artifactId>
-			<type>jar</type>
+			<type>war</type>
 			<version>${project.version}</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		
@@ -124,15 +124,15 @@
 							<artifactId>refapp-logic</artifactId>
 						</ejbModule>
 						
-<!-- 						<jarModule> -->
-<!-- 							<groupId>com.teoware.refapp</groupId> -->
-<!-- 							<artifactId>refapp-web-consumer</artifactId> -->
-<!-- 						</jarModule> -->
-						
 						<jarModule>
 							<groupId>com.teoware.refapp</groupId>
-							<artifactId>refapp-web-rest</artifactId>
+							<artifactId>refapp-web-consumer</artifactId>
 						</jarModule>
+						
+						<webModule>
+							<groupId>com.teoware.refapp</groupId>
+							<artifactId>refapp-web-rest</artifactId>
+						</webModule>
 						
 						<webModule>
 							<groupId>com.teoware.refapp</groupId>

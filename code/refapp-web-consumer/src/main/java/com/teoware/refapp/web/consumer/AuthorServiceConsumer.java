@@ -1,19 +1,16 @@
 package com.teoware.refapp.web.consumer;
 
-import com.teoware.refapp.service.ServiceException;
-import com.teoware.refapp.service.dto.FindAuthorRequest;
-import com.teoware.refapp.service.dto.FindAuthorResponse;
-import com.teoware.refapp.service.dto.ListAuthorsResponse;
-import com.teoware.refapp.service.dto.RegisterAuthorRequest;
-import com.teoware.refapp.service.dto.RegisterAuthorResponse;
-import com.teoware.refapp.service.validation.ValidationException;
+import com.teoware.refapp.web.consumer.vo.AuthorListVO;
+import com.teoware.refapp.web.consumer.vo.AuthorVO;
+import com.teoware.refapp.web.consumer.vo.FindAuthorRequestVO;
+import com.teoware.refapp.web.consumer.vo.RegisterAuthorRequestVO;
+import com.teoware.refapp.web.consumer.vo.RegisterAuthorResponseVO;
 
 public interface AuthorServiceConsumer {
 
-	public RegisterAuthorResponse registerAuthor(RegisterAuthorRequest request) throws ValidationException,
-			ServiceException;
+	public RegisterAuthorResponseVO registerAuthor(RegisterAuthorRequestVO vo);
 
-	public FindAuthorResponse findAuthor(FindAuthorRequest request) throws ValidationException, ServiceException;
+	public AuthorVO findAuthor(FindAuthorRequestVO vo);
 
-	public ListAuthorsResponse listAuthors() throws ServiceException;
+	public AuthorListVO listAuthors();
 }

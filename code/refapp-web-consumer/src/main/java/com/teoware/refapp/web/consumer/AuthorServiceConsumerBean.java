@@ -10,6 +10,13 @@ import com.teoware.refapp.service.dto.ListAuthorsResponse;
 import com.teoware.refapp.service.dto.RegisterAuthorRequest;
 import com.teoware.refapp.service.dto.RegisterAuthorResponse;
 import com.teoware.refapp.service.validation.ValidationException;
+import com.teoware.refapp.web.consumer.error.ErrorHandler;
+import com.teoware.refapp.web.consumer.error.ValidationHandler;
+import com.teoware.refapp.web.consumer.vo.AuthorListVO;
+import com.teoware.refapp.web.consumer.vo.AuthorVO;
+import com.teoware.refapp.web.consumer.vo.FindAuthorRequestVO;
+import com.teoware.refapp.web.consumer.vo.RegisterAuthorRequestVO;
+import com.teoware.refapp.web.consumer.vo.RegisterAuthorResponseVO;
 
 public class AuthorServiceConsumerBean implements AuthorServiceConsumer {
 
@@ -17,18 +24,41 @@ public class AuthorServiceConsumerBean implements AuthorServiceConsumer {
 	private AuthorService authorService;
 
 	@Override
-	public RegisterAuthorResponse registerAuthor(RegisterAuthorRequest request) throws ValidationException,
-			ServiceException {
-		return authorService.registerAuthor(request);
+	public RegisterAuthorResponseVO registerAuthor(RegisterAuthorRequestVO vo) {
+		try {
+			RegisterAuthorRequest request = new RegisterAuthorRequest(vo.getAuthor(), vo.getAuthorPassword());
+			RegisterAuthorResponse response = authorService.registerAuthor(request);
+			return new RegisterAuthorResponseVO(response.getBody());
+		} catch (ValidationException e) {
+			ValidationHandler.handle(e);
+		} catch (ServiceException e) {
+			ErrorHandler.handle(e);
+		}
+		return null;
 	}
 
 	@Override
-	public FindAuthorResponse findAuthor(FindAuthorRequest request) throws ValidationException, ServiceException {
-		return authorService.findAuthor(request);
+	public AuthorVO findAuthor(FindAuthorRequestVO vo) {
+		try {
+			FindAuthorRequest request = new FindAuthorRequest();
+			FindAuthorResponse response = authorService.findAuthor(request);
+			return new AuthorVO(response.getBody());
+		} catch (ValidationException e) {
+			ValidationHandler.handle(e);
+		} catch (ServiceException e) {
+			ErrorHandler.handle(e);
+		}
+		return null;
 	}
 
 	@Override
-	public ListAuthorsResponse listAuthors() throws ServiceException {
-		return authorService.listAuthors();
+	public AuthorListVO listAuthors() {
+		try {
+			ListAuthorsResponse response = authorService.listAuthors();
+			return new AuthorListVO(response.getAuthorList());
+		} catch (ServiceException e) {
+			ErrorHandler.handle(e);
+		}
+		return null;
 	}
 }
