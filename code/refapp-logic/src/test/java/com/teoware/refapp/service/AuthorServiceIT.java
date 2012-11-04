@@ -5,7 +5,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
-public class AuthorServiceITest {
+public class AuthorServiceIT {
 
 	//private InitialContext context;
 	

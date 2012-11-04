@@ -27,7 +27,7 @@ import com.teoware.refapp.model.enums.AuthorStatus;
 import com.teoware.refapp.util.PasswordHandler;
 
 @Category(com.teoware.refapp.test.IntegrationTestGroup.class)
-public class AuthorDaoITest extends AuthorDaoTestHelper {
+public class AuthorDaoIT extends AuthorDaoTestHelper {
 
 	private static Connection connection;
 	private static AuthorDaoMock authorDao;

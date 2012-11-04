@@ -5,7 +5,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
-public class AuthorServiceConsumerITest {
+public class AuthorServiceConsumerIT {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
