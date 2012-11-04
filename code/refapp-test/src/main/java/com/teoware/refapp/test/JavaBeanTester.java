@@ -102,7 +102,7 @@ public class JavaBeanTester {
 
 		else {
 
-			final Object mockObjekt = lagMockType(clazz);
+			final Object mockObjekt = createMockType(clazz);
 
 			if (mockObjekt != null) {
 				return mockObjekt;
@@ -122,7 +122,7 @@ public class JavaBeanTester {
 		}
 	}
 
-	private static Object lagMockType(Class<?> clazz) {
+	private static Object createMockType(Class<?> clazz) {
 		if (!Modifier.isFinal(clazz.getModifiers())) {
 			return Mockito.mock(clazz);
 		} else {

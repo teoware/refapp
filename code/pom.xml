@@ -348,13 +348,6 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>${version.maven-surefire-plugin}</version>
-					<configuration>
-						<excludes>
-							<exclude>**/com/teoware/refapp/**/*SysTest.java</exclude>
-							<exclude>**/com/teoware/refapp/**/systest/*.java</exclude>
-						</excludes>
-<!-- 						<excludedGroups>com.teoware.refapp.test.SystemTestGroup</excludedGroups> -->
-					</configuration>
 					<executions>
 						<execution>
 							<id>unit-tests</id>
@@ -363,34 +356,11 @@
 								<goal>test</goal>
 							</goals>
 							<configuration>
-								<excludes>
-									<exclude>**/com/teoware/refapp/**/*ITest.java</exclude>
-									<exclude>**/com/teoware/refapp/**/itest/*.java</exclude>
-								</excludes>
 								<includes>                  
 									<include>**/com/teoware/refapp/**/*Test.java</include>
 									<include>**/com/teoware/refapp/**/test/*.java</include>
 								</includes>
 <!-- 								<groups>com.teoware.refapp.test.UnitTestGroup</groups> -->
-							</configuration>
-						</execution>
-						<execution>
-							<id>integration-tests</id>
-							<phase>integration-test</phase>
-							<goals>
-								<goal>test</goal>
-							</goals>
-							<configuration>
-								<excludes>
-									<exclude>**/com/teoware/refapp/**/*Test.java</exclude>
-									<exclude>**/com/teoware/refapp/**/test/*.java</exclude>
-								</excludes>
-								<includes>                  
-									<include>**/com/teoware/refapp/**/*ITest.java</include>
-									<include>**/com/teoware/refapp/**/itest/*.java</include>
-								</includes>
-<!-- 								<groups>com.teoware.refapp.test.IntegrationTestGroup</groups> -->
-								<skip>${skip.intergration.test}</skip>
 							</configuration>
 						</execution>
 					</executions>
@@ -406,6 +376,13 @@
 								<goal>integration-test</goal>
 								<goal>verify</goal>
 							</goals>
+							<configuration>
+								<includes>                  
+									<include>**/com/teoware/refapp/**/*IT.java</include>
+									<include>**/com/teoware/refapp/**/itest/*.java</include>
+								</includes>
+<!-- 								<groups>com.teoware.refapp.test.IntegrationTestGroup</groups> -->
+							</configuration>
 						</execution>
 					</executions>
 				</plugin>
