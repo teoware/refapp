@@ -24,9 +24,10 @@ import com.teoware.refapp.dao.test.TestDataSourceHandler;
 import com.teoware.refapp.model.author.Author;
 import com.teoware.refapp.model.author.AuthorPassword;
 import com.teoware.refapp.model.enums.AuthorStatus;
+import com.teoware.refapp.test.SystemTestGroup;
 import com.teoware.refapp.util.PasswordHandler;
 
-@Category(com.teoware.refapp.test.SystemTestGroup.class)
+@Category(SystemTestGroup.class)
 public class AuthorDaoSysTest extends AuthorDaoTestHelper {
 
 	private static Connection connection;
