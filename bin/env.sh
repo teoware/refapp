@@ -19,7 +19,7 @@ DOMAIN="teoware"
 ASADMIN_CMD="${ASADMIN_HOME}/bin/asadmin --user ${ASADMIN_USER} --passwordfile ${ASADMIN_PASSWORD_FILE}"
 
 JDBC_XML_FILE="${FILE_PATH}/JDBCResource.xml"
-CONNECTION_POOL_NAME="jdbc/refapp-pool"
+CONNECTION_POOL_NAME="RefappDerbyPool"
 
 EAR_FILE="${FILE_PATH}/../code/refapp-ear/target/refapp-ear-0.0.1-SNAPSHOT.ear"
 APP_NAME="refapp"

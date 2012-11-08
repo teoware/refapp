@@ -17,7 +17,7 @@ set DOMAIN="teoware"
 set ASADMIN_CMD=%ASADMIN_HOME%\bin\asadmin --user %ASADMIN_USER% --passwordfile %ASADMIN_PASSWORD_FILE%
 
 set JDBC_XML_FILE="%FILE_PATH%JDBCResource.xml"
-set CONNECTION_POOL_NAME="jdbc/refapp-pool"
+set CONNECTION_POOL_NAME="RefappDerbyPool"
 
 set EAR_FILE="%FILE_PATH%..\code\refapp-ear\target\refapp-ear-0.0.1-SNAPSHOT.ear"
 set APP_NAME="refapp"
