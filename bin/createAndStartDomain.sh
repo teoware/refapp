@@ -2,6 +2,6 @@
 
 FILE_PATH="$(dirname "$(readlink -f ${BASH_SOURCE[0]})")"
 
-${FILE_PATH}/createDomain.cmd
+${FILE_PATH}/createDomain.sh
 
-${FILE_PATH}/startDomain.cmd
+${FILE_PATH}/startDomain.sh

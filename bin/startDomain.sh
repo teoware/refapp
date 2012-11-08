@@ -4,6 +4,6 @@ FILE_PATH="$(dirname "$(readlink -f ${BASH_SOURCE[0]})")"
 
 . ${FILE_PATH}/env.sh
 
-${ASADMIN_CMD} start-database
+bash -c "${ASADMIN_CMD} start-database"
 
-${ASADMIN_CMD} start-domain ${DOMAIN}
+bash -c "${ASADMIN_CMD} start-domain ${DOMAIN}"

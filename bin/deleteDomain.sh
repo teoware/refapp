@@ -4,4 +4,4 @@ FILE_PATH="$(dirname "$(readlink -f ${BASH_SOURCE[0]})")"
 
 . ${FILE_PATH}/env.sh
 
-${ASADMIN_CMD} delete-domain ${DOMAIN}
+bash -c "${ASADMIN_CMD} delete-domain ${DOMAIN}"
