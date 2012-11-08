@@ -2,6 +2,6 @@
 
 FILE_PATH="$(dirname "$(readlink -f ${BASH_SOURCE[0]})")"
 
-${FILE_PATH}/env.sh
+. ${FILE_PATH}/env.sh
 
-${ASADMIN_CMD} create-domain --savemasterpassword true ${DOMAIN}
+bash -c "${ASADMIN_CMD} create-domain --savemasterpassword true ${DOMAIN}"
