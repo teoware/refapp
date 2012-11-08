@@ -13,7 +13,7 @@ fi
 FILE_PATH="$(dirname "$(readlink -f ${BASH_SOURCE[0]})")"
 
 ASADMIN_USER="admin"
-ASADMIN_PASSWORD_FILE="%FILE_PATH%/.asadmintruststore"
+ASADMIN_PASSWORD_FILE="${FILE_PATH}/.asadmintruststore"
 
 DOMAIN="teoware"
 ASADMIN_CMD="${ASADMIN_HOME}/bin/asadmin --user ${ASADMIN_USER} --passwordfile ${ASADMIN_PASSWORD_FILE}"
