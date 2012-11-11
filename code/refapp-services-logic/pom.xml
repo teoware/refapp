@@ -7,10 +7,10 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>refapp-test</artifactId>
-	<packaging>jar</packaging>
-	<name>refapp-test</name>
-	<description>Module for more complex integration and system tests</description>
+	<artifactId>refapp-services-logic</artifactId>
+	<packaging>ejb</packaging>
+	<name>refapp-services-logic</name>
+	<description>Business logic service layer</description>
 	
 	<!-- PROPERTIES -->
 	<properties>
@@ -30,6 +30,33 @@
 	
 	<!-- DEPENDENCIES -->
 	<dependencies>
+		<!-- Java EE -->
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-jpa_2.0_spec</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-validation_1.0_spec</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+		</dependency>
+		
+		<!-- Logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+		
 		<!-- Testing -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -54,6 +81,11 @@
 		
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp-services-facade</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
 			<artifactId>refapp-infrastructure-dao</artifactId>
 		</dependency>
 	</dependencies>
@@ -68,12 +100,17 @@
 			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
+				<artifactId>maven-ejb-plugin</artifactId>
 			</plugin>
 			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>

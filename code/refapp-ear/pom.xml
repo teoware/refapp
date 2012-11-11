@@ -46,42 +46,42 @@
 		
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-dao</artifactId>
+			<artifactId>refapp-infrastructure-dao</artifactId>
 			<type>ejb</type>
 			<version>${project.version}</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-logic-facade</artifactId>
+			<artifactId>refapp-services-facade</artifactId>
 			<type>jar</type>
 			<version>${project.version}</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-logic</artifactId>
+			<artifactId>refapp-services-logic</artifactId>
 			<type>ejb</type>
 			<version>${project.version}</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-web-consumer</artifactId>
+			<artifactId>refapp-interfaces-consumer</artifactId>
 			<type>jar</type>
 			<version>${project.version}</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-web-rest</artifactId>
+			<artifactId>refapp-interfaces-rest</artifactId>
 			<type>war</type>
 			<version>${project.version}</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-web-ui</artifactId>
+			<artifactId>refapp-interfaces-webui</artifactId>
 			<type>war</type>
 			<version>${project.version}</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
@@ -111,32 +111,32 @@
 						
 						<ejbModule>
 							<groupId>com.teoware.refapp</groupId>
-							<artifactId>refapp-dao</artifactId>
+							<artifactId>refapp-infrastructure-dao</artifactId>
 						</ejbModule>
 						
 						<jarModule>
 							<groupId>com.teoware.refapp</groupId>
-							<artifactId>refapp-logic-facade</artifactId>
+							<artifactId>refapp-services-facade</artifactId>
 						</jarModule>
 						
 						<ejbModule>
 							<groupId>com.teoware.refapp</groupId>
-							<artifactId>refapp-logic</artifactId>
+							<artifactId>refapp-services-logic</artifactId>
 						</ejbModule>
 						
 						<jarModule>
 							<groupId>com.teoware.refapp</groupId>
-							<artifactId>refapp-web-consumer</artifactId>
+							<artifactId>refapp-interfaces-consumer</artifactId>
 						</jarModule>
 						
 						<webModule>
 							<groupId>com.teoware.refapp</groupId>
-							<artifactId>refapp-web-rest</artifactId>
+							<artifactId>refapp-interfaces-rest</artifactId>
 						</webModule>
 						
 						<webModule>
 							<groupId>com.teoware.refapp</groupId>
-							<artifactId>refapp-web-ui</artifactId>
+							<artifactId>refapp-interfaces-webui</artifactId>
 						</webModule>
 					</modules>
 				</configuration>

@@ -68,12 +68,12 @@
 	<modules>
 		<module>refapp-domain</module>
 		<module>refapp-common</module>
-		<module>refapp-dao</module>
-		<module>refapp-logic-facade</module>
-		<module>refapp-logic</module>
-		<module>refapp-web-consumer</module>
-		<module>refapp-web-rest</module>
-		<module>refapp-web-ui</module>
+		<module>refapp-infrastructure-dao</module>
+		<module>refapp-services-facade</module>
+		<module>refapp-services-logic</module>
+		<module>refapp-interfaces-consumer</module>
+		<module>refapp-interfaces-rest</module>
+		<module>refapp-interfaces-webui</module>
 		<module>refapp-ear</module>
 	</modules>
 	
@@ -222,42 +222,42 @@
 			
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp-dao</artifactId>
+				<artifactId>refapp-infrastructure-dao</artifactId>
 				<version>${project.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp-logic-facade</artifactId>
+				<artifactId>refapp-services-facade</artifactId>
 				<version>${project.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp-logic</artifactId>
+				<artifactId>refapp-services-logic</artifactId>
 				<version>${project.version}</version>
 				<scope>provided</scope>
 			</dependency>
 						
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp-web-consumer</artifactId>
+				<artifactId>refapp-interfaces-consumer</artifactId>
 				<version>${project.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp-web-ui</artifactId>
+				<artifactId>refapp-interfaces-webui</artifactId>
 				<version>${project.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp-web-rest</artifactId>
+				<artifactId>refapp-interfaces-rest</artifactId>
 				<version>${project.version}</version>
 				<scope>provided</scope>
 			</dependency>
