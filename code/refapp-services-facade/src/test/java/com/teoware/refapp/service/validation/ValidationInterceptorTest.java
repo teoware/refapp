@@ -1,4 +1,4 @@
-package com.teoware.refapp.service.interceptor;
+package com.teoware.refapp.service.validation;
 
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.when;
@@ -15,6 +15,7 @@ import org.mockito.Mock;
 
 import com.teoware.refapp.service.ServiceException;
 import com.teoware.refapp.service.validation.Validate;
+import com.teoware.refapp.service.validation.ValidationInterceptor;
 import com.teoware.refapp.service.validation.group.ValidationGroup;
 import com.teoware.refapp.service.validation.util.ServiceFacade;
 

@@ -14,7 +14,6 @@ import org.junit.Test;
 
 import com.teoware.refapp.service.ServiceException;
 import com.teoware.refapp.service.validation.group.ValidationGroup;
-import com.teoware.refapp.service.validation.util.ValidationUtils;
 
 public class ValidationUtilsTest {
 

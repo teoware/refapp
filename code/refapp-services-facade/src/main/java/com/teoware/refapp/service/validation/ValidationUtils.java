@@ -1,4 +1,4 @@
-package com.teoware.refapp.service.validation.util;
+package com.teoware.refapp.service.validation;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,10 +8,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-import com.teoware.refapp.dao.DaoException;
 import com.teoware.refapp.service.ServiceException;
-import com.teoware.refapp.service.validation.InternalValidationException;
-import com.teoware.refapp.service.validation.ValidationException;
 import com.teoware.refapp.service.validation.group.ValidationGroup;
 
 public class ValidationUtils {
@@ -41,9 +38,7 @@ public class ValidationUtils {
 			Exception ex = (Exception) e.getCause();
 			ex.printStackTrace(); // additional logging of error
 
-			if (ex instanceof DaoException) {
-				throw new ServiceException("DAO error", ex);
-			} else if (ex instanceof ServiceException) {
+			if (ex instanceof ServiceException) {
 				throw (ServiceException) ex;
 			} else if (ex instanceof RuntimeException) {
 				throw (RuntimeException) ex;

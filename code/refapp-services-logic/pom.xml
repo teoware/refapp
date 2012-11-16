@@ -81,11 +81,6 @@
 		
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-services-facade</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.teoware.refapp</groupId>
 			<artifactId>refapp-infrastructure-dao</artifactId>
 		</dependency>
 	</dependencies>

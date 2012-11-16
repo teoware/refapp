@@ -16,8 +16,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.teoware.refapp.service.dto.RegisterAuthorRequest;
+import com.teoware.refapp.service.testtools.TestHelper;
 import com.teoware.refapp.service.util.ServiceBeanFactory;
-import com.teoware.refapp.service.util.TestHelper;
 
 public class RegisterAuthorRequestValidationConstraintsTest {
 

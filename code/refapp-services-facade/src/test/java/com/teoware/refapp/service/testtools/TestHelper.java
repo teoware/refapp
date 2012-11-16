@@ -1,17 +1,19 @@
-package com.teoware.refapp.service.util;
+package com.teoware.refapp.service.testtools;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.teoware.refapp.model.author.Author;
+import com.teoware.refapp.model.author.AuthorPassword;
 import com.teoware.refapp.model.enums.Gender;
+import com.teoware.refapp.model.util.BeanFactory;
 import com.teoware.refapp.service.dto.RegisterAuthorRequest;
-import com.teoware.refapp.service.util.ServiceBeanFactory;
 
 public class TestHelper {
 
 	public static RegisterAuthorRequest populateRegisterAuthorRequest() {
-		return populateRegisterAuthorRequest(ServiceBeanFactory.createRegisterAuthorRequestBean());
+		return populateRegisterAuthorRequest(createRegisterAuthorRequestBean());
 	}
 
 	public static RegisterAuthorRequest populateRegisterAuthorRequest(RegisterAuthorRequest request) {
@@ -36,6 +38,12 @@ public class TestHelper {
 			}
 		}
 		return request;
+	}
+
+	public static RegisterAuthorRequest createRegisterAuthorRequestBean() {
+		Author author = BeanFactory.createAuthorBean();
+		AuthorPassword authorPassword = BeanFactory.createAuthorPasswordBean();
+		return new RegisterAuthorRequest(author, authorPassword);
 	}
 
 	public static Date createDate(String dateString) {

@@ -1,4 +1,4 @@
-package com.teoware.refapp.service.interceptor;
+package com.teoware.refapp.service.validation;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -17,11 +17,9 @@ import org.slf4j.LoggerFactory;
 
 import com.teoware.refapp.service.ServiceException;
 import com.teoware.refapp.service.validation.Validate;
-import com.teoware.refapp.service.validation.ValidationException;
 import com.teoware.refapp.service.validation.group.ValidationGroup;
 import com.teoware.refapp.service.validation.util.ServiceFacade;
 import com.teoware.refapp.service.validation.util.ServiceFacadeHolder;
-import com.teoware.refapp.service.validation.util.ValidationUtils;
 
 /**
  * EJB 3 Interceptor to validate method parameters which is marked with {@link Validate}. Calls {@link ValidationUtils}

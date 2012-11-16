@@ -21,8 +21,7 @@ import com.teoware.refapp.model.common.OperationResult;
 import com.teoware.refapp.model.enums.Result;
 import com.teoware.refapp.service.dto.RegisterAuthorRequest;
 import com.teoware.refapp.service.dto.RegisterAuthorResponse;
-import com.teoware.refapp.service.util.TestHelper;
-import com.teoware.refapp.service.validation.ValidationException;
+import com.teoware.refapp.service.testtools.TestHelper;
 
 @Category(com.teoware.refapp.test.UnitTestGroup.class)
 public class AuthorServiceRegisterAuthorTest {
@@ -97,7 +96,7 @@ public class AuthorServiceRegisterAuthorTest {
 	}
 
 	@Test(expected = ServiceException.class)
-	public void testRegisterAuthorThrowsServiceException() throws DaoException, ValidationException, ServiceException {
+	public void testRegisterAuthorThrowsServiceException() throws DaoException, ServiceException {
 		when(authorDao.insertAuthor(Mockito.any(InsertAuthorRequest.class))).thenThrow(new DaoException());
 
 		authorService.registerAuthor(request);
