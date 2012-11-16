@@ -10,5 +10,5 @@ import com.teoware.refapp.service.dto.CreateTaskResponse;
 @Local
 public interface TaskService extends Serializable {
 
-	public CreateTaskResponse createTask(CreateTaskRequest createTaskRequest);
+	public CreateTaskResponse createTask(CreateTaskRequest request);
 }

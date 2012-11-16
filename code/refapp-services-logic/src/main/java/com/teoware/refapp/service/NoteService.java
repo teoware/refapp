@@ -10,5 +10,5 @@ import com.teoware.refapp.service.dto.CreateNoteResponse;
 @Local
 public interface NoteService extends Serializable {
 
-	public CreateNoteResponse createNote(CreateNoteRequest createNoteRequest);
+	public CreateNoteResponse createNote(CreateNoteRequest request);
 }
