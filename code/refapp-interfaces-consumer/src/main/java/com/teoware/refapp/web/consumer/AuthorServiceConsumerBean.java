@@ -2,13 +2,13 @@ package com.teoware.refapp.web.consumer;
 
 import javax.ejb.EJB;
 
-import com.teoware.refapp.service.AuthorService;
 import com.teoware.refapp.service.ServiceException;
 import com.teoware.refapp.service.dto.FindAuthorRequest;
 import com.teoware.refapp.service.dto.FindAuthorResponse;
 import com.teoware.refapp.service.dto.ListAuthorsResponse;
 import com.teoware.refapp.service.dto.RegisterAuthorRequest;
 import com.teoware.refapp.service.dto.RegisterAuthorResponse;
+import com.teoware.refapp.service.facade.AuthorServiceFacade;
 import com.teoware.refapp.service.validation.ValidationException;
 import com.teoware.refapp.web.consumer.error.ErrorHandler;
 import com.teoware.refapp.web.consumer.error.ValidationHandler;
@@ -21,13 +21,13 @@ import com.teoware.refapp.web.consumer.vo.RegisterAuthorResponseVO;
 public class AuthorServiceConsumerBean implements AuthorServiceConsumer {
 
 	@EJB
-	private AuthorService authorService;
+	private AuthorServiceFacade authorServiceFacade;
 
 	@Override
 	public RegisterAuthorResponseVO registerAuthor(RegisterAuthorRequestVO vo) {
 		try {
 			RegisterAuthorRequest request = new RegisterAuthorRequest(vo.getAuthor(), vo.getAuthorPassword());
-			RegisterAuthorResponse response = authorService.registerAuthor(request);
+			RegisterAuthorResponse response = authorServiceFacade.registerAuthor(request);
 			return new RegisterAuthorResponseVO(response.getBody());
 		} catch (ValidationException e) {
 			ValidationHandler.handle(e);
@@ -41,7 +41,7 @@ public class AuthorServiceConsumerBean implements AuthorServiceConsumer {
 	public AuthorVO findAuthor(FindAuthorRequestVO vo) {
 		try {
 			FindAuthorRequest request = new FindAuthorRequest();
-			FindAuthorResponse response = authorService.findAuthor(request);
+			FindAuthorResponse response = authorServiceFacade.findAuthor(request);
 			return new AuthorVO(response.getBody());
 		} catch (ValidationException e) {
 			ValidationHandler.handle(e);
@@ -54,7 +54,7 @@ public class AuthorServiceConsumerBean implements AuthorServiceConsumer {
 	@Override
 	public AuthorListVO listAuthors() {
 		try {
-			ListAuthorsResponse response = authorService.listAuthors();
+			ListAuthorsResponse response = authorServiceFacade.listAuthors();
 			return new AuthorListVO(response.getAuthorList());
 		} catch (ServiceException e) {
 			ErrorHandler.handle(e);

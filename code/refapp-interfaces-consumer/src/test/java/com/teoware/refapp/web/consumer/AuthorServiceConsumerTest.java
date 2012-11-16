@@ -16,10 +16,10 @@ import org.mockito.Mock;
 
 import com.teoware.refapp.model.author.Author;
 import com.teoware.refapp.model.author.AuthorPassword;
-import com.teoware.refapp.service.AuthorServiceLocal;
 import com.teoware.refapp.service.ServiceException;
 import com.teoware.refapp.service.dto.RegisterAuthorRequest;
 import com.teoware.refapp.service.dto.RegisterAuthorResponse;
+import com.teoware.refapp.service.facade.AuthorServiceFacade;
 import com.teoware.refapp.service.validation.ValidationException;
 import com.teoware.refapp.web.consumer.util.TestDataFactory;
 import com.teoware.refapp.web.consumer.vo.RegisterAuthorRequestVO;
@@ -31,7 +31,7 @@ public class AuthorServiceConsumerTest {
 	private AuthorServiceConsumer authorServiceConsumer = new AuthorServiceConsumerBean();
 
 	@Mock
-	private AuthorServiceLocal authorService;
+	private AuthorServiceFacade authorServiceFacade;
 
 	@Before
 	public void setUp() throws Exception {
@@ -44,12 +44,12 @@ public class AuthorServiceConsumerTest {
 		AuthorPassword johnPassword = TestDataFactory.createAuthorJohnPassword();
 		RegisterAuthorRequestVO vo = new RegisterAuthorRequestVO(john, johnPassword);
 
-		when(authorService.registerAuthor(any(RegisterAuthorRequest.class))).thenReturn(
+		when(authorServiceFacade.registerAuthor(any(RegisterAuthorRequest.class))).thenReturn(
 				new RegisterAuthorResponse(null, null));
 
 		authorServiceConsumer.registerAuthor(vo);
 
-		verify(authorService).registerAuthor(any(RegisterAuthorRequest.class));
-		verifyNoMoreInteractions(authorService);
+		verify(authorServiceFacade).registerAuthor(any(RegisterAuthorRequest.class));
+		verifyNoMoreInteractions(authorServiceFacade);
 	}
 }

@@ -62,11 +62,6 @@
 			<groupId>com.teoware.refapp</groupId>
 			<artifactId>refapp-services-facade</artifactId>
 		</dependency>
-		
-		<dependency>
-			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-services-logic</artifactId>
-		</dependency>
 	</dependencies>
 	
 	<!-- MAVEN PLUGINS -->
