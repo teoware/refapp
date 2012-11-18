@@ -2,14 +2,16 @@
 
 set FILE_PATH=%~dp0
 
-call %FILE_PATH%createDomain.cmd
+call %FILE_PATH%buildApplication.cmd
 if not (%ERRORLEVEL%)==(0) goto ERROR
 
-call %FILE_PATH%startDomain.cmd
+call %FILE_PATH%deployApplication.cmd
 if not (%ERRORLEVEL%)==(0) goto ERROR
+
+goto SUCCESS
 
 :ERROR
 exit /B 1
 
-:EOF
+:SUCCESS
 exit /B 0
