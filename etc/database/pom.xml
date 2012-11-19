@@ -95,7 +95,7 @@
 									<pluginExecutionFilter>
 										<groupId>org.codehaus.mojo</groupId>
 										<artifactId>sql-maven-plugin</artifactId>
-										<versionRange>[1.4,)</versionRange>
+										<versionRange>[${version.sql-maven-plugin},)</versionRange>
 										<goals>
 											<goal>execute</goal>
 										</goals>

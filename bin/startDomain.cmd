@@ -9,7 +9,7 @@ set RETURNVALUE=%ERRORLEVEL%
 set ERROR_MSG=Failed to load env variables
 if not (%RETURNVALUE%)==(0) goto ERROR
 
-call %ASADMIN_CMD% start-database > %ERROR_LOG% 2>&1
+call %ASADMIN_CMD% start-database > nul 2>&1
 set RETURNVALUE=%ERRORLEVEL%
 set ERROR_MSG=Failed to start database
 if not (%RETURNVALUE%)==(0) goto ERROR

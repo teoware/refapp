@@ -31,47 +31,47 @@
 	
 	<!-- DEPENDENCIES -->
 	<dependencies>
-		<dependency>
-			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-domain</artifactId>
-			<type>jar</type>
-			<version>${project.version}</version><!--$NO-MVN-MAN-VER$-->
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.teoware.refapp</groupId> -->
+<!-- 			<artifactId>refapp-domain</artifactId> -->
+<!-- 			<type>jar</type> -->
+<!-- 			<version>${project.version}</version>$NO-MVN-MAN-VER$ -->
+<!-- 		</dependency> -->
 		
-		<dependency>
-			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-common</artifactId>
-			<type>jar</type>
-			<version>${project.version}</version><!--$NO-MVN-MAN-VER$-->
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.teoware.refapp</groupId> -->
+<!-- 			<artifactId>refapp-common</artifactId> -->
+<!-- 			<type>jar</type> -->
+<!-- 			<version>${project.version}</version>$NO-MVN-MAN-VER$ -->
+<!-- 		</dependency> -->
 		
-		<dependency>
-			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-infrastructure-dao</artifactId>
-			<type>ejb</type>
-			<version>${project.version}</version><!--$NO-MVN-MAN-VER$-->
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.teoware.refapp</groupId> -->
+<!-- 			<artifactId>refapp-infrastructure-dao</artifactId> -->
+<!-- 			<type>ejb</type> -->
+<!-- 			<version>${project.version}</version>$NO-MVN-MAN-VER$ -->
+<!-- 		</dependency> -->
 		
-		<dependency>
-			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-services-facade</artifactId>
-			<type>ejb</type>
-			<version>${project.version}</version><!--$NO-MVN-MAN-VER$-->
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.teoware.refapp</groupId> -->
+<!-- 			<artifactId>refapp-services-facade</artifactId> -->
+<!-- 			<type>ejb</type> -->
+<!-- 			<version>${project.version}</version>$NO-MVN-MAN-VER$ -->
+<!-- 		</dependency> -->
 		
-		<dependency>
-			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-services-logic</artifactId>
-			<type>ejb</type>
-			<version>${project.version}</version><!--$NO-MVN-MAN-VER$-->
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.teoware.refapp</groupId> -->
+<!-- 			<artifactId>refapp-services-logic</artifactId> -->
+<!-- 			<type>ejb</type> -->
+<!-- 			<version>${project.version}</version>$NO-MVN-MAN-VER$ -->
+<!-- 		</dependency> -->
 		
-		<dependency>
-			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-interfaces-consumer</artifactId>
-			<type>jar</type>
-			<version>${project.version}</version><!--$NO-MVN-MAN-VER$-->
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.teoware.refapp</groupId> -->
+<!-- 			<artifactId>refapp-interfaces-consumer</artifactId> -->
+<!-- 			<type>jar</type> -->
+<!-- 			<version>${project.version}</version>$NO-MVN-MAN-VER$ -->
+<!-- 		</dependency> -->
 		
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
@@ -100,41 +100,41 @@
 				<artifactId>maven-ear-plugin</artifactId>
 				<configuration>
 					<modules>
-						<jarModule>
-							<groupId>com.teoware.refapp</groupId>
-							<artifactId>refapp-domain</artifactId>
-							<unpack>${explode.ear.modules}</unpack>
-						</jarModule>
+<!-- 						<jarModule> -->
+<!-- 							<groupId>com.teoware.refapp</groupId> -->
+<!-- 							<artifactId>refapp-domain</artifactId> -->
+<!-- 							<unpack>${explode.ear.modules}</unpack> -->
+<!-- 						</jarModule> -->
 						
-						<jarModule>
-							<groupId>com.teoware.refapp</groupId>
-							<artifactId>refapp-common</artifactId>
-							<unpack>${explode.ear.modules}</unpack>
-						</jarModule>
+<!-- 						<jarModule> -->
+<!-- 							<groupId>com.teoware.refapp</groupId> -->
+<!-- 							<artifactId>refapp-common</artifactId> -->
+<!-- 							<unpack>${explode.ear.modules}</unpack> -->
+<!-- 						</jarModule> -->
 						
-						<ejbModule>
-							<groupId>com.teoware.refapp</groupId>
-							<artifactId>refapp-infrastructure-dao</artifactId>
-							<unpack>${explode.ear.modules}</unpack>
-						</ejbModule>
+<!-- 						<ejbModule> -->
+<!-- 							<groupId>com.teoware.refapp</groupId> -->
+<!-- 							<artifactId>refapp-infrastructure-dao</artifactId> -->
+<!-- 							<unpack>${explode.ear.modules}</unpack> -->
+<!-- 						</ejbModule> -->
 						
-						<ejbModule>
-							<groupId>com.teoware.refapp</groupId>
-							<artifactId>refapp-services-facade</artifactId>
-							<unpack>${explode.ear.modules}</unpack>
-						</ejbModule>
+<!-- 						<ejbModule> -->
+<!-- 							<groupId>com.teoware.refapp</groupId> -->
+<!-- 							<artifactId>refapp-services-facade</artifactId> -->
+<!-- 							<unpack>${explode.ear.modules}</unpack> -->
+<!-- 						</ejbModule> -->
 						
-						<ejbModule>
-							<groupId>com.teoware.refapp</groupId>
-							<artifactId>refapp-services-logic</artifactId>
-							<unpack>${explode.ear.modules}</unpack>
-						</ejbModule>
+<!-- 						<ejbModule> -->
+<!-- 							<groupId>com.teoware.refapp</groupId> -->
+<!-- 							<artifactId>refapp-services-logic</artifactId> -->
+<!-- 							<unpack>${explode.ear.modules}</unpack> -->
+<!-- 						</ejbModule> -->
 						
-						<jarModule>
-							<groupId>com.teoware.refapp</groupId>
-							<artifactId>refapp-interfaces-consumer</artifactId>
-							<unpack>${explode.ear.modules}</unpack>
-						</jarModule>
+<!-- 						<jarModule> -->
+<!-- 							<groupId>com.teoware.refapp</groupId> -->
+<!-- 							<artifactId>refapp-interfaces-consumer</artifactId> -->
+<!-- 							<unpack>${explode.ear.modules}</unpack> -->
+<!-- 						</jarModule> -->
 						
 						<webModule>
 							<groupId>com.teoware.refapp</groupId>

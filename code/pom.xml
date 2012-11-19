@@ -72,9 +72,9 @@
 		<module>refapp-services-facade</module>
 		<module>refapp-services-logic</module>
 		<module>refapp-interfaces-consumer</module>
-		<module>refapp-interfaces-rest</module>
+<!-- 		<module>refapp-interfaces-rest</module> -->
 		<module>refapp-interfaces-webui</module>
-		<module>refapp-ear</module>
+<!-- 		<module>refapp-ear</module> -->
 	</modules>
 	
 	<!-- REPOSITORIES -->
@@ -210,56 +210,56 @@
 				<groupId>com.teoware.refapp</groupId>
 				<artifactId>refapp-domain</artifactId>
 				<version>${project.version}</version>
-				<scope>provided</scope>
+<!-- 				<scope>provided</scope> -->
 			</dependency>
 			
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
 				<artifactId>refapp-common</artifactId>
 				<version>${project.version}</version>
-				<scope>provided</scope>
+<!-- 				<scope>provided</scope> -->
 			</dependency>
 			
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
 				<artifactId>refapp-infrastructure-dao</artifactId>
 				<version>${project.version}</version>
-				<scope>provided</scope>
+<!-- 				<scope>provided</scope> -->
 			</dependency>
 			
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
 				<artifactId>refapp-services-facade</artifactId>
 				<version>${project.version}</version>
-				<scope>provided</scope>
+<!-- 				<scope>provided</scope> -->
 			</dependency>
 			
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
 				<artifactId>refapp-services-logic</artifactId>
 				<version>${project.version}</version>
-				<scope>provided</scope>
+<!-- 				<scope>provided</scope> -->
 			</dependency>
 						
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
 				<artifactId>refapp-interfaces-consumer</artifactId>
 				<version>${project.version}</version>
-				<scope>provided</scope>
+<!-- 				<scope>provided</scope> -->
 			</dependency>
 			
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
 				<artifactId>refapp-interfaces-webui</artifactId>
 				<version>${project.version}</version>
-				<scope>provided</scope>
+<!-- 				<scope>provided</scope> -->
 			</dependency>
 			
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
 				<artifactId>refapp-interfaces-rest</artifactId>
 				<version>${project.version}</version>
-				<scope>provided</scope>
+<!-- 				<scope>provided</scope> -->
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -413,7 +413,7 @@
 									<pluginExecutionFilter>
 										<groupId>org.apache.maven.plugins</groupId>
 										<artifactId>maven-ear-plugin</artifactId>
-										<versionRange>[2.2,)</versionRange>
+										<versionRange>[${version.maven-ear-plugin},)</versionRange>
 										<goals>
 											<goal>execute</goal>
 										</goals>

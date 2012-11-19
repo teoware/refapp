@@ -33,11 +33,15 @@ set MAVEN_CMD=%MAVEN_HOME%\bin\mvn
 set JDBC_XML_FILE="%FILE_PATH%..\conf\jdbc_resource.xml"
 set CONNECTION_POOL_NAME="RefappDerbyPool"
 
-set EAR_FILE="%FILE_PATH%..\code\refapp-ear\target\refapp-ear-0.0.1-SNAPSHOT.ear"
+set DEPLOY_FILE="%FILE_PATH%..\code\refapp-interfaces-webui\target\refapp-interfaces-webui-0.0.1-SNAPSHOT.war"
 set APP_NAME="refapp"
 set CONTEXT_ROOT="refapp"
 
-set ERROR_LOG=%TEMP%\refapp.error
+for /f "tokens=2,3,4 delims=/ " %%f in ('date /t') do set d=%%h%%g%%f
+for /f "tokens=1,2 delims=: " %%f in ('time /t') do set t=%%f:%%g
+set TIMESTAMP=%d%T%t%
+
+set ERROR_LOG=%TEMP%\refapp-%TIMESTAMP%.error
 
 goto SUCCESS
 
