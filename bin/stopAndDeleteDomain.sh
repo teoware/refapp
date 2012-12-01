@@ -1,9 +1,11 @@
 #!/bin/bash
 
-FILE_PATH="$(dirname "$(readlink -f ${BASH_SOURCE[0]})")"
+FILE_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-${FILE_PATH}/stopDomain.sh
+bash -c "${FILE_PATH}/stopDomain.sh"
+test $? -ne 0 && exit 1
 
-${FILE_PATH}/deleteJDBCResource.sh
+bash -c "${FILE_PATH}/deleteDomain.sh"
+test $? -ne 0 && exit 1
 
-${FILE_PATH}/deleteDomain.sh
+exit 0

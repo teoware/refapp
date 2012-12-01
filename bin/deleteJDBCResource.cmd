@@ -12,7 +12,7 @@ if not (%RETURNVALUE%)==(0) goto ERROR
 call %ASADMIN_CMD% delete-jdbc-connection-pool --cascade true %CONNECTION_POOL_NAME% > %ERROR_LOG% 2>&1
 set RETURNVALUE=%ERRORLEVEL%
 if (%RETURNVALUE%)==(1) (
-	findstr "A JDBC connection pool named %CONNECTION_POOL_NAME% does not exist" %ERROR_LOG% > nul 2>&1
+	findstr "%CONNECTION_POOL_NAME% does not exist" %ERROR_LOG% > nul 2>&1
 	set RETURNVALUE=%ERRORLEVEL%
 )
 set ERROR_MSG=Failed to delete JDBC resources

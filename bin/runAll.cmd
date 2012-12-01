@@ -1,6 +1,6 @@
 @echo off
 
-echo Starting full execution...
+echo INFO: Starting full execution...
 
 set FILE_PATH=%~dp0
 

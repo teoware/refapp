@@ -1,9 +1,16 @@
 #!/bin/bash
 
-FILE_PATH="$(dirname "$(readlink -f ${BASH_SOURCE[0]})")"
+echo "INFO: Stopping domain..."
+
+FILE_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+test $? -ne 0 && echo "ERROR: Failed to load env variables" && exit 1
 
 . ${FILE_PATH}/env.sh
 
-bash -c "${ASADMIN_CMD} stop-database"
+bash -c "${ASADMIN_CMD} stop-database" > /dev/null 2>&1
+test $? -ne 0 && echo "ERROR: Failed to stop database" && exit 1
 
-bash -c "${ASADMIN_CMD} stop-domain ${DOMAIN}"
+bash -c "${ASADMIN_CMD} stop-domain ${DOMAIN}" > /dev/null 2>&1
+test $? -ne 0 && echo "ERROR: Failed to stop domain '${DOMAIN}'" && exit 1
+
+echo "INFO: Domain '${DOMAIN}' stopped successfully" && exit 0

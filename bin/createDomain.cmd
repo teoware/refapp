@@ -21,5 +21,5 @@ echo ERROR: %ERROR_MSG%
 exit /B 1
 
 :SUCCESS
-echo INFO: Domain created successfully
+echo INFO: Domain '%DOMAIN%' created successfully
 exit /B 0

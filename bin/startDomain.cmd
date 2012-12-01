@@ -20,7 +20,7 @@ if (%RETURNVALUE%)==(1) (
 	findstr "There is a process already using the admin port 4848" %ERROR_LOG% > nul 2>&1
 	set RETURNVALUE=%ERRORLEVEL%
 )
-set ERROR_MSG=Failed to start domain
+set ERROR_MSG=Failed to start domain '%DOMAIN%'
 if not (%RETURNVALUE%)==(0) goto ERROR
 
 goto SUCCESS
@@ -30,5 +30,5 @@ echo ERROR: %ERROR_MSG%
 exit /B 1
 
 :SUCCESS
-echo INFO: Domain started successfully
+echo INFO: Domain '%DOMAIN%' started successfully
 exit /B 0
