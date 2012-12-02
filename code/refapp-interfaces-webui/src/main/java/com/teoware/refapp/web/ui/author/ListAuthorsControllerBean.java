@@ -24,11 +24,11 @@ public class ListAuthorsControllerBean extends AbstractControllerBean implements
 	private List<Author> authorList;
 
 	@Inject
-	AuthorServiceConsumer serviceConsumer;
+	AuthorServiceConsumer consumer;
 
 	@SuppressWarnings("unused")
 	private void doLoadAuthorList() {
-		AuthorListVO vo = serviceConsumer.listAuthors();
+		AuthorListVO vo = consumer.listAuthors();
 		authorList = vo.getAuthorList();
 		action = "Size: " + authorList.size();
 	}

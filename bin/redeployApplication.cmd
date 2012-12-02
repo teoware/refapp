@@ -12,7 +12,7 @@ if not (%RETURNVALUE%)==(0) goto ERROR
 set ERROR_MSG=Failed to find application deploy file
 if not exist %DEPLOY_FILE% goto ERROR
 
-call %ASADMIN_CMD% redeploy --name %APP_NAME% %DEPLOY_FILE% > nul 2>&1
+call %ASADMIN_CMD% redeploy --name %APP_NAME% %DEPLOY_FILE% > %ERROR_LOG% 2>&1
 set RETURNVALUE=%ERRORLEVEL%
 set ERROR_MSG=Failed to redeploy application
 if not (%RETURNVALUE%)==(0) goto ERROR

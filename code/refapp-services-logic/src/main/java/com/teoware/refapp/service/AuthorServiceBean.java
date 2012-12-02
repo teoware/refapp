@@ -1,9 +1,9 @@
 package com.teoware.refapp.service;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,8 +34,8 @@ public class AuthorServiceBean implements AuthorService {
 	private static final String SERVICE_NAME = "Author service";
 	private static final String DAO_EXCEPTION_MESSAGE = "DAO exception";
 
-	@EJB
-	private AuthorDao authorDao;
+	@Inject
+	private AuthorDao dao;
 
 	@Override
 	public RegisterAuthorResponse registerAuthor(RegisterAuthorRequest request) throws ServiceException {
@@ -46,7 +46,7 @@ public class AuthorServiceBean implements AuthorService {
 		AuthorPassword authorPassword = request.getAuthorPassword();
 		InsertAuthorRequest insertRequest = new InsertAuthorRequest(author, authorPassword);
 		try {
-			authorDao.insertAuthor(insertRequest);
+			dao.insertAuthor(insertRequest);
 		} catch (DaoException e) {
 			LOG.error(SERVICE_NAME + ": Register author operation failed.");
 			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
@@ -65,7 +65,7 @@ public class AuthorServiceBean implements AuthorService {
 		LOG.info(SERVICE_NAME + ": List authors operation invoked.");
 
 		try {
-			SelectAuthorResponse selectResponse = authorDao.selectAllAuthors();
+			SelectAuthorResponse selectResponse = dao.selectAllAuthors();
 
 			return new ListAuthorsResponse(selectResponse.getAuthorList());
 		} catch (DaoException e) {

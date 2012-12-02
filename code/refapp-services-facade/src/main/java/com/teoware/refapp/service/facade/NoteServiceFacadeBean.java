@@ -1,9 +1,9 @@
 package com.teoware.refapp.service.facade;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.inject.Inject;
 
 import com.teoware.refapp.service.NoteService;
 import com.teoware.refapp.service.dto.CreateNoteRequest;
@@ -15,7 +15,7 @@ public class NoteServiceFacadeBean implements NoteServiceFacade {
 
 	private static final long serialVersionUID = 1L;
 
-	@EJB
+	@Inject
 	private NoteService noteService;
 
 	@Override

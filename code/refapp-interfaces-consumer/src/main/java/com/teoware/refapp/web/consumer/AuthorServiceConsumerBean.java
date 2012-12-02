@@ -1,6 +1,6 @@
 package com.teoware.refapp.web.consumer;
 
-import javax.ejb.EJB;
+import javax.inject.Inject;
 
 import com.teoware.refapp.service.ServiceException;
 import com.teoware.refapp.service.dto.FindAuthorRequest;
@@ -20,14 +20,14 @@ import com.teoware.refapp.web.consumer.vo.RegisterAuthorResponseVO;
 
 public class AuthorServiceConsumerBean implements AuthorServiceConsumer {
 
-	@EJB
-	private AuthorServiceFacade authorServiceFacade;
+	@Inject
+	private AuthorServiceFacade facade;
 
 	@Override
 	public RegisterAuthorResponseVO registerAuthor(RegisterAuthorRequestVO vo) {
 		try {
 			RegisterAuthorRequest request = new RegisterAuthorRequest(vo.getAuthor(), vo.getAuthorPassword());
-			RegisterAuthorResponse response = authorServiceFacade.registerAuthor(request);
+			RegisterAuthorResponse response = facade.registerAuthor(request);
 			return new RegisterAuthorResponseVO(response.getBody());
 		} catch (ValidationException e) {
 			ValidationHandler.handle(e);
@@ -41,7 +41,7 @@ public class AuthorServiceConsumerBean implements AuthorServiceConsumer {
 	public AuthorVO findAuthor(FindAuthorRequestVO vo) {
 		try {
 			FindAuthorRequest request = new FindAuthorRequest();
-			FindAuthorResponse response = authorServiceFacade.findAuthor(request);
+			FindAuthorResponse response = facade.findAuthor(request);
 			return new AuthorVO(response.getBody());
 		} catch (ValidationException e) {
 			ValidationHandler.handle(e);
@@ -54,7 +54,7 @@ public class AuthorServiceConsumerBean implements AuthorServiceConsumer {
 	@Override
 	public AuthorListVO listAuthors() {
 		try {
-			ListAuthorsResponse response = authorServiceFacade.listAuthors();
+			ListAuthorsResponse response = facade.listAuthors();
 			return new AuthorListVO(response.getAuthorList());
 		} catch (ServiceException e) {
 			ErrorHandler.handle(e);

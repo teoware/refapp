@@ -1,9 +1,9 @@
 package com.teoware.refapp.service.facade;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 
 import com.teoware.refapp.service.AuthorService;
@@ -24,25 +24,25 @@ public class AuthorServiceFacadeBean implements AuthorServiceFacade {
 
 	private static final long serialVersionUID = 1L;
 
-	@EJB
-	private AuthorService authorService;
+	@Inject
+	private AuthorService service;
 
 	@Interceptors({ ValidationInterceptor.class })
 	@Validate(RegisterAuthorRequestGroup.class)
 	@Override
 	public RegisterAuthorResponse registerAuthor(@Validate RegisterAuthorRequest request) throws ValidationException,
 			ServiceException {
-		return authorService.registerAuthor(request);
+		return service.registerAuthor(request);
 	}
 
 	@Override
 	public FindAuthorResponse findAuthor(FindAuthorRequest request) throws ValidationException, ServiceException {
-		return authorService.findAuthor(request);
+		return service.findAuthor(request);
 	}
 
 	@Override
 	public ListAuthorsResponse listAuthors() throws ServiceException {
-		return authorService.listAuthors();
+		return service.listAuthors();
 	}
 
 }

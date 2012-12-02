@@ -33,13 +33,13 @@ public class RegisterAuthorControllerBean extends AbstractControllerBean impleme
 	private String phone;
 
 	@Inject
-	AuthorServiceConsumer serviceConsumer;
+	AuthorServiceConsumer consumer;
 
 	public void onClickRegisterButton() {
 		action = "onClickRegisterButton";
 		RegisterAuthorRequestVO vo = createRegisterAuthorRequest();
 		try {
-			serviceConsumer.registerAuthor(vo);
+			consumer.registerAuthor(vo);
 		} catch (Exception e) {
 			action = getStackTrace(e);
 		}
