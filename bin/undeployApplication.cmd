@@ -9,9 +9,9 @@ set RETURNVALUE=%ERRORLEVEL%
 set ERROR_MSG=Failed to load env variables
 if not (%RETURNVALUE%)==(0) goto ERROR
 
-call %ASADMIN_CMD% deploy --contextroot %CONTEXT_ROOT% --name %APP_NAME% %DEPLOY_FILE% > nul 2>&1
+call %ASADMIN_CMD% undeploy %APP_NAME% > %ERROR_LOG% 2>&1
 set RETURNVALUE=%ERRORLEVEL%
-set ERROR_MSG=Failed to deploy application
+set ERROR_MSG=Failed to undeploy application
 if not (%RETURNVALUE%)==(0) goto ERROR
 
 goto SUCCESS
