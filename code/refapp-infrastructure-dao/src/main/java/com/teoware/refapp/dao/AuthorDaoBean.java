@@ -221,7 +221,9 @@ public class AuthorDaoBean extends BaseDao implements AuthorDao {
 
 	@Override
 	public SelectAuthorResponse selectAllAuthors() throws DaoException {
-		SqlStatement sql = new SqlStatement.Builder().doSelect("*").from(AUTHORS_VIEW).build();
+		super.doPersistConnection();
+		
+		SqlStatement sql = new SqlStatement.Builder().doSelectAll().from(AUTHORS_VIEW).build();
 		List<Author> authorList = super.select(sql, authorRowMapper);
 		return new SelectAuthorResponse(authorList);
 	}

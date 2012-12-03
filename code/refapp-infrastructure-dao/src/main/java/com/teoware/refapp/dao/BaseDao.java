@@ -21,9 +21,14 @@ import com.teoware.refapp.dao.util.DaoHelper;
 import com.teoware.refapp.dao.util.ResultSetExtractor;
 import com.teoware.refapp.dao.util.RowMapperResultSetExtractor;
 
+/**
+ * Base DAO that holds functionality for common database operations.
+ * 
+ */
 public abstract class BaseDao {
 
 	private static final Logger LOG = LoggerFactory.getLogger(BaseDao.class);
+	
 	private static final String INSERT_ERROR_MESSAGE = "Insert operation failed.";
 	private static final String UPDATE_ERROR_MESSAGE = "Update operation failed.";
 	private static final String SELECT_ERROR_MESSAGE = "Select operation failed.";
@@ -39,8 +44,8 @@ public abstract class BaseDao {
 		try {
 			return update(sql, parameters);
 		} catch (DaoException e) {
-			LOG.error(INSERT_ERROR_MESSAGE);
-			throw new DaoException(INSERT_ERROR_MESSAGE, e.getCause());
+			LOG.error(e(INSERT_ERROR_MESSAGE, sql));
+			throw new DaoException(e(INSERT_ERROR_MESSAGE, sql), e.getCause());
 		}
 	}
 
@@ -53,8 +58,8 @@ public abstract class BaseDao {
 			int rowsAffected = statement.executeUpdate();
 			return rowsAffected;
 		} catch (SQLException e) {
-			LOG.error(UPDATE_ERROR_MESSAGE);
-			throw new DaoException(UPDATE_ERROR_MESSAGE, e);
+			LOG.error(e(UPDATE_ERROR_MESSAGE, sql));
+			throw new DaoException(e(UPDATE_ERROR_MESSAGE, sql), e);
 		} finally {
 			closeConnection(statement);
 		}
@@ -78,11 +83,11 @@ public abstract class BaseDao {
 			ResultSetExtractor<List<T>> resultSetExtractor = new RowMapperResultSetExtractor<T>(rowMapper, rowsExpected);
 			return resultSetExtractor.extractData(result);
 		} catch (SQLException e) {
-			LOG.error(SELECT_ERROR_MESSAGE);
-			throw new DaoException(SELECT_ERROR_MESSAGE, e);
+			LOG.error(e(SELECT_ERROR_MESSAGE, sql));
+			throw new DaoException(e(SELECT_ERROR_MESSAGE, sql), e);
 		} catch (ParseException e) {
-			LOG.error(SELECT_ERROR_MESSAGE);
-			throw new DaoException(SELECT_ERROR_MESSAGE, e);
+			LOG.error(e(SELECT_ERROR_MESSAGE, sql));
+			throw new DaoException(e(SELECT_ERROR_MESSAGE, sql), e);
 		} finally {
 			closeConnection(statement);
 		}
@@ -92,15 +97,15 @@ public abstract class BaseDao {
 		try {
 			return update(sql, parameters);
 		} catch (DaoException e) {
-			LOG.error(DELETE_ERROR_MESSAGE);
-			throw new DaoException(DELETE_ERROR_MESSAGE, e.getCause());
+			LOG.error(e(DELETE_ERROR_MESSAGE, sql));
+			throw new DaoException(e(DELETE_ERROR_MESSAGE, sql), e.getCause());
 		}
 	}
 
 	public int rowCount(String table) throws DaoException {
 		PreparedStatement statement = null;
+		String sql = "SELECT * FROM " + table;
 		try {
-			String sql = "SELECT * FROM " + table;
 			createOrReuseConnection();
 			statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			ResultSet result = statement.executeQuery();
@@ -109,8 +114,8 @@ public abstract class BaseDao {
 			result.close();
 			return rowCount;
 		} catch (SQLException e) {
-			LOG.error(SELECT_ERROR_MESSAGE);
-			throw new DaoException(SELECT_ERROR_MESSAGE, e.getCause());
+			LOG.error(e(SELECT_ERROR_MESSAGE, sql));
+			throw new DaoException(e(SELECT_ERROR_MESSAGE, sql), e.getCause());
 		} finally {
 			closeConnection(statement);
 		}
@@ -156,5 +161,13 @@ public abstract class BaseDao {
 
 	protected void doPersistConnection() {
 		this.persistConnection = true;
+	}
+	
+	private String e(String msg, SqlStatement sql) {
+		return e(msg, sql.getSql());
+	}
+	
+	private String e(String msg, String sql) {
+		return msg + "[" + sql + "]";
 	}
 }

@@ -9,13 +9,17 @@ set RETURNVALUE=%ERRORLEVEL%
 set ERROR_MSG=Failed to load env variables
 if not (%RETURNVALUE%)==(0) goto ERROR
 
-call %ASADMIN_CMD% stop-database > nul 2>&1
+call %ASADMIN_CMD% stop-database > %ERROR_LOG% 2>&1
 set RETURNVALUE=%ERRORLEVEL%
 set ERROR_MSG=Failed to stop database
 if not (%RETURNVALUE%)==(0) goto ERROR
 
-call %ASADMIN_CMD% stop-domain %DOMAIN% > nul 2>&1
+call %ASADMIN_CMD% stop-domain %DOMAIN% > %ERROR_LOG% 2>&1
 set RETURNVALUE=%ERRORLEVEL%
+if (%RETURNVALUE%)==(1) (
+	findstr "There is no such domain" %ERROR_LOG% > nul 2>&1
+	set RETURNVALUE=%ERRORLEVEL%
+)
 set ERROR_MSG=Failed to stop domain '%DOMAIN%'
 if not (%RETURNVALUE%)==(0) goto ERROR
 

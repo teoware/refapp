@@ -34,7 +34,7 @@ public class AuthorServiceConsumerBean implements AuthorServiceConsumer {
 		} catch (ServiceException e) {
 			ErrorHandler.handle(e);
 		}
-		return null;
+		return null; // For compiler
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class AuthorServiceConsumerBean implements AuthorServiceConsumer {
 		} catch (ServiceException e) {
 			ErrorHandler.handle(e);
 		}
-		return null;
+		return null; // For compiler
 	}
 
 	@Override
@@ -59,6 +59,6 @@ public class AuthorServiceConsumerBean implements AuthorServiceConsumer {
 		} catch (ServiceException e) {
 			ErrorHandler.handle(e);
 		}
-		return null;
+		return null; // For compiler
 	}
 }

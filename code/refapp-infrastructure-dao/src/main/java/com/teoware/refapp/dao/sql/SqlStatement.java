@@ -73,6 +73,11 @@ public class SqlStatement {
 			sql.append("SELECT (" + join(columns, ", ") + ")");
 			return this;
 		}
+		
+		public Builder doSelectAll() {
+			sql.append("SELECT *");
+			return this;
+		}
 
 		public Builder doDelete(String tableName) {
 			sql.append("DELETE FROM " + tableName);

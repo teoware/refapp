@@ -178,7 +178,7 @@
 						</goals>
 						<configuration>
 							<fileset>
-								<basedir>${sql.test.file.root}/data</basedir>
+								<basedir>${sql.test.file.root}/data/insert</basedir>
 							</fileset>
 							<onError>continue</onError>
 							<skip>${derby.skip.tests}</skip>

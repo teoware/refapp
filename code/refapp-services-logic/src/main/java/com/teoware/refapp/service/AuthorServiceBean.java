@@ -41,17 +41,19 @@ public class AuthorServiceBean implements AuthorService {
 	public RegisterAuthorResponse registerAuthor(RegisterAuthorRequest request) throws ServiceException {
 		LOG.info(SERVICE_NAME + ": Register author operation invoked.");
 
-		Header header = request.getHeader();
-		Author author = request.getBody();
-		AuthorPassword authorPassword = request.getAuthorPassword();
-		InsertAuthorRequest insertRequest = new InsertAuthorRequest(author, authorPassword);
 		try {
+			Header header = request.getHeader();
+			Author author = request.getBody();
+			AuthorPassword authorPassword = request.getAuthorPassword();
+			InsertAuthorRequest insertRequest = new InsertAuthorRequest(author, authorPassword);
+			
 			dao.insertAuthor(insertRequest);
+			
+			return new RegisterAuthorResponse(header, new OperationResult(Result.SUCCESS, null));
 		} catch (DaoException e) {
 			LOG.error(SERVICE_NAME + ": Register author operation failed.");
 			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
 		}
-		return new RegisterAuthorResponse(header, new OperationResult(Result.SUCCESS, null));
 	}
 
 	@Override

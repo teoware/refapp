@@ -11,6 +11,10 @@ if not (%RETURNVALUE%)==(0) goto ERROR
 
 call %ASADMIN_CMD% delete-domain %DOMAIN% > %ERROR_LOG% 2>&1
 set RETURNVALUE=%ERRORLEVEL%
+if (%RETURNVALUE%)==(1) (
+	findstr "There is no such domain" %ERROR_LOG% > nul 2>&1
+	set RETURNVALUE=%ERRORLEVEL%
+)
 set ERROR_MSG=Failed to delete domain '%DOMAIN%'
 if not (%RETURNVALUE%)==(0) goto ERROR
 

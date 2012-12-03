@@ -38,11 +38,7 @@ public class RegisterAuthorControllerBean extends AbstractControllerBean impleme
 	public void onClickRegisterButton() {
 		action = "onClickRegisterButton";
 		RegisterAuthorRequestVO vo = createRegisterAuthorRequest();
-		try {
-			consumer.registerAuthor(vo);
-		} catch (Exception e) {
-			action = getStackTrace(e);
-		}
+		consumer.registerAuthor(vo);
 	}
 
 	private RegisterAuthorRequestVO createRegisterAuthorRequest() {
