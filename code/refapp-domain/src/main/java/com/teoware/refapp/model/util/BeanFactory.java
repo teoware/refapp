@@ -1,37 +1,37 @@
 package com.teoware.refapp.model.util;
 
-import com.teoware.refapp.model.author.Author;
-import com.teoware.refapp.model.author.AuthorAddress;
-import com.teoware.refapp.model.author.AuthorId;
-import com.teoware.refapp.model.author.AuthorInfo;
-import com.teoware.refapp.model.author.AuthorPassword;
+import com.teoware.refapp.model.user.User;
+import com.teoware.refapp.model.user.UserAddress;
+import com.teoware.refapp.model.user.UserId;
+import com.teoware.refapp.model.user.UserInfo;
+import com.teoware.refapp.model.user.UserPassword;
 
 public class BeanFactory {
 
-	public static AuthorId createAuthorIdBean() {
-		AuthorId authorId = new AuthorId();
-		return authorId;
+	public static UserId createUserIdBean() {
+		UserId userId = new UserId();
+		return userId;
 	}
 
-	public static AuthorInfo createAuthorInfoBean() {
-		AuthorInfo authorInfo = new AuthorInfo();
-		return authorInfo;
+	public static UserInfo createUserInfoBean() {
+		UserInfo userInfo = new UserInfo();
+		return userInfo;
 	}
 
-	public static AuthorAddress createAuthorAddressBean() {
-		AuthorAddress authorAddress = new AuthorAddress();
-		return authorAddress;
+	public static UserAddress createUserAddressBean() {
+		UserAddress userAddress = new UserAddress();
+		return userAddress;
 	}
 
-	public static Author createAuthorBean() {
-		Author author = new Author();
-		author.setAuthorId(createAuthorIdBean());
-		author.setAuthorInfo(createAuthorInfoBean());
-		author.setAuthorAddress(createAuthorAddressBean());
-		return author;
+	public static User createUserBean() {
+		User user = new User();
+		user.setUserId(createUserIdBean());
+		user.setUserInfo(createUserInfoBean());
+		user.setUserAddress(createUserAddressBean());
+		return user;
 	}
 
-	public static AuthorPassword createAuthorPasswordBean() {
-		return new AuthorPassword();
+	public static UserPassword createUserPasswordBean() {
+		return new UserPassword();
 	}
 }

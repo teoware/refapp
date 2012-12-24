@@ -3,8 +3,8 @@ package com.teoware.refapp.dao.rowmapper.util;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.teoware.refapp.model.enums.AuthorStatus;
 import com.teoware.refapp.model.enums.Gender;
+import com.teoware.refapp.model.enums.UserStatus;
 
 public class MapperHelper {
 
@@ -12,8 +12,8 @@ public class MapperHelper {
 		return Gender.valueOf(gender);
 	}
 
-	public static AuthorStatus mapAuthorStatus(String status) {
-		return AuthorStatus.valueOf(status);
+	public static UserStatus mapUserStatus(String status) {
+		return UserStatus.valueOf(status);
 	}
 
 	public static Date mapDate(java.sql.Date date) {

@@ -4,33 +4,33 @@ import java.io.Serializable;
 
 import javax.ejb.Local;
 
-import com.teoware.refapp.dao.dto.DeleteAuthorRequest;
-import com.teoware.refapp.dao.dto.DeleteAuthorResponse;
-import com.teoware.refapp.dao.dto.InsertAuthorRequest;
-import com.teoware.refapp.dao.dto.InsertAuthorResponse;
-import com.teoware.refapp.dao.dto.PurgeAuthorsRequest;
-import com.teoware.refapp.dao.dto.PurgeAuthorsResponse;
-import com.teoware.refapp.dao.dto.SelectAuthorPasswordRequest;
-import com.teoware.refapp.dao.dto.SelectAuthorPasswordResponse;
-import com.teoware.refapp.dao.dto.SelectAuthorRequest;
-import com.teoware.refapp.dao.dto.SelectAuthorResponse;
-import com.teoware.refapp.dao.dto.UpdateAuthorRequest;
-import com.teoware.refapp.dao.dto.UpdateAuthorResponse;
+import com.teoware.refapp.dao.dto.DeleteUserRequest;
+import com.teoware.refapp.dao.dto.DeleteUserResponse;
+import com.teoware.refapp.dao.dto.InsertUserRequest;
+import com.teoware.refapp.dao.dto.InsertUserResponse;
+import com.teoware.refapp.dao.dto.PurgeUsersRequest;
+import com.teoware.refapp.dao.dto.PurgeUsersResponse;
+import com.teoware.refapp.dao.dto.SelectUserPasswordRequest;
+import com.teoware.refapp.dao.dto.SelectUserPasswordResponse;
+import com.teoware.refapp.dao.dto.SelectUserRequest;
+import com.teoware.refapp.dao.dto.SelectUserResponse;
+import com.teoware.refapp.dao.dto.UpdateUserRequest;
+import com.teoware.refapp.dao.dto.UpdateUserResponse;
 
 @Local
 public interface UserDao extends Serializable {
 
-	public InsertAuthorResponse insertAuthor(InsertAuthorRequest request) throws DaoException;
+	public InsertUserResponse insertUser(InsertUserRequest request) throws DaoException;
 
-	public UpdateAuthorResponse updateAuthor(UpdateAuthorRequest request) throws DaoException;
+	public UpdateUserResponse updateUser(UpdateUserRequest request) throws DaoException;
 
-	public SelectAuthorResponse selectAuthor(SelectAuthorRequest request) throws DaoException;
+	public SelectUserResponse selectUser(SelectUserRequest request) throws DaoException;
 
-	public SelectAuthorResponse selectAllAuthors() throws DaoException;
+	public SelectUserResponse selectAllUsers() throws DaoException;
 
-	public SelectAuthorPasswordResponse selectAuthorPassword(SelectAuthorPasswordRequest request) throws DaoException;
+	public SelectUserPasswordResponse selectUserPassword(SelectUserPasswordRequest request) throws DaoException;
 
-	public DeleteAuthorResponse deleteAuthor(DeleteAuthorRequest request) throws DaoException;
+	public DeleteUserResponse deleteUser(DeleteUserRequest request) throws DaoException;
 
-	public PurgeAuthorsResponse purgeAuthors(PurgeAuthorsRequest request) throws DaoException;
+	public PurgeUsersResponse purgeUsers(PurgeUsersRequest request) throws DaoException;
 }

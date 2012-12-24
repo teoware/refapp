@@ -1,15 +1,15 @@
 package com.teoware.refapp.service.util;
 
-import com.teoware.refapp.model.author.Author;
-import com.teoware.refapp.model.author.AuthorPassword;
+import com.teoware.refapp.model.user.User;
+import com.teoware.refapp.model.user.UserPassword;
 import com.teoware.refapp.model.util.BeanFactory;
-import com.teoware.refapp.service.dto.RegisterAuthorRequest;
+import com.teoware.refapp.service.dto.RegisterUserRequest;
 
 public class ServiceBeanFactory {
 
-	public static RegisterAuthorRequest createRegisterAuthorRequestBean() {
-		Author author = BeanFactory.createAuthorBean();
-		AuthorPassword authorPassword = BeanFactory.createAuthorPasswordBean();
-		return new RegisterAuthorRequest(author, authorPassword);
+	public static RegisterUserRequest createRegisterUserRequestBean() {
+		User user = BeanFactory.createUserBean();
+		UserPassword userPassword = BeanFactory.createUserPasswordBean();
+		return new RegisterUserRequest(user, userPassword);
 	}
 }

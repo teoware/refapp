@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -7,11 +7,13 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition template="templates/common.xhtml">
-
+	
 	<ui:define name="content">
-		<h2>Main page</h2>
+		<a href="#{request.contextPath}/">&larr; Home</a>
+		<h2>Users</h2>
 		<ul>
-			<li><a href="users.xhtml">Users</a></li>
+			<li><a href="register_user.xhtml">Register</a></li>
+			<li><a href="list_users.xhtml">List</a></li>
 		</ul>
 	</ui:define>
 

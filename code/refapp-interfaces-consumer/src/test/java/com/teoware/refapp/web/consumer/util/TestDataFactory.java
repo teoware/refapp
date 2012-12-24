@@ -2,94 +2,94 @@ package com.teoware.refapp.web.consumer.util;
 
 import java.util.Calendar;
 
-import com.teoware.refapp.model.author.Author;
-import com.teoware.refapp.model.author.AuthorPassword;
-import com.teoware.refapp.model.enums.AuthorStatus;
 import com.teoware.refapp.model.enums.Gender;
+import com.teoware.refapp.model.enums.UserStatus;
+import com.teoware.refapp.model.user.User;
+import com.teoware.refapp.model.user.UserPassword;
 import com.teoware.refapp.model.util.BeanFactory;
 import com.teoware.refapp.util.PasswordHandler;
 import com.teoware.refapp.util.time.DateTimeUtils;
 
 public class TestDataFactory {
 
-	public static Author createAuthorJohn() {
+	public static User createUserJohn() {
 		Calendar calendar = Calendar.getInstance();
-		Author author = BeanFactory.createAuthorBean();
-		author.getAuthorId().setUserName("john.doe");
-		author.getAuthorId().setStatus(AuthorStatus.ACTIVE);
-		author.getAuthorId().setCreated(calendar);
-		author.getAuthorId().setModified(calendar);
-		author.getAuthorInfo().setFirstName("John");
-		author.getAuthorInfo().setLastName("Doe");
-		author.getAuthorInfo().setBirthDate(DateTimeUtils.stringToDate("1975-01-01"));
-		author.getAuthorInfo().setGender(Gender.MALE);
-		author.getAuthorInfo().setEmail("john.doe@email.com");
-		author.getAuthorInfo().setPhone("+47 23456789");
-		author.getAuthorAddress().setAddress("Storgata 1");
-		author.getAuthorAddress().setPostalCode("1234");
-		author.getAuthorAddress().setMunicipality("Oslo");
-		author.getAuthorAddress().setRegion("Oslo");
-		author.getAuthorAddress().setCountry("Norway");
-		return author;
+		User user = BeanFactory.createUserBean();
+		user.getUserId().setUserName("john.doe");
+		user.getUserId().setStatus(UserStatus.ACTIVE);
+		user.getUserId().setCreated(calendar);
+		user.getUserId().setModified(calendar);
+		user.getUserInfo().setFirstName("John");
+		user.getUserInfo().setLastName("Doe");
+		user.getUserInfo().setBirthDate(DateTimeUtils.stringToDate("1975-01-01"));
+		user.getUserInfo().setGender(Gender.MALE);
+		user.getUserInfo().setEmail("john.doe@email.com");
+		user.getUserInfo().setPhone("+47 23456789");
+		user.getUserAddress().setAddress("Storgata 1");
+		user.getUserAddress().setPostalCode("1234");
+		user.getUserAddress().setMunicipality("Oslo");
+		user.getUserAddress().setRegion("Oslo");
+		user.getUserAddress().setCountry("Norway");
+		return user;
 	}
 
-	public static Author createAuthorJane() {
+	public static User createUserJane() {
 		Calendar calendar = Calendar.getInstance();
-		Author author = BeanFactory.createAuthorBean();
-		author.getAuthorId().setUserName("jane.doe");
-		author.getAuthorId().setStatus(AuthorStatus.ACTIVE);
-		author.getAuthorId().setCreated(calendar);
-		author.getAuthorId().setModified(calendar);
-		author.getAuthorInfo().setFirstName("Jane");
-		author.getAuthorInfo().setLastName("Doe");
-		author.getAuthorInfo().setBirthDate(DateTimeUtils.stringToDate("1970-12-30"));
-		author.getAuthorInfo().setGender(Gender.FEMALE);
-		author.getAuthorInfo().setEmail("jane.doe@email.com");
-		author.getAuthorInfo().setPhone("+47 98765432");
-		author.getAuthorAddress().setAddress("Lillegata 1");
-		author.getAuthorAddress().setPostalCode("1010");
-		author.getAuthorAddress().setMunicipality("Oslo");
-		author.getAuthorAddress().setRegion("Oslo");
-		author.getAuthorAddress().setCountry("Norway");
-		return author;
+		User user = BeanFactory.createUserBean();
+		user.getUserId().setUserName("jane.doe");
+		user.getUserId().setStatus(UserStatus.ACTIVE);
+		user.getUserId().setCreated(calendar);
+		user.getUserId().setModified(calendar);
+		user.getUserInfo().setFirstName("Jane");
+		user.getUserInfo().setLastName("Doe");
+		user.getUserInfo().setBirthDate(DateTimeUtils.stringToDate("1970-12-30"));
+		user.getUserInfo().setGender(Gender.FEMALE);
+		user.getUserInfo().setEmail("jane.doe@email.com");
+		user.getUserInfo().setPhone("+47 98765432");
+		user.getUserAddress().setAddress("Lillegata 1");
+		user.getUserAddress().setPostalCode("1010");
+		user.getUserAddress().setMunicipality("Oslo");
+		user.getUserAddress().setRegion("Oslo");
+		user.getUserAddress().setCountry("Norway");
+		return user;
 	}
 
-	public static Author createAuthorJonah() {
+	public static User createUserJonah() {
 		Calendar calendar = Calendar.getInstance();
-		Author author = BeanFactory.createAuthorBean();
-		author.getAuthorId().setUserName("jonah.doe");
-		author.getAuthorId().setStatus(AuthorStatus.ACTIVE);
-		author.getAuthorId().setCreated(calendar);
-		author.getAuthorId().setModified(calendar);
-		author.getAuthorInfo().setFirstName("Jonah");
-		author.getAuthorInfo().setLastName("Doe");
-		author.getAuthorInfo().setBirthDate(DateTimeUtils.stringToDate("1975-01-01"));
-		author.getAuthorInfo().setGender(Gender.MALE);
-		author.getAuthorInfo().setEmail("jonah.doe@email.com");
-		author.getAuthorInfo().setPhone("+47 19283746");
-		author.getAuthorAddress().setAddress("Mellomgata 1");
-		author.getAuthorAddress().setPostalCode("1221");
-		author.getAuthorAddress().setMunicipality("Oslo");
-		author.getAuthorAddress().setRegion("Oslo");
-		author.getAuthorAddress().setCountry("Norway");
-		return author;
+		User user = BeanFactory.createUserBean();
+		user.getUserId().setUserName("jonah.doe");
+		user.getUserId().setStatus(UserStatus.ACTIVE);
+		user.getUserId().setCreated(calendar);
+		user.getUserId().setModified(calendar);
+		user.getUserInfo().setFirstName("Jonah");
+		user.getUserInfo().setLastName("Doe");
+		user.getUserInfo().setBirthDate(DateTimeUtils.stringToDate("1975-01-01"));
+		user.getUserInfo().setGender(Gender.MALE);
+		user.getUserInfo().setEmail("jonah.doe@email.com");
+		user.getUserInfo().setPhone("+47 19283746");
+		user.getUserAddress().setAddress("Mellomgata 1");
+		user.getUserAddress().setPostalCode("1221");
+		user.getUserAddress().setMunicipality("Oslo");
+		user.getUserAddress().setRegion("Oslo");
+		user.getUserAddress().setCountry("Norway");
+		return user;
 	}
 
-	public static AuthorPassword createAuthorJohnPassword() {
-		AuthorPassword authorPassword = new AuthorPassword();
-		authorPassword.setPassword(PasswordHandler.encryptPassword("johnsPassword"));
-		return authorPassword;
+	public static UserPassword createUserJohnPassword() {
+		UserPassword userPassword = new UserPassword();
+		userPassword.setPassword(PasswordHandler.encryptPassword("johnsPassword"));
+		return userPassword;
 	}
 
-	public static AuthorPassword createAuthorJanePassword() {
-		AuthorPassword authorPassword = new AuthorPassword();
-		authorPassword.setPassword(PasswordHandler.encryptPassword("janesPassword"));
-		return authorPassword;
+	public static UserPassword createUserJanePassword() {
+		UserPassword userPassword = new UserPassword();
+		userPassword.setPassword(PasswordHandler.encryptPassword("janesPassword"));
+		return userPassword;
 	}
 
-	public static AuthorPassword createAuthorJonahPassword() {
-		AuthorPassword authorPassword = new AuthorPassword();
-		authorPassword.setPassword(PasswordHandler.encryptPassword("jonahsPassword"));
-		return authorPassword;
+	public static UserPassword createUserJonahPassword() {
+		UserPassword userPassword = new UserPassword();
+		userPassword.setPassword(PasswordHandler.encryptPassword("jonahsPassword"));
+		return userPassword;
 	}
 }

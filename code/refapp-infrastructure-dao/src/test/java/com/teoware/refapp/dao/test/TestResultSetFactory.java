@@ -21,40 +21,40 @@ import java.sql.ResultSet;
 import org.apache.derby.client.am.Types;
 import org.h2.tools.SimpleResultSet;
 
-import com.teoware.refapp.model.author.Author;
+import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.util.time.DateTimeUtils;
 
 public final class TestResultSetFactory {
 
-	public static ResultSet createSelectAllAuthorsResultSet() {
+	public static ResultSet createSelectAllUsersResultSet() {
 		SimpleResultSet resultSet = new SimpleResultSet();
-		populateAuthorViewColumns(resultSet);
-		populateAllAuthorsViewRows(resultSet);
+		populateUserViewColumns(resultSet);
+		populateAllUsersViewRows(resultSet);
 		return resultSet;
 	}
 
-	public static ResultSet createSelectAuthorJohnResultSet() {
+	public static ResultSet createSelectUserJohnResultSet() {
 		SimpleResultSet resultSet = new SimpleResultSet();
-		populateAuthorViewColumns(resultSet);
-		populateAuthorJohnViewRow(resultSet);
+		populateUserViewColumns(resultSet);
+		populateUserJohnViewRow(resultSet);
 		return resultSet;
 	}
 
-	public static ResultSet createSelectAuthorJaneResultSet() {
+	public static ResultSet createSelectUserJaneResultSet() {
 		SimpleResultSet resultSet = new SimpleResultSet();
-		populateAuthorViewColumns(resultSet);
-		populateAllAuthorsViewRows(resultSet);
+		populateUserViewColumns(resultSet);
+		populateAllUsersViewRows(resultSet);
 		return resultSet;
 	}
 
-	public static ResultSet createSelectAuthorJonahResultSet() {
+	public static ResultSet createSelectUserJonahResultSet() {
 		SimpleResultSet resultSet = new SimpleResultSet();
-		populateAuthorViewColumns(resultSet);
-		populateAllAuthorsViewRows(resultSet);
+		populateUserViewColumns(resultSet);
+		populateAllUsersViewRows(resultSet);
 		return resultSet;
 	}
 
-	private static void populateAuthorViewColumns(SimpleResultSet resultSet) {
+	private static void populateUserViewColumns(SimpleResultSet resultSet) {
 		resultSet.addColumn(USERNAME_COLUMN_NAME, Types.VARCHAR, 20, 0);
 		resultSet.addColumn(FIRSTNAME_COLUMN_NAME, Types.VARCHAR, 50, 0);
 		resultSet.addColumn(LASTNAME_COLUMN_NAME, Types.VARCHAR, 50, 0);
@@ -72,44 +72,44 @@ public final class TestResultSetFactory {
 		resultSet.addColumn(MODIFIED_COLUMN_NAME, Types.DATE, 0, 0);
 	}
 
-	private static void populateAuthorJohnViewRow(SimpleResultSet resultSet) {
-		Author john = TestDataFactory.createAuthorJohn();
-		resultSet.addRow(john.getAuthorId().getUserName(), john.getAuthorInfo().getFirstName(), john.getAuthorInfo()
-				.getLastName(), DateTimeUtils.dateToSqlDate(john.getAuthorInfo().getBirthDate()), john.getAuthorInfo()
-				.getGender().toString(), john.getAuthorInfo().getEmail(), john.getAuthorInfo().getPhone(), john
-				.getAuthorAddress().getAddress(), john.getAuthorAddress().getPostalCode(), john.getAuthorAddress()
-				.getMunicipality(), john.getAuthorAddress().getRegion(), john.getAuthorAddress().getCountry(), john
-				.getAuthorId().getStatus().toString(), DateTimeUtils
-				.calendarToSqlTimestamp(john.getAuthorId().getCreated()), DateTimeUtils.calendarToSqlTimestamp(john
-				.getAuthorId().getModified()));
+	private static void populateUserJohnViewRow(SimpleResultSet resultSet) {
+		User john = TestDataFactory.createUserJohn();
+		resultSet.addRow(john.getUserId().getUserName(), john.getUserInfo().getFirstName(), john.getUserInfo()
+				.getLastName(), DateTimeUtils.dateToSqlDate(john.getUserInfo().getBirthDate()), john.getUserInfo()
+				.getGender().toString(), john.getUserInfo().getEmail(), john.getUserInfo().getPhone(), john
+				.getUserAddress().getAddress(), john.getUserAddress().getPostalCode(), john.getUserAddress()
+				.getMunicipality(), john.getUserAddress().getRegion(), john.getUserAddress().getCountry(), john
+				.getUserId().getStatus().toString(), DateTimeUtils
+				.calendarToSqlTimestamp(john.getUserId().getCreated()), DateTimeUtils.calendarToSqlTimestamp(john
+				.getUserId().getModified()));
 	}
 
-	private static void populateAuthorJaneViewRow(SimpleResultSet resultSet) {
-		Author jane = TestDataFactory.createAuthorJane();
-		resultSet.addRow(jane.getAuthorId().getUserName(), jane.getAuthorInfo().getFirstName(), jane.getAuthorInfo()
-				.getLastName(), DateTimeUtils.dateToSqlDate(jane.getAuthorInfo().getBirthDate()), jane.getAuthorInfo()
-				.getGender().toString(), jane.getAuthorInfo().getEmail(), jane.getAuthorInfo().getPhone(), jane
-				.getAuthorAddress().getAddress(), jane.getAuthorAddress().getPostalCode(), jane.getAuthorAddress()
-				.getMunicipality(), jane.getAuthorAddress().getRegion(), jane.getAuthorAddress().getCountry(), jane
-				.getAuthorId().getStatus().toString(), DateTimeUtils
-				.calendarToSqlTimestamp(jane.getAuthorId().getCreated()), DateTimeUtils.calendarToSqlTimestamp(jane
-				.getAuthorId().getModified()));
+	private static void populateUserJaneViewRow(SimpleResultSet resultSet) {
+		User jane = TestDataFactory.createUserJane();
+		resultSet.addRow(jane.getUserId().getUserName(), jane.getUserInfo().getFirstName(), jane.getUserInfo()
+				.getLastName(), DateTimeUtils.dateToSqlDate(jane.getUserInfo().getBirthDate()), jane.getUserInfo()
+				.getGender().toString(), jane.getUserInfo().getEmail(), jane.getUserInfo().getPhone(), jane
+				.getUserAddress().getAddress(), jane.getUserAddress().getPostalCode(), jane.getUserAddress()
+				.getMunicipality(), jane.getUserAddress().getRegion(), jane.getUserAddress().getCountry(), jane
+				.getUserId().getStatus().toString(), DateTimeUtils
+				.calendarToSqlTimestamp(jane.getUserId().getCreated()), DateTimeUtils.calendarToSqlTimestamp(jane
+				.getUserId().getModified()));
 	}
 
-	private static void populateAuthorJonahViewRow(SimpleResultSet resultSet) {
-		Author jonah = TestDataFactory.createAuthorJonah();
-		resultSet.addRow(jonah.getAuthorId().getUserName(), jonah.getAuthorInfo().getFirstName(), jonah.getAuthorInfo()
-				.getLastName(), DateTimeUtils.dateToSqlDate(jonah.getAuthorInfo().getBirthDate()), jonah.getAuthorInfo()
-				.getGender().toString(), jonah.getAuthorInfo().getEmail(), jonah.getAuthorInfo().getPhone(), jonah
-				.getAuthorAddress().getAddress(), jonah.getAuthorAddress().getPostalCode(), jonah.getAuthorAddress()
-				.getMunicipality(), jonah.getAuthorAddress().getRegion(), jonah.getAuthorAddress().getCountry(), jonah
-				.getAuthorId().getStatus().toString(), DateTimeUtils.calendarToSqlTimestamp(jonah.getAuthorId()
-				.getCreated()), DateTimeUtils.calendarToSqlTimestamp(jonah.getAuthorId().getModified()));
+	private static void populateUserJonahViewRow(SimpleResultSet resultSet) {
+		User jonah = TestDataFactory.createUserJonah();
+		resultSet.addRow(jonah.getUserId().getUserName(), jonah.getUserInfo().getFirstName(), jonah.getUserInfo()
+				.getLastName(), DateTimeUtils.dateToSqlDate(jonah.getUserInfo().getBirthDate()), jonah.getUserInfo()
+				.getGender().toString(), jonah.getUserInfo().getEmail(), jonah.getUserInfo().getPhone(), jonah
+				.getUserAddress().getAddress(), jonah.getUserAddress().getPostalCode(), jonah.getUserAddress()
+				.getMunicipality(), jonah.getUserAddress().getRegion(), jonah.getUserAddress().getCountry(), jonah
+				.getUserId().getStatus().toString(), DateTimeUtils.calendarToSqlTimestamp(jonah.getUserId()
+				.getCreated()), DateTimeUtils.calendarToSqlTimestamp(jonah.getUserId().getModified()));
 	}
 
-	private static void populateAllAuthorsViewRows(SimpleResultSet resultSet) {
-		populateAuthorJohnViewRow(resultSet);
-		populateAuthorJaneViewRow(resultSet);
-		populateAuthorJonahViewRow(resultSet);
+	private static void populateAllUsersViewRows(SimpleResultSet resultSet) {
+		populateUserJohnViewRow(resultSet);
+		populateUserJaneViewRow(resultSet);
+		populateUserJonahViewRow(resultSet);
 	}
 }

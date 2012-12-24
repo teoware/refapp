@@ -32,25 +32,25 @@ import javax.ejb.TransactionAttributeType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.teoware.refapp.dao.dto.DeleteAuthorRequest;
-import com.teoware.refapp.dao.dto.DeleteAuthorResponse;
-import com.teoware.refapp.dao.dto.InsertAuthorRequest;
-import com.teoware.refapp.dao.dto.InsertAuthorResponse;
-import com.teoware.refapp.dao.dto.PurgeAuthorsRequest;
-import com.teoware.refapp.dao.dto.PurgeAuthorsResponse;
-import com.teoware.refapp.dao.dto.SelectAuthorPasswordRequest;
-import com.teoware.refapp.dao.dto.SelectAuthorPasswordResponse;
-import com.teoware.refapp.dao.dto.SelectAuthorRequest;
-import com.teoware.refapp.dao.dto.SelectAuthorResponse;
-import com.teoware.refapp.dao.dto.UpdateAuthorRequest;
-import com.teoware.refapp.dao.dto.UpdateAuthorResponse;
-import com.teoware.refapp.dao.rowmapper.AuthorPasswordRowMapper;
-import com.teoware.refapp.dao.rowmapper.AuthorRowMapper;
+import com.teoware.refapp.dao.dto.DeleteUserRequest;
+import com.teoware.refapp.dao.dto.DeleteUserResponse;
+import com.teoware.refapp.dao.dto.InsertUserRequest;
+import com.teoware.refapp.dao.dto.InsertUserResponse;
+import com.teoware.refapp.dao.dto.PurgeUsersRequest;
+import com.teoware.refapp.dao.dto.PurgeUsersResponse;
+import com.teoware.refapp.dao.dto.SelectUserPasswordRequest;
+import com.teoware.refapp.dao.dto.SelectUserPasswordResponse;
+import com.teoware.refapp.dao.dto.SelectUserRequest;
+import com.teoware.refapp.dao.dto.SelectUserResponse;
+import com.teoware.refapp.dao.dto.UpdateUserRequest;
+import com.teoware.refapp.dao.dto.UpdateUserResponse;
+import com.teoware.refapp.dao.rowmapper.UserPasswordRowMapper;
+import com.teoware.refapp.dao.rowmapper.UserRowMapper;
 import com.teoware.refapp.dao.sql.SqlStatement;
 import com.teoware.refapp.dao.util.DaoHelper;
-import com.teoware.refapp.model.author.Author;
-import com.teoware.refapp.model.author.AuthorPassword;
-import com.teoware.refapp.model.enums.AuthorStatus;
+import com.teoware.refapp.model.enums.UserStatus;
+import com.teoware.refapp.model.user.User;
+import com.teoware.refapp.model.user.UserPassword;
 import com.teoware.refapp.util.time.DateTimeUtils;
 
 @Stateless
@@ -61,7 +61,7 @@ public class UserDaoBean extends BaseDao implements UserDao {
 
 	private static final Logger LOG = LoggerFactory.getLogger(UserDaoBean.class);
 
-	private static final String DAO_NAME = "Author DAO";
+	private static final String DAO_NAME = "User DAO";
 
 	public static final String USERS_VIEW = REFAPP_SCHEMA_NAME + "." + USERS_VIEW_NAME;
 	public static final String USERS_TABLE = REFAPP_SCHEMA_NAME + "." + USERS_TABLE_NAME;
@@ -69,61 +69,61 @@ public class UserDaoBean extends BaseDao implements UserDao {
 	public static final String USERS_ADDRESS_TABLE = REFAPP_SCHEMA_NAME + "." + USERS_ADDRESS_TABLE_NAME;
 	public static final String USERS_PASSWORD_TABLE = REFAPP_SCHEMA_NAME + "." + USERS_PASSWORD_TABLE_NAME;
 
-	private AuthorRowMapper authorRowMapper = new AuthorRowMapper();
-	private AuthorPasswordRowMapper authorPasswordRowMapper = new AuthorPasswordRowMapper();
+	private UserRowMapper UserRowMapper = new UserRowMapper();
+	private UserPasswordRowMapper UserPasswordRowMapper = new UserPasswordRowMapper();
 
 	@Override
-	public InsertAuthorResponse insertAuthor(InsertAuthorRequest request) throws DaoException {
-		LOG.info(DAO_NAME + ": Insert author operation invoked.");
+	public InsertUserResponse insertUser(InsertUserRequest request) throws DaoException {
+		LOG.info(DAO_NAME + ": Insert User operation invoked.");
 
 		super.doPersistConnection();
 
 		int rowsAffected = 0;
 
-		if (request.getAuthor().getAuthorId() != null && request.getAuthor().getAuthorInfo() != null) {
-			rowsAffected += localInsertAuthor(request);
+		if (request.getUser().getUserId() != null && request.getUser().getUserInfo() != null) {
+			rowsAffected += localInsertUser(request);
 
-			rowsAffected += localInsertAuthorPassword(request);
+			rowsAffected += localInsertUserPassword(request);
 
-			rowsAffected += localInsertAuthorAddress(request);
+			rowsAffected += localInsertUserAddress(request);
 		}
 
 		super.doCloseConnection();
 
-		return new InsertAuthorResponse(rowsAffected);
+		return new InsertUserResponse(rowsAffected);
 	}
 
-	private int localInsertAuthor(InsertAuthorRequest request) throws DaoException {
+	private int localInsertUser(InsertUserRequest request) throws DaoException {
 		SqlStatement sql = new SqlStatement.Builder()
 				.doInsert(USERS_TABLE)
 				.columnValues(USERNAME_COLUMN_NAME, FIRSTNAME_COLUMN_NAME, LASTNAME_COLUMN_NAME, BIRTHDATE_COLUMN_NAME,
 						GENDER_COLUMN_NAME, EMAIL_COLUMN_NAME, PHONE_COLUMN_NAME).build();
-		Object[] parameters = DaoHelper.generateArray(request.getAuthor().getAuthorId().getUserName(), request
-				.getAuthor().getAuthorInfo().getFirstName(), request.getAuthor().getAuthorInfo().getLastName(), request
-				.getAuthor().getAuthorInfo().getBirthDate(),
-				request.getAuthor().getAuthorInfo().getGender().toString(), request.getAuthor().getAuthorInfo()
-						.getEmail(), request.getAuthor().getAuthorInfo().getPhone());
+		Object[] parameters = DaoHelper.generateArray(request.getUser().getUserId().getUserName(), request
+				.getUser().getUserInfo().getFirstName(), request.getUser().getUserInfo().getLastName(), request
+				.getUser().getUserInfo().getBirthDate(),
+				request.getUser().getUserInfo().getGender().toString(), request.getUser().getUserInfo()
+						.getEmail(), request.getUser().getUserInfo().getPhone());
 		return super.insert(sql, parameters);
 	}
 
-	private int localInsertAuthorPassword(InsertAuthorRequest request) throws DaoException {
+	private int localInsertUserPassword(InsertUserRequest request) throws DaoException {
 		SqlStatement sql = new SqlStatement.Builder().doInsert(USERS_PASSWORD_TABLE)
 				.columnValues(USERNAME_COLUMN_NAME, PASSWORD_COLUMN_NAME).build();
-		Object[] parameters = DaoHelper.generateArray(request.getAuthor().getAuthorId().getUserName(), request
-				.getAuthorPassword().getPassword());
+		Object[] parameters = DaoHelper.generateArray(request.getUser().getUserId().getUserName(), request
+				.getUserPassword().getPassword());
 		return super.insert(sql, parameters);
 	}
 
-	private int localInsertAuthorAddress(InsertAuthorRequest request) throws DaoException {
-		if (request.getAuthor().getAuthorAddress() != null) {
+	private int localInsertUserAddress(InsertUserRequest request) throws DaoException {
+		if (request.getUser().getUserAddress() != null) {
 			SqlStatement sql = new SqlStatement.Builder()
 					.doInsert(USERS_ADDRESS_TABLE)
 					.columnValues(USERNAME_COLUMN_NAME, ADDRESS_COLUMN_NAME, POSTALCODE_COLUMN_NAME,
 							MUNICIPALITY_COLUMN_NAME, REGION_COLUMN_NAME, COUNTRY_COLUMN_NAME).build();
-			Object[] parameters = DaoHelper.generateArray(request.getAuthor().getAuthorId().getUserName(), request
-					.getAuthor().getAuthorAddress().getAddress(), request.getAuthor().getAuthorAddress()
-					.getPostalCode(), request.getAuthor().getAuthorAddress().getMunicipality(), request.getAuthor()
-					.getAuthorAddress().getRegion(), request.getAuthor().getAuthorAddress().getCountry());
+			Object[] parameters = DaoHelper.generateArray(request.getUser().getUserId().getUserName(), request
+					.getUser().getUserAddress().getAddress(), request.getUser().getUserAddress()
+					.getPostalCode(), request.getUser().getUserAddress().getMunicipality(), request.getUser()
+					.getUserAddress().getRegion(), request.getUser().getUserAddress().getCountry());
 			return super.insert(sql, parameters);
 		} else {
 			return 0;
@@ -131,78 +131,78 @@ public class UserDaoBean extends BaseDao implements UserDao {
 	}
 
 	@Override
-	public UpdateAuthorResponse updateAuthor(UpdateAuthorRequest request) throws DaoException {
+	public UpdateUserResponse updateUser(UpdateUserRequest request) throws DaoException {
 		super.doPersistConnection();
 
 		int rowsAffected = 0;
 
-		if (request.getAuthor().getAuthorId() != null) {
-			rowsAffected += localUpdateAuthor(request);
+		if (request.getUser().getUserId() != null) {
+			rowsAffected += localUpdateUser(request);
 
-			rowsAffected += localUpdateAuthorStatus(request);
+			rowsAffected += localUpdateUserStatus(request);
 
-			rowsAffected += localUpdateAuthorPassword(request);
+			rowsAffected += localUpdateUserPassword(request);
 
-			rowsAffected += localUpdateAuthorAddress(request);
+			rowsAffected += localUpdateUserAddress(request);
 		}
 
 		super.doCloseConnection();
 
-		return new UpdateAuthorResponse(rowsAffected);
+		return new UpdateUserResponse(rowsAffected);
 	}
 
-	private int localUpdateAuthor(UpdateAuthorRequest request) throws DaoException {
-		if (request.getAuthor().getAuthorInfo() != null) {
+	private int localUpdateUser(UpdateUserRequest request) throws DaoException {
+		if (request.getUser().getUserInfo() != null) {
 			SqlStatement sql = new SqlStatement.Builder()
 					.doUpdate(USERS_TABLE)
 					.setColumns(FIRSTNAME_COLUMN_NAME, LASTNAME_COLUMN_NAME, BIRTHDATE_COLUMN_NAME,
 							GENDER_COLUMN_NAME, EMAIL_COLUMN_NAME, PHONE_COLUMN_NAME).where(USERNAME_COLUMN_NAME)
 					.build();
-			Object[] parameters = DaoHelper.generateArray(request.getAuthor().getAuthorInfo().getFirstName(), request
-					.getAuthor().getAuthorInfo().getLastName(), request.getAuthor().getAuthorInfo().getBirthDate(),
-					request.getAuthor().getAuthorInfo().getGender().toString(), request.getAuthor().getAuthorInfo()
-							.getEmail(), request.getAuthor().getAuthorInfo().getPhone(), request.getAuthor()
-							.getAuthorId().getUserName());
+			Object[] parameters = DaoHelper.generateArray(request.getUser().getUserInfo().getFirstName(), request
+					.getUser().getUserInfo().getLastName(), request.getUser().getUserInfo().getBirthDate(),
+					request.getUser().getUserInfo().getGender().toString(), request.getUser().getUserInfo()
+							.getEmail(), request.getUser().getUserInfo().getPhone(), request.getUser()
+							.getUserId().getUserName());
 			return super.update(sql, parameters);
 		} else {
 			return 0;
 		}
 	}
 
-	private int localUpdateAuthorStatus(UpdateAuthorRequest request) throws DaoException {
-		if (request.getAuthor().getAuthorId().getStatus() != null) {
+	private int localUpdateUserStatus(UpdateUserRequest request) throws DaoException {
+		if (request.getUser().getUserId().getStatus() != null) {
 			SqlStatement sql = new SqlStatement.Builder().doUpdate(USERS_STATUS_TABLE)
 					.setColumn(STATUS_COLUMN_NAME).where(USERNAME_COLUMN_NAME).build();
-			Object[] parameters = DaoHelper.generateArray(request.getAuthor().getAuthorId().getStatus().toString(),
-					request.getAuthor().getAuthorId().getUserName());
+			Object[] parameters = DaoHelper.generateArray(request.getUser().getUserId().getStatus().toString(),
+					request.getUser().getUserId().getUserName());
 			return super.update(sql, parameters);
 		} else {
 			return 0;
 		}
 	}
 
-	private int localUpdateAuthorPassword(UpdateAuthorRequest request) throws DaoException {
-		if (request.getAuthorPassword() != null) {
+	private int localUpdateUserPassword(UpdateUserRequest request) throws DaoException {
+		if (request.getUserPassword() != null) {
 			SqlStatement sql = new SqlStatement.Builder().doUpdate(USERS_PASSWORD_TABLE)
 					.setColumn(PASSWORD_COLUMN_NAME).where(USERNAME_COLUMN_NAME).build();
-			Object[] parameters = DaoHelper.generateArray(request.getAuthorPassword().getPassword(), request
-					.getAuthor().getAuthorId().getUserName());
+			Object[] parameters = DaoHelper.generateArray(request.getUserPassword().getPassword(), request
+					.getUser().getUserId().getUserName());
 			return super.update(sql, parameters);
 		} else {
 			return 0;
 		}
 	}
 
-	private int localUpdateAuthorAddress(UpdateAuthorRequest request) throws DaoException {
-		if (request.getAuthor().getAuthorAddress() != null) {
+	private int localUpdateUserAddress(UpdateUserRequest request) throws DaoException {
+		if (request.getUser().getUserAddress() != null) {
 			SqlStatement sql = new SqlStatement.Builder()
 					.doUpdate(USERS_ADDRESS_TABLE)
 					.setColumns(ADDRESS_COLUMN_NAME, POSTALCODE_COLUMN_NAME, MUNICIPALITY_COLUMN_NAME,
 							REGION_COLUMN_NAME, COUNTRY_COLUMN_NAME).where(USERNAME_COLUMN_NAME).build();
-			Object[] parameters = DaoHelper.generateArray(request.getAuthor().getAuthorAddress().getAddress(), request
-					.getAuthor().getAuthorAddress().getPostalCode(), request.getAuthor().getAuthorAddress()
-					.getMunicipality(), request.getAuthor().getAuthorAddress().getRegion(), request.getAuthor()
-					.getAuthorAddress().getCountry(), request.getAuthor().getAuthorId().getUserName());
+			Object[] parameters = DaoHelper.generateArray(request.getUser().getUserAddress().getAddress(), request
+					.getUser().getUserAddress().getPostalCode(), request.getUser().getUserAddress()
+					.getMunicipality(), request.getUser().getUserAddress().getRegion(), request.getUser()
+					.getUserAddress().getCountry(), request.getUser().getUserId().getUserName());
 			return super.update(sql, parameters);
 		} else {
 			return 0;
@@ -210,52 +210,52 @@ public class UserDaoBean extends BaseDao implements UserDao {
 	}
 
 	@Override
-	public SelectAuthorResponse selectAuthor(SelectAuthorRequest request) throws DaoException {
+	public SelectUserResponse selectUser(SelectUserRequest request) throws DaoException {
 		SqlStatement sql = new SqlStatement.Builder().doSelect("*").from(USERS_VIEW).where(USERNAME_COLUMN_NAME)
 				.build();
 		Object[] parameters = DaoHelper.generateArray(request.getUserName());
-		List<Author> authorList = super.select(sql, authorRowMapper, parameters);
-		return new SelectAuthorResponse(authorList);
+		List<User> UserList = super.select(sql, UserRowMapper, parameters);
+		return new SelectUserResponse(UserList);
 	}
 
 	@Override
-	public SelectAuthorResponse selectAllAuthors() throws DaoException {
+	public SelectUserResponse selectAllUsers() throws DaoException {
 		super.doPersistConnection();
 		
 		SqlStatement sql = new SqlStatement.Builder().doSelectAll().from(USERS_VIEW).build();
-		List<Author> authorList = super.select(sql, authorRowMapper);
-		return new SelectAuthorResponse(authorList);
+		List<User> UserList = super.select(sql, UserRowMapper);
+		return new SelectUserResponse(UserList);
 	}
 
 	@Override
-	public SelectAuthorPasswordResponse selectAuthorPassword(SelectAuthorPasswordRequest request) throws DaoException {
+	public SelectUserPasswordResponse selectUserPassword(SelectUserPasswordRequest request) throws DaoException {
 		SqlStatement sql = new SqlStatement.Builder().doSelect("*").from(USERS_PASSWORD_TABLE)
 				.where(USERNAME_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(request.getUserName());
-		List<AuthorPassword> authorPasswordList = super.select(sql, authorPasswordRowMapper, parameters);
-		return new SelectAuthorPasswordResponse(authorPasswordList);
+		List<UserPassword> UserPasswordList = super.select(sql, UserPasswordRowMapper, parameters);
+		return new SelectUserPasswordResponse(UserPasswordList);
 	}
 
 	@Override
-	public DeleteAuthorResponse deleteAuthor(DeleteAuthorRequest request) throws DaoException {
+	public DeleteUserResponse deleteUser(DeleteUserRequest request) throws DaoException {
 		SqlStatement sql = new SqlStatement.Builder().doDelete(USERS_TABLE).where(USERNAME_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(request.getUserName());
 		int rowsAffected = super.delete(sql, parameters);
-		return new DeleteAuthorResponse(rowsAffected);
+		return new DeleteUserResponse(rowsAffected);
 	}
 
 	@Override
-	public PurgeAuthorsResponse purgeAuthors(PurgeAuthorsRequest request) throws DaoException {
+	public PurgeUsersResponse purgeUsers(PurgeUsersRequest request) throws DaoException {
 		SqlStatement sql = new SqlStatement("DELETE FROM " + USERS_TABLE + " WHERE " + STATUS_COLUMN_NAME + " = ?");
-		Object[] parameters = DaoHelper.generateArray(AuthorStatus.DELETED.toString());
+		Object[] parameters = DaoHelper.generateArray(UserStatus.DELETED.toString());
 
 		if (request.isGreedy()) {
 			sql.append(" AND (" + STATUS_COLUMN_NAME + " = ? AND " + CREATED_COLUMN_NAME + " >= ?");
-			parameters = DaoHelper.generateArray(AuthorStatus.DELETED.toString(), AuthorStatus.PENDING.toString(),
+			parameters = DaoHelper.generateArray(UserStatus.DELETED.toString(), UserStatus.PENDING.toString(),
 					DateTimeUtils.createCalendar(Calendar.DATE, -7));
 		}
 
 		int rowsAffected = super.delete(sql, parameters);
-		return new PurgeAuthorsResponse(rowsAffected);
+		return new PurgeUsersResponse(rowsAffected);
 	}
 }

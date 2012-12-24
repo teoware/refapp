@@ -14,29 +14,29 @@ import org.junit.Test;
 import com.teoware.refapp.dao.test.TestResultSetFactory;
 import com.teoware.refapp.dao.util.ResultSetExtractor;
 import com.teoware.refapp.dao.util.RowMapperResultSetExtractor;
-import com.teoware.refapp.model.author.Author;
+import com.teoware.refapp.model.user.User;
 
 public class RowMapperResultSetExtractorTest {
 
 	@Test
-	public void testExtractDataFromAuthorResultSet() throws SQLException, ParseException {
-		ResultSetExtractor<List<Author>> resultSetExtractor = new RowMapperResultSetExtractor<Author>(
-				new AuthorRowMapper(), 0);
-		ResultSet resultSet = TestResultSetFactory.createSelectAllAuthorsResultSet();
-		List<Author> authorList = resultSetExtractor.extractData(resultSet);
+	public void testExtractDataFromUserResultSet() throws SQLException, ParseException {
+		ResultSetExtractor<List<User>> resultSetExtractor = new RowMapperResultSetExtractor<User>(
+				new UserRowMapper(), 0);
+		ResultSet resultSet = TestResultSetFactory.createSelectAllUsersResultSet();
+		List<User> userList = resultSetExtractor.extractData(resultSet);
 
-		assertNotNull(authorList);
-		assertTrue(authorList.size() == 3);
+		assertNotNull(userList);
+		assertTrue(userList.size() == 3);
 
-		Author author = authorList.get(0);
+		User user = userList.get(0);
 
-		assertNotNull(author);
-		assertNotNull(author.getAuthorId());
-		assertNotNull(author.getAuthorInfo());
-		assertNotNull(author.getAuthorAddress());
+		assertNotNull(user);
+		assertNotNull(user.getUserId());
+		assertNotNull(user.getUserInfo());
+		assertNotNull(user.getUserAddress());
 
-		assertEquals("john.doe", author.getAuthorId().getUserName());
-		assertEquals("John", author.getAuthorInfo().getFirstName());
-		assertEquals("Storgata 1", author.getAuthorAddress().getAddress());
+		assertEquals("john.doe", user.getUserId().getUserName());
+		assertEquals("John", user.getUserInfo().getFirstName());
+		assertEquals("Storgata 1", user.getUserAddress().getAddress());
 	}
 }

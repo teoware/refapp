@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="templates/common.xhtml">
+
+	<ui:define name="content">
+		<a href="#{request.contextPath}/">&larr; Home</a>
+		<h2>Register user</h2>
+		<h:form>
+			<h:panelGrid>
+				<h:outputLabel value="Username: " style="font-weight:bold" />
+				<h:inputText value="#{registerUser.username}" />
+				<h:outputLabel value="First name: " style="font-weight:bold" />
+				<h:inputText value="#{registerUser.firstName}" />
+				<h:outputLabel value="Last name: " style="font-weight:bold" />
+				<h:inputText value="#{registerUser.lastName}" />
+				<h:outputLabel value="Email: " style="font-weight:bold" />
+				<h:inputText value="#{registerUser.email}" />
+				<h:outputLabel value="Phone: " style="font-weight:bold" />
+				<h:inputText value="#{registerUser.phone}" />
+				<h:commandButton value="Register" type="submit"
+					action="#{registerUser.onClickRegisterButton}" />
+			</h:panelGrid>
+		</h:form>
+		<h4>Action: #{registerUser.action}</h4>
+	</ui:define>
+
+</ui:composition>
+
+</html>
