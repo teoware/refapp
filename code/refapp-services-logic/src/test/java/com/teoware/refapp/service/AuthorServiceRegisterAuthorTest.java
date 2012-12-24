@@ -14,7 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import com.teoware.refapp.dao.AuthorDao;
+import com.teoware.refapp.dao.UserDao;
 import com.teoware.refapp.dao.DaoException;
 import com.teoware.refapp.dao.dto.InsertAuthorRequest;
 import com.teoware.refapp.model.common.OperationResult;
@@ -30,7 +30,7 @@ public class AuthorServiceRegisterAuthorTest {
 	private AuthorService authorService = new AuthorServiceBean();
 
 	@Mock
-	private AuthorDao authorDao;
+	private UserDao authorDao;
 
 	private RegisterAuthorRequest request;
 	private RegisterAuthorResponse response;

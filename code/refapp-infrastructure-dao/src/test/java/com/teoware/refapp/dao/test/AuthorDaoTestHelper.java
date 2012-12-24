@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import com.teoware.refapp.dao.AuthorDao;
+import com.teoware.refapp.dao.UserDao;
 import com.teoware.refapp.dao.DaoException;
 import com.teoware.refapp.dao.dto.DeleteAuthorRequest;
 import com.teoware.refapp.dao.dto.DeleteAuthorResponse;
@@ -25,92 +25,92 @@ import com.teoware.refapp.model.enums.Gender;
 
 public abstract class AuthorDaoTestHelper {
 
-	public static int insertAuthor(AuthorDao authorDao, Author author, AuthorPassword authorPassword)
+	public static int insertAuthor(UserDao authorDao, Author author, AuthorPassword authorPassword)
 			throws DaoException {
 		InsertAuthorRequest request = new InsertAuthorRequest(author, authorPassword);
 		InsertAuthorResponse response = authorDao.insertAuthor(request);
 		return response.getRowsAffected();
 	}
 
-	public static int updateAuthor(AuthorDao authorDao, Author author, AuthorPassword authorPassword)
+	public static int updateAuthor(UserDao authorDao, Author author, AuthorPassword authorPassword)
 			throws DaoException {
 		UpdateAuthorRequest request = new UpdateAuthorRequest(author, authorPassword);
 		UpdateAuthorResponse response = authorDao.updateAuthor(request);
 		return response.getRowsAffected();
 	}
 
-	public static List<Author> selectAuthor(AuthorDao authorDao, String userName) throws DaoException {
+	public static List<Author> selectAuthor(UserDao authorDao, String userName) throws DaoException {
 		SelectAuthorRequest request = new SelectAuthorRequest(userName);
 		SelectAuthorResponse response = authorDao.selectAuthor(request);
 		return response.getAuthorList();
 	}
 
-	public static List<Author> selectAuthorJohn(AuthorDao authorDao) throws DaoException {
+	public static List<Author> selectAuthorJohn(UserDao authorDao) throws DaoException {
 		return selectAuthor(authorDao, "john.doe");
 	}
 
-	public static List<Author> selectAuthorJane(AuthorDao authorDao) throws DaoException {
+	public static List<Author> selectAuthorJane(UserDao authorDao) throws DaoException {
 		return selectAuthor(authorDao, "jane.doe");
 	}
 
-	public static List<Author> selectAuthorJonah(AuthorDao authorDao) throws DaoException {
+	public static List<Author> selectAuthorJonah(UserDao authorDao) throws DaoException {
 		return selectAuthor(authorDao, "jonah.doe");
 	}
 
-	public static List<AuthorPassword> selectAuthorPassword(AuthorDao authorDao, String userName) throws DaoException {
+	public static List<AuthorPassword> selectAuthorPassword(UserDao authorDao, String userName) throws DaoException {
 		SelectAuthorPasswordRequest request = new SelectAuthorPasswordRequest(userName);
 		SelectAuthorPasswordResponse response = authorDao.selectAuthorPassword(request);
 		return response.getAuthorPasswordList();
 	}
 
-	public static List<AuthorPassword> selectAuthorPasswordJohn(AuthorDao authorDao) throws DaoException {
+	public static List<AuthorPassword> selectAuthorPasswordJohn(UserDao authorDao) throws DaoException {
 		return selectAuthorPassword(authorDao, "john.doe");
 	}
 
-	public static List<AuthorPassword> selectAuthorPasswordJane(AuthorDao authorDao) throws DaoException {
+	public static List<AuthorPassword> selectAuthorPasswordJane(UserDao authorDao) throws DaoException {
 		return selectAuthorPassword(authorDao, "jane.doe");
 	}
 
-	public static List<AuthorPassword> selectAuthorPasswordJonah(AuthorDao authorDao) throws DaoException {
+	public static List<AuthorPassword> selectAuthorPasswordJonah(UserDao authorDao) throws DaoException {
 		return selectAuthorPassword(authorDao, "jonah.doe");
 	}
 
-	public static List<Author> selectAllAuthors(AuthorDao authorDao) throws DaoException {
+	public static List<Author> selectAllAuthors(UserDao authorDao) throws DaoException {
 		SelectAuthorResponse response = authorDao.selectAllAuthors();
 		return response.getAuthorList();
 	}
 
-	public static int deleteAuthor(AuthorDao authorDao, String userName) throws DaoException {
+	public static int deleteAuthor(UserDao authorDao, String userName) throws DaoException {
 		DeleteAuthorRequest request = new DeleteAuthorRequest(userName);
 		DeleteAuthorResponse response = authorDao.deleteAuthor(request);
 		return response.getRowsAffected();
 	}
 
-	public static int deleteAuthorJohn(AuthorDao authorDao) throws DaoException {
+	public static int deleteAuthorJohn(UserDao authorDao) throws DaoException {
 		return deleteAuthor(authorDao, "john.doe");
 	}
 
-	public static int deleteAuthorJane(AuthorDao authorDao) throws DaoException {
+	public static int deleteAuthorJane(UserDao authorDao) throws DaoException {
 		return deleteAuthor(authorDao, "jane.doe");
 	}
 
-	public static int deleteAuthorJonah(AuthorDao authorDao) throws DaoException {
+	public static int deleteAuthorJonah(UserDao authorDao) throws DaoException {
 		return deleteAuthor(authorDao, "jonah.doe");
 	}
 
-	public static int insertAuthorJohn(AuthorDao authorDao) throws DaoException {
+	public static int insertAuthorJohn(UserDao authorDao) throws DaoException {
 		Author author = TestDataFactory.createAuthorJohn();
 		AuthorPassword authorPassword = TestDataFactory.createAuthorJohnPassword();
 		return insertAuthor(authorDao, author, authorPassword);
 	}
 
-	public static int insertAuthorJane(AuthorDao authorDao) throws DaoException {
+	public static int insertAuthorJane(UserDao authorDao) throws DaoException {
 		Author author = TestDataFactory.createAuthorJane();
 		AuthorPassword authorPassword = TestDataFactory.createAuthorJanePassword();
 		return insertAuthor(authorDao, author, authorPassword);
 	}
 
-	public static int insertAuthorJonah(AuthorDao authorDao) throws DaoException {
+	public static int insertAuthorJonah(UserDao authorDao) throws DaoException {
 		Author author = TestDataFactory.createAuthorJonah();
 		AuthorPassword authorPassword = TestDataFactory.createAuthorJonahPassword();
 		return insertAuthor(authorDao, author, authorPassword);

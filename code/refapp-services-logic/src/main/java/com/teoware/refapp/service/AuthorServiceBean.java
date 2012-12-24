@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.teoware.refapp.dao.AuthorDao;
+import com.teoware.refapp.dao.UserDao;
 import com.teoware.refapp.dao.DaoException;
 import com.teoware.refapp.dao.dto.InsertAuthorRequest;
 import com.teoware.refapp.dao.dto.SelectAuthorResponse;
@@ -35,7 +35,7 @@ public class AuthorServiceBean implements AuthorService {
 	private static final String DAO_EXCEPTION_MESSAGE = "DAO exception";
 
 	@Inject
-	private AuthorDao dao;
+	private UserDao dao;
 
 	@Override
 	public RegisterAuthorResponse registerAuthor(RegisterAuthorRequest request) throws ServiceException {

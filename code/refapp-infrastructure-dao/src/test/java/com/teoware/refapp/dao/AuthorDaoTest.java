@@ -35,7 +35,7 @@ import com.teoware.refapp.dao.test.TestResultSetFactory;
 public class AuthorDaoTest {
 
 	@InjectMocks
-	private AuthorDao authorDao = new AuthorDaoBean();
+	private UserDao authorDao = new UserDaoBean();
 
 	@Mock
 	private DataSource dataSource;

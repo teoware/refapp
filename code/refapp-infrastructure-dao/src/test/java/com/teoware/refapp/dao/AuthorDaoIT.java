@@ -1,9 +1,9 @@
 package com.teoware.refapp.dao;
 
-import static com.teoware.refapp.dao.AuthorDaoBean.AUTHORS_ADDRESS_TABLE;
-import static com.teoware.refapp.dao.AuthorDaoBean.AUTHORS_PASSWORD_TABLE;
-import static com.teoware.refapp.dao.AuthorDaoBean.AUTHORS_STATUS_TABLE;
-import static com.teoware.refapp.dao.AuthorDaoBean.AUTHORS_TABLE;
+import static com.teoware.refapp.dao.UserDaoBean.USERS_ADDRESS_TABLE;
+import static com.teoware.refapp.dao.UserDaoBean.USERS_PASSWORD_TABLE;
+import static com.teoware.refapp.dao.UserDaoBean.USERS_STATUS_TABLE;
+import static com.teoware.refapp.dao.UserDaoBean.USERS_TABLE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -144,20 +144,20 @@ public class AuthorDaoIT extends AuthorDaoTestHelper {
 	}
 
 	private static void cleanTables() throws DaoException {
-		if (authorDao.rowCount(AUTHORS_TABLE) > 0) {
-			authorDao.delete(new SqlStatement("DELETE FROM " + AUTHORS_TABLE), null);
+		if (authorDao.rowCount(USERS_TABLE) > 0) {
+			authorDao.delete(new SqlStatement("DELETE FROM " + USERS_TABLE), null);
 		}
 
-		if (authorDao.rowCount(AUTHORS_STATUS_TABLE) > 0) {
-			authorDao.delete(new SqlStatement("DELETE FROM " + AUTHORS_STATUS_TABLE), null);
+		if (authorDao.rowCount(USERS_STATUS_TABLE) > 0) {
+			authorDao.delete(new SqlStatement("DELETE FROM " + USERS_STATUS_TABLE), null);
 		}
 
-		if (authorDao.rowCount(AUTHORS_ADDRESS_TABLE) > 0) {
-			authorDao.delete(new SqlStatement("DELETE FROM " + AUTHORS_ADDRESS_TABLE), null);
+		if (authorDao.rowCount(USERS_ADDRESS_TABLE) > 0) {
+			authorDao.delete(new SqlStatement("DELETE FROM " + USERS_ADDRESS_TABLE), null);
 		}
 
-		if (authorDao.rowCount(AUTHORS_PASSWORD_TABLE) > 0) {
-			authorDao.delete(new SqlStatement("DELETE FROM " + AUTHORS_PASSWORD_TABLE), null);
+		if (authorDao.rowCount(USERS_PASSWORD_TABLE) > 0) {
+			authorDao.delete(new SqlStatement("DELETE FROM " + USERS_PASSWORD_TABLE), null);
 		}
 	}
 }

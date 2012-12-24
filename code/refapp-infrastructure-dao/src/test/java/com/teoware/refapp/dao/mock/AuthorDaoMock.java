@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import com.teoware.refapp.dao.AuthorDaoBean;
+import com.teoware.refapp.dao.UserDaoBean;
 
-public class AuthorDaoMock extends AuthorDaoBean {
+public class AuthorDaoMock extends UserDaoBean {
 
 	private static final long serialVersionUID = 1L;
 
