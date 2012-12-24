@@ -1,0 +1,6 @@
+<xs:schema targetNamespace="http://refapp.teoware.com/domain" xmlns:tns="http://refapp.teoware.com/domain"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xs:include schemaLocation="../common/UserTypes.xsd" />
+
+</xs:schema>

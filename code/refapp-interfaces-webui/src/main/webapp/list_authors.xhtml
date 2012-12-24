@@ -4,14 +4,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 <!-- 
 <f:event type="preRenderView" listener="#{listAuthors.doLoadAuthorList}" />
  -->
+<c:set var="root" value="#{request.contextPath}/" />
 <ui:composition template="templates/common.xhtml">
 
 	<ui:define name="content">
-		<a href="/">&larr; Home</a>
+		<a href="#{root}/">&larr; Home</a>
 		<h2>List authors</h2>
 		<h:dataTable value="#{listAuthors.authorList}" var="author"
 				styleClass="table"

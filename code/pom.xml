@@ -26,15 +26,18 @@
 		<version.maven-clean-plugin>2.5</version.maven-clean-plugin>
 		<version.maven-compiler-plugin>2.5</version.maven-compiler-plugin>
 		<version.maven-javadoc-plugin>2.8</version.maven-javadoc-plugin>
-		<version.maven-ejb-plugin>2.3</version.maven-ejb-plugin>
-		<version.maven-jar-plugin>2.4</version.maven-jar-plugin>
-		<version.maven-ear-plugin>2.7</version.maven-ear-plugin>
-		<version.maven-war-plugin>2.2</version.maven-war-plugin>
-		<version.maven-jaxb2-plugin>0.8.2</version.maven-jaxb2-plugin>
+		<version.maven-dependency-plugin>2.6</version.maven-dependency-plugin>
 		<version.build-helper-maven-plugin>1.7</version.build-helper-maven-plugin>
-		<version.maven-sonar-plugin>2.0</version.maven-sonar-plugin>
 		<version.maven-surefire-plugin>2.12.2</version.maven-surefire-plugin>
 		<version.maven-failsafe-plugin>2.12.4</version.maven-failsafe-plugin>
+		<version.maven-ejb-plugin>2.3</version.maven-ejb-plugin>
+		<version.maven-jar-plugin>2.4</version.maven-jar-plugin>
+		<version.maven-war-plugin>2.2</version.maven-war-plugin>
+		<version.maven-ear-plugin>2.7</version.maven-ear-plugin>
+		<version.maven-jaxb2-plugin>0.8.2</version.maven-jaxb2-plugin>
+		<version.jaxws-maven-plugin>2.2</version.jaxws-maven-plugin>
+		<version.cxf-codegen-plugin>cxf-codegen-plugin</version.cxf-codegen-plugin>
+		<version.maven-sonar-plugin>2.0</version.maven-sonar-plugin>
 		<version.m2e.lifecycle-mapping>1.0.0</version.m2e.lifecycle-mapping>
 		
 		<!-- Dependencies -->
@@ -49,17 +52,17 @@
 		<version.hibernate-validator>4.2.0.Final</version.hibernate-validator>
 		<version.commons-validator>1.4.0</version.commons-validator>
 		<!-- Logging -->
-		<version.slf4j-api>1.6.2</version.slf4j-api>
-		<version.slf4j-log4j12>1.6.2</version.slf4j-log4j12>
+		<version.log4j>1.2.17</version.log4j>
+		<version.slf4j>1.6.2</version.slf4j>
 		<!-- Security -->
 		<version.jasypt>1.9.0</version.jasypt>
 		<version.commons-codec>1.7</version.commons-codec>
 		<!-- Database -->
 		<version.derby>10.8.2.2</version.derby>
-		<version.derbyclient>10.8.2.2</version.derbyclient>
 		<!-- Testing -->
 		<version.junit>4.9</version.junit>
-		<version.mockito-core>1.9.0</version.mockito-core>
+		<version.mockito>1.9.0</version.mockito>
+		<version.powermock>1.4.12</version.powermock>
 		<version.hsqldb>2.2.8</version.hsqldb>
 		<version.h2database.h2>1.3.168</version.h2database.h2>
 	</properties>
@@ -72,9 +75,9 @@
 		<module>refapp-services-facade</module>
 		<module>refapp-services-logic</module>
 		<module>refapp-interfaces-consumer</module>
-<!-- 		<module>refapp-interfaces-rest</module> -->
+		<module>refapp-interfaces-rest</module>
 		<module>refapp-interfaces-webui</module>
-<!-- 		<module>refapp-ear</module> -->
+		<module>refapp-ear</module>
 	</modules>
 	
 	<!-- REPOSITORIES -->
@@ -139,15 +142,21 @@
 			
 			<!-- Logging -->
 			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>${version.log4j}</version>
+			</dependency>
+			
+			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
-				<version>${version.slf4j-api}</version>
+				<version>${version.slf4j}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-log4j12</artifactId>
-				<version>${version.slf4j-log4j12}</version>
+				<version>${version.slf4j}</version>
 			</dependency>
 			
 			<!-- Security -->
@@ -173,7 +182,7 @@
 			<dependency>
 				<groupId>org.apache.derby</groupId>
 				<artifactId>derbyclient</artifactId>
-				<version>${version.derbyclient}</version>
+				<version>${version.derby}</version>
 			</dependency>
 			
 			<!-- Testing -->
@@ -187,8 +196,20 @@
 			<dependency>
 				<groupId>org.mockito</groupId>
 				<artifactId>mockito-core</artifactId>  
-				<version>${version.mockito-core}</version> 
+				<version>${version.mockito}</version> 
 				<scope>test</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-module-junit4</artifactId>
+				<version>${version.powermock}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-api-mockito</artifactId>
+				<version>${version.powermock}</version>
 			</dependency>
 			
 			<dependency>
@@ -287,40 +308,6 @@
 				
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-ejb-plugin</artifactId>
-					<version>${version.maven-ejb-plugin}</version>
-					<configuration>
-						<ejbVersion>${ejb.version}</ejbVersion>
-					</configuration>
-				</plugin>
-				
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>${version.maven-jar-plugin}</version>
-				</plugin>
-				
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-ear-plugin</artifactId>
-					<version>${version.maven-ear-plugin}</version>
-					<configuration>
-						<version>${ear.version}</version>
-						<defaultLibBundleDir>lib</defaultLibBundleDir>
-					</configuration>
-				</plugin>
-				
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-war-plugin</artifactId>
-					<version>${version.maven-war-plugin}</version>
-					<configuration>
-						<failOnMissingWebXml>false</failOnMissingWebXml>
-					</configuration>
-				</plugin>
-				
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
 					<version>${version.maven-javadoc-plugin}</version>
 					<executions>
@@ -334,16 +321,9 @@
 				</plugin>
 				
 				<plugin>
-					<groupId>org.jvnet.jaxb2.maven2</groupId>
-					<artifactId>maven-jaxb2-plugin</artifactId>
-					<version>${version.maven-jaxb2-plugin}</version>
-					<executions>
-						<execution>
-							<goals>
-								<goal>generate</goal>
-							</goals>
-						</execution>
-					</executions>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.6</version>
 				</plugin>
 				
 				<plugin>
@@ -364,10 +344,6 @@
 								<goal>test</goal>
 							</goals>
 							<configuration>
-								<includes>                  
-									<include>**/com/teoware/refapp/**/*Test.java</include>
-									<include>**/com/teoware/refapp/**/test/*.java</include>
-								</includes>
 <!-- 								<groups>com.teoware.refapp.test.UnitTestGroup</groups> -->
 							</configuration>
 						</execution>
@@ -386,14 +362,69 @@
 								<goal>verify</goal>
 							</goals>
 							<configuration>
-								<includes>                  
-									<include>**/com/teoware/refapp/**/*IT.java</include>
-									<include>**/com/teoware/refapp/**/itest/*.java</include>
-								</includes>
 <!-- 								<groups>com.teoware.refapp.test.IntegrationTestGroup</groups> -->
 							</configuration>
 						</execution>
 					</executions>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-ejb-plugin</artifactId>
+					<version>${version.maven-ejb-plugin}</version>
+					<configuration>
+						<ejbVersion>${ejb.version}</ejbVersion>
+					</configuration>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>${version.maven-jar-plugin}</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>${version.maven-war-plugin}</version>
+					<configuration>
+						<failOnMissingWebXml>false</failOnMissingWebXml>
+					</configuration>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-ear-plugin</artifactId>
+					<version>${version.maven-ear-plugin}</version>
+					<configuration>
+						<version>${ear.version}</version>
+						<defaultLibBundleDir>lib</defaultLibBundleDir>
+					</configuration>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.jvnet.jaxb2.maven2</groupId>
+					<artifactId>maven-jaxb2-plugin</artifactId>
+					<version>${version.maven-jaxb2-plugin}</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>generate</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.jvnet.jax-ws-commons</groupId>
+					<artifactId>jaxws-maven-plugin</artifactId>
+					<version>${version.jaxws-maven-plugin}</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.cxf</groupId>
+					<artifactId>cxf-codegen-plugin</artifactId>
+					<version>${version.cxf-codegen-plugin}</version>
 				</plugin>
 				
 				<plugin>
@@ -416,6 +447,20 @@
 										<versionRange>[${version.maven-ear-plugin},)</versionRange>
 										<goals>
 											<goal>execute</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+								
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.jvnet.jax-ws-commons</groupId>
+										<artifactId>jaxws-maven-plugin</artifactId>
+										<versionRange>[${version.jaxws-maven-plugin},)</versionRange>
+										<goals>
+											<goal>wsimport</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>

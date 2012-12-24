@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:include schemaLocation="Basic.xsd" />
-	
-	<xs:simpleType name="userNameType">
-		<xs:restriction base="an3-20" />
-	</xs:simpleType>
-</xs:schema>

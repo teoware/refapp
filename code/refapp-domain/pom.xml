@@ -15,8 +15,8 @@
 	<!-- PROPERTIES -->
 	<properties>
 		<!-- JAXB -->
-		<jaxb.schema.directory>${project.basedir}/src/main/resources/xsd</jaxb.schema.directory>
-		<jaxb.binding.directory>${project.basedir}/src/main/resources/xjb</jaxb.binding.directory>
+		<jaxb.schema.directory>${project.basedir}/src/main/resources/schema</jaxb.schema.directory>
+		<jaxb.binding.directory>${project.basedir}/src/main/resources/binding</jaxb.binding.directory>
 		<jaxb.generate.directory>${project.basedir}/src/main/generated</jaxb.generate.directory>
 	</properties>
 	
@@ -87,6 +87,28 @@
 					<bindingDirectory>${jaxb.binding.directory}</bindingDirectory>
 					<generateDirectory>${jaxb.generate.directory}</generateDirectory>
 				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.jvnet.jax-ws-commons</groupId>
+				<artifactId>jaxws-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>wsimport</goal>
+						</goals>
+						<configuration>
+<!-- 							<wsdlLocation>http://.../*</wsdlLocation> -->
+<!-- 							<wsdlDirectory>${basedir}/src/main/resources/wsdl</wsdlDirectory> -->
+<!-- 							<wsdlFiles> -->
+<!-- 								<wsdlFile>Default.wsdl</wsdlFile> -->
+<!-- 							</wsdlFiles> -->
+<!-- 							<wsdlUrls> -->
+<!-- 								<wsdlUrl>http://localhost/ws/Default.ws?WSDL</wsdlUrl> -->
+<!-- 							</wsdlUrls> -->
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 			
 			<plugin>
