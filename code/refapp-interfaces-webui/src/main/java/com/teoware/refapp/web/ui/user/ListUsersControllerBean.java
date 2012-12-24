@@ -3,7 +3,6 @@ package com.teoware.refapp.web.ui.user;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -26,23 +25,16 @@ public class ListUsersControllerBean extends AbstractControllerBean implements S
 
 	private static final String PAGE_TITLE = "List users";
 
-	private String action = "Init";
-
 	private List<User> userList;
 
 	@Inject
 	UserServiceConsumer consumer;
 
-	@PostConstruct
-	private void doLoadUserList() {
-		LOG.info("Loading user list");
+	public void doLoadUserList() {
+		LOG.debug("Loading user list");
 		UserListVO vo = consumer.listUsers();
 		userList = vo.getUserList();
-		action = "Size: " + userList.size();
-	}
-
-	public String getAction() {
-		return action;
+		debug = "Size: " + userList.size();
 	}
 
 	public List<User> getUserList() {
@@ -51,6 +43,6 @@ public class ListUsersControllerBean extends AbstractControllerBean implements S
 
 	@Override
 	public String getTitle() {
-		return super.getTitle() + PAGE_TITLE;
+		return super.getTitle(PAGE_TITLE);
 	}
 }

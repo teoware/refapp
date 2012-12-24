@@ -5,11 +5,17 @@ import java.io.StringWriter;
 
 public abstract class AbstractControllerBean {
 
-	protected static final String DEFAULT_TITLE = "RefApp";
-	protected static final String TITLE_SPACER = " - ";
+	public static final String DEFAULT_TITLE = "RefApp";
+	public static final String TITLE_SPACER = " - ";
+
+	protected String debug;
 
 	public String getTitle() {
-		return DEFAULT_TITLE + TITLE_SPACER;
+		return DEFAULT_TITLE;
+	}
+
+	public String getTitle(String subTitle) {
+		return DEFAULT_TITLE + TITLE_SPACER + subTitle;
 	}
 
 	protected String getStackTrace(Exception e) {
@@ -17,5 +23,13 @@ public abstract class AbstractControllerBean {
 		PrintWriter printWriter = new PrintWriter(stringWriter);
 		e.printStackTrace(printWriter);
 		return stringWriter.toString();
+	}
+
+	public String getDebug() {
+		return debug;
+	}
+
+	public void setDebug(String debug) {
+		this.debug = debug;
 	}
 }

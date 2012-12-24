@@ -7,8 +7,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.teoware.refapp.model.enums.UserStatus;
 import com.teoware.refapp.model.enums.Gender;
+import com.teoware.refapp.model.enums.UserStatus;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserPassword;
 import com.teoware.refapp.model.util.BeanFactory;
@@ -23,8 +23,6 @@ public class RegisterUserControllerBean extends AbstractControllerBean implement
 	private static final long serialVersionUID = 1L;
 	private static final String PAGE_TITLE = "Register user";
 
-	private String action;
-
 	private String username;
 	private String firstName;
 	private String lastName;
@@ -36,7 +34,7 @@ public class RegisterUserControllerBean extends AbstractControllerBean implement
 	UserServiceConsumer consumer;
 
 	public void onClickRegisterButton() {
-		action = "onClickRegisterButton";
+		setDebug("onClickRegisterButton");
 		RegisterUserRequestVO vo = createRegisterUserRequest();
 		consumer.registerUser(vo);
 	}
@@ -65,10 +63,6 @@ public class RegisterUserControllerBean extends AbstractControllerBean implement
 		userPassword.setPassword("myPassword");
 
 		return new RegisterUserRequestVO(user, userPassword);
-	}
-
-	public String getAction() {
-		return action;
 	}
 
 	public String getUsername() {
@@ -121,6 +115,6 @@ public class RegisterUserControllerBean extends AbstractControllerBean implement
 
 	@Override
 	public String getTitle() {
-		return super.getTitle() + PAGE_TITLE;
+		return super.getTitle(PAGE_TITLE);
 	}
 }

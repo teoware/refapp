@@ -2,151 +2,151 @@ package com.teoware.refapp.dao.test;
 
 import java.util.Calendar;
 
-import com.teoware.refapp.dao.dto.DeleteAuthorRequest;
-import com.teoware.refapp.dao.dto.InsertAuthorRequest;
-import com.teoware.refapp.dao.dto.PurgeAuthorsRequest;
-import com.teoware.refapp.dao.dto.SelectAuthorRequest;
-import com.teoware.refapp.dao.dto.UpdateAuthorRequest;
-import com.teoware.refapp.model.author.Author;
-import com.teoware.refapp.model.author.AuthorPassword;
-import com.teoware.refapp.model.enums.AuthorStatus;
+import com.teoware.refapp.dao.dto.DeleteUserRequest;
+import com.teoware.refapp.dao.dto.InsertUserRequest;
+import com.teoware.refapp.dao.dto.PurgeUsersRequest;
+import com.teoware.refapp.dao.dto.SelectUserRequest;
+import com.teoware.refapp.dao.dto.UpdateUserRequest;
 import com.teoware.refapp.model.enums.Gender;
+import com.teoware.refapp.model.enums.UserStatus;
+import com.teoware.refapp.model.user.User;
+import com.teoware.refapp.model.user.UserPassword;
 import com.teoware.refapp.model.util.BeanFactory;
 import com.teoware.refapp.util.PasswordHandler;
 import com.teoware.refapp.util.time.DateTimeUtils;
 
 public final class TestDataFactory {
 
-	public static Author createAuthorJohn() {
+	public static User createUserJohn() {
 		Calendar calendar = Calendar.getInstance();
-		Author author = BeanFactory.createAuthorBean();
-		author.getAuthorId().setUserName("john.doe");
-		author.getAuthorId().setStatus(AuthorStatus.ACTIVE);
-		author.getAuthorId().setCreated(calendar);
-		author.getAuthorId().setModified(calendar);
-		author.getAuthorInfo().setFirstName("John");
-		author.getAuthorInfo().setLastName("Doe");
-		author.getAuthorInfo().setBirthDate(DateTimeUtils.stringToDate("1975-01-01"));
-		author.getAuthorInfo().setGender(Gender.MALE);
-		author.getAuthorInfo().setEmail("john.doe@email.com");
-		author.getAuthorInfo().setPhone("+47 23456789");
-		author.getAuthorAddress().setAddress("Storgata 1");
-		author.getAuthorAddress().setPostalCode("1234");
-		author.getAuthorAddress().setMunicipality("Oslo");
-		author.getAuthorAddress().setRegion("Oslo");
-		author.getAuthorAddress().setCountry("Norway");
+		User author = BeanFactory.createUserBean();
+		author.getUserId().setUserName("john.doe");
+		author.getUserId().setStatus(UserStatus.ACTIVE);
+		author.getUserId().setCreated(calendar);
+		author.getUserId().setModified(calendar);
+		author.getUserInfo().setFirstName("John");
+		author.getUserInfo().setLastName("Doe");
+		author.getUserInfo().setBirthDate(DateTimeUtils.stringToDate("1975-01-01"));
+		author.getUserInfo().setGender(Gender.MALE);
+		author.getUserInfo().setEmail("john.doe@email.com");
+		author.getUserInfo().setPhone("+47 23456789");
+		author.getUserAddress().setAddress("Storgata 1");
+		author.getUserAddress().setPostalCode("1234");
+		author.getUserAddress().setMunicipality("Oslo");
+		author.getUserAddress().setRegion("Oslo");
+		author.getUserAddress().setCountry("Norway");
 		return author;
 	}
 
-	public static Author createAuthorJane() {
+	public static User createUserJane() {
 		Calendar calendar = Calendar.getInstance();
-		Author author = BeanFactory.createAuthorBean();
-		author.getAuthorId().setUserName("jane.doe");
-		author.getAuthorId().setStatus(AuthorStatus.ACTIVE);
-		author.getAuthorId().setCreated(calendar);
-		author.getAuthorId().setModified(calendar);
-		author.getAuthorInfo().setFirstName("Jane");
-		author.getAuthorInfo().setLastName("Doe");
-		author.getAuthorInfo().setBirthDate(DateTimeUtils.stringToDate("1970-12-30"));
-		author.getAuthorInfo().setGender(Gender.FEMALE);
-		author.getAuthorInfo().setEmail("jane.doe@email.com");
-		author.getAuthorInfo().setPhone("+47 98765432");
-		author.getAuthorAddress().setAddress("Lillegata 1");
-		author.getAuthorAddress().setPostalCode("1010");
-		author.getAuthorAddress().setMunicipality("Oslo");
-		author.getAuthorAddress().setRegion("Oslo");
-		author.getAuthorAddress().setCountry("Norway");
+		User author = BeanFactory.createUserBean();
+		author.getUserId().setUserName("jane.doe");
+		author.getUserId().setStatus(UserStatus.ACTIVE);
+		author.getUserId().setCreated(calendar);
+		author.getUserId().setModified(calendar);
+		author.getUserInfo().setFirstName("Jane");
+		author.getUserInfo().setLastName("Doe");
+		author.getUserInfo().setBirthDate(DateTimeUtils.stringToDate("1970-12-30"));
+		author.getUserInfo().setGender(Gender.FEMALE);
+		author.getUserInfo().setEmail("jane.doe@email.com");
+		author.getUserInfo().setPhone("+47 98765432");
+		author.getUserAddress().setAddress("Lillegata 1");
+		author.getUserAddress().setPostalCode("1010");
+		author.getUserAddress().setMunicipality("Oslo");
+		author.getUserAddress().setRegion("Oslo");
+		author.getUserAddress().setCountry("Norway");
 		return author;
 	}
 
-	public static Author createAuthorJonah() {
+	public static User createUserJonah() {
 		Calendar calendar = Calendar.getInstance();
-		Author author = BeanFactory.createAuthorBean();
-		author.getAuthorId().setUserName("jonah.doe");
-		author.getAuthorId().setStatus(AuthorStatus.ACTIVE);
-		author.getAuthorId().setCreated(calendar);
-		author.getAuthorId().setModified(calendar);
-		author.getAuthorInfo().setFirstName("Jonah");
-		author.getAuthorInfo().setLastName("Doe");
-		author.getAuthorInfo().setBirthDate(DateTimeUtils.stringToDate("1975-01-01"));
-		author.getAuthorInfo().setGender(Gender.MALE);
-		author.getAuthorInfo().setEmail("jonah.doe@email.com");
-		author.getAuthorInfo().setPhone("+47 19283746");
-		author.getAuthorAddress().setAddress("Mellomgata 1");
-		author.getAuthorAddress().setPostalCode("1221");
-		author.getAuthorAddress().setMunicipality("Oslo");
-		author.getAuthorAddress().setRegion("Oslo");
-		author.getAuthorAddress().setCountry("Norway");
+		User author = BeanFactory.createUserBean();
+		author.getUserId().setUserName("jonah.doe");
+		author.getUserId().setStatus(UserStatus.ACTIVE);
+		author.getUserId().setCreated(calendar);
+		author.getUserId().setModified(calendar);
+		author.getUserInfo().setFirstName("Jonah");
+		author.getUserInfo().setLastName("Doe");
+		author.getUserInfo().setBirthDate(DateTimeUtils.stringToDate("1975-01-01"));
+		author.getUserInfo().setGender(Gender.MALE);
+		author.getUserInfo().setEmail("jonah.doe@email.com");
+		author.getUserInfo().setPhone("+47 19283746");
+		author.getUserAddress().setAddress("Mellomgata 1");
+		author.getUserAddress().setPostalCode("1221");
+		author.getUserAddress().setMunicipality("Oslo");
+		author.getUserAddress().setRegion("Oslo");
+		author.getUserAddress().setCountry("Norway");
 		return author;
 	}
 
-	public static AuthorPassword createAuthorJohnPassword() {
-		AuthorPassword authorPassword = new AuthorPassword();
+	public static UserPassword createUserJohnPassword() {
+		UserPassword authorPassword = new UserPassword();
 		authorPassword.setPassword(PasswordHandler.encryptPassword("johnsPassword"));
 		return authorPassword;
 	}
 
-	public static AuthorPassword createAuthorJanePassword() {
-		AuthorPassword authorPassword = new AuthorPassword();
+	public static UserPassword createUserJanePassword() {
+		UserPassword authorPassword = new UserPassword();
 		authorPassword.setPassword(PasswordHandler.encryptPassword("janesPassword"));
 		return authorPassword;
 	}
 
-	public static AuthorPassword createAuthorJonahPassword() {
-		AuthorPassword authorPassword = new AuthorPassword();
+	public static UserPassword createUserJonahPassword() {
+		UserPassword authorPassword = new UserPassword();
 		authorPassword.setPassword(PasswordHandler.encryptPassword("jonahsPassword"));
 		return authorPassword;
 	}
 
-	public static InsertAuthorRequest createInsertAuthorJohnRequest() {
-		return new InsertAuthorRequest(createAuthorJohn(), createAuthorJohnPassword());
+	public static InsertUserRequest createInsertUserJohnRequest() {
+		return new InsertUserRequest(createUserJohn(), createUserJohnPassword());
 	}
 
-	public static InsertAuthorRequest createInsertAuthorJaneRequest() {
-		return new InsertAuthorRequest(createAuthorJohn(), createAuthorJanePassword());
+	public static InsertUserRequest createInsertUserJaneRequest() {
+		return new InsertUserRequest(createUserJohn(), createUserJanePassword());
 	}
 
-	public static InsertAuthorRequest createInsertAuthorJonahRequest() {
-		return new InsertAuthorRequest(createAuthorJohn(), createAuthorJonahPassword());
+	public static InsertUserRequest createInsertUserJonahRequest() {
+		return new InsertUserRequest(createUserJohn(), createUserJonahPassword());
 	}
 
-	public static UpdateAuthorRequest createUpdateAuthorJohnRequest() {
-		return new UpdateAuthorRequest(createAuthorJohn(), createAuthorJohnPassword());
+	public static UpdateUserRequest createUpdateUserJohnRequest() {
+		return new UpdateUserRequest(createUserJohn(), createUserJohnPassword());
 	}
 
-	public static UpdateAuthorRequest createUpdateAuthorJaneRequest() {
-		return new UpdateAuthorRequest(createAuthorJohn(), createAuthorJanePassword());
+	public static UpdateUserRequest createUpdateUserJaneRequest() {
+		return new UpdateUserRequest(createUserJohn(), createUserJanePassword());
 	}
 
-	public static UpdateAuthorRequest createUpdateAuthorJonahRequest() {
-		return new UpdateAuthorRequest(createAuthorJohn(), createAuthorJonahPassword());
+	public static UpdateUserRequest createUpdateUserJonahRequest() {
+		return new UpdateUserRequest(createUserJohn(), createUserJonahPassword());
 	}
 
-	public static SelectAuthorRequest createSelectAuthorJohnRequest() {
-		return new SelectAuthorRequest("john.doe");
+	public static SelectUserRequest createSelectUserJohnRequest() {
+		return new SelectUserRequest("john.doe");
 	}
 
-	public static SelectAuthorRequest createSelectAuthorJaneRequest() {
-		return new SelectAuthorRequest("jane.doe");
+	public static SelectUserRequest createSelectUserJaneRequest() {
+		return new SelectUserRequest("jane.doe");
 	}
 
-	public static SelectAuthorRequest createSelectAuthorJonahRequest() {
-		return new SelectAuthorRequest("jonah.doe");
+	public static SelectUserRequest createSelectUserJonahRequest() {
+		return new SelectUserRequest("jonah.doe");
 	}
 
-	public static DeleteAuthorRequest createDeleteAuthorJohnRequest() {
-		return new DeleteAuthorRequest("john.doe");
+	public static DeleteUserRequest createDeleteUserJohnRequest() {
+		return new DeleteUserRequest("john.doe");
 	}
 
-	public static DeleteAuthorRequest createDeleteAuthorJaneRequest() {
-		return new DeleteAuthorRequest("jane.doe");
+	public static DeleteUserRequest createDeleteUserJaneRequest() {
+		return new DeleteUserRequest("jane.doe");
 	}
 
-	public static DeleteAuthorRequest createDeleteAuthorJonahRequest() {
-		return new DeleteAuthorRequest("jonah.doe");
+	public static DeleteUserRequest createDeleteUserJonahRequest() {
+		return new DeleteUserRequest("jonah.doe");
 	}
 
-	public static PurgeAuthorsRequest createPurgeAuthorsRequest() {
-		return new PurgeAuthorsRequest();
+	public static PurgeUsersRequest createPurgeUsersRequest() {
+		return new PurgeUsersRequest();
 	}
 }

@@ -7,6 +7,10 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<f:metadata>
+	<f:event type="preRenderView" listener="#{listUsers.doLoadUserList}" />
+</f:metadata>
 <ui:composition template="templates/common.xhtml">
 
 	<ui:define name="content">
@@ -21,7 +25,7 @@
 				<h:outputText value="#{user.userId.userName}" />
 			</h:column>
 		</h:dataTable>
-		<h4>Action: #{listUsers.action}</h4>
+		<h4>Action: #{listUsers.debug}</h4>
 	</ui:define>
 
 </ui:composition>

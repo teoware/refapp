@@ -3,13 +3,13 @@ package com.teoware.refapp.dao.mock;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import com.teoware.refapp.dao.AuthorDaoBean;
+import com.teoware.refapp.dao.UserDaoBean;
 
-public class AuthorDaoMock extends AuthorDaoBean {
+public class UserDaoMock extends UserDaoBean {
 
 	private static final long serialVersionUID = 1L;
 
-	public AuthorDaoMock(Connection connection) {
+	public UserDaoMock(Connection connection) {
 		super.connection = connection;
 	}
 
