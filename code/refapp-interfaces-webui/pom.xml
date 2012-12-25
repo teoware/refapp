@@ -78,11 +78,6 @@
 			<groupId>com.teoware.refapp</groupId>
 			<artifactId>refapp-interfaces-consumer</artifactId>
 		</dependency>
-		
-		<dependency>
-			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-test</artifactId>
-		</dependency>
 	</dependencies>
 	
 	<!-- MAVEN PLUGINS -->

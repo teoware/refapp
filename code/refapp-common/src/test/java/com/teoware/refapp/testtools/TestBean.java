@@ -1,4 +1,4 @@
-package com.teoware.refapp.test;
+package com.teoware.refapp.testtools;
 
 public class TestBean {
 

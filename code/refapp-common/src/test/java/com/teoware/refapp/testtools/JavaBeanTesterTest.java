@@ -1,8 +1,10 @@
-package com.teoware.refapp.test;
+package com.teoware.refapp.testtools;
 
 import java.beans.IntrospectionException;
 
 import org.junit.Test;
+
+import com.teoware.refapp.testtools.JavaBeanTester;
 
 public class JavaBeanTesterTest {
 

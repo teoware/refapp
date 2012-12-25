@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import com.teoware.refapp.test.JavaBeanTester;
+import com.teoware.refapp.testtools.JavaBeanTester;
 import com.teoware.refapp.web.consumer.UserServiceConsumer;
 import com.teoware.refapp.web.consumer.vo.RegisterUserRequestVO;
 

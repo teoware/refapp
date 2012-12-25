@@ -1,4 +1,4 @@
-package com.teoware.refapp.test;
+package com.teoware.refapp.testtools;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -58,9 +58,9 @@ public class JavaBeanTester {
 								actualType);
 
 					} catch (Exception e) {
-						e.printStackTrace();
-						fail(String.format("An exception was thrown during bean test %s: %s", prop.getName(),
-								e.toString()));
+						String error = String.format("An exception was thrown during bean test %s", prop.getName());
+						LOG.error(error, e);
+						fail(String.format("%s: %s", error, e.toString()));
 					}
 				}
 			}
@@ -130,8 +130,8 @@ public class JavaBeanTester {
 			return object;
 		}
 
-		fail("Could not create bean object of class " + clazz.getName() + ", please extend the "
-				+ JavaBeanTester.class.getName() + " class to prevent this.");
+		fail(String.format("Could not create bean object of class %s, please extend the %s class to prevent this.",
+				clazz.getName(), JavaBeanTester.class.getName()));
 		return null;
 	}
 

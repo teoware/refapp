@@ -4,7 +4,7 @@ import java.beans.IntrospectionException;
 
 import org.junit.Test;
 
-import com.teoware.refapp.test.JavaBeanTester;
+import com.teoware.refapp.testtools.JavaBeanTester;
 
 public class ConsumerVOTest {
 
