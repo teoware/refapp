@@ -24,21 +24,21 @@ public final class DateTimeParser {
 	public static final String DATETIME_FULL_PATTERN = DATETIME_PATTERN + ".SSSZ";
 	public static final String TIMESTAMP_PATTERN = DATE_PATTERN + " " + TIME_PATTERN + ".SSS";
 
-	public static DateTime stringToDateTime(String dateString, String pattern) {
+	public static DateTime fromString(String dateString, String pattern) {
 		DateTimeFormatter formatter = DateTimeFormat.forPattern(pattern);
-		return stringToDateTime(dateString, formatter);
+		return fromString(dateString, formatter);
 	}
 
-	public static String dateTimeToString(DateTime dateTime, String pattern) {
+	public static String toString(DateTime dateTime, String pattern) {
 		DateTimeFormatter formatter = DateTimeFormat.forPattern(pattern);
-		return dateTimeToString(dateTime, formatter);
+		return toString(dateTime, formatter);
 	}
 
-	public static DateTime stringToDateTime(String dateString, DateTimeFormatter formatter) {
+	public static DateTime fromString(String dateString, DateTimeFormatter formatter) {
 		return formatter.parseDateTime(dateString);
 	}
 
-	public static String dateTimeToString(DateTime dateTime, DateTimeFormatter formatter) {
+	public static String toString(DateTime dateTime, DateTimeFormatter formatter) {
 		return formatter.print(dateTime.getMillis());
 	}
 }

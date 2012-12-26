@@ -49,10 +49,11 @@ public class DateTimeConverterTest {
 		calendar.setTimeZone(TimeZone.getTimeZone(zoneId));
 	}
 
+	@SuppressWarnings("static-access")
 	@Test
 	public void testFromDateHaveSameMillis() {
 		Date date = calendar.getTime();
-		DateTime convertedDateTime = DateTimeConverter.fromDate(date);
+		DateTime convertedDateTime = new DateTimeConverter().fromDate(date);
 
 		assertEquals(date.getTime(), convertedDateTime.getMillis());
 	}

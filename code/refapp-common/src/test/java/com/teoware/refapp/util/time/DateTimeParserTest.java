@@ -29,9 +29,10 @@ public class DateTimeParserTest {
 		dateTimeFullString = dateTimeString + ".000+0100";
 	}
 
+	@SuppressWarnings("static-access")
 	@Test
 	public void testParseDateTimeToStringUsingDateTimePattern() {
-		String parsedDateTimeString = DateTimeParser.dateTimeToString(dateTime, DateTimeParser.DATETIME_PATTERN);
+		String parsedDateTimeString = new DateTimeParser().toString(dateTime, DateTimeParser.DATETIME_PATTERN);
 		String expectedDateTimeString = "2000-01-02T12:00:00";
 
 		assertEquals(expectedDateTimeString, parsedDateTimeString);
@@ -39,7 +40,7 @@ public class DateTimeParserTest {
 
 	@Test
 	public void testParseDateTimeToStringUsingDateTimeMillisPattern() {
-		String parsedDateTimeString = DateTimeParser.dateTimeToString(dateTime, DateTimeParser.DATETIME_MILLIS_PATTERN);
+		String parsedDateTimeString = DateTimeParser.toString(dateTime, DateTimeParser.DATETIME_MILLIS_PATTERN);
 		String expectedDateTimeString = "2000-01-02T12:00:00.000";
 
 		assertEquals(expectedDateTimeString, parsedDateTimeString);
@@ -47,7 +48,7 @@ public class DateTimeParserTest {
 
 	@Test
 	public void testParseDateTimeToStringUsingDateTimeZonePattern() {
-		String parsedDateTimeString = DateTimeParser.dateTimeToString(dateTime, DateTimeParser.DATETIME_ZONE_PATTERN);
+		String parsedDateTimeString = DateTimeParser.toString(dateTime, DateTimeParser.DATETIME_ZONE_PATTERN);
 		String expectedDateTimeString = "2000-01-02T12:00:00+0100";
 
 		assertEquals(expectedDateTimeString, parsedDateTimeString);
@@ -55,7 +56,7 @@ public class DateTimeParserTest {
 
 	@Test
 	public void testParseDateTimeToStringUsingDateTimeFullPattern() {
-		String parsedDateTimeString = DateTimeParser.dateTimeToString(dateTime, DateTimeParser.DATETIME_FULL_PATTERN);
+		String parsedDateTimeString = DateTimeParser.toString(dateTime, DateTimeParser.DATETIME_FULL_PATTERN);
 		String expectedDateTimeString = "2000-01-02T12:00:00.000+0100";
 
 		assertEquals(expectedDateTimeString, parsedDateTimeString);
@@ -63,7 +64,7 @@ public class DateTimeParserTest {
 
 	@Test
 	public void testParseStringToDateTimeUsingDateTimePattern() {
-		DateTime parsedDateTime = DateTimeParser.stringToDateTime(dateTimeString, DateTimeParser.DATETIME_PATTERN);
+		DateTime parsedDateTime = DateTimeParser.fromString(dateTimeString, DateTimeParser.DATETIME_PATTERN);
 		DateTime expectedDateTime = new DateTime().withYear(2004).withMonthOfYear(5).withDayOfMonth(6)
 				.withHourOfDay(18).withMinuteOfHour(0).withSecondOfMinute(0).withMillisOfSecond(0);
 
@@ -72,7 +73,7 @@ public class DateTimeParserTest {
 
 	@Test
 	public void testParseStringToDateTimeUsingDateTimeMillisPattern() {
-		DateTime parsedDateTime = DateTimeParser.stringToDateTime(dateTimeMillisString,
+		DateTime parsedDateTime = DateTimeParser.fromString(dateTimeMillisString,
 				DateTimeParser.DATETIME_MILLIS_PATTERN);
 		DateTime expectedDateTime = new DateTime().withYear(2004).withMonthOfYear(5).withDayOfMonth(6)
 				.withHourOfDay(18).withMinuteOfHour(0).withSecondOfMinute(0).withMillisOfSecond(0);
@@ -82,8 +83,7 @@ public class DateTimeParserTest {
 
 	@Test
 	public void testParseStringToDateTimeUsingDateTimeZonePattern() {
-		DateTime parsedDateTime = DateTimeParser.stringToDateTime(dateTimeZoneString,
-				DateTimeParser.DATETIME_ZONE_PATTERN);
+		DateTime parsedDateTime = DateTimeParser.fromString(dateTimeZoneString, DateTimeParser.DATETIME_ZONE_PATTERN);
 		DateTime expectedDateTime = new DateTime().withZone(DateTimeZone.forOffsetHours(1)).withYear(2004)
 				.withMonthOfYear(5).withDayOfMonth(6).withHourOfDay(18).withMinuteOfHour(0).withSecondOfMinute(0)
 				.withMillisOfSecond(0);
@@ -93,8 +93,7 @@ public class DateTimeParserTest {
 
 	@Test
 	public void testParseStringToDateTimeUsingDateTimeFullPattern() {
-		DateTime parsedDateTime = DateTimeParser.stringToDateTime(dateTimeFullString,
-				DateTimeParser.DATETIME_FULL_PATTERN);
+		DateTime parsedDateTime = DateTimeParser.fromString(dateTimeFullString, DateTimeParser.DATETIME_FULL_PATTERN);
 		DateTime expectedDateTime = new DateTime().withZone(DateTimeZone.forOffsetHours(1)).withYear(2004)
 				.withMonthOfYear(5).withDayOfMonth(6).withHourOfDay(18).withMinuteOfHour(0).withSecondOfMinute(0)
 				.withMillisOfSecond(0);
@@ -104,7 +103,7 @@ public class DateTimeParserTest {
 
 	@Test
 	public void testParseDateTimeToStringUsingDateFormatter() {
-		String parsedDateTimeString = DateTimeParser.dateTimeToString(dateTime, DateTimeParser.DATE_FORMATTER);
+		String parsedDateTimeString = DateTimeParser.toString(dateTime, DateTimeParser.DATE_FORMATTER);
 		String expectedDateTimeString = "2000-01-02";
 
 		assertEquals(expectedDateTimeString, parsedDateTimeString);
@@ -112,7 +111,7 @@ public class DateTimeParserTest {
 
 	@Test
 	public void testParseDateTimeToStringUsingTimeFormatter() {
-		String parsedDateTimeString = DateTimeParser.dateTimeToString(dateTime, DateTimeParser.TIME_FORMATTER);
+		String parsedDateTimeString = DateTimeParser.toString(dateTime, DateTimeParser.TIME_FORMATTER);
 		String expectedDateTimeString = "12:00:00.000+01:00";
 
 		assertEquals(expectedDateTimeString, parsedDateTimeString);
@@ -120,7 +119,7 @@ public class DateTimeParserTest {
 
 	@Test
 	public void testParseDateTimeToStringUsingDateTimeFormatter() {
-		String parsedDateTimeString = DateTimeParser.dateTimeToString(dateTime, DateTimeParser.DATETIME_FORMATTER);
+		String parsedDateTimeString = DateTimeParser.toString(dateTime, DateTimeParser.DATETIME_FORMATTER);
 		String expectedDateTimeString = "2000-01-02T12:00:00.000+01:00";
 
 		assertEquals(expectedDateTimeString, parsedDateTimeString);
@@ -128,7 +127,7 @@ public class DateTimeParserTest {
 
 	@Test
 	public void testParseStringToDateTimeUsingDateFormatter() {
-		DateTime parsedDateTime = DateTimeParser.stringToDateTime(dateString, DateTimeParser.DATE_FORMATTER);
+		DateTime parsedDateTime = DateTimeParser.fromString(dateString, DateTimeParser.DATE_FORMATTER);
 		DateTime expectedDateTime = new DateTime().withZone(DateTimeZone.forOffsetHours(2)).withYear(2004)
 				.withMonthOfYear(5).withDayOfMonth(6).withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0)
 				.withMillisOfSecond(0);
@@ -138,7 +137,7 @@ public class DateTimeParserTest {
 
 	@Test
 	public void testParseStringToDateTimeUsingTimeFormatter() {
-		DateTime parsedDateTime = DateTimeParser.stringToDateTime(timeString, DateTimeParser.TIME_FORMATTER);
+		DateTime parsedDateTime = DateTimeParser.fromString(timeString, DateTimeParser.TIME_FORMATTER);
 		DateTime expectedDateTime = new DateTime().withYear(1970).withMonthOfYear(1).withDayOfMonth(1)
 				.withHourOfDay(18).withMinuteOfHour(0).withSecondOfMinute(0).withMillisOfSecond(0);
 
@@ -147,7 +146,7 @@ public class DateTimeParserTest {
 
 	@Test
 	public void testParseStringToDateTimeUsingDateTimeFormatter() {
-		DateTime parsedDateTime = DateTimeParser.stringToDateTime(dateString + "T" + timeString,
+		DateTime parsedDateTime = DateTimeParser.fromString(dateString + "T" + timeString,
 				DateTimeParser.DATETIME_FORMATTER);
 		DateTime expectedDateTime = new DateTime().withZone(DateTimeZone.forOffsetHours(1)).withYear(2004)
 				.withMonthOfYear(5).withDayOfMonth(6).withHourOfDay(18).withMinuteOfHour(0).withSecondOfMinute(0)

@@ -5,10 +5,9 @@ import java.util.Date;
 import java.util.TimeZone;
 
 import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
 
 /**
- * Utility class for converting between standard date/time objects and to/from date/time strings.
+ * Utility class for converting between standard date/time objects and to/from a date/time formatted strings.
  * 
  * @author thomas@teoware.com
  * 
@@ -36,7 +35,7 @@ public final class DateTimeUtils {
 	}
 
 	public static Date stringToDate(String dateString, String pattern) {
-		DateTime dateTime = DateTimeParser.stringToDateTime(dateString, pattern);
+		DateTime dateTime = DateTimeParser.fromString(dateString, pattern);
 		return DateTimeConverter.toDate(dateTime);
 	}
 
@@ -46,7 +45,7 @@ public final class DateTimeUtils {
 
 	public static String dateToString(Date date, String pattern) {
 		DateTime dateTime = DateTimeConverter.fromDate(date);
-		return DateTimeParser.dateTimeToString(dateTime, pattern);
+		return DateTimeParser.toString(dateTime, pattern);
 	}
 
 	public static Calendar stringToCalendar(String dateString) {
@@ -54,7 +53,7 @@ public final class DateTimeUtils {
 	}
 
 	public static Calendar stringToCalendar(String dateString, String pattern) {
-		DateTime dateTime = DateTimeParser.stringToDateTime(dateString, pattern);
+		DateTime dateTime = DateTimeParser.fromString(dateString, pattern);
 		return DateTimeConverter.toCalendar(dateTime);
 	}
 
@@ -62,8 +61,9 @@ public final class DateTimeUtils {
 		return calendarToString(calendar, DateTimeParser.DATE_PATTERN);
 	}
 
-	public static String calendarToString(Calendar calendar, String mask) {
-		return LocalDate.fromCalendarFields(calendar).toString(mask);
+	public static String calendarToString(Calendar calendar, String pattern) {
+		DateTime dateTime = DateTimeConverter.fromCalendar(calendar);
+		return DateTimeParser.toString(dateTime, pattern);
 	}
 
 	public static Date timestampToDate(String timestampString) {
@@ -148,47 +148,47 @@ public final class DateTimeUtils {
 		return stringToSqlDate(dateString, DateTimeParser.DATE_PATTERN);
 	}
 
-	public static java.sql.Date stringToSqlDate(String dateString, String mask) {
-		return dateToSqlDate(stringToDate(dateString, mask));
+	public static java.sql.Date stringToSqlDate(String dateString, String pattern) {
+		return dateToSqlDate(stringToDate(dateString, pattern));
 	}
 
 	public static String sqlDateToString(java.sql.Date date) {
 		return sqlDateToString(date, DateTimeParser.DATE_PATTERN);
 	}
 
-	public static String sqlDateToString(java.sql.Date date, String mask) {
-		return dateToString(sqlDateToDate(date), mask);
+	public static String sqlDateToString(java.sql.Date date, String pattern) {
+		return dateToString(sqlDateToDate(date), pattern);
 	}
 
 	public static java.sql.Time stringToSqlTime(String dateString) {
 		return stringToSqlTime(dateString, DateTimeParser.TIME_PATTERN);
 	}
 
-	public static java.sql.Time stringToSqlTime(String dateString, String mask) {
-		return dateToSqlTime(stringToDate(dateString, mask));
+	public static java.sql.Time stringToSqlTime(String dateString, String pattern) {
+		return dateToSqlTime(stringToDate(dateString, pattern));
 	}
 
 	public static String sqlTimeToString(java.sql.Time time) {
 		return sqlTimeToString(time, DateTimeParser.TIME_PATTERN);
 	}
 
-	public static String sqlTimeToString(java.sql.Time time, String mask) {
-		return dateToString(sqlTimeToDate(time), mask);
+	public static String sqlTimeToString(java.sql.Time time, String pattern) {
+		return dateToString(sqlTimeToDate(time), pattern);
 	}
 
 	public static java.sql.Timestamp stringToSqlTimestamp(String dateString) {
 		return stringToSqlTimestamp(dateString, DateTimeParser.TIMESTAMP_PATTERN);
 	}
 
-	public static java.sql.Timestamp stringToSqlTimestamp(String dateString, String mask) {
-		return dateToSqlTimestamp(stringToDate(dateString, mask));
+	public static java.sql.Timestamp stringToSqlTimestamp(String dateString, String pattern) {
+		return dateToSqlTimestamp(stringToDate(dateString, pattern));
 	}
 
 	public static String sqlTimestampToString(java.sql.Timestamp timestamp) {
 		return sqlTimestampToString(timestamp, DateTimeParser.TIMESTAMP_PATTERN);
 	}
 
-	public static String sqlTimestampToString(java.sql.Timestamp timestamp, String mask) {
-		return dateToString(sqlTimestampToDate(timestamp), mask);
+	public static String sqlTimestampToString(java.sql.Timestamp timestamp, String pattern) {
+		return dateToString(sqlTimestampToDate(timestamp), pattern);
 	}
 }
