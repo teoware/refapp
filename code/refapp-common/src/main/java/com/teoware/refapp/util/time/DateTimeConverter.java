@@ -6,11 +6,22 @@ import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
+/**
+ * Utility class for converting between standard date/time objects and {@link DateTime}.
+ * 
+ * @author thomas@teoware.com
+ * 
+ */
 public final class DateTimeConverter {
 
-	public static TimeZone getTimeZone(DateTime dateTime) {
-		return TimeZone.getTimeZone(dateTime.getZone().getID());
+	public static TimeZone getTimeZone(DateTimeZone zone) {
+		return TimeZone.getTimeZone(zone.getID());
+	}
+
+	public static DateTimeZone getDateTimeZone(TimeZone zone) {
+		return DateTimeZone.forTimeZone(zone);
 	}
 
 	public static DateTime fromDate(Date date) {
@@ -22,24 +33,28 @@ public final class DateTimeConverter {
 	}
 
 	public static DateTime fromCalendar(Calendar calendar) {
-		return new DateTime(calendar.getTimeInMillis());
+		DateTime dateTime = new DateTime(calendar.getTimeInMillis());
+		dateTime.withZone(getDateTimeZone(calendar.getTimeZone()));
+		return dateTime;
 	}
 
 	public static Calendar toCalendar(DateTime dateTime) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(dateTime.getMillis());
-		calendar.setTimeZone(getTimeZone(dateTime));
+		calendar.setTimeZone(getTimeZone(dateTime.getZone()));
 		return calendar;
 	}
 
 	public static DateTime fromGregorianCalendar(GregorianCalendar calendar) {
-		return new DateTime(calendar.getTimeInMillis());
+		DateTime dateTime = new DateTime(calendar.getTimeInMillis());
+		dateTime.withZone(getDateTimeZone(calendar.getTimeZone()));
+		return dateTime;
 	}
 
 	public static GregorianCalendar toGregorianCalendar(DateTime dateTime) {
 		GregorianCalendar calendar = new GregorianCalendar();
 		calendar.setTimeInMillis(dateTime.getMillis());
-		calendar.setTimeZone(getTimeZone(dateTime));
+		calendar.setTimeZone(getTimeZone(dateTime.getZone()));
 		return calendar;
 	}
 

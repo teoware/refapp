@@ -2,6 +2,16 @@ package com.teoware.refapp.util.time;
 
 import org.joda.time.DateTime;
 
+/**
+ * Adapter for converting between {@link DateTime} and a date/time formatted string.
+ * <p>
+ * For use with JAX-WS and JAXB projects.
+ * <p>
+ * Uses {@link DateTimeParser} to do the actual conversion.
+ * 
+ * @author thomas@teoware.com
+ *
+ */
 public class DateTimeAdapter {
 
 	public static DateTime parseDate(String dateString) {

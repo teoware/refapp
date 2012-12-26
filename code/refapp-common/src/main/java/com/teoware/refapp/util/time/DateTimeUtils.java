@@ -2,18 +2,27 @@ package com.teoware.refapp.util.time;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
+/**
+ * Utility class for converting between standard date/time objects and to/from date/time strings.
+ * 
+ * @author thomas@teoware.com
+ * 
+ */
 public final class DateTimeUtils {
 
-	public static final String DATE_MASK = "yyyy-MM-dd";
-	public static final String TIMESTAMP_MASK = "yyyy-MM-dd HH:mm:ss.S";
+	public static final int SECOND_IN_MILLIS = 1000;
+	public static final int MINUTE_IN_MILLIS = SECOND_IN_MILLIS * 60;
+	public static final int HOUR_IN_MILLIS = MINUTE_IN_MILLIS * 60;
+	public static final int DAY_IN_MILLIS = HOUR_IN_MILLIS * 24;
 
 	public static Calendar createCalendar(int field, int offset) {
 		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeZone(TimeZone.getDefault());
 		calendar.add(field, offset);
 		return calendar;
 	}
@@ -23,34 +32,34 @@ public final class DateTimeUtils {
 	}
 
 	public static Date stringToDate(String dateString) {
-		return stringToDate(dateString, DATE_MASK);
+		return stringToDate(dateString, DateTimeParser.DATE_PATTERN);
 	}
 
-	public static Date stringToDate(String dateString, String mask) {
-		DateTimeFormatter formatter = DateTimeFormat.forPattern(mask);
-		return formatter.parseDateTime(dateString).toDate();
+	public static Date stringToDate(String dateString, String pattern) {
+		DateTime dateTime = DateTimeParser.stringToDateTime(dateString, pattern);
+		return DateTimeConverter.toDate(dateTime);
 	}
 
 	public static String dateToString(Date date) {
-		return dateToString(date, DATE_MASK);
+		return dateToString(date, DateTimeParser.DATE_PATTERN);
 	}
 
-	public static String dateToString(Date date, String mask) {
-		return LocalDate.fromDateFields(date).toString(mask);
+	public static String dateToString(Date date, String pattern) {
+		DateTime dateTime = DateTimeConverter.fromDate(date);
+		return DateTimeParser.dateTimeToString(dateTime, pattern);
 	}
 
 	public static Calendar stringToCalendar(String dateString) {
-		return stringToCalendar(dateString, DATE_MASK);
+		return stringToCalendar(dateString, DateTimeParser.DATE_PATTERN);
 	}
 
-	public static Calendar stringToCalendar(String dateString, String mask) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(stringToDate(dateString, mask));
-		return calendar;
+	public static Calendar stringToCalendar(String dateString, String pattern) {
+		DateTime dateTime = DateTimeParser.stringToDateTime(dateString, pattern);
+		return DateTimeConverter.toCalendar(dateTime);
 	}
 
 	public static String calendarToString(Calendar calendar) {
-		return calendarToString(calendar, DATE_MASK);
+		return calendarToString(calendar, DateTimeParser.DATE_PATTERN);
 	}
 
 	public static String calendarToString(Calendar calendar, String mask) {
@@ -58,19 +67,19 @@ public final class DateTimeUtils {
 	}
 
 	public static Date timestampToDate(String timestampString) {
-		return stringToDate(timestampString, TIMESTAMP_MASK);
+		return stringToDate(timestampString, DateTimeParser.TIMESTAMP_PATTERN);
 	}
 
 	public static String dateToTimestamp(Date date) {
-		return dateToString(date, TIMESTAMP_MASK);
+		return dateToString(date, DateTimeParser.TIMESTAMP_PATTERN);
 	}
 
 	public static Calendar timestampToCalendar(String dateString) {
-		return stringToCalendar(dateString, TIMESTAMP_MASK);
+		return stringToCalendar(dateString, DateTimeParser.TIMESTAMP_PATTERN);
 	}
 
 	public static String calendarToTimestamp(Calendar calendar) {
-		return calendarToString(calendar, TIMESTAMP_MASK);
+		return calendarToString(calendar, DateTimeParser.TIMESTAMP_PATTERN);
 	}
 
 	public static java.sql.Date dateToSqlDate(Date date) {
@@ -136,7 +145,7 @@ public final class DateTimeUtils {
 	}
 
 	public static java.sql.Date stringToSqlDate(String dateString) {
-		return stringToSqlDate(dateString, DATE_MASK);
+		return stringToSqlDate(dateString, DateTimeParser.DATE_PATTERN);
 	}
 
 	public static java.sql.Date stringToSqlDate(String dateString, String mask) {
@@ -144,7 +153,7 @@ public final class DateTimeUtils {
 	}
 
 	public static String sqlDateToString(java.sql.Date date) {
-		return sqlDateToString(date, DATE_MASK);
+		return sqlDateToString(date, DateTimeParser.DATE_PATTERN);
 	}
 
 	public static String sqlDateToString(java.sql.Date date, String mask) {
@@ -152,7 +161,7 @@ public final class DateTimeUtils {
 	}
 
 	public static java.sql.Time stringToSqlTime(String dateString) {
-		return stringToSqlTime(dateString, DATE_MASK);
+		return stringToSqlTime(dateString, DateTimeParser.TIME_PATTERN);
 	}
 
 	public static java.sql.Time stringToSqlTime(String dateString, String mask) {
@@ -160,7 +169,7 @@ public final class DateTimeUtils {
 	}
 
 	public static String sqlTimeToString(java.sql.Time time) {
-		return sqlTimeToString(time, DATE_MASK);
+		return sqlTimeToString(time, DateTimeParser.TIME_PATTERN);
 	}
 
 	public static String sqlTimeToString(java.sql.Time time, String mask) {
@@ -168,7 +177,7 @@ public final class DateTimeUtils {
 	}
 
 	public static java.sql.Timestamp stringToSqlTimestamp(String dateString) {
-		return stringToSqlTimestamp(dateString, DATE_MASK);
+		return stringToSqlTimestamp(dateString, DateTimeParser.TIMESTAMP_PATTERN);
 	}
 
 	public static java.sql.Timestamp stringToSqlTimestamp(String dateString, String mask) {
@@ -176,7 +185,7 @@ public final class DateTimeUtils {
 	}
 
 	public static String sqlTimestampToString(java.sql.Timestamp timestamp) {
-		return sqlTimestampToString(timestamp, DATE_MASK);
+		return sqlTimestampToString(timestamp, DateTimeParser.TIMESTAMP_PATTERN);
 	}
 
 	public static String sqlTimestampToString(java.sql.Timestamp timestamp, String mask) {

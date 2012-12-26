@@ -8,10 +8,11 @@ import org.junit.Test;
 
 public class DateTimeAdapterTest {
 
+	@SuppressWarnings("static-access")
 	@Test
 	public void testParseDate() {
 		String dateString = "2004-05-06";
-		DateTime parsedDateTime = DateTimeAdapter.parseDate(dateString);
+		DateTime parsedDateTime = new DateTimeAdapter().parseDate(dateString);
 		DateTime expectedDateTime = new DateTime().withZone(DateTimeZone.getDefault()).withYear(2004)
 				.withMonthOfYear(5).withDayOfMonth(6).withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0)
 				.withMillisOfSecond(0);
@@ -63,7 +64,8 @@ public class DateTimeAdapterTest {
 	@Test
 	public void testPrintDateTime() {
 		DateTime dateTime = new DateTime().withZone(DateTimeZone.forOffsetHours(1)).withYear(2010).withMonthOfYear(1)
-				.withDayOfMonth(24).withHourOfDay(9).withMinuteOfHour(44).withSecondOfMinute(51).withMillisOfSecond(232);
+				.withDayOfMonth(24).withHourOfDay(9).withMinuteOfHour(44).withSecondOfMinute(51)
+				.withMillisOfSecond(232);
 		String parcedDateString = DateTimeAdapter.printDateTime(dateTime);
 		String expectedDateString = "2010-01-24T09:44:51.232+01:00";
 

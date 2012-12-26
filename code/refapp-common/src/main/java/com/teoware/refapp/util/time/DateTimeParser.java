@@ -5,7 +5,13 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
-public class DateTimeParser {
+/**
+ * Converter for converting between {@link DateTime} and a date/time formatted string.
+ * 
+ * @author thomas@teoware.com
+ * 
+ */
+public final class DateTimeParser {
 
 	public static final DateTimeFormatter DATE_FORMATTER = ISODateTimeFormat.date();
 	public static final DateTimeFormatter TIME_FORMATTER = ISODateTimeFormat.time();
@@ -16,6 +22,7 @@ public class DateTimeParser {
 	public static final String DATETIME_MILLIS_PATTERN = DATETIME_PATTERN + ".SSS";
 	public static final String DATETIME_ZONE_PATTERN = DATETIME_PATTERN + "Z";
 	public static final String DATETIME_FULL_PATTERN = DATETIME_PATTERN + ".SSSZ";
+	public static final String TIMESTAMP_PATTERN = DATE_PATTERN + " " + TIME_PATTERN + ".SSS";
 
 	public static DateTime stringToDateTime(String dateString, String pattern) {
 		DateTimeFormatter formatter = DateTimeFormat.forPattern(pattern);

@@ -98,11 +98,10 @@ public class UserDaoBean extends BaseDao implements UserDao {
 				.doInsert(USERS_TABLE)
 				.columnValues(USERNAME_COLUMN_NAME, FIRSTNAME_COLUMN_NAME, LASTNAME_COLUMN_NAME, BIRTHDATE_COLUMN_NAME,
 						GENDER_COLUMN_NAME, EMAIL_COLUMN_NAME, PHONE_COLUMN_NAME).build();
-		Object[] parameters = DaoHelper.generateArray(request.getUser().getUserId().getUserName(), request
-				.getUser().getUserInfo().getFirstName(), request.getUser().getUserInfo().getLastName(), request
-				.getUser().getUserInfo().getBirthDate(),
-				request.getUser().getUserInfo().getGender().toString(), request.getUser().getUserInfo()
-						.getEmail(), request.getUser().getUserInfo().getPhone());
+		Object[] parameters = DaoHelper.generateArray(request.getUser().getUserId().getUserName(), request.getUser()
+				.getUserInfo().getFirstName(), request.getUser().getUserInfo().getLastName(), request.getUser()
+				.getUserInfo().getBirthDate(), request.getUser().getUserInfo().getGender().toString(), request
+				.getUser().getUserInfo().getEmail(), request.getUser().getUserInfo().getPhone());
 		return super.insert(sql, parameters);
 	}
 
@@ -121,9 +120,9 @@ public class UserDaoBean extends BaseDao implements UserDao {
 					.columnValues(USERNAME_COLUMN_NAME, ADDRESS_COLUMN_NAME, POSTALCODE_COLUMN_NAME,
 							MUNICIPALITY_COLUMN_NAME, REGION_COLUMN_NAME, COUNTRY_COLUMN_NAME).build();
 			Object[] parameters = DaoHelper.generateArray(request.getUser().getUserId().getUserName(), request
-					.getUser().getUserAddress().getAddress(), request.getUser().getUserAddress()
-					.getPostalCode(), request.getUser().getUserAddress().getMunicipality(), request.getUser()
-					.getUserAddress().getRegion(), request.getUser().getUserAddress().getCountry());
+					.getUser().getUserAddress().getAddress(), request.getUser().getUserAddress().getPostalCode(),
+					request.getUser().getUserAddress().getMunicipality(), request.getUser().getUserAddress()
+							.getRegion(), request.getUser().getUserAddress().getCountry());
 			return super.insert(sql, parameters);
 		} else {
 			return 0;
@@ -155,14 +154,12 @@ public class UserDaoBean extends BaseDao implements UserDao {
 		if (request.getUser().getUserInfo() != null) {
 			SqlStatement sql = new SqlStatement.Builder()
 					.doUpdate(USERS_TABLE)
-					.setColumns(FIRSTNAME_COLUMN_NAME, LASTNAME_COLUMN_NAME, BIRTHDATE_COLUMN_NAME,
-							GENDER_COLUMN_NAME, EMAIL_COLUMN_NAME, PHONE_COLUMN_NAME).where(USERNAME_COLUMN_NAME)
-					.build();
+					.setColumns(FIRSTNAME_COLUMN_NAME, LASTNAME_COLUMN_NAME, BIRTHDATE_COLUMN_NAME, GENDER_COLUMN_NAME,
+							EMAIL_COLUMN_NAME, PHONE_COLUMN_NAME).where(USERNAME_COLUMN_NAME).build();
 			Object[] parameters = DaoHelper.generateArray(request.getUser().getUserInfo().getFirstName(), request
-					.getUser().getUserInfo().getLastName(), request.getUser().getUserInfo().getBirthDate(),
-					request.getUser().getUserInfo().getGender().toString(), request.getUser().getUserInfo()
-							.getEmail(), request.getUser().getUserInfo().getPhone(), request.getUser()
-							.getUserId().getUserName());
+					.getUser().getUserInfo().getLastName(), request.getUser().getUserInfo().getBirthDate(), request
+					.getUser().getUserInfo().getGender().toString(), request.getUser().getUserInfo().getEmail(),
+					request.getUser().getUserInfo().getPhone(), request.getUser().getUserId().getUserName());
 			return super.update(sql, parameters);
 		} else {
 			return 0;
@@ -171,10 +168,10 @@ public class UserDaoBean extends BaseDao implements UserDao {
 
 	private int localUpdateUserStatus(UpdateUserRequest request) throws DaoException {
 		if (request.getUser().getUserId().getStatus() != null) {
-			SqlStatement sql = new SqlStatement.Builder().doUpdate(USERS_STATUS_TABLE)
-					.setColumn(STATUS_COLUMN_NAME).where(USERNAME_COLUMN_NAME).build();
-			Object[] parameters = DaoHelper.generateArray(request.getUser().getUserId().getStatus().toString(),
-					request.getUser().getUserId().getUserName());
+			SqlStatement sql = new SqlStatement.Builder().doUpdate(USERS_STATUS_TABLE).setColumn(STATUS_COLUMN_NAME)
+					.where(USERNAME_COLUMN_NAME).build();
+			Object[] parameters = DaoHelper.generateArray(request.getUser().getUserId().getStatus().toString(), request
+					.getUser().getUserId().getUserName());
 			return super.update(sql, parameters);
 		} else {
 			return 0;
@@ -185,8 +182,8 @@ public class UserDaoBean extends BaseDao implements UserDao {
 		if (request.getUserPassword() != null) {
 			SqlStatement sql = new SqlStatement.Builder().doUpdate(USERS_PASSWORD_TABLE)
 					.setColumn(PASSWORD_COLUMN_NAME).where(USERNAME_COLUMN_NAME).build();
-			Object[] parameters = DaoHelper.generateArray(request.getUserPassword().getPassword(), request
-					.getUser().getUserId().getUserName());
+			Object[] parameters = DaoHelper.generateArray(request.getUserPassword().getPassword(), request.getUser()
+					.getUserId().getUserName());
 			return super.update(sql, parameters);
 		} else {
 			return 0;
@@ -200,9 +197,9 @@ public class UserDaoBean extends BaseDao implements UserDao {
 					.setColumns(ADDRESS_COLUMN_NAME, POSTALCODE_COLUMN_NAME, MUNICIPALITY_COLUMN_NAME,
 							REGION_COLUMN_NAME, COUNTRY_COLUMN_NAME).where(USERNAME_COLUMN_NAME).build();
 			Object[] parameters = DaoHelper.generateArray(request.getUser().getUserAddress().getAddress(), request
-					.getUser().getUserAddress().getPostalCode(), request.getUser().getUserAddress()
-					.getMunicipality(), request.getUser().getUserAddress().getRegion(), request.getUser()
-					.getUserAddress().getCountry(), request.getUser().getUserId().getUserName());
+					.getUser().getUserAddress().getPostalCode(), request.getUser().getUserAddress().getMunicipality(),
+					request.getUser().getUserAddress().getRegion(), request.getUser().getUserAddress().getCountry(),
+					request.getUser().getUserId().getUserName());
 			return super.update(sql, parameters);
 		} else {
 			return 0;
@@ -221,7 +218,7 @@ public class UserDaoBean extends BaseDao implements UserDao {
 	@Override
 	public SelectUserResponse selectAllUsers() throws DaoException {
 		super.doPersistConnection();
-		
+
 		SqlStatement sql = new SqlStatement.Builder().doSelectAll().from(USERS_VIEW).build();
 		List<User> UserList = super.select(sql, UserRowMapper);
 		return new SelectUserResponse(UserList);
@@ -246,13 +243,13 @@ public class UserDaoBean extends BaseDao implements UserDao {
 
 	@Override
 	public PurgeUsersResponse purgeUsers(PurgeUsersRequest request) throws DaoException {
-		SqlStatement sql = new SqlStatement("DELETE FROM " + USERS_TABLE + " WHERE " + STATUS_COLUMN_NAME + " = ?");
+		SqlStatement sql = new SqlStatement.Builder().doDelete(USERS_TABLE).where(STATUS_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(UserStatus.DELETED.toString());
 
 		if (request.isGreedy()) {
-			sql.append(" AND (" + STATUS_COLUMN_NAME + " = ? AND " + CREATED_COLUMN_NAME + " >= ?");
+			sql.append(" OR (" + STATUS_COLUMN_NAME + " = ? AND " + CREATED_COLUMN_NAME + " >= ?");
 			parameters = DaoHelper.generateArray(UserStatus.DELETED.toString(), UserStatus.PENDING.toString(),
-					DateTimeUtils.createCalendar(Calendar.DATE, -7));
+					DateTimeUtils.createCalendar(Calendar.DAY_OF_YEAR, -7));
 		}
 
 		int rowsAffected = super.delete(sql, parameters);
