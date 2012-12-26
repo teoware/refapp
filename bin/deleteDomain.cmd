@@ -15,7 +15,7 @@ if (%RETURNVALUE%)==(1) (
 	findstr "There is no such domain" %ERROR_LOG% > nul 2>&1
 	set RETURNVALUE=%ERRORLEVEL%
 )
-set ERROR_MSG=Failed to delete domain '%DOMAIN%'
+set ERROR_MSG=Failed to delete domain %DOMAIN%
 if not (%RETURNVALUE%)==(0) goto ERROR
 
 goto SUCCESS
@@ -25,5 +25,5 @@ echo ERROR: %ERROR_MSG%
 exit /B 1
 
 :SUCCESS
-echo INFO: Domain '%DOMAIN%' deleted successfully
+echo INFO: Domain %DOMAIN% deleted successfully
 exit /B 0

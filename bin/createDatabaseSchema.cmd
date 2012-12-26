@@ -9,8 +9,8 @@ set RETURNVALUE=%ERRORLEVEL%
 set ERROR_MSG=Failed to load env variables
 if not (%RETURNVALUE%)==(0) goto ERROR
 
-set POM_FILE=%FILE_FILE%..\etc\database\pom.xml
-set ERROR_MSG=Failed to find Maven build file
+set POM_FILE=%FILE_PATH%..\etc\database\pom.xml
+set ERROR_MSG=Failed to find Maven build file at %POM_FILE%
 if not exist %POM_FILE% goto ERROR
 
 call %MAVEN_CMD% -f %POM_FILE% clean install > nul 2>&1

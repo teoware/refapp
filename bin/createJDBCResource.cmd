@@ -29,5 +29,5 @@ echo ERROR: %ERROR_MSG%
 exit /B 1
 
 :SUCCESS
-echo INFO: JDBC resources deleted successfully
+echo INFO: JDBC resources created successfully
 exit /B 0
