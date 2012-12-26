@@ -1,10 +1,12 @@
-package com.teoware.refapp.web.ui;
+package com.teoware.refapp.web.ui.controller;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import com.teoware.refapp.web.ui.controller.AbstractControllerBean;
 
 public class AbstractControllerBeanTest {
 

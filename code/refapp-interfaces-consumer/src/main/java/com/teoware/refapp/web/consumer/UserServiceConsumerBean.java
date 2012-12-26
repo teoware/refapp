@@ -40,7 +40,7 @@ public class UserServiceConsumerBean implements UserServiceConsumer {
 	@Override
 	public UserVO findUser(FindUserRequestVO vo) {
 		try {
-			FindUserRequest request = new FindUserRequest();
+			FindUserRequest request = new FindUserRequest(vo.getUsername());
 			FindUserResponse response = facade.findUser(request);
 			return new UserVO(response.getBody());
 		} catch (ValidationException e) {

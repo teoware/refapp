@@ -1,4 +1,4 @@
-package com.teoware.refapp.web.ui.user;
+package com.teoware.refapp.web.ui.controller;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -14,9 +14,8 @@ import com.teoware.refapp.model.user.UserPassword;
 import com.teoware.refapp.model.util.BeanFactory;
 import com.teoware.refapp.web.consumer.UserServiceConsumer;
 import com.teoware.refapp.web.consumer.vo.RegisterUserRequestVO;
-import com.teoware.refapp.web.ui.AbstractControllerBean;
 
-@Named("registerUser")
+@Named
 @RequestScoped
 public class RegisterUserControllerBean extends AbstractControllerBean implements Serializable {
 

@@ -11,6 +11,7 @@ import com.teoware.refapp.model.enums.Gender;
 import com.teoware.refapp.model.enums.UserStatus;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserPassword;
+import com.teoware.refapp.model.user.Username;
 import com.teoware.refapp.model.util.BeanFactory;
 import com.teoware.refapp.util.PasswordHandler;
 import com.teoware.refapp.util.time.DateTimeUtils;
@@ -123,15 +124,15 @@ public final class TestDataFactory {
 	}
 
 	public static SelectUserRequest createSelectUserJohnRequest() {
-		return new SelectUserRequest("john.doe");
+		return new SelectUserRequest(createUsername("john.doe"));
 	}
 
 	public static SelectUserRequest createSelectUserJaneRequest() {
-		return new SelectUserRequest("jane.doe");
+		return new SelectUserRequest(createUsername("jane.doe"));
 	}
 
 	public static SelectUserRequest createSelectUserJonahRequest() {
-		return new SelectUserRequest("jonah.doe");
+		return new SelectUserRequest(createUsername("jonah.doe"));
 	}
 
 	public static DeleteUserRequest createDeleteUserJohnRequest() {
@@ -148,5 +149,11 @@ public final class TestDataFactory {
 
 	public static PurgeUsersRequest createPurgeUsersRequest() {
 		return new PurgeUsersRequest();
+	}
+
+	private static Username createUsername(String username) {
+		Username bean = new Username();
+		bean.setUsername(username);
+		return bean;
 	}
 }

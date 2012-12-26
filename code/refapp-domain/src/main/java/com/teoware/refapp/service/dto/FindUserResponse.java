@@ -6,7 +6,7 @@ import com.teoware.refapp.model.user.User;
 
 public class FindUserResponse extends BaseMessage<Header, User> {
 
-	public FindUserResponse(Header header, User author) {
-		super(header, author);
+	public FindUserResponse(Header header, User user) {
+		super(header, user);
 	}
 }

@@ -7,30 +7,23 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition template="templates/common.xhtml">
-
-	<ui:param name="bean" value="#{registerUserControllerBean}" />
+	
+	<ui:param name="bean" value="#{findUserControllerBean}" />
 	
 	<ui:define name="title">#{bean.title}</ui:define>
 	
 	<ui:define name="content">
 		<a href="#{request.contextPath}/users.xhtml">&larr; Home</a>
-		<h2>Register user</h2>
+		<h2>Find user</h2>
 		<h:form>
 			<h:panelGrid>
 				<h:outputLabel value="Username: " style="font-weight:bold" />
 				<h:inputText value="#{bean.username}" />
-				<h:outputLabel value="First name: " style="font-weight:bold" />
-				<h:inputText value="#{bean.firstName}" />
-				<h:outputLabel value="Last name: " style="font-weight:bold" />
-				<h:inputText value="#{bean.lastName}" />
-				<h:outputLabel value="Email: " style="font-weight:bold" />
-				<h:inputText value="#{bean.email}" />
-				<h:outputLabel value="Phone: " style="font-weight:bold" />
-				<h:inputText value="#{bean.phone}" />
-				<h:commandButton value="Register" type="submit"
-					action="#{bean.onClickRegisterButton}" />
+				<h:commandButton value="Find" type="submit"
+					action="#{bean.onClickFindButton}" />
 			</h:panelGrid>
 		</h:form>
+		<h:outputLabel value="#{bean.user.userInfo.firstName} #{bean.user.userInfo.lastName}" rendered="#{bean.hasUser()}" />
 		<h4>Debug: #{bean.debug}</h4>
 	</ui:define>
 

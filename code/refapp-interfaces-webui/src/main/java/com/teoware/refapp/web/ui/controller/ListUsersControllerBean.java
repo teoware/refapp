@@ -1,4 +1,4 @@
-package com.teoware.refapp.web.ui.user;
+package com.teoware.refapp.web.ui.controller;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,9 +13,8 @@ import org.slf4j.LoggerFactory;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.web.consumer.UserServiceConsumer;
 import com.teoware.refapp.web.consumer.vo.UserListVO;
-import com.teoware.refapp.web.ui.AbstractControllerBean;
 
-@Named("listUsers")
+@Named
 @RequestScoped
 public class ListUsersControllerBean extends AbstractControllerBean implements Serializable {
 

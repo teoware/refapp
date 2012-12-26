@@ -1,4 +1,4 @@
-package com.teoware.refapp.web.ui.user;
+package com.teoware.refapp.web.ui.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -17,6 +17,7 @@ import org.mockito.Mock;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.web.consumer.UserServiceConsumer;
 import com.teoware.refapp.web.consumer.vo.UserListVO;
+import com.teoware.refapp.web.ui.controller.ListUsersControllerBean;
 
 public class ListUsersControllerBeanTest {
 

@@ -9,14 +9,18 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 <f:metadata>
-	<f:event type="preRenderView" listener="#{listUsers.doLoadUserList}" />
+	<f:event type="preRenderView" listener="#{listUsersControllerBean.doLoadUserList}" />
 </f:metadata>
 <ui:composition template="templates/common.xhtml">
 
+	<ui:param name="bean" value="#{listUsersControllerBean}" />
+	
+	<ui:define name="title">#{bean.title}</ui:define>
+	
 	<ui:define name="content">
-		<a href="#{request.contextPath}/">&larr; Home</a>
+		<a href="#{request.contextPath}/users.xhtml">&larr; Home</a>
 		<h2>List users</h2>
-		<h:dataTable value="#{listUsers.userList}" var="user"
+		<h:dataTable value="#{bean.userList}" var="user"
 				styleClass="table"
     			headerClass="table-header"
     			rowClasses="table-odd-row, table-even-row">
@@ -25,7 +29,7 @@
 				<h:outputText value="#{user.userId.userName}" />
 			</h:column>
 		</h:dataTable>
-		<h4>Action: #{listUsers.debug}</h4>
+		<h4>Debug: #{bean.debug}</h4>
 	</ui:define>
 
 </ui:composition>

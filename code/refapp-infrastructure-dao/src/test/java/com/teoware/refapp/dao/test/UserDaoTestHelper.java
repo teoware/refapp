@@ -22,25 +22,26 @@ import com.teoware.refapp.model.enums.Gender;
 import com.teoware.refapp.model.enums.UserStatus;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserPassword;
+import com.teoware.refapp.model.user.Username;
 
 public abstract class UserDaoTestHelper {
 
-	public static int insertUser(UserDao userDao, User user, UserPassword userPassword)
-			throws DaoException {
+	public static int insertUser(UserDao userDao, User user, UserPassword userPassword) throws DaoException {
 		InsertUserRequest request = new InsertUserRequest(user, userPassword);
 		InsertUserResponse response = userDao.insertUser(request);
 		return response.getRowsAffected();
 	}
 
-	public static int updateUser(UserDao userDao, User user, UserPassword userPassword)
-			throws DaoException {
+	public static int updateUser(UserDao userDao, User user, UserPassword userPassword) throws DaoException {
 		UpdateUserRequest request = new UpdateUserRequest(user, userPassword);
 		UpdateUserResponse response = userDao.updateUser(request);
 		return response.getRowsAffected();
 	}
 
-	public static List<User> selectUser(UserDao userDao, String userName) throws DaoException {
-		SelectUserRequest request = new SelectUserRequest(userName);
+	public static List<User> selectUser(UserDao userDao, String username) throws DaoException {
+		Username bean = new Username();
+		bean.setUsername(username);
+		SelectUserRequest request = new SelectUserRequest(bean);
 		SelectUserResponse response = userDao.selectUser(request);
 		return response.getUserList();
 	}

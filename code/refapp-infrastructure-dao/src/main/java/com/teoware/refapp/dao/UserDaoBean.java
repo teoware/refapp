@@ -25,9 +25,12 @@ import static com.teoware.refapp.dao.metadata.UsersTableMetaData.USERS_VIEW_NAME
 import java.util.Calendar;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +47,7 @@ import com.teoware.refapp.dao.dto.SelectUserRequest;
 import com.teoware.refapp.dao.dto.SelectUserResponse;
 import com.teoware.refapp.dao.dto.UpdateUserRequest;
 import com.teoware.refapp.dao.dto.UpdateUserResponse;
+import com.teoware.refapp.dao.metadata.JNDI;
 import com.teoware.refapp.dao.rowmapper.UserPasswordRowMapper;
 import com.teoware.refapp.dao.rowmapper.UserRowMapper;
 import com.teoware.refapp.dao.sql.SqlStatement;
@@ -69,12 +73,20 @@ public class UserDaoBean extends BaseDao implements UserDao {
 	public static final String USERS_ADDRESS_TABLE = REFAPP_SCHEMA_NAME + "." + USERS_ADDRESS_TABLE_NAME;
 	public static final String USERS_PASSWORD_TABLE = REFAPP_SCHEMA_NAME + "." + USERS_PASSWORD_TABLE_NAME;
 
-	private UserRowMapper UserRowMapper = new UserRowMapper();
-	private UserPasswordRowMapper UserPasswordRowMapper = new UserPasswordRowMapper();
+	@Resource(mappedName = JNDI.REFAPP_DATASOURCE)
+	private DataSource dataSource;
+
+	private UserRowMapper userRowMapper = new UserRowMapper();
+	private UserPasswordRowMapper userPasswordRowMapper = new UserPasswordRowMapper();
+
+	@PostConstruct
+	private void initialize() {
+		super.initialize(dataSource);
+	}
 
 	@Override
 	public InsertUserResponse insertUser(InsertUserRequest request) throws DaoException {
-		LOG.info(DAO_NAME + ": Insert User operation invoked.");
+		LOG.info(DAO_NAME + ": Insert user operation invoked.");
 
 		super.doPersistConnection();
 
@@ -131,6 +143,8 @@ public class UserDaoBean extends BaseDao implements UserDao {
 
 	@Override
 	public UpdateUserResponse updateUser(UpdateUserRequest request) throws DaoException {
+		LOG.info(DAO_NAME + ": Update user operation invoked.");
+
 		super.doPersistConnection();
 
 		int rowsAffected = 0;
@@ -208,33 +222,41 @@ public class UserDaoBean extends BaseDao implements UserDao {
 
 	@Override
 	public SelectUserResponse selectUser(SelectUserRequest request) throws DaoException {
+		LOG.info(DAO_NAME + ": Select user operation invoked.");
+
 		SqlStatement sql = new SqlStatement.Builder().doSelect("*").from(USERS_VIEW).where(USERNAME_COLUMN_NAME)
 				.build();
-		Object[] parameters = DaoHelper.generateArray(request.getUserName());
-		List<User> UserList = super.select(sql, UserRowMapper, parameters);
+		Object[] parameters = DaoHelper.generateArray(request.getUsername().getUsername());
+		List<User> UserList = super.select(sql, userRowMapper, parameters);
 		return new SelectUserResponse(UserList);
 	}
 
 	@Override
 	public SelectUserResponse selectAllUsers() throws DaoException {
+		LOG.info(DAO_NAME + ": Select all users operation invoked.");
+
 		super.doPersistConnection();
 
 		SqlStatement sql = new SqlStatement.Builder().doSelectAll().from(USERS_VIEW).build();
-		List<User> UserList = super.select(sql, UserRowMapper);
+		List<User> UserList = super.select(sql, userRowMapper);
 		return new SelectUserResponse(UserList);
 	}
 
 	@Override
 	public SelectUserPasswordResponse selectUserPassword(SelectUserPasswordRequest request) throws DaoException {
+		LOG.info(DAO_NAME + ": Select user password operation invoked.");
+
 		SqlStatement sql = new SqlStatement.Builder().doSelect("*").from(USERS_PASSWORD_TABLE)
 				.where(USERNAME_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(request.getUserName());
-		List<UserPassword> UserPasswordList = super.select(sql, UserPasswordRowMapper, parameters);
+		List<UserPassword> UserPasswordList = super.select(sql, userPasswordRowMapper, parameters);
 		return new SelectUserPasswordResponse(UserPasswordList);
 	}
 
 	@Override
 	public DeleteUserResponse deleteUser(DeleteUserRequest request) throws DaoException {
+		LOG.info(DAO_NAME + ": Delete user operation invoked.");
+
 		SqlStatement sql = new SqlStatement.Builder().doDelete(USERS_TABLE).where(USERNAME_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(request.getUserName());
 		int rowsAffected = super.delete(sql, parameters);
@@ -243,6 +265,8 @@ public class UserDaoBean extends BaseDao implements UserDao {
 
 	@Override
 	public PurgeUsersResponse purgeUsers(PurgeUsersRequest request) throws DaoException {
+		LOG.info(DAO_NAME + ": Purge users operation invoked.");
+
 		SqlStatement sql = new SqlStatement.Builder().doDelete(USERS_TABLE).where(STATUS_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(UserStatus.DELETED.toString());
 

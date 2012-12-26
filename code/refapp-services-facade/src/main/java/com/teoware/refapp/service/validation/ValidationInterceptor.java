@@ -25,7 +25,7 @@ import com.teoware.refapp.service.validation.util.ServiceFacadeHolder;
  * EJB 3 Interceptor to validate method parameters which is marked with {@link Validate}. Calls {@link ValidationUtils}
  * for validation processing.
  * 
- * @author thomas.johansen
+ * @author thomas@teoware.com
  * 
  */
 public class ValidationInterceptor {

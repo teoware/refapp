@@ -5,8 +5,14 @@ import com.teoware.refapp.model.user.UserAddress;
 import com.teoware.refapp.model.user.UserId;
 import com.teoware.refapp.model.user.UserInfo;
 import com.teoware.refapp.model.user.UserPassword;
+import com.teoware.refapp.model.user.Username;
 
 public class BeanFactory {
+
+	public static Username createUsernameBean() {
+		Username username = new Username();
+		return username;
+	}
 
 	public static UserId createUserIdBean() {
 		UserId userId = new UserId();

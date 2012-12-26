@@ -1,4 +1,4 @@
-package com.teoware.refapp.web.ui;
+package com.teoware.refapp.web.ui.controller;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

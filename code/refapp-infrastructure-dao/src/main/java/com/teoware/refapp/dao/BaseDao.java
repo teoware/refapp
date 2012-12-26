@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.ejb.TransactionAttribute;
 import javax.sql.DataSource;
 
@@ -28,17 +27,20 @@ import com.teoware.refapp.dao.util.RowMapperResultSetExtractor;
 public abstract class BaseDao {
 
 	private static final Logger LOG = LoggerFactory.getLogger(BaseDao.class);
-	
+
 	private static final String INSERT_ERROR_MESSAGE = "Insert operation failed.";
 	private static final String UPDATE_ERROR_MESSAGE = "Update operation failed.";
 	private static final String SELECT_ERROR_MESSAGE = "Select operation failed.";
 	private static final String DELETE_ERROR_MESSAGE = "Delete operation failed.";
 
-	@Resource(mappedName = "jdbc/refapp")
-	protected DataSource dataSource;
+	private DataSource dataSource;
 
 	protected Connection connection;
 	protected boolean persistConnection;
+	
+	protected void initialize(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
 
 	protected int insert(SqlStatement sql, Object[] parameters) throws DaoException {
 		try {
@@ -162,11 +164,11 @@ public abstract class BaseDao {
 	protected void doPersistConnection() {
 		this.persistConnection = true;
 	}
-	
+
 	private String e(String msg, SqlStatement sql) {
 		return e(msg, sql.getSql());
 	}
-	
+
 	private String e(String msg, String sql) {
 		return msg + "[" + sql + "]";
 	}

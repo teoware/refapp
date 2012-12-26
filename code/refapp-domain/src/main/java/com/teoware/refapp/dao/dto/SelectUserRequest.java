@@ -1,21 +1,23 @@
 package com.teoware.refapp.dao.dto;
 
+import com.teoware.refapp.model.user.Username;
+
 public class SelectUserRequest {
 
-	private String userName;
+	private Username username;
 
 	public SelectUserRequest() {
 	}
 
-	public SelectUserRequest(String userName) {
-		this.userName = userName;
+	public SelectUserRequest(Username username) {
+		this.username = username;
 	}
 
-	public String getUserName() {
-		return userName;
+	public Username getUsername() {
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(Username username) {
+		this.username = username;
 	}
 }

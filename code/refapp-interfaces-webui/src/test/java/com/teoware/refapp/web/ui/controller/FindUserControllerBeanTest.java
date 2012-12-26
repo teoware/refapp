@@ -1,4 +1,4 @@
-package com.teoware.refapp.web.ui.user;
+package com.teoware.refapp.web.ui.controller;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -12,15 +12,18 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 
+import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.testtools.JavaBeanTester;
 import com.teoware.refapp.web.consumer.UserServiceConsumer;
-import com.teoware.refapp.web.consumer.vo.RegisterUserRequestVO;
+import com.teoware.refapp.web.consumer.vo.FindUserRequestVO;
+import com.teoware.refapp.web.consumer.vo.UserVO;
 
-public class RegisterUserControllerBeanTest {
+public class FindUserControllerBeanTest {
 
 	@InjectMocks
-	RegisterUserControllerBean controller;
+	FindUserControllerBean controller;
 
 	@Mock
 	private UserServiceConsumer consumer;
@@ -32,9 +35,9 @@ public class RegisterUserControllerBeanTest {
 
 	@Test
 	public void testGettersAndSetters() throws IntrospectionException {
-		JavaBeanTester.test(RegisterUserControllerBean.class);
+		JavaBeanTester.test(FindUserControllerBean.class);
 	}
-	
+
 	@Test
 	public void testTitle() {
 		assertNotNull(controller.getTitle());
@@ -43,8 +46,10 @@ public class RegisterUserControllerBeanTest {
 
 	@Test
 	public void testOnClickRegisterButtonCreatesUser() {
-		controller.onClickRegisterButton();
+		Mockito.when(consumer.findUser(any(FindUserRequestVO.class))).thenReturn(new UserVO(new User()));
 
-		verify(consumer).registerUser(any(RegisterUserRequestVO.class));
+		controller.onClickFindButton();
+
+		verify(consumer).findUser(any(FindUserRequestVO.class));
 	}
 }
