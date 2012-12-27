@@ -14,6 +14,7 @@ import static com.teoware.refapp.dao.metadata.UsersTableMetaData.PASSWORD_COLUMN
 import static com.teoware.refapp.dao.metadata.UsersTableMetaData.PHONE_COLUMN_NAME;
 import static com.teoware.refapp.dao.metadata.UsersTableMetaData.POSTALCODE_COLUMN_NAME;
 import static com.teoware.refapp.dao.metadata.UsersTableMetaData.REGION_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTableMetaData.SALT_COLUMN_NAME;
 import static com.teoware.refapp.dao.metadata.UsersTableMetaData.STATUS_COLUMN_NAME;
 import static com.teoware.refapp.dao.metadata.UsersTableMetaData.USERNAME_COLUMN_NAME;
 import static com.teoware.refapp.dao.metadata.UsersTableMetaData.USERS_ADDRESS_TABLE_NAME;
@@ -119,9 +120,9 @@ public class UserDaoBean extends BaseDao implements UserDao {
 
 	private int localInsertUserPassword(InsertUserRequest request) throws DaoException {
 		SqlStatement sql = new SqlStatement.Builder().doInsert(USERS_PASSWORD_TABLE)
-				.columnValues(USERNAME_COLUMN_NAME, PASSWORD_COLUMN_NAME).build();
+				.columnValues(USERNAME_COLUMN_NAME, PASSWORD_COLUMN_NAME, SALT_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(request.getUser().getUserId().getUserName(), request
-				.getUserPassword().getPassword());
+				.getUserPassword().getPassword(), request.getUserPassword().getSalt());
 		return super.insert(sql, parameters);
 	}
 

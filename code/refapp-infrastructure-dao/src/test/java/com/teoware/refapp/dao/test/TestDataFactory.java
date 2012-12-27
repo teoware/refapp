@@ -13,7 +13,6 @@ import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserPassword;
 import com.teoware.refapp.model.user.Username;
 import com.teoware.refapp.model.util.BeanFactory;
-import com.teoware.refapp.util.PasswordHandler;
 import com.teoware.refapp.util.time.DateTimeUtils;
 
 public final class TestDataFactory {
@@ -83,19 +82,22 @@ public final class TestDataFactory {
 
 	public static UserPassword createUserJohnPassword() {
 		UserPassword userPassword = new UserPassword();
-		userPassword.setPassword(PasswordHandler.encryptPassword("johnsPassword"));
+		userPassword.setPassword("johnsPassword");
+		userPassword.setSalt("johnsPasswordSalt");
 		return userPassword;
 	}
 
 	public static UserPassword createUserJanePassword() {
 		UserPassword userPassword = new UserPassword();
-		userPassword.setPassword(PasswordHandler.encryptPassword("janesPassword"));
+		userPassword.setPassword("janesPassword");
+		userPassword.setSalt("janesPasswordSalt");
 		return userPassword;
 	}
 
 	public static UserPassword createUserJonahPassword() {
 		UserPassword userPassword = new UserPassword();
-		userPassword.setPassword(PasswordHandler.encryptPassword("jonahsPassword"));
+		userPassword.setPassword("jonahsPassword");
+		userPassword.setSalt("jonahsPasswordSalt");
 		return userPassword;
 	}
 

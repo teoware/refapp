@@ -9,6 +9,13 @@ public class Username extends BaseBody {
 	@NotNull
 	private String username;
 
+	public Username() {
+	}
+
+	public Username(String username) {
+		this.username = username;
+	}
+
 	public String getUsername() {
 		return username;
 	}

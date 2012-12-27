@@ -6,6 +6,9 @@ public class FindUserRequestVO {
 
 	private Username username;
 
+	public FindUserRequestVO() {
+	}
+
 	public FindUserRequestVO(Username username) {
 		this.username = username;
 	}

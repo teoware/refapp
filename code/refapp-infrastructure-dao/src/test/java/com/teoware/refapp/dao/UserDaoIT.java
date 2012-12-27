@@ -6,7 +6,6 @@ import static com.teoware.refapp.dao.UserDaoBean.USERS_STATUS_TABLE;
 import static com.teoware.refapp.dao.UserDaoBean.USERS_TABLE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import java.sql.Connection;
 import java.util.List;
@@ -19,12 +18,11 @@ import org.junit.experimental.categories.Category;
 
 import com.teoware.refapp.dao.mock.UserDaoMock;
 import com.teoware.refapp.dao.sql.SqlStatement;
-import com.teoware.refapp.dao.test.UserDaoTestHelper;
 import com.teoware.refapp.dao.test.TestDataSourceHandler;
+import com.teoware.refapp.dao.test.UserDaoTestHelper;
 import com.teoware.refapp.model.enums.UserStatus;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserPassword;
-import com.teoware.refapp.util.PasswordHandler;
 
 @Category(com.teoware.refapp.test.IntegrationTestGroup.class)
 public class UserDaoIT extends UserDaoTestHelper {
@@ -108,7 +106,8 @@ public class UserDaoIT extends UserDaoTestHelper {
 		UserPassword authorPassword = authorPasswordList.get(0);
 
 		assertNotNull(authorPassword.getPassword());
-		assertTrue(PasswordHandler.verifyPassword("jonahsPassword", authorPassword.getPassword()));
+		assertEquals("jonahsPassword", authorPassword.getPassword());
+		assertEquals("jonahsPasswordSalt", authorPassword.getSalt());
 	}
 
 	@Test

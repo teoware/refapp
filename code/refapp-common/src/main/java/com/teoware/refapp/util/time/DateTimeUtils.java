@@ -22,7 +22,7 @@ public final class DateTimeUtils {
 	public static Calendar createCalendar(int field, int offset) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeZone(TimeZone.getDefault());
-		calendar.add(field, offset);
+		calendar.roll(field, offset);
 		return calendar;
 	}
 

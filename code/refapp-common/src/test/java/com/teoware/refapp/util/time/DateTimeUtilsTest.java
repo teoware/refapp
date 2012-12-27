@@ -14,14 +14,14 @@ public class DateTimeUtilsTest {
 	public void testCreateCalendarWithDayOffset() {
 		Calendar cal = new DateTimeUtils().createCalendar(Calendar.DAY_OF_YEAR, 5);
 
-		assertEquals(Calendar.getInstance().get(Calendar.DAY_OF_YEAR) + 5, cal.get(Calendar.DAY_OF_YEAR));
+		assertEquals(dayPlus5(), cal.get(Calendar.DAY_OF_YEAR));
 	}
 
 	@Test
 	public void testCreateCalendarWithHourOffset() {
 		Calendar cal = DateTimeUtils.createCalendar(Calendar.HOUR_OF_DAY, -5);
 
-		assertEquals(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) - 5, cal.get(Calendar.HOUR_OF_DAY));
+		assertEquals(hourMinus5(), cal.get(Calendar.HOUR_OF_DAY));
 	}
 
 	@Test
@@ -30,7 +30,7 @@ public class DateTimeUtilsTest {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 
-		assertEquals(Calendar.getInstance().get(Calendar.DAY_OF_YEAR) + 5, cal.get(Calendar.DAY_OF_YEAR));
+		assertEquals(dayPlus5(), cal.get(Calendar.DAY_OF_YEAR));
 	}
 
 	@Test
@@ -39,7 +39,19 @@ public class DateTimeUtilsTest {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 
-		assertEquals(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) - 5, cal.get(Calendar.HOUR_OF_DAY));
+		assertEquals(hourMinus5(), cal.get(Calendar.HOUR_OF_DAY));
+	}
+	
+	private int dayPlus5() {
+		Calendar cal = Calendar.getInstance();
+		cal.roll(Calendar.DAY_OF_YEAR, 5);
+		return cal.get(Calendar.DAY_OF_YEAR);
+	}
+	
+	private int hourMinus5() {
+		Calendar cal = Calendar.getInstance();
+		cal.roll(Calendar.HOUR_OF_DAY, -5);
+		return cal.get(Calendar.HOUR_OF_DAY);
 	}
 
 	@Test
