@@ -47,8 +47,11 @@ public class UserDaoIT extends UserDaoTestHelper {
 	}
 
 	@Test
-	public void testInsertAndSelectUserJohn() throws DaoException {
-		int rowsAffected = insertUserJohn(authorDao);
+	public void testInsertAndSelectUserJohn() {
+		try {int rowsAffected;
+		
+			rowsAffected = insertUserJohn(authorDao);
+		
 
 		assertEquals(3, rowsAffected);
 
@@ -58,7 +61,10 @@ public class UserDaoIT extends UserDaoTestHelper {
 		assertEquals(1, authorList.size());
 		User author = authorList.get(0);
 
-		assertInsertUserJohn(author);
+		assertInsertUserJohn(author);} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Test

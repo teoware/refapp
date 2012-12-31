@@ -1,5 +1,7 @@
 package com.teoware.refapp.dao;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import com.teoware.refapp.dao.rowmapper.RowMapper;
 import com.teoware.refapp.dao.sql.SqlStatement;
+import com.teoware.refapp.dao.util.ChangeResult;
 import com.teoware.refapp.dao.util.ConnectionHandler;
 import com.teoware.refapp.dao.util.DaoHelper;
 import com.teoware.refapp.dao.util.ResultSetExtractor;
@@ -32,17 +35,18 @@ public abstract class BaseDao {
 	private static final String UPDATE_ERROR_MESSAGE = "Update operation failed.";
 	private static final String SELECT_ERROR_MESSAGE = "Select operation failed.";
 	private static final String DELETE_ERROR_MESSAGE = "Delete operation failed.";
+	private static final String ID_COLUMN_NAME = "ID";
 
 	private DataSource dataSource;
 
 	protected Connection connection;
 	protected boolean persistConnection;
-	
+
 	protected void initialize(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
 
-	protected int insert(SqlStatement sql, Object[] parameters) throws DaoException {
+	protected ChangeResult insert(SqlStatement sql, Object[] parameters) throws DaoException {
 		try {
 			return update(sql, parameters);
 		} catch (DaoException e) {
@@ -51,14 +55,15 @@ public abstract class BaseDao {
 		}
 	}
 
-	protected int update(SqlStatement sql, Object[] parameters) throws DaoException {
+	protected ChangeResult update(SqlStatement sql, Object[] parameters) throws DaoException {
 		LOG.debug("Executing SQL statement: " + sql.getSql());
 
 		PreparedStatement statement = null;
 		try {
 			statement = generatePreparedStatement(sql, parameters);
 			int rowsAffected = statement.executeUpdate();
-			return rowsAffected;
+			BigInteger generatedKey = getGeneratedKey(statement);
+			return new ChangeResult(rowsAffected, generatedKey);
 		} catch (SQLException e) {
 			LOG.error(e(UPDATE_ERROR_MESSAGE, sql));
 			throw new DaoException(e(UPDATE_ERROR_MESSAGE, sql), e);
@@ -95,7 +100,7 @@ public abstract class BaseDao {
 		}
 	}
 
-	protected int delete(SqlStatement sql, Object[] parameters) throws DaoException {
+	protected ChangeResult delete(SqlStatement sql, Object[] parameters) throws DaoException {
 		try {
 			return update(sql, parameters);
 		} catch (DaoException e) {
@@ -171,5 +176,15 @@ public abstract class BaseDao {
 
 	private String e(String msg, String sql) {
 		return msg + "[" + sql + "]";
+	}
+
+	private BigInteger getGeneratedKey(PreparedStatement statement) {
+		try {
+			ResultSet rs = statement.getGeneratedKeys();
+			BigDecimal bd = rs.getBigDecimal(ID_COLUMN_NAME);
+			return bd.toBigInteger();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 }
