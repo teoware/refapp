@@ -5,24 +5,36 @@ echo "INFO: Starting full execution..."
 FILE_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 bash -c "${FILE_PATH}/startDomain.sh"
-test $? -ne 0 && echo "ERROR: Execution failed at step '1'" && exit 1
+test $? -ne 0 && echo "ERROR: Execution failed at step '1 (startDomain)'" && exit 1
 
 bash -c "${FILE_PATH}/deleteJDBCResource.sh"
-test $? -ne 0 && echo "ERROR: Execution failed at step '2'" && exit 1
+test $? -ne 0 && echo "ERROR: Execution failed at step '2 (deleteJDBCResource)'" && exit 1
 
-bash -c "${FILE_PATH}/stopAndDeleteDomain.sh"
-test $? -ne 0 && echo "ERROR: Execution failed at step '3'" && exit 1
+bash -c "${FILE_PATH}/stopDomain.sh"
+test $? -ne 0 && echo "ERROR: Execution failed at step '3 (stopDomain)'" && exit 1
 
-bash -c "${FILE_PATH}/createAndStartDomain.sh"
-test $? -ne 0 && echo "ERROR: Execution failed at step '4'" && exit 1
+bash -c "${FILE_PATH}/deleteDomain.sh"
+test $? -ne 0 && echo "ERROR: Execution failed at step '4 (deleteDomain)'" && exit 1
+
+bash -c "${FILE_PATH}/deleteDatabase.sh"
+test $? -ne 0 && echo "ERROR: Execution failed at step '5 (deleteDatabase)'" && exit 1
+
+bash -c "${FILE_PATH}/createDomain.sh"
+test $? -ne 0 && echo "ERROR: Execution failed at step '6 (createDomain)'" && exit 1
+
+bash -c "${FILE_PATH}/startDomain.sh"
+test $? -ne 0 && echo "ERROR: Execution failed at step '7 (startDomain)'" && exit 1
 
 bash -c "${FILE_PATH}/createJDBCResource.sh"
-test $? -ne 0 && echo "ERROR: Execution failed at step '5'" && exit 1
+test $? -ne 0 && echo "ERROR: Execution failed at step '8 (createJDBCResource)'" && exit 1
 
 bash -c "${FILE_PATH}/createDatabaseSchema.sh"
-test $? -ne 0 && echo "ERROR: Execution failed at step '6'" && exit 1
+test $? -ne 0 && echo "ERROR: Execution failed at step '9 (createDatabaseSchema)'" && exit 1
 
-bash -c "${FILE_PATH}/buildAndDeployApplication.sh"
-test $? -ne 0 && echo "ERROR: Execution failed at step '7'" && exit 1
+bash -c "${FILE_PATH}/buildApplication.sh"
+test $? -ne 0 && echo "ERROR: Execution failed at step '10 (buildApplication)'" && exit 1
+
+bash -c "${FILE_PATH}/deployApplication.sh"
+test $? -ne 0 && echo "ERROR: Execution failed at step '11 (deployApplication)'" && exit 1
 
 echo "INFO: Execution finished successfully!" && exit 0

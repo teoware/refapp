@@ -13,7 +13,7 @@ set POM_FILE=%FILE_PATH%..\etc\database\pom.xml
 set ERROR_MSG=Failed to find Maven build file at %POM_FILE%
 if not exist %POM_FILE% goto ERROR
 
-call %MAVEN_CMD% -f %POM_FILE% clean install > nul 2>&1
+call %MAVEN_CMD% -f %POM_FILE% clean install > %ERROR_LOG% 2>&1
 set RETURNVALUE=%ERRORLEVEL%
 set ERROR_MSG=Failed to create database schema objects using Maven
 if not (%RETURNVALUE%)==(0) goto ERROR

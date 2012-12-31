@@ -18,6 +18,8 @@ ASADMIN_CMD="${ASADMIN_HOME}/bin/asadmin --user ${ASADMIN_USER} --passwordfile $
 
 MAVEN_CMD="${MAVEN_HOME}/bin/mvn"
 
+DATABASE_FOLDER="${ASADMIN_HOME}/glassfish/databases/refapp"
+
 JDBC_XML_FILE="${FILE_PATH}/../conf/jdbc_resource.xml"
 CONNECTION_POOL_NAME="RefappDerbyPool"
 

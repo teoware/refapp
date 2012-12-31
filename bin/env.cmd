@@ -28,7 +28,9 @@ set ASADMIN_PASSWORD_FILE="%FILE_PATH%..\conf\.asadmintruststore"
 set DOMAIN="domain1"
 set ASADMIN_CMD=%ASADMIN_HOME%\bin\asadmin --user %ASADMIN_USER% --passwordfile %ASADMIN_PASSWORD_FILE%
 
-set MAVEN_CMD=%MAVEN_HOME%\bin\mvn
+set MAVEN_CMD="%MAVEN_HOME%\bin\mvn"
+
+set DATABASE_FOLDER="%ASADMIN_HOME%\glassfish\databases\refapp"
 
 set JDBC_XML_FILE="%FILE_PATH%..\conf\jdbc_resource.xml"
 set CONNECTION_POOL_NAME="RefappDerbyPool"
@@ -43,7 +45,7 @@ for /f "tokens=1,2 delims=: " %%f in ('time /t') do set t=%%f.%%g
 set TIMESTAMP=%d%T%t%
 
 rem set ERROR_LOG=%TEMP%\%APP_NAME%-%TIMESTAMP%.error
-set ERROR_LOG=%TEMP%\%APP_NAME%.error
+set ERROR_LOG="%TEMP%\%APP_NAME%.error"
 
 goto SUCCESS
 
