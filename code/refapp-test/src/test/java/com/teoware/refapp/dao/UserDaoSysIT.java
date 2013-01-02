@@ -1,8 +1,8 @@
 package com.teoware.refapp.dao;
 
-import static com.teoware.refapp.dao.UserDaoBean.USERS_ADDRESS_TABLE;
-import static com.teoware.refapp.dao.UserDaoBean.USERS_PASSWORD_TABLE;
-import static com.teoware.refapp.dao.UserDaoBean.USERS_STATUS_TABLE;
+import static com.teoware.refapp.dao.UserDaoBean.USER_ADDRESS_TABLE;
+import static com.teoware.refapp.dao.UserDaoBean.USER_PASSWORD_TABLE;
+import static com.teoware.refapp.dao.UserDaoBean.USER_STATUS_TABLE;
 import static com.teoware.refapp.dao.UserDaoBean.USERS_TABLE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -170,16 +170,16 @@ public class UserDaoSysIT extends UserDaoTestHelper {
 			userDao.delete(new SqlStatement("DELETE FROM " + USERS_TABLE), null);
 		}
 
-		if (userDao.rowCount(USERS_STATUS_TABLE) > 0) {
-			userDao.delete(new SqlStatement("DELETE FROM " + USERS_STATUS_TABLE), null);
+		if (userDao.rowCount(USER_STATUS_TABLE) > 0) {
+			userDao.delete(new SqlStatement("DELETE FROM " + USER_STATUS_TABLE), null);
 		}
 
-		if (userDao.rowCount(USERS_ADDRESS_TABLE) > 0) {
-			userDao.delete(new SqlStatement("DELETE FROM " + USERS_ADDRESS_TABLE), null);
+		if (userDao.rowCount(USER_ADDRESS_TABLE) > 0) {
+			userDao.delete(new SqlStatement("DELETE FROM " + USER_ADDRESS_TABLE), null);
 		}
 
-		if (userDao.rowCount(USERS_PASSWORD_TABLE) > 0) {
-			userDao.delete(new SqlStatement("DELETE FROM " + USERS_PASSWORD_TABLE), null);
+		if (userDao.rowCount(USER_PASSWORD_TABLE) > 0) {
+			userDao.delete(new SqlStatement("DELETE FROM " + USER_PASSWORD_TABLE), null);
 		}
 	}
 }

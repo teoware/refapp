@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.util.List;
 
@@ -130,7 +131,7 @@ public abstract class BaseDao {
 
 	protected PreparedStatement generatePreparedStatement(SqlStatement sql, Object[] parameters) throws SQLException {
 		createOrReuseConnection();
-		PreparedStatement statement = connection.prepareStatement(sql.getSql());
+		PreparedStatement statement = connection.prepareStatement(sql.getSql(), Statement.RETURN_GENERATED_KEYS);
 		if (parameters != null) {
 			for (int i = 0; i < parameters.length; i++) {
 				DaoHelper.processParameter(statement, parameters[i], i + 1);
@@ -181,6 +182,7 @@ public abstract class BaseDao {
 	private BigInteger getGeneratedKey(PreparedStatement statement) {
 		try {
 			ResultSet rs = statement.getGeneratedKeys();
+			rs.next();
 			BigDecimal bd = rs.getBigDecimal(ID_COLUMN_NAME);
 			return bd.toBigInteger();
 		} catch (Exception e) {

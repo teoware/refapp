@@ -11,6 +11,7 @@ public final class UsersTableMetaData {
 	public static final String USERNAME_COLUMN_NAME = "USERNAME";
 	
 	// USER_INFO
+	public static final String USER_INFO_TABLE_NAME = "USER_INFO";
 	public static final String USER_ID_COLUMN_NAME = "USER_ID";
 	public static final String FIRSTNAME_COLUMN_NAME = "FIRSTNAME";
 	public static final String LASTNAME_COLUMN_NAME = "LASTNAME";

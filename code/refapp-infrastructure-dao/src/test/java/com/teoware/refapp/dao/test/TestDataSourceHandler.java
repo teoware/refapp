@@ -1,21 +1,26 @@
 package com.teoware.refapp.dao.test;
 
 import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_SCHEMA_REFAPP_STATEMENT;
-import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_TABLE_USER_ADDRESS_STATEMENT;
-import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_TABLE_USER_PASSWORD_STATEMENT;
-import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_TABLE_USERS_STATEMENT;
-import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_TABLE_USER_STATUS_STATEMENT;
-import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_TABLE_REF_USER_STATUS_STATEMENT;
 import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_TABLE_REF_GENDER_STATEMENT;
+import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_TABLE_REF_USER_STATUS_STATEMENT;
+import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_TABLE_USERS_STATEMENT;
+import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_TABLE_USER_ADDRESS_STATEMENT;
+import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_TABLE_USER_INFO_STATEMENT;
+import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_TABLE_USER_PASSWORD_STATEMENT;
+import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_TABLE_USER_STATUS_STATEMENT;
 import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_TRIGGER_USERS_TRG1_STATEMENT;
 import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_TRIGGER_USERS_TRG2_STATEMENT;
+import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_TRIGGER_USER_ADDRESS_TRG1_STATEMENT;
+import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_TRIGGER_USER_INFO_TRG1_STATEMENT;
+import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_TRIGGER_USER_PASSWORD_TRG1_STATEMENT;
+import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_TRIGGER_USER_STATUS_TRG1_STATEMENT;
 import static com.teoware.refapp.dao.test.TestDataSourceMetaData.CREATE_VIEW_USERS_V_STATEMENT;
+import static com.teoware.refapp.dao.test.TestDataSourceMetaData.INSERT_REF_GENDER_STATEMENT_1;
+import static com.teoware.refapp.dao.test.TestDataSourceMetaData.INSERT_REF_GENDER_STATEMENT_2;
 import static com.teoware.refapp.dao.test.TestDataSourceMetaData.INSERT_REF_USER_STATUS_STATEMENT_1;
 import static com.teoware.refapp.dao.test.TestDataSourceMetaData.INSERT_REF_USER_STATUS_STATEMENT_2;
 import static com.teoware.refapp.dao.test.TestDataSourceMetaData.INSERT_REF_USER_STATUS_STATEMENT_3;
 import static com.teoware.refapp.dao.test.TestDataSourceMetaData.INSERT_REF_USER_STATUS_STATEMENT_4;
-import static com.teoware.refapp.dao.test.TestDataSourceMetaData.INSERT_REF_GENDER_STATEMENT_1;
-import static com.teoware.refapp.dao.test.TestDataSourceMetaData.INSERT_REF_GENDER_STATEMENT_2;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -47,11 +52,16 @@ public final class TestDataSourceHandler {
 		connection.prepareStatement(CREATE_TABLE_REF_USER_STATUS_STATEMENT).execute();
 		connection.prepareStatement(CREATE_TABLE_USERS_STATEMENT).execute();
 		connection.prepareStatement(CREATE_TABLE_USER_STATUS_STATEMENT).execute();
+		connection.prepareStatement(CREATE_TABLE_USER_INFO_STATEMENT).execute();
 		connection.prepareStatement(CREATE_TABLE_USER_PASSWORD_STATEMENT).execute();
 		connection.prepareStatement(CREATE_TABLE_USER_ADDRESS_STATEMENT).execute();
 		connection.prepareStatement(CREATE_VIEW_USERS_V_STATEMENT).execute();
 		connection.prepareStatement(CREATE_TRIGGER_USERS_TRG1_STATEMENT).execute();
 		connection.prepareStatement(CREATE_TRIGGER_USERS_TRG2_STATEMENT).execute();
+		connection.prepareStatement(CREATE_TRIGGER_USER_INFO_TRG1_STATEMENT).execute();
+		connection.prepareStatement(CREATE_TRIGGER_USER_PASSWORD_TRG1_STATEMENT).execute();
+		connection.prepareStatement(CREATE_TRIGGER_USER_ADDRESS_TRG1_STATEMENT).execute();
+		connection.prepareStatement(CREATE_TRIGGER_USER_STATUS_TRG1_STATEMENT).execute();
 		return connection;
 	}
 

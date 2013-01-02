@@ -1,6 +1,7 @@
 package com.teoware.refapp.dao.util;
 
 import java.io.StringWriter;
+import java.math.BigInteger;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -11,7 +12,7 @@ public final class DaoHelper {
 			throws SQLException {
 		if (parameter == null) {
 			statement.setObject(parameterIndex, parameter);
-		} else if (isString(parameter)) {
+		} else if (isString(parameter) || isBigInteger(parameter)) {
 			statement.setString(parameterIndex, parameter.toString());
 		} else if (isDate(parameter)) {
 			java.util.Date date = (java.util.Date) parameter;
@@ -43,6 +44,10 @@ public final class DaoHelper {
 
 	public static boolean isCalendar(Object object) {
 		return object instanceof Calendar;
+	}
+
+	public static boolean isBigInteger(Object object) {
+		return object instanceof BigInteger;
 	}
 
 	public static Object[] generateArray(Object... objects) {

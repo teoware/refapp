@@ -22,7 +22,9 @@ public class UserDaoMock extends UserDaoBean {
 	@Override
 	protected void closeConnection(PreparedStatement statement, boolean persistConnection) {
 		try {
-			statement.close();
+			if (statement != null) {
+				statement.close();
+			}
 		} catch (SQLException e) {
 			// Ignore
 		}
