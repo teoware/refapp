@@ -18,9 +18,9 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import com.teoware.refapp.dao.mock.UserDaoMock;
-import com.teoware.refapp.dao.sql.SqlStatement;
 import com.teoware.refapp.dao.test.UserDaoTestHelper;
 import com.teoware.refapp.dao.test.TestDataSourceHandler;
+import com.teoware.refapp.dao.util.SqlStatement;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserPassword;
 import com.teoware.refapp.model.enums.UserStatus;

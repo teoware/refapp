@@ -17,12 +17,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.teoware.refapp.dao.rowmapper.RowMapper;
-import com.teoware.refapp.dao.sql.SqlStatement;
 import com.teoware.refapp.dao.util.ChangeResult;
 import com.teoware.refapp.dao.util.ConnectionHandler;
 import com.teoware.refapp.dao.util.DaoHelper;
 import com.teoware.refapp.dao.util.ResultSetExtractor;
 import com.teoware.refapp.dao.util.RowMapperResultSetExtractor;
+import com.teoware.refapp.dao.util.SqlStatement;
 
 /**
  * Base DAO that holds functionality for common database operations.

@@ -1,8 +1,10 @@
-package com.teoware.refapp.dao.sql;
+package com.teoware.refapp.dao.util;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import com.teoware.refapp.dao.util.SqlStatement;
 
 public class SqlStatementTest {
 

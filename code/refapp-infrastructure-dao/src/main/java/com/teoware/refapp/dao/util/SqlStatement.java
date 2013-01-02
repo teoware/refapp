@@ -1,4 +1,4 @@
-package com.teoware.refapp.dao.sql;
+package com.teoware.refapp.dao.util;
 
 public class SqlStatement {
 
