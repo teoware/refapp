@@ -48,6 +48,7 @@
 		<version.javaee-api>6.0</version.javaee-api>
 		<!-- Utils -->
 		<version.joda-time>2.1</version.joda-time>
+		<version.commons-io>2.4</version.commons-io>
 		<!-- Validation -->
 		<version.hibernate-validator>4.2.0.Final</version.hibernate-validator>
 		<version.commons-validator>1.4.0</version.commons-validator>
@@ -127,6 +128,12 @@
 				<version>${version.joda-time}</version>
 			</dependency>
 			
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${version.commons-io}</version>
+			</dependency>
+			
 			<!-- Validation -->
 			<dependency>
 				<groupId>org.hibernate</groupId>
@@ -204,12 +211,14 @@
 				<groupId>org.powermock</groupId>
 				<artifactId>powermock-module-junit4</artifactId>
 				<version>${version.powermock}</version>
+				<scope>test</scope>
 			</dependency>
 			
 			<dependency>
 				<groupId>org.powermock</groupId>
 				<artifactId>powermock-api-mockito</artifactId>
 				<version>${version.powermock}</version>
+				<scope>test</scope>
 			</dependency>
 			
 			<dependency>

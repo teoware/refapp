@@ -36,6 +36,12 @@
 			<artifactId>javaee-api</artifactId>
 		</dependency>
 		
+		<!-- Utils -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+		
 		<!-- Logging -->
 		<dependency>
 			<groupId>log4j</groupId>
