@@ -22,7 +22,7 @@ import com.teoware.refapp.dao.util.ConnectionHandler;
 import com.teoware.refapp.dao.util.DaoHelper;
 import com.teoware.refapp.dao.util.ResultSetExtractor;
 import com.teoware.refapp.dao.util.RowMapperResultSetExtractor;
-import com.teoware.refapp.dao.util.SqlStatement;
+import com.teoware.refapp.dao.util.SQL;
 
 /**
  * Base DAO that holds functionality for common database operations.
@@ -47,7 +47,7 @@ public abstract class Dao {
 		this.dataSource = dataSource;
 	}
 
-	protected ChangeResult insert(SqlStatement sql, Object[] parameters) throws DaoException {
+	protected ChangeResult create(SQL sql, Object[] parameters) throws DaoException {
 		try {
 			return update(sql, parameters);
 		} catch (DaoException e) {
@@ -56,31 +56,14 @@ public abstract class Dao {
 		}
 	}
 
-	protected ChangeResult update(SqlStatement sql, Object[] parameters) throws DaoException {
-		LOG.debug("Executing SQL statement: " + sql.getSql());
-
-		PreparedStatement statement = null;
-		try {
-			statement = generatePreparedStatement(sql, parameters);
-			int rowsAffected = statement.executeUpdate();
-			BigInteger generatedKey = getGeneratedKey(statement);
-			return new ChangeResult(rowsAffected, generatedKey);
-		} catch (SQLException e) {
-			LOG.error(e(UPDATE_ERROR_MESSAGE, sql));
-			throw new DaoException(e(UPDATE_ERROR_MESSAGE, sql), e);
-		} finally {
-			closeConnection(statement);
-		}
-	}
-
 	@TransactionAttribute
-	protected <T> List<T> select(SqlStatement sql, RowMapper<T> rowMapper) throws DaoException {
+	protected <T> List<T> read(SQL sql, RowMapper<T> rowMapper) throws DaoException {
 		Object[] parameters = null;
-		return select(sql, rowMapper, parameters);
+		return read(sql, rowMapper, parameters);
 	}
 
 	@TransactionAttribute
-	protected <T> List<T> select(SqlStatement sql, RowMapper<T> rowMapper, Object[] parameters) throws DaoException {
+	protected <T> List<T> read(SQL sql, RowMapper<T> rowMapper, Object[] parameters) throws DaoException {
 		LOG.debug("Executing SQL statement: " + sql.getSql());
 
 		PreparedStatement statement = null;
@@ -101,7 +84,24 @@ public abstract class Dao {
 		}
 	}
 
-	protected ChangeResult delete(SqlStatement sql, Object[] parameters) throws DaoException {
+	protected ChangeResult update(SQL sql, Object[] parameters) throws DaoException {
+		LOG.debug("Executing SQL statement: " + sql.getSql());
+
+		PreparedStatement statement = null;
+		try {
+			statement = generatePreparedStatement(sql, parameters);
+			int rowsAffected = statement.executeUpdate();
+			BigInteger generatedKey = getGeneratedKey(statement);
+			return new ChangeResult(rowsAffected, generatedKey);
+		} catch (SQLException e) {
+			LOG.error(e(UPDATE_ERROR_MESSAGE, sql));
+			throw new DaoException(e(UPDATE_ERROR_MESSAGE, sql), e);
+		} finally {
+			closeConnection(statement);
+		}
+	}
+
+	protected ChangeResult delete(SQL sql, Object[] parameters) throws DaoException {
 		try {
 			return update(sql, parameters);
 		} catch (DaoException e) {
@@ -129,7 +129,7 @@ public abstract class Dao {
 		}
 	}
 
-	protected PreparedStatement generatePreparedStatement(SqlStatement sql, Object[] parameters) throws SQLException {
+	protected PreparedStatement generatePreparedStatement(SQL sql, Object[] parameters) throws SQLException {
 		createOrReuseConnection();
 		PreparedStatement statement = connection.prepareStatement(sql.getSql(), Statement.RETURN_GENERATED_KEYS);
 		if (parameters != null) {
@@ -171,7 +171,7 @@ public abstract class Dao {
 		this.persistConnection = true;
 	}
 
-	private String e(String msg, SqlStatement sql) {
+	private String e(String msg, SQL sql) {
 		return e(msg, sql.getSql());
 	}
 

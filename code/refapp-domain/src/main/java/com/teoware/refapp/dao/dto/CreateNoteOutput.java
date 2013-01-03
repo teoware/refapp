@@ -1,5 +1,5 @@
 package com.teoware.refapp.dao.dto;
 
-public class InsertTaskRequest {
+public class CreateNoteOutput {
 
 }

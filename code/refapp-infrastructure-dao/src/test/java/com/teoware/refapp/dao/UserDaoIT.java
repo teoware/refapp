@@ -19,7 +19,7 @@ import org.junit.experimental.categories.Category;
 import com.teoware.refapp.dao.mock.UserDaoMock;
 import com.teoware.refapp.dao.test.TestDataSourceHandler;
 import com.teoware.refapp.dao.test.UserDaoTestHelper;
-import com.teoware.refapp.dao.util.SqlStatement;
+import com.teoware.refapp.dao.util.SQL;
 import com.teoware.refapp.model.enums.UserStatus;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserPassword;
@@ -50,32 +50,32 @@ public class UserDaoIT extends UserDaoTestHelper {
 	public void testInsertAndSelectUserJohn() throws DaoException {
 		int rowsAffected;
 
-		rowsAffected = insertUserJohn(authorDao);
+		rowsAffected = createUserJohn(authorDao);
 
 		assertEquals(4, rowsAffected);
 
-		List<User> authorList = selectUserJohn(authorDao);
+		List<User> authorList = readUserJohn(authorDao);
 
 		assertNotNull(authorList);
 		assertEquals(1, authorList.size());
 		User author = authorList.get(0);
 
-		assertInsertUserJohn(author);
+		assertCreateUserJohn(author);
 	}
 
 	@Test
 	public void testInsertUpdateAndSelectUserJane() throws DaoException {
-		int rowsAffected = insertUserJane(authorDao);
+		int rowsAffected = createUserJane(authorDao);
 
 		assertEquals(4, rowsAffected);
 
-		List<User> authorList = selectUserJane(authorDao);
+		List<User> authorList = readUserJane(authorDao);
 
 		assertNotNull(authorList);
 		assertEquals(1, authorList.size());
 		User author = authorList.get(0);
 
-		assertInsertUserJane(author);
+		assertCreateUserJane(author);
 
 		author.getUserId().setStatus(UserStatus.ACTIVE);
 		author.getUserInfo().setEmail("jane.doe@epost.net");
@@ -86,7 +86,7 @@ public class UserDaoIT extends UserDaoTestHelper {
 		rowsAffected = updateUser(authorDao, author, null);
 		assertEquals(3, rowsAffected);
 
-		authorList = selectUserJane(authorDao);
+		authorList = readUserJane(authorDao);
 
 		assertNotNull(authorList);
 		assertEquals(1, authorList.size());
@@ -97,11 +97,11 @@ public class UserDaoIT extends UserDaoTestHelper {
 
 	@Test
 	public void testInsertAndSelectPasswordForUserJonah() throws DaoException {
-		int rowsAffected = insertUserJonah(authorDao);
+		int rowsAffected = createUserJonah(authorDao);
 
 		assertEquals(4, rowsAffected);
 
-		List<UserPassword> authorPasswordList = selectUserPasswordJonah(authorDao);
+		List<UserPassword> authorPasswordList = readUserPasswordJonah(authorDao);
 
 		assertNotNull(authorPasswordList);
 		assertEquals(1, authorPasswordList.size());
@@ -114,13 +114,13 @@ public class UserDaoIT extends UserDaoTestHelper {
 
 	@Test
 	public void testInsertAndSelectAllUsersShouldBeThree() throws DaoException {
-		int rowsAffected = insertUserJohn(authorDao);
-		rowsAffected += insertUserJane(authorDao);
-		rowsAffected += insertUserJonah(authorDao);
+		int rowsAffected = createUserJohn(authorDao);
+		rowsAffected += createUserJane(authorDao);
+		rowsAffected += createUserJonah(authorDao);
 
 		assertEquals(12, rowsAffected);
 
-		List<User> authorList = selectAllUsers(authorDao);
+		List<User> authorList = readAllUsers(authorDao);
 
 		assertNotNull(authorList);
 		assertEquals(3, authorList.size());
@@ -128,9 +128,9 @@ public class UserDaoIT extends UserDaoTestHelper {
 
 	@Test
 	public void testInsertDeleteOneAndSelectAllUsersShouldBeTwo() throws DaoException {
-		int rowsAffected = insertUserJohn(authorDao);
-		rowsAffected += insertUserJane(authorDao);
-		rowsAffected += insertUserJonah(authorDao);
+		int rowsAffected = createUserJohn(authorDao);
+		rowsAffected += createUserJane(authorDao);
+		rowsAffected += createUserJonah(authorDao);
 
 		assertEquals(12, rowsAffected);
 
@@ -138,7 +138,7 @@ public class UserDaoIT extends UserDaoTestHelper {
 
 		assertEquals(1, rowsAffected);
 
-		List<User> authorList = selectAllUsers(authorDao);
+		List<User> authorList = readAllUsers(authorDao);
 
 		assertNotNull(authorList);
 		assertEquals(2, authorList.size());
@@ -146,19 +146,19 @@ public class UserDaoIT extends UserDaoTestHelper {
 
 	private static void cleanTables() throws DaoException {
 		if (authorDao.rowCount(USERS_TABLE) > 0) {
-			authorDao.delete(new SqlStatement("DELETE FROM " + USERS_TABLE), null);
+			authorDao.delete(new SQL("DELETE FROM " + USERS_TABLE), null);
 		}
 
 		if (authorDao.rowCount(USER_STATUS_TABLE) > 0) {
-			authorDao.delete(new SqlStatement("DELETE FROM " + USER_STATUS_TABLE), null);
+			authorDao.delete(new SQL("DELETE FROM " + USER_STATUS_TABLE), null);
 		}
 
 		if (authorDao.rowCount(USER_ADDRESS_TABLE) > 0) {
-			authorDao.delete(new SqlStatement("DELETE FROM " + USER_ADDRESS_TABLE), null);
+			authorDao.delete(new SQL("DELETE FROM " + USER_ADDRESS_TABLE), null);
 		}
 
 		if (authorDao.rowCount(USER_PASSWORD_TABLE) > 0) {
-			authorDao.delete(new SqlStatement("DELETE FROM " + USER_PASSWORD_TABLE), null);
+			authorDao.delete(new SQL("DELETE FROM " + USER_PASSWORD_TABLE), null);
 		}
 	}
 }

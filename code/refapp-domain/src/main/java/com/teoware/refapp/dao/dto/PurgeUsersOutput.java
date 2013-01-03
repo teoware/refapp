@@ -1,10 +1,10 @@
 package com.teoware.refapp.dao.dto;
 
-public class UpdateUserResponse {
+public class PurgeUsersOutput {
 
 	private int rowsAffected;
 
-	public UpdateUserResponse(int rowsAffected) {
+	public PurgeUsersOutput(int rowsAffected) {
 		this.rowsAffected = rowsAffected;
 	}
 

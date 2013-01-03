@@ -1,13 +1,13 @@
 package com.teoware.refapp.dao.dto;
 
-public class SelectUserPasswordRequest {
+public class DeleteUserInput {
 
 	private String userName;
 
-	public SelectUserPasswordRequest() {
+	public DeleteUserInput() {
 	}
 
-	public SelectUserPasswordRequest(String userName) {
+	public DeleteUserInput(String userName) {
 		this.userName = userName;
 	}
 

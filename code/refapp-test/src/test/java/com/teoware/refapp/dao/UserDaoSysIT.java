@@ -1,9 +1,9 @@
 package com.teoware.refapp.dao;
 
+import static com.teoware.refapp.dao.UserDaoBean.USERS_TABLE;
 import static com.teoware.refapp.dao.UserDaoBean.USER_ADDRESS_TABLE;
 import static com.teoware.refapp.dao.UserDaoBean.USER_PASSWORD_TABLE;
 import static com.teoware.refapp.dao.UserDaoBean.USER_STATUS_TABLE;
-import static com.teoware.refapp.dao.UserDaoBean.USERS_TABLE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -18,12 +18,12 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import com.teoware.refapp.dao.mock.UserDaoMock;
-import com.teoware.refapp.dao.test.UserDaoTestHelper;
 import com.teoware.refapp.dao.test.TestDataSourceHandler;
-import com.teoware.refapp.dao.util.SqlStatement;
+import com.teoware.refapp.dao.test.UserDaoTestHelper;
+import com.teoware.refapp.dao.util.SQL;
+import com.teoware.refapp.model.enums.UserStatus;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserPassword;
-import com.teoware.refapp.model.enums.UserStatus;
 import com.teoware.refapp.test.SystemTestGroup;
 import com.teoware.refapp.util.PasswordHandler;
 
@@ -53,17 +53,17 @@ public class UserDaoSysIT extends UserDaoTestHelper {
 	@Test
 	public void testInsertAndSelectUserJohn() {
 		try {
-			int rowsAffected = insertUserJohn(userDao);
+			int rowsAffected = createUserJohn(userDao);
 
 			assertEquals(4, rowsAffected);
 
-			List<User> userList = selectUser(userDao, "john.doe");
+			List<User> userList = readUser(userDao, "john.doe");
 
 			assertNotNull(userList);
 			assertEquals(1, userList.size());
 			User user = userList.get(0);
 
-			assertInsertUserJohn(user);
+			assertCreateUserJohn(user);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -72,17 +72,17 @@ public class UserDaoSysIT extends UserDaoTestHelper {
 	@Test
 	public void testInsertUpdateAndSelectUserJane() {
 		try {
-			int rowsAffected = insertUserJane(userDao);
+			int rowsAffected = createUserJane(userDao);
 
 			assertEquals(4, rowsAffected);
 
-			List<User> userList = selectUser(userDao, "jane.doe");
+			List<User> userList = readUser(userDao, "jane.doe");
 
 			assertNotNull(userList);
 			assertEquals(1, userList.size());
 			User user = userList.get(0);
 
-			assertInsertUserJane(user);
+			assertCreateUserJane(user);
 
 			user.getUserId().setStatus(UserStatus.ACTIVE);
 			user.getUserInfo().setEmail("jane.doe@epost.net");
@@ -93,7 +93,7 @@ public class UserDaoSysIT extends UserDaoTestHelper {
 			rowsAffected = updateUser(userDao, user, null);
 			assertEquals(3, rowsAffected);
 
-			userList = selectUser(userDao, "jane.doe");
+			userList = readUser(userDao, "jane.doe");
 
 			assertNotNull(userList);
 			assertEquals(1, userList.size());
@@ -108,11 +108,11 @@ public class UserDaoSysIT extends UserDaoTestHelper {
 	@Test
 	public void testInsertUserJonahAndSelectPassword() {
 		try {
-			int rowsAffected = insertUserJonah(userDao);
+			int rowsAffected = createUserJonah(userDao);
 
 			assertEquals(4, rowsAffected);
 
-			List<UserPassword> userPasswordList = selectUserPassword(userDao, "jonah.doe");
+			List<UserPassword> userPasswordList = readUserPassword(userDao, "jonah.doe");
 
 			assertNotNull(userPasswordList);
 			assertEquals(1, userPasswordList.size());
@@ -128,13 +128,13 @@ public class UserDaoSysIT extends UserDaoTestHelper {
 	@Test
 	public void testInsertAndSelectAllUsersShouldBeThree() {
 		try {
-			int rowsAffected = insertUserJohn(userDao);
-			rowsAffected += insertUserJane(userDao);
-			rowsAffected += insertUserJonah(userDao);
+			int rowsAffected = createUserJohn(userDao);
+			rowsAffected += createUserJane(userDao);
+			rowsAffected += createUserJonah(userDao);
 
 			assertEquals(12, rowsAffected);
 
-			List<User> userList = selectAllUsers(userDao);
+			List<User> userList = readAllUsers(userDao);
 
 			assertNotNull(userList);
 			assertEquals(3, userList.size());
@@ -146,9 +146,9 @@ public class UserDaoSysIT extends UserDaoTestHelper {
 	@Test
 	public void testInsertDeleteOneSelectAllUsersShouldBeTwo() {
 		try {
-			int rowsAffected = insertUserJohn(userDao);
-			rowsAffected += insertUserJane(userDao);
-			rowsAffected += insertUserJonah(userDao);
+			int rowsAffected = createUserJohn(userDao);
+			rowsAffected += createUserJane(userDao);
+			rowsAffected += createUserJonah(userDao);
 
 			assertEquals(12, rowsAffected);
 
@@ -156,7 +156,7 @@ public class UserDaoSysIT extends UserDaoTestHelper {
 
 			assertEquals(1, rowsAffected);
 
-			List<User> userList = selectAllUsers(userDao);
+			List<User> userList = readAllUsers(userDao);
 
 			assertNotNull(userList);
 			assertEquals(2, userList.size());
@@ -167,19 +167,19 @@ public class UserDaoSysIT extends UserDaoTestHelper {
 
 	private static void cleanTables() throws DaoException {
 		if (userDao.rowCount(USERS_TABLE) > 0) {
-			userDao.delete(new SqlStatement("DELETE FROM " + USERS_TABLE), null);
+			userDao.delete(new SQL("DELETE FROM " + USERS_TABLE), null);
 		}
 
 		if (userDao.rowCount(USER_STATUS_TABLE) > 0) {
-			userDao.delete(new SqlStatement("DELETE FROM " + USER_STATUS_TABLE), null);
+			userDao.delete(new SQL("DELETE FROM " + USER_STATUS_TABLE), null);
 		}
 
 		if (userDao.rowCount(USER_ADDRESS_TABLE) > 0) {
-			userDao.delete(new SqlStatement("DELETE FROM " + USER_ADDRESS_TABLE), null);
+			userDao.delete(new SQL("DELETE FROM " + USER_ADDRESS_TABLE), null);
 		}
 
 		if (userDao.rowCount(USER_PASSWORD_TABLE) > 0) {
-			userDao.delete(new SqlStatement("DELETE FROM " + USER_PASSWORD_TABLE), null);
+			userDao.delete(new SQL("DELETE FROM " + USER_PASSWORD_TABLE), null);
 		}
 	}
 }

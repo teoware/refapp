@@ -1,10 +1,10 @@
 package com.teoware.refapp.dao.dto;
 
-public class InsertUserResponse {
+public class DeleteUserOutput {
 
 	private int rowsAffected;
 
-	public InsertUserResponse(int rowsAffected) {
+	public DeleteUserOutput(int rowsAffected) {
 		this.rowsAffected = rowsAffected;
 	}
 

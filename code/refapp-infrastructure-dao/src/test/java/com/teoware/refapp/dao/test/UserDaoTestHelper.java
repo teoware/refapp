@@ -8,16 +8,16 @@ import java.util.List;
 
 import com.teoware.refapp.dao.DaoException;
 import com.teoware.refapp.dao.UserDao;
-import com.teoware.refapp.dao.dto.DeleteUserRequest;
-import com.teoware.refapp.dao.dto.DeleteUserResponse;
-import com.teoware.refapp.dao.dto.InsertUserRequest;
-import com.teoware.refapp.dao.dto.InsertUserResponse;
-import com.teoware.refapp.dao.dto.SelectUserPasswordRequest;
-import com.teoware.refapp.dao.dto.SelectUserPasswordResponse;
-import com.teoware.refapp.dao.dto.SelectUserRequest;
-import com.teoware.refapp.dao.dto.SelectUserResponse;
-import com.teoware.refapp.dao.dto.UpdateUserRequest;
-import com.teoware.refapp.dao.dto.UpdateUserResponse;
+import com.teoware.refapp.dao.dto.CreateUserInput;
+import com.teoware.refapp.dao.dto.CreateUserOutput;
+import com.teoware.refapp.dao.dto.DeleteUserInput;
+import com.teoware.refapp.dao.dto.DeleteUserOutput;
+import com.teoware.refapp.dao.dto.ReadUserInput;
+import com.teoware.refapp.dao.dto.ReadUserOutput;
+import com.teoware.refapp.dao.dto.ReadUserPasswordInput;
+import com.teoware.refapp.dao.dto.ReadUserPasswordOutput;
+import com.teoware.refapp.dao.dto.UpdateUserInput;
+import com.teoware.refapp.dao.dto.UpdateUserOutput;
 import com.teoware.refapp.model.enums.Gender;
 import com.teoware.refapp.model.enums.UserStatus;
 import com.teoware.refapp.model.user.User;
@@ -26,65 +26,65 @@ import com.teoware.refapp.model.user.Username;
 
 public abstract class UserDaoTestHelper {
 
-	public static int insertUser(UserDao userDao, User user, UserPassword userPassword) throws DaoException {
-		InsertUserRequest request = new InsertUserRequest(user, userPassword);
-		InsertUserResponse response = userDao.insertUser(request);
-		return response.getRowsAffected();
+	public static int createUser(UserDao userDao, User user, UserPassword userPassword) throws DaoException {
+		CreateUserInput input = new CreateUserInput(user, userPassword);
+		CreateUserOutput output = userDao.createUser(input);
+		return output.getRowsAffected();
 	}
 
-	public static int updateUser(UserDao userDao, User user, UserPassword userPassword) throws DaoException {
-		UpdateUserRequest request = new UpdateUserRequest(user, userPassword);
-		UpdateUserResponse response = userDao.updateUser(request);
-		return response.getRowsAffected();
-	}
-
-	public static List<User> selectUser(UserDao userDao, String username) throws DaoException {
+	public static List<User> readUser(UserDao userDao, String username) throws DaoException {
 		Username bean = new Username();
 		bean.setUsername(username);
-		SelectUserRequest request = new SelectUserRequest(bean);
-		SelectUserResponse response = userDao.selectUser(request);
-		return response.getUserList();
+		ReadUserInput input = new ReadUserInput(bean);
+		ReadUserOutput output = userDao.readUser(input);
+		return output.getUserList();
+	}
+	
+	public static int updateUser(UserDao userDao, User user, UserPassword userPassword) throws DaoException {
+		UpdateUserInput input = new UpdateUserInput(user, userPassword);
+		UpdateUserOutput output = userDao.updateUser(input);
+		return output.getRowsAffected();
 	}
 
-	public static List<User> selectUserJohn(UserDao userDao) throws DaoException {
-		return selectUser(userDao, "john.doe");
+	public static List<User> readUserJohn(UserDao userDao) throws DaoException {
+		return readUser(userDao, "john.doe");
 	}
 
-	public static List<User> selectUserJane(UserDao userDao) throws DaoException {
-		return selectUser(userDao, "jane.doe");
+	public static List<User> readUserJane(UserDao userDao) throws DaoException {
+		return readUser(userDao, "jane.doe");
 	}
 
-	public static List<User> selectUserJonah(UserDao userDao) throws DaoException {
-		return selectUser(userDao, "jonah.doe");
+	public static List<User> readUserJonah(UserDao userDao) throws DaoException {
+		return readUser(userDao, "jonah.doe");
 	}
 
-	public static List<UserPassword> selectUserPassword(UserDao userDao, String userName) throws DaoException {
-		SelectUserPasswordRequest request = new SelectUserPasswordRequest(userName);
-		SelectUserPasswordResponse response = userDao.selectUserPassword(request);
-		return response.getUserPasswordList();
+	public static List<UserPassword> readUserPassword(UserDao userDao, String userName) throws DaoException {
+		ReadUserPasswordInput input = new ReadUserPasswordInput(userName);
+		ReadUserPasswordOutput output = userDao.readUserPassword(input);
+		return output.getUserPasswordList();
 	}
 
-	public static List<UserPassword> selectUserPasswordJohn(UserDao userDao) throws DaoException {
-		return selectUserPassword(userDao, "john.doe");
+	public static List<UserPassword> readUserPasswordJohn(UserDao userDao) throws DaoException {
+		return readUserPassword(userDao, "john.doe");
 	}
 
-	public static List<UserPassword> selectUserPasswordJane(UserDao userDao) throws DaoException {
-		return selectUserPassword(userDao, "jane.doe");
+	public static List<UserPassword> readUserPasswordJane(UserDao userDao) throws DaoException {
+		return readUserPassword(userDao, "jane.doe");
 	}
 
-	public static List<UserPassword> selectUserPasswordJonah(UserDao userDao) throws DaoException {
-		return selectUserPassword(userDao, "jonah.doe");
+	public static List<UserPassword> readUserPasswordJonah(UserDao userDao) throws DaoException {
+		return readUserPassword(userDao, "jonah.doe");
 	}
 
-	public static List<User> selectAllUsers(UserDao userDao) throws DaoException {
-		SelectUserResponse response = userDao.selectAllUsers();
-		return response.getUserList();
+	public static List<User> readAllUsers(UserDao userDao) throws DaoException {
+		ReadUserOutput output = userDao.readAllUsers();
+		return output.getUserList();
 	}
 
 	public static int deleteUser(UserDao userDao, String userName) throws DaoException {
-		DeleteUserRequest request = new DeleteUserRequest(userName);
-		DeleteUserResponse response = userDao.deleteUser(request);
-		return response.getRowsAffected();
+		DeleteUserInput input = new DeleteUserInput(userName);
+		DeleteUserOutput output = userDao.deleteUser(input);
+		return output.getRowsAffected();
 	}
 
 	public static int deleteUserJohn(UserDao userDao) throws DaoException {
@@ -99,25 +99,25 @@ public abstract class UserDaoTestHelper {
 		return deleteUser(userDao, "jonah.doe");
 	}
 
-	public static int insertUserJohn(UserDao userDao) throws DaoException {
+	public static int createUserJohn(UserDao userDao) throws DaoException {
 		User user = TestDataFactory.createUserJohn();
 		UserPassword userPassword = TestDataFactory.createUserJohnPassword();
-		return insertUser(userDao, user, userPassword);
+		return createUser(userDao, user, userPassword);
 	}
 
-	public static int insertUserJane(UserDao userDao) throws DaoException {
+	public static int createUserJane(UserDao userDao) throws DaoException {
 		User user = TestDataFactory.createUserJane();
 		UserPassword userPassword = TestDataFactory.createUserJanePassword();
-		return insertUser(userDao, user, userPassword);
+		return createUser(userDao, user, userPassword);
 	}
 
-	public static int insertUserJonah(UserDao userDao) throws DaoException {
+	public static int createUserJonah(UserDao userDao) throws DaoException {
 		User user = TestDataFactory.createUserJonah();
 		UserPassword userPassword = TestDataFactory.createUserJonahPassword();
-		return insertUser(userDao, user, userPassword);
+		return createUser(userDao, user, userPassword);
 	}
 
-	public static void assertInsertUserJohn(User user) {
+	public static void assertCreateUserJohn(User user) {
 		assertNotNull(user.getUserId());
 		assertEquals("john.doe", user.getUserId().getUserName());
 		assertEquals(UserStatus.PENDING, user.getUserId().getStatus());
@@ -140,7 +140,7 @@ public abstract class UserDaoTestHelper {
 		assertEquals("Norway", user.getUserAddress().getCountry());
 	}
 
-	public static void assertInsertUserJane(User user) {
+	public static void assertCreateUserJane(User user) {
 		assertNotNull(user.getUserId());
 		assertTrue("jane.doe".equals(user.getUserId().getUserName()));
 		assertTrue(UserStatus.PENDING.equals(user.getUserId().getStatus()));

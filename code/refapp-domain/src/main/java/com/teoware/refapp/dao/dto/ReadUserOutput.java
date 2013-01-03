@@ -4,11 +4,11 @@ import java.util.List;
 
 import com.teoware.refapp.model.user.User;
 
-public class SelectUserResponse {
+public class ReadUserOutput {
 
 	List<User> userList;
 
-	public SelectUserResponse(List<User> userList) {
+	public ReadUserOutput(List<User> userList) {
 		this.userList = userList;
 	}
 

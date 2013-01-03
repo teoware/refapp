@@ -1,13 +1,13 @@
 package com.teoware.refapp.dao.dto;
 
-public class PurgeUsersRequest {
+public class PurgeUsersInput {
 
 	private boolean greedy;
 
-	public PurgeUsersRequest() {
+	public PurgeUsersInput() {
 	}
 
-	public PurgeUsersRequest(boolean greedy) {
+	public PurgeUsersInput(boolean greedy) {
 		super();
 		this.greedy = greedy;
 	}

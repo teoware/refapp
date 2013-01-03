@@ -2,11 +2,11 @@ package com.teoware.refapp.dao.test;
 
 import java.util.Calendar;
 
-import com.teoware.refapp.dao.dto.DeleteUserRequest;
-import com.teoware.refapp.dao.dto.InsertUserRequest;
-import com.teoware.refapp.dao.dto.PurgeUsersRequest;
-import com.teoware.refapp.dao.dto.SelectUserRequest;
-import com.teoware.refapp.dao.dto.UpdateUserRequest;
+import com.teoware.refapp.dao.dto.DeleteUserInput;
+import com.teoware.refapp.dao.dto.CreateUserInput;
+import com.teoware.refapp.dao.dto.PurgeUsersInput;
+import com.teoware.refapp.dao.dto.ReadUserInput;
+import com.teoware.refapp.dao.dto.UpdateUserInput;
 import com.teoware.refapp.model.enums.Gender;
 import com.teoware.refapp.model.enums.UserStatus;
 import com.teoware.refapp.model.user.User;
@@ -19,138 +19,138 @@ public final class TestDataFactory {
 
 	public static User createUserJohn() {
 		Calendar calendar = Calendar.getInstance();
-		User user = BeanFactory.createUserBean();
-		user.getUserId().setUserName("john.doe");
-		user.getUserId().setStatus(UserStatus.ACTIVE);
-		user.getUserId().setCreated(calendar);
-		user.getUserId().setModified(calendar);
-		user.getUserInfo().setFirstName("John");
-		user.getUserInfo().setLastName("Doe");
-		user.getUserInfo().setBirthDate(DateTimeUtils.stringToDate("1975-01-01"));
-		user.getUserInfo().setGender(Gender.MALE);
-		user.getUserInfo().setEmail("john.doe@email.com");
-		user.getUserInfo().setPhone("+47 23456789");
-		user.getUserAddress().setAddress("Storgata 1");
-		user.getUserAddress().setPostalCode("1234");
-		user.getUserAddress().setMunicipality("Oslo");
-		user.getUserAddress().setRegion("Oslo");
-		user.getUserAddress().setCountry("Norway");
-		return user;
+		User bean = BeanFactory.createUserBean();
+		bean.getUserId().setUserName("john.doe");
+		bean.getUserId().setStatus(UserStatus.ACTIVE);
+		bean.getUserId().setCreated(calendar);
+		bean.getUserId().setModified(calendar);
+		bean.getUserInfo().setFirstName("John");
+		bean.getUserInfo().setLastName("Doe");
+		bean.getUserInfo().setBirthDate(DateTimeUtils.stringToDate("1975-01-01"));
+		bean.getUserInfo().setGender(Gender.MALE);
+		bean.getUserInfo().setEmail("john.doe@email.com");
+		bean.getUserInfo().setPhone("+47 23456789");
+		bean.getUserAddress().setAddress("Storgata 1");
+		bean.getUserAddress().setPostalCode("1234");
+		bean.getUserAddress().setMunicipality("Oslo");
+		bean.getUserAddress().setRegion("Oslo");
+		bean.getUserAddress().setCountry("Norway");
+		return bean;
 	}
 
 	public static User createUserJane() {
 		Calendar calendar = Calendar.getInstance();
-		User user = BeanFactory.createUserBean();
-		user.getUserId().setUserName("jane.doe");
-		user.getUserId().setStatus(UserStatus.ACTIVE);
-		user.getUserId().setCreated(calendar);
-		user.getUserId().setModified(calendar);
-		user.getUserInfo().setFirstName("Jane");
-		user.getUserInfo().setLastName("Doe");
-		user.getUserInfo().setBirthDate(DateTimeUtils.stringToDate("1970-12-30"));
-		user.getUserInfo().setGender(Gender.FEMALE);
-		user.getUserInfo().setEmail("jane.doe@email.com");
-		user.getUserInfo().setPhone("+47 98765432");
-		user.getUserAddress().setAddress("Lillegata 1");
-		user.getUserAddress().setPostalCode("1010");
-		user.getUserAddress().setMunicipality("Oslo");
-		user.getUserAddress().setRegion("Oslo");
-		user.getUserAddress().setCountry("Norway");
-		return user;
+		User bean = BeanFactory.createUserBean();
+		bean.getUserId().setUserName("jane.doe");
+		bean.getUserId().setStatus(UserStatus.ACTIVE);
+		bean.getUserId().setCreated(calendar);
+		bean.getUserId().setModified(calendar);
+		bean.getUserInfo().setFirstName("Jane");
+		bean.getUserInfo().setLastName("Doe");
+		bean.getUserInfo().setBirthDate(DateTimeUtils.stringToDate("1970-12-30"));
+		bean.getUserInfo().setGender(Gender.FEMALE);
+		bean.getUserInfo().setEmail("jane.doe@email.com");
+		bean.getUserInfo().setPhone("+47 98765432");
+		bean.getUserAddress().setAddress("Lillegata 1");
+		bean.getUserAddress().setPostalCode("1010");
+		bean.getUserAddress().setMunicipality("Oslo");
+		bean.getUserAddress().setRegion("Oslo");
+		bean.getUserAddress().setCountry("Norway");
+		return bean;
 	}
 
 	public static User createUserJonah() {
 		Calendar calendar = Calendar.getInstance();
-		User user = BeanFactory.createUserBean();
-		user.getUserId().setUserName("jonah.doe");
-		user.getUserId().setStatus(UserStatus.ACTIVE);
-		user.getUserId().setCreated(calendar);
-		user.getUserId().setModified(calendar);
-		user.getUserInfo().setFirstName("Jonah");
-		user.getUserInfo().setLastName("Doe");
-		user.getUserInfo().setBirthDate(DateTimeUtils.stringToDate("1975-01-01"));
-		user.getUserInfo().setGender(Gender.MALE);
-		user.getUserInfo().setEmail("jonah.doe@email.com");
-		user.getUserInfo().setPhone("+47 19283746");
-		user.getUserAddress().setAddress("Mellomgata 1");
-		user.getUserAddress().setPostalCode("1221");
-		user.getUserAddress().setMunicipality("Oslo");
-		user.getUserAddress().setRegion("Oslo");
-		user.getUserAddress().setCountry("Norway");
-		return user;
+		User bean = BeanFactory.createUserBean();
+		bean.getUserId().setUserName("jonah.doe");
+		bean.getUserId().setStatus(UserStatus.ACTIVE);
+		bean.getUserId().setCreated(calendar);
+		bean.getUserId().setModified(calendar);
+		bean.getUserInfo().setFirstName("Jonah");
+		bean.getUserInfo().setLastName("Doe");
+		bean.getUserInfo().setBirthDate(DateTimeUtils.stringToDate("1975-01-01"));
+		bean.getUserInfo().setGender(Gender.MALE);
+		bean.getUserInfo().setEmail("jonah.doe@email.com");
+		bean.getUserInfo().setPhone("+47 19283746");
+		bean.getUserAddress().setAddress("Mellomgata 1");
+		bean.getUserAddress().setPostalCode("1221");
+		bean.getUserAddress().setMunicipality("Oslo");
+		bean.getUserAddress().setRegion("Oslo");
+		bean.getUserAddress().setCountry("Norway");
+		return bean;
 	}
 
 	public static UserPassword createUserJohnPassword() {
-		UserPassword userPassword = new UserPassword();
-		userPassword.setPassword("johnsPassword");
-		userPassword.setSalt("johnsPasswordSalt");
-		return userPassword;
+		UserPassword bean = new UserPassword();
+		bean.setPassword("johnsPassword");
+		bean.setSalt("johnsPasswordSalt");
+		return bean;
 	}
 
 	public static UserPassword createUserJanePassword() {
-		UserPassword userPassword = new UserPassword();
-		userPassword.setPassword("janesPassword");
-		userPassword.setSalt("janesPasswordSalt");
-		return userPassword;
+		UserPassword bean = new UserPassword();
+		bean.setPassword("janesPassword");
+		bean.setSalt("janesPasswordSalt");
+		return bean;
 	}
 
 	public static UserPassword createUserJonahPassword() {
-		UserPassword userPassword = new UserPassword();
-		userPassword.setPassword("jonahsPassword");
-		userPassword.setSalt("jonahsPasswordSalt");
-		return userPassword;
+		UserPassword bean = new UserPassword();
+		bean.setPassword("jonahsPassword");
+		bean.setSalt("jonahsPasswordSalt");
+		return bean;
 	}
 
-	public static InsertUserRequest createInsertUserJohnRequest() {
-		return new InsertUserRequest(createUserJohn(), createUserJohnPassword());
+	public static CreateUserInput createCreateUserJohnInput() {
+		return new CreateUserInput(createUserJohn(), createUserJohnPassword());
 	}
 
-	public static InsertUserRequest createInsertUserJaneRequest() {
-		return new InsertUserRequest(createUserJohn(), createUserJanePassword());
+	public static CreateUserInput createCreateUserJaneInput() {
+		return new CreateUserInput(createUserJohn(), createUserJanePassword());
 	}
 
-	public static InsertUserRequest createInsertUserJonahRequest() {
-		return new InsertUserRequest(createUserJohn(), createUserJonahPassword());
+	public static CreateUserInput createCreateUserJonahInput() {
+		return new CreateUserInput(createUserJohn(), createUserJonahPassword());
 	}
 
-	public static UpdateUserRequest createUpdateUserJohnRequest() {
-		return new UpdateUserRequest(createUserJohn(), createUserJohnPassword());
+	public static UpdateUserInput createUpdateUserJohnInput() {
+		return new UpdateUserInput(createUserJohn(), createUserJohnPassword());
 	}
 
-	public static UpdateUserRequest createUpdateUserJaneRequest() {
-		return new UpdateUserRequest(createUserJohn(), createUserJanePassword());
+	public static UpdateUserInput createUpdateUserJaneInput() {
+		return new UpdateUserInput(createUserJohn(), createUserJanePassword());
 	}
 
-	public static UpdateUserRequest createUpdateUserJonahRequest() {
-		return new UpdateUserRequest(createUserJohn(), createUserJonahPassword());
+	public static UpdateUserInput createUpdateUserJonahInput() {
+		return new UpdateUserInput(createUserJohn(), createUserJonahPassword());
 	}
 
-	public static SelectUserRequest createSelectUserJohnRequest() {
-		return new SelectUserRequest(createUsername("john.doe"));
+	public static ReadUserInput createReadUserJohnInput() {
+		return new ReadUserInput(createUsername("john.doe"));
 	}
 
-	public static SelectUserRequest createSelectUserJaneRequest() {
-		return new SelectUserRequest(createUsername("jane.doe"));
+	public static ReadUserInput createReadUserJaneInput() {
+		return new ReadUserInput(createUsername("jane.doe"));
 	}
 
-	public static SelectUserRequest createSelectUserJonahRequest() {
-		return new SelectUserRequest(createUsername("jonah.doe"));
+	public static ReadUserInput createReadUserJonahInput() {
+		return new ReadUserInput(createUsername("jonah.doe"));
 	}
 
-	public static DeleteUserRequest createDeleteUserJohnRequest() {
-		return new DeleteUserRequest("john.doe");
+	public static DeleteUserInput createDeleteUserJohnInput() {
+		return new DeleteUserInput("john.doe");
 	}
 
-	public static DeleteUserRequest createDeleteUserJaneRequest() {
-		return new DeleteUserRequest("jane.doe");
+	public static DeleteUserInput createDeleteUserJaneInput() {
+		return new DeleteUserInput("jane.doe");
 	}
 
-	public static DeleteUserRequest createDeleteUserJonahRequest() {
-		return new DeleteUserRequest("jonah.doe");
+	public static DeleteUserInput createDeleteUserJonahInput() {
+		return new DeleteUserInput("jonah.doe");
 	}
 
-	public static PurgeUsersRequest createPurgeUsersRequest() {
-		return new PurgeUsersRequest();
+	public static PurgeUsersInput createPurgeUsersInput() {
+		return new PurgeUsersInput();
 	}
 
 	private static Username createUsername(String username) {

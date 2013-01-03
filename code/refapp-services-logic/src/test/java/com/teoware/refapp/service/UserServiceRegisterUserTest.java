@@ -16,7 +16,7 @@ import org.mockito.Mockito;
 
 import com.teoware.refapp.dao.DaoException;
 import com.teoware.refapp.dao.UserDao;
-import com.teoware.refapp.dao.dto.InsertUserRequest;
+import com.teoware.refapp.dao.dto.CreateUserInput;
 import com.teoware.refapp.model.common.OperationResult;
 import com.teoware.refapp.model.enums.Result;
 import com.teoware.refapp.service.dto.RegisterUserRequest;
@@ -45,21 +45,21 @@ public class UserServiceRegisterUserTest {
 
 	@Test
 	public void testRegisterUserResponseNotNull() throws DaoException {
-		verify(userDao).insertUser(Mockito.any(InsertUserRequest.class));
+		verify(userDao).createUser(Mockito.any(CreateUserInput.class));
 
 		assertNotNull(response);
 	}
 
 	@Test
 	public void testRegisterUserResponseHeaderNotNull() throws DaoException {
-		verify(userDao).insertUser(Mockito.any(InsertUserRequest.class));
+		verify(userDao).createUser(Mockito.any(CreateUserInput.class));
 
 		assertNotNull(response.getHeader());
 	}
 
 	@Test
 	public void testRegisterUserResponseHeaderMessageIdNotNull() throws DaoException {
-		verify(userDao).insertUser(Mockito.any(InsertUserRequest.class));
+		verify(userDao).createUser(Mockito.any(CreateUserInput.class));
 
 		assertNotNull(response.getHeader().getMessageId());
 		assertNotNull(response.getHeader().getMessageId().getUuid());
@@ -67,7 +67,7 @@ public class UserServiceRegisterUserTest {
 
 	@Test
 	public void testRegisterUserResponseHeaderTimestampNotNull() throws DaoException {
-		verify(userDao).insertUser(Mockito.any(InsertUserRequest.class));
+		verify(userDao).createUser(Mockito.any(CreateUserInput.class));
 
 		assertNotNull(response.getHeader().getTimestamp());
 		assertNotNull(response.getHeader().getTimestamp().getTimestamp());
@@ -75,21 +75,21 @@ public class UserServiceRegisterUserTest {
 
 	@Test
 	public void testRegisterUserResponseBodyNotNull() throws DaoException {
-		verify(userDao).insertUser(Mockito.any(InsertUserRequest.class));
+		verify(userDao).createUser(Mockito.any(CreateUserInput.class));
 
 		assertNotNull(response.getBody());
 	}
 
 	@Test
 	public void testRegisterUserResponseBodyIsCorrectType() throws DaoException {
-		verify(userDao).insertUser(Mockito.any(InsertUserRequest.class));
+		verify(userDao).createUser(Mockito.any(CreateUserInput.class));
 
 		assertTrue(response.getBody() instanceof OperationResult);
 	}
 
 	@Test
 	public void testRegisterUserResponseBodyHasSuccessResult() throws DaoException {
-		verify(userDao).insertUser(Mockito.any(InsertUserRequest.class));
+		verify(userDao).createUser(Mockito.any(CreateUserInput.class));
 
 		assertEquals(Result.SUCCESS, response.getBody().getResult());
 		assertTrue(response.getBody().getDescription() == null);
@@ -97,7 +97,7 @@ public class UserServiceRegisterUserTest {
 
 	@Test(expected = ServiceException.class)
 	public void testRegisterUserThrowsServiceException() throws DaoException, ServiceException {
-		when(userDao.insertUser(Mockito.any(InsertUserRequest.class))).thenThrow(new DaoException());
+		when(userDao.createUser(Mockito.any(CreateUserInput.class))).thenThrow(new DaoException());
 
 		userService.registerUser(request);
 	}

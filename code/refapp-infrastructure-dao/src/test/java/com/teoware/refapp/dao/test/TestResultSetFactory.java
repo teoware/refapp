@@ -1,20 +1,20 @@
 package com.teoware.refapp.dao.test;
 
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.ADDRESS_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.BIRTHDATE_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.COUNTRY_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.CREATED_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.EMAIL_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.FIRSTNAME_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.GENDER_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.LASTNAME_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.MODIFIED_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.MUNICIPALITY_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.PHONE_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.POSTALCODE_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.REGION_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.STATUS_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.USERNAME_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.ADDRESS_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.BIRTHDATE_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.COUNTRY_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.CREATED_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.EMAIL_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.FIRSTNAME_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.GENDER_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.LASTNAME_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.MODIFIED_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.MUNICIPALITY_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.PHONE_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.POSTALCODE_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.REGION_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.STATUS_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.USERNAME_COLUMN_NAME;
 
 import java.sql.ResultSet;
 
@@ -26,28 +26,28 @@ import com.teoware.refapp.util.time.DateTimeUtils;
 
 public final class TestResultSetFactory {
 
-	public static ResultSet createSelectAllUsersResultSet() {
+	public static ResultSet createReadAllUsersResultSet() {
 		SimpleResultSet resultSet = new SimpleResultSet();
 		populateUserViewColumns(resultSet);
 		populateAllUsersViewRows(resultSet);
 		return resultSet;
 	}
 
-	public static ResultSet createSelectUserJohnResultSet() {
+	public static ResultSet createReadUserJohnResultSet() {
 		SimpleResultSet resultSet = new SimpleResultSet();
 		populateUserViewColumns(resultSet);
 		populateUserJohnViewRow(resultSet);
 		return resultSet;
 	}
 
-	public static ResultSet createSelectUserJaneResultSet() {
+	public static ResultSet createReadUserJaneResultSet() {
 		SimpleResultSet resultSet = new SimpleResultSet();
 		populateUserViewColumns(resultSet);
 		populateAllUsersViewRows(resultSet);
 		return resultSet;
 	}
 
-	public static ResultSet createSelectUserJonahResultSet() {
+	public static ResultSet createReadUserJonahResultSet() {
 		SimpleResultSet resultSet = new SimpleResultSet();
 		populateUserViewColumns(resultSet);
 		populateAllUsersViewRows(resultSet);

@@ -23,12 +23,12 @@ import org.junit.experimental.categories.Category;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import com.teoware.refapp.dao.dto.DeleteUserRequest;
-import com.teoware.refapp.dao.dto.InsertUserRequest;
-import com.teoware.refapp.dao.dto.PurgeUsersRequest;
-import com.teoware.refapp.dao.dto.SelectUserRequest;
-import com.teoware.refapp.dao.dto.SelectUserResponse;
-import com.teoware.refapp.dao.dto.UpdateUserRequest;
+import com.teoware.refapp.dao.dto.CreateUserInput;
+import com.teoware.refapp.dao.dto.DeleteUserInput;
+import com.teoware.refapp.dao.dto.PurgeUsersInput;
+import com.teoware.refapp.dao.dto.ReadUserInput;
+import com.teoware.refapp.dao.dto.ReadUserOutput;
+import com.teoware.refapp.dao.dto.UpdateUserInput;
 import com.teoware.refapp.dao.test.TestDataFactory;
 import com.teoware.refapp.dao.test.TestResultSetFactory;
 
@@ -50,47 +50,82 @@ public class UserDaoTest {
 	@Mock
 	private ResultSet resultSet;
 
-	private InsertUserRequest insertRequest;
-	private UpdateUserRequest updateRequest;
-	private SelectUserRequest selectRequest;
-	private DeleteUserRequest deleteRequest;
-	private PurgeUsersRequest purgeRequest;
+	private CreateUserInput createInput;
+	private ReadUserInput readInput;
+	private UpdateUserInput updateInput;
+	private DeleteUserInput deleteInput;
+	private PurgeUsersInput purgeInput;
 
 	@Before
 	public void setUp() {
 		initMocks(this);
 
-		insertRequest = TestDataFactory.createInsertUserJohnRequest();
-		updateRequest = TestDataFactory.createUpdateUserJohnRequest();
-		selectRequest = TestDataFactory.createSelectUserJohnRequest();
-		deleteRequest = TestDataFactory.createDeleteUserJohnRequest();
-		purgeRequest = TestDataFactory.createPurgeUsersRequest();
+		createInput = TestDataFactory.createCreateUserJohnInput();
+		readInput = TestDataFactory.createReadUserJohnInput();
+		updateInput = TestDataFactory.createUpdateUserJohnInput();
+		deleteInput = TestDataFactory.createDeleteUserJohnInput();
+		purgeInput = TestDataFactory.createPurgeUsersInput();
 	}
 
 	@Test
-	public void testInsertUserJohn() throws Exception {
+	public void testCreateUserJohn() throws Exception {
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		userDao.insertUser(insertRequest);
+		userDao.createUser(createInput);
 
 		verify(connection, times(4)).prepareStatement(anyString(), anyInt());
 	}
 
 	@Test(expected = DaoException.class)
-	public void testInsertUserJohnPrepareStatementThrowsDaoException() throws Exception {
+	public void testCreateUserJohnPrepareStatementThrowsDaoException() throws Exception {
 		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
 
-		userDao.insertUser(insertRequest);
+		userDao.createUser(createInput);
 	}
 
 	@Test
-	public void testInsertUserJohnWithoutAddress() throws Exception {
+	public void testCreateUserJohnWithoutAddress() throws Exception {
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		insertRequest.getUser().setUserAddress(null);
-		userDao.insertUser(insertRequest);
+		createInput.getUser().setUserAddress(null);
+		userDao.createUser(createInput);
 
 		verify(connection, times(3)).prepareStatement(anyString(), anyInt());
+	}
+	
+	@Test
+	public void testReadUserJohn() throws Exception {
+		ResultSet resultSet = TestResultSetFactory.createReadUserJohnResultSet();
+
+		when(statement.executeQuery()).thenReturn(resultSet);
+		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
+
+		ReadUserOutput output = userDao.readUser(readInput);
+
+		verify(connection, times(1)).prepareStatement(anyString(), anyInt());
+
+		assertEquals(1, output.getUserList().size());
+	}
+
+	@Test
+	public void testReadAllUsers() throws Exception {
+		ResultSet resultSet = TestResultSetFactory.createReadAllUsersResultSet();
+
+		when(statement.executeQuery()).thenReturn(resultSet);
+		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
+
+		ReadUserOutput output = userDao.readAllUsers();
+
+		verify(connection, times(1)).prepareStatement(anyString(), anyInt());
+
+		assertEquals(3, output.getUserList().size());
+	}
+
+	@Test(expected = DaoException.class)
+	public void testReadUserJohnPrepareStatementThrowsDaoException() throws Exception {
+		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
+
+		userDao.readUser(readInput);
 	}
 
 	@Test
@@ -99,7 +134,7 @@ public class UserDaoTest {
 		when(statement.executeQuery()).thenReturn(resultSet);
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		userDao.updateUser(updateRequest);
+		userDao.updateUser(updateInput);
 
 		verify(connection, times(5)).prepareStatement(anyString(), anyInt());
 	}
@@ -108,7 +143,7 @@ public class UserDaoTest {
 	public void testUpdateUserJohnPrepareStatementThrowsDaoException() throws Exception {
 		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
 
-		userDao.updateUser(updateRequest);
+		userDao.updateUser(updateInput);
 	}
 
 	@Test
@@ -117,8 +152,8 @@ public class UserDaoTest {
 		when(statement.executeQuery()).thenReturn(resultSet);
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		updateRequest.setUserPassword(null);
-		userDao.updateUser(updateRequest);
+		updateInput.setUserPassword(null);
+		userDao.updateUser(updateInput);
 
 		verify(connection, times(4)).prepareStatement(anyString(), anyInt());
 	}
@@ -129,8 +164,8 @@ public class UserDaoTest {
 		when(statement.executeQuery()).thenReturn(resultSet);
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		updateRequest.getUser().setUserAddress(null);
-		userDao.updateUser(updateRequest);
+		updateInput.getUser().setUserAddress(null);
+		userDao.updateUser(updateInput);
 
 		verify(connection, times(4)).prepareStatement(anyString(), anyInt());
 	}
@@ -139,8 +174,8 @@ public class UserDaoTest {
 	public void testUpdateUserJohnWithoutUserId() throws Exception {
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		updateRequest.getUser().setUserId(null);
-		userDao.updateUser(updateRequest);
+		updateInput.getUser().setUserId(null);
+		userDao.updateUser(updateInput);
 
 		verifyZeroInteractions(connection);
 	}
@@ -151,8 +186,8 @@ public class UserDaoTest {
 		when(statement.executeQuery()).thenReturn(resultSet);
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		updateRequest.getUser().setUserInfo(null);
-		userDao.updateUser(updateRequest);
+		updateInput.getUser().setUserInfo(null);
+		userDao.updateUser(updateInput);
 
 		verify(connection, times(4)).prepareStatement(anyString(), anyInt());
 	}
@@ -163,54 +198,19 @@ public class UserDaoTest {
 		when(statement.executeQuery()).thenReturn(resultSet);
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		updateRequest.setUserPassword(null);
-		updateRequest.getUser().setUserAddress(null);
-		updateRequest.getUser().setUserInfo(null);
-		userDao.updateUser(updateRequest);
+		updateInput.setUserPassword(null);
+		updateInput.getUser().setUserAddress(null);
+		updateInput.getUser().setUserInfo(null);
+		userDao.updateUser(updateInput);
 
 		verify(connection, times(2)).prepareStatement(anyString(), anyInt());
-	}
-
-	@Test
-	public void testSelectUserJohn() throws Exception {
-		ResultSet resultSet = TestResultSetFactory.createSelectUserJohnResultSet();
-
-		when(statement.executeQuery()).thenReturn(resultSet);
-		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
-
-		SelectUserResponse response = userDao.selectUser(selectRequest);
-
-		verify(connection, times(1)).prepareStatement(anyString(), anyInt());
-
-		assertEquals(1, response.getUserList().size());
-	}
-
-	@Test
-	public void testSelectAllUsers() throws Exception {
-		ResultSet resultSet = TestResultSetFactory.createSelectAllUsersResultSet();
-
-		when(statement.executeQuery()).thenReturn(resultSet);
-		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
-
-		SelectUserResponse response = userDao.selectAllUsers();
-
-		verify(connection, times(1)).prepareStatement(anyString(), anyInt());
-
-		assertEquals(3, response.getUserList().size());
-	}
-
-	@Test(expected = DaoException.class)
-	public void testSelectUserJohnPrepareStatementThrowsDaoException() throws Exception {
-		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
-
-		userDao.selectUser(selectRequest);
 	}
 
 	@Test
 	public void testDeleteUserJohn() throws Exception {
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		userDao.deleteUser(deleteRequest);
+		userDao.deleteUser(deleteInput);
 
 		verify(connection, times(1)).prepareStatement(anyString(), anyInt());
 	}
@@ -219,14 +219,14 @@ public class UserDaoTest {
 	public void testDeleteUserJohnPrepareStatementThrowsDaoException() throws Exception {
 		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
 
-		userDao.deleteUser(deleteRequest);
+		userDao.deleteUser(deleteInput);
 	}
 
 	@Test
 	public void testPurgeUsers() throws Exception {
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		userDao.purgeUsers(purgeRequest);
+		userDao.purgeUsers(purgeInput);
 
 		verify(connection, times(1)).prepareStatement(anyString(), anyInt());
 	}
@@ -235,6 +235,6 @@ public class UserDaoTest {
 	public void testPurgeUsersPrepareStatementThrowsDaoException() throws Exception {
 		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
 
-		userDao.purgeUsers(purgeRequest);
+		userDao.purgeUsers(purgeInput);
 	}
 }

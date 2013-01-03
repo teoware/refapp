@@ -12,9 +12,9 @@ import org.slf4j.LoggerFactory;
 
 import com.teoware.refapp.dao.DaoException;
 import com.teoware.refapp.dao.UserDao;
-import com.teoware.refapp.dao.dto.InsertUserRequest;
-import com.teoware.refapp.dao.dto.SelectUserRequest;
-import com.teoware.refapp.dao.dto.SelectUserResponse;
+import com.teoware.refapp.dao.dto.CreateUserInput;
+import com.teoware.refapp.dao.dto.ReadUserInput;
+import com.teoware.refapp.dao.dto.ReadUserOutput;
 import com.teoware.refapp.model.Header;
 import com.teoware.refapp.model.common.OperationResult;
 import com.teoware.refapp.model.enums.Result;
@@ -49,9 +49,9 @@ public class UserServiceBean implements UserService {
 			Header header = request.getHeader();
 			User user = request.getBody();
 			UserPassword userPassword = request.getUserPassword();
-			InsertUserRequest insertRequest = new InsertUserRequest(user, userPassword);
+			CreateUserInput insertRequest = new CreateUserInput(user, userPassword);
 
-			dao.insertUser(insertRequest);
+			dao.createUser(insertRequest);
 
 			return new RegisterUserResponse(header, new OperationResult(Result.SUCCESS, null));
 		} catch (DaoException e) {
@@ -67,9 +67,9 @@ public class UserServiceBean implements UserService {
 		try {
 			Header header = request.getHeader();
 			Username username = request.getBody();
-			SelectUserRequest selectRequest = new SelectUserRequest(username);
+			ReadUserInput selectRequest = new ReadUserInput(username);
 
-			SelectUserResponse selectResposne = dao.selectUser(selectRequest);
+			ReadUserOutput selectResposne = dao.readUser(selectRequest);
 			List<User> userList = selectResposne.getUserList();
 
 			// TODO Sanity check if more than one user found
@@ -86,7 +86,7 @@ public class UserServiceBean implements UserService {
 		LOG.info(SERVICE_NAME + ": List users operation invoked.");
 
 		try {
-			SelectUserResponse selectResponse = dao.selectAllUsers();
+			ReadUserOutput selectResponse = dao.readAllUsers();
 
 			return new ListUsersResponse(selectResponse.getUserList());
 		} catch (DaoException e) {

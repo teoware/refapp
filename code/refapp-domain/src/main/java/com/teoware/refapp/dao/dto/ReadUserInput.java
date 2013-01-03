@@ -2,14 +2,14 @@ package com.teoware.refapp.dao.dto;
 
 import com.teoware.refapp.model.user.Username;
 
-public class SelectUserRequest {
+public class ReadUserInput {
 
 	private Username username;
 
-	public SelectUserRequest() {
+	public ReadUserInput() {
 	}
 
-	public SelectUserRequest(Username username) {
+	public ReadUserInput(Username username) {
 		this.username = username;
 	}
 

@@ -22,7 +22,7 @@ public class RowMapperResultSetExtractorTest {
 	public void testExtractDataFromUserResultSet() throws SQLException, ParseException {
 		ResultSetExtractor<List<User>> resultSetExtractor = new RowMapperResultSetExtractor<User>(
 				new UserRowMapper(), 0);
-		ResultSet resultSet = TestResultSetFactory.createSelectAllUsersResultSet();
+		ResultSet resultSet = TestResultSetFactory.createReadAllUsersResultSet();
 		List<User> userList = resultSetExtractor.extractData(resultSet);
 
 		assertNotNull(userList);

@@ -1,10 +1,14 @@
 package com.teoware.refapp.dao.util;
 
-public class SqlStatement {
+/**
+ * Utility for building an SQL statement.
+ *
+ */
+public class SQL {
 
 	private String sql;
 
-	public SqlStatement(String sql) {
+	public SQL(String sql) {
 		this.sql = sql;
 	}
 
@@ -160,8 +164,8 @@ public class SqlStatement {
 			return string;
 		}
 
-		public SqlStatement build() {
-			return new SqlStatement(sql.toString());
+		public SQL build() {
+			return new SQL(sql.toString());
 		}
 	}
 }

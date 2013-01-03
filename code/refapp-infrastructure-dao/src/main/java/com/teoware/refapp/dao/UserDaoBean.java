@@ -1,30 +1,30 @@
 package com.teoware.refapp.dao;
 
-import static com.teoware.refapp.dao.metadata.SchemaMetaData.REFAPP_SCHEMA_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.ADDRESS_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.BIRTHDATE_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.COUNTRY_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.CREATED_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.EMAIL_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.FIRSTNAME_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.GENDER_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.ID_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.LASTNAME_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.MUNICIPALITY_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.PASSWORD_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.PHONE_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.POSTALCODE_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.REGION_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.SALT_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.STATUS_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.USERNAME_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.USERS_TABLE_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.USERS_VIEW_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.USER_ADDRESS_TABLE_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.USER_ID_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.USER_INFO_TABLE_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.USER_PASSWORD_TABLE_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.USER_STATUS_TABLE_NAME;
+import static com.teoware.refapp.dao.metadata.Schema.REFAPP_SCHEMA_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.ADDRESS_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.BIRTHDATE_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.COUNTRY_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.CREATED_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.EMAIL_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.FIRSTNAME_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.GENDER_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.ID_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.LASTNAME_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.MUNICIPALITY_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.PASSWORD_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.PHONE_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.POSTALCODE_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.REGION_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.SALT_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.STATUS_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.USERNAME_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.USERS_TABLE_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.USERS_VIEW_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.USER_ADDRESS_TABLE_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.USER_ID_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.USER_INFO_TABLE_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.USER_PASSWORD_TABLE_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.USER_STATUS_TABLE_NAME;
 
 import java.math.BigInteger;
 import java.util.Calendar;
@@ -40,25 +40,25 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.teoware.refapp.dao.dto.DeleteUserRequest;
-import com.teoware.refapp.dao.dto.DeleteUserResponse;
-import com.teoware.refapp.dao.dto.InsertUserRequest;
-import com.teoware.refapp.dao.dto.InsertUserResponse;
-import com.teoware.refapp.dao.dto.PurgeUsersRequest;
-import com.teoware.refapp.dao.dto.PurgeUsersResponse;
-import com.teoware.refapp.dao.dto.SelectUserPasswordRequest;
-import com.teoware.refapp.dao.dto.SelectUserPasswordResponse;
-import com.teoware.refapp.dao.dto.SelectUserRequest;
-import com.teoware.refapp.dao.dto.SelectUserResponse;
-import com.teoware.refapp.dao.dto.UpdateUserRequest;
-import com.teoware.refapp.dao.dto.UpdateUserResponse;
+import com.teoware.refapp.dao.dto.CreateUserInput;
+import com.teoware.refapp.dao.dto.CreateUserOutput;
+import com.teoware.refapp.dao.dto.DeleteUserInput;
+import com.teoware.refapp.dao.dto.DeleteUserOutput;
+import com.teoware.refapp.dao.dto.PurgeUsersInput;
+import com.teoware.refapp.dao.dto.PurgeUsersOutput;
+import com.teoware.refapp.dao.dto.ReadUserInput;
+import com.teoware.refapp.dao.dto.ReadUserOutput;
+import com.teoware.refapp.dao.dto.ReadUserPasswordInput;
+import com.teoware.refapp.dao.dto.ReadUserPasswordOutput;
+import com.teoware.refapp.dao.dto.UpdateUserInput;
+import com.teoware.refapp.dao.dto.UpdateUserOutput;
 import com.teoware.refapp.dao.metadata.JNDI;
 import com.teoware.refapp.dao.rowmapper.UserIdRowMapper;
 import com.teoware.refapp.dao.rowmapper.UserPasswordRowMapper;
 import com.teoware.refapp.dao.rowmapper.UserRowMapper;
 import com.teoware.refapp.dao.util.ChangeResult;
 import com.teoware.refapp.dao.util.DaoHelper;
-import com.teoware.refapp.dao.util.SqlStatement;
+import com.teoware.refapp.dao.util.SQL;
 import com.teoware.refapp.model.enums.UserStatus;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserPassword;
@@ -94,7 +94,7 @@ public class UserDaoBean extends Dao implements UserDao {
 	}
 
 	@Override
-	public InsertUserResponse insertUser(InsertUserRequest request) throws DaoException {
+	public CreateUserOutput createUser(CreateUserInput request) throws DaoException {
 		LOG.info(DAO_NAME + ": Insert user operation invoked.");
 
 		super.doPersistConnection();
@@ -103,33 +103,33 @@ public class UserDaoBean extends Dao implements UserDao {
 		ChangeResult changeResult;
 
 		if (request.getUser().getUserId() != null && request.getUser().getUserInfo() != null) {
-			changeResult = localInsertUser(request);
+			changeResult = localCreateUser(request);
 			rowsAffected += changeResult.getRowsAffected();
 			BigInteger userId = changeResult.getAutoGeneratedKey();
 
-			changeResult = localInsertUserInfo(request, userId);
+			changeResult = localCreateUserInfo(request, userId);
 			rowsAffected += changeResult.getRowsAffected();
 
-			changeResult = localInsertUserPassword(request, userId);
+			changeResult = localCreateUserAddress(request, userId);
 			rowsAffected += changeResult.getRowsAffected();
 
-			changeResult = localInsertUserAddress(request, userId);
+			changeResult = localCreateUserPassword(request, userId);
 			rowsAffected += changeResult.getRowsAffected();
 		}
 
 		super.doCloseConnection();
 
-		return new InsertUserResponse(rowsAffected);
+		return new CreateUserOutput(rowsAffected);
 	}
 
-	private ChangeResult localInsertUser(InsertUserRequest request) throws DaoException {
-		SqlStatement sql = new SqlStatement.Builder().doInsert(USERS_TABLE).columnValues(USERNAME_COLUMN_NAME).build();
+	private ChangeResult localCreateUser(CreateUserInput request) throws DaoException {
+		SQL sql = new SQL.Builder().doInsert(USERS_TABLE).columnValues(USERNAME_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(request.getUser().getUserId().getUserName());
-		return super.insert(sql, parameters);
+		return super.create(sql, parameters);
 	}
 
-	private ChangeResult localInsertUserInfo(InsertUserRequest request, BigInteger userId) throws DaoException {
-		SqlStatement sql = new SqlStatement.Builder()
+	private ChangeResult localCreateUserInfo(CreateUserInput request, BigInteger userId) throws DaoException {
+		SQL sql = new SQL.Builder()
 				.doInsert(USER_INFO_TABLE)
 				.columnValues(USER_ID_COLUMN_NAME, FIRSTNAME_COLUMN_NAME, LASTNAME_COLUMN_NAME, BIRTHDATE_COLUMN_NAME,
 						GENDER_COLUMN_NAME, EMAIL_COLUMN_NAME, PHONE_COLUMN_NAME).build();
@@ -137,20 +137,12 @@ public class UserDaoBean extends Dao implements UserDao {
 				.getUser().getUserInfo().getLastName(), request.getUser().getUserInfo().getBirthDate(), request
 				.getUser().getUserInfo().getGender().toString(), request.getUser().getUserInfo().getEmail(), request
 				.getUser().getUserInfo().getPhone());
-		return super.insert(sql, parameters);
+		return super.create(sql, parameters);
 	}
 
-	private ChangeResult localInsertUserPassword(InsertUserRequest request, BigInteger userId) throws DaoException {
-		SqlStatement sql = new SqlStatement.Builder().doInsert(USER_PASSWORD_TABLE)
-				.columnValues(USER_ID_COLUMN_NAME, PASSWORD_COLUMN_NAME, SALT_COLUMN_NAME).build();
-		Object[] parameters = DaoHelper.generateArray(userId, request.getUserPassword().getPassword(), request
-				.getUserPassword().getSalt());
-		return super.insert(sql, parameters);
-	}
-
-	private ChangeResult localInsertUserAddress(InsertUserRequest request, BigInteger userId) throws DaoException {
+	private ChangeResult localCreateUserAddress(CreateUserInput request, BigInteger userId) throws DaoException {
 		if (request.getUser().getUserAddress() != null) {
-			SqlStatement sql = new SqlStatement.Builder()
+			SQL sql = new SQL.Builder()
 					.doInsert(USER_ADDRESS_TABLE)
 					.columnValues(USER_ID_COLUMN_NAME, ADDRESS_COLUMN_NAME, POSTALCODE_COLUMN_NAME,
 							MUNICIPALITY_COLUMN_NAME, REGION_COLUMN_NAME, COUNTRY_COLUMN_NAME).build();
@@ -158,14 +150,61 @@ public class UserDaoBean extends Dao implements UserDao {
 					request.getUser().getUserAddress().getPostalCode(), request.getUser().getUserAddress()
 							.getMunicipality(), request.getUser().getUserAddress().getRegion(), request.getUser()
 							.getUserAddress().getCountry());
-			return super.insert(sql, parameters);
+			return super.create(sql, parameters);
 		} else {
 			return new ChangeResult(0);
 		}
 	}
 
+	private ChangeResult localCreateUserPassword(CreateUserInput request, BigInteger userId) throws DaoException {
+		SQL sql = new SQL.Builder().doInsert(USER_PASSWORD_TABLE)
+				.columnValues(USER_ID_COLUMN_NAME, PASSWORD_COLUMN_NAME, SALT_COLUMN_NAME).build();
+		Object[] parameters = DaoHelper.generateArray(userId, request.getUserPassword().getPassword(), request
+				.getUserPassword().getSalt());
+		return super.create(sql, parameters);
+	}
+
 	@Override
-	public UpdateUserResponse updateUser(UpdateUserRequest request) throws DaoException {
+	public ReadUserOutput readUser(ReadUserInput request) throws DaoException {
+		LOG.info(DAO_NAME + ": Select user operation invoked.");
+
+		SQL sql = new SQL.Builder().doSelect("*").from(USERS_VIEW).where(USERNAME_COLUMN_NAME).build();
+		Object[] parameters = DaoHelper.generateArray(request.getUsername().getUsername());
+		List<User> UserList = super.read(sql, userRowMapper, parameters);
+		return new ReadUserOutput(UserList);
+	}
+
+	@Override
+	public ReadUserOutput readAllUsers() throws DaoException {
+		LOG.info(DAO_NAME + ": Select all users operation invoked.");
+
+		super.doPersistConnection();
+
+		SQL sql = new SQL.Builder().doSelectAll().from(USERS_VIEW).build();
+		List<User> UserList = super.read(sql, userRowMapper);
+		return new ReadUserOutput(UserList);
+	}
+
+	@Override
+	public ReadUserPasswordOutput readUserPassword(ReadUserPasswordInput request) throws DaoException {
+		LOG.info(DAO_NAME + ": Select user password operation invoked.");
+
+		BigInteger userId = localReadUserId(request.getUserName());
+
+		SQL sql = new SQL.Builder().doSelect("*").from(USER_PASSWORD_TABLE).where(USER_ID_COLUMN_NAME).build();
+		Object[] parameters = DaoHelper.generateArray(userId);
+		List<UserPassword> UserPasswordList = super.read(sql, userPasswordRowMapper, parameters);
+		return new ReadUserPasswordOutput(UserPasswordList);
+	}
+
+	private BigInteger localReadUserId(String username) throws DaoException {
+		SQL sql = new SQL.Builder().doSelect(ID_COLUMN_NAME).from(USERS_TABLE).where(USERNAME_COLUMN_NAME).build();
+		Object[] parameters = DaoHelper.generateArray(username);
+		return super.read(sql, userIdRowMapper, parameters).get(0);
+	}
+
+	@Override
+	public UpdateUserOutput updateUser(UpdateUserInput request) throws DaoException {
 		LOG.info(DAO_NAME + ": Update user operation invoked.");
 
 		super.doPersistConnection();
@@ -174,7 +213,7 @@ public class UserDaoBean extends Dao implements UserDao {
 		ChangeResult changeResult;
 
 		if (request.getUser().getUserId() != null) {
-			BigInteger userId = localSelectUserId(request.getUser().getUserId().getUserName());
+			BigInteger userId = localReadUserId(request.getUser().getUserId().getUserName());
 
 			changeResult = localUpdateUserInfo(request, userId);
 			rowsAffected += changeResult.getRowsAffected();
@@ -191,19 +230,12 @@ public class UserDaoBean extends Dao implements UserDao {
 
 		super.doCloseConnection();
 
-		return new UpdateUserResponse(rowsAffected);
+		return new UpdateUserOutput(rowsAffected);
 	}
 
-	private BigInteger localSelectUserId(String username) throws DaoException {
-		SqlStatement sql = new SqlStatement.Builder().doSelect(ID_COLUMN_NAME).from(USERS_TABLE)
-				.where(USERNAME_COLUMN_NAME).build();
-		Object[] parameters = DaoHelper.generateArray(username);
-		return super.select(sql, userIdRowMapper, parameters).get(0);
-	}
-
-	private ChangeResult localUpdateUserInfo(UpdateUserRequest request, BigInteger userId) throws DaoException {
+	private ChangeResult localUpdateUserInfo(UpdateUserInput request, BigInteger userId) throws DaoException {
 		if (request.getUser().getUserInfo() != null) {
-			SqlStatement sql = new SqlStatement.Builder()
+			SQL sql = new SQL.Builder()
 					.doUpdate(USER_INFO_TABLE)
 					.setColumns(FIRSTNAME_COLUMN_NAME, LASTNAME_COLUMN_NAME, BIRTHDATE_COLUMN_NAME, GENDER_COLUMN_NAME,
 							EMAIL_COLUMN_NAME, PHONE_COLUMN_NAME).where(USER_ID_COLUMN_NAME).build();
@@ -217,9 +249,9 @@ public class UserDaoBean extends Dao implements UserDao {
 		}
 	}
 
-	private ChangeResult localUpdateUserStatus(UpdateUserRequest request, BigInteger userId) throws DaoException {
+	private ChangeResult localUpdateUserStatus(UpdateUserInput request, BigInteger userId) throws DaoException {
 		if (request.getUser().getUserId().getStatus() != null) {
-			SqlStatement sql = new SqlStatement.Builder().doUpdate(USER_STATUS_TABLE).setColumn(STATUS_COLUMN_NAME)
+			SQL sql = new SQL.Builder().doUpdate(USER_STATUS_TABLE).setColumn(STATUS_COLUMN_NAME)
 					.where(USER_ID_COLUMN_NAME).build();
 			Object[] parameters = DaoHelper.generateArray(request.getUser().getUserId().getStatus().toString(), userId);
 			return super.update(sql, parameters);
@@ -228,9 +260,9 @@ public class UserDaoBean extends Dao implements UserDao {
 		}
 	}
 
-	private ChangeResult localUpdateUserPassword(UpdateUserRequest request, BigInteger userId) throws DaoException {
+	private ChangeResult localUpdateUserPassword(UpdateUserInput request, BigInteger userId) throws DaoException {
 		if (request.getUserPassword() != null) {
-			SqlStatement sql = new SqlStatement.Builder().doUpdate(USER_PASSWORD_TABLE).setColumn(PASSWORD_COLUMN_NAME)
+			SQL sql = new SQL.Builder().doUpdate(USER_PASSWORD_TABLE).setColumn(PASSWORD_COLUMN_NAME)
 					.where(USER_ID_COLUMN_NAME).build();
 			Object[] parameters = DaoHelper.generateArray(request.getUserPassword().getPassword(), userId);
 			return super.update(sql, parameters);
@@ -239,9 +271,9 @@ public class UserDaoBean extends Dao implements UserDao {
 		}
 	}
 
-	private ChangeResult localUpdateUserAddress(UpdateUserRequest request, BigInteger userId) throws DaoException {
+	private ChangeResult localUpdateUserAddress(UpdateUserInput request, BigInteger userId) throws DaoException {
 		if (request.getUser().getUserAddress() != null) {
-			SqlStatement sql = new SqlStatement.Builder()
+			SQL sql = new SQL.Builder()
 					.doUpdate(USER_ADDRESS_TABLE)
 					.setColumns(ADDRESS_COLUMN_NAME, POSTALCODE_COLUMN_NAME, MUNICIPALITY_COLUMN_NAME,
 							REGION_COLUMN_NAME, COUNTRY_COLUMN_NAME).where(USER_ID_COLUMN_NAME).build();
@@ -256,55 +288,20 @@ public class UserDaoBean extends Dao implements UserDao {
 	}
 
 	@Override
-	public SelectUserResponse selectUser(SelectUserRequest request) throws DaoException {
-		LOG.info(DAO_NAME + ": Select user operation invoked.");
-
-		SqlStatement sql = new SqlStatement.Builder().doSelect("*").from(USERS_VIEW).where(USERNAME_COLUMN_NAME)
-				.build();
-		Object[] parameters = DaoHelper.generateArray(request.getUsername().getUsername());
-		List<User> UserList = super.select(sql, userRowMapper, parameters);
-		return new SelectUserResponse(UserList);
-	}
-
-	@Override
-	public SelectUserResponse selectAllUsers() throws DaoException {
-		LOG.info(DAO_NAME + ": Select all users operation invoked.");
-
-		super.doPersistConnection();
-
-		SqlStatement sql = new SqlStatement.Builder().doSelectAll().from(USERS_VIEW).build();
-		List<User> UserList = super.select(sql, userRowMapper);
-		return new SelectUserResponse(UserList);
-	}
-
-	@Override
-	public SelectUserPasswordResponse selectUserPassword(SelectUserPasswordRequest request) throws DaoException {
-		LOG.info(DAO_NAME + ": Select user password operation invoked.");
-
-		BigInteger userId = localSelectUserId(request.getUserName());
-
-		SqlStatement sql = new SqlStatement.Builder().doSelect("*").from(USER_PASSWORD_TABLE)
-				.where(USER_ID_COLUMN_NAME).build();
-		Object[] parameters = DaoHelper.generateArray(userId);
-		List<UserPassword> UserPasswordList = super.select(sql, userPasswordRowMapper, parameters);
-		return new SelectUserPasswordResponse(UserPasswordList);
-	}
-
-	@Override
-	public DeleteUserResponse deleteUser(DeleteUserRequest request) throws DaoException {
+	public DeleteUserOutput deleteUser(DeleteUserInput request) throws DaoException {
 		LOG.info(DAO_NAME + ": Delete user operation invoked.");
 
-		SqlStatement sql = new SqlStatement.Builder().doDelete(USERS_TABLE).where(USERNAME_COLUMN_NAME).build();
+		SQL sql = new SQL.Builder().doDelete(USERS_TABLE).where(USERNAME_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(request.getUserName());
 		ChangeResult changeResult = super.delete(sql, parameters);
-		return new DeleteUserResponse(changeResult.getRowsAffected());
+		return new DeleteUserOutput(changeResult.getRowsAffected());
 	}
 
 	@Override
-	public PurgeUsersResponse purgeUsers(PurgeUsersRequest request) throws DaoException {
+	public PurgeUsersOutput purgeUsers(PurgeUsersInput request) throws DaoException {
 		LOG.info(DAO_NAME + ": Purge users operation invoked.");
 
-		SqlStatement sql = new SqlStatement.Builder().doDelete(USERS_TABLE).where(STATUS_COLUMN_NAME).build();
+		SQL sql = new SQL.Builder().doDelete(USERS_TABLE).where(STATUS_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(UserStatus.DELETED.toString());
 
 		if (request.isGreedy()) {
@@ -314,7 +311,7 @@ public class UserDaoBean extends Dao implements UserDao {
 		}
 
 		ChangeResult changeResult = super.delete(sql, parameters);
-		return new PurgeUsersResponse(changeResult.getRowsAffected());
+		return new PurgeUsersOutput(changeResult.getRowsAffected());
 	}
 
 }

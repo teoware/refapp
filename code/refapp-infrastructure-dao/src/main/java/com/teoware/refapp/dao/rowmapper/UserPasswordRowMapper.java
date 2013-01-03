@@ -1,7 +1,7 @@
 package com.teoware.refapp.dao.rowmapper;
 
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.PASSWORD_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.SALT_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.PASSWORD_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.SALT_COLUMN_NAME;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

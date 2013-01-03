@@ -1,6 +1,6 @@
 package com.teoware.refapp.dao.metadata;
 
-public final class UsersTableMetaData {
+public final class UsersTable {
 
 	// VIEWS
 	public static final String USERS_VIEW_NAME = "USERS_V";
@@ -9,7 +9,7 @@ public final class UsersTableMetaData {
 	public static final String USERS_TABLE_NAME = "USERS";
 	public static final String ID_COLUMN_NAME = "ID";
 	public static final String USERNAME_COLUMN_NAME = "USERNAME";
-	
+
 	// USER_INFO
 	public static final String USER_INFO_TABLE_NAME = "USER_INFO";
 	public static final String USER_ID_COLUMN_NAME = "USER_ID";

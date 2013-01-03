@@ -7,8 +7,8 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.sql.DataSource;
 
-import com.teoware.refapp.dao.dto.InsertNoteRequest;
-import com.teoware.refapp.dao.dto.InsertNoteResponse;
+import com.teoware.refapp.dao.dto.CreateNoteInput;
+import com.teoware.refapp.dao.dto.CreateNoteOutput;
 import com.teoware.refapp.dao.metadata.JNDI;
 
 @Stateless
@@ -26,7 +26,7 @@ public class NoteDaoBean extends Dao implements NoteDao {
 	}
 
 	@Override
-	public InsertNoteResponse insertNote(InsertNoteRequest request) {
+	public CreateNoteOutput createNote(CreateNoteInput request) {
 		// TODO Auto-generated method stub
 		return null;
 	}

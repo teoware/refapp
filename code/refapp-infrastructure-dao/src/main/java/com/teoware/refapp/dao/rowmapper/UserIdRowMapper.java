@@ -1,6 +1,6 @@
 package com.teoware.refapp.dao.rowmapper;
 
-import static com.teoware.refapp.dao.metadata.UsersTableMetaData.ID_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UsersTable.ID_COLUMN_NAME;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

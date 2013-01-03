@@ -3,19 +3,19 @@ package com.teoware.refapp.dao.dto;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserPassword;
 
-public class UpdateUserRequest {
+public class UpdateUserInput {
 
 	private User user;
 	private UserPassword userPassword;
 
-	public UpdateUserRequest() {
+	public UpdateUserInput() {
 	}
 
-	public UpdateUserRequest(User user) {
+	public UpdateUserInput(User user) {
 		this.user = user;
 	}
 
-	public UpdateUserRequest(User user, UserPassword userPassword) {
+	public UpdateUserInput(User user, UserPassword userPassword) {
 		this.user = user;
 		this.userPassword = userPassword;
 	}

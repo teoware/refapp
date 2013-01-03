@@ -4,11 +4,11 @@ import java.util.List;
 
 import com.teoware.refapp.model.user.UserPassword;
 
-public class SelectUserPasswordResponse {
+public class ReadUserPasswordOutput {
 
 	List<UserPassword> userPasswordList;
 
-	public SelectUserPasswordResponse(List<UserPassword> userPasswordList) {
+	public ReadUserPasswordOutput(List<UserPassword> userPasswordList) {
 		this.userPasswordList = userPasswordList;
 	}
 

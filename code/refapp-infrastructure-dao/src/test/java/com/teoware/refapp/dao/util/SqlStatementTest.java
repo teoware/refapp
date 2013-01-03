@@ -4,13 +4,13 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.teoware.refapp.dao.util.SqlStatement;
+import com.teoware.refapp.dao.util.SQL;
 
 public class SqlStatementTest {
 
 	@Test
 	public void testInsertOneColumnSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doInsert("TABLE").columnValues("COLUMN").build();
+		SQL sql = new SQL.Builder().doInsert("TABLE").columnValues("COLUMN").build();
 		String expectedSql = "INSERT INTO TABLE (COLUMN) VALUES (?)";
 
 		assertEquals(expectedSql, sql.getSql());
@@ -18,7 +18,7 @@ public class SqlStatementTest {
 
 	@Test
 	public void testInsertThreeColumnsSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doInsert("TABLE").columnValues("COLUMN1", "COLUMN2", "COLUMN3")
+		SQL sql = new SQL.Builder().doInsert("TABLE").columnValues("COLUMN1", "COLUMN2", "COLUMN3")
 				.build();
 		String expectedSql = "INSERT INTO TABLE (COLUMN1, COLUMN2, COLUMN3) VALUES (?, ?, ?)";
 
@@ -27,7 +27,7 @@ public class SqlStatementTest {
 
 	@Test
 	public void testInsertThreeValuesSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doInsert("TABLE").values(3).build();
+		SQL sql = new SQL.Builder().doInsert("TABLE").values(3).build();
 		String expectedSql = "INSERT INTO TABLE VALUES (?, ?, ?)";
 
 		assertEquals(expectedSql, sql.getSql());
@@ -35,7 +35,7 @@ public class SqlStatementTest {
 
 	@Test
 	public void testUpdateOneColumnSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doUpdate("TABLE").setColumn("COLUMN").build();
+		SQL sql = new SQL.Builder().doUpdate("TABLE").setColumn("COLUMN").build();
 		String expectedSql = "UPDATE TABLE SET COLUMN = ?";
 
 		assertEquals(expectedSql, sql.getSql());
@@ -43,7 +43,7 @@ public class SqlStatementTest {
 
 	@Test
 	public void testUpdateThreeColumnSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doUpdate("TABLE").setColumns("COLUMN1", "COLUMN2", "COLUMN3")
+		SQL sql = new SQL.Builder().doUpdate("TABLE").setColumns("COLUMN1", "COLUMN2", "COLUMN3")
 				.build();
 		String expectedSql = "UPDATE TABLE SET COLUMN1 = ?, COLUMN2 = ?, COLUMN3 = ?";
 
@@ -52,7 +52,7 @@ public class SqlStatementTest {
 
 	@Test
 	public void testUpdateThreeColumnWhereOneSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doUpdate("TABLE").setColumns("COLUMN1", "COLUMN2", "COLUMN3")
+		SQL sql = new SQL.Builder().doUpdate("TABLE").setColumns("COLUMN1", "COLUMN2", "COLUMN3")
 				.where("COLUMN4").build();
 		String expectedSql = "UPDATE TABLE SET COLUMN1 = ?, COLUMN2 = ?, COLUMN3 = ? WHERE COLUMN4 = ?";
 
@@ -61,7 +61,7 @@ public class SqlStatementTest {
 
 	@Test
 	public void testUpdateThreeColumnWhereThreeSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doUpdate("TABLE").setColumns("COLUMN1", "COLUMN2", "COLUMN3")
+		SQL sql = new SQL.Builder().doUpdate("TABLE").setColumns("COLUMN1", "COLUMN2", "COLUMN3")
 				.where("COLUMN4", "COLUMN5", "COLUMN6").build();
 		String expectedSql = "UPDATE TABLE SET COLUMN1 = ?, COLUMN2 = ?, COLUMN3 = ? "
 				+ "WHERE (COLUMN4 = ? AND COLUMN5 = ? AND COLUMN6 = ?)";
@@ -71,7 +71,7 @@ public class SqlStatementTest {
 
 	@Test
 	public void testSelectAllFromSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doSelect("*").from("TABLE").build();
+		SQL sql = new SQL.Builder().doSelect("*").from("TABLE").build();
 		String expectedSql = "SELECT * FROM TABLE";
 
 		assertEquals(expectedSql, sql.getSql());
@@ -79,7 +79,7 @@ public class SqlStatementTest {
 
 	@Test
 	public void testSelectAllFromWhereOneSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doSelect("*").from("TABLE").where("COLUMN").build();
+		SQL sql = new SQL.Builder().doSelect("*").from("TABLE").where("COLUMN").build();
 		String expectedSql = "SELECT * FROM TABLE WHERE COLUMN = ?";
 
 		assertEquals(expectedSql, sql.getSql());
@@ -87,7 +87,7 @@ public class SqlStatementTest {
 
 	@Test
 	public void testSelectThreeColumnsFromWhereTwoSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doSelect("COLUMN1", "COLUMN2", "COLUMN3").from("TABLE")
+		SQL sql = new SQL.Builder().doSelect("COLUMN1", "COLUMN2", "COLUMN3").from("TABLE")
 				.where("COLUMN4", "COLUMN5").build();
 		String expectedSql = "SELECT (COLUMN1, COLUMN2, COLUMN3) FROM TABLE WHERE (COLUMN4 = ? AND COLUMN5 = ?)";
 
@@ -96,7 +96,7 @@ public class SqlStatementTest {
 
 	@Test
 	public void testSelectThreeColumnsFromWhereAndTwoSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doSelect("COLUMN1", "COLUMN2", "COLUMN3").from("TABLE").where()
+		SQL sql = new SQL.Builder().doSelect("COLUMN1", "COLUMN2", "COLUMN3").from("TABLE").where()
 				.and("COLUMN4", "COLUMN5").build();
 		String expectedSql = "SELECT (COLUMN1, COLUMN2, COLUMN3) FROM TABLE WHERE (COLUMN4 = ? AND COLUMN5 = ?)";
 
@@ -105,7 +105,7 @@ public class SqlStatementTest {
 
 	@Test
 	public void testSelectThreeColumnsFromWhereAndSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doSelect("COLUMN1", "COLUMN2", "COLUMN3").from("TABLE")
+		SQL sql = new SQL.Builder().doSelect("COLUMN1", "COLUMN2", "COLUMN3").from("TABLE")
 				.where("COLUMN4").and("COLUMN5").build();
 		String expectedSql = "SELECT (COLUMN1, COLUMN2, COLUMN3) FROM TABLE WHERE COLUMN4 = ? AND COLUMN5 = ?";
 
@@ -114,7 +114,7 @@ public class SqlStatementTest {
 
 	@Test
 	public void testSelectThreeColumnsFromWhereTwoAndSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doSelect("COLUMN1", "COLUMN2", "COLUMN3").from("TABLE")
+		SQL sql = new SQL.Builder().doSelect("COLUMN1", "COLUMN2", "COLUMN3").from("TABLE")
 				.where("COLUMN4").and("COLUMN5").and("COLUMN6").build();
 		String expectedSql = "SELECT (COLUMN1, COLUMN2, COLUMN3) FROM TABLE "
 				+ "WHERE COLUMN4 = ? AND COLUMN5 = ? AND COLUMN6 = ?";
@@ -124,7 +124,7 @@ public class SqlStatementTest {
 
 	@Test
 	public void testSelectThreeColumnsFromWhereOrTwoSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doSelect("COLUMN1", "COLUMN2", "COLUMN3").from("TABLE").where()
+		SQL sql = new SQL.Builder().doSelect("COLUMN1", "COLUMN2", "COLUMN3").from("TABLE").where()
 				.or("COLUMN4", "COLUMN5").build();
 		String expectedSql = "SELECT (COLUMN1, COLUMN2, COLUMN3) FROM TABLE WHERE (COLUMN4 = ? OR COLUMN5 = ?)";
 
@@ -133,7 +133,7 @@ public class SqlStatementTest {
 
 	@Test
 	public void testSelectThreeColumnsFromWhereOrSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doSelect("COLUMN1", "COLUMN2", "COLUMN3").from("TABLE")
+		SQL sql = new SQL.Builder().doSelect("COLUMN1", "COLUMN2", "COLUMN3").from("TABLE")
 				.where("COLUMN4").or("COLUMN5").build();
 		String expectedSql = "SELECT (COLUMN1, COLUMN2, COLUMN3) FROM TABLE WHERE COLUMN4 = ? OR COLUMN5 = ?";
 
@@ -142,7 +142,7 @@ public class SqlStatementTest {
 
 	@Test
 	public void testSelectThreeColumnsFromWhereTwoOrSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doSelect("COLUMN1", "COLUMN2", "COLUMN3").from("TABLE")
+		SQL sql = new SQL.Builder().doSelect("COLUMN1", "COLUMN2", "COLUMN3").from("TABLE")
 				.where("COLUMN4").or("COLUMN5").or("COLUMN6").build();
 		String expectedSql = "SELECT (COLUMN1, COLUMN2, COLUMN3) FROM TABLE "
 				+ "WHERE COLUMN4 = ? OR COLUMN5 = ? OR COLUMN6 = ?";
@@ -152,7 +152,7 @@ public class SqlStatementTest {
 
 	@Test
 	public void testSelectThreeColumnsFromWhereOrTwoAndAndThreeSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doSelect("COLUMN1", "COLUMN2", "COLUMN3").from("TABLE").where()
+		SQL sql = new SQL.Builder().doSelect("COLUMN1", "COLUMN2", "COLUMN3").from("TABLE").where()
 				.or("COLUMN4", "COLUMN5").and().and("COLUMN6", "COLUMN7", "COLUMN8").build();
 		String expectedSql = "SELECT (COLUMN1, COLUMN2, COLUMN3) FROM TABLE "
 				+ "WHERE (COLUMN4 = ? OR COLUMN5 = ?) AND (COLUMN6 = ? AND COLUMN7 = ? AND COLUMN8 = ?)";
@@ -162,7 +162,7 @@ public class SqlStatementTest {
 
 	@Test
 	public void testDeleteSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doDelete("TABLE").build();
+		SQL sql = new SQL.Builder().doDelete("TABLE").build();
 		String expectedSql = "DELETE FROM TABLE";
 
 		assertEquals(expectedSql, sql.getSql());
@@ -170,7 +170,7 @@ public class SqlStatementTest {
 
 	@Test
 	public void testDeleteWhereSqlStatementBuilder() {
-		SqlStatement sql = new SqlStatement.Builder().doDelete("TABLE").where("COLUMN").build();
+		SQL sql = new SQL.Builder().doDelete("TABLE").where("COLUMN").build();
 		String expectedSql = "DELETE FROM TABLE WHERE COLUMN = ?";
 
 		assertEquals(expectedSql, sql.getSql());
