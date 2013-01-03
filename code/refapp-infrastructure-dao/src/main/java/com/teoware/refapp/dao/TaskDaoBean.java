@@ -13,7 +13,7 @@ import com.teoware.refapp.dao.metadata.JNDI;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
-public class TaskDaoBean extends BaseDao implements TaskDao {
+public class TaskDaoBean extends Dao implements TaskDao {
 
 	private static final long serialVersionUID = 1L;
 

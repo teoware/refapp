@@ -13,7 +13,7 @@ import com.teoware.refapp.dao.metadata.JNDI;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
-public class NoteDaoBean extends BaseDao implements NoteDao {
+public class NoteDaoBean extends Dao implements NoteDao {
 
 	private static final long serialVersionUID = 1L;
 

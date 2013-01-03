@@ -28,9 +28,9 @@ import com.teoware.refapp.dao.util.SqlStatement;
  * Base DAO that holds functionality for common database operations.
  * 
  */
-public abstract class BaseDao {
+public abstract class Dao {
 
-	private static final Logger LOG = LoggerFactory.getLogger(BaseDao.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Dao.class);
 
 	private static final String INSERT_ERROR_MESSAGE = "Insert operation failed.";
 	private static final String UPDATE_ERROR_MESSAGE = "Update operation failed.";

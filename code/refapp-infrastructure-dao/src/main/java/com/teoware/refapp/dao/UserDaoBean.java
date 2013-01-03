@@ -66,7 +66,7 @@ import com.teoware.refapp.util.time.DateTimeUtils;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
-public class UserDaoBean extends BaseDao implements UserDao {
+public class UserDaoBean extends Dao implements UserDao {
 
 	private static final long serialVersionUID = 1L;
 
