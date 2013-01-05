@@ -2,19 +2,19 @@ package com.teoware.refapp.dao.rowmapper;
 
 import static com.teoware.refapp.dao.metadata.UsersTable.ID_COLUMN_NAME;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 
-public class UserIdRowMapper implements RowMapper<BigInteger> {
+import com.teoware.refapp.dao.dto.Id;
+
+public class UserIdRowMapper implements RowMapper<Id> {
 
 	@Override
-	public BigInteger mapRow(ResultSet result, int rowCount) throws SQLException, ParseException {
-		BigDecimal userId = result.getBigDecimal(ID_COLUMN_NAME);
+	public Id mapRow(ResultSet result, int rowCount) throws SQLException, ParseException {
+		Long userId = result.getLong(ID_COLUMN_NAME);
 		if (userId != null) {
-			return userId.toBigInteger();
+			return new Id(userId);
 		} else {
 			return null;
 		}

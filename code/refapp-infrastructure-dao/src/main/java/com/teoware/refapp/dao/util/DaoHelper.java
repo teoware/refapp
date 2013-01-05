@@ -1,9 +1,9 @@
 package com.teoware.refapp.dao.util;
 
 import java.io.StringWriter;
-import java.math.BigInteger;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.Calendar;
 
 public final class DaoHelper {
@@ -11,9 +11,14 @@ public final class DaoHelper {
 	public static void processParameter(PreparedStatement statement, Object parameter, int parameterIndex)
 			throws SQLException {
 		if (parameter == null) {
-			statement.setObject(parameterIndex, parameter);
-		} else if (isString(parameter) || isBigInteger(parameter)) {
+			// statement.setObject(parameterIndex, parameter);
+			statement.setNull(parameterIndex, Types.INTEGER);
+		} else if (isString(parameter)) {
 			statement.setString(parameterIndex, parameter.toString());
+		} else if (isInt(parameter)) {
+			statement.setInt(parameterIndex, (Integer) parameter);
+		} else if (isLong(parameter)) {
+			statement.setLong(parameterIndex, (Long) parameter);
 		} else if (isDate(parameter)) {
 			java.util.Date date = (java.util.Date) parameter;
 			statement.setDate(parameterIndex, new java.sql.Date(date.getTime()));
@@ -31,6 +36,14 @@ public final class DaoHelper {
 				|| StringWriter.class.isAssignableFrom(clazz);
 	}
 
+	public static boolean isInt(Object object) {
+		return object instanceof Integer;
+	}
+
+	public static boolean isLong(Object object) {
+		return object instanceof Long;
+	}
+
 	public static boolean isDate(Object object) {
 		Class<?> clazz = object.getClass();
 		return java.util.Date.class.isAssignableFrom(clazz) && !isSqlDateTime(object);
@@ -44,10 +57,6 @@ public final class DaoHelper {
 
 	public static boolean isCalendar(Object object) {
 		return object instanceof Calendar;
-	}
-
-	public static boolean isBigInteger(Object object) {
-		return object instanceof BigInteger;
 	}
 
 	public static Object[] generateArray(Object... objects) {

@@ -69,6 +69,8 @@ public class UserDaoTest {
 
 	@Test
 	public void testCreateUserJohn() throws Exception {
+		when(resultSet.getLong(anyString())).thenReturn(0L);
+		when(statement.getGeneratedKeys()).thenReturn(resultSet);
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
 		userDao.createUser(createInput);
@@ -85,6 +87,8 @@ public class UserDaoTest {
 
 	@Test
 	public void testCreateUserJohnWithoutAddress() throws Exception {
+		when(resultSet.getLong(anyString())).thenReturn(0L);
+		when(statement.getGeneratedKeys()).thenReturn(resultSet);
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
 		createInput.getUser().setUserAddress(null);
@@ -92,7 +96,7 @@ public class UserDaoTest {
 
 		verify(connection, times(3)).prepareStatement(anyString(), anyInt());
 	}
-	
+
 	@Test
 	public void testReadUserJohn() throws Exception {
 		ResultSet resultSet = TestResultSetFactory.createReadUserJohnResultSet();

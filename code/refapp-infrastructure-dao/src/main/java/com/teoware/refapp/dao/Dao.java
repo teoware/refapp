@@ -1,7 +1,5 @@
 package com.teoware.refapp.dao;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +14,7 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.teoware.refapp.dao.dto.Id;
 import com.teoware.refapp.dao.rowmapper.RowMapper;
 import com.teoware.refapp.dao.util.ChangeResult;
 import com.teoware.refapp.dao.util.ConnectionHandler;
@@ -47,7 +46,7 @@ public abstract class Dao {
 		this.dataSource = dataSource;
 	}
 
-	protected ChangeResult create(SQL sql, Object[] parameters) throws DaoException {
+	protected ChangeResult create(SQL sql, Object... parameters) throws DaoException {
 		try {
 			return update(sql, parameters);
 		} catch (DaoException e) {
@@ -63,7 +62,7 @@ public abstract class Dao {
 	}
 
 	@TransactionAttribute
-	protected <T> List<T> read(SQL sql, RowMapper<T> rowMapper, Object[] parameters) throws DaoException {
+	protected <T> List<T> read(SQL sql, RowMapper<T> rowMapper, Object... parameters) throws DaoException {
 		LOG.debug("Executing SQL statement: " + sql.getSql());
 
 		PreparedStatement statement = null;
@@ -84,14 +83,14 @@ public abstract class Dao {
 		}
 	}
 
-	protected ChangeResult update(SQL sql, Object[] parameters) throws DaoException {
+	protected ChangeResult update(SQL sql, Object... parameters) throws DaoException {
 		LOG.debug("Executing SQL statement: " + sql.getSql());
 
 		PreparedStatement statement = null;
 		try {
 			statement = generatePreparedStatement(sql, parameters);
 			int rowsAffected = statement.executeUpdate();
-			BigInteger generatedKey = getGeneratedKey(statement);
+			Id generatedKey = getGeneratedKey(statement);
 			return new ChangeResult(rowsAffected, generatedKey);
 		} catch (SQLException e) {
 			LOG.error(e(UPDATE_ERROR_MESSAGE, sql));
@@ -101,7 +100,7 @@ public abstract class Dao {
 		}
 	}
 
-	protected ChangeResult delete(SQL sql, Object[] parameters) throws DaoException {
+	protected ChangeResult delete(SQL sql, Object... parameters) throws DaoException {
 		try {
 			return update(sql, parameters);
 		} catch (DaoException e) {
@@ -129,7 +128,7 @@ public abstract class Dao {
 		}
 	}
 
-	protected PreparedStatement generatePreparedStatement(SQL sql, Object[] parameters) throws SQLException {
+	protected PreparedStatement generatePreparedStatement(SQL sql, Object... parameters) throws SQLException {
 		createOrReuseConnection();
 		PreparedStatement statement = connection.prepareStatement(sql.getSql(), Statement.RETURN_GENERATED_KEYS);
 		if (parameters != null) {
@@ -179,12 +178,11 @@ public abstract class Dao {
 		return msg + "[" + sql + "]";
 	}
 
-	private BigInteger getGeneratedKey(PreparedStatement statement) {
+	private Id getGeneratedKey(PreparedStatement statement) {
 		try {
 			ResultSet rs = statement.getGeneratedKeys();
 			rs.next();
-			BigDecimal bd = rs.getBigDecimal(ID_COLUMN_NAME);
-			return bd.toBigInteger();
+			return new Id(rs.getLong(ID_COLUMN_NAME));
 		} catch (Exception e) {
 			return null;
 		}

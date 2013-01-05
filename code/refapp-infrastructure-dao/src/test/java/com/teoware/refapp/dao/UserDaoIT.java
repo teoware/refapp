@@ -146,19 +146,19 @@ public class UserDaoIT extends UserDaoTestHelper {
 
 	private static void cleanTables() throws DaoException {
 		if (authorDao.rowCount(USERS_TABLE) > 0) {
-			authorDao.delete(new SQL("DELETE FROM " + USERS_TABLE), null);
+			authorDao.delete(new SQL("DELETE FROM " + USERS_TABLE));
 		}
 
 		if (authorDao.rowCount(USER_STATUS_TABLE) > 0) {
-			authorDao.delete(new SQL("DELETE FROM " + USER_STATUS_TABLE), null);
+			authorDao.delete(new SQL("DELETE FROM " + USER_STATUS_TABLE));
 		}
 
 		if (authorDao.rowCount(USER_ADDRESS_TABLE) > 0) {
-			authorDao.delete(new SQL("DELETE FROM " + USER_ADDRESS_TABLE), null);
+			authorDao.delete(new SQL("DELETE FROM " + USER_ADDRESS_TABLE));
 		}
 
 		if (authorDao.rowCount(USER_PASSWORD_TABLE) > 0) {
-			authorDao.delete(new SQL("DELETE FROM " + USER_PASSWORD_TABLE), null);
+			authorDao.delete(new SQL("DELETE FROM " + USER_PASSWORD_TABLE));
 		}
 	}
 }
