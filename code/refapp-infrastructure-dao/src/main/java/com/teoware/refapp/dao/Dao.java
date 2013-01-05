@@ -31,11 +31,11 @@ public abstract class Dao {
 
 	private static final Logger LOG = LoggerFactory.getLogger(Dao.class);
 
+	private static final int FIRST_COLUMN = 1;
 	private static final String INSERT_ERROR_MESSAGE = "Insert operation failed.";
 	private static final String UPDATE_ERROR_MESSAGE = "Update operation failed.";
 	private static final String SELECT_ERROR_MESSAGE = "Select operation failed.";
 	private static final String DELETE_ERROR_MESSAGE = "Delete operation failed.";
-	private static final String ID_COLUMN_NAME = "ID";
 
 	private DataSource dataSource;
 
@@ -182,7 +182,7 @@ public abstract class Dao {
 		try {
 			ResultSet rs = statement.getGeneratedKeys();
 			rs.next();
-			return new Id(rs.getLong(ID_COLUMN_NAME));
+			return new Id(rs.getLong(FIRST_COLUMN));
 		} catch (Exception e) {
 			return null;
 		}

@@ -167,19 +167,19 @@ public class UserDaoSysIT extends UserDaoTestHelper {
 
 	private static void cleanTables() throws DaoException {
 		if (userDao.rowCount(USERS_TABLE) > 0) {
-			userDao.delete(new SQL("DELETE FROM " + USERS_TABLE), null);
+			userDao.delete(new SQL("DELETE FROM " + USERS_TABLE));
 		}
 
 		if (userDao.rowCount(USER_STATUS_TABLE) > 0) {
-			userDao.delete(new SQL("DELETE FROM " + USER_STATUS_TABLE), null);
+			userDao.delete(new SQL("DELETE FROM " + USER_STATUS_TABLE));
 		}
 
 		if (userDao.rowCount(USER_ADDRESS_TABLE) > 0) {
-			userDao.delete(new SQL("DELETE FROM " + USER_ADDRESS_TABLE), null);
+			userDao.delete(new SQL("DELETE FROM " + USER_ADDRESS_TABLE));
 		}
 
 		if (userDao.rowCount(USER_PASSWORD_TABLE) > 0) {
-			userDao.delete(new SQL("DELETE FROM " + USER_PASSWORD_TABLE), null);
+			userDao.delete(new SQL("DELETE FROM " + USER_PASSWORD_TABLE));
 		}
 	}
 }

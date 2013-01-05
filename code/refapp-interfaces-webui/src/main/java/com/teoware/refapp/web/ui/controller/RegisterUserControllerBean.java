@@ -60,6 +60,7 @@ public class RegisterUserControllerBean extends AbstractControllerBean implement
 
 		UserPassword userPassword = BeanFactory.createUserPasswordBean();
 		userPassword.setPassword("myPassword");
+		userPassword.setSalt("mySalt");
 
 		return new RegisterUserRequestVO(user, userPassword);
 	}

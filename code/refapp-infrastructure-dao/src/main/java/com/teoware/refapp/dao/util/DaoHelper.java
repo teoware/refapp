@@ -3,7 +3,6 @@ package com.teoware.refapp.dao.util;
 import java.io.StringWriter;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.Calendar;
 
 public final class DaoHelper {
@@ -11,8 +10,7 @@ public final class DaoHelper {
 	public static void processParameter(PreparedStatement statement, Object parameter, int parameterIndex)
 			throws SQLException {
 		if (parameter == null) {
-			// statement.setObject(parameterIndex, parameter);
-			statement.setNull(parameterIndex, Types.INTEGER);
+			statement.setObject(parameterIndex, parameter);
 		} else if (isString(parameter)) {
 			statement.setString(parameterIndex, parameter.toString());
 		} else if (isInt(parameter)) {
