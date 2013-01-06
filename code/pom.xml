@@ -78,6 +78,8 @@
 		<module>refapp-interfaces-consumer</module>
 		<module>refapp-interfaces-rest</module>
 		<module>refapp-interfaces-webui</module>
+		<module>refapp-schedule</module>
+		<module>refapp-batch</module>
 		<module>refapp-testtools</module>
 		<module>refapp-ear</module>
 	</modules>
@@ -289,6 +291,20 @@
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
 				<artifactId>refapp-interfaces-rest</artifactId>
+				<version>${project.version}</version>
+<!-- 				<scope>provided</scope> -->
+			</dependency>
+			
+			<dependency>
+				<groupId>com.teoware.refapp</groupId>
+				<artifactId>refapp-schedule</artifactId>
+				<version>${project.version}</version>
+<!-- 				<scope>provided</scope> -->
+			</dependency>
+			
+			<dependency>
+				<groupId>com.teoware.refapp</groupId>
+				<artifactId>refapp-batch</artifactId>
 				<version>${project.version}</version>
 <!-- 				<scope>provided</scope> -->
 			</dependency>
