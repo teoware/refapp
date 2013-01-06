@@ -7,10 +7,10 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>refapp-infrastructure-dao</artifactId>
-	<packaging>ejb</packaging>
-	<name>refapp-infrastructure-dao</name>
-	<description>Data access layer</description>
+	<artifactId>refapp-testtools</artifactId>
+	<packaging>jar</packaging>
+	<name>refapp-testtools</name>
+	<description>Module for testing tools</description>
 	
 	<!-- PROPERTIES -->
 	<properties>
@@ -30,45 +30,6 @@
 	
 	<!-- DEPENDENCIES -->
 	<dependencies>
-		<!-- Java EE -->
-		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
-		</dependency>
-		
-		<!-- Utils -->
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-		</dependency>
-		
-		<!-- Logging -->
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-		</dependency>
-		
-		<!-- Datebase -->
-		<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derbyclient</artifactId>
-		</dependency>
-		
 		<!-- Testing -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -80,16 +41,6 @@
 			<artifactId>mockito-core</artifactId>
 		</dependency>
 		
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-		</dependency>
-		
 		<!-- Project -->
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
@@ -99,11 +50,6 @@
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
 			<artifactId>refapp-common</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-testtools</artifactId>
 		</dependency>
 	</dependencies>
 	
@@ -117,7 +63,7 @@
 			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-ejb-plugin</artifactId>
+				<artifactId>maven-jar-plugin</artifactId>
 			</plugin>
 			
 			<plugin>
@@ -128,6 +74,9 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
+				<configuration>
+					<skip>${skip.intergration.test}</skip>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

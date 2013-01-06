@@ -29,8 +29,8 @@ import com.teoware.refapp.dao.dto.PurgeUsersInput;
 import com.teoware.refapp.dao.dto.ReadUserInput;
 import com.teoware.refapp.dao.dto.ReadUserOutput;
 import com.teoware.refapp.dao.dto.UpdateUserInput;
-import com.teoware.refapp.dao.test.TestDataFactory;
 import com.teoware.refapp.dao.test.TestResultSetFactory;
+import com.teoware.refapp.test.util.TestDataFactory;
 
 @Category(com.teoware.refapp.test.UnitTestGroup.class)
 public class UserDaoTest {
@@ -175,10 +175,10 @@ public class UserDaoTest {
 	}
 
 	@Test
-	public void testUpdateUserJohnWithoutUserId() throws Exception {
+	public void testUpdateUserJohnWithoutUsername() throws Exception {
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		updateInput.getUser().setUserId(null);
+		updateInput.getUser().setUsername(null);
 		userDao.updateUser(updateInput);
 
 		verifyZeroInteractions(connection);

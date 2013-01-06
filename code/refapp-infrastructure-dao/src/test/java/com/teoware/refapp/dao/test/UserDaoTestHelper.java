@@ -19,10 +19,11 @@ import com.teoware.refapp.dao.dto.ReadUserPasswordOutput;
 import com.teoware.refapp.dao.dto.UpdateUserInput;
 import com.teoware.refapp.dao.dto.UpdateUserOutput;
 import com.teoware.refapp.model.enums.Gender;
-import com.teoware.refapp.model.enums.UserStatus;
+import com.teoware.refapp.model.enums.Status;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserPassword;
 import com.teoware.refapp.model.user.Username;
+import com.teoware.refapp.test.util.TestDataFactory;
 
 public abstract class UserDaoTestHelper {
 
@@ -39,7 +40,7 @@ public abstract class UserDaoTestHelper {
 		ReadUserOutput output = userDao.readUser(input);
 		return output.getUserList();
 	}
-	
+
 	public static int updateUser(UserDao userDao, User user, UserPassword userPassword) throws DaoException {
 		UpdateUserInput input = new UpdateUserInput(user, userPassword);
 		UpdateUserOutput output = userDao.updateUser(input);
@@ -118,11 +119,11 @@ public abstract class UserDaoTestHelper {
 	}
 
 	public static void assertCreateUserJohn(User user) {
-		assertNotNull(user.getUserId());
-		assertEquals("john.doe", user.getUserId().getUserName());
-		assertEquals(UserStatus.PENDING, user.getUserId().getStatus());
-		assertTrue(user.getUserId().getCreated().before(user.getUserId().getModified())
-				|| user.getUserId().getCreated().equals(user.getUserId().getModified()));
+		assertNotNull(user.getUsername());
+		assertEquals("john.doe", user.getUsername().getUsername());
+		assertEquals(Status.PENDING, user.getUserStatus().getStatus());
+		assertTrue(user.getUserStatus().getCreated().isBefore(user.getUserStatus().getModified())
+				|| user.getUserStatus().getCreated().equals(user.getUserStatus().getModified()));
 
 		assertNotNull(user.getUserInfo());
 		assertEquals("John", user.getUserInfo().getFirstName());
@@ -141,11 +142,11 @@ public abstract class UserDaoTestHelper {
 	}
 
 	public static void assertCreateUserJane(User user) {
-		assertNotNull(user.getUserId());
-		assertTrue("jane.doe".equals(user.getUserId().getUserName()));
-		assertTrue(UserStatus.PENDING.equals(user.getUserId().getStatus()));
-		assertTrue(user.getUserId().getCreated().before(user.getUserId().getModified())
-				|| user.getUserId().getCreated().equals(user.getUserId().getModified()));
+		assertNotNull(user.getUsername());
+		assertTrue("jane.doe".equals(user.getUsername().getUsername()));
+		assertTrue(Status.PENDING.equals(user.getUserStatus().getStatus()));
+		assertTrue(user.getUserStatus().getCreated().isBefore(user.getUserStatus().getModified())
+				|| user.getUserStatus().getCreated().equals(user.getUserStatus().getModified()));
 
 		assertNotNull(user.getUserInfo());
 		assertEquals("Jane", user.getUserInfo().getFirstName());
@@ -164,11 +165,11 @@ public abstract class UserDaoTestHelper {
 	}
 
 	public static void assertUpdateUserJane(User user) {
-		assertNotNull(user.getUserId());
-		assertEquals("jane.doe", user.getUserId().getUserName());
-		assertEquals(UserStatus.ACTIVE, user.getUserId().getStatus());
-		assertTrue(user.getUserId().getCreated().before(user.getUserId().getModified())
-				|| user.getUserId().getCreated().equals(user.getUserId().getModified()));
+		assertNotNull(user.getUsername());
+		assertEquals("jane.doe", user.getUsername().getUsername());
+		assertEquals(Status.ACTIVE, user.getUserStatus().getStatus());
+		assertTrue(user.getUserStatus().getCreated().isBefore(user.getUserStatus().getModified())
+				|| user.getUserStatus().getCreated().equals(user.getUserStatus().getModified()));
 
 		assertNotNull(user.getUserInfo());
 		assertEquals("Jane", user.getUserInfo().getFirstName());

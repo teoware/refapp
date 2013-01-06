@@ -1,8 +1,13 @@
 package com.teoware.refapp.model.user;
 
+import javax.validation.constraints.NotNull;
+
 public class UserPassword {
 
+	@NotNull
 	private String password;
+
+	@NotNull
 	private String salt;
 
 	public UserPassword() {

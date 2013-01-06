@@ -1,6 +1,6 @@
 package com.teoware.refapp.model.user;
 
-import java.util.Date;
+import org.joda.time.DateTime;
 
 import com.teoware.refapp.model.enums.Gender;
 
@@ -8,7 +8,7 @@ public class UserInfo {
 
 	protected String firstName;
 	protected String lastName;
-	protected Date birthDate;
+	protected DateTime birthDate;
 	protected Gender gender;
 	protected String email;
 	protected String phone;
@@ -29,11 +29,11 @@ public class UserInfo {
 		this.lastName = lastName;
 	}
 
-	public Date getBirthDate() {
+	public DateTime getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(DateTime birthDate) {
 		this.birthDate = birthDate;
 	}
 

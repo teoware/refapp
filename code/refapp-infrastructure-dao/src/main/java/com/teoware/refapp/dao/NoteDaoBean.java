@@ -26,7 +26,7 @@ public class NoteDaoBean extends Dao implements NoteDao {
 	}
 
 	@Override
-	public CreateNoteOutput createNote(CreateNoteInput request) {
+	public CreateNoteOutput createNote(CreateNoteInput input) {
 		// TODO Auto-generated method stub
 		return null;
 	}

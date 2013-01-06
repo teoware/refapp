@@ -6,6 +6,7 @@ import static com.teoware.refapp.dao.UserDaoBean.USER_PASSWORD_TABLE;
 import static com.teoware.refapp.dao.UserDaoBean.USER_STATUS_TABLE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 import java.sql.Connection;
 import java.util.List;
@@ -20,7 +21,7 @@ import com.teoware.refapp.dao.mock.UserDaoMock;
 import com.teoware.refapp.dao.test.TestDataSourceHandler;
 import com.teoware.refapp.dao.test.UserDaoTestHelper;
 import com.teoware.refapp.dao.util.SQL;
-import com.teoware.refapp.model.enums.UserStatus;
+import com.teoware.refapp.model.enums.Status;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserPassword;
 
@@ -28,17 +29,17 @@ import com.teoware.refapp.model.user.UserPassword;
 public class UserDaoIT extends UserDaoTestHelper {
 
 	private static Connection connection;
-	private static UserDaoMock authorDao;
+	private static UserDaoMock userDao;
 
 	@BeforeClass
 	public static void oneTimeSetUp() throws Exception {
 		connection = TestDataSourceHandler.initializeDatabase();
-		authorDao = new UserDaoMock(connection);
+		userDao = new UserDaoMock(connection);
 	}
 
 	@AfterClass
 	public static void oneTimeTearDown() throws Exception {
-		authorDao.closeAll();
+		userDao.closeAll();
 	}
 
 	@Before
@@ -47,65 +48,70 @@ public class UserDaoIT extends UserDaoTestHelper {
 	}
 
 	@Test
-	public void testInsertAndSelectUserJohn() throws DaoException {
-		int rowsAffected;
+	public void testInsertAndSelectUserJohn() {
+		try {
+			int rowsAffected;
 
-		rowsAffected = createUserJohn(authorDao);
+			rowsAffected = createUserJohn(userDao);
 
-		assertEquals(4, rowsAffected);
+			assertEquals(4, rowsAffected);
 
-		List<User> authorList = readUserJohn(authorDao);
+			List<User> authorList = readUserJohn(userDao);
 
-		assertNotNull(authorList);
-		assertEquals(1, authorList.size());
-		User author = authorList.get(0);
+			assertNotNull(authorList);
+			assertEquals(1, authorList.size());
+			User author = authorList.get(0);
 
-		assertCreateUserJohn(author);
+			assertCreateUserJohn(author);
+		} catch (DaoException e) {
+			e.printStackTrace();
+			fail("" + e.getMessage());
+		}
 	}
 
 	@Test
 	public void testInsertUpdateAndSelectUserJane() throws DaoException {
-		int rowsAffected = createUserJane(authorDao);
+		int rowsAffected = createUserJane(userDao);
 
 		assertEquals(4, rowsAffected);
 
-		List<User> authorList = readUserJane(authorDao);
+		List<User> userList = readUserJane(userDao);
 
-		assertNotNull(authorList);
-		assertEquals(1, authorList.size());
-		User author = authorList.get(0);
+		assertNotNull(userList);
+		assertEquals(1, userList.size());
+		User user = userList.get(0);
 
-		assertCreateUserJane(author);
+		assertCreateUserJane(user);
 
-		author.getUserId().setStatus(UserStatus.ACTIVE);
-		author.getUserInfo().setEmail("jane.doe@epost.net");
-		author.getUserInfo().setPhone("+47 22334455");
-		author.getUserAddress().setAddress("Nygata 2");
-		author.getUserAddress().setPostalCode("1122");
+		user.getUserInfo().setEmail("jane.doe@epost.net");
+		user.getUserInfo().setPhone("+47 22334455");
+		user.getUserAddress().setAddress("Nygata 2");
+		user.getUserAddress().setPostalCode("1122");
+		user.getUserStatus().setStatus(Status.ACTIVE);
 
-		rowsAffected = updateUser(authorDao, author, null);
+		rowsAffected = updateUser(userDao, user, null);
 		assertEquals(3, rowsAffected);
 
-		authorList = readUserJane(authorDao);
+		userList = readUserJane(userDao);
 
-		assertNotNull(authorList);
-		assertEquals(1, authorList.size());
-		author = authorList.get(0);
+		assertNotNull(userList);
+		assertEquals(1, userList.size());
+		user = userList.get(0);
 
-		assertUpdateUserJane(author);
+		assertUpdateUserJane(user);
 	}
 
 	@Test
 	public void testInsertAndSelectPasswordForUserJonah() throws DaoException {
-		int rowsAffected = createUserJonah(authorDao);
+		int rowsAffected = createUserJonah(userDao);
 
 		assertEquals(4, rowsAffected);
 
-		List<UserPassword> authorPasswordList = readUserPasswordJonah(authorDao);
+		List<UserPassword> userPasswordList = readUserPasswordJonah(userDao);
 
-		assertNotNull(authorPasswordList);
-		assertEquals(1, authorPasswordList.size());
-		UserPassword authorPassword = authorPasswordList.get(0);
+		assertNotNull(userPasswordList);
+		assertEquals(1, userPasswordList.size());
+		UserPassword authorPassword = userPasswordList.get(0);
 
 		assertNotNull(authorPassword.getPassword());
 		assertEquals("jonahsPassword", authorPassword.getPassword());
@@ -114,51 +120,51 @@ public class UserDaoIT extends UserDaoTestHelper {
 
 	@Test
 	public void testInsertAndSelectAllUsersShouldBeThree() throws DaoException {
-		int rowsAffected = createUserJohn(authorDao);
-		rowsAffected += createUserJane(authorDao);
-		rowsAffected += createUserJonah(authorDao);
+		int rowsAffected = createUserJohn(userDao);
+		rowsAffected += createUserJane(userDao);
+		rowsAffected += createUserJonah(userDao);
 
 		assertEquals(12, rowsAffected);
 
-		List<User> authorList = readAllUsers(authorDao);
+		List<User> userList = readAllUsers(userDao);
 
-		assertNotNull(authorList);
-		assertEquals(3, authorList.size());
+		assertNotNull(userList);
+		assertEquals(3, userList.size());
 	}
 
 	@Test
 	public void testInsertDeleteOneAndSelectAllUsersShouldBeTwo() throws DaoException {
-		int rowsAffected = createUserJohn(authorDao);
-		rowsAffected += createUserJane(authorDao);
-		rowsAffected += createUserJonah(authorDao);
+		int rowsAffected = createUserJohn(userDao);
+		rowsAffected += createUserJane(userDao);
+		rowsAffected += createUserJonah(userDao);
 
 		assertEquals(12, rowsAffected);
 
-		rowsAffected = deleteUserJohn(authorDao);
+		rowsAffected = deleteUserJohn(userDao);
 
 		assertEquals(1, rowsAffected);
 
-		List<User> authorList = readAllUsers(authorDao);
+		List<User> userList = readAllUsers(userDao);
 
-		assertNotNull(authorList);
-		assertEquals(2, authorList.size());
+		assertNotNull(userList);
+		assertEquals(2, userList.size());
 	}
 
 	private static void cleanTables() throws DaoException {
-		if (authorDao.rowCount(USERS_TABLE) > 0) {
-			authorDao.delete(new SQL("DELETE FROM " + USERS_TABLE));
+		if (userDao.rowCount(USERS_TABLE) > 0) {
+			userDao.delete(new SQL("DELETE FROM " + USERS_TABLE));
 		}
 
-		if (authorDao.rowCount(USER_STATUS_TABLE) > 0) {
-			authorDao.delete(new SQL("DELETE FROM " + USER_STATUS_TABLE));
+		if (userDao.rowCount(USER_STATUS_TABLE) > 0) {
+			userDao.delete(new SQL("DELETE FROM " + USER_STATUS_TABLE));
 		}
 
-		if (authorDao.rowCount(USER_ADDRESS_TABLE) > 0) {
-			authorDao.delete(new SQL("DELETE FROM " + USER_ADDRESS_TABLE));
+		if (userDao.rowCount(USER_ADDRESS_TABLE) > 0) {
+			userDao.delete(new SQL("DELETE FROM " + USER_ADDRESS_TABLE));
 		}
 
-		if (authorDao.rowCount(USER_PASSWORD_TABLE) > 0) {
-			authorDao.delete(new SQL("DELETE FROM " + USER_PASSWORD_TABLE));
+		if (userDao.rowCount(USER_PASSWORD_TABLE) > 0) {
+			userDao.delete(new SQL("DELETE FROM " + USER_PASSWORD_TABLE));
 		}
 	}
 }

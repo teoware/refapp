@@ -10,5 +10,5 @@ import com.teoware.refapp.dao.dto.CreateNoteOutput;
 @Local
 public interface NoteDao extends Serializable {
 
-	public CreateNoteOutput createNote(CreateNoteInput request);
+	public CreateNoteOutput createNote(CreateNoteInput input);
 }

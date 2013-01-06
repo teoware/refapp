@@ -78,6 +78,7 @@
 		<module>refapp-interfaces-consumer</module>
 		<module>refapp-interfaces-rest</module>
 		<module>refapp-interfaces-webui</module>
+		<module>refapp-testtools</module>
 		<module>refapp-ear</module>
 	</modules>
 	
@@ -290,6 +291,13 @@
 				<artifactId>refapp-interfaces-rest</artifactId>
 				<version>${project.version}</version>
 <!-- 				<scope>provided</scope> -->
+			</dependency>
+			
+			<dependency>
+				<groupId>com.teoware.refapp</groupId>
+				<artifactId>refapp-testtools</artifactId>
+				<version>${project.version}</version>
+				<scope>test</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

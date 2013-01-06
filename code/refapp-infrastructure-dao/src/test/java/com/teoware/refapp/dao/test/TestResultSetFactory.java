@@ -22,7 +22,8 @@ import org.apache.derby.client.am.Types;
 import org.h2.tools.SimpleResultSet;
 
 import com.teoware.refapp.model.user.User;
-import com.teoware.refapp.util.time.DateTimeUtils;
+import com.teoware.refapp.test.util.TestDataFactory;
+import com.teoware.refapp.util.time.DateTimeConverter;
 
 public final class TestResultSetFactory {
 
@@ -74,37 +75,35 @@ public final class TestResultSetFactory {
 
 	private static void populateUserJohnViewRow(SimpleResultSet resultSet) {
 		User john = TestDataFactory.createUserJohn();
-		resultSet.addRow(john.getUserId().getUserName(), john.getUserInfo().getFirstName(), john.getUserInfo()
-				.getLastName(), DateTimeUtils.dateToSqlDate(john.getUserInfo().getBirthDate()), john.getUserInfo()
+		resultSet.addRow(john.getUsername().getUsername(), john.getUserInfo().getFirstName(), john.getUserInfo()
+				.getLastName(), DateTimeConverter.toSqlDate(john.getUserInfo().getBirthDate()), john.getUserInfo()
 				.getGender().toString(), john.getUserInfo().getEmail(), john.getUserInfo().getPhone(), john
 				.getUserAddress().getAddress(), john.getUserAddress().getPostalCode(), john.getUserAddress()
 				.getMunicipality(), john.getUserAddress().getRegion(), john.getUserAddress().getCountry(), john
-				.getUserId().getStatus().toString(), DateTimeUtils
-				.calendarToSqlTimestamp(john.getUserId().getCreated()), DateTimeUtils.calendarToSqlTimestamp(john
-				.getUserId().getModified()));
+				.getUserStatus().getStatus().toString(), DateTimeConverter.toSqlTimestamp(john.getUserStatus()
+				.getCreated()), DateTimeConverter.toSqlTimestamp(john.getUserStatus().getModified()));
 	}
 
 	private static void populateUserJaneViewRow(SimpleResultSet resultSet) {
 		User jane = TestDataFactory.createUserJane();
-		resultSet.addRow(jane.getUserId().getUserName(), jane.getUserInfo().getFirstName(), jane.getUserInfo()
-				.getLastName(), DateTimeUtils.dateToSqlDate(jane.getUserInfo().getBirthDate()), jane.getUserInfo()
+		resultSet.addRow(jane.getUsername().getUsername(), jane.getUserInfo().getFirstName(), jane.getUserInfo()
+				.getLastName(), DateTimeConverter.toSqlDate(jane.getUserInfo().getBirthDate()), jane.getUserInfo()
 				.getGender().toString(), jane.getUserInfo().getEmail(), jane.getUserInfo().getPhone(), jane
 				.getUserAddress().getAddress(), jane.getUserAddress().getPostalCode(), jane.getUserAddress()
 				.getMunicipality(), jane.getUserAddress().getRegion(), jane.getUserAddress().getCountry(), jane
-				.getUserId().getStatus().toString(), DateTimeUtils
-				.calendarToSqlTimestamp(jane.getUserId().getCreated()), DateTimeUtils.calendarToSqlTimestamp(jane
-				.getUserId().getModified()));
+				.getUserStatus().getStatus().toString(), DateTimeConverter.toSqlTimestamp(jane.getUserStatus()
+				.getCreated()), DateTimeConverter.toSqlTimestamp(jane.getUserStatus().getModified()));
 	}
 
 	private static void populateUserJonahViewRow(SimpleResultSet resultSet) {
 		User jonah = TestDataFactory.createUserJonah();
-		resultSet.addRow(jonah.getUserId().getUserName(), jonah.getUserInfo().getFirstName(), jonah.getUserInfo()
-				.getLastName(), DateTimeUtils.dateToSqlDate(jonah.getUserInfo().getBirthDate()), jonah.getUserInfo()
+		resultSet.addRow(jonah.getUsername().getUsername(), jonah.getUserInfo().getFirstName(), jonah.getUserInfo()
+				.getLastName(), DateTimeConverter.toSqlDate(jonah.getUserInfo().getBirthDate()), jonah.getUserInfo()
 				.getGender().toString(), jonah.getUserInfo().getEmail(), jonah.getUserInfo().getPhone(), jonah
 				.getUserAddress().getAddress(), jonah.getUserAddress().getPostalCode(), jonah.getUserAddress()
 				.getMunicipality(), jonah.getUserAddress().getRegion(), jonah.getUserAddress().getCountry(), jonah
-				.getUserId().getStatus().toString(), DateTimeUtils.calendarToSqlTimestamp(jonah.getUserId()
-				.getCreated()), DateTimeUtils.calendarToSqlTimestamp(jonah.getUserId().getModified()));
+				.getUserStatus().getStatus().toString(), DateTimeConverter.toSqlTimestamp(jonah.getUserStatus()
+				.getCreated()), DateTimeConverter.toSqlTimestamp(jonah.getUserStatus().getModified()));
 	}
 
 	private static void populateAllUsersViewRows(SimpleResultSet resultSet) {

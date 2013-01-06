@@ -56,6 +56,11 @@
 			<groupId>com.teoware.refapp</groupId>
 			<artifactId>refapp-infrastructure-dao</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp-testtools</artifactId>
+		</dependency>
 	</dependencies>
 	
 	<!-- MAVEN PLUGINS -->

@@ -1,14 +1,14 @@
 package com.teoware.refapp.web.ui.controller;
 
 import java.io.Serializable;
-import java.util.Calendar;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.joda.time.DateTime;
+
 import com.teoware.refapp.model.enums.Gender;
-import com.teoware.refapp.model.enums.UserStatus;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserPassword;
 import com.teoware.refapp.model.util.BeanFactory;
@@ -41,14 +41,12 @@ public class RegisterUserControllerBean extends AbstractControllerBean implement
 	private RegisterUserRequestVO createRegisterUserRequest() {
 		User user = BeanFactory.createUserBean();
 
-		user.getUserId().setUserName(username);
-		user.getUserId().setStatus(UserStatus.PENDING);
-		user.getUserId().setCreated(Calendar.getInstance());
+		user.getUsername().setUsername(username);
 
 		user.getUserInfo().setFirstName(firstName);
 		user.getUserInfo().setLastName(lastName);
 		user.getUserInfo().setGender(Gender.MALE);
-		user.getUserInfo().setBirthDate(Calendar.getInstance().getTime());
+		user.getUserInfo().setBirthDate(new DateTime());
 		user.getUserInfo().setEmail(email);
 		user.getUserInfo().setPhone(phone);
 

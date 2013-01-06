@@ -21,7 +21,7 @@ import com.teoware.refapp.dao.mock.UserDaoMock;
 import com.teoware.refapp.dao.test.TestDataSourceHandler;
 import com.teoware.refapp.dao.test.UserDaoTestHelper;
 import com.teoware.refapp.dao.util.SQL;
-import com.teoware.refapp.model.enums.UserStatus;
+import com.teoware.refapp.model.enums.Status;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserPassword;
 import com.teoware.refapp.test.SystemTestGroup;
@@ -84,7 +84,7 @@ public class UserDaoSysIT extends UserDaoTestHelper {
 
 			assertCreateUserJane(user);
 
-			user.getUserId().setStatus(UserStatus.ACTIVE);
+			user.getUserStatus().setStatus(Status.ACTIVE);
 			user.getUserInfo().setEmail("jane.doe@epost.net");
 			user.getUserInfo().setPhone("+47 22334455");
 			user.getUserAddress().setAddress("Nygata 2");

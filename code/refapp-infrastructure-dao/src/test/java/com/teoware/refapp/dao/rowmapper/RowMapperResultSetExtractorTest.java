@@ -20,8 +20,8 @@ public class RowMapperResultSetExtractorTest {
 
 	@Test
 	public void testExtractDataFromUserResultSet() throws SQLException, ParseException {
-		ResultSetExtractor<List<User>> resultSetExtractor = new RowMapperResultSetExtractor<User>(
-				new UserRowMapper(), 0);
+		ResultSetExtractor<List<User>> resultSetExtractor = new RowMapperResultSetExtractor<User>(new UserRowMapper(),
+				0);
 		ResultSet resultSet = TestResultSetFactory.createReadAllUsersResultSet();
 		List<User> userList = resultSetExtractor.extractData(resultSet);
 
@@ -31,11 +31,11 @@ public class RowMapperResultSetExtractorTest {
 		User user = userList.get(0);
 
 		assertNotNull(user);
-		assertNotNull(user.getUserId());
+		assertNotNull(user.getUsername());
 		assertNotNull(user.getUserInfo());
 		assertNotNull(user.getUserAddress());
 
-		assertEquals("john.doe", user.getUserId().getUserName());
+		assertEquals("john.doe", user.getUsername().getUsername());
 		assertEquals("John", user.getUserInfo().getFirstName());
 		assertEquals("Storgata 1", user.getUserAddress().getAddress());
 	}

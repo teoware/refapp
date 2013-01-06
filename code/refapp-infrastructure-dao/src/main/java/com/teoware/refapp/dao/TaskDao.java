@@ -9,5 +9,5 @@ import com.teoware.refapp.dao.dto.CreateTaskOutput;
 @Local
 public interface TaskDao extends Serializable {
 
-	public CreateTaskOutput createTask(CreateTaskInput request);
+	public CreateTaskOutput createTask(CreateTaskInput input);
 }

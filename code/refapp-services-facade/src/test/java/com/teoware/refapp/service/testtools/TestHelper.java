@@ -1,8 +1,6 @@
 package com.teoware.refapp.service.testtools;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import org.joda.time.DateTime;
 
 import com.teoware.refapp.model.enums.Gender;
 import com.teoware.refapp.model.user.User;
@@ -18,13 +16,14 @@ public class TestHelper {
 
 	public static RegisterUserRequest populateRegisterUserRequest(RegisterUserRequest request) {
 		if (request.getBody() != null) {
-			if (request.getBody().getUserId() != null) {
-				request.getBody().getUserId().setUserName("johndoe");
+			if (request.getBody().getUsername() != null) {
+				request.getBody().getUsername().setUsername("johndoe");
 			}
 			if (request.getBody().getUserInfo() != null) {
 				request.getBody().getUserInfo().setFirstName("John");
 				request.getBody().getUserInfo().setLastName("Doe");
-				request.getBody().getUserInfo().setBirthDate(createDate("01-01-1970"));
+				request.getBody().getUserInfo()
+						.setBirthDate(new DateTime().withYear(1970).withMonthOfYear(1).withDayOfMonth(1));
 				request.getBody().getUserInfo().setGender(Gender.MALE);
 				request.getBody().getUserInfo().setEmail("john.doe@mail.com");
 				request.getBody().getUserInfo().setPhone("+123456789");
@@ -44,17 +43,5 @@ public class TestHelper {
 		User user = BeanFactory.createUserBean();
 		UserPassword userPassword = BeanFactory.createUserPasswordBean();
 		return new RegisterUserRequest(user, userPassword);
-	}
-
-	public static Date createDate(String dateString) {
-		return createDate(dateString, "dd-MM-yyyy");
-	}
-
-	public static Date createDate(String dateString, String dateFormat) {
-		try {
-			return new SimpleDateFormat(dateFormat).parse(dateString);
-		} catch (ParseException e) {
-			return new Date();
-		}
 	}
 }

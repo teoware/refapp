@@ -1,10 +1,10 @@
 package com.teoware.refapp.dao.rowmapper.util;
 
-import java.util.Calendar;
-import java.util.Date;
+import org.joda.time.DateTime;
 
 import com.teoware.refapp.model.enums.Gender;
-import com.teoware.refapp.model.enums.UserStatus;
+import com.teoware.refapp.model.enums.Status;
+import com.teoware.refapp.util.time.DateTimeConverter;
 
 public class MapperHelper {
 
@@ -12,23 +12,19 @@ public class MapperHelper {
 		return Gender.valueOf(gender);
 	}
 
-	public static UserStatus mapUserStatus(String status) {
-		return UserStatus.valueOf(status);
+	public static Status mapStatus(String status) {
+		return Status.valueOf(status);
 	}
 
-	public static Date mapDate(java.sql.Date date) {
-		return new Date(date.getTime());
+	public static DateTime mapDate(java.sql.Date date) {
+		return DateTimeConverter.fromSqlDate(date);
 	}
 
-	public static Calendar mapCalendar(java.sql.Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(mapDate(date));
-		return calendar;
+	public static DateTime mapTime(java.sql.Time time) {
+		return DateTimeConverter.fromSqlTime(time);
 	}
 
-	public static Calendar mapCalendar(java.sql.Timestamp timestamp) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(timestamp);
-		return calendar;
+	public static DateTime mapTimestamp(java.sql.Timestamp timestamp) {
+		return DateTimeConverter.fromSqlTimestamp(timestamp);
 	}
 }

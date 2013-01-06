@@ -26,7 +26,7 @@ public class TaskDaoBean extends Dao implements TaskDao {
 	}
 
 	@Override
-	public CreateTaskOutput createTask(CreateTaskInput request) {
+	public CreateTaskOutput createTask(CreateTaskInput input) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -9,18 +9,24 @@ public class User extends BaseBody {
 
 	@NotNull
 	@Valid
-	protected UserId userId;
+	protected Username username;
+	
 	@NotNull
+	@Valid
 	protected UserInfo userInfo;
+	
 	@NotNull
+	@Valid
 	protected UserAddress userAddress;
+	
+	protected UserStatus userStatus;
 
-	public UserId getUserId() {
-		return userId;
+	public Username getUsername() {
+		return username;
 	}
 
-	public void setUserId(UserId userId) {
-		this.userId = userId;
+	public void setUsername(Username username) {
+		this.username = username;
 	}
 
 	public UserInfo getUserInfo() {
@@ -37,5 +43,13 @@ public class User extends BaseBody {
 
 	public void setUserAddress(UserAddress userAddress) {
 		this.userAddress = userAddress;
+	}
+
+	public UserStatus getUserStatus() {
+		return userStatus;
+	}
+
+	public void setUserStatus(UserStatus userStatus) {
+		this.userStatus = userStatus;
 	}
 }
