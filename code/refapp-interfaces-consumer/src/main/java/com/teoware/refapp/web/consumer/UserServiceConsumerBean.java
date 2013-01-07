@@ -2,6 +2,7 @@ package com.teoware.refapp.web.consumer;
 
 import javax.inject.Inject;
 
+import com.teoware.refapp.model.user.Username;
 import com.teoware.refapp.service.ServiceException;
 import com.teoware.refapp.service.dto.FindUserRequest;
 import com.teoware.refapp.service.dto.FindUserResponse;
@@ -12,11 +13,11 @@ import com.teoware.refapp.service.facade.UserServiceFacade;
 import com.teoware.refapp.service.validation.ValidationException;
 import com.teoware.refapp.web.consumer.error.ErrorHandler;
 import com.teoware.refapp.web.consumer.error.ValidationHandler;
-import com.teoware.refapp.web.consumer.vo.FindUserRequestVO;
 import com.teoware.refapp.web.consumer.vo.RegisterUserRequestVO;
 import com.teoware.refapp.web.consumer.vo.RegisterUserResponseVO;
 import com.teoware.refapp.web.consumer.vo.UserListVO;
 import com.teoware.refapp.web.consumer.vo.UserVO;
+import com.teoware.refapp.web.consumer.vo.UsernameVO;
 
 public class UserServiceConsumerBean implements UserServiceConsumer {
 
@@ -38,9 +39,9 @@ public class UserServiceConsumerBean implements UserServiceConsumer {
 	}
 
 	@Override
-	public UserVO findUser(FindUserRequestVO vo) {
+	public UserVO findUser(UsernameVO vo) {
 		try {
-			FindUserRequest request = new FindUserRequest(vo.getUsername());
+			FindUserRequest request = new FindUserRequest(new Username(vo.getUsername()));
 			FindUserResponse response = facade.findUser(request);
 			return new UserVO(response.getBody());
 		} catch (ValidationException e) {

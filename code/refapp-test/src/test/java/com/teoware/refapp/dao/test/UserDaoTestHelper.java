@@ -27,14 +27,14 @@ import com.teoware.refapp.test.util.TestDataFactory;
 
 public abstract class UserDaoTestHelper {
 
-	public static int createUser(UserDao userDao, User user, UserPassword userPassword) throws DaoException {
-		CreateUserInput input = new CreateUserInput(user, userPassword);
+	public static int createUser(UserDao userDao, User user) throws DaoException {
+		CreateUserInput input = new CreateUserInput(user);
 		CreateUserOutput output = userDao.createUser(input);
 		return output.getRowsAffected();
 	}
 
-	public static int updateUser(UserDao userDao, User user, UserPassword userPassword) throws DaoException {
-		UpdateUserInput input = new UpdateUserInput(user, userPassword);
+	public static int updateUser(UserDao userDao, User user) throws DaoException {
+		UpdateUserInput input = new UpdateUserInput(user);
 		UpdateUserOutput output = userDao.updateUser(input);
 		return output.getRowsAffected();
 	}
@@ -66,20 +66,17 @@ public abstract class UserDaoTestHelper {
 
 	public static int createUserJohn(UserDao userDao) throws DaoException {
 		User user = TestDataFactory.createUserJohn();
-		UserPassword userPassword = TestDataFactory.createUserJohnPassword();
-		return createUser(userDao, user, userPassword);
+		return createUser(userDao, user);
 	}
 
 	public static int createUserJane(UserDao userDao) throws DaoException {
 		User user = TestDataFactory.createUserJane();
-		UserPassword userPassword = TestDataFactory.createUserJanePassword();
-		return createUser(userDao, user, userPassword);
+		return createUser(userDao, user);
 	}
 
 	public static int createUserJonah(UserDao userDao) throws DaoException {
 		User user = TestDataFactory.createUserJonah();
-		UserPassword userPassword = TestDataFactory.createUserJonahPassword();
-		return createUser(userDao, user, userPassword);
+		return createUser(userDao, user);
 	}
 
 	public static void assertCreateUserJohn(User user) {

@@ -6,8 +6,14 @@ import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 
-import com.teoware.refapp.service.UserService;
 import com.teoware.refapp.service.ServiceException;
+import com.teoware.refapp.service.UserService;
+import com.teoware.refapp.service.dto.ChangeUserPasswordRequest;
+import com.teoware.refapp.service.dto.ChangeUserPasswordResponse;
+import com.teoware.refapp.service.dto.ChangeUserRequest;
+import com.teoware.refapp.service.dto.ChangeUserResponse;
+import com.teoware.refapp.service.dto.DeleteUserRequest;
+import com.teoware.refapp.service.dto.DeleteUserResponse;
 import com.teoware.refapp.service.dto.FindUserRequest;
 import com.teoware.refapp.service.dto.FindUserResponse;
 import com.teoware.refapp.service.dto.ListUsersResponse;
@@ -16,6 +22,10 @@ import com.teoware.refapp.service.dto.RegisterUserResponse;
 import com.teoware.refapp.service.validation.Validate;
 import com.teoware.refapp.service.validation.ValidationException;
 import com.teoware.refapp.service.validation.ValidationInterceptor;
+import com.teoware.refapp.service.validation.group.ChangeUserPasswordRequestGroup;
+import com.teoware.refapp.service.validation.group.ChangeUserRequestGroup;
+import com.teoware.refapp.service.validation.group.DeleteUserRequestGroup;
+import com.teoware.refapp.service.validation.group.FindUserRequestGroup;
 import com.teoware.refapp.service.validation.group.RegisterUserRequestGroup;
 
 @Stateless
@@ -35,6 +45,8 @@ public class UserServiceFacadeBean implements UserServiceFacade {
 		return service.registerUser(request);
 	}
 
+	@Interceptors({ ValidationInterceptor.class })
+	@Validate(FindUserRequestGroup.class)
 	@Override
 	public FindUserResponse findUser(FindUserRequest request) throws ValidationException, ServiceException {
 		return service.findUser(request);
@@ -45,4 +57,25 @@ public class UserServiceFacadeBean implements UserServiceFacade {
 		return service.listUsers();
 	}
 
+	@Interceptors({ ValidationInterceptor.class })
+	@Validate(ChangeUserRequestGroup.class)
+	@Override
+	public ChangeUserResponse changeUser(ChangeUserRequest request) throws ValidationException, ServiceException {
+		return service.changeUser(request);
+	}
+
+	@Interceptors({ ValidationInterceptor.class })
+	@Validate(ChangeUserPasswordRequestGroup.class)
+	@Override
+	public ChangeUserPasswordResponse changeUserPassword(ChangeUserPasswordRequest request) throws ValidationException,
+			ServiceException {
+		return service.changeUserPassword(request);
+	}
+
+	@Interceptors({ ValidationInterceptor.class })
+	@Validate(DeleteUserRequestGroup.class)
+	@Override
+	public DeleteUserResponse deleteUser(DeleteUserRequest request) throws ValidationException, ServiceException {
+		return service.deleteUser(request);
+	}
 }

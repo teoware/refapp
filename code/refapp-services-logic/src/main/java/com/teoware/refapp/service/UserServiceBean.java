@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import com.teoware.refapp.dao.DaoException;
 import com.teoware.refapp.dao.UserDao;
 import com.teoware.refapp.dao.dto.CreateUserInput;
+import com.teoware.refapp.dao.dto.CreateUserOutput;
+import com.teoware.refapp.dao.dto.CreateUserPasswordInput;
 import com.teoware.refapp.dao.dto.ReadUserInput;
 import com.teoware.refapp.dao.dto.ReadUserOutput;
 import com.teoware.refapp.model.Header;
@@ -21,6 +23,12 @@ import com.teoware.refapp.model.enums.Result;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserPassword;
 import com.teoware.refapp.model.user.Username;
+import com.teoware.refapp.service.dto.ChangeUserPasswordRequest;
+import com.teoware.refapp.service.dto.ChangeUserPasswordResponse;
+import com.teoware.refapp.service.dto.ChangeUserRequest;
+import com.teoware.refapp.service.dto.ChangeUserResponse;
+import com.teoware.refapp.service.dto.DeleteUserRequest;
+import com.teoware.refapp.service.dto.DeleteUserResponse;
 import com.teoware.refapp.service.dto.FindUserRequest;
 import com.teoware.refapp.service.dto.FindUserResponse;
 import com.teoware.refapp.service.dto.ListUsersResponse;
@@ -49,9 +57,13 @@ public class UserServiceBean implements UserService {
 			Header header = request.getHeader();
 			User user = request.getBody();
 			UserPassword userPassword = request.getUserPassword();
-			CreateUserInput insertRequest = new CreateUserInput(user, userPassword);
 
-			dao.createUser(insertRequest);
+			CreateUserInput createUserInput = new CreateUserInput(user);
+			CreateUserOutput createUserOutput = dao.createUser(createUserInput);
+
+			CreateUserPasswordInput createUserPasswordInput = new CreateUserPasswordInput(createUserOutput.getUserId(),
+					userPassword);
+			dao.createUserPassword(createUserPasswordInput);
 
 			return new RegisterUserResponse(header, new OperationResult(Result.SUCCESS, null));
 		} catch (DaoException e) {
@@ -67,10 +79,10 @@ public class UserServiceBean implements UserService {
 		try {
 			Header header = request.getHeader();
 			Username username = request.getBody();
-			ReadUserInput selectRequest = new ReadUserInput(username);
+			ReadUserInput readUserInput = new ReadUserInput(username);
 
-			ReadUserOutput selectResposne = dao.readUser(selectRequest);
-			List<User> userList = selectResposne.getUserList();
+			ReadUserOutput readUserOutput = dao.readUser(readUserInput);
+			List<User> userList = readUserOutput.getUserList();
 
 			// TODO Sanity check if more than one user found
 
@@ -86,12 +98,30 @@ public class UserServiceBean implements UserService {
 		LOG.info(SERVICE_NAME + ": List users operation invoked.");
 
 		try {
-			ReadUserOutput selectResponse = dao.readAllUsers();
+			ReadUserOutput readUserOutput = dao.readAllUsers();
 
-			return new ListUsersResponse(selectResponse.getUserList());
+			return new ListUsersResponse(readUserOutput.getUserList());
 		} catch (DaoException e) {
 			LOG.error(SERVICE_NAME + ": List users operation failed.");
 			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
 		}
+	}
+
+	@Override
+	public ChangeUserResponse changeUser(ChangeUserRequest request) throws ServiceException {
+		LOG.info(SERVICE_NAME + ": Change user operation invoked.");
+		return null;
+	}
+
+	@Override
+	public ChangeUserPasswordResponse changeUserPassword(ChangeUserPasswordRequest request) throws ServiceException {
+		LOG.info(SERVICE_NAME + ": Change user password operation invoked.");
+		return null;
+	}
+
+	@Override
+	public DeleteUserResponse deleteUser(DeleteUserRequest request) throws ServiceException {
+		LOG.info(SERVICE_NAME + ": Delete user operation invoked.");
+		return null;
 	}
 }

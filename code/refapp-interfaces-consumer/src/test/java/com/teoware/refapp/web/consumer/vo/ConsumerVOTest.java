@@ -10,7 +10,7 @@ public class ConsumerVOTest {
 
 	@Test
 	public void testFindUserRequestVO() throws IntrospectionException {
-		JavaBeanTester.test(FindUserRequestVO.class);
+		JavaBeanTester.test(UsernameVO.class);
 	}
 
 	@Test

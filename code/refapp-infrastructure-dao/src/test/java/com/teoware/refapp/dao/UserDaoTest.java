@@ -75,7 +75,7 @@ public class UserDaoTest {
 
 		userDao.createUser(createInput);
 
-		verify(connection, times(4)).prepareStatement(anyString(), anyInt());
+		verify(connection, times(3)).prepareStatement(anyString(), anyInt());
 	}
 
 	@Test(expected = DaoException.class)
@@ -94,7 +94,7 @@ public class UserDaoTest {
 		createInput.getUser().setUserAddress(null);
 		userDao.createUser(createInput);
 
-		verify(connection, times(3)).prepareStatement(anyString(), anyInt());
+		verify(connection, times(2)).prepareStatement(anyString(), anyInt());
 	}
 
 	@Test
@@ -140,7 +140,7 @@ public class UserDaoTest {
 
 		userDao.updateUser(updateInput);
 
-		verify(connection, times(5)).prepareStatement(anyString(), anyInt());
+		verify(connection, times(4)).prepareStatement(anyString(), anyInt());
 	}
 
 	@Test(expected = DaoException.class)
@@ -148,18 +148,6 @@ public class UserDaoTest {
 		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
 
 		userDao.updateUser(updateInput);
-	}
-
-	@Test
-	public void testUpdateUserJohnWithoutPassword() throws Exception {
-		when(resultSet.next()).thenReturn(Boolean.TRUE).thenReturn(Boolean.FALSE);
-		when(statement.executeQuery()).thenReturn(resultSet);
-		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
-
-		updateInput.setUserPassword(null);
-		userDao.updateUser(updateInput);
-
-		verify(connection, times(4)).prepareStatement(anyString(), anyInt());
 	}
 
 	@Test
@@ -171,7 +159,7 @@ public class UserDaoTest {
 		updateInput.getUser().setUserAddress(null);
 		userDao.updateUser(updateInput);
 
-		verify(connection, times(4)).prepareStatement(anyString(), anyInt());
+		verify(connection, times(3)).prepareStatement(anyString(), anyInt());
 	}
 
 	@Test
@@ -193,16 +181,15 @@ public class UserDaoTest {
 		updateInput.getUser().setUserInfo(null);
 		userDao.updateUser(updateInput);
 
-		verify(connection, times(4)).prepareStatement(anyString(), anyInt());
+		verify(connection, times(3)).prepareStatement(anyString(), anyInt());
 	}
 
 	@Test
-	public void testUpdateUserJohnWithoutPasswordAddressAndInfo() throws Exception {
+	public void testUpdateUserJohnWithoutAddressAndInfo() throws Exception {
 		when(resultSet.next()).thenReturn(Boolean.TRUE).thenReturn(Boolean.FALSE);
 		when(statement.executeQuery()).thenReturn(resultSet);
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		updateInput.setUserPassword(null);
 		updateInput.getUser().setUserAddress(null);
 		updateInput.getUser().setUserInfo(null);
 		userDao.updateUser(updateInput);

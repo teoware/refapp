@@ -2,7 +2,9 @@ package com.teoware.refapp.model.user;
 
 import javax.validation.constraints.NotNull;
 
-public class UserPassword {
+import com.teoware.refapp.model.base.BaseBody;
+
+public class UserPassword extends BaseBody {
 
 	@NotNull
 	private String password;

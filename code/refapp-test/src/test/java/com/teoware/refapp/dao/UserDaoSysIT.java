@@ -90,7 +90,7 @@ public class UserDaoSysIT extends UserDaoTestHelper {
 			user.getUserAddress().setAddress("Nygata 2");
 			user.getUserAddress().setPostalCode("1122");
 
-			rowsAffected = updateUser(userDao, user, null);
+			rowsAffected = updateUser(userDao, user);
 			assertEquals(3, rowsAffected);
 
 			userList = readUser(userDao, "jane.doe");

@@ -101,27 +101,27 @@ public final class TestDataFactory {
 	}
 
 	public static CreateUserInput createCreateUserJohnInput() {
-		return new CreateUserInput(createUserJohn(), createUserJohnPassword());
+		return new CreateUserInput(createUserJohn());
 	}
 
 	public static CreateUserInput createCreateUserJaneInput() {
-		return new CreateUserInput(createUserJohn(), createUserJanePassword());
+		return new CreateUserInput(createUserJohn());
 	}
 
 	public static CreateUserInput createCreateUserJonahInput() {
-		return new CreateUserInput(createUserJohn(), createUserJonahPassword());
+		return new CreateUserInput(createUserJohn());
 	}
 
 	public static UpdateUserInput createUpdateUserJohnInput() {
-		return new UpdateUserInput(createUserJohn(), createUserJohnPassword());
+		return new UpdateUserInput(createUserJohn());
 	}
 
 	public static UpdateUserInput createUpdateUserJaneInput() {
-		return new UpdateUserInput(createUserJohn(), createUserJanePassword());
+		return new UpdateUserInput(createUserJohn());
 	}
 
 	public static UpdateUserInput createUpdateUserJonahInput() {
-		return new UpdateUserInput(createUserJohn(), createUserJonahPassword());
+		return new UpdateUserInput(createUserJohn());
 	}
 
 	public static ReadUserInput createReadUserJohnInput() {

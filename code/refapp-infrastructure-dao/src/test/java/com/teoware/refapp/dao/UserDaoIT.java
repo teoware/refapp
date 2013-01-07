@@ -54,7 +54,7 @@ public class UserDaoIT extends UserDaoTestHelper {
 
 			rowsAffected = createUserJohn(userDao);
 
-			assertEquals(4, rowsAffected);
+			assertEquals(3, rowsAffected);
 
 			List<User> authorList = readUserJohn(userDao);
 
@@ -73,7 +73,7 @@ public class UserDaoIT extends UserDaoTestHelper {
 	public void testInsertUpdateAndSelectUserJane() throws DaoException {
 		int rowsAffected = createUserJane(userDao);
 
-		assertEquals(4, rowsAffected);
+		assertEquals(3, rowsAffected);
 
 		List<User> userList = readUserJane(userDao);
 
@@ -89,7 +89,7 @@ public class UserDaoIT extends UserDaoTestHelper {
 		user.getUserAddress().setPostalCode("1122");
 		user.getUserStatus().setStatus(Status.ACTIVE);
 
-		rowsAffected = updateUser(userDao, user, null);
+		rowsAffected = updateUser(userDao, user);
 		assertEquals(3, rowsAffected);
 
 		userList = readUserJane(userDao);
@@ -105,12 +105,12 @@ public class UserDaoIT extends UserDaoTestHelper {
 	public void testInsertAndSelectPasswordForUserJonah() throws DaoException {
 		int rowsAffected = createUserJonah(userDao);
 
-		assertEquals(4, rowsAffected);
+		assertEquals(3, rowsAffected);
 
 		List<UserPassword> userPasswordList = readUserPasswordJonah(userDao);
 
 		assertNotNull(userPasswordList);
-		assertEquals(1, userPasswordList.size());
+		assertEquals(0, userPasswordList.size());
 		UserPassword authorPassword = userPasswordList.get(0);
 
 		assertNotNull(authorPassword.getPassword());
@@ -124,7 +124,7 @@ public class UserDaoIT extends UserDaoTestHelper {
 		rowsAffected += createUserJane(userDao);
 		rowsAffected += createUserJonah(userDao);
 
-		assertEquals(12, rowsAffected);
+		assertEquals(9, rowsAffected);
 
 		List<User> userList = readAllUsers(userDao);
 
@@ -138,7 +138,7 @@ public class UserDaoIT extends UserDaoTestHelper {
 		rowsAffected += createUserJane(userDao);
 		rowsAffected += createUserJonah(userDao);
 
-		assertEquals(12, rowsAffected);
+		assertEquals(9, rowsAffected);
 
 		rowsAffected = deleteUserJohn(userDao);
 
