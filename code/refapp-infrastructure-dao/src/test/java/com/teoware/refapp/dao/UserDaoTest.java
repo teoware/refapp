@@ -106,8 +106,7 @@ public class UserDaoTest {
 
 		ReadUserOutput output = userDao.readUser(readInput);
 
-		verify(connection, times(1)).prepareStatement(anyString(), anyInt());
-
+		verify(connection).prepareStatement(anyString(), anyInt());
 		assertEquals(1, output.getUserList().size());
 	}
 
@@ -120,8 +119,7 @@ public class UserDaoTest {
 
 		ReadUserOutput output = userDao.readAllUsers();
 
-		verify(connection, times(1)).prepareStatement(anyString(), anyInt());
-
+		verify(connection).prepareStatement(anyString(), anyInt());
 		assertEquals(3, output.getUserList().size());
 	}
 
@@ -139,7 +137,6 @@ public class UserDaoTest {
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
 		userDao.updateUser(updateInput);
-
 		verify(connection, times(4)).prepareStatement(anyString(), anyInt());
 	}
 
@@ -203,7 +200,7 @@ public class UserDaoTest {
 
 		userDao.deleteUser(deleteInput);
 
-		verify(connection, times(1)).prepareStatement(anyString(), anyInt());
+		verify(connection).prepareStatement(anyString(), anyInt());
 	}
 
 	@Test(expected = DaoException.class)
@@ -219,7 +216,7 @@ public class UserDaoTest {
 
 		userDao.purgeUsers(purgeInput);
 
-		verify(connection, times(1)).prepareStatement(anyString(), anyInt());
+		verify(connection).prepareStatement(anyString(), anyInt());
 	}
 
 	@Test(expected = DaoException.class)
