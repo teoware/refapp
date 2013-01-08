@@ -1,4 +1,4 @@
-package com.teoware.refapp.dao.rowmapper;
+package com.teoware.refapp.dao.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.teoware.refapp.dao.rowmapper.UserRowMapper;
 import com.teoware.refapp.dao.test.TestResultSetFactory;
 import com.teoware.refapp.dao.util.ResultSetExtractor;
 import com.teoware.refapp.dao.util.RowMapperResultSetExtractor;

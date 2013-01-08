@@ -1,4 +1,4 @@
-package com.teoware.refapp.dao.rowmapper.util;
+package com.teoware.refapp.dao.util;
 
 import org.joda.time.DateTime;
 

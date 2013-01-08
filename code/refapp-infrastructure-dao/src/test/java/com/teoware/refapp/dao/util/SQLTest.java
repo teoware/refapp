@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import com.teoware.refapp.dao.util.SQL;
 
-public class SqlStatementTest {
+public class SQLTest {
 
 	@Test
 	public void testInsertOneColumnSqlStatementBuilder() {

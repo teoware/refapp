@@ -1,6 +1,6 @@
 package com.teoware.refapp.dao.metadata;
 
-public final class UsersTable {
+public interface UserTables {
 
 	// VIEWS
 	public static final String USERS_VIEW_NAME = "USERS_V";

@@ -1,6 +1,6 @@
 package com.teoware.refapp.dao.rowmapper;
 
-import static com.teoware.refapp.dao.metadata.UsersTable.ID_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UserTables.ID_COLUMN_NAME;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

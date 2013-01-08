@@ -1,20 +1,20 @@
 package com.teoware.refapp.dao.test;
 
-import static com.teoware.refapp.dao.metadata.UsersTable.ADDRESS_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTable.BIRTHDATE_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTable.COUNTRY_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTable.CREATED_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTable.EMAIL_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTable.FIRSTNAME_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTable.GENDER_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTable.LASTNAME_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTable.MODIFIED_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTable.MUNICIPALITY_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTable.PHONE_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTable.POSTALCODE_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTable.REGION_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTable.STATUS_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UsersTable.USERNAME_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UserTables.ADDRESS_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UserTables.BIRTHDATE_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UserTables.COUNTRY_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UserTables.CREATED_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UserTables.EMAIL_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UserTables.FIRSTNAME_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UserTables.GENDER_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UserTables.LASTNAME_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UserTables.MODIFIED_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UserTables.MUNICIPALITY_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UserTables.PHONE_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UserTables.POSTALCODE_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UserTables.REGION_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UserTables.STATUS_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.UserTables.USERNAME_COLUMN_NAME;
 
 import java.sql.ResultSet;
 
