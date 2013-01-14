@@ -1,6 +1,6 @@
 package com.teoware.refapp.model.util;
 
-public class ValidationRegex {
+public interface ValidationRegex {
 
 	public static final String USERNAME = "[\\w\\-\\.]+";
 }

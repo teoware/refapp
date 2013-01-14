@@ -2,7 +2,7 @@ package com.teoware.refapp.dao.util;
 
 /**
  * Utility for building an SQL statement.
- *
+ * 
  */
 public class SQL {
 
@@ -37,16 +37,12 @@ public class SQL {
 			sql.append(" (" + join(columns, ", ") + ")");
 			return this;
 		}
-		
+
 		public Builder values(int length) {
-			String values = "?";
-			for (int i = 1; i < length; i++) {
-				values += ", ?";
-			}
-			sql.append(" VALUES (" + values + ")");
+			sql.append(" VALUES (" + count(length) + ")");
 			return this;
 		}
-		
+
 		public Builder columnValues(String... columns) {
 			columns(columns);
 			values(columns.length);
@@ -62,7 +58,7 @@ public class SQL {
 			sql.append(" SET " + column + " = ?");
 			return this;
 		}
-		
+
 		public Builder setColumns(String... columns) {
 			sql.append(" SET " + join(append(columns, " = ?"), ", "));
 			return this;
@@ -72,12 +68,12 @@ public class SQL {
 			sql.append("SELECT " + column);
 			return this;
 		}
-		
+
 		public Builder doSelect(String... columns) {
 			sql.append("SELECT (" + join(columns, ", ") + ")");
 			return this;
 		}
-		
+
 		public Builder doSelectAll() {
 			sql.append("SELECT *");
 			return this;
@@ -94,7 +90,8 @@ public class SQL {
 		}
 
 		public Builder from(String table) {
-			sql.append(" FROM " + table);
+			from();
+			sql.append(" " + table);
 			return this;
 		}
 
@@ -109,12 +106,38 @@ public class SQL {
 		}
 
 		public Builder where(String column) {
-			sql.append(" WHERE " + column + " = ?");
+			where();
+			sql.append(" " + column + " = ?");
 			return this;
 		}
 
 		public Builder where(String... column) {
-			sql.append(" WHERE (" + join(append(column, " = ?"), " AND ") + ")");
+			where();
+			sql.append(" (" + join(append(column, " = ?"), " AND ") + ")");
+			return this;
+		}
+
+		public Builder whereIn(String column, int count) {
+			where();
+			sql.append(" " + column);
+			in(count);
+			return this;
+		}
+
+		public Builder whereLike(String column) {
+			where();
+			sql.append(" " + column);
+			like();
+			return this;
+		}
+
+		public Builder in(int count) {
+			sql.append(" IN (" + count(count) + ")");
+			return this;
+		}
+
+		public Builder like() {
+			sql.append(" LIKE ?");
 			return this;
 		}
 
@@ -124,7 +147,8 @@ public class SQL {
 		}
 
 		public Builder and(String column) {
-			sql.append(" AND " + column + " = ?");
+			and();
+			sql.append(" " + column + " = ?");
 			return this;
 		}
 
@@ -139,7 +163,8 @@ public class SQL {
 		}
 
 		public Builder or(String column) {
-			sql.append(" OR " + column + " = ?");
+			or();
+			sql.append(" " + column + " = ?");
 			return this;
 		}
 
@@ -162,6 +187,14 @@ public class SQL {
 				string += join + strings[i];
 			}
 			return string;
+		}
+
+		private String count(int length) {
+			String values = "?";
+			for (int i = 1; i < length; i++) {
+				values += ", ?";
+			}
+			return values;
 		}
 
 		public SQL build() {
