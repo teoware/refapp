@@ -1,23 +1,33 @@
 package com.teoware.refapp.dao.dto;
 
-import com.teoware.refapp.model.user.User;
+import com.teoware.refapp.model.user.Username;
 
 public class UpdateUserInput {
 
-	private User user;
+	private Id userId;
+	private Username username;
 
 	public UpdateUserInput() {
 	}
 
-	public UpdateUserInput(User user) {
-		this.user = user;
+	public UpdateUserInput(Id userId, Username username) {
+		this.userId = userId;
+		this.username = username;
 	}
 
-	public User getUser() {
-		return user;
+	public Id getUserId() {
+		return userId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(Id userId) {
+		this.userId = userId;
+	}
+
+	public Username getUsername() {
+		return username;
+	}
+
+	public void setUser(Username username) {
+		this.username = username;
 	}
 }

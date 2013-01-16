@@ -30,8 +30,14 @@ import com.teoware.refapp.dao.dto.ReadUserInput;
 import com.teoware.refapp.dao.dto.ReadUserOutput;
 import com.teoware.refapp.dao.dto.ReadUserPasswordInput;
 import com.teoware.refapp.dao.dto.ReadUserPasswordOutput;
+import com.teoware.refapp.dao.dto.UpdateUserAddressInput;
+import com.teoware.refapp.dao.dto.UpdateUserAddressOutput;
+import com.teoware.refapp.dao.dto.UpdateUserInfoInput;
+import com.teoware.refapp.dao.dto.UpdateUserInfoOutput;
 import com.teoware.refapp.dao.dto.UpdateUserInput;
 import com.teoware.refapp.dao.dto.UpdateUserOutput;
+import com.teoware.refapp.dao.dto.UpdateUserStatusInput;
+import com.teoware.refapp.dao.dto.UpdateUserStatusOutput;
 import com.teoware.refapp.dao.itest.mock.UserDaoMock;
 import com.teoware.refapp.dao.itest.util.TestDataSourceHandler;
 import com.teoware.refapp.model.enums.Gender;
@@ -140,9 +146,26 @@ public class UserDaoIT {
 			user.getUserAddress().setPostalCode("1122");
 			user.getUserStatus().setStatus(Status.ACTIVE);
 
-			UpdateUserInput input = new UpdateUserInput(user);
-			UpdateUserOutput output = userDao.updateUser(input);
-			assertEquals(3, output.getRowsAffected());
+			UpdateUserInput updateUserInput = new UpdateUserInput(null, user.getUsername());
+			UpdateUserOutput updateUserOutput = userDao.updateUser(updateUserInput);
+			userId = updateUserOutput.getUserId();
+
+			assertEquals(0, updateUserOutput.getRowsAffected());
+
+			UpdateUserInfoInput updateUserInfoInput = new UpdateUserInfoInput(userId, user.getUserInfo());
+			UpdateUserInfoOutput updateUserInfoOutput = userDao.updateUserInfo(updateUserInfoInput);
+
+			assertEquals(1, updateUserInfoOutput.getRowsAffected());
+
+			UpdateUserAddressInput updateUserAddressInput = new UpdateUserAddressInput(userId, user.getUserAddress());
+			UpdateUserAddressOutput updateUserAddressOutput = userDao.updateUserAddress(updateUserAddressInput);
+
+			assertEquals(1, updateUserAddressOutput.getRowsAffected());
+
+			UpdateUserStatusInput updateUserStatusInput = new UpdateUserStatusInput(userId, user.getUserStatus());
+			UpdateUserStatusOutput updateUserStatusOutput = userDao.updateUserStatus(updateUserStatusInput);
+
+			assertEquals(1, updateUserStatusOutput.getRowsAffected());
 
 			readOutput = userDao.readUser(readInput);
 			userList = readOutput.getUserList();

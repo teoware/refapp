@@ -56,10 +56,16 @@ import com.teoware.refapp.dao.dto.ReadUserInput;
 import com.teoware.refapp.dao.dto.ReadUserOutput;
 import com.teoware.refapp.dao.dto.ReadUserPasswordInput;
 import com.teoware.refapp.dao.dto.ReadUserPasswordOutput;
+import com.teoware.refapp.dao.dto.UpdateUserAddressInput;
+import com.teoware.refapp.dao.dto.UpdateUserAddressOutput;
+import com.teoware.refapp.dao.dto.UpdateUserInfoInput;
+import com.teoware.refapp.dao.dto.UpdateUserInfoOutput;
 import com.teoware.refapp.dao.dto.UpdateUserInput;
 import com.teoware.refapp.dao.dto.UpdateUserOutput;
 import com.teoware.refapp.dao.dto.UpdateUserPasswordInput;
 import com.teoware.refapp.dao.dto.UpdateUserPasswordOutput;
+import com.teoware.refapp.dao.dto.UpdateUserStatusInput;
+import com.teoware.refapp.dao.dto.UpdateUserStatusOutput;
 import com.teoware.refapp.dao.metadata.JNDI;
 import com.teoware.refapp.dao.rowmapper.UserIdRowMapper;
 import com.teoware.refapp.dao.rowmapper.UserPasswordRowMapper;
@@ -164,6 +170,13 @@ public class UserDaoBean extends Dao implements UserDao {
 	}
 
 	@Override
+	public Id readUserId(String username) throws DaoException {
+		SQL sql = new SQL.Builder().doSelect(ID_COLUMN_NAME).from(USERS_TABLE).where(USERNAME_COLUMN_NAME).build();
+		Object[] parameters = DaoHelper.generateArray(username);
+		return super.read(sql, userIdRowMapper, parameters).get(0);
+	}
+
+	@Override
 	public ReadUserOutput readUser(ReadUserInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Select user operation invoked.");
 
@@ -185,7 +198,7 @@ public class UserDaoBean extends Dao implements UserDao {
 	public ReadUserPasswordOutput readUserPassword(ReadUserPasswordInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Select user password operation invoked.");
 
-		Id userId = localReadUserId(input.getUserName());
+		Id userId = readUserId(input.getUserName());
 
 		SQL sql = new SQL.Builder().doSelect("*").from(USER_PASSWORD_TABLE).where(USER_ID_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(userId.getId());
@@ -193,81 +206,63 @@ public class UserDaoBean extends Dao implements UserDao {
 		return new ReadUserPasswordOutput(UserPasswordList);
 	}
 
-	private Id localReadUserId(String username) throws DaoException {
-		SQL sql = new SQL.Builder().doSelect(ID_COLUMN_NAME).from(USERS_TABLE).where(USERNAME_COLUMN_NAME).build();
-		Object[] parameters = DaoHelper.generateArray(username);
-		return super.read(sql, userIdRowMapper, parameters).get(0);
-	}
-
 	@Override
 	public UpdateUserOutput updateUser(UpdateUserInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Update user operation invoked.");
 
-		persistConnection();
-
 		int rowsAffected = 0;
-		ChangeResult changeResult;
 
-		if (input.getUser().getUsername() != null && input.getUser().getUsername().getUsername() != null) {
-			Id userId = localReadUserId(input.getUser().getUsername().getUsername());
+		Id userId = readUserId(input.getUsername().getUsername());
 
-			changeResult = localUpdateUserInfo(input, userId);
-			rowsAffected += changeResult.getRowsAffected();
-
-			changeResult = localUpdateUserStatus(input, userId);
-			rowsAffected += changeResult.getRowsAffected();
-
-			changeResult = localUpdateUserAddress(input, userId);
-			rowsAffected += changeResult.getRowsAffected();
-		}
-
-		terminateConnection();
-
-		return new UpdateUserOutput(rowsAffected);
+		return new UpdateUserOutput(userId, rowsAffected);
 	}
 
-	private ChangeResult localUpdateUserInfo(UpdateUserInput input, Id userId) throws DaoException {
-		if (input.getUser().getUserInfo() != null) {
+	@Override
+	public UpdateUserInfoOutput updateUserInfo(UpdateUserInfoInput input) throws DaoException {
+		if (input.getUserInfo() != null) {
 			SQL sql = new SQL.Builder()
 					.doUpdate(USER_INFO_TABLE)
 					.setColumns(FIRSTNAME_COLUMN_NAME, LASTNAME_COLUMN_NAME, BIRTHDATE_COLUMN_NAME, GENDER_COLUMN_NAME,
 							EMAIL_COLUMN_NAME, PHONE_COLUMN_NAME).where(USER_ID_COLUMN_NAME).build();
-			Object[] parameters = DaoHelper.generateArray(input.getUser().getUserInfo().getFirstName(), input.getUser()
-					.getUserInfo().getLastName(),
-					DateTimeConverter.toSqlDate(input.getUser().getUserInfo().getBirthDate()), input.getUser()
-							.getUserInfo().getGender().toString(), input.getUser().getUserInfo().getEmail(), input
-							.getUser().getUserInfo().getPhone(), userId.getId());
-			return super.update(sql, parameters);
+			Object[] parameters = DaoHelper.generateArray(input.getUserInfo().getFirstName(), input.getUserInfo()
+					.getLastName(), DateTimeConverter.toSqlDate(input.getUserInfo().getBirthDate()), input
+					.getUserInfo().getGender().toString(), input.getUserInfo().getEmail(), input.getUserInfo()
+					.getPhone(), input.getUserId().getId());
+			ChangeResult result = super.update(sql, parameters);
+			return new UpdateUserInfoOutput(result.getRowsAffected());
 		} else {
-			return new ChangeResult(0);
+			return new UpdateUserInfoOutput(0);
 		}
 	}
 
-	private ChangeResult localUpdateUserStatus(UpdateUserInput input, Id userId) throws DaoException {
-		if (input.getUser().getUserStatus().getStatus() != null) {
+	@Override
+	public UpdateUserStatusOutput updateUserStatus(UpdateUserStatusInput input) throws DaoException {
+		if (input.getUserStatus() != null) {
 			SQL sql = new SQL.Builder().doUpdate(USER_STATUS_TABLE).setColumn(STATUS_COLUMN_NAME)
 					.where(USER_ID_COLUMN_NAME).build();
-			Object[] parameters = DaoHelper.generateArray(input.getUser().getUserStatus().getStatus().toString(),
-					userId.getId());
-			return super.update(sql, parameters);
+			Object[] parameters = DaoHelper.generateArray(input.getUserStatus().getStatus().toString(), input
+					.getUserId().getId());
+			ChangeResult result = super.update(sql, parameters);
+			return new UpdateUserStatusOutput(result.getRowsAffected());
 		} else {
-			return new ChangeResult(0);
+			return new UpdateUserStatusOutput(0);
 		}
 	}
 
-	private ChangeResult localUpdateUserAddress(UpdateUserInput input, Id userId) throws DaoException {
-		if (input.getUser().getUserAddress() != null) {
+	@Override
+	public UpdateUserAddressOutput updateUserAddress(UpdateUserAddressInput input) throws DaoException {
+		if (input.getUserAddress() != null) {
 			SQL sql = new SQL.Builder()
 					.doUpdate(USER_ADDRESS_TABLE)
 					.setColumns(ADDRESS_COLUMN_NAME, POSTALCODE_COLUMN_NAME, MUNICIPALITY_COLUMN_NAME,
 							REGION_COLUMN_NAME, COUNTRY_COLUMN_NAME).where(USER_ID_COLUMN_NAME).build();
-			Object[] parameters = DaoHelper.generateArray(input.getUser().getUserAddress().getAddress(), input
-					.getUser().getUserAddress().getPostalCode(), input.getUser().getUserAddress().getMunicipality(),
-					input.getUser().getUserAddress().getRegion(), input.getUser().getUserAddress().getCountry(),
-					userId.getId());
-			return super.update(sql, parameters);
+			Object[] parameters = DaoHelper.generateArray(input.getUserAddress().getAddress(), input.getUserAddress()
+					.getPostalCode(), input.getUserAddress().getMunicipality(), input.getUserAddress().getRegion(),
+					input.getUserAddress().getCountry(), input.getUserId().getId());
+			ChangeResult result = super.update(sql, parameters);
+			return new UpdateUserAddressOutput(result.getRowsAffected());
 		} else {
-			return new ChangeResult(0);
+			return new UpdateUserAddressOutput(0);
 		}
 	}
 
