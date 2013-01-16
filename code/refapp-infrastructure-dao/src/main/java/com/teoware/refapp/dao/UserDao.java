@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 import javax.ejb.Local;
 
+import com.teoware.refapp.dao.dto.CreateUserAddressInput;
+import com.teoware.refapp.dao.dto.CreateUserAddressOutput;
+import com.teoware.refapp.dao.dto.CreateUserInfoInput;
+import com.teoware.refapp.dao.dto.CreateUserInfoOutput;
 import com.teoware.refapp.dao.dto.CreateUserInput;
 import com.teoware.refapp.dao.dto.CreateUserOutput;
 import com.teoware.refapp.dao.dto.CreateUserPasswordInput;
@@ -26,6 +30,10 @@ public interface UserDao extends Serializable {
 
 	public CreateUserOutput createUser(CreateUserInput input) throws DaoException;
 
+	public CreateUserInfoOutput createUserInfo(CreateUserInfoInput input) throws DaoException;
+
+	public CreateUserAddressOutput createUserAddress(CreateUserAddressInput input) throws DaoException;
+
 	public CreateUserPasswordOutput createUserPassword(CreateUserPasswordInput input) throws DaoException;
 
 	public ReadUserOutput readUser(ReadUserInput input) throws DaoException;
@@ -41,4 +49,8 @@ public interface UserDao extends Serializable {
 	public DeleteUserOutput deleteUser(DeleteUserInput input) throws DaoException;
 
 	public PurgeUsersOutput purgeUsers(PurgeUsersInput input) throws DaoException;
+
+	public void persistConnection();
+
+	public void terminateConnection();
 }

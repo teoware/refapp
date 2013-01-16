@@ -146,6 +146,10 @@ public abstract class Dao {
 		return connection;
 	}
 
+	protected void closeConnection() {
+		closeConnection(null);
+	}
+
 	protected void closeConnection(PreparedStatement statement) {
 		closeConnection(statement, persistConnection);
 	}
@@ -162,20 +166,12 @@ public abstract class Dao {
 		}
 	}
 
-	protected void doCloseConnection() {
-		this.persistConnection = false;
+	public void setPersistConnection(boolean persistConnection) {
+		this.persistConnection = persistConnection;
 	}
 
-	protected void doPersistConnection() {
-		this.persistConnection = true;
-	}
-
-	private String e(String msg, SQL sql) {
-		return e(msg, sql.getSql());
-	}
-
-	private String e(String msg, String sql) {
-		return msg + "[" + sql + "]";
+	public boolean getPersistConnection() {
+		return persistConnection;
 	}
 
 	private Id getGeneratedKey(PreparedStatement statement) {
@@ -186,5 +182,13 @@ public abstract class Dao {
 		} catch (Exception e) {
 			return null;
 		}
+	}
+
+	private String e(String msg, SQL sql) {
+		return e(msg, sql.getSql());
+	}
+
+	private String e(String msg, String sql) {
+		return msg + "[" + sql + "]";
 	}
 }

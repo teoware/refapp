@@ -6,7 +6,6 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -23,6 +22,8 @@ import org.junit.experimental.categories.Category;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+import com.teoware.refapp.dao.dto.CreateUserAddressInput;
+import com.teoware.refapp.dao.dto.CreateUserInfoInput;
 import com.teoware.refapp.dao.dto.CreateUserInput;
 import com.teoware.refapp.dao.dto.DeleteUserInput;
 import com.teoware.refapp.dao.dto.PurgeUsersInput;
@@ -51,6 +52,8 @@ public class UserDaoTest {
 	private ResultSet resultSet;
 
 	private CreateUserInput createInput;
+	private CreateUserInfoInput createInfoInput;
+	private CreateUserAddressInput createAddressInput;
 	private ReadUserInput readInput;
 	private UpdateUserInput updateInput;
 	private DeleteUserInput deleteInput;
@@ -60,10 +63,12 @@ public class UserDaoTest {
 	public void setUp() {
 		initMocks(this);
 
-		createInput = TestDataFactory.createCreateUserJohnInput();
-		readInput = TestDataFactory.createReadUserJohnInput();
-		updateInput = TestDataFactory.createUpdateUserJohnInput();
-		deleteInput = TestDataFactory.createDeleteUserJohnInput();
+		createInput = TestDataFactory.createCreateUserInputJohn();
+		createInfoInput = TestDataFactory.createCreateUserInfoInputJohn();
+		createAddressInput = TestDataFactory.createCreateUserAddressInputJohn();
+		readInput = TestDataFactory.createReadUserInputJohn();
+		updateInput = TestDataFactory.createUpdateUserInputJohn();
+		deleteInput = TestDataFactory.createDeleteUserInputJohn();
 		purgeInput = TestDataFactory.createPurgeUsersInput();
 	}
 
@@ -75,7 +80,7 @@ public class UserDaoTest {
 
 		userDao.createUser(createInput);
 
-		verify(connection, times(3)).prepareStatement(anyString(), anyInt());
+		verify(connection).prepareStatement(anyString(), anyInt());
 	}
 
 	@Test(expected = DaoException.class)
@@ -86,15 +91,25 @@ public class UserDaoTest {
 	}
 
 	@Test
-	public void testCreateUserJohnWithoutAddress() throws Exception {
+	public void testCreateUserInfoJohn() throws Exception {
 		when(resultSet.getLong(anyString())).thenReturn(0L);
 		when(statement.getGeneratedKeys()).thenReturn(resultSet);
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		createInput.getUser().setUserAddress(null);
-		userDao.createUser(createInput);
+		userDao.createUserInfo(createInfoInput);
 
-		verify(connection, times(2)).prepareStatement(anyString(), anyInt());
+		verify(connection).prepareStatement(anyString(), anyInt());
+	}
+
+	@Test
+	public void testCreateUserAddressJohn() throws Exception {
+		when(resultSet.getLong(anyString())).thenReturn(0L);
+		when(statement.getGeneratedKeys()).thenReturn(resultSet);
+		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
+
+		userDao.createUserAddress(createAddressInput);
+
+		verify(connection).prepareStatement(anyString(), anyInt());
 	}
 
 	@Test
@@ -157,16 +172,6 @@ public class UserDaoTest {
 		userDao.updateUser(updateInput);
 
 		verify(connection, times(3)).prepareStatement(anyString(), anyInt());
-	}
-
-	@Test
-	public void testUpdateUserJohnWithoutUsername() throws Exception {
-		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
-
-		updateInput.getUser().setUsername(null);
-		userDao.updateUser(updateInput);
-
-		verifyZeroInteractions(connection);
 	}
 
 	@Test

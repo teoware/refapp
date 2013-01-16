@@ -2,8 +2,11 @@ package com.teoware.refapp.test.util;
 
 import org.joda.time.DateTime;
 
+import com.teoware.refapp.dao.dto.CreateUserAddressInput;
+import com.teoware.refapp.dao.dto.CreateUserInfoInput;
 import com.teoware.refapp.dao.dto.CreateUserInput;
 import com.teoware.refapp.dao.dto.DeleteUserInput;
+import com.teoware.refapp.dao.dto.Id;
 import com.teoware.refapp.dao.dto.PurgeUsersInput;
 import com.teoware.refapp.dao.dto.ReadUserInput;
 import com.teoware.refapp.dao.dto.UpdateUserInput;
@@ -13,6 +16,7 @@ import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserPassword;
 import com.teoware.refapp.model.user.Username;
 import com.teoware.refapp.model.util.BeanFactory;
+import com.teoware.refapp.service.dto.RegisterUserRequest;
 
 public final class TestDataFactory {
 
@@ -79,72 +83,132 @@ public final class TestDataFactory {
 		return bean;
 	}
 
-	public static UserPassword createUserJohnPassword() {
+	public static UserPassword createUserPasswordJohn() {
 		UserPassword bean = new UserPassword();
 		bean.setPassword("johnsPassword");
 		bean.setSalt("johnsPasswordSalt");
 		return bean;
 	}
 
-	public static UserPassword createUserJanePassword() {
+	public static UserPassword createUserPasswordJane() {
 		UserPassword bean = new UserPassword();
 		bean.setPassword("janesPassword");
 		bean.setSalt("janesPasswordSalt");
 		return bean;
 	}
 
-	public static UserPassword createUserJonahPassword() {
+	public static UserPassword createUserPasswordJonah() {
 		UserPassword bean = new UserPassword();
 		bean.setPassword("jonahsPassword");
 		bean.setSalt("jonahsPasswordSalt");
 		return bean;
 	}
 
-	public static CreateUserInput createCreateUserJohnInput() {
-		return new CreateUserInput(createUserJohn());
+	public static RegisterUserRequest createRegisterUserRequestJohn() {
+		return new RegisterUserRequest(createUserJohn(), createUserPasswordJohn());
 	}
 
-	public static CreateUserInput createCreateUserJaneInput() {
-		return new CreateUserInput(createUserJohn());
+	public static RegisterUserRequest createRegisterUserRequestJane() {
+		return new RegisterUserRequest(createUserJane(), createUserPasswordJane());
 	}
 
-	public static CreateUserInput createCreateUserJonahInput() {
-		return new CreateUserInput(createUserJohn());
+	public static RegisterUserRequest createRegisterUserRequestJonah() {
+		return new RegisterUserRequest(createUserJonah(), createUserPasswordJonah());
 	}
 
-	public static UpdateUserInput createUpdateUserJohnInput() {
+	public static CreateUserInput createCreateUserInputJohn() {
+		return new CreateUserInput(createUserJohn().getUsername());
+	}
+
+	public static CreateUserInfoInput createCreateUserInfoInputJohn() {
+		return createCreateUserInfoInputJohn(new Id());
+	}
+
+	public static CreateUserInfoInput createCreateUserInfoInputJohn(Id userId) {
+		return new CreateUserInfoInput(userId, createUserJohn().getUserInfo());
+	}
+
+	public static CreateUserAddressInput createCreateUserAddressInputJohn() {
+		return createCreateUserAddressInputJohn(new Id());
+	}
+
+	public static CreateUserAddressInput createCreateUserAddressInputJohn(Id userId) {
+		return new CreateUserAddressInput(userId, createUserJohn().getUserAddress());
+	}
+
+	public static CreateUserInput createCreateUserInputJane() {
+		return new CreateUserInput(createUserJane().getUsername());
+	}
+
+	public static CreateUserInfoInput createCreateUserInfoInputJane() {
+		return createCreateUserInfoInputJane(new Id());
+	}
+
+	public static CreateUserInfoInput createCreateUserInfoInputJane(Id userId) {
+		return new CreateUserInfoInput(userId, createUserJane().getUserInfo());
+	}
+
+	public static CreateUserAddressInput createCreateUserAddressInputJane() {
+		return createCreateUserAddressInputJane(new Id());
+	}
+
+	public static CreateUserAddressInput createCreateUserAddressInputJane(Id userId) {
+		return new CreateUserAddressInput(userId, createUserJane().getUserAddress());
+	}
+
+	public static CreateUserInput createCreateUserInputJonah() {
+		return new CreateUserInput(createUserJonah().getUsername());
+	}
+
+	public static CreateUserInfoInput createCreateUserInfoInputJonah() {
+		return createCreateUserInfoInputJonah(new Id());
+	}
+
+	public static CreateUserInfoInput createCreateUserInfoInputJonah(Id userId) {
+		return new CreateUserInfoInput(userId, createUserJonah().getUserInfo());
+	}
+
+	public static CreateUserAddressInput createCreateUserAddressInputJonah() {
+		return createCreateUserAddressInputJonah(new Id());
+	}
+
+	public static CreateUserAddressInput createCreateUserAddressInputJonah(Id userId) {
+		return new CreateUserAddressInput(userId, createUserJonah().getUserAddress());
+	}
+
+	public static UpdateUserInput createUpdateUserInputJohn() {
 		return new UpdateUserInput(createUserJohn());
 	}
 
-	public static UpdateUserInput createUpdateUserJaneInput() {
+	public static UpdateUserInput createUpdateUserInputJane() {
 		return new UpdateUserInput(createUserJohn());
 	}
 
-	public static UpdateUserInput createUpdateUserJonahInput() {
+	public static UpdateUserInput createUpdateUserInputJonah() {
 		return new UpdateUserInput(createUserJohn());
 	}
 
-	public static ReadUserInput createReadUserJohnInput() {
+	public static ReadUserInput createReadUserInputJohn() {
 		return new ReadUserInput(createUsername("john.doe"));
 	}
 
-	public static ReadUserInput createReadUserJaneInput() {
+	public static ReadUserInput createReadUserInputJane() {
 		return new ReadUserInput(createUsername("jane.doe"));
 	}
 
-	public static ReadUserInput createReadUserJonahInput() {
+	public static ReadUserInput createReadUserInputJonah() {
 		return new ReadUserInput(createUsername("jonah.doe"));
 	}
 
-	public static DeleteUserInput createDeleteUserJohnInput() {
+	public static DeleteUserInput createDeleteUserInputJohn() {
 		return new DeleteUserInput("john.doe");
 	}
 
-	public static DeleteUserInput createDeleteUserJaneInput() {
+	public static DeleteUserInput createDeleteUserInputJane() {
 		return new DeleteUserInput("jane.doe");
 	}
 
-	public static DeleteUserInput createDeleteUserJonahInput() {
+	public static DeleteUserInput createDeleteUserInputJonah() {
 		return new DeleteUserInput("jonah.doe");
 	}
 

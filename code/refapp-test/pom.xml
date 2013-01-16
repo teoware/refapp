@@ -59,6 +59,11 @@
 		
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp-services-logic</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
 			<artifactId>refapp-testtools</artifactId>
 		</dependency>
 	</dependencies>

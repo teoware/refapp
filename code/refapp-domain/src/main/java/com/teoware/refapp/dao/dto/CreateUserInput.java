@@ -1,23 +1,23 @@
 package com.teoware.refapp.dao.dto;
 
-import com.teoware.refapp.model.user.User;
+import com.teoware.refapp.model.user.Username;
 
 public class CreateUserInput {
 
-	private User user;
+	private Username username;
 
 	public CreateUserInput() {
 	}
 
-	public CreateUserInput(User user) {
-		this.user = user;
+	public CreateUserInput(Username username) {
+		this.username = username;
 	}
 
-	public User getUser() {
-		return user;
+	public Username getUsername() {
+		return username;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUsername(Username username) {
+		this.username = username;
 	}
 }

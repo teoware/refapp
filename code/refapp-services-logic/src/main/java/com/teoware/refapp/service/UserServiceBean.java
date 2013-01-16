@@ -12,9 +12,15 @@ import org.slf4j.LoggerFactory;
 
 import com.teoware.refapp.dao.DaoException;
 import com.teoware.refapp.dao.UserDao;
+import com.teoware.refapp.dao.dto.CreateUserAddressInput;
+import com.teoware.refapp.dao.dto.CreateUserAddressOutput;
+import com.teoware.refapp.dao.dto.CreateUserInfoInput;
+import com.teoware.refapp.dao.dto.CreateUserInfoOutput;
 import com.teoware.refapp.dao.dto.CreateUserInput;
 import com.teoware.refapp.dao.dto.CreateUserOutput;
 import com.teoware.refapp.dao.dto.CreateUserPasswordInput;
+import com.teoware.refapp.dao.dto.CreateUserPasswordOutput;
+import com.teoware.refapp.dao.dto.Id;
 import com.teoware.refapp.dao.dto.ReadUserInput;
 import com.teoware.refapp.dao.dto.ReadUserOutput;
 import com.teoware.refapp.model.Header;
@@ -47,28 +53,46 @@ public class UserServiceBean implements UserService {
 	private static final String DAO_EXCEPTION_MESSAGE = "DAO exception";
 
 	@Inject
-	private UserDao dao;
+	protected UserDao dao;
 
 	@Override
 	public RegisterUserResponse registerUser(RegisterUserRequest request) throws ServiceException {
 		LOG.info(SERVICE_NAME + ": Register user operation invoked.");
 
 		try {
+			int rowsAffected = 0;
+
 			Header header = request.getHeader();
 			User user = request.getBody();
 			UserPassword userPassword = request.getUserPassword();
 
-			CreateUserInput createUserInput = new CreateUserInput(user);
+			dao.persistConnection();
+
+			CreateUserInput createUserInput = new CreateUserInput(user.getUsername());
 			CreateUserOutput createUserOutput = dao.createUser(createUserInput);
+			Id userId = createUserOutput.getUserId();
+			rowsAffected += createUserOutput.getRowsAffected();
+
+			CreateUserInfoInput createUserInfoInput = new CreateUserInfoInput(userId, user.getUserInfo());
+			CreateUserInfoOutput createUserInfoOutput = dao.createUserInfo(createUserInfoInput);
+			rowsAffected += createUserInfoOutput.getRowsAffected();
+
+			CreateUserAddressInput createUserAddressInput = new CreateUserAddressInput(userId, user.getUserAddress());
+			CreateUserAddressOutput createUserAddressOutput = dao.createUserAddress(createUserAddressInput);
+			rowsAffected += createUserAddressOutput.getRowsAffected();
 
 			CreateUserPasswordInput createUserPasswordInput = new CreateUserPasswordInput(createUserOutput.getUserId(),
 					userPassword);
-			dao.createUserPassword(createUserPasswordInput);
+			CreateUserPasswordOutput createUserPasswordOutput = dao.createUserPassword(createUserPasswordInput);
+			rowsAffected += createUserPasswordOutput.getRowsAffected();
 
-			return new RegisterUserResponse(header, new OperationResult(Result.SUCCESS, null));
+			return new RegisterUserResponse(header, new OperationResult(Result.SUCCESS, "<" + rowsAffected
+					+ "> rows created"));
 		} catch (DaoException e) {
 			LOG.error(SERVICE_NAME + ": Register user operation failed.");
 			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
+		} finally {
+			dao.terminateConnection();
 		}
 	}
 

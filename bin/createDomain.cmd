@@ -9,7 +9,7 @@ set RETURNVALUE=%ERRORLEVEL%
 set ERROR_MSG=Failed to load env variable
 if not (%RETURNVALUE%)==(0) goto ERROR
 
-call %ASADMIN_CMD% create-domain --savemasterpassword true %DOMAIN% > nul 2>&1
+call %ASADMIN_CMD% create-domain --savemasterpassword true %DOMAIN% > %ERROR_LOG% 2>&1
 set RETURNVALUE=%ERRORLEVEL%
 set ERROR_MSG=Failed to create domain %DOMAIN%
 if not (%RETURNVALUE%)==(0) goto ERROR
