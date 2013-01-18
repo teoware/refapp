@@ -47,7 +47,7 @@ public class RegisterUserRequestValidationConstraintsTest {
 
 		Set<ConstraintViolation<RegisterUserRequest>> constraintViolations = validator.validate(request);
 
-		assertEquals(2, constraintViolations.size());
+		assertEquals(3, constraintViolations.size());
 	}
 
 	@Test
@@ -56,7 +56,7 @@ public class RegisterUserRequestValidationConstraintsTest {
 
 		Set<ConstraintViolation<RegisterUserRequest>> constraintViolations = validator.validate(request);
 
-		assertEquals(0, constraintViolations.size());
+		assertEquals(2, constraintViolations.size());
 	}
 
 	@Test
@@ -69,7 +69,7 @@ public class RegisterUserRequestValidationConstraintsTest {
 
 		Set<ConstraintViolation<RegisterUserRequest>> constraintViolations = validator.validate(request);
 
-		assertEquals(3, constraintViolations.size());
+		assertEquals(5, constraintViolations.size());
 	}
 
 	@Test
@@ -79,7 +79,7 @@ public class RegisterUserRequestValidationConstraintsTest {
 
 		Set<ConstraintViolation<RegisterUserRequest>> constraintViolations = validator.validate(request);
 
-		assertEquals(1, constraintViolations.size());
+		assertEquals(3, constraintViolations.size());
 	}
 
 	@Test
@@ -89,7 +89,7 @@ public class RegisterUserRequestValidationConstraintsTest {
 
 		Set<ConstraintViolation<RegisterUserRequest>> constraintViolations = validator.validate(request);
 
-		assertEquals(1, constraintViolations.size());
+		assertEquals(3, constraintViolations.size());
 	}
 
 	@Test
@@ -99,7 +99,7 @@ public class RegisterUserRequestValidationConstraintsTest {
 
 		Set<ConstraintViolation<RegisterUserRequest>> constraintViolations = validator.validate(request);
 
-		assertEquals(0, constraintViolations.size());
+		assertEquals(2, constraintViolations.size());
 	}
 
 	@Test
@@ -109,7 +109,7 @@ public class RegisterUserRequestValidationConstraintsTest {
 
 		Set<ConstraintViolation<RegisterUserRequest>> constraintViolations = validator.validate(request);
 
-		assertEquals(1, constraintViolations.size());
+		assertEquals(3, constraintViolations.size());
 	}
 
 	@Test
@@ -119,7 +119,7 @@ public class RegisterUserRequestValidationConstraintsTest {
 
 		Set<ConstraintViolation<RegisterUserRequest>> constraintViolations = validator.validate(request);
 
-		assertEquals(0, constraintViolations.size());
+		assertEquals(2, constraintViolations.size());
 	}
 
 	@Test
@@ -129,7 +129,7 @@ public class RegisterUserRequestValidationConstraintsTest {
 
 		Set<ConstraintViolation<RegisterUserRequest>> constraintViolations = validator.validate(request);
 
-		assertEquals(1, constraintViolations.size());
+		assertEquals(3, constraintViolations.size());
 	}
 
 	@Test
@@ -139,6 +139,6 @@ public class RegisterUserRequestValidationConstraintsTest {
 
 		Set<ConstraintViolation<RegisterUserRequest>> constraintViolations = validator.validate(request);
 
-		assertEquals(1, constraintViolations.size());
+		assertEquals(3, constraintViolations.size());
 	}
 }
