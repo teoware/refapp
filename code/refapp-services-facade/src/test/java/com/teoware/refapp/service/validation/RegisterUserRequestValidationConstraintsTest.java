@@ -16,8 +16,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.teoware.refapp.service.dto.RegisterUserRequest;
-import com.teoware.refapp.service.testtools.TestHelper;
 import com.teoware.refapp.service.util.ServiceBeanFactory;
+import com.teoware.refapp.test.util.TestDataFactory;
 
 public class RegisterUserRequestValidationConstraintsTest {
 
@@ -42,7 +42,7 @@ public class RegisterUserRequestValidationConstraintsTest {
 	}
 
 	@Test
-	public void testRegisterUserRequestHeaderAndBodyNull() {
+	public void testRegisterUserRequestHeaderBodyAndPasswordNull() {
 		RegisterUserRequest request = new RegisterUserRequest(null, null, null);
 
 		Set<ConstraintViolation<RegisterUserRequest>> constraintViolations = validator.validate(request);
@@ -51,12 +51,12 @@ public class RegisterUserRequestValidationConstraintsTest {
 	}
 
 	@Test
-	public void testRegisterUserRequestHeaderAndBodyNotNull() {
-		RegisterUserRequest request = TestHelper.populateRegisterUserRequest();
+	public void testRegisterUserRequestComplete() {
+		RegisterUserRequest request = TestDataFactory.createRegisterUserRequestJohn();
 
 		Set<ConstraintViolation<RegisterUserRequest>> constraintViolations = validator.validate(request);
 
-		assertEquals(2, constraintViolations.size());
+		assertEquals(0, constraintViolations.size());
 	}
 
 	@Test
@@ -74,71 +74,71 @@ public class RegisterUserRequestValidationConstraintsTest {
 
 	@Test
 	public void testRegisterUserRequestUsernameUserNameNull() {
-		RegisterUserRequest request = TestHelper.populateRegisterUserRequest();
+		RegisterUserRequest request = TestDataFactory.createRegisterUserRequestJohn();
 		request.getBody().getUsername().setUsername(null);
 
 		Set<ConstraintViolation<RegisterUserRequest>> constraintViolations = validator.validate(request);
 
-		assertEquals(3, constraintViolations.size());
+		assertEquals(1, constraintViolations.size());
 	}
 
 	@Test
 	public void testRegisterUserRequestUsernameUsernameExactlyToShortString() {
-		RegisterUserRequest request = TestHelper.populateRegisterUserRequest();
+		RegisterUserRequest request = TestDataFactory.createRegisterUserRequestJohn();
 		request.getBody().getUsername().setUsername("ab");
 
 		Set<ConstraintViolation<RegisterUserRequest>> constraintViolations = validator.validate(request);
 
-		assertEquals(3, constraintViolations.size());
+		assertEquals(1, constraintViolations.size());
 	}
 
 	@Test
 	public void testRegisterUserRequestUsernameUsernameExactlyLongEnoughString() {
-		RegisterUserRequest request = TestHelper.populateRegisterUserRequest();
+		RegisterUserRequest request = TestDataFactory.createRegisterUserRequestJohn();
 		request.getBody().getUsername().setUsername("abc");
 
 		Set<ConstraintViolation<RegisterUserRequest>> constraintViolations = validator.validate(request);
 
-		assertEquals(2, constraintViolations.size());
+		assertEquals(0, constraintViolations.size());
 	}
 
 	@Test
 	public void testRegisterUserRequestUsernameUsernameExactlyTooLongString() {
-		RegisterUserRequest request = TestHelper.populateRegisterUserRequest();
+		RegisterUserRequest request = TestDataFactory.createRegisterUserRequestJohn();
 		request.getBody().getUsername().setUsername("abcdefghijklmnopqrstu");
 
 		Set<ConstraintViolation<RegisterUserRequest>> constraintViolations = validator.validate(request);
 
-		assertEquals(3, constraintViolations.size());
+		assertEquals(1, constraintViolations.size());
 	}
 
 	@Test
 	public void testRegisterUserRequestUsernameUsernameExactlyMaxLengthString() {
-		RegisterUserRequest request = TestHelper.populateRegisterUserRequest();
+		RegisterUserRequest request = TestDataFactory.createRegisterUserRequestJohn();
 		request.getBody().getUsername().setUsername("abcdefghijklmnopqrst");
 
 		Set<ConstraintViolation<RegisterUserRequest>> constraintViolations = validator.validate(request);
 
-		assertEquals(2, constraintViolations.size());
+		assertEquals(0, constraintViolations.size());
 	}
 
 	@Test
 	public void testRegisterUserRequestUsernameUsernameContainSpaces() {
-		RegisterUserRequest request = TestHelper.populateRegisterUserRequest();
+		RegisterUserRequest request = TestDataFactory.createRegisterUserRequestJohn();
 		request.getBody().getUsername().setUsername("abc def");
 
 		Set<ConstraintViolation<RegisterUserRequest>> constraintViolations = validator.validate(request);
 
-		assertEquals(3, constraintViolations.size());
+		assertEquals(1, constraintViolations.size());
 	}
 
 	@Test
 	public void testRegisterUserRequestUsernameUsernameInvalidCharacter() {
-		RegisterUserRequest request = TestHelper.populateRegisterUserRequest();
+		RegisterUserRequest request = TestDataFactory.createRegisterUserRequestJohn();
 		request.getBody().getUsername().setUsername("abc#def");
 
 		Set<ConstraintViolation<RegisterUserRequest>> constraintViolations = validator.validate(request);
 
-		assertEquals(3, constraintViolations.size());
+		assertEquals(1, constraintViolations.size());
 	}
 }
