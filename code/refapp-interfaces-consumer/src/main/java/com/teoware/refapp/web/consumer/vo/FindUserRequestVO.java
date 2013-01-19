@@ -1,13 +1,13 @@
 package com.teoware.refapp.web.consumer.vo;
 
-public class UsernameVO {
+public class FindUserRequestVO {
 
 	private String username;
 
-	public UsernameVO() {
+	public FindUserRequestVO() {
 	}
 
-	public UsernameVO(String username) {
+	public FindUserRequestVO(String username) {
 		this.username = username;
 	}
 

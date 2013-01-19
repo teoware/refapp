@@ -23,7 +23,7 @@ import com.teoware.refapp.service.dto.RegisterUserResponse;
 import com.teoware.refapp.service.facade.UserServiceFacade;
 import com.teoware.refapp.service.validation.ValidationException;
 import com.teoware.refapp.web.consumer.vo.RegisterUserRequestVO;
-import com.teoware.refapp.web.consumer.vo.UsernameVO;
+import com.teoware.refapp.web.consumer.vo.FindUserRequestVO;
 
 @Category(com.teoware.refapp.test.UnitTestGroup.class)
 public class UserServiceConsumerTest {
@@ -66,7 +66,7 @@ public class UserServiceConsumerTest {
 	public void testFindUserIsSuccessful() throws ParseException, ValidationException, ServiceException {
 		when(serviceFacade.findUser(any(FindUserRequest.class))).thenReturn(mock(FindUserResponse.class));
 
-		serviceConsumer.findUser(mock(UsernameVO.class));
+		serviceConsumer.findUser(mock(FindUserRequestVO.class));
 
 		verify(serviceFacade).findUser(any(FindUserRequest.class));
 	}
@@ -75,14 +75,14 @@ public class UserServiceConsumerTest {
 	public void testFindUserThrowsValidationException() throws ValidationException, ServiceException {
 		when(serviceFacade.findUser(any(FindUserRequest.class))).thenThrow(mock(ValidationException.class));
 
-		serviceConsumer.findUser(mock(UsernameVO.class));
+		serviceConsumer.findUser(mock(FindUserRequestVO.class));
 	}
 
 	@Test(expected = RuntimeException.class)
 	public void testFindUserThrowsServiceException() throws ValidationException, ServiceException {
 		when(serviceFacade.findUser(any(FindUserRequest.class))).thenThrow(mock(ServiceException.class));
 
-		serviceConsumer.findUser(mock(UsernameVO.class));
+		serviceConsumer.findUser(mock(FindUserRequestVO.class));
 	}
 
 	@Test

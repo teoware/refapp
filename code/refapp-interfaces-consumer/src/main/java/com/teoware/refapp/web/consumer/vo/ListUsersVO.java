@@ -4,11 +4,11 @@ import java.util.List;
 
 import com.teoware.refapp.model.user.User;
 
-public class UserListVO {
+public class ListUsersVO {
 
 	private List<User> userList;
 
-	public UserListVO(List<User> userList) {
+	public ListUsersVO(List<User> userList) {
 		this.userList = userList;
 	}
 

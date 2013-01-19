@@ -16,7 +16,7 @@ import org.mockito.Mock;
 
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.web.consumer.UserServiceConsumer;
-import com.teoware.refapp.web.consumer.vo.UserListVO;
+import com.teoware.refapp.web.consumer.vo.ListUsersVO;
 import com.teoware.refapp.web.ui.controller.ListUsersControllerBean;
 
 public class ListUsersControllerBeanTest {
@@ -40,7 +40,7 @@ public class ListUsersControllerBeanTest {
 
 	@Test
 	public void testDoLoadUserList() {
-		when(consumer.listUsers()).thenReturn(new UserListVO(new ArrayList<User>()));
+		when(consumer.listUsers()).thenReturn(new ListUsersVO(new ArrayList<User>()));
 
 		controller.doLoadUserList();
 

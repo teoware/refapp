@@ -263,12 +263,12 @@ public class UserServiceBean implements UserService {
 
 		try {
 			Header header = request.getHeader();
-			UserPassword body = request.getBody();
+			UserPassword userPassword = request.getBody();
 			Username username = request.getUsername();
 
 			Id userId = dao.readUserId(username.getUsername());
 
-			UpdateUserPasswordInput input = new UpdateUserPasswordInput(userId, body);
+			UpdateUserPasswordInput input = new UpdateUserPasswordInput(userId, userPassword);
 			UpdateUserPasswordOutput output = dao.updateUserPassword(input);
 			int rowsAffected = output.getRowsAffected();
 

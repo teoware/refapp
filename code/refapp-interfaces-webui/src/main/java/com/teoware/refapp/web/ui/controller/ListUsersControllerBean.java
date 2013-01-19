@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.web.consumer.UserServiceConsumer;
-import com.teoware.refapp.web.consumer.vo.UserListVO;
+import com.teoware.refapp.web.consumer.vo.ListUsersVO;
 
 @Named
 @RequestScoped
@@ -31,7 +31,7 @@ public class ListUsersControllerBean extends AbstractControllerBean implements S
 
 	public void doLoadUserList() {
 		LOG.debug("Loading user list");
-		UserListVO vo = consumer.listUsers();
+		ListUsersVO vo = consumer.listUsers();
 		userList = vo.getUserList();
 		debug = "Size: " + userList.size();
 	}

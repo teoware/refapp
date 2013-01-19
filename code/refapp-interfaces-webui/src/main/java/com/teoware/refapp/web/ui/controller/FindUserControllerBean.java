@@ -8,8 +8,8 @@ import javax.inject.Named;
 
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.web.consumer.UserServiceConsumer;
-import com.teoware.refapp.web.consumer.vo.UserVO;
-import com.teoware.refapp.web.consumer.vo.UsernameVO;
+import com.teoware.refapp.web.consumer.vo.FindUserResponseVO;
+import com.teoware.refapp.web.consumer.vo.FindUserRequestVO;
 
 @Named
 @RequestScoped
@@ -26,13 +26,13 @@ public class FindUserControllerBean extends AbstractControllerBean implements Se
 
 	public void onClickFindButton() {
 		setDebug("onClickFindButton");
-		UsernameVO vo = createFindUserRequest();
-		UserVO responseVO = consumer.findUser(vo);
+		FindUserRequestVO vo = createFindUserRequest();
+		FindUserResponseVO responseVO = consumer.findUser(vo);
 		user = responseVO.getUser();
 	}
 
-	private UsernameVO createFindUserRequest() {
-		return new UsernameVO(this.username);
+	private FindUserRequestVO createFindUserRequest() {
+		return new FindUserRequestVO(this.username);
 	}
 
 	public String getUsername() {

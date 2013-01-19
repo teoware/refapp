@@ -10,7 +10,7 @@ public class ConsumerVOTest {
 
 	@Test
 	public void testFindUserRequestVO() throws IntrospectionException {
-		JavaBeanTester.test(UsernameVO.class);
+		JavaBeanTester.test(FindUserRequestVO.class);
 	}
 
 	@Test
@@ -25,11 +25,11 @@ public class ConsumerVOTest {
 
 	@Test
 	public void testUserListVO() throws IntrospectionException {
-		JavaBeanTester.test(UserListVO.class);
+		JavaBeanTester.test(ListUsersVO.class);
 	}
 
 	@Test
 	public void testUserVO() throws IntrospectionException {
-		JavaBeanTester.test(UserVO.class);
+		JavaBeanTester.test(FindUserResponseVO.class);
 	}
 }

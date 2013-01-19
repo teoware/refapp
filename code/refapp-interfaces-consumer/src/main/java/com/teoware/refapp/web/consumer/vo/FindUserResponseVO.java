@@ -2,11 +2,11 @@ package com.teoware.refapp.web.consumer.vo;
 
 import com.teoware.refapp.model.user.User;
 
-public class UserVO {
+public class FindUserResponseVO {
 
 	User user;
 
-	public UserVO(User user) {
+	public FindUserResponseVO(User user) {
 		this.user = user;
 	}
 

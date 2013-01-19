@@ -17,8 +17,8 @@ import org.mockito.Mockito;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.testtools.JavaBeanTester;
 import com.teoware.refapp.web.consumer.UserServiceConsumer;
-import com.teoware.refapp.web.consumer.vo.UserVO;
-import com.teoware.refapp.web.consumer.vo.UsernameVO;
+import com.teoware.refapp.web.consumer.vo.FindUserResponseVO;
+import com.teoware.refapp.web.consumer.vo.FindUserRequestVO;
 
 public class FindUserControllerBeanTest {
 
@@ -46,10 +46,10 @@ public class FindUserControllerBeanTest {
 
 	@Test
 	public void testOnClickRegisterButtonCreatesUser() {
-		Mockito.when(consumer.findUser(any(UsernameVO.class))).thenReturn(new UserVO(new User()));
+		Mockito.when(consumer.findUser(any(FindUserRequestVO.class))).thenReturn(new FindUserResponseVO(new User()));
 
 		controller.onClickFindButton();
 
-		verify(consumer).findUser(any(UsernameVO.class));
+		verify(consumer).findUser(any(FindUserRequestVO.class));
 	}
 }
