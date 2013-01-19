@@ -77,7 +77,7 @@ public class UserDaoTest {
 		updateInfoInput = TestDataFactory.createUpdateUserInfoInputJohn();
 		updateStatusInput = TestDataFactory.createUpdateUserStatusInputJohn();
 		updateAddressInput = TestDataFactory.createUpdateUserAddressInputJohn();
-		deleteInput = TestDataFactory.createDeleteUserInputJohn();
+		deleteInput = TestDataFactory.createDeleteUserInput();
 		purgeInput = TestDataFactory.createPurgeUsersInput();
 	}
 

@@ -23,6 +23,8 @@ public final class DaoHelper {
 		} else if (isCalendar(parameter)) {
 			Calendar calendar = (Calendar) parameter;
 			statement.setTimestamp(parameterIndex, new java.sql.Timestamp(calendar.getTime().getTime()), calendar);
+		} else if (isEnum(parameter)) {
+			statement.setString(parameterIndex, parameter.toString());
 		} else {
 			statement.setObject(parameterIndex, parameter);
 		}
@@ -55,6 +57,10 @@ public final class DaoHelper {
 
 	public static boolean isCalendar(Object object) {
 		return object instanceof Calendar;
+	}
+
+	public static boolean isEnum(Object object) {
+		return object.getClass().isEnum();
 	}
 
 	public static Object[] generateArray(Object... objects) {

@@ -12,8 +12,16 @@ import com.teoware.refapp.dao.dto.CreateUserInput;
 import com.teoware.refapp.dao.dto.CreateUserOutput;
 import com.teoware.refapp.dao.dto.CreateUserPasswordInput;
 import com.teoware.refapp.dao.dto.CreateUserPasswordOutput;
+import com.teoware.refapp.dao.dto.DeleteUserAddressInput;
+import com.teoware.refapp.dao.dto.DeleteUserAddressOutput;
+import com.teoware.refapp.dao.dto.DeleteUserInfoInput;
+import com.teoware.refapp.dao.dto.DeleteUserInfoOutput;
 import com.teoware.refapp.dao.dto.DeleteUserInput;
 import com.teoware.refapp.dao.dto.DeleteUserOutput;
+import com.teoware.refapp.dao.dto.DeleteUserPasswordInput;
+import com.teoware.refapp.dao.dto.DeleteUserPasswordOutput;
+import com.teoware.refapp.dao.dto.DeleteUserStatusInput;
+import com.teoware.refapp.dao.dto.DeleteUserStatusOutput;
 import com.teoware.refapp.dao.dto.Id;
 import com.teoware.refapp.dao.dto.PurgeUsersInput;
 import com.teoware.refapp.dao.dto.PurgeUsersOutput;
@@ -52,7 +60,7 @@ public interface UserDao extends Serializable {
 	public ReadUserPasswordOutput readUserPassword(ReadUserPasswordInput input) throws DaoException;
 
 	public UpdateUserOutput updateUser(UpdateUserInput input) throws DaoException;
-	
+
 	public UpdateUserInfoOutput updateUserInfo(UpdateUserInfoInput input) throws DaoException;
 
 	public UpdateUserStatusOutput updateUserStatus(UpdateUserStatusInput input) throws DaoException;
@@ -62,6 +70,14 @@ public interface UserDao extends Serializable {
 	public UpdateUserPasswordOutput updateUserPassword(UpdateUserPasswordInput input) throws DaoException;
 
 	public DeleteUserOutput deleteUser(DeleteUserInput input) throws DaoException;
+
+	public DeleteUserInfoOutput deleteUserInfo(DeleteUserInfoInput input) throws DaoException;
+
+	public DeleteUserStatusOutput deleteUserStatus(DeleteUserStatusInput input) throws DaoException;
+
+	public DeleteUserAddressOutput deleteUserAddress(DeleteUserAddressInput input) throws DaoException;
+
+	public DeleteUserPasswordOutput deleteUserPassword(DeleteUserPasswordInput input) throws DaoException;
 
 	public PurgeUsersOutput purgeUsers(PurgeUsersInput input) throws DaoException;
 

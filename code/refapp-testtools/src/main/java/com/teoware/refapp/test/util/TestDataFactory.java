@@ -287,16 +287,8 @@ public final class TestDataFactory {
 		return new ReadUserInput(createUsername("jonah.doe"));
 	}
 
-	public static DeleteUserInput createDeleteUserInputJohn() {
-		return new DeleteUserInput("john.doe");
-	}
-
-	public static DeleteUserInput createDeleteUserInputJane() {
-		return new DeleteUserInput("jane.doe");
-	}
-
-	public static DeleteUserInput createDeleteUserInputJonah() {
-		return new DeleteUserInput("jonah.doe");
+	public static DeleteUserInput createDeleteUserInput() {
+		return new DeleteUserInput(new Id());
 	}
 
 	public static PurgeUsersInput createPurgeUsersInput() {

@@ -266,7 +266,7 @@ public class UserDaoIT {
 			List<User> userList = readAllOutput.getUserList();
 
 			assertNotNull(userList);
-			assertEquals(6, userList.size());
+			assertEquals(3, userList.size());
 		} catch (Throwable t) {
 			t.printStackTrace();
 			fail(t.getMessage());
@@ -321,7 +321,9 @@ public class UserDaoIT {
 
 			assertEquals(9, rowsAffected);
 
-			DeleteUserInput deleteInput = new DeleteUserInput("john.doe");
+			userId = userDao.readUserId("john.doe");
+
+			DeleteUserInput deleteInput = new DeleteUserInput(userId);
 			DeleteUserOutput deleteOutput = userDao.deleteUser(deleteInput);
 
 			assertEquals(1, deleteOutput.getRowsAffected());
@@ -330,7 +332,7 @@ public class UserDaoIT {
 			List<User> userList = readAllOutput.getUserList();
 
 			assertNotNull(userList);
-			assertEquals(5, userList.size());
+			assertEquals(3, userList.size());
 		} catch (Throwable t) {
 			t.printStackTrace();
 			fail(t.getMessage());

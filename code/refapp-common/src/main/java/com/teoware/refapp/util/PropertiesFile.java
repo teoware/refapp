@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;
 import java.util.Set;
@@ -13,13 +14,11 @@ public class PropertiesFile extends Properties {
 	private static final long serialVersionUID = 1L;
 
 	public void loadFromFile(String fileName) throws IOException {
-		super.load(new FileInputStream(fileName));
-		prosessProperties();
+		loadProperties(new FileInputStream(fileName));
 	}
 
 	public void loadFromClasspath(String fileName) throws IOException {
-		super.load(this.getClass().getResourceAsStream(fileName));
-		prosessProperties();
+		loadProperties(this.getClass().getResourceAsStream(fileName));
 	}
 
 	public void loadUsingClassLoader(String fileName) throws IOException {
@@ -27,7 +26,12 @@ public class PropertiesFile extends Properties {
 		if (url == null) {
 			throw new FileNotFoundException("File '" + fileName + "' could not be found.");
 		}
-		super.load(new FileInputStream(new File(url.getFile())));
+		loadProperties(new FileInputStream(new File(url.getFile())));
+	}
+
+	private void loadProperties(InputStream is) throws IOException {
+		super.load(is);
+		is.close();
 		prosessProperties();
 	}
 

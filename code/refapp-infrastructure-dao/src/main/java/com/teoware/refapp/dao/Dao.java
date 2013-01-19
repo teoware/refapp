@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.util.List;
 
-import javax.ejb.TransactionAttribute;
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
@@ -32,9 +31,9 @@ public abstract class Dao {
 	private static final Logger LOG = LoggerFactory.getLogger(Dao.class);
 
 	private static final int FIRST_COLUMN = 1;
-	private static final String INSERT_ERROR_MESSAGE = "Insert operation failed.";
+	private static final String CREATE_ERROR_MESSAGE = "Create operation failed.";
+	private static final String READ_ERROR_MESSAGE = "Read operation failed.";
 	private static final String UPDATE_ERROR_MESSAGE = "Update operation failed.";
-	private static final String SELECT_ERROR_MESSAGE = "Select operation failed.";
 	private static final String DELETE_ERROR_MESSAGE = "Delete operation failed.";
 
 	private DataSource dataSource;
@@ -48,61 +47,39 @@ public abstract class Dao {
 
 	protected ChangeResult create(SQL sql, Object... parameters) throws DaoException {
 		try {
-			return update(sql, parameters);
+			return executeUpdate(sql, parameters);
 		} catch (DaoException e) {
-			LOG.error(e(INSERT_ERROR_MESSAGE, sql));
-			throw new DaoException(e(INSERT_ERROR_MESSAGE, sql), e.getCause());
+			LOG.error(e(CREATE_ERROR_MESSAGE, sql));
+			throw new DaoException(e(CREATE_ERROR_MESSAGE, sql), e.getCause());
 		}
 	}
 
-	@TransactionAttribute
 	protected <T> List<T> read(SQL sql, RowMapper<T> rowMapper) throws DaoException {
 		Object[] parameters = null;
 		return read(sql, rowMapper, parameters);
 	}
 
-	@TransactionAttribute
 	protected <T> List<T> read(SQL sql, RowMapper<T> rowMapper, Object... parameters) throws DaoException {
-		LOG.debug("Executing SQL statement: " + sql.getSql());
-
-		PreparedStatement statement = null;
 		try {
-			statement = generatePreparedStatement(sql, parameters);
-			ResultSet result = statement.executeQuery();
-			int rowsExpected = 0;
-			ResultSetExtractor<List<T>> resultSetExtractor = new RowMapperResultSetExtractor<T>(rowMapper, rowsExpected);
-			return resultSetExtractor.extractData(result);
-		} catch (SQLException e) {
-			LOG.error(e(SELECT_ERROR_MESSAGE, sql));
-			throw new DaoException(e(SELECT_ERROR_MESSAGE, sql), e);
-		} catch (ParseException e) {
-			LOG.error(e(SELECT_ERROR_MESSAGE, sql));
-			throw new DaoException(e(SELECT_ERROR_MESSAGE, sql), e);
-		} finally {
-			closeConnection(statement);
+			return executeQuery(sql, rowMapper, parameters);
+		} catch (DaoException e) {
+			LOG.error(e(READ_ERROR_MESSAGE, sql));
+			throw new DaoException(e(READ_ERROR_MESSAGE, sql), e.getCause());
 		}
 	}
 
 	protected ChangeResult update(SQL sql, Object... parameters) throws DaoException {
-		LOG.debug("Executing SQL statement: " + sql.getSql());
-
-		PreparedStatement statement = null;
 		try {
-			statement = generatePreparedStatement(sql, parameters);
-			int rowsAffected = statement.executeUpdate();
-			Id generatedKey = getGeneratedKey(statement);
-			return new ChangeResult(rowsAffected, generatedKey);
-		} catch (SQLException e) {
+			return executeUpdate(sql, parameters);
+		} catch (DaoException e) {
 			LOG.error(e(UPDATE_ERROR_MESSAGE, sql));
-			throw new DaoException(e(UPDATE_ERROR_MESSAGE, sql), e);
-		} finally {
-			closeConnection(statement);
+			throw new DaoException(e(UPDATE_ERROR_MESSAGE, sql), e.getCause());
 		}
 	}
 
 	protected ChangeResult delete(SQL sql, Object... parameters) throws DaoException {
 		try {
-			return update(sql, parameters);
+			return executeUpdate(sql, parameters);
 		} catch (DaoException e) {
 			LOG.error(e(DELETE_ERROR_MESSAGE, sql));
 			throw new DaoException(e(DELETE_ERROR_MESSAGE, sql), e.getCause());
@@ -121,8 +98,41 @@ public abstract class Dao {
 			result.close();
 			return rowCount;
 		} catch (SQLException e) {
-			LOG.error(e(SELECT_ERROR_MESSAGE, sql));
-			throw new DaoException(e(SELECT_ERROR_MESSAGE, sql), e.getCause());
+			LOG.error(e(READ_ERROR_MESSAGE, sql));
+			throw new DaoException(e(READ_ERROR_MESSAGE, sql), e.getCause());
+		} finally {
+			closeConnection(statement);
+		}
+	}
+
+	private <T> List<T> executeQuery(SQL sql, RowMapper<T> rowMapper, Object... parameters) throws DaoException {
+		LOG.debug("Executing SQL statement: " + sql.getSql());
+		PreparedStatement statement = null;
+		try {
+			statement = generatePreparedStatement(sql, parameters);
+			ResultSet result = statement.executeQuery();
+			int rowsExpected = 0;
+			ResultSetExtractor<List<T>> resultSetExtractor = new RowMapperResultSetExtractor<T>(rowMapper, rowsExpected);
+			return resultSetExtractor.extractData(result);
+		} catch (SQLException e) {
+			throw new DaoException(e.getMessage(), e);
+		} catch (ParseException e) {
+			throw new DaoException(e.getMessage(), e);
+		} finally {
+			closeConnection(statement);
+		}
+	}
+
+	private ChangeResult executeUpdate(SQL sql, Object... parameters) throws DaoException {
+		LOG.debug("Executing SQL statement: " + sql.getSql());
+		PreparedStatement statement = null;
+		try {
+			statement = generatePreparedStatement(sql, parameters);
+			int rowsAffected = statement.executeUpdate();
+			Id generatedKey = getGeneratedKey(statement);
+			return new ChangeResult(rowsAffected, generatedKey);
+		} catch (SQLException e) {
+			throw new DaoException(e.getMessage(), e);
 		} finally {
 			closeConnection(statement);
 		}
@@ -189,6 +199,6 @@ public abstract class Dao {
 	}
 
 	private String e(String msg, String sql) {
-		return msg + "[" + sql + "]";
+		return msg + " [" + sql + "]";
 	}
 }

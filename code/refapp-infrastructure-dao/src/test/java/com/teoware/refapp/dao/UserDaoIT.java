@@ -27,7 +27,6 @@ import com.teoware.refapp.dao.dto.CreateUserOutput;
 import com.teoware.refapp.dao.dto.CreateUserPasswordInput;
 import com.teoware.refapp.dao.dto.CreateUserPasswordOutput;
 import com.teoware.refapp.dao.dto.DeleteUserInput;
-import com.teoware.refapp.dao.dto.DeleteUserOutput;
 import com.teoware.refapp.dao.dto.Id;
 import com.teoware.refapp.dao.dto.ReadUserInput;
 import com.teoware.refapp.dao.dto.ReadUserOutput;
@@ -48,6 +47,7 @@ import com.teoware.refapp.model.enums.Gender;
 import com.teoware.refapp.model.enums.Status;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserPassword;
+import com.teoware.refapp.model.user.UserStatus;
 import com.teoware.refapp.model.user.Username;
 import com.teoware.refapp.test.util.TestDataFactory;
 
@@ -204,7 +204,7 @@ public class UserDaoIT {
 	}
 
 	@Test
-	public void testCreateAndReadAllUsersShouldBeThree() throws DaoException {
+	public void testCreateThreeAndReadAllUsersShouldBeThree() throws DaoException {
 		int rowsAffected = 0;
 
 		CreateUserInput createUserInput = TestDataFactory.createCreateUserInputJohn();
@@ -212,43 +212,45 @@ public class UserDaoIT {
 		Id userId = createUserOutput.getUserId();
 		rowsAffected += createUserOutput.getRowsAffected();
 
+		UpdateUserStatusInput updateUserStatusInput = new UpdateUserStatusInput(userId, new UserStatus(Status.ACTIVE,
+				null, null));
+		rowsAffected += userDao.updateUserStatus(updateUserStatusInput).getRowsAffected();
+
 		CreateUserInfoInput createUserInfoInput = TestDataFactory.createCreateUserInfoInputJohn(userId);
 		rowsAffected += userDao.createUserInfo(createUserInfoInput).getRowsAffected();
 
 		CreateUserAddressInput createUserAddressInput = TestDataFactory.createCreateUserAddressInputJohn(userId);
-		CreateUserAddressOutput createUserAddressOutput = userDao.createUserAddress(createUserAddressInput);
-
-		rowsAffected += createUserAddressOutput.getRowsAffected();
+		rowsAffected += userDao.createUserAddress(createUserAddressInput).getRowsAffected();
 
 		createUserInput = TestDataFactory.createCreateUserInputJane();
 		createUserOutput = userDao.createUser(createUserInput);
 		userId = createUserOutput.getUserId();
-
 		rowsAffected += createUserOutput.getRowsAffected();
+
+		updateUserStatusInput.setUserId(userId);
+		rowsAffected += userDao.updateUserStatus(updateUserStatusInput).getRowsAffected();
 
 		createUserInfoInput = TestDataFactory.createCreateUserInfoInputJane(userId);
 		rowsAffected += userDao.createUserInfo(createUserInfoInput).getRowsAffected();
 
 		createUserAddressInput = TestDataFactory.createCreateUserAddressInputJane(userId);
-		createUserAddressOutput = userDao.createUserAddress(createUserAddressInput);
-
-		rowsAffected += createUserAddressOutput.getRowsAffected();
+		rowsAffected += userDao.createUserAddress(createUserAddressInput).getRowsAffected();
 
 		createUserInput = TestDataFactory.createCreateUserInputJonah();
 		createUserOutput = userDao.createUser(createUserInput);
 		userId = createUserOutput.getUserId();
-
 		rowsAffected += createUserOutput.getRowsAffected();
+
+		updateUserStatusInput.setUserId(userId);
+		rowsAffected += userDao.updateUserStatus(updateUserStatusInput).getRowsAffected();
 
 		createUserInfoInput = TestDataFactory.createCreateUserInfoInputJonah(userId);
 		rowsAffected += userDao.createUserInfo(createUserInfoInput).getRowsAffected();
 
 		createUserAddressInput = TestDataFactory.createCreateUserAddressInputJonah(userId);
-		createUserAddressOutput = userDao.createUserAddress(createUserAddressInput);
+		rowsAffected += userDao.createUserAddress(createUserAddressInput).getRowsAffected();
 
-		rowsAffected += createUserAddressOutput.getRowsAffected();
-
-		assertEquals(9, rowsAffected);
+		assertEquals(12, rowsAffected);
 
 		ReadUserOutput readAllOutput = userDao.readAllUsers();
 		List<User> userList = readAllOutput.getUserList();
@@ -258,7 +260,7 @@ public class UserDaoIT {
 	}
 
 	@Test
-	public void testCreateDeleteOneAndReadAllUsersShouldBeTwo() throws DaoException {
+	public void testCreateThreeDeleteOneAndReadAllUsersShouldBeTwo() throws DaoException {
 		int rowsAffected = 0;
 
 		CreateUserInput createUserInput = TestDataFactory.createCreateUserInputJohn();
@@ -266,48 +268,52 @@ public class UserDaoIT {
 		Id userId = createUserOutput.getUserId();
 		rowsAffected += createUserOutput.getRowsAffected();
 
+		UpdateUserStatusInput updateUserStatusInput = new UpdateUserStatusInput(userId, new UserStatus(Status.ACTIVE,
+				null, null));
+		rowsAffected += userDao.updateUserStatus(updateUserStatusInput).getRowsAffected();
+
 		CreateUserInfoInput createUserInfoInput = TestDataFactory.createCreateUserInfoInputJohn(userId);
 		rowsAffected += userDao.createUserInfo(createUserInfoInput).getRowsAffected();
 
 		CreateUserAddressInput createUserAddressInput = TestDataFactory.createCreateUserAddressInputJohn(userId);
-		CreateUserAddressOutput createUserAddressOutput = userDao.createUserAddress(createUserAddressInput);
-
-		rowsAffected += createUserAddressOutput.getRowsAffected();
+		rowsAffected += userDao.createUserAddress(createUserAddressInput).getRowsAffected();
 
 		createUserInput = TestDataFactory.createCreateUserInputJane();
 		createUserOutput = userDao.createUser(createUserInput);
 		userId = createUserOutput.getUserId();
-
 		rowsAffected += createUserOutput.getRowsAffected();
+
+		updateUserStatusInput.setUserId(userId);
+		rowsAffected += userDao.updateUserStatus(updateUserStatusInput).getRowsAffected();
 
 		createUserInfoInput = TestDataFactory.createCreateUserInfoInputJane(userId);
 		rowsAffected += userDao.createUserInfo(createUserInfoInput).getRowsAffected();
 
 		createUserAddressInput = TestDataFactory.createCreateUserAddressInputJane(userId);
-		createUserAddressOutput = userDao.createUserAddress(createUserAddressInput);
-
-		rowsAffected += createUserAddressOutput.getRowsAffected();
+		rowsAffected += userDao.createUserAddress(createUserAddressInput).getRowsAffected();
 
 		createUserInput = TestDataFactory.createCreateUserInputJonah();
 		createUserOutput = userDao.createUser(createUserInput);
 		userId = createUserOutput.getUserId();
-
 		rowsAffected += createUserOutput.getRowsAffected();
+
+		updateUserStatusInput.setUserId(userId);
+		rowsAffected += userDao.updateUserStatus(updateUserStatusInput).getRowsAffected();
 
 		createUserInfoInput = TestDataFactory.createCreateUserInfoInputJonah(userId);
 		rowsAffected += userDao.createUserInfo(createUserInfoInput).getRowsAffected();
 
 		createUserAddressInput = TestDataFactory.createCreateUserAddressInputJonah(userId);
-		createUserAddressOutput = userDao.createUserAddress(createUserAddressInput);
+		rowsAffected += userDao.createUserAddress(createUserAddressInput).getRowsAffected();
 
-		rowsAffected += createUserAddressOutput.getRowsAffected();
+		assertEquals(12, rowsAffected);
 
-		assertEquals(9, rowsAffected);
+		userId = userDao.readUserId("john.doe");
 
-		DeleteUserInput deleteInput = new DeleteUserInput("john.doe");
-		DeleteUserOutput deleteOutput = userDao.deleteUser(deleteInput);
+		DeleteUserInput deleteInput = new DeleteUserInput(userId);
+		rowsAffected = userDao.deleteUser(deleteInput).getRowsAffected();
 
-		assertEquals(1, deleteOutput.getRowsAffected());
+		assertEquals(1, rowsAffected);
 
 		ReadUserOutput readAllOutput = userDao.readAllUsers();
 		List<User> userList = readAllOutput.getUserList();
