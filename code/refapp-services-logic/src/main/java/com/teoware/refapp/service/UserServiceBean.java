@@ -20,6 +20,16 @@ import com.teoware.refapp.dao.dto.CreateUserInput;
 import com.teoware.refapp.dao.dto.CreateUserOutput;
 import com.teoware.refapp.dao.dto.CreateUserPasswordInput;
 import com.teoware.refapp.dao.dto.CreateUserPasswordOutput;
+import com.teoware.refapp.dao.dto.DeleteUserAddressInput;
+import com.teoware.refapp.dao.dto.DeleteUserAddressOutput;
+import com.teoware.refapp.dao.dto.DeleteUserInfoInput;
+import com.teoware.refapp.dao.dto.DeleteUserInfoOutput;
+import com.teoware.refapp.dao.dto.DeleteUserInput;
+import com.teoware.refapp.dao.dto.DeleteUserOutput;
+import com.teoware.refapp.dao.dto.DeleteUserPasswordInput;
+import com.teoware.refapp.dao.dto.DeleteUserPasswordOutput;
+import com.teoware.refapp.dao.dto.DeleteUserStatusInput;
+import com.teoware.refapp.dao.dto.DeleteUserStatusOutput;
 import com.teoware.refapp.dao.dto.Id;
 import com.teoware.refapp.dao.dto.ReadUserInput;
 import com.teoware.refapp.dao.dto.ReadUserOutput;
@@ -29,14 +39,20 @@ import com.teoware.refapp.dao.dto.UpdateUserInfoInput;
 import com.teoware.refapp.dao.dto.UpdateUserInfoOutput;
 import com.teoware.refapp.dao.dto.UpdateUserInput;
 import com.teoware.refapp.dao.dto.UpdateUserOutput;
+import com.teoware.refapp.dao.dto.UpdateUserPasswordInput;
+import com.teoware.refapp.dao.dto.UpdateUserPasswordOutput;
 import com.teoware.refapp.dao.dto.UpdateUserStatusInput;
 import com.teoware.refapp.dao.dto.UpdateUserStatusOutput;
 import com.teoware.refapp.model.Header;
 import com.teoware.refapp.model.common.OperationResult;
 import com.teoware.refapp.model.enums.Result;
+import com.teoware.refapp.model.enums.Status;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserPassword;
+import com.teoware.refapp.model.user.UserStatus;
 import com.teoware.refapp.model.user.Username;
+import com.teoware.refapp.service.dto.ActivateUserRequest;
+import com.teoware.refapp.service.dto.ActivateUserResponse;
 import com.teoware.refapp.service.dto.ChangeUserPasswordRequest;
 import com.teoware.refapp.service.dto.ChangeUserPasswordResponse;
 import com.teoware.refapp.service.dto.ChangeUserRequest;
@@ -48,6 +64,8 @@ import com.teoware.refapp.service.dto.FindUserResponse;
 import com.teoware.refapp.service.dto.ListUsersResponse;
 import com.teoware.refapp.service.dto.RegisterUserRequest;
 import com.teoware.refapp.service.dto.RegisterUserResponse;
+import com.teoware.refapp.service.dto.SuspendUserRequest;
+import com.teoware.refapp.service.dto.SuspendUserResponse;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
@@ -105,14 +123,68 @@ public class UserServiceBean implements UserService {
 	}
 
 	@Override
+	public ActivateUserResponse activateUser(ActivateUserRequest request) throws ServiceException {
+		LOG.info(SERVICE_NAME + ": Activate user operation invoked.");
+
+		try {
+			Header header = request.getHeader();
+			Username username = request.getBody();
+
+			dao.persistConnection();
+
+			Id userId = dao.readUserId(username.getUsername());
+
+			UpdateUserStatusInput updateUserStatusInput = new UpdateUserStatusInput(userId, new UserStatus(
+					Status.ACTIVE, null, null));
+			UpdateUserStatusOutput updateUserStatusOutput = dao.updateUserStatus(updateUserStatusInput);
+			int rowsAffected = updateUserStatusOutput.getRowsAffected();
+
+			return new ActivateUserResponse(header, new OperationResult(Result.SUCCESS, "<" + rowsAffected
+					+ "> rows changed"));
+		} catch (DaoException e) {
+			LOG.error(SERVICE_NAME + ": Activate user operation failed.");
+			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
+		} finally {
+			dao.terminateConnection();
+		}
+	}
+
+	@Override
+	public SuspendUserResponse suspendUser(SuspendUserRequest request) throws ServiceException {
+		LOG.info(SERVICE_NAME + ": Suspend user operation invoked.");
+
+		try {
+			Header header = request.getHeader();
+			Username username = request.getBody();
+
+			dao.persistConnection();
+
+			Id userId = dao.readUserId(username.getUsername());
+
+			UpdateUserStatusInput updateUserStatusInput = new UpdateUserStatusInput(userId, new UserStatus(
+					Status.SUSPENDED, null, null));
+			UpdateUserStatusOutput updateUserStatusOutput = dao.updateUserStatus(updateUserStatusInput);
+			int rowsAffected = updateUserStatusOutput.getRowsAffected();
+
+			return new SuspendUserResponse(header, new OperationResult(Result.SUCCESS, "<" + rowsAffected
+					+ "> rows changed"));
+		} catch (DaoException e) {
+			LOG.error(SERVICE_NAME + ": Suspend user operation failed.");
+			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
+		} finally {
+			dao.terminateConnection();
+		}
+	}
+
+	@Override
 	public FindUserResponse findUser(FindUserRequest request) throws ServiceException {
 		LOG.info(SERVICE_NAME + ": Find user operation invoked.");
 
 		try {
 			Header header = request.getHeader();
 			Username username = request.getBody();
-			ReadUserInput readUserInput = new ReadUserInput(username);
 
+			ReadUserInput readUserInput = new ReadUserInput(username);
 			ReadUserOutput readUserOutput = dao.readUser(readUserInput);
 			List<User> userList = readUserOutput.getUserList();
 
@@ -120,8 +192,10 @@ public class UserServiceBean implements UserService {
 
 			return new FindUserResponse(header, userList.get(0));
 		} catch (DaoException e) {
-			LOG.error(SERVICE_NAME + ": Register user operation failed.");
+			LOG.error(SERVICE_NAME + ": Find user operation failed.");
 			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
+		} finally {
+			dao.terminateConnection();
 		}
 	}
 
@@ -136,6 +210,8 @@ public class UserServiceBean implements UserService {
 		} catch (DaoException e) {
 			LOG.error(SERVICE_NAME + ": List users operation failed.");
 			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
+		} finally {
+			dao.terminateConnection();
 		}
 	}
 
@@ -174,7 +250,7 @@ public class UserServiceBean implements UserService {
 			return new ChangeUserResponse(header, new OperationResult(Result.SUCCESS, "<" + rowsAffected
 					+ "> rows changed"));
 		} catch (DaoException e) {
-			LOG.error(SERVICE_NAME + ": Register user operation failed.");
+			LOG.error(SERVICE_NAME + ": Change user operation failed.");
 			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
 		} finally {
 			dao.terminateConnection();
@@ -184,12 +260,69 @@ public class UserServiceBean implements UserService {
 	@Override
 	public ChangeUserPasswordResponse changeUserPassword(ChangeUserPasswordRequest request) throws ServiceException {
 		LOG.info(SERVICE_NAME + ": Change user password operation invoked.");
-		return null;
+
+		try {
+			Header header = request.getHeader();
+			UserPassword body = request.getBody();
+			Username username = request.getUsername();
+
+			Id userId = dao.readUserId(username.getUsername());
+
+			UpdateUserPasswordInput input = new UpdateUserPasswordInput(userId, body);
+			UpdateUserPasswordOutput output = dao.updateUserPassword(input);
+			int rowsAffected = output.getRowsAffected();
+
+			return new ChangeUserPasswordResponse(header, new OperationResult(Result.SUCCESS, "<" + rowsAffected
+					+ "> rows changed"));
+		} catch (DaoException e) {
+			LOG.error(SERVICE_NAME + ": Change user password operation failed.");
+			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
+		} finally {
+			dao.terminateConnection();
+		}
 	}
 
 	@Override
 	public DeleteUserResponse deleteUser(DeleteUserRequest request) throws ServiceException {
 		LOG.info(SERVICE_NAME + ": Delete user operation invoked.");
-		return null;
+
+		try {
+			int rowsAffected = 0;
+
+			Header header = request.getHeader();
+			Username username = request.getBody();
+
+			dao.persistConnection();
+
+			Id userId = dao.readUserId(username.getUsername());
+
+			DeleteUserPasswordInput deleteUserPasswordInput = new DeleteUserPasswordInput(userId);
+			DeleteUserPasswordOutput deleteUserPasswordOutput = dao.deleteUserPassword(deleteUserPasswordInput);
+			rowsAffected += deleteUserPasswordOutput.getRowsAffected();
+
+			DeleteUserAddressInput deleteUserAddressInput = new DeleteUserAddressInput(userId);
+			DeleteUserAddressOutput deleteUserAddressOutput = dao.deleteUserAddress(deleteUserAddressInput);
+			rowsAffected += deleteUserAddressOutput.getRowsAffected();
+
+			DeleteUserStatusInput deleteUserStatusInput = new DeleteUserStatusInput(userId);
+			DeleteUserStatusOutput deleteUserStatusOutput = dao.deleteUserStatus(deleteUserStatusInput);
+			rowsAffected += deleteUserStatusOutput.getRowsAffected();
+
+			DeleteUserInfoInput deleteUserInfoInput = new DeleteUserInfoInput(userId);
+			DeleteUserInfoOutput deleteUserInfoOutput = dao.deleteUserInfo(deleteUserInfoInput);
+			rowsAffected += deleteUserInfoOutput.getRowsAffected();
+
+			DeleteUserInput deleteUserInput = new DeleteUserInput(userId);
+			DeleteUserOutput deleteUserOutput = dao.deleteUser(deleteUserInput);
+			rowsAffected += deleteUserOutput.getRowsAffected();
+
+			return new DeleteUserResponse(header, new OperationResult(Result.SUCCESS, "<" + rowsAffected
+					+ "> rows deleted"));
+		} catch (DaoException e) {
+			LOG.error(SERVICE_NAME + ": Delete user operation failed.");
+			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
+		} finally {
+			dao.terminateConnection();
+		}
 	}
 }
