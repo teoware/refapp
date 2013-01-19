@@ -144,11 +144,12 @@ public class UserDaoIT {
 		user.getUserAddress().setPostalCode("1122");
 		user.getUserStatus().setStatus(Status.ACTIVE);
 
-		UpdateUserInput updateUserInput = new UpdateUserInput(null, user.getUsername());
-		UpdateUserOutput updateUserOutput = userDao.updateUser(updateUserInput);
-		userId = updateUserOutput.getUserId();
+		userId = userDao.readUserId(user.getUsername().getUsername());
 
-		assertEquals(0, updateUserOutput.getRowsAffected());
+		UpdateUserInput updateUserInput = new UpdateUserInput(userId, user.getUsername());
+		UpdateUserOutput updateUserOutput = userDao.updateUser(updateUserInput);
+
+		assertEquals(1, updateUserOutput.getRowsAffected());
 
 		UpdateUserInfoInput updateUserInfoInput = new UpdateUserInfoInput(userId, user.getUserInfo());
 		UpdateUserInfoOutput updateUserInfoOutput = userDao.updateUserInfo(updateUserInfoInput);

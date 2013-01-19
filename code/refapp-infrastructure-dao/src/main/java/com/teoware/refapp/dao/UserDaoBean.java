@@ -209,12 +209,18 @@ public class UserDaoBean extends Dao implements UserDao {
 	@Override
 	public UpdateUserOutput updateUser(UpdateUserInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Update user operation invoked.");
-
 		int rowsAffected = 0;
 
-		Id userId = readUserId(input.getUsername().getUsername());
+		if (input.getUsername() != null) {
+			SQL sql = new SQL.Builder().doUpdate(USERS_TABLE).setColumn(USERNAME_COLUMN_NAME).where(ID_COLUMN_NAME)
+					.build();
+			Object[] parameters = DaoHelper.generateArray(input.getUsername().getUsername(), input.getUserId().getId());
+			ChangeResult changeResult = super.update(sql, parameters);
 
-		return new UpdateUserOutput(userId, rowsAffected);
+			rowsAffected = changeResult.getRowsAffected();
+		}
+
+		return new UpdateUserOutput(rowsAffected);
 	}
 
 	@Override

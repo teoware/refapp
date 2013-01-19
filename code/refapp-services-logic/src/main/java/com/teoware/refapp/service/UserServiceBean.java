@@ -23,6 +23,14 @@ import com.teoware.refapp.dao.dto.CreateUserPasswordOutput;
 import com.teoware.refapp.dao.dto.Id;
 import com.teoware.refapp.dao.dto.ReadUserInput;
 import com.teoware.refapp.dao.dto.ReadUserOutput;
+import com.teoware.refapp.dao.dto.UpdateUserAddressInput;
+import com.teoware.refapp.dao.dto.UpdateUserAddressOutput;
+import com.teoware.refapp.dao.dto.UpdateUserInfoInput;
+import com.teoware.refapp.dao.dto.UpdateUserInfoOutput;
+import com.teoware.refapp.dao.dto.UpdateUserInput;
+import com.teoware.refapp.dao.dto.UpdateUserOutput;
+import com.teoware.refapp.dao.dto.UpdateUserStatusInput;
+import com.teoware.refapp.dao.dto.UpdateUserStatusOutput;
 import com.teoware.refapp.model.Header;
 import com.teoware.refapp.model.common.OperationResult;
 import com.teoware.refapp.model.enums.Result;
@@ -134,7 +142,43 @@ public class UserServiceBean implements UserService {
 	@Override
 	public ChangeUserResponse changeUser(ChangeUserRequest request) throws ServiceException {
 		LOG.info(SERVICE_NAME + ": Change user operation invoked.");
-		return null;
+
+		try {
+			int rowsAffected = 0;
+
+			Header header = request.getHeader();
+			User user = request.getBody();
+
+			dao.persistConnection();
+
+			Id userId = dao.readUserId(user.getUsername().getUsername());
+
+			UpdateUserInput updateUserInput = new UpdateUserInput(userId, request.getUsername());
+			UpdateUserOutput updateUserOutput = dao.updateUser(updateUserInput);
+			rowsAffected += updateUserOutput.getRowsAffected();
+
+			UpdateUserInfoInput updateUserInfoInput = new UpdateUserInfoInput(userId, request.getBody().getUserInfo());
+			UpdateUserInfoOutput updateUserInfoOutput = dao.updateUserInfo(updateUserInfoInput);
+			rowsAffected += updateUserInfoOutput.getRowsAffected();
+
+			UpdateUserStatusInput updateUserStatusInput = new UpdateUserStatusInput(userId, request.getBody()
+					.getUserStatus());
+			UpdateUserStatusOutput updateUserStatusOutput = dao.updateUserStatus(updateUserStatusInput);
+			rowsAffected += updateUserStatusOutput.getRowsAffected();
+
+			UpdateUserAddressInput updateUserAddressInput = new UpdateUserAddressInput(userId, request.getBody()
+					.getUserAddress());
+			UpdateUserAddressOutput updateUserAddressOutput = dao.updateUserAddress(updateUserAddressInput);
+			rowsAffected += updateUserAddressOutput.getRowsAffected();
+
+			return new ChangeUserResponse(header, new OperationResult(Result.SUCCESS, "<" + rowsAffected
+					+ "> rows changed"));
+		} catch (DaoException e) {
+			LOG.error(SERVICE_NAME + ": Register user operation failed.");
+			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
+		} finally {
+			dao.terminateConnection();
+		}
 	}
 
 	@Override
