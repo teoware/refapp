@@ -8,9 +8,11 @@
 
 <ui:composition template="templates/common.xhtml">
 	
+	<ui:param name="controller" value="#{defaultControllerBean}" />
+	
 	<ui:define name="content">
 		<a href="#{request.contextPath}/">&larr; Home</a>
-		<h2>Users</h2>
+		<h2>#{controller.pageTitle}</h2>
 		<ul>
 			<li><a href="register_user.xhtml">Register</a></li>
 			<li><a href="list_users.xhtml">List</a></li>

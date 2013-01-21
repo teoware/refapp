@@ -1,5 +1,7 @@
 package com.teoware.refapp.web.consumer;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.inject.Inject;
 
 import com.teoware.refapp.model.user.Username;
@@ -21,6 +23,7 @@ import com.teoware.refapp.service.dto.SuspendUserRequest;
 import com.teoware.refapp.service.dto.SuspendUserResponse;
 import com.teoware.refapp.service.facade.UserServiceFacade;
 import com.teoware.refapp.service.validation.ValidationException;
+import com.teoware.refapp.util.PasswordHandler;
 import com.teoware.refapp.web.consumer.error.ErrorHandler;
 import com.teoware.refapp.web.consumer.error.ValidationHandler;
 import com.teoware.refapp.web.consumer.vo.ActivateUserRequestVO;
@@ -47,15 +50,32 @@ public class UserServiceConsumerBean implements UserServiceConsumer {
 	@Override
 	public RegisterUserResponseVO registerUser(RegisterUserRequestVO vo) {
 		try {
-			RegisterUserRequest request = new RegisterUserRequest(vo.getUser(), vo.getUserPassword());
+			RegisterUserRequest request = processRegisterUserRequest(vo);
+
 			RegisterUserResponse response = facade.registerUser(request);
 			return new RegisterUserResponseVO(response.getBody());
 		} catch (ValidationException e) {
 			ValidationHandler.handle(e);
 		} catch (ServiceException e) {
 			ErrorHandler.handle(e);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return null; // For compiler
+	}
+
+	private RegisterUserRequest processRegisterUserRequest(RegisterUserRequestVO vo)
+			throws UnsupportedEncodingException {
+		RegisterUserRequest request = new RegisterUserRequest(vo.getUser(), vo.getUserPassword());
+
+		String salt = PasswordHandler.generateSalt();
+		request.getUserPassword().setSalt(salt);
+
+		String encryptedPassword = PasswordHandler.encryptPassword(vo.getUserPassword().getPassword(), salt);
+		request.getUserPassword().setPassword(encryptedPassword);
+
+		return request;
 	}
 
 	@Override

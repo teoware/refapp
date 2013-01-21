@@ -8,30 +8,65 @@
 
 <ui:composition template="templates/common.xhtml">
 
-	<ui:param name="bean" value="#{registerUserControllerBean}" />
-	
-	<ui:define name="title">#{bean.title}</ui:define>
+	<ui:param name="controller" value="#{registerUserControllerBean}" />
+	<ui:param name="vo" value="#{controller.vo}" />
 	
 	<ui:define name="content">
 		<a href="#{request.contextPath}/users.xhtml">&larr; Home</a>
-		<h2>Register user</h2>
-		<h:form>
-			<h:panelGrid>
-				<h:outputLabel value="Username: " style="font-weight:bold" />
-				<h:inputText value="#{bean.username}" />
-				<h:outputLabel value="First name: " style="font-weight:bold" />
-				<h:inputText value="#{bean.firstName}" />
-				<h:outputLabel value="Last name: " style="font-weight:bold" />
-				<h:inputText value="#{bean.lastName}" />
-				<h:outputLabel value="Email: " style="font-weight:bold" />
-				<h:inputText value="#{bean.email}" />
-				<h:outputLabel value="Phone: " style="font-weight:bold" />
-				<h:inputText value="#{bean.phone}" />
-				<h:commandButton value="Register" type="submit"
-					action="#{bean.onClickRegisterButton}" />
+		<h2>#{controller.pageTitle}</h2>
+		<h:form id="registerUserForm">
+			<h:panelGrid columnClasses="formLabel, formItem" columns="2">
+				<h:outputLabel id="usernameLabel" for="username" value="Username: " />
+				<h:inputText id="username" value="#{vo.user.username.username}" />
+				
+				<h:outputLabel id="passwordLabel" for="password" value="Password: " />
+				<h:inputText id="password" value="#{vo.userPassword.password}" />
+				
+				<h:outputLabel id="confirmPasswordLabel" for="confirmPassword" value="Confirm password: " />
+				<h:inputText id="confirmPassword" value="#{controller.confirmPassword}" />
+				
+				<h:outputText style="padding: 5px" />
+				<h:outputText style="padding: 5px" />
+
+				<h:outputLabel id="firstNameLabel" for="firstName" value="First name: " />
+				<h:inputText id="firstName" value="#{vo.user.userInfo.firstName}" />
+				
+				<h:outputLabel id="lastNameLabel" for="lastName" value="Last name: " />
+				<h:inputText id="lastName" value="#{vo.user.userInfo.lastName}" />
+				
+				<h:outputLabel id="emailLabel" for="email" value="Email: " />
+				<h:inputText id="email" value="#{vo.user.userInfo.email}" />
+				
+				<h:outputLabel id="phoneLabel" for="phone" value="Phone: " />
+				<h:inputText id="phone" value="#{vo.user.userInfo.phone}" />
+				
+				<h:outputText style="padding: 5px" />
+				<h:outputText style="padding: 5px" />
+			
+				<h:outputLabel id="addressLabel" for="address" value="Address: " />
+				<h:inputText id="address" value="#{vo.user.userAddress.address}" />
+				
+				<h:outputLabel id="postalCodeLabel" for="postalCode" value="Postal code: " />
+				<h:inputText id="postalCode" value="#{vo.user.userAddress.postalCode}" />
+				
+				<h:outputLabel id="municipalityLabel" for="municipality" value="Municipality: " />
+				<h:inputText id="municipality" value="#{vo.user.userAddress.municipality}" />
+				
+				<h:outputLabel id="regionLabel" for="region" value="Region: " />
+				<h:inputText id="region" value="#{vo.user.userAddress.region}" />
+				
+				<h:outputLabel id="countryLabel" for="country" value="Country: " />
+				<h:inputText id="country" value="#{vo.user.userAddress.country}" />
+				
+				<h:outputText style="padding: 5px" />
+				<h:outputText style="padding: 5px" />
+			
+				<f:facet name="footer">
+					<h:commandButton id="registerButton" type="submit" value="Register" action="#{controller.onClickRegisterButton}" />
+				</f:facet>
 			</h:panelGrid>
 		</h:form>
-		<h4>Debug: #{bean.debug}</h4>
+		<h4>Debug: #{controller.debug}</h4>
 	</ui:define>
 
 </ui:composition>

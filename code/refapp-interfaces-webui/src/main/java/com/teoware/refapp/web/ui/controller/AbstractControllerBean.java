@@ -1,21 +1,28 @@
 package com.teoware.refapp.web.ui.controller;
 
+import static com.teoware.refapp.web.ui.util.Globalization.spacer;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-public abstract class AbstractControllerBean {
+import com.teoware.refapp.web.ui.util.Globalization;
 
-	public static final String DEFAULT_TITLE = "RefApp";
-	public static final String TITLE_SPACER = " - ";
+public abstract class AbstractControllerBean {
 
 	protected String debug;
 
 	public String getTitle() {
-		return DEFAULT_TITLE;
+		return dict("app.title");
 	}
 
-	public String getTitle(String subTitle) {
-		return DEFAULT_TITLE + TITLE_SPACER + subTitle;
+	public abstract String getPageTitle();
+
+	public String getFullTitle() {
+		return getTitle() + spacer + getPageTitle();
+	}
+
+	public String getPageFooter() {
+		return dict("page.common.footer");
 	}
 
 	protected String getStackTrace(Exception e) {
@@ -31,5 +38,9 @@ public abstract class AbstractControllerBean {
 
 	public void setDebug(String debug) {
 		this.debug = debug;
+	}
+
+	public String dict(String key) {
+		return Globalization.dict(key);
 	}
 }

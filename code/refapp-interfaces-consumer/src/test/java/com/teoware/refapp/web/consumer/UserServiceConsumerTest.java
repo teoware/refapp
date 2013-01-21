@@ -1,19 +1,26 @@
 package com.teoware.refapp.web.consumer;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
+import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
+import com.teoware.refapp.model.user.UserPassword;
 import com.teoware.refapp.service.ServiceException;
 import com.teoware.refapp.service.dto.FindUserRequest;
 import com.teoware.refapp.service.dto.FindUserResponse;
@@ -22,9 +29,12 @@ import com.teoware.refapp.service.dto.RegisterUserRequest;
 import com.teoware.refapp.service.dto.RegisterUserResponse;
 import com.teoware.refapp.service.facade.UserServiceFacade;
 import com.teoware.refapp.service.validation.ValidationException;
-import com.teoware.refapp.web.consumer.vo.RegisterUserRequestVO;
+import com.teoware.refapp.util.PasswordHandler;
 import com.teoware.refapp.web.consumer.vo.FindUserRequestVO;
+import com.teoware.refapp.web.consumer.vo.RegisterUserRequestVO;
 
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(PasswordHandler.class)
 @Category(com.teoware.refapp.test.UnitTestGroup.class)
 public class UserServiceConsumerTest {
 
@@ -40,10 +50,15 @@ public class UserServiceConsumerTest {
 	}
 
 	@Test
-	public void testRegisterUserIsSuccessful() throws ParseException, ValidationException, ServiceException {
+	public void testRegisterUserIsSuccessful() throws ParseException, ValidationException, ServiceException,
+			UnsupportedEncodingException {
 		when(serviceFacade.registerUser(any(RegisterUserRequest.class))).thenReturn(mock(RegisterUserResponse.class));
+		RegisterUserRequestVO vo = mock(RegisterUserRequestVO.class);
+		when(vo.getUserPassword()).thenReturn(mock(UserPassword.class));
+		mockStatic(PasswordHandler.class);
+		when(PasswordHandler.encryptPassword(anyString(), anyString())).thenReturn("abcd");
 
-		serviceConsumer.registerUser(mock(RegisterUserRequestVO.class));
+		serviceConsumer.registerUser(vo);
 
 		verify(serviceFacade).registerUser(any(RegisterUserRequest.class));
 	}

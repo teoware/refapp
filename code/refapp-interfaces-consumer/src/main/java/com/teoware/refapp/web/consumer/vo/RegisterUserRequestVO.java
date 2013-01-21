@@ -8,6 +8,9 @@ public class RegisterUserRequestVO {
 	private User user;
 	private UserPassword userPassword;
 
+	public RegisterUserRequestVO() {
+	}
+
 	public RegisterUserRequestVO(User user, UserPassword userPassword) {
 		this.user = user;
 		this.userPassword = userPassword;

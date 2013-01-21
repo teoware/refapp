@@ -22,8 +22,6 @@ public class ListUsersControllerBean extends AbstractControllerBean implements S
 
 	private static final Logger LOG = LoggerFactory.getLogger(ListUsersControllerBean.class);
 
-	private static final String PAGE_TITLE = "List users";
-
 	private List<User> userList;
 
 	@Inject
@@ -41,7 +39,7 @@ public class ListUsersControllerBean extends AbstractControllerBean implements S
 	}
 
 	@Override
-	public String getTitle() {
-		return super.getTitle(PAGE_TITLE);
+	public String getPageTitle() {
+		return super.dict("page.list_users.title");
 	}
 }

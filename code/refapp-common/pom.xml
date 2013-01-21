@@ -54,8 +54,8 @@
 		
 		<!-- Security -->
 		<dependency>
-			<groupId>org.jasypt</groupId>
-			<artifactId>jasypt</artifactId>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk16</artifactId>
 		</dependency>
 		
 		<dependency>

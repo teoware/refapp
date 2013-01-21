@@ -6,8 +6,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.teoware.refapp.web.ui.controller.AbstractControllerBean;
-
 public class AbstractControllerBeanTest {
 
 	private AbstractControllerBean controller;
@@ -15,6 +13,10 @@ public class AbstractControllerBeanTest {
 	@Before
 	public void setUp() throws Exception {
 		controller = new AbstractControllerBean() {
+			@Override
+			public String getPageTitle() {
+				return "";
+			}
 		};
 	}
 

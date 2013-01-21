@@ -2,45 +2,45 @@ package com.teoware.refapp.web.ui.controller;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.web.consumer.UserServiceConsumer;
-import com.teoware.refapp.web.consumer.vo.FindUserResponseVO;
 import com.teoware.refapp.web.consumer.vo.FindUserRequestVO;
+import com.teoware.refapp.web.consumer.vo.FindUserResponseVO;
 
 @Named
 @RequestScoped
 public class FindUserControllerBean extends AbstractControllerBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private static final String PAGE_TITLE = "Find user";
 
-	private String username;
+	private FindUserRequestVO vo;
 	private User user;
 
 	@Inject
 	UserServiceConsumer consumer;
 
+	@PostConstruct
+	private void init() {
+		setVo(new FindUserRequestVO());
+	}
+
 	public void onClickFindButton() {
 		setDebug("onClickFindButton");
-		FindUserRequestVO vo = createFindUserRequest();
 		FindUserResponseVO responseVO = consumer.findUser(vo);
 		user = responseVO.getUser();
 	}
 
-	private FindUserRequestVO createFindUserRequest() {
-		return new FindUserRequestVO(this.username);
+	public FindUserRequestVO getVo() {
+		return vo;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
+	public void setVo(FindUserRequestVO vo) {
+		this.vo = vo;
 	}
 
 	public User getUser() {
@@ -56,7 +56,7 @@ public class FindUserControllerBean extends AbstractControllerBean implements Se
 	}
 
 	@Override
-	public String getTitle() {
-		return super.getTitle(PAGE_TITLE);
+	public String getPageTitle() {
+		return super.dict("page.find_user.title");
 	}
 }

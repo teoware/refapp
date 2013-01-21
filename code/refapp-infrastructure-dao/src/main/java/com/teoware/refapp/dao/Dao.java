@@ -150,7 +150,7 @@ public abstract class Dao {
 	}
 
 	protected Connection createOrReuseConnection() throws SQLException {
-		if (connection == null) {
+		if (connection == null || connection.isClosed()) {
 			connection = ConnectionHandler.createConnection(dataSource);
 		}
 		return connection;
