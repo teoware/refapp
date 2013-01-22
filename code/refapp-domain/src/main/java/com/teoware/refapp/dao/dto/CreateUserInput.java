@@ -1,6 +1,6 @@
 package com.teoware.refapp.dao.dto;
 
-import com.teoware.refapp.model.user.Username;
+import com.teoware.refapp.model.common.Username;
 
 public class CreateUserInput {
 

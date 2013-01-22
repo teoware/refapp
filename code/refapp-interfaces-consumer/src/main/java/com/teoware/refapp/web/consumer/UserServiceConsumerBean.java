@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException;
 
 import javax.inject.Inject;
 
-import com.teoware.refapp.model.user.Username;
+import com.teoware.refapp.model.common.Username;
 import com.teoware.refapp.service.ServiceException;
 import com.teoware.refapp.service.dto.ActivateUserRequest;
 import com.teoware.refapp.service.dto.ActivateUserResponse;

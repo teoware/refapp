@@ -40,11 +40,11 @@ import com.teoware.refapp.dao.dto.UpdateUserStatusInput;
 import com.teoware.refapp.dao.dto.UpdateUserStatusOutput;
 import com.teoware.refapp.dao.itest.mock.UserDaoMock;
 import com.teoware.refapp.dao.itest.util.TestDataSourceHandler;
+import com.teoware.refapp.model.common.Username;
 import com.teoware.refapp.model.enums.Gender;
 import com.teoware.refapp.model.enums.Status;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserPassword;
-import com.teoware.refapp.model.user.Username;
 import com.teoware.refapp.test.util.TestDataFactory;
 
 @Category(com.teoware.refapp.test.IntegrationTestGroup.class)
@@ -79,7 +79,7 @@ public class UserDaoIT {
 		try {
 			CreateUserInput createUserInput = TestDataFactory.createCreateUserInputJohn();
 			CreateUserOutput createUserOutput = userDao.createUser(createUserInput);
-			Id userId = createUserOutput.getUserId();
+			Id userId = createUserOutput.getId();
 
 			assertEquals(1, createUserOutput.getRowsAffected());
 
@@ -114,7 +114,7 @@ public class UserDaoIT {
 		try {
 			CreateUserInput createUserInput = TestDataFactory.createCreateUserInputJane();
 			CreateUserOutput createUserOutput = userDao.createUser(createUserInput);
-			Id userId = createUserOutput.getUserId();
+			Id userId = createUserOutput.getId();
 
 			assertEquals(1, createUserOutput.getRowsAffected());
 
@@ -192,12 +192,12 @@ public class UserDaoIT {
 			assertEquals(1, createOutput.getRowsAffected());
 
 			UserPassword userPwd = new UserPassword("jonahsPassword", "jonahsPasswordSalt");
-			CreateUserPasswordInput createPwdInput = new CreateUserPasswordInput(createOutput.getUserId(), userPwd);
+			CreateUserPasswordInput createPwdInput = new CreateUserPasswordInput(createOutput.getId(), userPwd);
 			CreateUserPasswordOutput createPwdOutput = userDao.createUserPassword(createPwdInput);
 
 			assertEquals(1, createPwdOutput.getRowsAffected());
 
-			ReadUserPasswordInput readInput = new ReadUserPasswordInput("jonah.doe");
+			ReadUserPasswordInput readInput = new ReadUserPasswordInput(new Username("jonah.doe"));
 			ReadUserPasswordOutput readOutput = userDao.readUserPassword(readInput);
 			List<UserPassword> userPasswordList = readOutput.getUserPasswordList();
 
@@ -221,7 +221,7 @@ public class UserDaoIT {
 
 			CreateUserInput createUserInput = TestDataFactory.createCreateUserInputJohn();
 			CreateUserOutput createUserOutput = userDao.createUser(createUserInput);
-			Id userId = createUserOutput.getUserId();
+			Id userId = createUserOutput.getId();
 			rowsAffected += createUserOutput.getRowsAffected();
 
 			CreateUserDetailsInput createUserInfoInput = TestDataFactory.createCreateUserDetailsInputJohn(userId);
@@ -234,7 +234,7 @@ public class UserDaoIT {
 
 			createUserInput = TestDataFactory.createCreateUserInputJane();
 			createUserOutput = userDao.createUser(createUserInput);
-			userId = createUserOutput.getUserId();
+			userId = createUserOutput.getId();
 
 			rowsAffected += createUserOutput.getRowsAffected();
 
@@ -248,7 +248,7 @@ public class UserDaoIT {
 
 			createUserInput = TestDataFactory.createCreateUserInputJonah();
 			createUserOutput = userDao.createUser(createUserInput);
-			userId = createUserOutput.getUserId();
+			userId = createUserOutput.getId();
 
 			rowsAffected += createUserOutput.getRowsAffected();
 
@@ -280,7 +280,7 @@ public class UserDaoIT {
 
 			CreateUserInput createUserInput = TestDataFactory.createCreateUserInputJohn();
 			CreateUserOutput createUserOutput = userDao.createUser(createUserInput);
-			Id userId = createUserOutput.getUserId();
+			Id userId = createUserOutput.getId();
 			rowsAffected += createUserOutput.getRowsAffected();
 
 			CreateUserDetailsInput createUserInfoInput = TestDataFactory.createCreateUserDetailsInputJohn(userId);
@@ -293,7 +293,7 @@ public class UserDaoIT {
 
 			createUserInput = TestDataFactory.createCreateUserInputJane();
 			createUserOutput = userDao.createUser(createUserInput);
-			userId = createUserOutput.getUserId();
+			userId = createUserOutput.getId();
 
 			rowsAffected += createUserOutput.getRowsAffected();
 
@@ -307,7 +307,7 @@ public class UserDaoIT {
 
 			createUserInput = TestDataFactory.createCreateUserInputJonah();
 			createUserOutput = userDao.createUser(createUserInput);
-			userId = createUserOutput.getUserId();
+			userId = createUserOutput.getId();
 
 			rowsAffected += createUserOutput.getRowsAffected();
 

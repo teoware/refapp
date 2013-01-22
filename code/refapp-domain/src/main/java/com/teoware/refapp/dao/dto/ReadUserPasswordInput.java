@@ -1,21 +1,23 @@
 package com.teoware.refapp.dao.dto;
 
+import com.teoware.refapp.model.common.Username;
+
 public class ReadUserPasswordInput {
 
-	private String userName;
+	private Username username;
 
 	public ReadUserPasswordInput() {
 	}
 
-	public ReadUserPasswordInput(String userName) {
-		this.userName = userName;
+	public ReadUserPasswordInput(Username username) {
+		this.username = username;
 	}
 
-	public String getUserName() {
-		return userName;
+	public Username getUsername() {
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(Username username) {
+		this.username = username;
 	}
 }

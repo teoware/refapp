@@ -4,6 +4,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import com.teoware.refapp.model.base.BaseBody;
+import com.teoware.refapp.model.common.Username;
 
 public class User extends BaseBody {
 

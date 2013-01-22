@@ -1,4 +1,4 @@
-package com.teoware.refapp.model.user;
+package com.teoware.refapp.model.common;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;

@@ -2,25 +2,17 @@ package com.teoware.refapp.dao.dto;
 
 import com.teoware.refapp.model.user.UserDetails;
 
-public class UpdateUserDetailsInput {
+public class UpdateUserDetailsInput extends ChangeInput {
 
-	private Id userId;
 	private UserDetails userDetails;
 
 	public UpdateUserDetailsInput() {
+		super();
 	}
 
-	public UpdateUserDetailsInput(Id userId, UserDetails userDetails) {
-		this.userId = userId;
+	public UpdateUserDetailsInput(Id id, UserDetails userDetails) {
+		super(id);
 		this.userDetails = userDetails;
-	}
-
-	public Id getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Id userId) {
-		this.userId = userId;
 	}
 
 	public UserDetails getUserDetails() {

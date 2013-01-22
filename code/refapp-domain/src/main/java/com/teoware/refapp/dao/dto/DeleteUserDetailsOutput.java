@@ -1,14 +1,11 @@
 package com.teoware.refapp.dao.dto;
 
-public class DeleteUserDetailsOutput {
+public class DeleteUserDetailsOutput extends ChangeOutput {
 
-	private int rowsAffected;
-
-	public DeleteUserDetailsOutput(int rowsAffected) {
-		this.rowsAffected = rowsAffected;
+	public DeleteUserDetailsOutput() {
 	}
 
-	public int getRowsAffected() {
-		return rowsAffected;
+	public DeleteUserDetailsOutput(int rowsAffected) {
+		super(rowsAffected);
 	}
 }

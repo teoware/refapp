@@ -1,14 +1,12 @@
 package com.teoware.refapp.dao.dto;
 
-public class UpdateUserPasswordOutput {
+public class UpdateUserPasswordOutput extends ChangeOutput {
 
-	private int rowsAffected;
-
-	public UpdateUserPasswordOutput(int rowsAffected) {
-		this.rowsAffected = rowsAffected;
+	public UpdateUserPasswordOutput() {
+		super();
 	}
 
-	public int getRowsAffected() {
-		return rowsAffected;
+	public UpdateUserPasswordOutput(int rowsAffected) {
+		super(rowsAffected);
 	}
 }

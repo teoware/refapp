@@ -1,6 +1,6 @@
 package com.teoware.refapp.web.consumer.vo;
 
-import com.teoware.refapp.model.user.Username;
+import com.teoware.refapp.model.common.Username;
 
 public class DeleteUserRequestVO {
 

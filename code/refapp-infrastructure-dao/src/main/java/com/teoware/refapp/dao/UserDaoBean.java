@@ -137,7 +137,7 @@ public class UserDaoBean extends Dao implements UserDao {
 				.doInsert(USER_DETAILS_TABLE)
 				.columnValues(USER_ID_COLUMN_NAME, FIRSTNAME_COLUMN_NAME, LASTNAME_COLUMN_NAME, BIRTHDATE_COLUMN_NAME,
 						GENDER_COLUMN_NAME, EMAIL_COLUMN_NAME, PHONE_COLUMN_NAME).build();
-		Object[] parameters = DaoHelper.generateArray(input.getUserId().getId(), input.getUserDetails().getFirstName(),
+		Object[] parameters = DaoHelper.generateArray(input.getId().getId(), input.getUserDetails().getFirstName(),
 				input.getUserDetails().getLastName(), DateTimeConverter.toSqlDate(input.getUserDetails().getBirthDate()),
 				input.getUserDetails().getGender().toString(), input.getUserDetails().getEmail(), input.getUserDetails()
 						.getPhone());
@@ -158,7 +158,7 @@ public class UserDaoBean extends Dao implements UserDao {
 					.doInsert(USER_ADDRESS_TABLE)
 					.columnValues(USER_ID_COLUMN_NAME, ADDRESS_COLUMN_NAME, POSTALCODE_COLUMN_NAME,
 							MUNICIPALITY_COLUMN_NAME, REGION_COLUMN_NAME, COUNTRY_COLUMN_NAME).build();
-			Object[] parameters = DaoHelper.generateArray(input.getUserId().getId(), input.getUserAddress()
+			Object[] parameters = DaoHelper.generateArray(input.getId().getId(), input.getUserAddress()
 					.getAddress(), input.getUserAddress().getPostalCode(), input.getUserAddress().getMunicipality(),
 					input.getUserAddress().getRegion(), input.getUserAddress().getCountry());
 			ChangeResult changeResult = super.create(sql, parameters);
@@ -174,7 +174,7 @@ public class UserDaoBean extends Dao implements UserDao {
 		LOG.info(DAO_NAME + ": Create user password operation invoked.");
 		SQL sql = new SQL.Builder().doInsert(USER_PASSWORD_TABLE)
 				.columnValues(USER_ID_COLUMN_NAME, PASSWORD_COLUMN_NAME, SALT_COLUMN_NAME).build();
-		Object[] parameters = DaoHelper.generateArray(input.getUserId().getId(), input.getUserPassword().getPassword(),
+		Object[] parameters = DaoHelper.generateArray(input.getId().getId(), input.getUserPassword().getPassword(),
 				input.getUserPassword().getSalt());
 		ChangeResult changeResult = super.create(sql, parameters);
 		return new CreateUserPasswordOutput(changeResult.getRowsAffected());
@@ -210,7 +210,7 @@ public class UserDaoBean extends Dao implements UserDao {
 	public ReadUserPasswordOutput readUserPassword(ReadUserPasswordInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Read user password operation invoked.");
 
-		Id userId = readUserId(input.getUserName());
+		Id userId = readUserId(input.getUsername().getUsername());
 
 		SQL sql = new SQL.Builder().doSelect("*").from(USER_PASSWORD_TABLE).where(USER_ID_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(userId.getId());
@@ -226,7 +226,7 @@ public class UserDaoBean extends Dao implements UserDao {
 		if (input.getUsername() != null) {
 			SQL sql = new SQL.Builder().doUpdate(USERS_TABLE).setColumn(USERNAME_COLUMN_NAME).where(ID_COLUMN_NAME)
 					.build();
-			Object[] parameters = DaoHelper.generateArray(input.getUsername().getUsername(), input.getUserId().getId());
+			Object[] parameters = DaoHelper.generateArray(input.getUsername().getUsername(), input.getId().getId());
 			ChangeResult changeResult = super.update(sql, parameters);
 
 			rowsAffected = changeResult.getRowsAffected();
@@ -246,7 +246,7 @@ public class UserDaoBean extends Dao implements UserDao {
 			Object[] parameters = DaoHelper.generateArray(input.getUserDetails().getFirstName(), input.getUserDetails()
 					.getLastName(), DateTimeConverter.toSqlDate(input.getUserDetails().getBirthDate()), input
 					.getUserDetails().getGender().toString(), input.getUserDetails().getEmail(), input.getUserDetails()
-					.getPhone(), input.getUserId().getId());
+					.getPhone(), input.getId().getId());
 			ChangeResult result = super.update(sql, parameters);
 			return new UpdateUserDetailsOutput(result.getRowsAffected());
 		} else {
@@ -261,7 +261,7 @@ public class UserDaoBean extends Dao implements UserDao {
 			SQL sql = new SQL.Builder().doUpdate(USER_STATUS_TABLE).setColumn(STATUS_COLUMN_NAME)
 					.where(USER_ID_COLUMN_NAME).build();
 			Object[] parameters = DaoHelper.generateArray(input.getUserStatus().getStatus().toString(), input
-					.getUserId().getId());
+					.getId().getId());
 			ChangeResult result = super.update(sql, parameters);
 			return new UpdateUserStatusOutput(result.getRowsAffected());
 		} else {
@@ -279,7 +279,7 @@ public class UserDaoBean extends Dao implements UserDao {
 							REGION_COLUMN_NAME, COUNTRY_COLUMN_NAME).where(USER_ID_COLUMN_NAME).build();
 			Object[] parameters = DaoHelper.generateArray(input.getUserAddress().getAddress(), input.getUserAddress()
 					.getPostalCode(), input.getUserAddress().getMunicipality(), input.getUserAddress().getRegion(),
-					input.getUserAddress().getCountry(), input.getUserId().getId());
+					input.getUserAddress().getCountry(), input.getId().getId());
 			ChangeResult result = super.update(sql, parameters);
 			return new UpdateUserAddressOutput(result.getRowsAffected());
 		} else {
@@ -293,7 +293,7 @@ public class UserDaoBean extends Dao implements UserDao {
 		if (input.getUserPassword() != null) {
 			SQL sql = new SQL.Builder().doUpdate(USER_PASSWORD_TABLE).setColumn(PASSWORD_COLUMN_NAME)
 					.where(USER_ID_COLUMN_NAME).build();
-			Object[] parameters = DaoHelper.generateArray(input.getUserPassword().getPassword(), input.getUserId()
+			Object[] parameters = DaoHelper.generateArray(input.getUserPassword().getPassword(), input.getId()
 					.getId());
 			ChangeResult changeResult = super.update(sql, parameters);
 			return new UpdateUserPasswordOutput(changeResult.getRowsAffected());
@@ -307,7 +307,7 @@ public class UserDaoBean extends Dao implements UserDao {
 		LOG.info(DAO_NAME + ": Delete user operation invoked.");
 
 		SQL sql = new SQL.Builder().doDelete(USERS_TABLE).where(ID_COLUMN_NAME).build();
-		Object[] parameters = DaoHelper.generateArray(input.getUserId().getId());
+		Object[] parameters = DaoHelper.generateArray(input.getId().getId());
 		ChangeResult changeResult = super.delete(sql, parameters);
 		return new DeleteUserOutput(changeResult.getRowsAffected());
 	}
@@ -317,7 +317,7 @@ public class UserDaoBean extends Dao implements UserDao {
 		LOG.info(DAO_NAME + ": Delete user info operation invoked.");
 
 		SQL sql = new SQL.Builder().doDelete(USER_DETAILS_TABLE).where(USER_ID_COLUMN_NAME).build();
-		Object[] parameters = DaoHelper.generateArray(input.getUserId().getId());
+		Object[] parameters = DaoHelper.generateArray(input.getId().getId());
 		ChangeResult changeResult = super.delete(sql, parameters);
 		return new DeleteUserDetailsOutput(changeResult.getRowsAffected());
 	}
@@ -327,7 +327,7 @@ public class UserDaoBean extends Dao implements UserDao {
 		LOG.info(DAO_NAME + ": Delete user status operation invoked.");
 
 		SQL sql = new SQL.Builder().doDelete(USER_STATUS_TABLE).where(USER_ID_COLUMN_NAME).build();
-		Object[] parameters = DaoHelper.generateArray(input.getUserId().getId());
+		Object[] parameters = DaoHelper.generateArray(input.getId().getId());
 		ChangeResult changeResult = super.delete(sql, parameters);
 		return new DeleteUserStatusOutput(changeResult.getRowsAffected());
 	}
@@ -337,7 +337,7 @@ public class UserDaoBean extends Dao implements UserDao {
 		LOG.info(DAO_NAME + ": Delete user address operation invoked.");
 
 		SQL sql = new SQL.Builder().doDelete(USER_ADDRESS_TABLE).where(USER_ID_COLUMN_NAME).build();
-		Object[] parameters = DaoHelper.generateArray(input.getUserId().getId());
+		Object[] parameters = DaoHelper.generateArray(input.getId().getId());
 		ChangeResult changeResult = super.delete(sql, parameters);
 		return new DeleteUserAddressOutput(changeResult.getRowsAffected());
 	}
@@ -347,7 +347,7 @@ public class UserDaoBean extends Dao implements UserDao {
 		LOG.info(DAO_NAME + ": Delete user password operation invoked.");
 
 		SQL sql = new SQL.Builder().doDelete(USER_PASSWORD_TABLE).where(USER_ID_COLUMN_NAME).build();
-		Object[] parameters = DaoHelper.generateArray(input.getUserId().getId());
+		Object[] parameters = DaoHelper.generateArray(input.getId().getId());
 		ChangeResult changeResult = super.delete(sql, parameters);
 		return new DeleteUserPasswordOutput(changeResult.getRowsAffected());
 	}

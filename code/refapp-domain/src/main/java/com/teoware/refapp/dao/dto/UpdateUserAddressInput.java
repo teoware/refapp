@@ -2,25 +2,17 @@ package com.teoware.refapp.dao.dto;
 
 import com.teoware.refapp.model.user.UserAddress;
 
-public class UpdateUserAddressInput {
+public class UpdateUserAddressInput extends ChangeInput {
 
-	private Id userId;
 	private UserAddress userAddress;
 
 	public UpdateUserAddressInput() {
+		super();
 	}
 
-	public UpdateUserAddressInput(Id userId, UserAddress userAddress) {
-		this.userId = userId;
+	public UpdateUserAddressInput(Id id, UserAddress userAddress) {
+		super(id);
 		this.userAddress = userAddress;
-	}
-
-	public Id getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Id userId) {
-		this.userId = userId;
 	}
 
 	public UserAddress getUserAddress() {

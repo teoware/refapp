@@ -1,14 +1,12 @@
 package com.teoware.refapp.dao.dto;
 
-public class PurgeUsersOutput {
+public class PurgeUsersOutput extends ChangeOutput {
 
-	private int rowsAffected;
-
-	public PurgeUsersOutput(int rowsAffected) {
-		this.rowsAffected = rowsAffected;
+	public PurgeUsersOutput() {
+		super();
 	}
 
-	public int getRowsAffected() {
-		return rowsAffected;
+	public PurgeUsersOutput(int rowsAffected) {
+		super(rowsAffected);
 	}
 }

@@ -45,12 +45,12 @@ import com.teoware.refapp.dao.dto.UpdateUserStatusInput;
 import com.teoware.refapp.dao.dto.UpdateUserStatusOutput;
 import com.teoware.refapp.model.Header;
 import com.teoware.refapp.model.common.OperationResult;
+import com.teoware.refapp.model.common.Username;
 import com.teoware.refapp.model.enums.Result;
 import com.teoware.refapp.model.enums.Status;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserPassword;
 import com.teoware.refapp.model.user.UserStatus;
-import com.teoware.refapp.model.user.Username;
 import com.teoware.refapp.service.dto.ActivateUserRequest;
 import com.teoware.refapp.service.dto.ActivateUserResponse;
 import com.teoware.refapp.service.dto.ChangeUserPasswordRequest;
@@ -96,7 +96,7 @@ public class UserServiceBean implements UserService {
 
 			CreateUserInput createUserInput = new CreateUserInput(user.getUsername());
 			CreateUserOutput createUserOutput = dao.createUser(createUserInput);
-			Id userId = createUserOutput.getUserId();
+			Id userId = createUserOutput.getId();
 			rowsAffected += createUserOutput.getRowsAffected();
 
 			CreateUserDetailsInput createUserInfoInput = new CreateUserDetailsInput(userId, user.getUserDetails());
@@ -107,7 +107,7 @@ public class UserServiceBean implements UserService {
 			CreateUserAddressOutput createUserAddressOutput = dao.createUserAddress(createUserAddressInput);
 			rowsAffected += createUserAddressOutput.getRowsAffected();
 
-			CreateUserPasswordInput createUserPasswordInput = new CreateUserPasswordInput(createUserOutput.getUserId(),
+			CreateUserPasswordInput createUserPasswordInput = new CreateUserPasswordInput(createUserOutput.getId(),
 					userPassword);
 			CreateUserPasswordOutput createUserPasswordOutput = dao.createUserPassword(createUserPasswordInput);
 			rowsAffected += createUserPasswordOutput.getRowsAffected();
@@ -233,7 +233,8 @@ public class UserServiceBean implements UserService {
 			UpdateUserOutput updateUserOutput = dao.updateUser(updateUserInput);
 			rowsAffected += updateUserOutput.getRowsAffected();
 
-			UpdateUserDetailsInput updateUserInfoInput = new UpdateUserDetailsInput(userId, request.getBody().getUserDetails());
+			UpdateUserDetailsInput updateUserInfoInput = new UpdateUserDetailsInput(userId, request.getBody()
+					.getUserDetails());
 			UpdateUserDetailsOutput updateUserInfoOutput = dao.updateUserDetails(updateUserInfoInput);
 			rowsAffected += updateUserInfoOutput.getRowsAffected();
 

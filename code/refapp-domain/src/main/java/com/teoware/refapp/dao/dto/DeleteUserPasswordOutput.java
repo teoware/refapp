@@ -1,14 +1,12 @@
 package com.teoware.refapp.dao.dto;
 
-public class DeleteUserPasswordOutput {
+public class DeleteUserPasswordOutput extends ChangeOutput {
 
-	private int rowsAffected;
-
-	public DeleteUserPasswordOutput(int rowsAffected) {
-		this.rowsAffected = rowsAffected;
+	public DeleteUserPasswordOutput() {
+		super();
 	}
 
-	public int getRowsAffected() {
-		return rowsAffected;
+	public DeleteUserPasswordOutput(int rowsAffected) {
+		super(rowsAffected);
 	}
 }

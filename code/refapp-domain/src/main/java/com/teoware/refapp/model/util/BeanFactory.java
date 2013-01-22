@@ -1,11 +1,11 @@
 package com.teoware.refapp.model.util;
 
+import com.teoware.refapp.model.common.Username;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserAddress;
 import com.teoware.refapp.model.user.UserDetails;
 import com.teoware.refapp.model.user.UserPassword;
 import com.teoware.refapp.model.user.UserStatus;
-import com.teoware.refapp.model.user.Username;
 
 public class BeanFactory {
 

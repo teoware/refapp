@@ -5,8 +5,8 @@ import javax.validation.constraints.NotNull;
 
 import com.teoware.refapp.model.Header;
 import com.teoware.refapp.model.base.BaseMessage;
+import com.teoware.refapp.model.common.Username;
 import com.teoware.refapp.model.user.UserPassword;
-import com.teoware.refapp.model.user.Username;
 
 public class ChangeUserPasswordRequest extends BaseMessage<Header, UserPassword> {
 

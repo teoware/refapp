@@ -13,11 +13,11 @@ import com.teoware.refapp.dao.dto.UpdateUserAddressInput;
 import com.teoware.refapp.dao.dto.UpdateUserDetailsInput;
 import com.teoware.refapp.dao.dto.UpdateUserInput;
 import com.teoware.refapp.dao.dto.UpdateUserStatusInput;
+import com.teoware.refapp.model.common.Username;
 import com.teoware.refapp.model.enums.Gender;
 import com.teoware.refapp.model.enums.Status;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserPassword;
-import com.teoware.refapp.model.user.Username;
 import com.teoware.refapp.model.util.BeanFactory;
 import com.teoware.refapp.service.dto.RegisterUserRequest;
 

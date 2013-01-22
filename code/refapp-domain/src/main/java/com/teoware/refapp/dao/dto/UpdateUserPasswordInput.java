@@ -2,25 +2,17 @@ package com.teoware.refapp.dao.dto;
 
 import com.teoware.refapp.model.user.UserPassword;
 
-public class UpdateUserPasswordInput {
+public class UpdateUserPasswordInput extends ChangeInput {
 
-	private Id userId;
 	private UserPassword userPassword;
 
 	public UpdateUserPasswordInput() {
+		super();
 	}
 
-	public UpdateUserPasswordInput(Id userId, UserPassword userPassword) {
-		this.setUserId(userId);
+	public UpdateUserPasswordInput(Id id, UserPassword userPassword) {
+		super(id);
 		this.userPassword = userPassword;
-	}
-
-	public Id getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Id userId) {
-		this.userId = userId;
 	}
 
 	public UserPassword getUserPassword() {

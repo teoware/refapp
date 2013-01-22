@@ -1,20 +1,12 @@
 package com.teoware.refapp.dao.dto;
 
-public class CreateUserOutput {
+public class CreateUserOutput extends CreateOutput {
 
-	private Id userId;
-	private int rowsAffected;
-
-	public CreateUserOutput(Id userId, int rowsAffected) {
-		this.userId = userId;
-		this.rowsAffected = rowsAffected;
+	public CreateUserOutput() {
+		super();
 	}
 
-	public Id getUserId() {
-		return userId;
-	}
-
-	public int getRowsAffected() {
-		return rowsAffected;
+	public CreateUserOutput(Id id, int rowsAffected) {
+		super(id, rowsAffected);
 	}
 }
