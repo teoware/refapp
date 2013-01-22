@@ -31,4 +31,14 @@ public class TaskDaoBean extends Dao implements TaskDao {
 		return null;
 	}
 
+	@Override
+	public void persistConnection() {
+		super.setPersistConnection(Boolean.TRUE);
+	}
+
+	@Override
+	public void terminateConnection() {
+		super.setPersistConnection(Boolean.FALSE);
+		super.closeConnection();
+	}
 }

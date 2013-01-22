@@ -5,11 +5,16 @@ import static com.teoware.refapp.web.ui.util.Globalization.spacer;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import javax.inject.Inject;
+
 import com.teoware.refapp.web.ui.util.Globalization;
 
 public abstract class AbstractControllerBean {
 
 	protected String debug;
+
+	@Inject
+	protected Globalization globalization;
 
 	public String getTitle() {
 		return dict("app.title");
@@ -41,6 +46,6 @@ public abstract class AbstractControllerBean {
 	}
 
 	public String dict(String key) {
-		return Globalization.dict(key);
+		return globalization.dict(key);
 	}
 }

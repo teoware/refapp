@@ -26,7 +26,7 @@ public class Globalization {
 		dict.put("page.common.footer", "By teoware");
 	}
 
-	public static String dict(String key) {
+	public String dict(String key) {
 		return dict.get(key);
 	}
 }

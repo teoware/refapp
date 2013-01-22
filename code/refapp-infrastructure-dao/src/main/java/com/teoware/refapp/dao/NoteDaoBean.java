@@ -30,4 +30,15 @@ public class NoteDaoBean extends Dao implements NoteDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void persistConnection() {
+		super.setPersistConnection(Boolean.TRUE);
+	}
+
+	@Override
+	public void terminateConnection() {
+		super.setPersistConnection(Boolean.FALSE);
+		super.closeConnection();
+	}
 }

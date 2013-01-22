@@ -2,22 +2,34 @@ package com.teoware.refapp.web.ui.controller;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+
+import com.teoware.refapp.web.ui.util.Globalization;
 
 public class AbstractControllerBeanTest {
 
-	private AbstractControllerBean controller;
+	@InjectMocks
+	private AbstractControllerBean controller = new AbstractControllerBean() {
+		@Override
+		public String getPageTitle() {
+			return "";
+		}
+	};
+
+	@Mock
+	protected Globalization globalization;
 
 	@Before
 	public void setUp() throws Exception {
-		controller = new AbstractControllerBean() {
-			@Override
-			public String getPageTitle() {
-				return "";
-			}
-		};
+		initMocks(this);
+		when(globalization.dict(anyString())).thenReturn("RefApp");
 	}
 
 	@Test

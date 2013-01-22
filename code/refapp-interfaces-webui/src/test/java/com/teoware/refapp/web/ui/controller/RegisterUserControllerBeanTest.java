@@ -3,6 +3,7 @@ package com.teoware.refapp.web.ui.controller;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -21,12 +22,16 @@ import com.teoware.refapp.model.user.UserPassword;
 import com.teoware.refapp.testtools.JavaBeanTester;
 import com.teoware.refapp.web.consumer.UserServiceConsumer;
 import com.teoware.refapp.web.consumer.vo.RegisterUserRequestVO;
+import com.teoware.refapp.web.ui.util.Globalization;
 
 public class RegisterUserControllerBeanTest {
 
 	@InjectMocks
 	RegisterUserControllerBean controller;
 
+	@Mock
+	protected Globalization globalization;
+	
 	@Mock
 	private UserServiceConsumer consumer;
 
@@ -48,6 +53,7 @@ public class RegisterUserControllerBeanTest {
 	@Before
 	public void setUp() throws Exception {
 		initMocks(this);
+		when(globalization.dict(anyString())).thenReturn("RefApp");
 		when(vo.getUser()).thenReturn(user);
 		when(user.getUserInfo()).thenReturn(userInfo);
 		when(user.getUserAddress()).thenReturn(userAddress);

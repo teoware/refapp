@@ -11,4 +11,8 @@ import com.teoware.refapp.dao.dto.CreateNoteOutput;
 public interface NoteDao extends Serializable {
 
 	public CreateNoteOutput createNote(CreateNoteInput input);
+
+	public void persistConnection();
+
+	public void terminateConnection();
 }
