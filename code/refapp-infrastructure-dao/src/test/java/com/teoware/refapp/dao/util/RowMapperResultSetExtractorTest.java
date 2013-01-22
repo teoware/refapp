@@ -33,11 +33,11 @@ public class RowMapperResultSetExtractorTest {
 
 		assertNotNull(user);
 		assertNotNull(user.getUsername());
-		assertNotNull(user.getUserInfo());
+		assertNotNull(user.getUserDetails());
 		assertNotNull(user.getUserAddress());
 
 		assertEquals("john.doe", user.getUsername().getUsername());
-		assertEquals("John", user.getUserInfo().getFirstName());
+		assertEquals("John", user.getUserDetails().getFirstName());
 		assertEquals("Storgata 1", user.getUserAddress().getAddress());
 	}
 }

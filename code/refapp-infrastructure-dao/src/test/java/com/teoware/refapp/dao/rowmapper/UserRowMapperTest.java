@@ -50,9 +50,9 @@ public class UserRowMapperTest {
 		assertEquals(Status.ACTIVE, user.getUserStatus().getStatus());
 		assertEquals(new Timestamp(0).getTime(), user.getUserStatus().getCreated().getMillis());
 		assertEquals(new Timestamp(1).getTime(), user.getUserStatus().getModified().getMillis());
-		assertEquals("c", user.getUserInfo().getFirstName());
-		assertEquals("d", user.getUserInfo().getLastName());
-		assertEquals(Gender.MALE, user.getUserInfo().getGender());
+		assertEquals("c", user.getUserDetails().getFirstName());
+		assertEquals("d", user.getUserDetails().getLastName());
+		assertEquals(Gender.MALE, user.getUserDetails().getGender());
 
 		verify(result, times(12)).getString(anyString());
 		verify(result, times(2)).getTimestamp(anyString());

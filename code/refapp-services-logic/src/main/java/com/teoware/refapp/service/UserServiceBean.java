@@ -14,16 +14,16 @@ import com.teoware.refapp.dao.DaoException;
 import com.teoware.refapp.dao.UserDao;
 import com.teoware.refapp.dao.dto.CreateUserAddressInput;
 import com.teoware.refapp.dao.dto.CreateUserAddressOutput;
-import com.teoware.refapp.dao.dto.CreateUserInfoInput;
-import com.teoware.refapp.dao.dto.CreateUserInfoOutput;
+import com.teoware.refapp.dao.dto.CreateUserDetailsInput;
+import com.teoware.refapp.dao.dto.CreateUserDetailsOutput;
 import com.teoware.refapp.dao.dto.CreateUserInput;
 import com.teoware.refapp.dao.dto.CreateUserOutput;
 import com.teoware.refapp.dao.dto.CreateUserPasswordInput;
 import com.teoware.refapp.dao.dto.CreateUserPasswordOutput;
 import com.teoware.refapp.dao.dto.DeleteUserAddressInput;
 import com.teoware.refapp.dao.dto.DeleteUserAddressOutput;
-import com.teoware.refapp.dao.dto.DeleteUserInfoInput;
-import com.teoware.refapp.dao.dto.DeleteUserInfoOutput;
+import com.teoware.refapp.dao.dto.DeleteUserDetailsInput;
+import com.teoware.refapp.dao.dto.DeleteUserDetailsOutput;
 import com.teoware.refapp.dao.dto.DeleteUserInput;
 import com.teoware.refapp.dao.dto.DeleteUserOutput;
 import com.teoware.refapp.dao.dto.DeleteUserPasswordInput;
@@ -35,8 +35,8 @@ import com.teoware.refapp.dao.dto.ReadUserInput;
 import com.teoware.refapp.dao.dto.ReadUserOutput;
 import com.teoware.refapp.dao.dto.UpdateUserAddressInput;
 import com.teoware.refapp.dao.dto.UpdateUserAddressOutput;
-import com.teoware.refapp.dao.dto.UpdateUserInfoInput;
-import com.teoware.refapp.dao.dto.UpdateUserInfoOutput;
+import com.teoware.refapp.dao.dto.UpdateUserDetailsInput;
+import com.teoware.refapp.dao.dto.UpdateUserDetailsOutput;
 import com.teoware.refapp.dao.dto.UpdateUserInput;
 import com.teoware.refapp.dao.dto.UpdateUserOutput;
 import com.teoware.refapp.dao.dto.UpdateUserPasswordInput;
@@ -99,8 +99,8 @@ public class UserServiceBean implements UserService {
 			Id userId = createUserOutput.getUserId();
 			rowsAffected += createUserOutput.getRowsAffected();
 
-			CreateUserInfoInput createUserInfoInput = new CreateUserInfoInput(userId, user.getUserInfo());
-			CreateUserInfoOutput createUserInfoOutput = dao.createUserInfo(createUserInfoInput);
+			CreateUserDetailsInput createUserInfoInput = new CreateUserDetailsInput(userId, user.getUserDetails());
+			CreateUserDetailsOutput createUserInfoOutput = dao.createUserDetails(createUserInfoInput);
 			rowsAffected += createUserInfoOutput.getRowsAffected();
 
 			CreateUserAddressInput createUserAddressInput = new CreateUserAddressInput(userId, user.getUserAddress());
@@ -233,8 +233,8 @@ public class UserServiceBean implements UserService {
 			UpdateUserOutput updateUserOutput = dao.updateUser(updateUserInput);
 			rowsAffected += updateUserOutput.getRowsAffected();
 
-			UpdateUserInfoInput updateUserInfoInput = new UpdateUserInfoInput(userId, request.getBody().getUserInfo());
-			UpdateUserInfoOutput updateUserInfoOutput = dao.updateUserInfo(updateUserInfoInput);
+			UpdateUserDetailsInput updateUserInfoInput = new UpdateUserDetailsInput(userId, request.getBody().getUserDetails());
+			UpdateUserDetailsOutput updateUserInfoOutput = dao.updateUserDetails(updateUserInfoInput);
 			rowsAffected += updateUserInfoOutput.getRowsAffected();
 
 			UpdateUserStatusInput updateUserStatusInput = new UpdateUserStatusInput(userId, request.getBody()
@@ -308,8 +308,8 @@ public class UserServiceBean implements UserService {
 			DeleteUserStatusOutput deleteUserStatusOutput = dao.deleteUserStatus(deleteUserStatusInput);
 			rowsAffected += deleteUserStatusOutput.getRowsAffected();
 
-			DeleteUserInfoInput deleteUserInfoInput = new DeleteUserInfoInput(userId);
-			DeleteUserInfoOutput deleteUserInfoOutput = dao.deleteUserInfo(deleteUserInfoInput);
+			DeleteUserDetailsInput deleteUserInfoInput = new DeleteUserDetailsInput(userId);
+			DeleteUserDetailsOutput deleteUserInfoOutput = dao.deleteUserDetails(deleteUserInfoInput);
 			rowsAffected += deleteUserInfoOutput.getRowsAffected();
 
 			DeleteUserInput deleteUserInput = new DeleteUserInput(userId);

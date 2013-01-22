@@ -36,12 +36,12 @@ public class UserRowMapper implements RowMapper<User> {
 		user.getUserStatus().setCreated(MapperHelper.mapTimestamp(result.getTimestamp(CREATED_COLUMN_NAME)));
 		user.getUserStatus().setModified(MapperHelper.mapTimestamp(result.getTimestamp(MODIFIED_COLUMN_NAME)));
 
-		user.getUserInfo().setFirstName(result.getString(FIRSTNAME_COLUMN_NAME));
-		user.getUserInfo().setLastName(result.getString(LASTNAME_COLUMN_NAME));
-		user.getUserInfo().setBirthDate(MapperHelper.mapDate(result.getDate(BIRTHDATE_COLUMN_NAME)));
-		user.getUserInfo().setGender(MapperHelper.mapGender(result.getString(GENDER_COLUMN_NAME)));
-		user.getUserInfo().setEmail(result.getString(EMAIL_COLUMN_NAME));
-		user.getUserInfo().setPhone(result.getString(PHONE_COLUMN_NAME));
+		user.getUserDetails().setFirstName(result.getString(FIRSTNAME_COLUMN_NAME));
+		user.getUserDetails().setLastName(result.getString(LASTNAME_COLUMN_NAME));
+		user.getUserDetails().setBirthDate(MapperHelper.mapDate(result.getDate(BIRTHDATE_COLUMN_NAME)));
+		user.getUserDetails().setGender(MapperHelper.mapGender(result.getString(GENDER_COLUMN_NAME)));
+		user.getUserDetails().setEmail(result.getString(EMAIL_COLUMN_NAME));
+		user.getUserDetails().setPhone(result.getString(PHONE_COLUMN_NAME));
 
 		user.getUserAddress().setAddress(result.getString(ADDRESS_COLUMN_NAME));
 		user.getUserAddress().setPostalCode(result.getString(POSTALCODE_COLUMN_NAME));

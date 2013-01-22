@@ -42,12 +42,12 @@ public class ChangeUserControllerBean extends AbstractControllerBean implements 
 
 		user.getUsername().setUsername(username);
 
-		user.getUserInfo().setFirstName(firstName);
-		user.getUserInfo().setLastName(lastName);
-		user.getUserInfo().setGender(Gender.MALE);
-		user.getUserInfo().setBirthDate(new DateTime());
-		user.getUserInfo().setEmail(email);
-		user.getUserInfo().setPhone(phone);
+		user.getUserDetails().setFirstName(firstName);
+		user.getUserDetails().setLastName(lastName);
+		user.getUserDetails().setGender(Gender.MALE);
+		user.getUserDetails().setBirthDate(new DateTime());
+		user.getUserDetails().setEmail(email);
+		user.getUserDetails().setPhone(phone);
 
 		user.getUserAddress().setAddress("Abc street 1");
 		user.getUserAddress().setPostalCode("1234");

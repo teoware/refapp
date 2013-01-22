@@ -17,7 +17,7 @@ import org.mockito.Mock;
 
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserAddress;
-import com.teoware.refapp.model.user.UserInfo;
+import com.teoware.refapp.model.user.UserDetails;
 import com.teoware.refapp.model.user.UserPassword;
 import com.teoware.refapp.testtools.JavaBeanTester;
 import com.teoware.refapp.web.consumer.UserServiceConsumer;
@@ -42,7 +42,7 @@ public class RegisterUserControllerBeanTest {
 	private User user;
 
 	@Mock
-	private UserInfo userInfo;
+	private UserDetails userInfo;
 
 	@Mock
 	private UserAddress userAddress;
@@ -55,7 +55,7 @@ public class RegisterUserControllerBeanTest {
 		initMocks(this);
 		when(globalization.dict(anyString())).thenReturn("RefApp");
 		when(vo.getUser()).thenReturn(user);
-		when(user.getUserInfo()).thenReturn(userInfo);
+		when(user.getUserDetails()).thenReturn(userInfo);
 		when(user.getUserAddress()).thenReturn(userAddress);
 		when(vo.getUserPassword()).thenReturn(userPassword);
 	}

@@ -23,14 +23,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import com.teoware.refapp.dao.dto.CreateUserAddressInput;
-import com.teoware.refapp.dao.dto.CreateUserInfoInput;
+import com.teoware.refapp.dao.dto.CreateUserDetailsInput;
 import com.teoware.refapp.dao.dto.CreateUserInput;
 import com.teoware.refapp.dao.dto.DeleteUserInput;
 import com.teoware.refapp.dao.dto.PurgeUsersInput;
 import com.teoware.refapp.dao.dto.ReadUserInput;
 import com.teoware.refapp.dao.dto.ReadUserOutput;
 import com.teoware.refapp.dao.dto.UpdateUserAddressInput;
-import com.teoware.refapp.dao.dto.UpdateUserInfoInput;
+import com.teoware.refapp.dao.dto.UpdateUserDetailsInput;
 import com.teoware.refapp.dao.dto.UpdateUserInput;
 import com.teoware.refapp.dao.dto.UpdateUserStatusInput;
 import com.teoware.refapp.dao.test.TestResultSetFactory;
@@ -55,12 +55,12 @@ public class UserDaoTest {
 	private ResultSet resultSet;
 
 	private CreateUserInput createInput;
-	private CreateUserInfoInput createInfoInput;
+	private CreateUserDetailsInput createInfoInput;
 	private CreateUserAddressInput createAddressInput;
 	private ReadUserInput readInput;
 	private UpdateUserInput updateInput;
 	private UpdateUserStatusInput updateStatusInput;
-	private UpdateUserInfoInput updateInfoInput;
+	private UpdateUserDetailsInput updateInfoInput;
 	private UpdateUserAddressInput updateAddressInput;
 	private DeleteUserInput deleteInput;
 	private PurgeUsersInput purgeInput;
@@ -70,11 +70,11 @@ public class UserDaoTest {
 		initMocks(this);
 
 		createInput = TestDataFactory.createCreateUserInputJohn();
-		createInfoInput = TestDataFactory.createCreateUserInfoInputJohn();
+		createInfoInput = TestDataFactory.createCreateUserDetailsInputJohn();
 		createAddressInput = TestDataFactory.createCreateUserAddressInputJohn();
 		readInput = TestDataFactory.createReadUserInputJohn();
 		updateInput = TestDataFactory.createUpdateUserInputJohn();
-		updateInfoInput = TestDataFactory.createUpdateUserInfoInputJohn();
+		updateInfoInput = TestDataFactory.createUpdateUserDetailsInputJohn();
 		updateStatusInput = TestDataFactory.createUpdateUserStatusInputJohn();
 		updateAddressInput = TestDataFactory.createUpdateUserAddressInputJohn();
 		deleteInput = TestDataFactory.createDeleteUserInput();
@@ -105,7 +105,7 @@ public class UserDaoTest {
 		when(statement.getGeneratedKeys()).thenReturn(resultSet);
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		userDao.createUserInfo(createInfoInput);
+		userDao.createUserDetails(createInfoInput);
 
 		verify(connection).prepareStatement(anyString(), anyInt());
 	}
@@ -177,7 +177,7 @@ public class UserDaoTest {
 		when(statement.executeQuery()).thenReturn(resultSet);
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		userDao.updateUserInfo(updateInfoInput);
+		userDao.updateUserDetails(updateInfoInput);
 
 		verify(connection, times(1)).prepareStatement(anyString(), anyInt());
 	}

@@ -6,16 +6,16 @@ import javax.ejb.Local;
 
 import com.teoware.refapp.dao.dto.CreateUserAddressInput;
 import com.teoware.refapp.dao.dto.CreateUserAddressOutput;
-import com.teoware.refapp.dao.dto.CreateUserInfoInput;
-import com.teoware.refapp.dao.dto.CreateUserInfoOutput;
+import com.teoware.refapp.dao.dto.CreateUserDetailsInput;
+import com.teoware.refapp.dao.dto.CreateUserDetailsOutput;
 import com.teoware.refapp.dao.dto.CreateUserInput;
 import com.teoware.refapp.dao.dto.CreateUserOutput;
 import com.teoware.refapp.dao.dto.CreateUserPasswordInput;
 import com.teoware.refapp.dao.dto.CreateUserPasswordOutput;
 import com.teoware.refapp.dao.dto.DeleteUserAddressInput;
 import com.teoware.refapp.dao.dto.DeleteUserAddressOutput;
-import com.teoware.refapp.dao.dto.DeleteUserInfoInput;
-import com.teoware.refapp.dao.dto.DeleteUserInfoOutput;
+import com.teoware.refapp.dao.dto.DeleteUserDetailsInput;
+import com.teoware.refapp.dao.dto.DeleteUserDetailsOutput;
 import com.teoware.refapp.dao.dto.DeleteUserInput;
 import com.teoware.refapp.dao.dto.DeleteUserOutput;
 import com.teoware.refapp.dao.dto.DeleteUserPasswordInput;
@@ -31,8 +31,8 @@ import com.teoware.refapp.dao.dto.ReadUserPasswordInput;
 import com.teoware.refapp.dao.dto.ReadUserPasswordOutput;
 import com.teoware.refapp.dao.dto.UpdateUserAddressInput;
 import com.teoware.refapp.dao.dto.UpdateUserAddressOutput;
-import com.teoware.refapp.dao.dto.UpdateUserInfoInput;
-import com.teoware.refapp.dao.dto.UpdateUserInfoOutput;
+import com.teoware.refapp.dao.dto.UpdateUserDetailsInput;
+import com.teoware.refapp.dao.dto.UpdateUserDetailsOutput;
 import com.teoware.refapp.dao.dto.UpdateUserInput;
 import com.teoware.refapp.dao.dto.UpdateUserOutput;
 import com.teoware.refapp.dao.dto.UpdateUserPasswordInput;
@@ -45,7 +45,7 @@ public interface UserDao extends Serializable {
 
 	public CreateUserOutput createUser(CreateUserInput input) throws DaoException;
 
-	public CreateUserInfoOutput createUserInfo(CreateUserInfoInput input) throws DaoException;
+	public CreateUserDetailsOutput createUserDetails(CreateUserDetailsInput input) throws DaoException;
 
 	public CreateUserAddressOutput createUserAddress(CreateUserAddressInput input) throws DaoException;
 
@@ -61,7 +61,7 @@ public interface UserDao extends Serializable {
 
 	public UpdateUserOutput updateUser(UpdateUserInput input) throws DaoException;
 
-	public UpdateUserInfoOutput updateUserInfo(UpdateUserInfoInput input) throws DaoException;
+	public UpdateUserDetailsOutput updateUserDetails(UpdateUserDetailsInput input) throws DaoException;
 
 	public UpdateUserStatusOutput updateUserStatus(UpdateUserStatusInput input) throws DaoException;
 
@@ -71,7 +71,7 @@ public interface UserDao extends Serializable {
 
 	public DeleteUserOutput deleteUser(DeleteUserInput input) throws DaoException;
 
-	public DeleteUserInfoOutput deleteUserInfo(DeleteUserInfoInput input) throws DaoException;
+	public DeleteUserDetailsOutput deleteUserDetails(DeleteUserDetailsInput input) throws DaoException;
 
 	public DeleteUserStatusOutput deleteUserStatus(DeleteUserStatusInput input) throws DaoException;
 

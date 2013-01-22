@@ -17,8 +17,8 @@ import org.junit.experimental.categories.Category;
 import com.teoware.refapp.dao.DaoException;
 import com.teoware.refapp.dao.dto.CreateUserAddressInput;
 import com.teoware.refapp.dao.dto.CreateUserAddressOutput;
-import com.teoware.refapp.dao.dto.CreateUserInfoInput;
-import com.teoware.refapp.dao.dto.CreateUserInfoOutput;
+import com.teoware.refapp.dao.dto.CreateUserDetailsInput;
+import com.teoware.refapp.dao.dto.CreateUserDetailsOutput;
 import com.teoware.refapp.dao.dto.CreateUserInput;
 import com.teoware.refapp.dao.dto.CreateUserOutput;
 import com.teoware.refapp.dao.dto.CreateUserPasswordInput;
@@ -32,8 +32,8 @@ import com.teoware.refapp.dao.dto.ReadUserPasswordInput;
 import com.teoware.refapp.dao.dto.ReadUserPasswordOutput;
 import com.teoware.refapp.dao.dto.UpdateUserAddressInput;
 import com.teoware.refapp.dao.dto.UpdateUserAddressOutput;
-import com.teoware.refapp.dao.dto.UpdateUserInfoInput;
-import com.teoware.refapp.dao.dto.UpdateUserInfoOutput;
+import com.teoware.refapp.dao.dto.UpdateUserDetailsInput;
+import com.teoware.refapp.dao.dto.UpdateUserDetailsOutput;
 import com.teoware.refapp.dao.dto.UpdateUserInput;
 import com.teoware.refapp.dao.dto.UpdateUserOutput;
 import com.teoware.refapp.dao.dto.UpdateUserStatusInput;
@@ -83,8 +83,8 @@ public class UserDaoIT {
 
 			assertEquals(1, createUserOutput.getRowsAffected());
 
-			CreateUserInfoInput createUserInfoInput = TestDataFactory.createCreateUserInfoInputJohn(userId);
-			CreateUserInfoOutput createUserInfoOutput = userDao.createUserInfo(createUserInfoInput);
+			CreateUserDetailsInput createUserInfoInput = TestDataFactory.createCreateUserDetailsInputJohn(userId);
+			CreateUserDetailsOutput createUserInfoOutput = userDao.createUserDetails(createUserInfoInput);
 
 			assertEquals(1, createUserInfoOutput.getRowsAffected());
 
@@ -118,8 +118,8 @@ public class UserDaoIT {
 
 			assertEquals(1, createUserOutput.getRowsAffected());
 
-			CreateUserInfoInput createUserInfoInput = TestDataFactory.createCreateUserInfoInputJane(userId);
-			CreateUserInfoOutput createUserInfoOutput = userDao.createUserInfo(createUserInfoInput);
+			CreateUserDetailsInput createUserInfoInput = TestDataFactory.createCreateUserDetailsInputJane(userId);
+			CreateUserDetailsOutput createUserInfoOutput = userDao.createUserDetails(createUserInfoInput);
 
 			assertEquals(1, createUserInfoOutput.getRowsAffected());
 
@@ -140,8 +140,8 @@ public class UserDaoIT {
 
 			assertCreateUserJane(user);
 
-			user.getUserInfo().setEmail("jane.doe@epost.net");
-			user.getUserInfo().setPhone("+47 22334455");
+			user.getUserDetails().setEmail("jane.doe@epost.net");
+			user.getUserDetails().setPhone("+47 22334455");
 			user.getUserAddress().setAddress("Nygata 2");
 			user.getUserAddress().setPostalCode("1122");
 			user.getUserStatus().setStatus(Status.ACTIVE);
@@ -153,8 +153,8 @@ public class UserDaoIT {
 
 			assertEquals(1, updateUserOutput.getRowsAffected());
 
-			UpdateUserInfoInput updateUserInfoInput = new UpdateUserInfoInput(userId, user.getUserInfo());
-			UpdateUserInfoOutput updateUserInfoOutput = userDao.updateUserInfo(updateUserInfoInput);
+			UpdateUserDetailsInput updateUserInfoInput = new UpdateUserDetailsInput(userId, user.getUserDetails());
+			UpdateUserDetailsOutput updateUserInfoOutput = userDao.updateUserDetails(updateUserInfoInput);
 
 			assertEquals(1, updateUserInfoOutput.getRowsAffected());
 
@@ -224,8 +224,8 @@ public class UserDaoIT {
 			Id userId = createUserOutput.getUserId();
 			rowsAffected += createUserOutput.getRowsAffected();
 
-			CreateUserInfoInput createUserInfoInput = TestDataFactory.createCreateUserInfoInputJohn(userId);
-			rowsAffected += userDao.createUserInfo(createUserInfoInput).getRowsAffected();
+			CreateUserDetailsInput createUserInfoInput = TestDataFactory.createCreateUserDetailsInputJohn(userId);
+			rowsAffected += userDao.createUserDetails(createUserInfoInput).getRowsAffected();
 
 			CreateUserAddressInput createUserAddressInput = TestDataFactory.createCreateUserAddressInputJohn(userId);
 			CreateUserAddressOutput createUserAddressOutput = userDao.createUserAddress(createUserAddressInput);
@@ -238,8 +238,8 @@ public class UserDaoIT {
 
 			rowsAffected += createUserOutput.getRowsAffected();
 
-			createUserInfoInput = TestDataFactory.createCreateUserInfoInputJane(userId);
-			rowsAffected += userDao.createUserInfo(createUserInfoInput).getRowsAffected();
+			createUserInfoInput = TestDataFactory.createCreateUserDetailsInputJane(userId);
+			rowsAffected += userDao.createUserDetails(createUserInfoInput).getRowsAffected();
 
 			createUserAddressInput = TestDataFactory.createCreateUserAddressInputJane(userId);
 			createUserAddressOutput = userDao.createUserAddress(createUserAddressInput);
@@ -252,8 +252,8 @@ public class UserDaoIT {
 
 			rowsAffected += createUserOutput.getRowsAffected();
 
-			createUserInfoInput = TestDataFactory.createCreateUserInfoInputJonah(userId);
-			rowsAffected += userDao.createUserInfo(createUserInfoInput).getRowsAffected();
+			createUserInfoInput = TestDataFactory.createCreateUserDetailsInputJonah(userId);
+			rowsAffected += userDao.createUserDetails(createUserInfoInput).getRowsAffected();
 
 			createUserAddressInput = TestDataFactory.createCreateUserAddressInputJonah(userId);
 			createUserAddressOutput = userDao.createUserAddress(createUserAddressInput);
@@ -283,8 +283,8 @@ public class UserDaoIT {
 			Id userId = createUserOutput.getUserId();
 			rowsAffected += createUserOutput.getRowsAffected();
 
-			CreateUserInfoInput createUserInfoInput = TestDataFactory.createCreateUserInfoInputJohn(userId);
-			rowsAffected += userDao.createUserInfo(createUserInfoInput).getRowsAffected();
+			CreateUserDetailsInput createUserInfoInput = TestDataFactory.createCreateUserDetailsInputJohn(userId);
+			rowsAffected += userDao.createUserDetails(createUserInfoInput).getRowsAffected();
 
 			CreateUserAddressInput createUserAddressInput = TestDataFactory.createCreateUserAddressInputJohn(userId);
 			CreateUserAddressOutput createUserAddressOutput = userDao.createUserAddress(createUserAddressInput);
@@ -297,8 +297,8 @@ public class UserDaoIT {
 
 			rowsAffected += createUserOutput.getRowsAffected();
 
-			createUserInfoInput = TestDataFactory.createCreateUserInfoInputJane(userId);
-			rowsAffected += userDao.createUserInfo(createUserInfoInput).getRowsAffected();
+			createUserInfoInput = TestDataFactory.createCreateUserDetailsInputJane(userId);
+			rowsAffected += userDao.createUserDetails(createUserInfoInput).getRowsAffected();
 
 			createUserAddressInput = TestDataFactory.createCreateUserAddressInputJane(userId);
 			createUserAddressOutput = userDao.createUserAddress(createUserAddressInput);
@@ -311,8 +311,8 @@ public class UserDaoIT {
 
 			rowsAffected += createUserOutput.getRowsAffected();
 
-			createUserInfoInput = TestDataFactory.createCreateUserInfoInputJonah(userId);
-			rowsAffected += userDao.createUserInfo(createUserInfoInput).getRowsAffected();
+			createUserInfoInput = TestDataFactory.createCreateUserDetailsInputJonah(userId);
+			rowsAffected += userDao.createUserDetails(createUserInfoInput).getRowsAffected();
 
 			createUserAddressInput = TestDataFactory.createCreateUserAddressInputJonah(userId);
 			createUserAddressOutput = userDao.createUserAddress(createUserAddressInput);
@@ -346,13 +346,13 @@ public class UserDaoIT {
 		assertTrue(user.getUserStatus().getCreated().isBefore(user.getUserStatus().getModified())
 				|| user.getUserStatus().getCreated().equals(user.getUserStatus().getModified()));
 
-		assertNotNull(user.getUserInfo());
-		assertEquals("John", user.getUserInfo().getFirstName());
-		assertEquals("Doe", user.getUserInfo().getLastName());
-		assertNotNull(user.getUserInfo().getBirthDate());
-		assertEquals(Gender.MALE, user.getUserInfo().getGender());
-		assertEquals("john.doe@email.com", user.getUserInfo().getEmail());
-		assertEquals("+47 23456789", user.getUserInfo().getPhone());
+		assertNotNull(user.getUserDetails());
+		assertEquals("John", user.getUserDetails().getFirstName());
+		assertEquals("Doe", user.getUserDetails().getLastName());
+		assertNotNull(user.getUserDetails().getBirthDate());
+		assertEquals(Gender.MALE, user.getUserDetails().getGender());
+		assertEquals("john.doe@email.com", user.getUserDetails().getEmail());
+		assertEquals("+47 23456789", user.getUserDetails().getPhone());
 
 		assertNotNull(user.getUserAddress());
 		assertEquals("Storgata 1", user.getUserAddress().getAddress());
@@ -369,13 +369,13 @@ public class UserDaoIT {
 		assertTrue(user.getUserStatus().getCreated().isBefore(user.getUserStatus().getModified())
 				|| user.getUserStatus().getCreated().equals(user.getUserStatus().getModified()));
 
-		assertNotNull(user.getUserInfo());
-		assertEquals("Jane", user.getUserInfo().getFirstName());
-		assertEquals("Doe", user.getUserInfo().getLastName());
-		assertNotNull(user.getUserInfo().getBirthDate());
-		assertEquals(Gender.FEMALE, user.getUserInfo().getGender());
-		assertEquals("jane.doe@email.com", user.getUserInfo().getEmail());
-		assertEquals("+47 98765432", user.getUserInfo().getPhone());
+		assertNotNull(user.getUserDetails());
+		assertEquals("Jane", user.getUserDetails().getFirstName());
+		assertEquals("Doe", user.getUserDetails().getLastName());
+		assertNotNull(user.getUserDetails().getBirthDate());
+		assertEquals(Gender.FEMALE, user.getUserDetails().getGender());
+		assertEquals("jane.doe@email.com", user.getUserDetails().getEmail());
+		assertEquals("+47 98765432", user.getUserDetails().getPhone());
 
 		assertNotNull(user.getUserAddress());
 		assertEquals("Lillegata 1", user.getUserAddress().getAddress());
@@ -392,13 +392,13 @@ public class UserDaoIT {
 		assertTrue(user.getUserStatus().getCreated().isBefore(user.getUserStatus().getModified())
 				|| user.getUserStatus().getCreated().equals(user.getUserStatus().getModified()));
 
-		assertNotNull(user.getUserInfo());
-		assertEquals("Jane", user.getUserInfo().getFirstName());
-		assertEquals("Doe", user.getUserInfo().getLastName());
-		assertNotNull(user.getUserInfo().getBirthDate());
-		assertEquals(Gender.FEMALE, user.getUserInfo().getGender());
-		assertEquals("jane.doe@epost.net", user.getUserInfo().getEmail());
-		assertEquals("+47 22334455", user.getUserInfo().getPhone());
+		assertNotNull(user.getUserDetails());
+		assertEquals("Jane", user.getUserDetails().getFirstName());
+		assertEquals("Doe", user.getUserDetails().getLastName());
+		assertNotNull(user.getUserDetails().getBirthDate());
+		assertEquals(Gender.FEMALE, user.getUserDetails().getGender());
+		assertEquals("jane.doe@epost.net", user.getUserDetails().getEmail());
+		assertEquals("+47 22334455", user.getUserDetails().getPhone());
 
 		assertNotNull(user.getUserAddress());
 		assertEquals("Nygata 2", user.getUserAddress().getAddress());

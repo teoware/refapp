@@ -47,8 +47,8 @@ public class RegisterUserControllerBean extends AbstractControllerBean implement
 	}
 
 	private void processRegisterUserRequest() {
-		vo.getUser().getUserInfo().setGender(Gender.MALE);
-		vo.getUser().getUserInfo().setBirthDate(new DateTime());
+		vo.getUser().getUserDetails().setGender(Gender.MALE);
+		vo.getUser().getUserDetails().setBirthDate(new DateTime());
 
 		vo.getUser().getUserAddress().setAddress("Abc street 1");
 		vo.getUser().getUserAddress().setPostalCode("1234");

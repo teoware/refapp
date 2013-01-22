@@ -13,7 +13,7 @@ public class User extends BaseBody {
 	
 	@NotNull
 	@Valid
-	protected UserInfo userInfo;
+	protected UserDetails userDetails;
 	
 	@NotNull
 	@Valid
@@ -29,12 +29,12 @@ public class User extends BaseBody {
 		this.username = username;
 	}
 
-	public UserInfo getUserInfo() {
-		return userInfo;
+	public UserDetails getUserDetails() {
+		return userDetails;
 	}
 
-	public void setUserInfo(UserInfo userInfo) {
-		this.userInfo = userInfo;
+	public void setUserDetails(UserDetails userDetails) {
+		this.userDetails = userDetails;
 	}
 
 	public UserAddress getUserAddress() {

@@ -41,16 +41,16 @@ import org.slf4j.LoggerFactory;
 
 import com.teoware.refapp.dao.dto.CreateUserAddressInput;
 import com.teoware.refapp.dao.dto.CreateUserAddressOutput;
-import com.teoware.refapp.dao.dto.CreateUserInfoInput;
-import com.teoware.refapp.dao.dto.CreateUserInfoOutput;
+import com.teoware.refapp.dao.dto.CreateUserDetailsInput;
+import com.teoware.refapp.dao.dto.CreateUserDetailsOutput;
 import com.teoware.refapp.dao.dto.CreateUserInput;
 import com.teoware.refapp.dao.dto.CreateUserOutput;
 import com.teoware.refapp.dao.dto.CreateUserPasswordInput;
 import com.teoware.refapp.dao.dto.CreateUserPasswordOutput;
 import com.teoware.refapp.dao.dto.DeleteUserAddressInput;
 import com.teoware.refapp.dao.dto.DeleteUserAddressOutput;
-import com.teoware.refapp.dao.dto.DeleteUserInfoInput;
-import com.teoware.refapp.dao.dto.DeleteUserInfoOutput;
+import com.teoware.refapp.dao.dto.DeleteUserDetailsInput;
+import com.teoware.refapp.dao.dto.DeleteUserDetailsOutput;
 import com.teoware.refapp.dao.dto.DeleteUserInput;
 import com.teoware.refapp.dao.dto.DeleteUserOutput;
 import com.teoware.refapp.dao.dto.DeleteUserPasswordInput;
@@ -66,8 +66,8 @@ import com.teoware.refapp.dao.dto.ReadUserPasswordInput;
 import com.teoware.refapp.dao.dto.ReadUserPasswordOutput;
 import com.teoware.refapp.dao.dto.UpdateUserAddressInput;
 import com.teoware.refapp.dao.dto.UpdateUserAddressOutput;
-import com.teoware.refapp.dao.dto.UpdateUserInfoInput;
-import com.teoware.refapp.dao.dto.UpdateUserInfoOutput;
+import com.teoware.refapp.dao.dto.UpdateUserDetailsInput;
+import com.teoware.refapp.dao.dto.UpdateUserDetailsOutput;
 import com.teoware.refapp.dao.dto.UpdateUserInput;
 import com.teoware.refapp.dao.dto.UpdateUserOutput;
 import com.teoware.refapp.dao.dto.UpdateUserPasswordInput;
@@ -131,21 +131,21 @@ public class UserDaoBean extends Dao implements UserDao {
 	}
 
 	@Override
-	public CreateUserInfoOutput createUserInfo(CreateUserInfoInput input) throws DaoException {
+	public CreateUserDetailsOutput createUserDetails(CreateUserDetailsInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Create user info operation invoked.");
 		SQL sql = new SQL.Builder()
 				.doInsert(USER_DETAILS_TABLE)
 				.columnValues(USER_ID_COLUMN_NAME, FIRSTNAME_COLUMN_NAME, LASTNAME_COLUMN_NAME, BIRTHDATE_COLUMN_NAME,
 						GENDER_COLUMN_NAME, EMAIL_COLUMN_NAME, PHONE_COLUMN_NAME).build();
-		Object[] parameters = DaoHelper.generateArray(input.getUserId().getId(), input.getUserInfo().getFirstName(),
-				input.getUserInfo().getLastName(), DateTimeConverter.toSqlDate(input.getUserInfo().getBirthDate()),
-				input.getUserInfo().getGender().toString(), input.getUserInfo().getEmail(), input.getUserInfo()
+		Object[] parameters = DaoHelper.generateArray(input.getUserId().getId(), input.getUserDetails().getFirstName(),
+				input.getUserDetails().getLastName(), DateTimeConverter.toSqlDate(input.getUserDetails().getBirthDate()),
+				input.getUserDetails().getGender().toString(), input.getUserDetails().getEmail(), input.getUserDetails()
 						.getPhone());
 		ChangeResult changeResult = super.create(sql, parameters);
 
 		int rowsAffected = changeResult.getRowsAffected();
 
-		return new CreateUserInfoOutput(rowsAffected);
+		return new CreateUserDetailsOutput(rowsAffected);
 	}
 
 	@Override
@@ -236,21 +236,21 @@ public class UserDaoBean extends Dao implements UserDao {
 	}
 
 	@Override
-	public UpdateUserInfoOutput updateUserInfo(UpdateUserInfoInput input) throws DaoException {
+	public UpdateUserDetailsOutput updateUserDetails(UpdateUserDetailsInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Update user info operation invoked.");
-		if (input.getUserInfo() != null) {
+		if (input.getUserDetails() != null) {
 			SQL sql = new SQL.Builder()
 					.doUpdate(USER_DETAILS_TABLE)
 					.setColumns(FIRSTNAME_COLUMN_NAME, LASTNAME_COLUMN_NAME, BIRTHDATE_COLUMN_NAME, GENDER_COLUMN_NAME,
 							EMAIL_COLUMN_NAME, PHONE_COLUMN_NAME).where(USER_ID_COLUMN_NAME).build();
-			Object[] parameters = DaoHelper.generateArray(input.getUserInfo().getFirstName(), input.getUserInfo()
-					.getLastName(), DateTimeConverter.toSqlDate(input.getUserInfo().getBirthDate()), input
-					.getUserInfo().getGender().toString(), input.getUserInfo().getEmail(), input.getUserInfo()
+			Object[] parameters = DaoHelper.generateArray(input.getUserDetails().getFirstName(), input.getUserDetails()
+					.getLastName(), DateTimeConverter.toSqlDate(input.getUserDetails().getBirthDate()), input
+					.getUserDetails().getGender().toString(), input.getUserDetails().getEmail(), input.getUserDetails()
 					.getPhone(), input.getUserId().getId());
 			ChangeResult result = super.update(sql, parameters);
-			return new UpdateUserInfoOutput(result.getRowsAffected());
+			return new UpdateUserDetailsOutput(result.getRowsAffected());
 		} else {
-			return new UpdateUserInfoOutput(0);
+			return new UpdateUserDetailsOutput(0);
 		}
 	}
 
@@ -313,13 +313,13 @@ public class UserDaoBean extends Dao implements UserDao {
 	}
 
 	@Override
-	public DeleteUserInfoOutput deleteUserInfo(DeleteUserInfoInput input) throws DaoException {
+	public DeleteUserDetailsOutput deleteUserDetails(DeleteUserDetailsInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Delete user info operation invoked.");
 
 		SQL sql = new SQL.Builder().doDelete(USER_DETAILS_TABLE).where(USER_ID_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(input.getUserId().getId());
 		ChangeResult changeResult = super.delete(sql, parameters);
-		return new DeleteUserInfoOutput(changeResult.getRowsAffected());
+		return new DeleteUserDetailsOutput(changeResult.getRowsAffected());
 	}
 
 	@Override

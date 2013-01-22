@@ -63,7 +63,7 @@ public class RegisterUserRequestValidationConstraintsTest {
 	public void testRegisterUserRequestUserFieldsNull() {
 		RegisterUserRequest request = ServiceBeanFactory.createRegisterUserRequestBean();
 		request.getBody().setUsername(null);
-		request.getBody().setUserInfo(null);
+		request.getBody().setUserDetails(null);
 		request.getBody().setUserAddress(null);
 		request.getBody().setUserStatus(null);
 

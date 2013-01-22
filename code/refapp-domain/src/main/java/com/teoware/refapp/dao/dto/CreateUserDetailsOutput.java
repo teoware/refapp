@@ -1,10 +1,10 @@
 package com.teoware.refapp.dao.dto;
 
-public class DeleteUserInfoOutput {
+public class CreateUserDetailsOutput {
 
 	private int rowsAffected;
 
-	public DeleteUserInfoOutput(int rowsAffected) {
+	public CreateUserDetailsOutput(int rowsAffected) {
 		this.rowsAffected = rowsAffected;
 	}
 

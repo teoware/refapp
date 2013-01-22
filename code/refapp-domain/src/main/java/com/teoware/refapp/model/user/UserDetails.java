@@ -4,7 +4,7 @@ import org.joda.time.DateTime;
 
 import com.teoware.refapp.model.enums.Gender;
 
-public class UserInfo {
+public class UserDetails {
 
 	protected String firstName;
 	protected String lastName;

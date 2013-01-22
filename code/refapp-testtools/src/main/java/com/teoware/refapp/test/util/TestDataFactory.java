@@ -3,14 +3,14 @@ package com.teoware.refapp.test.util;
 import org.joda.time.DateTime;
 
 import com.teoware.refapp.dao.dto.CreateUserAddressInput;
-import com.teoware.refapp.dao.dto.CreateUserInfoInput;
+import com.teoware.refapp.dao.dto.CreateUserDetailsInput;
 import com.teoware.refapp.dao.dto.CreateUserInput;
 import com.teoware.refapp.dao.dto.DeleteUserInput;
 import com.teoware.refapp.dao.dto.Id;
 import com.teoware.refapp.dao.dto.PurgeUsersInput;
 import com.teoware.refapp.dao.dto.ReadUserInput;
 import com.teoware.refapp.dao.dto.UpdateUserAddressInput;
-import com.teoware.refapp.dao.dto.UpdateUserInfoInput;
+import com.teoware.refapp.dao.dto.UpdateUserDetailsInput;
 import com.teoware.refapp.dao.dto.UpdateUserInput;
 import com.teoware.refapp.dao.dto.UpdateUserStatusInput;
 import com.teoware.refapp.model.enums.Gender;
@@ -30,12 +30,12 @@ public final class TestDataFactory {
 		bean.getUserStatus().setStatus(Status.ACTIVE);
 		bean.getUserStatus().setCreated(dateTime);
 		bean.getUserStatus().setModified(dateTime);
-		bean.getUserInfo().setFirstName("John");
-		bean.getUserInfo().setLastName("Doe");
-		bean.getUserInfo().setBirthDate(new DateTime().withYear(1975).withMonthOfYear(1).withDayOfMonth(1));
-		bean.getUserInfo().setGender(Gender.MALE);
-		bean.getUserInfo().setEmail("john.doe@email.com");
-		bean.getUserInfo().setPhone("+47 23456789");
+		bean.getUserDetails().setFirstName("John");
+		bean.getUserDetails().setLastName("Doe");
+		bean.getUserDetails().setBirthDate(new DateTime().withYear(1975).withMonthOfYear(1).withDayOfMonth(1));
+		bean.getUserDetails().setGender(Gender.MALE);
+		bean.getUserDetails().setEmail("john.doe@email.com");
+		bean.getUserDetails().setPhone("+47 23456789");
 		bean.getUserAddress().setAddress("Storgata 1");
 		bean.getUserAddress().setPostalCode("1234");
 		bean.getUserAddress().setMunicipality("Oslo");
@@ -51,12 +51,12 @@ public final class TestDataFactory {
 		bean.getUserStatus().setStatus(Status.ACTIVE);
 		bean.getUserStatus().setCreated(dateTime);
 		bean.getUserStatus().setModified(dateTime);
-		bean.getUserInfo().setFirstName("Jane");
-		bean.getUserInfo().setLastName("Doe");
-		bean.getUserInfo().setBirthDate(new DateTime().withYear(1970).withMonthOfYear(12).withDayOfMonth(30));
-		bean.getUserInfo().setGender(Gender.FEMALE);
-		bean.getUserInfo().setEmail("jane.doe@email.com");
-		bean.getUserInfo().setPhone("+47 98765432");
+		bean.getUserDetails().setFirstName("Jane");
+		bean.getUserDetails().setLastName("Doe");
+		bean.getUserDetails().setBirthDate(new DateTime().withYear(1970).withMonthOfYear(12).withDayOfMonth(30));
+		bean.getUserDetails().setGender(Gender.FEMALE);
+		bean.getUserDetails().setEmail("jane.doe@email.com");
+		bean.getUserDetails().setPhone("+47 98765432");
 		bean.getUserAddress().setAddress("Lillegata 1");
 		bean.getUserAddress().setPostalCode("1010");
 		bean.getUserAddress().setMunicipality("Oslo");
@@ -72,12 +72,12 @@ public final class TestDataFactory {
 		bean.getUserStatus().setStatus(Status.ACTIVE);
 		bean.getUserStatus().setCreated(dateTime);
 		bean.getUserStatus().setModified(dateTime);
-		bean.getUserInfo().setFirstName("Jonah");
-		bean.getUserInfo().setLastName("Doe");
-		bean.getUserInfo().setBirthDate(new DateTime().withYear(1975).withMonthOfYear(1).withDayOfMonth(1));
-		bean.getUserInfo().setGender(Gender.MALE);
-		bean.getUserInfo().setEmail("jonah.doe@email.com");
-		bean.getUserInfo().setPhone("+47 19283746");
+		bean.getUserDetails().setFirstName("Jonah");
+		bean.getUserDetails().setLastName("Doe");
+		bean.getUserDetails().setBirthDate(new DateTime().withYear(1975).withMonthOfYear(1).withDayOfMonth(1));
+		bean.getUserDetails().setGender(Gender.MALE);
+		bean.getUserDetails().setEmail("jonah.doe@email.com");
+		bean.getUserDetails().setPhone("+47 19283746");
 		bean.getUserAddress().setAddress("Mellomgata 1");
 		bean.getUserAddress().setPostalCode("1221");
 		bean.getUserAddress().setMunicipality("Oslo");
@@ -123,12 +123,12 @@ public final class TestDataFactory {
 		return new CreateUserInput(createUserJohn().getUsername());
 	}
 
-	public static CreateUserInfoInput createCreateUserInfoInputJohn() {
-		return createCreateUserInfoInputJohn(new Id());
+	public static CreateUserDetailsInput createCreateUserDetailsInputJohn() {
+		return createCreateUserDetailsInputJohn(new Id());
 	}
 
-	public static CreateUserInfoInput createCreateUserInfoInputJohn(Id userId) {
-		return new CreateUserInfoInput(userId, createUserJohn().getUserInfo());
+	public static CreateUserDetailsInput createCreateUserDetailsInputJohn(Id userId) {
+		return new CreateUserDetailsInput(userId, createUserJohn().getUserDetails());
 	}
 
 	public static CreateUserAddressInput createCreateUserAddressInputJohn() {
@@ -143,12 +143,12 @@ public final class TestDataFactory {
 		return new CreateUserInput(createUserJane().getUsername());
 	}
 
-	public static CreateUserInfoInput createCreateUserInfoInputJane() {
-		return createCreateUserInfoInputJane(new Id());
+	public static CreateUserDetailsInput createCreateUserDetailsInputJane() {
+		return createCreateUserDetailsInputJane(new Id());
 	}
 
-	public static CreateUserInfoInput createCreateUserInfoInputJane(Id userId) {
-		return new CreateUserInfoInput(userId, createUserJane().getUserInfo());
+	public static CreateUserDetailsInput createCreateUserDetailsInputJane(Id userId) {
+		return new CreateUserDetailsInput(userId, createUserJane().getUserDetails());
 	}
 
 	public static CreateUserAddressInput createCreateUserAddressInputJane() {
@@ -163,12 +163,12 @@ public final class TestDataFactory {
 		return new CreateUserInput(createUserJonah().getUsername());
 	}
 
-	public static CreateUserInfoInput createCreateUserInfoInputJonah() {
-		return createCreateUserInfoInputJonah(new Id());
+	public static CreateUserDetailsInput createCreateUserDetailsInputJonah() {
+		return createCreateUserDetailsInputJonah(new Id());
 	}
 
-	public static CreateUserInfoInput createCreateUserInfoInputJonah(Id userId) {
-		return new CreateUserInfoInput(userId, createUserJonah().getUserInfo());
+	public static CreateUserDetailsInput createCreateUserDetailsInputJonah(Id userId) {
+		return new CreateUserDetailsInput(userId, createUserJonah().getUserDetails());
 	}
 
 	public static CreateUserAddressInput createCreateUserAddressInputJonah() {
@@ -187,12 +187,12 @@ public final class TestDataFactory {
 		return new UpdateUserInput(userId, createUserJohn().getUsername());
 	}
 
-	public static UpdateUserInfoInput createUpdateUserInfoInputJohn() {
-		return createUpdateUserInfoInputJohn(new Id());
+	public static UpdateUserDetailsInput createUpdateUserDetailsInputJohn() {
+		return createUpdateUserDetailsInputJohn(new Id());
 	}
 
-	public static UpdateUserInfoInput createUpdateUserInfoInputJohn(Id userId) {
-		return new UpdateUserInfoInput(userId, createUserJohn().getUserInfo());
+	public static UpdateUserDetailsInput createUpdateUserDetailsInputJohn(Id userId) {
+		return new UpdateUserDetailsInput(userId, createUserJohn().getUserDetails());
 	}
 
 	public static UpdateUserStatusInput createUpdateUserStatusInputJohn() {
@@ -219,12 +219,12 @@ public final class TestDataFactory {
 		return new UpdateUserInput(userId, createUserJane().getUsername());
 	}
 
-	public static UpdateUserInfoInput createUpdateUserInfoInputJane() {
-		return createUpdateUserInfoInputJane(new Id());
+	public static UpdateUserDetailsInput createUpdateUserDetailsInputJane() {
+		return createUpdateUserDetailsInputJane(new Id());
 	}
 
-	public static UpdateUserInfoInput createUpdateUserInfoInputJane(Id userId) {
-		return new UpdateUserInfoInput(userId, createUserJane().getUserInfo());
+	public static UpdateUserDetailsInput createUpdateUserDetailsInputJane(Id userId) {
+		return new UpdateUserDetailsInput(userId, createUserJane().getUserDetails());
 	}
 
 	public static UpdateUserStatusInput createUpdateUserStatusInputJane() {
@@ -251,12 +251,12 @@ public final class TestDataFactory {
 		return new UpdateUserInput(userId, createUserJonah().getUsername());
 	}
 
-	public static UpdateUserInfoInput createUpdateUserInfoInputJonah() {
-		return createUpdateUserInfoInputJonah(new Id());
+	public static UpdateUserDetailsInput createUpdateUserDetailsInputJonah() {
+		return createUpdateUserDetailsInputJonah(new Id());
 	}
 
-	public static UpdateUserInfoInput createUpdateUserInfoInputJonah(Id userId) {
-		return new UpdateUserInfoInput(userId, createUserJonah().getUserInfo());
+	public static UpdateUserDetailsInput createUpdateUserDetailsInputJonah(Id userId) {
+		return new UpdateUserDetailsInput(userId, createUserJonah().getUserDetails());
 	}
 
 	public static UpdateUserStatusInput createUpdateUserStatusInputJonah() {

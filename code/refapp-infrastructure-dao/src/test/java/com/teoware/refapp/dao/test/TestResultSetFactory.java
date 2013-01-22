@@ -75,9 +75,9 @@ public final class TestResultSetFactory {
 
 	private static void populateUserJohnViewRow(SimpleResultSet resultSet) {
 		User john = TestDataFactory.createUserJohn();
-		resultSet.addRow(john.getUsername().getUsername(), john.getUserInfo().getFirstName(), john.getUserInfo()
-				.getLastName(), DateTimeConverter.toSqlDate(john.getUserInfo().getBirthDate()), john.getUserInfo()
-				.getGender().toString(), john.getUserInfo().getEmail(), john.getUserInfo().getPhone(), john
+		resultSet.addRow(john.getUsername().getUsername(), john.getUserDetails().getFirstName(), john.getUserDetails()
+				.getLastName(), DateTimeConverter.toSqlDate(john.getUserDetails().getBirthDate()), john.getUserDetails()
+				.getGender().toString(), john.getUserDetails().getEmail(), john.getUserDetails().getPhone(), john
 				.getUserAddress().getAddress(), john.getUserAddress().getPostalCode(), john.getUserAddress()
 				.getMunicipality(), john.getUserAddress().getRegion(), john.getUserAddress().getCountry(), john
 				.getUserStatus().getStatus().toString(), DateTimeConverter.toSqlTimestamp(john.getUserStatus()
@@ -86,9 +86,9 @@ public final class TestResultSetFactory {
 
 	private static void populateUserJaneViewRow(SimpleResultSet resultSet) {
 		User jane = TestDataFactory.createUserJane();
-		resultSet.addRow(jane.getUsername().getUsername(), jane.getUserInfo().getFirstName(), jane.getUserInfo()
-				.getLastName(), DateTimeConverter.toSqlDate(jane.getUserInfo().getBirthDate()), jane.getUserInfo()
-				.getGender().toString(), jane.getUserInfo().getEmail(), jane.getUserInfo().getPhone(), jane
+		resultSet.addRow(jane.getUsername().getUsername(), jane.getUserDetails().getFirstName(), jane.getUserDetails()
+				.getLastName(), DateTimeConverter.toSqlDate(jane.getUserDetails().getBirthDate()), jane.getUserDetails()
+				.getGender().toString(), jane.getUserDetails().getEmail(), jane.getUserDetails().getPhone(), jane
 				.getUserAddress().getAddress(), jane.getUserAddress().getPostalCode(), jane.getUserAddress()
 				.getMunicipality(), jane.getUserAddress().getRegion(), jane.getUserAddress().getCountry(), jane
 				.getUserStatus().getStatus().toString(), DateTimeConverter.toSqlTimestamp(jane.getUserStatus()
@@ -97,9 +97,9 @@ public final class TestResultSetFactory {
 
 	private static void populateUserJonahViewRow(SimpleResultSet resultSet) {
 		User jonah = TestDataFactory.createUserJonah();
-		resultSet.addRow(jonah.getUsername().getUsername(), jonah.getUserInfo().getFirstName(), jonah.getUserInfo()
-				.getLastName(), DateTimeConverter.toSqlDate(jonah.getUserInfo().getBirthDate()), jonah.getUserInfo()
-				.getGender().toString(), jonah.getUserInfo().getEmail(), jonah.getUserInfo().getPhone(), jonah
+		resultSet.addRow(jonah.getUsername().getUsername(), jonah.getUserDetails().getFirstName(), jonah.getUserDetails()
+				.getLastName(), DateTimeConverter.toSqlDate(jonah.getUserDetails().getBirthDate()), jonah.getUserDetails()
+				.getGender().toString(), jonah.getUserDetails().getEmail(), jonah.getUserDetails().getPhone(), jonah
 				.getUserAddress().getAddress(), jonah.getUserAddress().getPostalCode(), jonah.getUserAddress()
 				.getMunicipality(), jonah.getUserAddress().getRegion(), jonah.getUserAddress().getCountry(), jonah
 				.getUserStatus().getStatus().toString(), DateTimeConverter.toSqlTimestamp(jonah.getUserStatus()

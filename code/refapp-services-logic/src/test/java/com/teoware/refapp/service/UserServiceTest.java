@@ -18,8 +18,8 @@ import com.teoware.refapp.dao.DaoException;
 import com.teoware.refapp.dao.UserDao;
 import com.teoware.refapp.dao.dto.CreateUserAddressInput;
 import com.teoware.refapp.dao.dto.CreateUserAddressOutput;
-import com.teoware.refapp.dao.dto.CreateUserInfoInput;
-import com.teoware.refapp.dao.dto.CreateUserInfoOutput;
+import com.teoware.refapp.dao.dto.CreateUserDetailsInput;
+import com.teoware.refapp.dao.dto.CreateUserDetailsOutput;
 import com.teoware.refapp.dao.dto.CreateUserInput;
 import com.teoware.refapp.dao.dto.CreateUserOutput;
 import com.teoware.refapp.dao.dto.CreateUserPasswordInput;
@@ -48,7 +48,7 @@ public class UserServiceTest {
 	private CreateUserOutput createUserOutput;
 
 	@Mock
-	private CreateUserInfoOutput createUserInfoOutput;
+	private CreateUserDetailsOutput createUserInfoOutput;
 
 	@Mock
 	private CreateUserAddressOutput createUserAddressOutput;
@@ -66,7 +66,7 @@ public class UserServiceTest {
 	public void testRegisterUserResponseNotNull() {
 		try {
 			when(userDao.createUser(any(CreateUserInput.class))).thenReturn(createUserOutput);
-			when(userDao.createUserInfo(any(CreateUserInfoInput.class))).thenReturn(createUserInfoOutput);
+			when(userDao.createUserDetails(any(CreateUserDetailsInput.class))).thenReturn(createUserInfoOutput);
 			when(userDao.createUserAddress(any(CreateUserAddressInput.class))).thenReturn(createUserAddressOutput);
 			when(userDao.createUserPassword(any(CreateUserPasswordInput.class))).thenReturn(createUserPasswordOutput);
 

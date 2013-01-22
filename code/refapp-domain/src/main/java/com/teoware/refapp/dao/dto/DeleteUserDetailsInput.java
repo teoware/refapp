@@ -1,13 +1,13 @@
 package com.teoware.refapp.dao.dto;
 
-public class DeleteUserInfoInput {
+public class DeleteUserDetailsInput {
 
 	private Id userId;
 
-	public DeleteUserInfoInput() {
+	public DeleteUserDetailsInput() {
 	}
 
-	public DeleteUserInfoInput(Id userId) {
+	public DeleteUserDetailsInput(Id userId) {
 		this.setUserId(userId);
 	}
 
