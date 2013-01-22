@@ -53,7 +53,7 @@ public class UserDaoMock extends UserDaoBean {
 
 		super.delete(new SQL.Builder().doDelete(USER_PASSWORD_TABLE).whereIn(USER_ID_COLUMN_NAME, 3).build(), ids);
 		super.delete(new SQL.Builder().doDelete(USER_ADDRESS_TABLE).whereIn(USER_ID_COLUMN_NAME, 3).build(), ids);
-		super.delete(new SQL.Builder().doDelete(USER_INFO_TABLE).whereIn(USER_ID_COLUMN_NAME, 3).build(), ids);
+		super.delete(new SQL.Builder().doDelete(USER_DETAILS_TABLE).whereIn(USER_ID_COLUMN_NAME, 3).build(), ids);
 		super.delete(new SQL.Builder().doDelete(USER_STATUS_TABLE).whereIn(USER_ID_COLUMN_NAME, 3).build(), ids);
 		super.delete(new SQL.Builder().doDelete(USERS_TABLE).whereIn(USER_ID_COLUMN_NAME, 3).build(), ids);
 	}

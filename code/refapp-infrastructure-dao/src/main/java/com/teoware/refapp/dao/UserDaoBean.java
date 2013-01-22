@@ -21,8 +21,8 @@ import static com.teoware.refapp.dao.metadata.UserTables.USERNAME_COLUMN_NAME;
 import static com.teoware.refapp.dao.metadata.UserTables.USERS_TABLE_NAME;
 import static com.teoware.refapp.dao.metadata.UserTables.USERS_VIEW_NAME;
 import static com.teoware.refapp.dao.metadata.UserTables.USER_ADDRESS_TABLE_NAME;
+import static com.teoware.refapp.dao.metadata.UserTables.USER_DETAILS_TABLE_NAME;
 import static com.teoware.refapp.dao.metadata.UserTables.USER_ID_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UserTables.USER_INFO_TABLE_NAME;
 import static com.teoware.refapp.dao.metadata.UserTables.USER_PASSWORD_TABLE_NAME;
 import static com.teoware.refapp.dao.metadata.UserTables.USER_STATUS_TABLE_NAME;
 
@@ -100,7 +100,7 @@ public class UserDaoBean extends Dao implements UserDao {
 	public static final String USERS_VIEW = REFAPP_SCHEMA_NAME + "." + USERS_VIEW_NAME;
 	public static final String USERS_TABLE = REFAPP_SCHEMA_NAME + "." + USERS_TABLE_NAME;
 	public static final String USER_STATUS_TABLE = REFAPP_SCHEMA_NAME + "." + USER_STATUS_TABLE_NAME;
-	public static final String USER_INFO_TABLE = REFAPP_SCHEMA_NAME + "." + USER_INFO_TABLE_NAME;
+	public static final String USER_DETAILS_TABLE = REFAPP_SCHEMA_NAME + "." + USER_DETAILS_TABLE_NAME;
 	public static final String USER_ADDRESS_TABLE = REFAPP_SCHEMA_NAME + "." + USER_ADDRESS_TABLE_NAME;
 	public static final String USER_PASSWORD_TABLE = REFAPP_SCHEMA_NAME + "." + USER_PASSWORD_TABLE_NAME;
 
@@ -134,7 +134,7 @@ public class UserDaoBean extends Dao implements UserDao {
 	public CreateUserInfoOutput createUserInfo(CreateUserInfoInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Create user info operation invoked.");
 		SQL sql = new SQL.Builder()
-				.doInsert(USER_INFO_TABLE)
+				.doInsert(USER_DETAILS_TABLE)
 				.columnValues(USER_ID_COLUMN_NAME, FIRSTNAME_COLUMN_NAME, LASTNAME_COLUMN_NAME, BIRTHDATE_COLUMN_NAME,
 						GENDER_COLUMN_NAME, EMAIL_COLUMN_NAME, PHONE_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(input.getUserId().getId(), input.getUserInfo().getFirstName(),
@@ -240,7 +240,7 @@ public class UserDaoBean extends Dao implements UserDao {
 		LOG.info(DAO_NAME + ": Update user info operation invoked.");
 		if (input.getUserInfo() != null) {
 			SQL sql = new SQL.Builder()
-					.doUpdate(USER_INFO_TABLE)
+					.doUpdate(USER_DETAILS_TABLE)
 					.setColumns(FIRSTNAME_COLUMN_NAME, LASTNAME_COLUMN_NAME, BIRTHDATE_COLUMN_NAME, GENDER_COLUMN_NAME,
 							EMAIL_COLUMN_NAME, PHONE_COLUMN_NAME).where(USER_ID_COLUMN_NAME).build();
 			Object[] parameters = DaoHelper.generateArray(input.getUserInfo().getFirstName(), input.getUserInfo()
@@ -316,7 +316,7 @@ public class UserDaoBean extends Dao implements UserDao {
 	public DeleteUserInfoOutput deleteUserInfo(DeleteUserInfoInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Delete user info operation invoked.");
 
-		SQL sql = new SQL.Builder().doDelete(USER_INFO_TABLE).where(USER_ID_COLUMN_NAME).build();
+		SQL sql = new SQL.Builder().doDelete(USER_DETAILS_TABLE).where(USER_ID_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(input.getUserId().getId());
 		ChangeResult changeResult = super.delete(sql, parameters);
 		return new DeleteUserInfoOutput(changeResult.getRowsAffected());
