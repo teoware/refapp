@@ -2,17 +2,17 @@ package com.teoware.refapp.dao.dto;
 
 import java.util.List;
 
-import com.teoware.refapp.model.user.User;
+import com.teoware.refapp.model.note.Note;
 
 public class ReadNoteOutput {
 
-	List<User> userList;
+	List<Note> noteList;
 
-	public ReadNoteOutput(List<User> userList) {
-		this.userList = userList;
+	public ReadNoteOutput(List<Note> noteList) {
+		this.noteList = noteList;
 	}
 
-	public List<User> getUserList() {
-		return userList;
+	public List<Note> getNoteList() {
+		return noteList;
 	}
 }

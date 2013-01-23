@@ -12,11 +12,6 @@ public class UserIdRowMapper implements RowMapper<Id> {
 
 	@Override
 	public Id mapRow(ResultSet result, int rowCount) throws SQLException, ParseException {
-		Long userId = result.getLong(ID_COLUMN_NAME);
-		if (userId != null) {
-			return new Id(userId);
-		} else {
-			return null;
-		}
+		return new Id(result.getLong(ID_COLUMN_NAME));
 	}
 }

@@ -2,17 +2,17 @@ package com.teoware.refapp.dao.dto;
 
 import java.util.List;
 
-import com.teoware.refapp.model.user.User;
+import com.teoware.refapp.model.task.Task;
 
 public class ReadTaskOutput {
 
-	List<User> userList;
+	List<Task> taskList;
 
-	public ReadTaskOutput(List<User> userList) {
-		this.userList = userList;
+	public ReadTaskOutput(List<Task> taskList) {
+		this.taskList = taskList;
 	}
 
-	public List<User> getUserList() {
-		return userList;
+	public List<Task> getTaskList() {
+		return taskList;
 	}
 }
