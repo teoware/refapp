@@ -5,6 +5,8 @@ import static org.junit.Assert.assertEquals;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Test;
 
 public class DateTimeUtilsTest {
@@ -41,13 +43,13 @@ public class DateTimeUtilsTest {
 
 		assertEquals(hourMinus5(), cal.get(Calendar.HOUR_OF_DAY));
 	}
-	
+
 	private int dayPlus5() {
 		Calendar cal = Calendar.getInstance();
 		cal.roll(Calendar.DAY_OF_YEAR, 5);
 		return cal.get(Calendar.DAY_OF_YEAR);
 	}
-	
+
 	private int hourMinus5() {
 		Calendar cal = Calendar.getInstance();
 		cal.roll(Calendar.HOUR_OF_DAY, -5);
@@ -255,12 +257,65 @@ public class DateTimeUtilsTest {
 
 		assertEquals(sqlTimestamp.getTime(), sqlDate.getTime());
 	}
-	
+
 	@Test
 	public void testSqlDateToSqlTimestamp() {
 		java.sql.Date sqlDate = new java.sql.Date(0);
 		java.sql.Timestamp sqlTimestamp = DateTimeUtils.sqlDateToSqlTimestamp(sqlDate);
 
 		assertEquals(sqlDate.getTime(), sqlTimestamp.getTime());
+	}
+
+	@Test
+	public void testStringToSqlDate() {
+		java.sql.Date sqlDate = new java.sql.Date(offsetInMillis());
+		java.sql.Date sqlDate2 = DateTimeUtils.stringToSqlDate("1970-01-01");
+
+		assertEquals(sqlDate.getTime(), sqlDate2.getTime());
+	}
+
+	@Test
+	public void testSqlDateToString() {
+		java.sql.Date sqlDate = new java.sql.Date(0);
+		String str = DateTimeUtils.sqlDateToString(sqlDate);
+
+		assertEquals("1970-01-01", str);
+	}
+
+	@Test
+	public void testStringToSqlTime() {
+		java.sql.Time sqlTime = new java.sql.Time(offsetInMillis());
+		java.sql.Time sqlTime2 = DateTimeUtils.stringToSqlTime("00:00:00");
+
+		assertEquals(sqlTime.getTime(), sqlTime2.getTime());
+	}
+
+	@Test
+	public void testSqlTimeToString() {
+		java.sql.Time sqlTime = new java.sql.Time(offsetInMillis());
+		String str = DateTimeUtils.sqlTimeToString(sqlTime);
+
+		assertEquals("00:00:00", str);
+	}
+
+	@Test
+	public void testStringToSqlTimestamp() {
+		java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(offsetInMillis());
+		java.sql.Timestamp sqlTimestamp2 = DateTimeUtils.stringToSqlTimestamp("1970-01-01 00:00:00.000");
+
+		assertEquals(sqlTimestamp.getTime(), sqlTimestamp2.getTime());
+	}
+
+	@Test
+	public void testSqlTimestampToString() {
+		java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(offsetInMillis());
+		String str = DateTimeUtils.sqlTimestampToString(sqlTimestamp);
+
+		assertEquals("1970-01-01 00:00:00.000", str);
+	}
+
+	private int offsetInMillis() {
+		int offset = DateTimeZone.UTC.getOffset(0) - DateTime.now().getZone().getOffset(0);
+		return offset;
 	}
 }

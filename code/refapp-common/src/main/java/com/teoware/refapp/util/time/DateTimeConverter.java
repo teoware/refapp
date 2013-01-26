@@ -9,7 +9,7 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
 /**
- * Utility class for converting between standard date/time objects and {@link DateTime}.
+ * Utility class for converting between basic Java date/time objects and {@link DateTime}.
  * 
  * @author thomas@teoware.com
  * 

@@ -17,6 +17,8 @@ public class TestBean {
 	private char chr;
 	private Character chr2;
 	private Object obj;
+	private FinalObjectType finalObj;
+	private FinalObjectTypeNoDefaultConstructor finalObjectNoDefaultConstructor;
 
 	public String getStr() {
 		return str;
@@ -136,5 +138,21 @@ public class TestBean {
 
 	public void setObj(Object obj) {
 		this.obj = obj;
+	}
+
+	public FinalObjectType getFinalObj() {
+		return finalObj;
+	}
+
+	public void setFinalObj(FinalObjectType finalObj) {
+		this.finalObj = finalObj;
+	}
+
+	public FinalObjectTypeNoDefaultConstructor getFinalObjectNoDefaultConstructor() {
+		return finalObjectNoDefaultConstructor;
+	}
+
+	public void setFinalObjectNoDefaultConstructor(FinalObjectTypeNoDefaultConstructor finalObjectNoDefaultConstructor) {
+		this.finalObjectNoDefaultConstructor = finalObjectNoDefaultConstructor;
 	}
 }

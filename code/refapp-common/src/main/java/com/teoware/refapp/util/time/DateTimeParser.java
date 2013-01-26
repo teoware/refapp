@@ -6,7 +6,7 @@ import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
 /**
- * Converter for converting between {@link DateTime} and a date/time formatted string.
+ * Parser for converting between {@link DateTime} and a date/time formatted string.
  * 
  * @author thomas@teoware.com
  * 
@@ -25,12 +25,12 @@ public final class DateTimeParser {
 	public static final String TIMESTAMP_PATTERN = DATE_PATTERN + " " + TIME_PATTERN + ".SSS";
 
 	public static DateTime fromString(String dateString, String pattern) {
-		DateTimeFormatter formatter = DateTimeFormat.forPattern(pattern);
+		DateTimeFormatter formatter = createDateTimeFormatter(pattern);
 		return fromString(dateString, formatter);
 	}
 
 	public static String toString(DateTime dateTime, String pattern) {
-		DateTimeFormatter formatter = DateTimeFormat.forPattern(pattern);
+		DateTimeFormatter formatter = createDateTimeFormatter(pattern);
 		return toString(dateTime, formatter);
 	}
 
@@ -40,5 +40,9 @@ public final class DateTimeParser {
 
 	public static String toString(DateTime dateTime, DateTimeFormatter formatter) {
 		return formatter.print(dateTime.getMillis());
+	}
+
+	private static DateTimeFormatter createDateTimeFormatter(String pattern) {
+		return DateTimeFormat.forPattern(pattern);
 	}
 }

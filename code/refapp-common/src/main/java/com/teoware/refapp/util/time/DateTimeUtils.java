@@ -7,7 +7,8 @@ import java.util.TimeZone;
 import org.joda.time.DateTime;
 
 /**
- * Utility class for converting between standard date/time objects and to/from a date/time formatted strings.
+ * Utility class for converting between basic Java date/time objects, and for converting to/from a date/time formatted
+ * strings.
  * 
  * @author thomas@teoware.com
  * 

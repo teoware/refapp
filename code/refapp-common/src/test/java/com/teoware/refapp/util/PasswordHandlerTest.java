@@ -1,35 +1,21 @@
 package com.teoware.refapp.util;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.UnsupportedEncodingException;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 @Category(com.teoware.refapp.test.UnitTestGroup.class)
 public class PasswordHandlerTest {
 
-	@BeforeClass
-	public static void oneTimeSetUp() {
-
-	}
-
-	@AfterClass
-	public static void oneTimeTearDown() {
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
+	@Test
+	public void testDefaultConstructor() {
+		PasswordHandler ph = new PasswordHandler();
+		assertNotNull(ph);
 	}
 
 	@Test
@@ -64,12 +50,17 @@ public class PasswordHandlerTest {
 	public void testEncrypt() throws UnsupportedEncodingException {
 		String pwd = "secret password";
 		String salt = PasswordHandler.generateSalt();
-		
+
 		System.out.println(PasswordHandler.encryptPassword(pwd, salt));
 	}
 
 	@Test
 	public void testGenerateSalt() throws UnsupportedEncodingException {
 		System.out.println(PasswordHandler.generateSalt());
+	}
+
+	@Test
+	public void testVerifyPasswordWithAllNullInputs() throws UnsupportedEncodingException {
+		assertFalse(PasswordHandler.verifyPassword(null, null, null));
 	}
 }

@@ -16,6 +16,7 @@ import org.junit.Test;
 
 public class ConnectionHandlerTest {
 
+	@SuppressWarnings("static-access")
 	@Test
 	public void testCreateConnection() throws SQLException {
 		DataSource dataSource = mock(DataSource.class);
@@ -23,7 +24,7 @@ public class ConnectionHandlerTest {
 
 		when(dataSource.getConnection()).thenReturn(connection);
 
-		ConnectionHandler.createConnection(dataSource);
+		new ConnectionHandler().createConnection(dataSource);
 
 		verify(dataSource, times(1)).getConnection();
 	}
