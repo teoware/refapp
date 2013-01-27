@@ -52,7 +52,7 @@ import com.teoware.refapp.model.user.UserStatus;
 import com.teoware.refapp.test.util.TestDataFactory;
 
 @Category(com.teoware.refapp.test.IntegrationTestGroup.class)
-public class UserDaoIT {
+public class UserDaoBeanIT {
 
 	private static Connection connection;
 	private static UserDaoMock userDao;

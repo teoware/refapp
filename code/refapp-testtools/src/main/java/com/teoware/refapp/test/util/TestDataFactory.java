@@ -5,13 +5,18 @@ import org.joda.time.DateTime;
 import com.teoware.refapp.dao.dto.CreateUserAddressInput;
 import com.teoware.refapp.dao.dto.CreateUserDetailsInput;
 import com.teoware.refapp.dao.dto.CreateUserInput;
+import com.teoware.refapp.dao.dto.DeleteUserAddressInput;
+import com.teoware.refapp.dao.dto.DeleteUserDetailsInput;
 import com.teoware.refapp.dao.dto.DeleteUserInput;
+import com.teoware.refapp.dao.dto.DeleteUserPasswordInput;
+import com.teoware.refapp.dao.dto.DeleteUserStatusInput;
 import com.teoware.refapp.dao.dto.Id;
 import com.teoware.refapp.dao.dto.PurgeUsersInput;
 import com.teoware.refapp.dao.dto.ReadUserInput;
 import com.teoware.refapp.dao.dto.UpdateUserAddressInput;
 import com.teoware.refapp.dao.dto.UpdateUserDetailsInput;
 import com.teoware.refapp.dao.dto.UpdateUserInput;
+import com.teoware.refapp.dao.dto.UpdateUserPasswordInput;
 import com.teoware.refapp.dao.dto.UpdateUserStatusInput;
 import com.teoware.refapp.model.common.Username;
 import com.teoware.refapp.model.enums.Gender;
@@ -211,6 +216,14 @@ public final class TestDataFactory {
 		return new UpdateUserAddressInput(userId, createUserJohn().getUserAddress());
 	}
 
+	public static UpdateUserPasswordInput createUpdateUserPasswordInputJohn() {
+		return createUpdateUserPasswordInputJohn(new Id());
+	}
+
+	public static UpdateUserPasswordInput createUpdateUserPasswordInputJohn(Id userId) {
+		return new UpdateUserPasswordInput(userId, createUserPasswordJohn());
+	}
+
 	public static UpdateUserInput createUpdateUserInputJane() {
 		return createUpdateUserInputJane(new Id());
 	}
@@ -241,6 +254,14 @@ public final class TestDataFactory {
 
 	public static UpdateUserAddressInput createUpdateUserAddressInputJane(Id userId) {
 		return new UpdateUserAddressInput(userId, createUserJane().getUserAddress());
+	}
+
+	public static UpdateUserPasswordInput createUpdateUserPasswordInputJane() {
+		return createUpdateUserPasswordInputJane(new Id());
+	}
+
+	public static UpdateUserPasswordInput createUpdateUserPasswordInputJane(Id userId) {
+		return new UpdateUserPasswordInput(userId, createUserPasswordJane());
 	}
 
 	public static UpdateUserInput createUpdateUserInputJonah() {
@@ -275,6 +296,14 @@ public final class TestDataFactory {
 		return new UpdateUserAddressInput(userId, createUserJonah().getUserAddress());
 	}
 
+	public static UpdateUserPasswordInput createUpdateUserPasswordInputJonah() {
+		return createUpdateUserPasswordInputJonah(new Id());
+	}
+
+	public static UpdateUserPasswordInput createUpdateUserPasswordInputJonah(Id userId) {
+		return new UpdateUserPasswordInput(userId, createUserPasswordJonah());
+	}
+
 	public static ReadUserInput createReadUserInputJohn() {
 		return new ReadUserInput(createUsername("john.doe"));
 	}
@@ -289,6 +318,22 @@ public final class TestDataFactory {
 
 	public static DeleteUserInput createDeleteUserInput() {
 		return new DeleteUserInput(new Id());
+	}
+
+	public static DeleteUserDetailsInput createDeleteUserDetailsInput() {
+		return new DeleteUserDetailsInput(new Id());
+	}
+
+	public static DeleteUserStatusInput createDeleteUserStatusInput() {
+		return new DeleteUserStatusInput(new Id());
+	}
+
+	public static DeleteUserAddressInput createDeleteUserAddressInput() {
+		return new DeleteUserAddressInput(new Id());
+	}
+
+	public static DeleteUserPasswordInput createDeleteUserPasswordInput() {
+		return new DeleteUserPasswordInput(new Id());
 	}
 
 	public static PurgeUsersInput createPurgeUsersInput() {

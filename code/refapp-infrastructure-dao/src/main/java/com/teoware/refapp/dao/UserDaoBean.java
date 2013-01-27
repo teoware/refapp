@@ -149,7 +149,6 @@ public class UserDaoBean extends Dao implements UserDao {
 	public CreateUserAddressOutput createUserAddress(CreateUserAddressInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Create user address operation invoked.");
 
-		int rowsAffected = 0;
 		if (input.getUserAddress() != null) {
 			SQL sql = new SQL.Builder()
 					.doInsert(USER_ADDRESS_TABLE)
@@ -159,9 +158,10 @@ public class UserDaoBean extends Dao implements UserDao {
 					input.getUserAddress().getPostalCode(), input.getUserAddress().getMunicipality(), input
 							.getUserAddress().getRegion(), input.getUserAddress().getCountry());
 			ChangeResult changeResult = super.create(sql, parameters);
-			rowsAffected = changeResult.getRowsAffected();
+			return new CreateUserAddressOutput(changeResult.getRowsAffected());
+		} else {
+			return new CreateUserAddressOutput(0);
 		}
-		return new CreateUserAddressOutput(rowsAffected);
 	}
 
 	@Override
@@ -220,15 +220,15 @@ public class UserDaoBean extends Dao implements UserDao {
 	public UpdateUserOutput updateUser(UpdateUserInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Update user operation invoked.");
 
-		int rowsAffected = 0;
 		if (input.getUsername() != null) {
 			SQL sql = new SQL.Builder().doUpdate(USERS_TABLE).setColumn(USERNAME_COLUMN_NAME).where(ID_COLUMN_NAME)
 					.build();
 			Object[] parameters = DaoHelper.generateArray(input.getUsername().getUsername(), input.getId().getId());
 			ChangeResult changeResult = super.update(sql, parameters);
-			rowsAffected = changeResult.getRowsAffected();
+			return new UpdateUserOutput(changeResult.getRowsAffected());
+		} else {
+			return new UpdateUserOutput(0);
 		}
-		return new UpdateUserOutput(rowsAffected);
 	}
 
 	@Override

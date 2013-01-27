@@ -56,7 +56,7 @@ import com.teoware.refapp.model.task.Task;
 public class TaskDaoBean extends Dao implements TaskDao {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private static final Logger LOG = LoggerFactory.getLogger(TaskDaoBean.class);
 
 	private static final String DAO_NAME = "Task DAO";
@@ -99,8 +99,7 @@ public class TaskDaoBean extends Dao implements TaskDao {
 				.columnValues(TASK_ID_COLUMN_NAME, DESCRIPTION_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(input.getId(), input.getTaskDetails().getDescription());
 		ChangeResult changeResult = super.create(sql, parameters);
-		int rowsAffected = changeResult.getRowsAffected();
-		return new CreateTaskDetailsOutput(rowsAffected);
+		return new CreateTaskDetailsOutput(changeResult.getRowsAffected());
 	}
 
 	@Override
@@ -117,31 +116,31 @@ public class TaskDaoBean extends Dao implements TaskDao {
 	public UpdateTaskOutput updateTask(UpdateTaskInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Update task operation invoked.");
 
-		int rowsAffected = 0;
 		if (input.getTitle() != null) {
 			SQL sql = new SQL.Builder().doUpdate(TASKS_TABLE).setColumn(TITLE_COLUMN_NAME).where(ID_COLUMN_NAME)
 					.build();
 			Object[] parameters = DaoHelper.generateArray(input.getTitle().getTitle(), input.getId().getId());
 			ChangeResult changeResult = super.update(sql, parameters);
-			rowsAffected = changeResult.getRowsAffected();
+			return new UpdateTaskOutput(changeResult.getRowsAffected());
+		} else {
+			return new UpdateTaskOutput(0);
 		}
-		return new UpdateTaskOutput(rowsAffected);
 	}
 
 	@Override
 	public UpdateTaskDetailsOutput updateTaskDetails(UpdateTaskDetailsInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Update task details operation invoked.");
 
-		int rowsAffected = 0;
 		if (input.getTaskDetails() != null) {
 			SQL sql = new SQL.Builder().doUpdate(TASK_DETAILS_TABLE).setColumn(DESCRIPTION_COLUMN_NAME)
 					.where(ID_COLUMN_NAME).build();
 			Object[] parameters = DaoHelper.generateArray(input.getTaskDetails().getDescription(), input.getId()
 					.getId());
 			ChangeResult changeResult = super.update(sql, parameters);
-			rowsAffected = changeResult.getRowsAffected();
+			return new UpdateTaskDetailsOutput(changeResult.getRowsAffected());
+		} else {
+			return new UpdateTaskDetailsOutput(0);
 		}
-		return new UpdateTaskDetailsOutput(rowsAffected);
 	}
 
 	@Override

@@ -79,9 +79,7 @@ public class JavaBeanTester {
 
 		int minParams = constructor.getParameterTypes().length;
 		if (minParams == 0) {
-
 			return (T) constructor.newInstance();
-
 		} else {
 			return (T) constructor.newInstance(getNullParams(minParams));
 		}

@@ -1,11 +1,13 @@
 package com.teoware.refapp.dao;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -25,22 +27,27 @@ import org.mockito.Mock;
 import com.teoware.refapp.dao.dto.CreateUserAddressInput;
 import com.teoware.refapp.dao.dto.CreateUserDetailsInput;
 import com.teoware.refapp.dao.dto.CreateUserInput;
+import com.teoware.refapp.dao.dto.DeleteUserAddressInput;
+import com.teoware.refapp.dao.dto.DeleteUserDetailsInput;
 import com.teoware.refapp.dao.dto.DeleteUserInput;
+import com.teoware.refapp.dao.dto.DeleteUserPasswordInput;
+import com.teoware.refapp.dao.dto.DeleteUserStatusInput;
 import com.teoware.refapp.dao.dto.PurgeUsersInput;
 import com.teoware.refapp.dao.dto.ReadUserInput;
 import com.teoware.refapp.dao.dto.ReadUserOutput;
 import com.teoware.refapp.dao.dto.UpdateUserAddressInput;
 import com.teoware.refapp.dao.dto.UpdateUserDetailsInput;
 import com.teoware.refapp.dao.dto.UpdateUserInput;
+import com.teoware.refapp.dao.dto.UpdateUserPasswordInput;
 import com.teoware.refapp.dao.dto.UpdateUserStatusInput;
 import com.teoware.refapp.dao.test.TestResultSetFactory;
 import com.teoware.refapp.test.util.TestDataFactory;
 
 @Category(com.teoware.refapp.test.UnitTestGroup.class)
-public class UserDaoTest {
+public class UserDaoBeanTest {
 
 	@InjectMocks
-	private UserDaoBean userDao;
+	private UserDaoBean dao;
 
 	@Mock
 	private DataSource dataSource;
@@ -55,14 +62,19 @@ public class UserDaoTest {
 	private ResultSet resultSet;
 
 	private CreateUserInput createInput;
-	private CreateUserDetailsInput createInfoInput;
+	private CreateUserDetailsInput createDetailsInput;
 	private CreateUserAddressInput createAddressInput;
 	private ReadUserInput readInput;
 	private UpdateUserInput updateInput;
 	private UpdateUserStatusInput updateStatusInput;
-	private UpdateUserDetailsInput updateInfoInput;
+	private UpdateUserDetailsInput updateDetailsInput;
 	private UpdateUserAddressInput updateAddressInput;
+	private UpdateUserPasswordInput updatePasswordInput;
 	private DeleteUserInput deleteInput;
+	private DeleteUserDetailsInput deleteDetailsInput;
+	private DeleteUserStatusInput deleteStatusInput;
+	private DeleteUserAddressInput deleteAddressInput;
+	private DeleteUserPasswordInput deletePasswordInput;
 	private PurgeUsersInput purgeInput;
 
 	@Before
@@ -70,14 +82,19 @@ public class UserDaoTest {
 		initMocks(this);
 
 		createInput = TestDataFactory.createCreateUserInputJohn();
-		createInfoInput = TestDataFactory.createCreateUserDetailsInputJohn();
+		createDetailsInput = TestDataFactory.createCreateUserDetailsInputJohn();
 		createAddressInput = TestDataFactory.createCreateUserAddressInputJohn();
 		readInput = TestDataFactory.createReadUserInputJohn();
 		updateInput = TestDataFactory.createUpdateUserInputJohn();
-		updateInfoInput = TestDataFactory.createUpdateUserDetailsInputJohn();
+		updateDetailsInput = TestDataFactory.createUpdateUserDetailsInputJohn();
 		updateStatusInput = TestDataFactory.createUpdateUserStatusInputJohn();
 		updateAddressInput = TestDataFactory.createUpdateUserAddressInputJohn();
+		updatePasswordInput = TestDataFactory.createUpdateUserPasswordInputJohn();
 		deleteInput = TestDataFactory.createDeleteUserInput();
+		deleteDetailsInput = TestDataFactory.createDeleteUserDetailsInput();
+		deleteStatusInput = TestDataFactory.createDeleteUserStatusInput();
+		deleteAddressInput = TestDataFactory.createDeleteUserAddressInput();
+		deletePasswordInput = TestDataFactory.createDeleteUserPasswordInput();
 		purgeInput = TestDataFactory.createPurgeUsersInput();
 	}
 
@@ -87,7 +104,7 @@ public class UserDaoTest {
 		when(statement.getGeneratedKeys()).thenReturn(resultSet);
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		userDao.createUser(createInput);
+		dao.createUser(createInput);
 
 		verify(connection).prepareStatement(anyString(), anyInt());
 	}
@@ -96,7 +113,7 @@ public class UserDaoTest {
 	public void testCreateUserJohnPrepareStatementThrowsDaoException() throws Exception {
 		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
 
-		userDao.createUser(createInput);
+		dao.createUser(createInput);
 	}
 
 	@Test
@@ -105,7 +122,7 @@ public class UserDaoTest {
 		when(statement.getGeneratedKeys()).thenReturn(resultSet);
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		userDao.createUserDetails(createInfoInput);
+		dao.createUserDetails(createDetailsInput);
 
 		verify(connection).prepareStatement(anyString(), anyInt());
 	}
@@ -116,9 +133,18 @@ public class UserDaoTest {
 		when(statement.getGeneratedKeys()).thenReturn(resultSet);
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		userDao.createUserAddress(createAddressInput);
+		dao.createUserAddress(createAddressInput);
 
 		verify(connection).prepareStatement(anyString(), anyInt());
+	}
+
+	@Test
+	public void testCreateUserAddressNull() throws Exception {
+		createAddressInput.setUserAddress(null);
+
+		dao.createUserAddress(createAddressInput);
+
+		verifyZeroInteractions(connection);
 	}
 
 	@Test
@@ -128,7 +154,7 @@ public class UserDaoTest {
 		when(statement.executeQuery()).thenReturn(resultSet);
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		ReadUserOutput output = userDao.readUser(readInput);
+		ReadUserOutput output = dao.readUser(readInput);
 
 		verify(connection).prepareStatement(anyString(), anyInt());
 		assertEquals(1, output.getUserList().size());
@@ -141,7 +167,7 @@ public class UserDaoTest {
 		when(statement.executeQuery()).thenReturn(resultSet);
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		ReadUserOutput output = userDao.readAllUsers();
+		ReadUserOutput output = dao.readAllUsers();
 
 		verify(connection).prepareStatement(anyString(), anyInt());
 		assertEquals(3, output.getUserList().size());
@@ -151,7 +177,7 @@ public class UserDaoTest {
 	public void testReadUserJohnPrepareStatementThrowsDaoException() throws Exception {
 		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
 
-		userDao.readUser(readInput);
+		dao.readUser(readInput);
 	}
 
 	@Test
@@ -160,26 +186,45 @@ public class UserDaoTest {
 		when(statement.executeQuery()).thenReturn(resultSet);
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		userDao.updateUser(updateInput);
-		verify(connection, times(1)).prepareStatement(anyString(), anyInt());
+		dao.updateUser(updateInput);
+
+		verify(connection).prepareStatement(anyString(), anyInt());
+	}
+
+	@Test
+	public void testUpdateUserNull() throws Exception {
+		updateInput.setUser(null);
+
+		dao.updateUser(updateInput);
+
+		verifyZeroInteractions(connection);
 	}
 
 	@Test(expected = DaoException.class)
 	public void testUpdateUserJohnThrowsDaoException() throws Exception {
 		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
 
-		userDao.updateUser(updateInput);
+		dao.updateUser(updateInput);
 	}
 
 	@Test
-	public void testUpdateUserInfoJohn() throws Exception {
+	public void testUpdateUserDetailsJohn() throws Exception {
 		when(resultSet.next()).thenReturn(Boolean.TRUE).thenReturn(Boolean.FALSE);
 		when(statement.executeQuery()).thenReturn(resultSet);
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		userDao.updateUserDetails(updateInfoInput);
+		dao.updateUserDetails(updateDetailsInput);
 
-		verify(connection, times(1)).prepareStatement(anyString(), anyInt());
+		verify(connection).prepareStatement(anyString(), anyInt());
+	}
+
+	@Test
+	public void testUpdateUserDetailsNull() throws Exception {
+		updateDetailsInput.setUserDetails(null);
+
+		dao.updateUserDetails(updateDetailsInput);
+
+		verifyZeroInteractions(connection);
 	}
 
 	@Test
@@ -188,9 +233,18 @@ public class UserDaoTest {
 		when(statement.executeQuery()).thenReturn(resultSet);
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		userDao.updateUserStatus(updateStatusInput);
+		dao.updateUserStatus(updateStatusInput);
 
-		verify(connection, times(1)).prepareStatement(anyString(), anyInt());
+		verify(connection).prepareStatement(anyString(), anyInt());
+	}
+
+	@Test
+	public void testUpdateUserStatusNull() throws Exception {
+		updateStatusInput.setUserStatus(null);
+
+		dao.updateUserStatus(updateStatusInput);
+
+		verifyZeroInteractions(connection);
 	}
 
 	@Test
@@ -199,16 +253,79 @@ public class UserDaoTest {
 		when(statement.executeQuery()).thenReturn(resultSet);
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		userDao.updateUserAddress(updateAddressInput);
+		dao.updateUserAddress(updateAddressInput);
 
-		verify(connection, times(1)).prepareStatement(anyString(), anyInt());
+		verify(connection).prepareStatement(anyString(), anyInt());
+	}
+
+	@Test
+	public void testUpdateUserAddressNull() throws Exception {
+		updateAddressInput.setUserAddress(null);
+
+		dao.updateUserAddress(updateAddressInput);
+
+		verifyZeroInteractions(connection);
+	}
+
+	@Test
+	public void testUpdateUserPasswordJohn() throws Exception {
+		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
+
+		dao.updateUserPassword(updatePasswordInput);
+
+		verify(connection).prepareStatement(anyString(), anyInt());
+	}
+
+	@Test
+	public void testUpdateUserPasswordNull() throws Exception {
+		updatePasswordInput.setUserPassword(null);
+
+		dao.updateUserPassword(updatePasswordInput);
+
+		verifyZeroInteractions(connection);
 	}
 
 	@Test
 	public void testDeleteUserJohn() throws Exception {
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		userDao.deleteUser(deleteInput);
+		dao.deleteUser(deleteInput);
+
+		verify(connection).prepareStatement(anyString(), anyInt());
+	}
+
+	@Test
+	public void testDeleteUserDetailsJohn() throws Exception {
+		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
+
+		dao.deleteUserDetails(deleteDetailsInput);
+
+		verify(connection).prepareStatement(anyString(), anyInt());
+	}
+
+	@Test
+	public void testDeleteUserStatusJohn() throws Exception {
+		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
+
+		dao.deleteUserStatus(deleteStatusInput);
+
+		verify(connection).prepareStatement(anyString(), anyInt());
+	}
+
+	@Test
+	public void testDeleteUserAddressJohn() throws Exception {
+		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
+
+		dao.deleteUserAddress(deleteAddressInput);
+
+		verify(connection).prepareStatement(anyString(), anyInt());
+	}
+
+	@Test
+	public void testDeleteUserPasswordJohn() throws Exception {
+		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
+
+		dao.deleteUserPassword(deletePasswordInput);
 
 		verify(connection).prepareStatement(anyString(), anyInt());
 	}
@@ -217,14 +334,24 @@ public class UserDaoTest {
 	public void testDeleteUserJohnPrepareStatementThrowsDaoException() throws Exception {
 		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
 
-		userDao.deleteUser(deleteInput);
+		dao.deleteUser(deleteInput);
 	}
 
 	@Test
 	public void testPurgeUsers() throws Exception {
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		userDao.purgeUsers(purgeInput);
+		dao.purgeUsers(purgeInput);
+
+		verify(connection).prepareStatement(anyString(), anyInt());
+	}
+
+	@Test
+	public void testPurgeUsersGreedy() throws Exception {
+		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
+		purgeInput.setGreedy(Boolean.TRUE);
+
+		dao.purgeUsers(purgeInput);
 
 		verify(connection).prepareStatement(anyString(), anyInt());
 	}
@@ -233,6 +360,21 @@ public class UserDaoTest {
 	public void testPurgeUsersPrepareStatementThrowsDaoException() throws Exception {
 		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
 
-		userDao.purgeUsers(purgeInput);
+		dao.purgeUsers(purgeInput);
+	}
+
+	@Test
+	public void testPersistConnection() {
+		dao.persistConnection();
+
+		assertTrue(dao.getPersistConnection());
+	}
+
+	@Test
+	public void testTerminateConnection() throws SQLException {
+		dao.terminateConnection();
+
+		assertFalse(dao.getPersistConnection());
+		verify(connection).close();
 	}
 }

@@ -1,11 +1,12 @@
 package com.teoware.refapp.dao.util;
 
 import java.io.StringWriter;
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Calendar;
 
-public final class DaoHelper {
+public class DaoHelper {
 
 	public static void processParameter(PreparedStatement statement, Object parameter, int parameterIndex)
 			throws SQLException {
@@ -17,6 +18,12 @@ public final class DaoHelper {
 			statement.setInt(parameterIndex, (Integer) parameter);
 		} else if (isLong(parameter)) {
 			statement.setLong(parameterIndex, (Long) parameter);
+		} else if (isFloat(parameter)) {
+			BigDecimal bd = new BigDecimal(Float.toString((Float) parameter));
+			statement.setBigDecimal(parameterIndex, bd);
+		} else if (isDouble(parameter)) {
+			BigDecimal bd = new BigDecimal(Double.toString((Double) parameter));
+			statement.setBigDecimal(parameterIndex, bd);
 		} else if (isDate(parameter)) {
 			java.util.Date date = (java.util.Date) parameter;
 			statement.setDate(parameterIndex, new java.sql.Date(date.getTime()));
@@ -33,7 +40,7 @@ public final class DaoHelper {
 	public static boolean isString(Object object) {
 		Class<?> clazz = object.getClass();
 		return String.class.isAssignableFrom(clazz) || CharSequence.class.isAssignableFrom(clazz)
-				|| StringWriter.class.isAssignableFrom(clazz);
+				|| StringWriter.class.isAssignableFrom(clazz) || StringBuffer.class.isAssignableFrom(clazz);
 	}
 
 	public static boolean isInt(Object object) {
@@ -42,6 +49,14 @@ public final class DaoHelper {
 
 	public static boolean isLong(Object object) {
 		return object instanceof Long;
+	}
+
+	public static boolean isFloat(Object object) {
+		return object instanceof Float;
+	}
+
+	public static boolean isDouble(Object object) {
+		return object instanceof Double;
 	}
 
 	public static boolean isDate(Object object) {

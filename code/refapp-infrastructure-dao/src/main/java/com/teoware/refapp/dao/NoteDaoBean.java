@@ -99,8 +99,7 @@ public class NoteDaoBean extends Dao implements NoteDao {
 				.columnValues(NOTE_ID_COLUMN_NAME, DESCRIPTION_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(input.getId(), input.getNoteDetails().getDescription());
 		ChangeResult changeResult = super.create(sql, parameters);
-		int rowsAffected = changeResult.getRowsAffected();
-		return new CreateNoteDetailsOutput(rowsAffected);
+		return new CreateNoteDetailsOutput(changeResult.getRowsAffected());
 	}
 
 	@Override
@@ -117,31 +116,32 @@ public class NoteDaoBean extends Dao implements NoteDao {
 	public UpdateNoteOutput updateNote(UpdateNoteInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Update note operation invoked.");
 
-		int rowsAffected = 0;
 		if (input.getTitle() != null) {
 			SQL sql = new SQL.Builder().doUpdate(NOTES_TABLE).setColumn(TITLE_COLUMN_NAME).where(ID_COLUMN_NAME)
 					.build();
 			Object[] parameters = DaoHelper.generateArray(input.getTitle().getTitle(), input.getId().getId());
 			ChangeResult changeResult = super.update(sql, parameters);
-			rowsAffected = changeResult.getRowsAffected();
+			return new UpdateNoteOutput(changeResult.getRowsAffected());
+		} else {
+			return new UpdateNoteOutput(0);
 		}
-		return new UpdateNoteOutput(rowsAffected);
+
 	}
 
 	@Override
 	public UpdateNoteDetailsOutput updateNoteDetails(UpdateNoteDetailsInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Update note details operation invoked.");
 
-		int rowsAffected = 0;
 		if (input.getNoteDetails() != null) {
 			SQL sql = new SQL.Builder().doUpdate(NOTE_DETAILS_TABLE).setColumn(DESCRIPTION_COLUMN_NAME)
 					.where(ID_COLUMN_NAME).build();
 			Object[] parameters = DaoHelper.generateArray(input.getNoteDetails().getDescription(), input.getId()
 					.getId());
 			ChangeResult changeResult = super.update(sql, parameters);
-			rowsAffected = changeResult.getRowsAffected();
+			return new UpdateNoteDetailsOutput(changeResult.getRowsAffected());
+		} else {
+			return new UpdateNoteDetailsOutput(0);
 		}
-		return new UpdateNoteDetailsOutput(rowsAffected);
 	}
 
 	@Override

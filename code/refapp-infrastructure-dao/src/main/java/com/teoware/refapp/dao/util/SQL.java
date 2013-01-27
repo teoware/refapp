@@ -33,13 +33,18 @@ public class SQL {
 			return this;
 		}
 
+		public Builder column(String column) {
+			sql.append(" " + column);
+			return this;
+		}
+
 		public Builder columns(String... columns) {
 			sql.append(" (" + join(columns, ", ") + ")");
 			return this;
 		}
 
 		public Builder values(int length) {
-			sql.append(" VALUES (" + count(length) + ")");
+			sql.append(" VALUES (" + params(length) + ")");
 			return this;
 		}
 
@@ -132,7 +137,7 @@ public class SQL {
 		}
 
 		public Builder in(int count) {
-			sql.append(" IN (" + count(count) + ")");
+			sql.append(" IN (" + params(count) + ")");
 			return this;
 		}
 
@@ -189,12 +194,12 @@ public class SQL {
 			return string;
 		}
 
-		private String count(int length) {
-			String values = "?";
+		private String params(int length) {
+			String params = "?";
 			for (int i = 1; i < length; i++) {
-				values += ", ?";
+				params += ", ?";
 			}
-			return values;
+			return params;
 		}
 
 		public SQL build() {
