@@ -1,5 +1,6 @@
 package com.teoware.refapp.dao.dto;
 
+import com.teoware.refapp.model.common.Id;
 import com.teoware.refapp.model.note.NoteDetails;
 
 public class CreateNoteDetailsInput extends ChangeInput {

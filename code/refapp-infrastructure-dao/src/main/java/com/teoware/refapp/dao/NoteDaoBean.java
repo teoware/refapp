@@ -34,7 +34,6 @@ import com.teoware.refapp.dao.dto.DeleteNoteInput;
 import com.teoware.refapp.dao.dto.DeleteNoteOutput;
 import com.teoware.refapp.dao.dto.DeleteNoteStatusInput;
 import com.teoware.refapp.dao.dto.DeleteNoteStatusOutput;
-import com.teoware.refapp.dao.dto.Id;
 import com.teoware.refapp.dao.dto.ReadNoteInput;
 import com.teoware.refapp.dao.dto.ReadNoteOutput;
 import com.teoware.refapp.dao.dto.UpdateNoteDetailsInput;
@@ -48,6 +47,7 @@ import com.teoware.refapp.dao.rowmapper.NoteRowMapper;
 import com.teoware.refapp.dao.util.ChangeResult;
 import com.teoware.refapp.dao.util.DaoHelper;
 import com.teoware.refapp.dao.util.SQL;
+import com.teoware.refapp.model.common.Id;
 import com.teoware.refapp.model.note.Note;
 
 @Stateless

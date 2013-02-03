@@ -30,7 +30,6 @@ import com.teoware.refapp.dao.dto.DeleteUserPasswordInput;
 import com.teoware.refapp.dao.dto.DeleteUserPasswordOutput;
 import com.teoware.refapp.dao.dto.DeleteUserStatusInput;
 import com.teoware.refapp.dao.dto.DeleteUserStatusOutput;
-import com.teoware.refapp.dao.dto.Id;
 import com.teoware.refapp.dao.dto.ReadUserInput;
 import com.teoware.refapp.dao.dto.ReadUserOutput;
 import com.teoware.refapp.dao.dto.UpdateUserAddressInput;
@@ -44,7 +43,7 @@ import com.teoware.refapp.dao.dto.UpdateUserPasswordOutput;
 import com.teoware.refapp.dao.dto.UpdateUserStatusInput;
 import com.teoware.refapp.dao.dto.UpdateUserStatusOutput;
 import com.teoware.refapp.model.Header;
-import com.teoware.refapp.model.common.OperationResult;
+import com.teoware.refapp.model.common.Id;
 import com.teoware.refapp.model.common.Username;
 import com.teoware.refapp.model.enums.Result;
 import com.teoware.refapp.model.enums.Status;
@@ -69,7 +68,7 @@ import com.teoware.refapp.service.dto.SuspendUserResponse;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
-public class UserServiceBean implements UserService {
+public class UserServiceBean extends Service implements UserService {
 
 	private static final long serialVersionUID = 1L;
 
@@ -112,8 +111,7 @@ public class UserServiceBean implements UserService {
 			CreateUserPasswordOutput createUserPasswordOutput = dao.createUserPassword(createUserPasswordInput);
 			rowsAffected += createUserPasswordOutput.getRowsAffected();
 
-			return new RegisterUserResponse(header, new OperationResult(Result.SUCCESS, "<" + rowsAffected
-					+ "> rows created"));
+			return new RegisterUserResponse(header, createOperationResult(Result.SUCCESS, rowsAffected));
 		} catch (DaoException e) {
 			LOG.error(SERVICE_NAME + ": Register user operation failed.");
 			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
@@ -132,15 +130,14 @@ public class UserServiceBean implements UserService {
 
 			dao.persistConnection();
 
-			Id userId = dao.readUserId(username.getUsername());
+			Id userId = dao.readUserId(username);
 
 			UpdateUserStatusInput updateUserStatusInput = new UpdateUserStatusInput(userId, new UserStatus(
 					Status.ACTIVE, null, null));
 			UpdateUserStatusOutput updateUserStatusOutput = dao.updateUserStatus(updateUserStatusInput);
 			int rowsAffected = updateUserStatusOutput.getRowsAffected();
 
-			return new ActivateUserResponse(header, new OperationResult(Result.SUCCESS, "<" + rowsAffected
-					+ "> rows changed"));
+			return new ActivateUserResponse(header, createOperationResult(Result.SUCCESS, rowsAffected));
 		} catch (DaoException e) {
 			LOG.error(SERVICE_NAME + ": Activate user operation failed.");
 			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
@@ -159,15 +156,14 @@ public class UserServiceBean implements UserService {
 
 			dao.persistConnection();
 
-			Id userId = dao.readUserId(username.getUsername());
+			Id userId = dao.readUserId(username);
 
 			UpdateUserStatusInput updateUserStatusInput = new UpdateUserStatusInput(userId, new UserStatus(
 					Status.SUSPENDED, null, null));
 			UpdateUserStatusOutput updateUserStatusOutput = dao.updateUserStatus(updateUserStatusInput);
 			int rowsAffected = updateUserStatusOutput.getRowsAffected();
 
-			return new SuspendUserResponse(header, new OperationResult(Result.SUCCESS, "<" + rowsAffected
-					+ "> rows changed"));
+			return new SuspendUserResponse(header, createOperationResult(Result.SUCCESS, rowsAffected));
 		} catch (DaoException e) {
 			LOG.error(SERVICE_NAME + ": Suspend user operation failed.");
 			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
@@ -227,7 +223,7 @@ public class UserServiceBean implements UserService {
 
 			dao.persistConnection();
 
-			Id userId = dao.readUserId(user.getUsername().getUsername());
+			Id userId = dao.readUserId(user.getUsername());
 
 			UpdateUserInput updateUserInput = new UpdateUserInput(userId, request.getUsername());
 			UpdateUserOutput updateUserOutput = dao.updateUser(updateUserInput);
@@ -248,8 +244,7 @@ public class UserServiceBean implements UserService {
 			UpdateUserAddressOutput updateUserAddressOutput = dao.updateUserAddress(updateUserAddressInput);
 			rowsAffected += updateUserAddressOutput.getRowsAffected();
 
-			return new ChangeUserResponse(header, new OperationResult(Result.SUCCESS, "<" + rowsAffected
-					+ "> rows changed"));
+			return new ChangeUserResponse(header, createOperationResult(Result.SUCCESS, rowsAffected));
 		} catch (DaoException e) {
 			LOG.error(SERVICE_NAME + ": Change user operation failed.");
 			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
@@ -267,14 +262,13 @@ public class UserServiceBean implements UserService {
 			UserPassword userPassword = request.getBody();
 			Username username = request.getUsername();
 
-			Id userId = dao.readUserId(username.getUsername());
+			Id userId = dao.readUserId(username);
 
 			UpdateUserPasswordInput input = new UpdateUserPasswordInput(userId, userPassword);
 			UpdateUserPasswordOutput output = dao.updateUserPassword(input);
 			int rowsAffected = output.getRowsAffected();
 
-			return new ChangeUserPasswordResponse(header, new OperationResult(Result.SUCCESS, "<" + rowsAffected
-					+ "> rows changed"));
+			return new ChangeUserPasswordResponse(header, createOperationResult(Result.SUCCESS, rowsAffected));
 		} catch (DaoException e) {
 			LOG.error(SERVICE_NAME + ": Change user password operation failed.");
 			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
@@ -295,7 +289,7 @@ public class UserServiceBean implements UserService {
 
 			dao.persistConnection();
 
-			Id userId = dao.readUserId(username.getUsername());
+			Id userId = dao.readUserId(username);
 
 			DeleteUserPasswordInput deleteUserPasswordInput = new DeleteUserPasswordInput(userId);
 			DeleteUserPasswordOutput deleteUserPasswordOutput = dao.deleteUserPassword(deleteUserPasswordInput);
@@ -317,8 +311,7 @@ public class UserServiceBean implements UserService {
 			DeleteUserOutput deleteUserOutput = dao.deleteUser(deleteUserInput);
 			rowsAffected += deleteUserOutput.getRowsAffected();
 
-			return new DeleteUserResponse(header, new OperationResult(Result.SUCCESS, "<" + rowsAffected
-					+ "> rows deleted"));
+			return new DeleteUserResponse(header, createOperationResult(Result.SUCCESS, rowsAffected));
 		} catch (DaoException e) {
 			LOG.error(SERVICE_NAME + ": Delete user operation failed.");
 			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);

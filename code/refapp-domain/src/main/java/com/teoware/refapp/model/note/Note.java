@@ -3,9 +3,10 @@ package com.teoware.refapp.model.note;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import com.teoware.refapp.model.base.BaseBody;
 import com.teoware.refapp.model.common.Title;
 
-public class Note {
+public class Note extends BaseBody {
 
 	@NotNull
 	@Valid

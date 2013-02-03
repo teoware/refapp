@@ -16,7 +16,7 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import com.teoware.refapp.dao.dto.Id;
+import com.teoware.refapp.model.common.Id;
 
 public class UserIdRowMapperTest {
 

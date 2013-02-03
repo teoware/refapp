@@ -11,6 +11,7 @@ public class ChangeUserRequest extends BaseMessage<Header, User> {
 
 	public ChangeUserRequest(Header header, User user, Username username) {
 		super(header, user);
+		this.username = username;
 	}
 
 	public ChangeUserRequest(User user, Username username) {

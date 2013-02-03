@@ -8,7 +8,7 @@ import java.beans.IntrospectionException;
 
 import org.junit.Test;
 
-import com.teoware.refapp.dao.dto.Id;
+import com.teoware.refapp.model.common.Id;
 import com.teoware.refapp.testtools.JavaBeanTester;
 
 public class ChangeResultTest {

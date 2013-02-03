@@ -25,7 +25,6 @@ import com.teoware.refapp.dao.dto.CreateUserPasswordInput;
 import com.teoware.refapp.dao.dto.CreateUserPasswordOutput;
 import com.teoware.refapp.dao.dto.DeleteUserInput;
 import com.teoware.refapp.dao.dto.DeleteUserOutput;
-import com.teoware.refapp.dao.dto.Id;
 import com.teoware.refapp.dao.dto.ReadUserInput;
 import com.teoware.refapp.dao.dto.ReadUserOutput;
 import com.teoware.refapp.dao.dto.ReadUserPasswordInput;
@@ -40,6 +39,7 @@ import com.teoware.refapp.dao.dto.UpdateUserStatusInput;
 import com.teoware.refapp.dao.dto.UpdateUserStatusOutput;
 import com.teoware.refapp.dao.itest.mock.UserDaoMock;
 import com.teoware.refapp.dao.itest.util.TestDataSourceHandler;
+import com.teoware.refapp.model.common.Id;
 import com.teoware.refapp.model.common.Username;
 import com.teoware.refapp.model.enums.Gender;
 import com.teoware.refapp.model.enums.Status;
@@ -146,7 +146,7 @@ public class UserDaoIT {
 			user.getUserAddress().setPostalCode("1122");
 			user.getUserStatus().setStatus(Status.ACTIVE);
 
-			userId = userDao.readUserId(user.getUsername().getUsername());
+			userId = userDao.readUserId(user.getUsername());
 
 			UpdateUserInput updateUserInput = new UpdateUserInput(userId, user.getUsername());
 			UpdateUserOutput updateUserOutput = userDao.updateUser(updateUserInput);
@@ -197,7 +197,7 @@ public class UserDaoIT {
 
 			assertEquals(1, createPwdOutput.getRowsAffected());
 
-			ReadUserPasswordInput readInput = new ReadUserPasswordInput(new Username("jonah.doe"));
+			ReadUserPasswordInput readInput = new ReadUserPasswordInput(createOutput.getId());
 			ReadUserPasswordOutput readOutput = userDao.readUserPassword(readInput);
 			List<UserPassword> userPasswordList = readOutput.getUserPasswordList();
 
@@ -321,7 +321,7 @@ public class UserDaoIT {
 
 			assertEquals(9, rowsAffected);
 
-			userId = userDao.readUserId("john.doe");
+			userId = userDao.readUserId(new Username("john.doe"));
 
 			DeleteUserInput deleteInput = new DeleteUserInput(userId);
 			DeleteUserOutput deleteOutput = userDao.deleteUser(deleteInput);

@@ -22,7 +22,6 @@ import com.teoware.refapp.dao.dto.DeleteUserPasswordInput;
 import com.teoware.refapp.dao.dto.DeleteUserPasswordOutput;
 import com.teoware.refapp.dao.dto.DeleteUserStatusInput;
 import com.teoware.refapp.dao.dto.DeleteUserStatusOutput;
-import com.teoware.refapp.dao.dto.Id;
 import com.teoware.refapp.dao.dto.PurgeUsersInput;
 import com.teoware.refapp.dao.dto.PurgeUsersOutput;
 import com.teoware.refapp.dao.dto.ReadUserInput;
@@ -39,6 +38,8 @@ import com.teoware.refapp.dao.dto.UpdateUserPasswordInput;
 import com.teoware.refapp.dao.dto.UpdateUserPasswordOutput;
 import com.teoware.refapp.dao.dto.UpdateUserStatusInput;
 import com.teoware.refapp.dao.dto.UpdateUserStatusOutput;
+import com.teoware.refapp.model.common.Id;
+import com.teoware.refapp.model.common.Username;
 
 @Local
 public interface UserDao extends Serializable {
@@ -51,7 +52,7 @@ public interface UserDao extends Serializable {
 
 	public CreateUserPasswordOutput createUserPassword(CreateUserPasswordInput input) throws DaoException;
 
-	public Id readUserId(String username) throws DaoException;
+	public Id readUserId(Username username) throws DaoException;
 
 	public ReadUserOutput readUser(ReadUserInput input) throws DaoException;
 

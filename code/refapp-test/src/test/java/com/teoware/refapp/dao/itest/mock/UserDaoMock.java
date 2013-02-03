@@ -10,10 +10,10 @@ import java.util.List;
 
 import com.teoware.refapp.dao.DaoException;
 import com.teoware.refapp.dao.UserDaoBean;
-import com.teoware.refapp.dao.dto.Id;
 import com.teoware.refapp.dao.rowmapper.UserIdRowMapper;
 import com.teoware.refapp.dao.util.DaoHelper;
 import com.teoware.refapp.dao.util.SQL;
+import com.teoware.refapp.model.common.Id;
 
 public class UserDaoMock extends UserDaoBean {
 

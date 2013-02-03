@@ -6,6 +6,7 @@ import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
 import com.teoware.refapp.service.NoteService;
+import com.teoware.refapp.service.ServiceException;
 import com.teoware.refapp.service.dto.CreateNoteRequest;
 import com.teoware.refapp.service.dto.CreateNoteResponse;
 
@@ -19,7 +20,7 @@ public class NoteServiceFacadeBean implements NoteServiceFacade {
 	private NoteService noteService;
 
 	@Override
-	public CreateNoteResponse createNote(CreateNoteRequest request) {
+	public CreateNoteResponse createNote(CreateNoteRequest request) throws ServiceException {
 		return noteService.createNote(request);
 	}
 

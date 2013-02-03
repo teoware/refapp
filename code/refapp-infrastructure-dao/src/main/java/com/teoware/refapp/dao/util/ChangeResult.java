@@ -1,6 +1,6 @@
 package com.teoware.refapp.dao.util;
 
-import com.teoware.refapp.dao.dto.Id;
+import com.teoware.refapp.model.common.Id;
 
 public class ChangeResult {
 

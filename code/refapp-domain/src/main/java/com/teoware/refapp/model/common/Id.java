@@ -1,4 +1,4 @@
-package com.teoware.refapp.dao.dto;
+package com.teoware.refapp.model.common;
 
 public class Id {
 

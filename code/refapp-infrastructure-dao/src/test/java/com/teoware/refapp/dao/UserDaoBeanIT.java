@@ -27,7 +27,6 @@ import com.teoware.refapp.dao.dto.CreateUserOutput;
 import com.teoware.refapp.dao.dto.CreateUserPasswordInput;
 import com.teoware.refapp.dao.dto.CreateUserPasswordOutput;
 import com.teoware.refapp.dao.dto.DeleteUserInput;
-import com.teoware.refapp.dao.dto.Id;
 import com.teoware.refapp.dao.dto.ReadUserInput;
 import com.teoware.refapp.dao.dto.ReadUserOutput;
 import com.teoware.refapp.dao.dto.ReadUserPasswordInput;
@@ -43,6 +42,7 @@ import com.teoware.refapp.dao.dto.UpdateUserStatusOutput;
 import com.teoware.refapp.dao.mock.UserDaoMock;
 import com.teoware.refapp.dao.test.TestDataSourceHandler;
 import com.teoware.refapp.dao.util.SQL;
+import com.teoware.refapp.model.common.Id;
 import com.teoware.refapp.model.common.Username;
 import com.teoware.refapp.model.enums.Gender;
 import com.teoware.refapp.model.enums.Status;
@@ -144,7 +144,7 @@ public class UserDaoBeanIT {
 		user.getUserAddress().setPostalCode("1122");
 		user.getUserStatus().setStatus(Status.ACTIVE);
 
-		userId = userDao.readUserId(user.getUsername().getUsername());
+		userId = userDao.readUserId(user.getUsername());
 
 		UpdateUserInput updateUserInput = new UpdateUserInput(userId, user.getUsername());
 		UpdateUserOutput updateUserOutput = userDao.updateUser(updateUserInput);
@@ -190,7 +190,7 @@ public class UserDaoBeanIT {
 
 		assertEquals(1, createPwdOutput.getRowsAffected());
 
-		ReadUserPasswordInput readInput = new ReadUserPasswordInput(new Username("jonah.doe"));
+		ReadUserPasswordInput readInput = new ReadUserPasswordInput(createOutput.getId());
 		ReadUserPasswordOutput readOutput = userDao.readUserPassword(readInput);
 		List<UserPassword> userPasswordList = readOutput.getUserPasswordList();
 
@@ -308,7 +308,7 @@ public class UserDaoBeanIT {
 
 		assertEquals(12, rowsAffected);
 
-		userId = userDao.readUserId("john.doe");
+		userId = userDao.readUserId(new Username("john.doe"));
 
 		DeleteUserInput deleteInput = new DeleteUserInput(userId);
 		rowsAffected = userDao.deleteUser(deleteInput).getRowsAffected();

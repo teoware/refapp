@@ -9,7 +9,7 @@ import com.teoware.refapp.service.dto.CreateTaskResponse;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
-public class TaskServiceBean implements TaskService {
+public class TaskServiceBean extends Service implements TaskService {
 
 	private static final long serialVersionUID = 1L;
 

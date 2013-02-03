@@ -1,5 +1,7 @@
 package com.teoware.refapp.dao.dto;
 
+import com.teoware.refapp.model.common.Id;
+
 public abstract class CreateOutput extends ChangeOutput {
 
 	protected Id id;

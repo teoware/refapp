@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 
-import com.teoware.refapp.dao.dto.Id;
+import com.teoware.refapp.model.common.Id;
 
 public class UserIdRowMapper implements RowMapper<Id> {
 

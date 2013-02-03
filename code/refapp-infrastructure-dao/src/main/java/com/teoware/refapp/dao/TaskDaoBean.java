@@ -34,7 +34,6 @@ import com.teoware.refapp.dao.dto.DeleteTaskInput;
 import com.teoware.refapp.dao.dto.DeleteTaskOutput;
 import com.teoware.refapp.dao.dto.DeleteTaskStatusInput;
 import com.teoware.refapp.dao.dto.DeleteTaskStatusOutput;
-import com.teoware.refapp.dao.dto.Id;
 import com.teoware.refapp.dao.dto.ReadTaskInput;
 import com.teoware.refapp.dao.dto.ReadTaskOutput;
 import com.teoware.refapp.dao.dto.UpdateTaskDetailsInput;
@@ -48,6 +47,7 @@ import com.teoware.refapp.dao.rowmapper.TaskRowMapper;
 import com.teoware.refapp.dao.util.ChangeResult;
 import com.teoware.refapp.dao.util.DaoHelper;
 import com.teoware.refapp.dao.util.SQL;
+import com.teoware.refapp.model.common.Id;
 import com.teoware.refapp.model.task.Task;
 
 @Stateless

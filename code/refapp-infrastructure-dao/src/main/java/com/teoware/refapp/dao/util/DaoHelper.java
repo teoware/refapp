@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Calendar;
 
+import com.teoware.refapp.model.common.Id;
+import com.teoware.refapp.model.common.Username;
+
 public class DaoHelper {
 
 	public static void processParameter(PreparedStatement statement, Object parameter, int parameterIndex)
@@ -32,6 +35,12 @@ public class DaoHelper {
 			statement.setTimestamp(parameterIndex, new java.sql.Timestamp(calendar.getTime().getTime()), calendar);
 		} else if (isEnum(parameter)) {
 			statement.setString(parameterIndex, parameter.toString());
+		} else if (isId(parameter)) {
+			Id id = (Id) parameter;
+			statement.setLong(parameterIndex, id.getId());
+		} else if (isUsername(parameter)) {
+			Username username = (Username) parameter;
+			statement.setString(parameterIndex, username.getUsername());
 		} else {
 			statement.setObject(parameterIndex, parameter);
 		}
@@ -76,6 +85,14 @@ public class DaoHelper {
 
 	public static boolean isEnum(Object object) {
 		return object.getClass().isEnum();
+	}
+
+	public static boolean isId(Object object) {
+		return object instanceof Id;
+	}
+
+	public static boolean isUsername(Object object) {
+		return object instanceof Username;
 	}
 
 	public static Object[] generateArray(Object... objects) {

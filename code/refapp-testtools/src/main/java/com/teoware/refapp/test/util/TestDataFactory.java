@@ -20,7 +20,6 @@ import com.teoware.refapp.dao.dto.DeleteUserDetailsInput;
 import com.teoware.refapp.dao.dto.DeleteUserInput;
 import com.teoware.refapp.dao.dto.DeleteUserPasswordInput;
 import com.teoware.refapp.dao.dto.DeleteUserStatusInput;
-import com.teoware.refapp.dao.dto.Id;
 import com.teoware.refapp.dao.dto.PurgeUsersInput;
 import com.teoware.refapp.dao.dto.ReadNoteInput;
 import com.teoware.refapp.dao.dto.ReadTaskInput;
@@ -36,6 +35,7 @@ import com.teoware.refapp.dao.dto.UpdateUserDetailsInput;
 import com.teoware.refapp.dao.dto.UpdateUserInput;
 import com.teoware.refapp.dao.dto.UpdateUserPasswordInput;
 import com.teoware.refapp.dao.dto.UpdateUserStatusInput;
+import com.teoware.refapp.model.common.Id;
 import com.teoware.refapp.model.common.Username;
 import com.teoware.refapp.model.enums.Gender;
 import com.teoware.refapp.model.enums.Status;
@@ -155,7 +155,7 @@ public class TestDataFactory {
 	}
 
 	public static CreateUserDetailsInput createCreateUserDetailsInputJohn() {
-		return createCreateUserDetailsInputJohn(new Id());
+		return createCreateUserDetailsInputJohn(new Id(0L));
 	}
 
 	public static CreateUserDetailsInput createCreateUserDetailsInputJohn(Id userId) {
@@ -163,7 +163,7 @@ public class TestDataFactory {
 	}
 
 	public static CreateUserAddressInput createCreateUserAddressInputJohn() {
-		return createCreateUserAddressInputJohn(new Id());
+		return createCreateUserAddressInputJohn(new Id(0L));
 	}
 
 	public static CreateUserAddressInput createCreateUserAddressInputJohn(Id userId) {
@@ -175,7 +175,7 @@ public class TestDataFactory {
 	}
 
 	public static CreateUserDetailsInput createCreateUserDetailsInputJane() {
-		return createCreateUserDetailsInputJane(new Id());
+		return createCreateUserDetailsInputJane(new Id(0L));
 	}
 
 	public static CreateUserDetailsInput createCreateUserDetailsInputJane(Id userId) {
@@ -183,7 +183,7 @@ public class TestDataFactory {
 	}
 
 	public static CreateUserAddressInput createCreateUserAddressInputJane() {
-		return createCreateUserAddressInputJane(new Id());
+		return createCreateUserAddressInputJane(new Id(0L));
 	}
 
 	public static CreateUserAddressInput createCreateUserAddressInputJane(Id userId) {
@@ -195,7 +195,7 @@ public class TestDataFactory {
 	}
 
 	public static CreateUserDetailsInput createCreateUserDetailsInputJonah() {
-		return createCreateUserDetailsInputJonah(new Id());
+		return createCreateUserDetailsInputJonah(new Id(0L));
 	}
 
 	public static CreateUserDetailsInput createCreateUserDetailsInputJonah(Id userId) {
@@ -203,7 +203,7 @@ public class TestDataFactory {
 	}
 
 	public static CreateUserAddressInput createCreateUserAddressInputJonah() {
-		return createCreateUserAddressInputJonah(new Id());
+		return createCreateUserAddressInputJonah(new Id(0L));
 	}
 
 	public static CreateUserAddressInput createCreateUserAddressInputJonah(Id userId) {
@@ -211,7 +211,7 @@ public class TestDataFactory {
 	}
 
 	public static UpdateUserInput createUpdateUserInputJohn() {
-		return createUpdateUserInputJohn(new Id());
+		return createUpdateUserInputJohn(new Id(0L));
 	}
 
 	public static UpdateUserInput createUpdateUserInputJohn(Id userId) {
@@ -219,7 +219,7 @@ public class TestDataFactory {
 	}
 
 	public static UpdateUserDetailsInput createUpdateUserDetailsInputJohn() {
-		return createUpdateUserDetailsInputJohn(new Id());
+		return createUpdateUserDetailsInputJohn(new Id(0L));
 	}
 
 	public static UpdateUserDetailsInput createUpdateUserDetailsInputJohn(Id userId) {
@@ -227,7 +227,7 @@ public class TestDataFactory {
 	}
 
 	public static UpdateUserStatusInput createUpdateUserStatusInputJohn() {
-		return createUpdateUserStatusInputJohn(new Id());
+		return createUpdateUserStatusInputJohn(new Id(0L));
 	}
 
 	public static UpdateUserStatusInput createUpdateUserStatusInputJohn(Id userId) {
@@ -235,7 +235,7 @@ public class TestDataFactory {
 	}
 
 	public static UpdateUserAddressInput createUpdateUserAddressInputJohn() {
-		return createUpdateUserAddressInputJohn(new Id());
+		return createUpdateUserAddressInputJohn(new Id(0L));
 	}
 
 	public static UpdateUserAddressInput createUpdateUserAddressInputJohn(Id userId) {
@@ -243,7 +243,7 @@ public class TestDataFactory {
 	}
 
 	public static UpdateUserPasswordInput createUpdateUserPasswordInputJohn() {
-		return createUpdateUserPasswordInputJohn(new Id());
+		return createUpdateUserPasswordInputJohn(new Id(0L));
 	}
 
 	public static UpdateUserPasswordInput createUpdateUserPasswordInputJohn(Id userId) {
@@ -251,7 +251,7 @@ public class TestDataFactory {
 	}
 
 	public static UpdateUserInput createUpdateUserInputJane() {
-		return createUpdateUserInputJane(new Id());
+		return createUpdateUserInputJane(new Id(0L));
 	}
 
 	public static UpdateUserInput createUpdateUserInputJane(Id userId) {
@@ -259,7 +259,7 @@ public class TestDataFactory {
 	}
 
 	public static UpdateUserDetailsInput createUpdateUserDetailsInputJane() {
-		return createUpdateUserDetailsInputJane(new Id());
+		return createUpdateUserDetailsInputJane(new Id(0L));
 	}
 
 	public static UpdateUserDetailsInput createUpdateUserDetailsInputJane(Id userId) {
@@ -267,7 +267,7 @@ public class TestDataFactory {
 	}
 
 	public static UpdateUserStatusInput createUpdateUserStatusInputJane() {
-		return createUpdateUserStatusInputJane(new Id());
+		return createUpdateUserStatusInputJane(new Id(0L));
 	}
 
 	public static UpdateUserStatusInput createUpdateUserStatusInputJane(Id userId) {
@@ -275,7 +275,7 @@ public class TestDataFactory {
 	}
 
 	public static UpdateUserAddressInput createUpdateUserAddressInputJane() {
-		return createUpdateUserAddressInputJane(new Id());
+		return createUpdateUserAddressInputJane(new Id(0L));
 	}
 
 	public static UpdateUserAddressInput createUpdateUserAddressInputJane(Id userId) {
@@ -283,7 +283,7 @@ public class TestDataFactory {
 	}
 
 	public static UpdateUserPasswordInput createUpdateUserPasswordInputJane() {
-		return createUpdateUserPasswordInputJane(new Id());
+		return createUpdateUserPasswordInputJane(new Id(0L));
 	}
 
 	public static UpdateUserPasswordInput createUpdateUserPasswordInputJane(Id userId) {
@@ -291,7 +291,7 @@ public class TestDataFactory {
 	}
 
 	public static UpdateUserInput createUpdateUserInputJonah() {
-		return createUpdateUserInputJonah(new Id());
+		return createUpdateUserInputJonah(new Id(0L));
 	}
 
 	public static UpdateUserInput createUpdateUserInputJonah(Id userId) {
@@ -299,7 +299,7 @@ public class TestDataFactory {
 	}
 
 	public static UpdateUserDetailsInput createUpdateUserDetailsInputJonah() {
-		return createUpdateUserDetailsInputJonah(new Id());
+		return createUpdateUserDetailsInputJonah(new Id(0L));
 	}
 
 	public static UpdateUserDetailsInput createUpdateUserDetailsInputJonah(Id userId) {
@@ -307,7 +307,7 @@ public class TestDataFactory {
 	}
 
 	public static UpdateUserStatusInput createUpdateUserStatusInputJonah() {
-		return createUpdateUserStatusInputJonah(new Id());
+		return createUpdateUserStatusInputJonah(new Id(0L));
 	}
 
 	public static UpdateUserStatusInput createUpdateUserStatusInputJonah(Id userId) {
@@ -315,7 +315,7 @@ public class TestDataFactory {
 	}
 
 	public static UpdateUserAddressInput createUpdateUserAddressInputJonah() {
-		return createUpdateUserAddressInputJonah(new Id());
+		return createUpdateUserAddressInputJonah(new Id(0L));
 	}
 
 	public static UpdateUserAddressInput createUpdateUserAddressInputJonah(Id userId) {
@@ -323,7 +323,7 @@ public class TestDataFactory {
 	}
 
 	public static UpdateUserPasswordInput createUpdateUserPasswordInputJonah() {
-		return createUpdateUserPasswordInputJonah(new Id());
+		return createUpdateUserPasswordInputJonah(new Id(0L));
 	}
 
 	public static UpdateUserPasswordInput createUpdateUserPasswordInputJonah(Id userId) {
@@ -343,7 +343,7 @@ public class TestDataFactory {
 	}
 
 	public static DeleteUserInput createDeleteUserInput() {
-		return createDeleteUserInput(new Id());
+		return createDeleteUserInput(new Id(0L));
 	}
 
 	public static DeleteUserInput createDeleteUserInput(Id id) {
@@ -351,7 +351,7 @@ public class TestDataFactory {
 	}
 
 	public static DeleteUserDetailsInput createDeleteUserDetailsInput() {
-		return createDeleteUserDetailsInput(new Id());
+		return createDeleteUserDetailsInput(new Id(0L));
 	}
 
 	public static DeleteUserDetailsInput createDeleteUserDetailsInput(Id id) {
@@ -359,7 +359,7 @@ public class TestDataFactory {
 	}
 
 	public static DeleteUserStatusInput createDeleteUserStatusInput() {
-		return createDeleteUserStatusInput(new Id());
+		return createDeleteUserStatusInput(new Id(0L));
 	}
 
 	public static DeleteUserStatusInput createDeleteUserStatusInput(Id id) {
@@ -367,7 +367,7 @@ public class TestDataFactory {
 	}
 
 	public static DeleteUserAddressInput createDeleteUserAddressInput() {
-		return createDeleteUserAddressInput(new Id());
+		return createDeleteUserAddressInput(new Id(0L));
 	}
 
 	public static DeleteUserAddressInput createDeleteUserAddressInput(Id id) {
@@ -375,7 +375,7 @@ public class TestDataFactory {
 	}
 
 	public static DeleteUserPasswordInput createDeleteUserPasswordInput() {
-		return createDeleteUserPasswordInput(new Id());
+		return createDeleteUserPasswordInput(new Id(0L));
 	}
 
 	public static DeleteUserPasswordInput createDeleteUserPasswordInput(Id id) {
@@ -398,7 +398,7 @@ public class TestDataFactory {
 	}
 
 	public static CreateNoteInput createCreateNoteInput1() {
-		return createCreateNoteInput1(new Id());
+		return createCreateNoteInput1(new Id(0L));
 	}
 
 	public static CreateNoteInput createCreateNoteInput1(Id userId) {
@@ -406,7 +406,7 @@ public class TestDataFactory {
 	}
 
 	public static CreateNoteDetailsInput createCreateNoteDetailsInput1() {
-		return createCreateNoteDetailsInput1(new Id());
+		return createCreateNoteDetailsInput1(new Id(0L));
 	}
 
 	public static CreateNoteDetailsInput createCreateNoteDetailsInput1(Id id) {
@@ -418,7 +418,7 @@ public class TestDataFactory {
 	}
 
 	public static UpdateNoteInput createUpdateNoteInput1() {
-		return createUpdateNoteInput1(new Id());
+		return createUpdateNoteInput1(new Id(0L));
 	}
 
 	public static UpdateNoteInput createUpdateNoteInput1(Id id) {
@@ -426,7 +426,7 @@ public class TestDataFactory {
 	}
 
 	public static UpdateNoteDetailsInput createUpdateNoteDetailsInput1() {
-		return createUpdateNoteDetailsInput1(new Id());
+		return createUpdateNoteDetailsInput1(new Id(0L));
 	}
 
 	public static UpdateNoteDetailsInput createUpdateNoteDetailsInput1(Id id) {
@@ -434,7 +434,7 @@ public class TestDataFactory {
 	}
 
 	public static UpdateNoteStatusInput createUpdateNoteStatusInput1() {
-		return createUpdateNoteStatusInput1(new Id());
+		return createUpdateNoteStatusInput1(new Id(0L));
 	}
 
 	public static UpdateNoteStatusInput createUpdateNoteStatusInput1(Id id) {
@@ -442,7 +442,7 @@ public class TestDataFactory {
 	}
 
 	public static DeleteNoteInput createDeleteNoteInput() {
-		return createDeleteNoteInput(new Id());
+		return createDeleteNoteInput(new Id(0L));
 	}
 
 	public static DeleteNoteInput createDeleteNoteInput(Id id) {
@@ -450,7 +450,7 @@ public class TestDataFactory {
 	}
 
 	public static DeleteNoteDetailsInput createDeleteNoteDetailsInput() {
-		return createDeleteNoteDetailsInput(new Id());
+		return createDeleteNoteDetailsInput(new Id(0L));
 	}
 
 	public static DeleteNoteDetailsInput createDeleteNoteDetailsInput(Id id) {
@@ -458,7 +458,7 @@ public class TestDataFactory {
 	}
 
 	public static DeleteNoteStatusInput createDeleteNoteStatusInput() {
-		return createDeleteNoteStatusInput(new Id());
+		return createDeleteNoteStatusInput(new Id(0L));
 	}
 
 	public static DeleteNoteStatusInput createDeleteNoteStatusInput(Id id) {
@@ -477,7 +477,7 @@ public class TestDataFactory {
 	}
 
 	public static CreateTaskInput createCreateTaskInput1() {
-		return createCreateTaskInput1(new Id());
+		return createCreateTaskInput1(new Id(0L));
 	}
 
 	public static CreateTaskInput createCreateTaskInput1(Id userId) {
@@ -485,7 +485,7 @@ public class TestDataFactory {
 	}
 
 	public static CreateTaskDetailsInput createCreateTaskDetailsInput1() {
-		return createCreateTaskDetailsInput1(new Id());
+		return createCreateTaskDetailsInput1(new Id(0L));
 	}
 
 	public static CreateTaskDetailsInput createCreateTaskDetailsInput1(Id id) {
@@ -497,7 +497,7 @@ public class TestDataFactory {
 	}
 
 	public static UpdateTaskInput createUpdateTaskInput1() {
-		return createUpdateTaskInput1(new Id());
+		return createUpdateTaskInput1(new Id(0L));
 	}
 
 	public static UpdateTaskInput createUpdateTaskInput1(Id id) {
@@ -505,7 +505,7 @@ public class TestDataFactory {
 	}
 
 	public static UpdateTaskDetailsInput createUpdateTaskDetailsInput1() {
-		return createUpdateTaskDetailsInput1(new Id());
+		return createUpdateTaskDetailsInput1(new Id(0L));
 	}
 
 	public static UpdateTaskDetailsInput createUpdateTaskDetailsInput1(Id id) {
@@ -513,7 +513,7 @@ public class TestDataFactory {
 	}
 
 	public static UpdateTaskStatusInput createUpdateTaskStatusInput1() {
-		return createUpdateTaskStatusInput1(new Id());
+		return createUpdateTaskStatusInput1(new Id(0L));
 	}
 
 	public static UpdateTaskStatusInput createUpdateTaskStatusInput1(Id id) {
@@ -521,7 +521,7 @@ public class TestDataFactory {
 	}
 
 	public static DeleteTaskInput createDeleteTaskInput() {
-		return createDeleteTaskInput(new Id());
+		return createDeleteTaskInput(new Id(0L));
 	}
 
 	public static DeleteTaskInput createDeleteTaskInput(Id id) {
@@ -529,7 +529,7 @@ public class TestDataFactory {
 	}
 
 	public static DeleteTaskDetailsInput createDeleteTaskDetailsInput() {
-		return createDeleteTaskDetailsInput(new Id());
+		return createDeleteTaskDetailsInput(new Id(0L));
 	}
 
 	public static DeleteTaskDetailsInput createDeleteTaskDetailsInput(Id id) {
@@ -537,7 +537,7 @@ public class TestDataFactory {
 	}
 
 	public static DeleteTaskStatusInput createDeleteTaskStatusInput() {
-		return createDeleteTaskStatusInput(new Id());
+		return createDeleteTaskStatusInput(new Id(0L));
 	}
 
 	public static DeleteTaskStatusInput createDeleteTaskStatusInput(Id id) {
