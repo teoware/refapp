@@ -1,27 +1,26 @@
 package com.teoware.refapp.dao.dto;
 
 import com.teoware.refapp.model.common.Title;
-import com.teoware.refapp.model.common.Username;
 
 public class CreateNoteInput {
 
-	private Username username;
+	private Id userId;
 	private Title title;
 
 	public CreateNoteInput() {
 	}
 
-	public CreateNoteInput(Username username, Title title) {
-		this.username = username;
+	public CreateNoteInput(Id userId, Title title) {
+		this.setUserId(userId);
 		this.title = title;
 	}
 
-	public Username getUsername() {
-		return username;
+	public Id getUserId() {
+		return userId;
 	}
 
-	public void setUsername(Username username) {
-		this.username = username;
+	public void setUserId(Id userId) {
+		this.userId = userId;
 	}
 
 	public Title getTitle() {

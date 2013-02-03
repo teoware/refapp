@@ -14,14 +14,14 @@ import com.teoware.refapp.dao.dto.DeleteTaskInput;
 import com.teoware.refapp.dao.dto.DeleteTaskOutput;
 import com.teoware.refapp.dao.dto.DeleteTaskStatusInput;
 import com.teoware.refapp.dao.dto.DeleteTaskStatusOutput;
-import com.teoware.refapp.dao.dto.Id;
 import com.teoware.refapp.dao.dto.ReadTaskInput;
 import com.teoware.refapp.dao.dto.ReadTaskOutput;
 import com.teoware.refapp.dao.dto.UpdateTaskDetailsInput;
 import com.teoware.refapp.dao.dto.UpdateTaskDetailsOutput;
 import com.teoware.refapp.dao.dto.UpdateTaskInput;
 import com.teoware.refapp.dao.dto.UpdateTaskOutput;
-import com.teoware.refapp.model.common.Username;
+import com.teoware.refapp.dao.dto.UpdateTaskStatusInput;
+import com.teoware.refapp.dao.dto.UpdateTaskStatusOutput;
 
 @Local
 public interface TaskDao extends Serializable {
@@ -36,13 +36,13 @@ public interface TaskDao extends Serializable {
 
 	public UpdateTaskDetailsOutput updateTaskDetails(UpdateTaskDetailsInput input) throws DaoException;
 
+	public UpdateTaskStatusOutput updateTaskStatus(UpdateTaskStatusInput input) throws DaoException;
+
 	public DeleteTaskOutput deleteTask(DeleteTaskInput input) throws DaoException;
 
 	public DeleteTaskDetailsOutput deleteTaskDetails(DeleteTaskDetailsInput input) throws DaoException;
 
 	public DeleteTaskStatusOutput deleteTaskStatus(DeleteTaskStatusInput input) throws DaoException;
-
-	public Id readUserId(Username username) throws DaoException;
 
 	public void persistConnection();
 

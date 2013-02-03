@@ -2,9 +2,19 @@ package com.teoware.refapp.test.util;
 
 import org.joda.time.DateTime;
 
+import com.teoware.refapp.dao.dto.CreateNoteDetailsInput;
+import com.teoware.refapp.dao.dto.CreateNoteInput;
+import com.teoware.refapp.dao.dto.CreateTaskDetailsInput;
+import com.teoware.refapp.dao.dto.CreateTaskInput;
 import com.teoware.refapp.dao.dto.CreateUserAddressInput;
 import com.teoware.refapp.dao.dto.CreateUserDetailsInput;
 import com.teoware.refapp.dao.dto.CreateUserInput;
+import com.teoware.refapp.dao.dto.DeleteNoteDetailsInput;
+import com.teoware.refapp.dao.dto.DeleteNoteInput;
+import com.teoware.refapp.dao.dto.DeleteNoteStatusInput;
+import com.teoware.refapp.dao.dto.DeleteTaskDetailsInput;
+import com.teoware.refapp.dao.dto.DeleteTaskInput;
+import com.teoware.refapp.dao.dto.DeleteTaskStatusInput;
 import com.teoware.refapp.dao.dto.DeleteUserAddressInput;
 import com.teoware.refapp.dao.dto.DeleteUserDetailsInput;
 import com.teoware.refapp.dao.dto.DeleteUserInput;
@@ -12,7 +22,15 @@ import com.teoware.refapp.dao.dto.DeleteUserPasswordInput;
 import com.teoware.refapp.dao.dto.DeleteUserStatusInput;
 import com.teoware.refapp.dao.dto.Id;
 import com.teoware.refapp.dao.dto.PurgeUsersInput;
+import com.teoware.refapp.dao.dto.ReadNoteInput;
+import com.teoware.refapp.dao.dto.ReadTaskInput;
 import com.teoware.refapp.dao.dto.ReadUserInput;
+import com.teoware.refapp.dao.dto.UpdateNoteDetailsInput;
+import com.teoware.refapp.dao.dto.UpdateNoteInput;
+import com.teoware.refapp.dao.dto.UpdateNoteStatusInput;
+import com.teoware.refapp.dao.dto.UpdateTaskDetailsInput;
+import com.teoware.refapp.dao.dto.UpdateTaskInput;
+import com.teoware.refapp.dao.dto.UpdateTaskStatusInput;
 import com.teoware.refapp.dao.dto.UpdateUserAddressInput;
 import com.teoware.refapp.dao.dto.UpdateUserDetailsInput;
 import com.teoware.refapp.dao.dto.UpdateUserInput;
@@ -21,15 +39,17 @@ import com.teoware.refapp.dao.dto.UpdateUserStatusInput;
 import com.teoware.refapp.model.common.Username;
 import com.teoware.refapp.model.enums.Gender;
 import com.teoware.refapp.model.enums.Status;
+import com.teoware.refapp.model.note.Note;
+import com.teoware.refapp.model.task.Task;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserPassword;
 import com.teoware.refapp.model.util.BeanFactory;
 import com.teoware.refapp.service.dto.RegisterUserRequest;
 
-public final class TestDataFactory {
+public class TestDataFactory {
 
 	public static User createUserJohn() {
-		DateTime dateTime = new DateTime();
+		DateTime dateTime = DateTime.now();
 		User bean = BeanFactory.createUserBean();
 		bean.getUsername().setUsername("john.doe");
 		bean.getUserStatus().setStatus(Status.ACTIVE);
@@ -50,7 +70,7 @@ public final class TestDataFactory {
 	}
 
 	public static User createUserJane() {
-		DateTime dateTime = new DateTime();
+		DateTime dateTime = DateTime.now();
 		User bean = BeanFactory.createUserBean();
 		bean.getUsername().setUsername("jane.doe");
 		bean.getUserStatus().setStatus(Status.ACTIVE);
@@ -71,7 +91,7 @@ public final class TestDataFactory {
 	}
 
 	public static User createUserJonah() {
-		DateTime dateTime = new DateTime();
+		DateTime dateTime = DateTime.now();
 		User bean = BeanFactory.createUserBean();
 		bean.getUsername().setUsername("jonah.doe");
 		bean.getUserStatus().setStatus(Status.ACTIVE);
@@ -109,6 +129,12 @@ public final class TestDataFactory {
 		UserPassword bean = new UserPassword();
 		bean.setPassword("jonahsPassword");
 		bean.setSalt("jonahsPasswordSalt");
+		return bean;
+	}
+
+	public static Username createUsername(String username) {
+		Username bean = new Username();
+		bean.setUsername(username);
 		return bean;
 	}
 
@@ -317,32 +343,204 @@ public final class TestDataFactory {
 	}
 
 	public static DeleteUserInput createDeleteUserInput() {
-		return new DeleteUserInput(new Id());
+		return createDeleteUserInput(new Id());
+	}
+
+	public static DeleteUserInput createDeleteUserInput(Id id) {
+		return new DeleteUserInput(id);
 	}
 
 	public static DeleteUserDetailsInput createDeleteUserDetailsInput() {
-		return new DeleteUserDetailsInput(new Id());
+		return createDeleteUserDetailsInput(new Id());
+	}
+
+	public static DeleteUserDetailsInput createDeleteUserDetailsInput(Id id) {
+		return new DeleteUserDetailsInput(id);
 	}
 
 	public static DeleteUserStatusInput createDeleteUserStatusInput() {
-		return new DeleteUserStatusInput(new Id());
+		return createDeleteUserStatusInput(new Id());
+	}
+
+	public static DeleteUserStatusInput createDeleteUserStatusInput(Id id) {
+		return new DeleteUserStatusInput(id);
 	}
 
 	public static DeleteUserAddressInput createDeleteUserAddressInput() {
-		return new DeleteUserAddressInput(new Id());
+		return createDeleteUserAddressInput(new Id());
+	}
+
+	public static DeleteUserAddressInput createDeleteUserAddressInput(Id id) {
+		return new DeleteUserAddressInput(id);
 	}
 
 	public static DeleteUserPasswordInput createDeleteUserPasswordInput() {
-		return new DeleteUserPasswordInput(new Id());
+		return createDeleteUserPasswordInput(new Id());
+	}
+
+	public static DeleteUserPasswordInput createDeleteUserPasswordInput(Id id) {
+		return new DeleteUserPasswordInput(id);
 	}
 
 	public static PurgeUsersInput createPurgeUsersInput() {
 		return new PurgeUsersInput();
 	}
 
-	private static Username createUsername(String username) {
-		Username bean = new Username();
-		bean.setUsername(username);
-		return bean;
+	public static Note createNote1() {
+		DateTime dateTime = DateTime.now();
+		Note note = BeanFactory.createNote();
+		note.getTitle().setTitle("Note 1");
+		note.getNoteDetails().setDescription("This is note 1");
+		note.getNoteStatus().setStatus(Status.NEW);
+		note.getNoteStatus().setCreated(dateTime);
+		note.getNoteStatus().setModified(dateTime);
+		return note;
+	}
+
+	public static CreateNoteInput createCreateNoteInput1() {
+		return createCreateNoteInput1(new Id());
+	}
+
+	public static CreateNoteInput createCreateNoteInput1(Id userId) {
+		return new CreateNoteInput(userId, createNote1().getTitle());
+	}
+
+	public static CreateNoteDetailsInput createCreateNoteDetailsInput1() {
+		return createCreateNoteDetailsInput1(new Id());
+	}
+
+	public static CreateNoteDetailsInput createCreateNoteDetailsInput1(Id id) {
+		return new CreateNoteDetailsInput(id, createNote1().getNoteDetails());
+	}
+
+	public static ReadNoteInput createReadNoteInput1() {
+		return new ReadNoteInput(createUsername("john.doe"));
+	}
+
+	public static UpdateNoteInput createUpdateNoteInput1() {
+		return createUpdateNoteInput1(new Id());
+	}
+
+	public static UpdateNoteInput createUpdateNoteInput1(Id id) {
+		return new UpdateNoteInput(id, createNote1().getTitle());
+	}
+
+	public static UpdateNoteDetailsInput createUpdateNoteDetailsInput1() {
+		return createUpdateNoteDetailsInput1(new Id());
+	}
+
+	public static UpdateNoteDetailsInput createUpdateNoteDetailsInput1(Id id) {
+		return new UpdateNoteDetailsInput(id, createNote1().getNoteDetails());
+	}
+
+	public static UpdateNoteStatusInput createUpdateNoteStatusInput1() {
+		return createUpdateNoteStatusInput1(new Id());
+	}
+
+	public static UpdateNoteStatusInput createUpdateNoteStatusInput1(Id id) {
+		return new UpdateNoteStatusInput(id, createNote1().getNoteStatus());
+	}
+
+	public static DeleteNoteInput createDeleteNoteInput() {
+		return createDeleteNoteInput(new Id());
+	}
+
+	public static DeleteNoteInput createDeleteNoteInput(Id id) {
+		return new DeleteNoteInput(id);
+	}
+
+	public static DeleteNoteDetailsInput createDeleteNoteDetailsInput() {
+		return createDeleteNoteDetailsInput(new Id());
+	}
+
+	public static DeleteNoteDetailsInput createDeleteNoteDetailsInput(Id id) {
+		return new DeleteNoteDetailsInput(id);
+	}
+
+	public static DeleteNoteStatusInput createDeleteNoteStatusInput() {
+		return createDeleteNoteStatusInput(new Id());
+	}
+
+	public static DeleteNoteStatusInput createDeleteNoteStatusInput(Id id) {
+		return new DeleteNoteStatusInput(id);
+	}
+
+	public static Task createTask1() {
+		DateTime dateTime = DateTime.now();
+		Task task = BeanFactory.createTask();
+		task.getTitle().setTitle("Task 1");
+		task.getTaskDetails().setDescription("This is task 1");
+		task.getTaskStatus().setStatus(Status.NEW);
+		task.getTaskStatus().setCreated(dateTime);
+		task.getTaskStatus().setModified(dateTime);
+		return task;
+	}
+
+	public static CreateTaskInput createCreateTaskInput1() {
+		return createCreateTaskInput1(new Id());
+	}
+
+	public static CreateTaskInput createCreateTaskInput1(Id userId) {
+		return new CreateTaskInput(userId, createTask1().getTitle());
+	}
+
+	public static CreateTaskDetailsInput createCreateTaskDetailsInput1() {
+		return createCreateTaskDetailsInput1(new Id());
+	}
+
+	public static CreateTaskDetailsInput createCreateTaskDetailsInput1(Id id) {
+		return new CreateTaskDetailsInput(id, createTask1().getTaskDetails());
+	}
+
+	public static ReadTaskInput createReadTaskInput1() {
+		return new ReadTaskInput(createUsername("john.doe"));
+	}
+
+	public static UpdateTaskInput createUpdateTaskInput1() {
+		return createUpdateTaskInput1(new Id());
+	}
+
+	public static UpdateTaskInput createUpdateTaskInput1(Id id) {
+		return new UpdateTaskInput(id, createTask1().getTitle());
+	}
+
+	public static UpdateTaskDetailsInput createUpdateTaskDetailsInput1() {
+		return createUpdateTaskDetailsInput1(new Id());
+	}
+
+	public static UpdateTaskDetailsInput createUpdateTaskDetailsInput1(Id id) {
+		return new UpdateTaskDetailsInput(id, createTask1().getTaskDetails());
+	}
+
+	public static UpdateTaskStatusInput createUpdateTaskStatusInput1() {
+		return createUpdateTaskStatusInput1(new Id());
+	}
+
+	public static UpdateTaskStatusInput createUpdateTaskStatusInput1(Id id) {
+		return new UpdateTaskStatusInput(id, createTask1().getTaskStatus());
+	}
+
+	public static DeleteTaskInput createDeleteTaskInput() {
+		return createDeleteTaskInput(new Id());
+	}
+
+	public static DeleteTaskInput createDeleteTaskInput(Id id) {
+		return new DeleteTaskInput(id);
+	}
+
+	public static DeleteTaskDetailsInput createDeleteTaskDetailsInput() {
+		return createDeleteTaskDetailsInput(new Id());
+	}
+
+	public static DeleteTaskDetailsInput createDeleteTaskDetailsInput(Id id) {
+		return new DeleteTaskDetailsInput(id);
+	}
+
+	public static DeleteTaskStatusInput createDeleteTaskStatusInput() {
+		return createDeleteTaskStatusInput(new Id());
+	}
+
+	public static DeleteTaskStatusInput createDeleteTaskStatusInput(Id id) {
+		return new DeleteTaskStatusInput(id);
 	}
 }

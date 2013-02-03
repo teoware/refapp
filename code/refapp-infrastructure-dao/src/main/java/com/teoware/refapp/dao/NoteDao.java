@@ -14,14 +14,14 @@ import com.teoware.refapp.dao.dto.DeleteNoteInput;
 import com.teoware.refapp.dao.dto.DeleteNoteOutput;
 import com.teoware.refapp.dao.dto.DeleteNoteStatusInput;
 import com.teoware.refapp.dao.dto.DeleteNoteStatusOutput;
-import com.teoware.refapp.dao.dto.Id;
 import com.teoware.refapp.dao.dto.ReadNoteInput;
 import com.teoware.refapp.dao.dto.ReadNoteOutput;
 import com.teoware.refapp.dao.dto.UpdateNoteDetailsInput;
 import com.teoware.refapp.dao.dto.UpdateNoteDetailsOutput;
 import com.teoware.refapp.dao.dto.UpdateNoteInput;
 import com.teoware.refapp.dao.dto.UpdateNoteOutput;
-import com.teoware.refapp.model.common.Username;
+import com.teoware.refapp.dao.dto.UpdateNoteStatusInput;
+import com.teoware.refapp.dao.dto.UpdateNoteStatusOutput;
 
 @Local
 public interface NoteDao extends Serializable {
@@ -36,13 +36,13 @@ public interface NoteDao extends Serializable {
 
 	public UpdateNoteDetailsOutput updateNoteDetails(UpdateNoteDetailsInput input) throws DaoException;
 
+	public UpdateNoteStatusOutput updateNoteStatus(UpdateNoteStatusInput input) throws DaoException;
+
 	public DeleteNoteOutput deleteNote(DeleteNoteInput input) throws DaoException;
 
 	public DeleteNoteDetailsOutput deleteNoteDetails(DeleteNoteDetailsInput input) throws DaoException;
 
 	public DeleteNoteStatusOutput deleteNoteStatus(DeleteNoteStatusInput input) throws DaoException;
-
-	public Id readUserId(Username username) throws DaoException;
 
 	public void persistConnection();
 
