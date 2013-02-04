@@ -21,7 +21,7 @@ import com.teoware.refapp.model.common.Id;
 public class UserIdRowMapperTest {
 
 	@InjectMocks
-	private UserIdRowMapper rowMapper;
+	private IdRowMapper rowMapper;
 
 	@Mock
 	private ResultSet result;

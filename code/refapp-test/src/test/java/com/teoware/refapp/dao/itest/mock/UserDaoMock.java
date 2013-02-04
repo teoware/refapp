@@ -10,7 +10,7 @@ import java.util.List;
 
 import com.teoware.refapp.dao.DaoException;
 import com.teoware.refapp.dao.UserDaoBean;
-import com.teoware.refapp.dao.rowmapper.UserIdRowMapper;
+import com.teoware.refapp.dao.rowmapper.IdRowMapper;
 import com.teoware.refapp.dao.util.DaoHelper;
 import com.teoware.refapp.dao.util.SQL;
 import com.teoware.refapp.model.common.Id;
@@ -44,7 +44,7 @@ public class UserDaoMock extends UserDaoBean {
 	public void cleanAll() throws DaoException {
 		List<Id> users = super.read(
 				new SQL.Builder().doSelect(ID_COLUMN_NAME).from(USERS_TABLE).whereLike(USERNAME_COLUMN_NAME).build(),
-				new UserIdRowMapper(), DaoHelper.generateArray("%.doe"));
+				new IdRowMapper(), DaoHelper.generateArray("%.doe"));
 		Object[] ids = new Object[users.size()];
 		for (int i = 0; i < users.size(); i++) {
 			ids[i] = users.get(i).getId();

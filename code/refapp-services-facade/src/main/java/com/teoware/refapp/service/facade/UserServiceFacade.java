@@ -15,6 +15,7 @@ import com.teoware.refapp.service.dto.DeleteUserRequest;
 import com.teoware.refapp.service.dto.DeleteUserResponse;
 import com.teoware.refapp.service.dto.FindUserRequest;
 import com.teoware.refapp.service.dto.FindUserResponse;
+import com.teoware.refapp.service.dto.ListUsersRequest;
 import com.teoware.refapp.service.dto.ListUsersResponse;
 import com.teoware.refapp.service.dto.RegisterUserRequest;
 import com.teoware.refapp.service.dto.RegisterUserResponse;
@@ -33,7 +34,7 @@ public interface UserServiceFacade extends Serializable {
 
 	public FindUserResponse findUser(FindUserRequest request) throws ValidationException, ServiceException;
 
-	public ListUsersResponse listUsers() throws ServiceException;
+	public ListUsersResponse listUsers(ListUsersRequest request) throws ServiceException;
 
 	public ChangeUserResponse changeUser(ChangeUserRequest request) throws ValidationException, ServiceException;
 

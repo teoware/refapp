@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.teoware.refapp.dao.rowmapper.IdRowMapper;
 import com.teoware.refapp.dao.rowmapper.RowMapper;
 import com.teoware.refapp.dao.util.ChangeResult;
 import com.teoware.refapp.dao.util.ConnectionHandler;
@@ -40,6 +41,7 @@ public abstract class Dao {
 
 	protected Connection connection;
 	protected boolean persistConnection;
+	protected IdRowMapper idRowMapper = new IdRowMapper();
 
 	protected void initialize(DataSource dataSource) {
 		this.dataSource = dataSource;

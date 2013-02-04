@@ -16,12 +16,15 @@ import com.teoware.refapp.dao.dto.DeleteNoteStatusInput;
 import com.teoware.refapp.dao.dto.DeleteNoteStatusOutput;
 import com.teoware.refapp.dao.dto.ReadNoteInput;
 import com.teoware.refapp.dao.dto.ReadNoteOutput;
+import com.teoware.refapp.dao.dto.ReadNotesInput;
 import com.teoware.refapp.dao.dto.UpdateNoteDetailsInput;
 import com.teoware.refapp.dao.dto.UpdateNoteDetailsOutput;
 import com.teoware.refapp.dao.dto.UpdateNoteInput;
 import com.teoware.refapp.dao.dto.UpdateNoteOutput;
 import com.teoware.refapp.dao.dto.UpdateNoteStatusInput;
 import com.teoware.refapp.dao.dto.UpdateNoteStatusOutput;
+import com.teoware.refapp.model.common.Id;
+import com.teoware.refapp.model.common.Title;
 
 @Local
 public interface NoteDao extends Serializable {
@@ -31,6 +34,10 @@ public interface NoteDao extends Serializable {
 	public CreateNoteDetailsOutput createNoteDetails(CreateNoteDetailsInput input) throws DaoException;
 
 	public ReadNoteOutput readNote(ReadNoteInput input) throws DaoException;
+
+	public ReadNoteOutput readNotes(ReadNotesInput input) throws DaoException;
+
+	public Id readNoteId(Title title) throws DaoException;
 
 	public UpdateNoteOutput updateNote(UpdateNoteInput input) throws DaoException;
 

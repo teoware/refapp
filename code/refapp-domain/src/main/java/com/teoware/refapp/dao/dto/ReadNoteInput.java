@@ -1,23 +1,23 @@
 package com.teoware.refapp.dao.dto;
 
-import com.teoware.refapp.model.common.Username;
+import com.teoware.refapp.model.common.Title;
 
 public class ReadNoteInput {
 
-	private Username username;
+	private Title title;
 
 	public ReadNoteInput() {
 	}
 
-	public ReadNoteInput(Username username) {
-		this.username = username;
+	public ReadNoteInput(Title title) {
+		this.setTitle(title);
 	}
 
-	public Username getUsername() {
-		return username;
+	public Title getTitle() {
+		return title;
 	}
 
-	public void setUsername(Username username) {
-		this.username = username;
+	public void setTitle(Title title) {
+		this.title = title;
 	}
 }

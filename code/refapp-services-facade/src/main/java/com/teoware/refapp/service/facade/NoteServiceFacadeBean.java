@@ -23,5 +23,4 @@ public class NoteServiceFacadeBean implements NoteServiceFacade {
 	public CreateNoteResponse createNote(CreateNoteRequest request) throws ServiceException {
 		return noteService.createNote(request);
 	}
-
 }

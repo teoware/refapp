@@ -60,6 +60,7 @@ import com.teoware.refapp.service.dto.DeleteUserRequest;
 import com.teoware.refapp.service.dto.DeleteUserResponse;
 import com.teoware.refapp.service.dto.FindUserRequest;
 import com.teoware.refapp.service.dto.FindUserResponse;
+import com.teoware.refapp.service.dto.ListUsersRequest;
 import com.teoware.refapp.service.dto.ListUsersResponse;
 import com.teoware.refapp.service.dto.RegisterUserRequest;
 import com.teoware.refapp.service.dto.RegisterUserResponse;
@@ -78,7 +79,7 @@ public class UserServiceBean extends Service implements UserService {
 	private static final String DAO_EXCEPTION_MESSAGE = "DAO exception";
 
 	@Inject
-	protected UserDao dao;
+	protected UserDao userDao;
 
 	@Override
 	public RegisterUserResponse registerUser(RegisterUserRequest request) throws ServiceException {
@@ -91,24 +92,24 @@ public class UserServiceBean extends Service implements UserService {
 			User user = request.getBody();
 			UserPassword userPassword = request.getUserPassword();
 
-			dao.persistConnection();
+			userDao.persistConnection();
 
 			CreateUserInput createUserInput = new CreateUserInput(user.getUsername());
-			CreateUserOutput createUserOutput = dao.createUser(createUserInput);
+			CreateUserOutput createUserOutput = userDao.createUser(createUserInput);
 			Id userId = createUserOutput.getId();
 			rowsAffected += createUserOutput.getRowsAffected();
 
-			CreateUserDetailsInput createUserInfoInput = new CreateUserDetailsInput(userId, user.getUserDetails());
-			CreateUserDetailsOutput createUserInfoOutput = dao.createUserDetails(createUserInfoInput);
-			rowsAffected += createUserInfoOutput.getRowsAffected();
+			CreateUserDetailsInput createUserDetailsInput = new CreateUserDetailsInput(userId, user.getUserDetails());
+			CreateUserDetailsOutput createUserDetailsOutput = userDao.createUserDetails(createUserDetailsInput);
+			rowsAffected += createUserDetailsOutput.getRowsAffected();
 
 			CreateUserAddressInput createUserAddressInput = new CreateUserAddressInput(userId, user.getUserAddress());
-			CreateUserAddressOutput createUserAddressOutput = dao.createUserAddress(createUserAddressInput);
+			CreateUserAddressOutput createUserAddressOutput = userDao.createUserAddress(createUserAddressInput);
 			rowsAffected += createUserAddressOutput.getRowsAffected();
 
 			CreateUserPasswordInput createUserPasswordInput = new CreateUserPasswordInput(createUserOutput.getId(),
 					userPassword);
-			CreateUserPasswordOutput createUserPasswordOutput = dao.createUserPassword(createUserPasswordInput);
+			CreateUserPasswordOutput createUserPasswordOutput = userDao.createUserPassword(createUserPasswordInput);
 			rowsAffected += createUserPasswordOutput.getRowsAffected();
 
 			return new RegisterUserResponse(header, createOperationResult(Result.SUCCESS, rowsAffected));
@@ -116,7 +117,7 @@ public class UserServiceBean extends Service implements UserService {
 			LOG.error(SERVICE_NAME + ": Register user operation failed.");
 			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
 		} finally {
-			dao.terminateConnection();
+			userDao.terminateConnection();
 		}
 	}
 
@@ -128,13 +129,13 @@ public class UserServiceBean extends Service implements UserService {
 			Header header = request.getHeader();
 			Username username = request.getBody();
 
-			dao.persistConnection();
+			userDao.persistConnection();
 
-			Id userId = dao.readUserId(username);
+			Id userId = userDao.readUserId(username);
 
 			UpdateUserStatusInput updateUserStatusInput = new UpdateUserStatusInput(userId, new UserStatus(
 					Status.ACTIVE, null, null));
-			UpdateUserStatusOutput updateUserStatusOutput = dao.updateUserStatus(updateUserStatusInput);
+			UpdateUserStatusOutput updateUserStatusOutput = userDao.updateUserStatus(updateUserStatusInput);
 			int rowsAffected = updateUserStatusOutput.getRowsAffected();
 
 			return new ActivateUserResponse(header, createOperationResult(Result.SUCCESS, rowsAffected));
@@ -142,7 +143,7 @@ public class UserServiceBean extends Service implements UserService {
 			LOG.error(SERVICE_NAME + ": Activate user operation failed.");
 			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
 		} finally {
-			dao.terminateConnection();
+			userDao.terminateConnection();
 		}
 	}
 
@@ -154,13 +155,13 @@ public class UserServiceBean extends Service implements UserService {
 			Header header = request.getHeader();
 			Username username = request.getBody();
 
-			dao.persistConnection();
+			userDao.persistConnection();
 
-			Id userId = dao.readUserId(username);
+			Id userId = userDao.readUserId(username);
 
 			UpdateUserStatusInput updateUserStatusInput = new UpdateUserStatusInput(userId, new UserStatus(
 					Status.SUSPENDED, null, null));
-			UpdateUserStatusOutput updateUserStatusOutput = dao.updateUserStatus(updateUserStatusInput);
+			UpdateUserStatusOutput updateUserStatusOutput = userDao.updateUserStatus(updateUserStatusInput);
 			int rowsAffected = updateUserStatusOutput.getRowsAffected();
 
 			return new SuspendUserResponse(header, createOperationResult(Result.SUCCESS, rowsAffected));
@@ -168,7 +169,7 @@ public class UserServiceBean extends Service implements UserService {
 			LOG.error(SERVICE_NAME + ": Suspend user operation failed.");
 			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
 		} finally {
-			dao.terminateConnection();
+			userDao.terminateConnection();
 		}
 	}
 
@@ -181,7 +182,7 @@ public class UserServiceBean extends Service implements UserService {
 			Username username = request.getBody();
 
 			ReadUserInput readUserInput = new ReadUserInput(username);
-			ReadUserOutput readUserOutput = dao.readUser(readUserInput);
+			ReadUserOutput readUserOutput = userDao.readUser(readUserInput);
 			List<User> userList = readUserOutput.getUserList();
 
 			// TODO Sanity check if more than one user found
@@ -191,23 +192,25 @@ public class UserServiceBean extends Service implements UserService {
 			LOG.error(SERVICE_NAME + ": Find user operation failed.");
 			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
 		} finally {
-			dao.terminateConnection();
+			userDao.terminateConnection();
 		}
 	}
 
 	@Override
-	public ListUsersResponse listUsers() throws ServiceException {
+	public ListUsersResponse listUsers(ListUsersRequest request) throws ServiceException {
 		LOG.info(SERVICE_NAME + ": List users operation invoked.");
 
 		try {
-			ReadUserOutput readUserOutput = dao.readAllUsers();
+			Header header = request.getHeader();
+			
+			ReadUserOutput readUserOutput = userDao.readAllUsers();
 
-			return new ListUsersResponse(readUserOutput.getUserList());
+			return new ListUsersResponse(header, readUserOutput.getUserList());
 		} catch (DaoException e) {
 			LOG.error(SERVICE_NAME + ": List users operation failed.");
 			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
 		} finally {
-			dao.terminateConnection();
+			userDao.terminateConnection();
 		}
 	}
 
@@ -221,27 +224,27 @@ public class UserServiceBean extends Service implements UserService {
 			Header header = request.getHeader();
 			User user = request.getBody();
 
-			dao.persistConnection();
+			userDao.persistConnection();
 
-			Id userId = dao.readUserId(user.getUsername());
+			Id userId = userDao.readUserId(user.getUsername());
 
 			UpdateUserInput updateUserInput = new UpdateUserInput(userId, request.getUsername());
-			UpdateUserOutput updateUserOutput = dao.updateUser(updateUserInput);
+			UpdateUserOutput updateUserOutput = userDao.updateUser(updateUserInput);
 			rowsAffected += updateUserOutput.getRowsAffected();
 
-			UpdateUserDetailsInput updateUserInfoInput = new UpdateUserDetailsInput(userId, request.getBody()
+			UpdateUserDetailsInput updateUserDetailsInput = new UpdateUserDetailsInput(userId, request.getBody()
 					.getUserDetails());
-			UpdateUserDetailsOutput updateUserInfoOutput = dao.updateUserDetails(updateUserInfoInput);
-			rowsAffected += updateUserInfoOutput.getRowsAffected();
+			UpdateUserDetailsOutput updateUserDetailsOutput = userDao.updateUserDetails(updateUserDetailsInput);
+			rowsAffected += updateUserDetailsOutput.getRowsAffected();
 
 			UpdateUserStatusInput updateUserStatusInput = new UpdateUserStatusInput(userId, request.getBody()
 					.getUserStatus());
-			UpdateUserStatusOutput updateUserStatusOutput = dao.updateUserStatus(updateUserStatusInput);
+			UpdateUserStatusOutput updateUserStatusOutput = userDao.updateUserStatus(updateUserStatusInput);
 			rowsAffected += updateUserStatusOutput.getRowsAffected();
 
 			UpdateUserAddressInput updateUserAddressInput = new UpdateUserAddressInput(userId, request.getBody()
 					.getUserAddress());
-			UpdateUserAddressOutput updateUserAddressOutput = dao.updateUserAddress(updateUserAddressInput);
+			UpdateUserAddressOutput updateUserAddressOutput = userDao.updateUserAddress(updateUserAddressInput);
 			rowsAffected += updateUserAddressOutput.getRowsAffected();
 
 			return new ChangeUserResponse(header, createOperationResult(Result.SUCCESS, rowsAffected));
@@ -249,7 +252,7 @@ public class UserServiceBean extends Service implements UserService {
 			LOG.error(SERVICE_NAME + ": Change user operation failed.");
 			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
 		} finally {
-			dao.terminateConnection();
+			userDao.terminateConnection();
 		}
 	}
 
@@ -262,10 +265,10 @@ public class UserServiceBean extends Service implements UserService {
 			UserPassword userPassword = request.getBody();
 			Username username = request.getUsername();
 
-			Id userId = dao.readUserId(username);
+			Id userId = userDao.readUserId(username);
 
 			UpdateUserPasswordInput input = new UpdateUserPasswordInput(userId, userPassword);
-			UpdateUserPasswordOutput output = dao.updateUserPassword(input);
+			UpdateUserPasswordOutput output = userDao.updateUserPassword(input);
 			int rowsAffected = output.getRowsAffected();
 
 			return new ChangeUserPasswordResponse(header, createOperationResult(Result.SUCCESS, rowsAffected));
@@ -273,7 +276,7 @@ public class UserServiceBean extends Service implements UserService {
 			LOG.error(SERVICE_NAME + ": Change user password operation failed.");
 			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
 		} finally {
-			dao.terminateConnection();
+			userDao.terminateConnection();
 		}
 	}
 
@@ -287,28 +290,28 @@ public class UserServiceBean extends Service implements UserService {
 			Header header = request.getHeader();
 			Username username = request.getBody();
 
-			dao.persistConnection();
+			userDao.persistConnection();
 
-			Id userId = dao.readUserId(username);
+			Id userId = userDao.readUserId(username);
 
 			DeleteUserPasswordInput deleteUserPasswordInput = new DeleteUserPasswordInput(userId);
-			DeleteUserPasswordOutput deleteUserPasswordOutput = dao.deleteUserPassword(deleteUserPasswordInput);
+			DeleteUserPasswordOutput deleteUserPasswordOutput = userDao.deleteUserPassword(deleteUserPasswordInput);
 			rowsAffected += deleteUserPasswordOutput.getRowsAffected();
 
 			DeleteUserAddressInput deleteUserAddressInput = new DeleteUserAddressInput(userId);
-			DeleteUserAddressOutput deleteUserAddressOutput = dao.deleteUserAddress(deleteUserAddressInput);
+			DeleteUserAddressOutput deleteUserAddressOutput = userDao.deleteUserAddress(deleteUserAddressInput);
 			rowsAffected += deleteUserAddressOutput.getRowsAffected();
 
 			DeleteUserStatusInput deleteUserStatusInput = new DeleteUserStatusInput(userId);
-			DeleteUserStatusOutput deleteUserStatusOutput = dao.deleteUserStatus(deleteUserStatusInput);
+			DeleteUserStatusOutput deleteUserStatusOutput = userDao.deleteUserStatus(deleteUserStatusInput);
 			rowsAffected += deleteUserStatusOutput.getRowsAffected();
 
-			DeleteUserDetailsInput deleteUserInfoInput = new DeleteUserDetailsInput(userId);
-			DeleteUserDetailsOutput deleteUserInfoOutput = dao.deleteUserDetails(deleteUserInfoInput);
-			rowsAffected += deleteUserInfoOutput.getRowsAffected();
+			DeleteUserDetailsInput deleteUserDetailsInput = new DeleteUserDetailsInput(userId);
+			DeleteUserDetailsOutput deleteUserDetailsOutput = userDao.deleteUserDetails(deleteUserDetailsInput);
+			rowsAffected += deleteUserDetailsOutput.getRowsAffected();
 
 			DeleteUserInput deleteUserInput = new DeleteUserInput(userId);
-			DeleteUserOutput deleteUserOutput = dao.deleteUser(deleteUserInput);
+			DeleteUserOutput deleteUserOutput = userDao.deleteUser(deleteUserInput);
 			rowsAffected += deleteUserOutput.getRowsAffected();
 
 			return new DeleteUserResponse(header, createOperationResult(Result.SUCCESS, rowsAffected));
@@ -316,7 +319,7 @@ public class UserServiceBean extends Service implements UserService {
 			LOG.error(SERVICE_NAME + ": Delete user operation failed.");
 			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
 		} finally {
-			dao.terminateConnection();
+			userDao.terminateConnection();
 		}
 	}
 }

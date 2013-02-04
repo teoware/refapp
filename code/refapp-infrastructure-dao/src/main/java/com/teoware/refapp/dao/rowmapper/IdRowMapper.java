@@ -8,7 +8,7 @@ import java.text.ParseException;
 
 import com.teoware.refapp.model.common.Id;
 
-public class UserIdRowMapper implements RowMapper<Id> {
+public class IdRowMapper implements RowMapper<Id> {
 
 	@Override
 	public Id mapRow(ResultSet result, int rowCount) throws SQLException, ParseException {

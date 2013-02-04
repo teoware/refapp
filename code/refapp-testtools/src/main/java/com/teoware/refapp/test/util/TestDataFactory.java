@@ -414,7 +414,7 @@ public class TestDataFactory {
 	}
 
 	public static ReadNoteInput createReadNoteInput1() {
-		return new ReadNoteInput(createUsername("john.doe"));
+		return new ReadNoteInput(createNote1().getTitle());
 	}
 
 	public static UpdateNoteInput createUpdateNoteInput1() {

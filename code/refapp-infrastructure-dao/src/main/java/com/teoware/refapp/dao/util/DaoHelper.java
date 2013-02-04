@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.Calendar;
 
 import com.teoware.refapp.model.common.Id;
+import com.teoware.refapp.model.common.Title;
 import com.teoware.refapp.model.common.Username;
 
 public class DaoHelper {
@@ -41,6 +42,9 @@ public class DaoHelper {
 		} else if (isUsername(parameter)) {
 			Username username = (Username) parameter;
 			statement.setString(parameterIndex, username.getUsername());
+		} else if (isTitle(parameter)) {
+			Title title = (Title) parameter;
+			statement.setString(parameterIndex, title.getTitle());
 		} else {
 			statement.setObject(parameterIndex, parameter);
 		}
@@ -93,6 +97,10 @@ public class DaoHelper {
 
 	public static boolean isUsername(Object object) {
 		return object instanceof Username;
+	}
+
+	public static boolean isTitle(Object object) {
+		return object instanceof Title;
 	}
 
 	public static Object[] generateArray(Object... objects) {

@@ -24,6 +24,7 @@ import com.teoware.refapp.model.user.UserPassword;
 import com.teoware.refapp.service.ServiceException;
 import com.teoware.refapp.service.dto.FindUserRequest;
 import com.teoware.refapp.service.dto.FindUserResponse;
+import com.teoware.refapp.service.dto.ListUsersRequest;
 import com.teoware.refapp.service.dto.ListUsersResponse;
 import com.teoware.refapp.service.dto.RegisterUserRequest;
 import com.teoware.refapp.service.dto.RegisterUserResponse;
@@ -102,16 +103,16 @@ public class UserServiceConsumerTest {
 
 	@Test
 	public void testListUsersIsSuccessful() throws ParseException, ValidationException, ServiceException {
-		when(serviceFacade.listUsers()).thenReturn(mock(ListUsersResponse.class));
+		when(serviceFacade.listUsers(any(ListUsersRequest.class))).thenReturn(mock(ListUsersResponse.class));
 
 		serviceConsumer.listUsers();
 
-		verify(serviceFacade).listUsers();
+		verify(serviceFacade).listUsers(any(ListUsersRequest.class));
 	}
 
 	@Test(expected = RuntimeException.class)
 	public void testListUsersThrowsServiceException() throws ValidationException, ServiceException {
-		when(serviceFacade.listUsers()).thenThrow(mock(ServiceException.class));
+		when(serviceFacade.listUsers(any(ListUsersRequest.class))).thenThrow(mock(ServiceException.class));
 
 		serviceConsumer.listUsers();
 	}

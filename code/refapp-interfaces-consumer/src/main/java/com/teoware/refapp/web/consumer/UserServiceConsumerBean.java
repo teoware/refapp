@@ -16,6 +16,7 @@ import com.teoware.refapp.service.dto.DeleteUserRequest;
 import com.teoware.refapp.service.dto.DeleteUserResponse;
 import com.teoware.refapp.service.dto.FindUserRequest;
 import com.teoware.refapp.service.dto.FindUserResponse;
+import com.teoware.refapp.service.dto.ListUsersRequest;
 import com.teoware.refapp.service.dto.ListUsersResponse;
 import com.teoware.refapp.service.dto.RegisterUserRequest;
 import com.teoware.refapp.service.dto.RegisterUserResponse;
@@ -123,8 +124,9 @@ public class UserServiceConsumerBean implements UserServiceConsumer {
 	@Override
 	public ListUsersVO listUsers() {
 		try {
-			ListUsersResponse response = facade.listUsers();
-			return new ListUsersVO(response.getUserList());
+			ListUsersRequest request = new ListUsersRequest();
+			ListUsersResponse response = facade.listUsers(request);
+			return new ListUsersVO(response.getBody());
 		} catch (ServiceException e) {
 			ErrorHandler.handle(e);
 		}

@@ -74,7 +74,6 @@ import com.teoware.refapp.dao.dto.UpdateUserPasswordOutput;
 import com.teoware.refapp.dao.dto.UpdateUserStatusInput;
 import com.teoware.refapp.dao.dto.UpdateUserStatusOutput;
 import com.teoware.refapp.dao.metadata.JNDI;
-import com.teoware.refapp.dao.rowmapper.UserIdRowMapper;
 import com.teoware.refapp.dao.rowmapper.UserPasswordRowMapper;
 import com.teoware.refapp.dao.rowmapper.UserRowMapper;
 import com.teoware.refapp.dao.util.ChangeResult;
@@ -108,7 +107,6 @@ public class UserDaoBean extends Dao implements UserDao {
 	@Resource(mappedName = JNDI.REFAPP_DATASOURCE)
 	private DataSource dataSource;
 
-	private UserIdRowMapper userIdRowMapper = new UserIdRowMapper();
 	private UserRowMapper userRowMapper = new UserRowMapper();
 	private UserPasswordRowMapper userPasswordRowMapper = new UserPasswordRowMapper();
 
@@ -182,8 +180,8 @@ public class UserDaoBean extends Dao implements UserDao {
 		LOG.info(DAO_NAME + ": Read user ID operation invoked.");
 
 		SQL sql = new SQL.Builder().doSelect(ID_COLUMN_NAME).from(USERS_TABLE).where(USERNAME_COLUMN_NAME).build();
-		Object[] parameters = DaoHelper.generateArray(username.getUsername());
-		return super.read(sql, userIdRowMapper, parameters).get(0);
+		Object[] parameters = DaoHelper.generateArray(username);
+		return super.read(sql, idRowMapper, parameters).get(0);
 	}
 
 	@Override

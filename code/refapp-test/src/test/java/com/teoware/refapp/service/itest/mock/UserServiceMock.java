@@ -15,10 +15,10 @@ public class UserServiceMock extends UserServiceBean {
 
 	public UserServiceMock() throws FileNotFoundException, ClassNotFoundException, SQLException, IOException {
 		Connection connection = TestDataSourceHandler.createDataSourceConnection();
-		super.dao = new UserDaoMock(connection);
+		super.userDao = new UserDaoMock(connection);
 	}
 
 	public void terminateConnection() {
-		super.dao.terminateConnection();
+		super.userDao.terminateConnection();
 	}
 }
