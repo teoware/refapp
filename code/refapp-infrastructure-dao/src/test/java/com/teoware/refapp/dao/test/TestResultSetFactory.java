@@ -234,6 +234,24 @@ public final class TestResultSetFactory {
 				DateTimeConverter.toSqlTimestamp(note.getNoteStatus().getModified()));
 	}
 
+	public static ResultSet createReadNoteId1ResultSet() {
+		SimpleResultSet resultSet = new SimpleResultSet();
+		populateNotesTableColumns(resultSet);
+		populateNotesTableRow1(resultSet);
+		return resultSet;
+	}
+
+	private static void populateNotesTableColumns(SimpleResultSet resultSet) {
+		resultSet.addColumn(NoteTables.ID_COLUMN_NAME, Types.BIGINT, 0, 0);
+		resultSet.addColumn(NoteTables.USER_ID_COLUMN_NAME, Types.BIGINT, 0, 0);
+		resultSet.addColumn(NoteTables.TITLE_COLUMN_NAME, Types.VARCHAR, 100, 0);
+	}
+
+	private static void populateNotesTableRow1(SimpleResultSet resultSet) {
+		Note note = TestDataFactory.createNote1();
+		resultSet.addRow(1L, 1L, note.getTitle().getTitle());
+	}
+
 	public static ResultSet createReadTask1ResultSet() {
 		SimpleResultSet resultSet = new SimpleResultSet();
 		populateTasksViewColumns(resultSet);
