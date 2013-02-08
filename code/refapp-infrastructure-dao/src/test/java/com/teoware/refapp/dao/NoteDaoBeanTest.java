@@ -35,6 +35,7 @@ import com.teoware.refapp.dao.dto.DeleteNoteStatusInput;
 import com.teoware.refapp.dao.dto.DeleteNoteStatusOutput;
 import com.teoware.refapp.dao.dto.ReadNoteInput;
 import com.teoware.refapp.dao.dto.ReadNoteOutput;
+import com.teoware.refapp.dao.dto.ReadNotesInput;
 import com.teoware.refapp.dao.dto.UpdateNoteDetailsInput;
 import com.teoware.refapp.dao.dto.UpdateNoteDetailsOutput;
 import com.teoware.refapp.dao.dto.UpdateNoteInput;
@@ -64,6 +65,7 @@ public class NoteDaoBeanTest {
 	private CreateNoteInput createInput;
 	private CreateNoteDetailsInput createDetailsInput;
 	private ReadNoteInput readInput;
+	private ReadNotesInput readAllInput;
 	private UpdateNoteInput updateInput;
 	private UpdateNoteDetailsInput updateDetailsInput;
 	private UpdateNoteStatusInput updateStatusInput;
@@ -78,6 +80,7 @@ public class NoteDaoBeanTest {
 		createInput = TestDataFactory.createCreateNoteInput1();
 		createDetailsInput = TestDataFactory.createCreateNoteDetailsInput1();
 		readInput = TestDataFactory.createReadNoteInput1();
+		readAllInput = TestDataFactory.createReadNotesInput1();
 		updateInput = TestDataFactory.createUpdateNoteInput1();
 		updateDetailsInput = TestDataFactory.createUpdateNoteDetailsInput1();
 		updateStatusInput = TestDataFactory.createUpdateNoteStatusInput1();
@@ -136,6 +139,26 @@ public class NoteDaoBeanTest {
 		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
 
 		dao.readNote(readInput);
+	}
+
+	@Test
+	public void testReadNotes() throws Exception {
+		ResultSet resultSet = TestResultSetFactory.createReadNote1ResultSet();
+
+		when(statement.executeQuery()).thenReturn(resultSet);
+		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
+
+		ReadNoteOutput output = dao.readNotes(readAllInput);
+
+		assertEquals(1, output.getNoteList().size());
+		verify(connection).prepareStatement(anyString(), anyInt());
+	}
+
+	@Test(expected = DaoException.class)
+	public void testReadNotesPrepareStatementThrowsDaoException() throws Exception {
+		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
+
+		dao.readNotes(readAllInput);
 	}
 
 	@Test
@@ -245,14 +268,14 @@ public class NoteDaoBeanTest {
 	public void testPersistConnection() {
 		dao.persistConnection();
 
-		assertTrue(dao.getPersistConnection());
+		assertTrue(dao.isPersistConnection());
 	}
 
 	@Test
 	public void testTerminateConnection() throws SQLException {
 		dao.terminateConnection();
 
-		assertFalse(dao.getPersistConnection());
+		assertFalse(dao.isPersistConnection());
 		verify(connection).close();
 	}
 }

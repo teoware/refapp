@@ -1,25 +1,12 @@
 package com.teoware.refapp.dao.rowmapper;
 
-import static com.teoware.refapp.dao.metadata.UserTables.ADDRESS_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UserTables.BIRTHDATE_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UserTables.COUNTRY_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UserTables.CREATED_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UserTables.EMAIL_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UserTables.FIRSTNAME_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UserTables.GENDER_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UserTables.LASTNAME_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UserTables.MODIFIED_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UserTables.MUNICIPALITY_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UserTables.PHONE_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UserTables.POSTALCODE_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UserTables.REGION_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UserTables.STATUS_COLUMN_NAME;
 import static com.teoware.refapp.dao.metadata.UserTables.USERNAME_COLUMN_NAME;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import com.teoware.refapp.dao.metadata.UserTables;
 import com.teoware.refapp.dao.util.MapperHelper;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.util.BeanFactory;
@@ -32,22 +19,23 @@ public class UserRowMapper implements RowMapper<User> {
 
 		user.getUsername().setUsername(result.getString(USERNAME_COLUMN_NAME));
 
-		user.getUserStatus().setStatus(MapperHelper.mapStatus(result.getString(STATUS_COLUMN_NAME)));
-		user.getUserStatus().setCreated(MapperHelper.mapTimestamp(result.getTimestamp(CREATED_COLUMN_NAME)));
-		user.getUserStatus().setModified(MapperHelper.mapTimestamp(result.getTimestamp(MODIFIED_COLUMN_NAME)));
+		user.getUserStatus().setStatus(MapperHelper.mapStatus(result.getString(UserTables.STATUS_COLUMN_NAME)));
+		user.getUserStatus().setCreated(MapperHelper.mapTimestamp(result.getTimestamp(UserTables.CREATED_COLUMN_NAME)));
+		user.getUserStatus().setModified(
+				MapperHelper.mapTimestamp(result.getTimestamp(UserTables.MODIFIED_COLUMN_NAME)));
 
-		user.getUserDetails().setFirstName(result.getString(FIRSTNAME_COLUMN_NAME));
-		user.getUserDetails().setLastName(result.getString(LASTNAME_COLUMN_NAME));
-		user.getUserDetails().setBirthDate(MapperHelper.mapDate(result.getDate(BIRTHDATE_COLUMN_NAME)));
-		user.getUserDetails().setGender(MapperHelper.mapGender(result.getString(GENDER_COLUMN_NAME)));
-		user.getUserDetails().setEmail(result.getString(EMAIL_COLUMN_NAME));
-		user.getUserDetails().setPhone(result.getString(PHONE_COLUMN_NAME));
+		user.getUserDetails().setFirstName(result.getString(UserTables.FIRSTNAME_COLUMN_NAME));
+		user.getUserDetails().setLastName(result.getString(UserTables.LASTNAME_COLUMN_NAME));
+		user.getUserDetails().setBirthDate(MapperHelper.mapDate(result.getDate(UserTables.BIRTHDATE_COLUMN_NAME)));
+		user.getUserDetails().setGender(MapperHelper.mapGender(result.getString(UserTables.GENDER_COLUMN_NAME)));
+		user.getUserDetails().setEmail(result.getString(UserTables.EMAIL_COLUMN_NAME));
+		user.getUserDetails().setPhone(result.getString(UserTables.PHONE_COLUMN_NAME));
 
-		user.getUserAddress().setAddress(result.getString(ADDRESS_COLUMN_NAME));
-		user.getUserAddress().setPostalCode(result.getString(POSTALCODE_COLUMN_NAME));
-		user.getUserAddress().setMunicipality(result.getString(MUNICIPALITY_COLUMN_NAME));
-		user.getUserAddress().setRegion(result.getString(REGION_COLUMN_NAME));
-		user.getUserAddress().setCountry(result.getString(COUNTRY_COLUMN_NAME));
+		user.getUserAddress().setAddress(result.getString(UserTables.ADDRESS_COLUMN_NAME));
+		user.getUserAddress().setPostalCode(result.getString(UserTables.POSTALCODE_COLUMN_NAME));
+		user.getUserAddress().setMunicipality(result.getString(UserTables.MUNICIPALITY_COLUMN_NAME));
+		user.getUserAddress().setRegion(result.getString(UserTables.REGION_COLUMN_NAME));
+		user.getUserAddress().setCountry(result.getString(UserTables.COUNTRY_COLUMN_NAME));
 
 		return user;
 	}

@@ -139,6 +139,16 @@ public abstract class Dao {
 			closeConnection(statement);
 		}
 	}
+	
+	private Id getGeneratedKey(PreparedStatement statement) {
+		try {
+			ResultSet rs = statement.getGeneratedKeys();
+			rs.next();
+			return new Id(rs.getLong(FIRST_COLUMN));
+		} catch (Exception e) {
+			return null;
+		}
+	}
 
 	protected PreparedStatement generatePreparedStatement(SQL sql, Object... parameters) throws SQLException {
 		createOrReuseConnection();
@@ -182,18 +192,8 @@ public abstract class Dao {
 		this.persistConnection = persistConnection;
 	}
 
-	public boolean getPersistConnection() {
+	public boolean isPersistConnection() {
 		return persistConnection;
-	}
-
-	private Id getGeneratedKey(PreparedStatement statement) {
-		try {
-			ResultSet rs = statement.getGeneratedKeys();
-			rs.next();
-			return new Id(rs.getLong(FIRST_COLUMN));
-		} catch (Exception e) {
-			return null;
-		}
 	}
 
 	private String e(String msg, SQL sql) {

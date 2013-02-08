@@ -245,14 +245,14 @@ public class TaskDaoBeanTest {
 	public void testPersistConnection() {
 		dao.persistConnection();
 
-		assertTrue(dao.getPersistConnection());
+		assertTrue(dao.isPersistConnection());
 	}
 
 	@Test
 	public void testTerminateConnection() throws SQLException {
 		dao.terminateConnection();
 
-		assertFalse(dao.getPersistConnection());
+		assertFalse(dao.isPersistConnection());
 		verify(connection).close();
 	}
 }

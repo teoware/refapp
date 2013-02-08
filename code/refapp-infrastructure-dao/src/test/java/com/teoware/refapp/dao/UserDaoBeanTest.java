@@ -2,6 +2,7 @@ package com.teoware.refapp.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
@@ -30,6 +31,8 @@ import com.teoware.refapp.dao.dto.CreateUserDetailsInput;
 import com.teoware.refapp.dao.dto.CreateUserDetailsOutput;
 import com.teoware.refapp.dao.dto.CreateUserInput;
 import com.teoware.refapp.dao.dto.CreateUserOutput;
+import com.teoware.refapp.dao.dto.CreateUserPasswordInput;
+import com.teoware.refapp.dao.dto.CreateUserPasswordOutput;
 import com.teoware.refapp.dao.dto.DeleteUserAddressInput;
 import com.teoware.refapp.dao.dto.DeleteUserAddressOutput;
 import com.teoware.refapp.dao.dto.DeleteUserDetailsInput;
@@ -44,6 +47,8 @@ import com.teoware.refapp.dao.dto.PurgeUsersInput;
 import com.teoware.refapp.dao.dto.PurgeUsersOutput;
 import com.teoware.refapp.dao.dto.ReadUserInput;
 import com.teoware.refapp.dao.dto.ReadUserOutput;
+import com.teoware.refapp.dao.dto.ReadUserPasswordInput;
+import com.teoware.refapp.dao.dto.ReadUserPasswordOutput;
 import com.teoware.refapp.dao.dto.UpdateUserAddressInput;
 import com.teoware.refapp.dao.dto.UpdateUserAddressOutput;
 import com.teoware.refapp.dao.dto.UpdateUserDetailsInput;
@@ -55,6 +60,7 @@ import com.teoware.refapp.dao.dto.UpdateUserPasswordOutput;
 import com.teoware.refapp.dao.dto.UpdateUserStatusInput;
 import com.teoware.refapp.dao.dto.UpdateUserStatusOutput;
 import com.teoware.refapp.dao.test.TestResultSetFactory;
+import com.teoware.refapp.model.common.Id;
 import com.teoware.refapp.test.util.TestDataFactory;
 
 @Category(com.teoware.refapp.test.UnitTestGroup.class)
@@ -78,7 +84,9 @@ public class UserDaoBeanTest {
 	private CreateUserInput createInput;
 	private CreateUserDetailsInput createDetailsInput;
 	private CreateUserAddressInput createAddressInput;
+	private CreateUserPasswordInput createPasswordInput;
 	private ReadUserInput readInput;
+	private ReadUserPasswordInput readPasswordInput;
 	private UpdateUserInput updateInput;
 	private UpdateUserStatusInput updateStatusInput;
 	private UpdateUserDetailsInput updateDetailsInput;
@@ -98,7 +106,9 @@ public class UserDaoBeanTest {
 		createInput = TestDataFactory.createCreateUserInputJohn();
 		createDetailsInput = TestDataFactory.createCreateUserDetailsInputJohn();
 		createAddressInput = TestDataFactory.createCreateUserAddressInputJohn();
+		createPasswordInput = TestDataFactory.createCreateUserPasswordInputJohn();
 		readInput = TestDataFactory.createReadUserInputJohn();
+		readPasswordInput = TestDataFactory.createReadUserPasswordInputJohn();
 		updateInput = TestDataFactory.createUpdateUserInputJohn();
 		updateDetailsInput = TestDataFactory.createUpdateUserDetailsInputJohn();
 		updateStatusInput = TestDataFactory.createUpdateUserStatusInputJohn();
@@ -167,6 +177,18 @@ public class UserDaoBeanTest {
 	}
 
 	@Test
+	public void testCreateUserPasswordJohn() throws Exception {
+		when(resultSet.getLong(anyString())).thenReturn(0L);
+		when(statement.getGeneratedKeys()).thenReturn(resultSet);
+		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
+
+		CreateUserPasswordOutput output = dao.createUserPassword(createPasswordInput);
+
+		assertEquals(0, output.getRowsAffected());
+		verify(connection).prepareStatement(anyString(), anyInt());
+	}
+
+	@Test
 	public void testReadUserJohn() throws Exception {
 		ResultSet resultSet = TestResultSetFactory.createReadUserJohnResultSet();
 
@@ -177,6 +199,26 @@ public class UserDaoBeanTest {
 
 		verify(connection).prepareStatement(anyString(), anyInt());
 		assertEquals(1, output.getUserList().size());
+	}
+
+	@Test
+	public void testReadUserIdJohn() throws Exception {
+		ResultSet resultSet = TestResultSetFactory.createReadUserIdJohnResultSet();
+
+		when(statement.executeQuery()).thenReturn(resultSet);
+		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
+
+		Id id = dao.readUserId(readInput.getUsername());
+
+		verify(connection).prepareStatement(anyString(), anyInt());
+		assertNotNull(id);
+	}
+
+	@Test(expected = DaoException.class)
+	public void testReadUserIdJohnPrepareStatementThrowsDaoException() throws Exception {
+		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
+
+		dao.readUserId(readInput.getUsername());
 	}
 
 	@Test
@@ -197,6 +239,19 @@ public class UserDaoBeanTest {
 		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
 
 		dao.readUser(readInput);
+	}
+
+	@Test
+	public void testReadUserPasswordJohn() throws Exception {
+		ResultSet resultSet = TestResultSetFactory.createReadUserPasswordJohnResultSet();
+
+		when(statement.executeQuery()).thenReturn(resultSet);
+		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
+
+		ReadUserPasswordOutput output = dao.readUserPassword(readPasswordInput);
+
+		verify(connection).prepareStatement(anyString(), anyInt());
+		assertEquals(1, output.getUserPasswordList().size());
 	}
 
 	@Test
@@ -403,14 +458,14 @@ public class UserDaoBeanTest {
 	public void testPersistConnection() {
 		dao.persistConnection();
 
-		assertTrue(dao.getPersistConnection());
+		assertTrue(dao.isPersistConnection());
 	}
 
 	@Test
 	public void testTerminateConnection() throws SQLException {
 		dao.terminateConnection();
 
-		assertFalse(dao.getPersistConnection());
+		assertFalse(dao.isPersistConnection());
 		verify(connection).close();
 	}
 }

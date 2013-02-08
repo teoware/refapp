@@ -9,6 +9,7 @@ import com.teoware.refapp.dao.dto.CreateTaskInput;
 import com.teoware.refapp.dao.dto.CreateUserAddressInput;
 import com.teoware.refapp.dao.dto.CreateUserDetailsInput;
 import com.teoware.refapp.dao.dto.CreateUserInput;
+import com.teoware.refapp.dao.dto.CreateUserPasswordInput;
 import com.teoware.refapp.dao.dto.DeleteNoteDetailsInput;
 import com.teoware.refapp.dao.dto.DeleteNoteInput;
 import com.teoware.refapp.dao.dto.DeleteNoteStatusInput;
@@ -22,8 +23,10 @@ import com.teoware.refapp.dao.dto.DeleteUserPasswordInput;
 import com.teoware.refapp.dao.dto.DeleteUserStatusInput;
 import com.teoware.refapp.dao.dto.PurgeUsersInput;
 import com.teoware.refapp.dao.dto.ReadNoteInput;
+import com.teoware.refapp.dao.dto.ReadNotesInput;
 import com.teoware.refapp.dao.dto.ReadTaskInput;
 import com.teoware.refapp.dao.dto.ReadUserInput;
+import com.teoware.refapp.dao.dto.ReadUserPasswordInput;
 import com.teoware.refapp.dao.dto.UpdateNoteDetailsInput;
 import com.teoware.refapp.dao.dto.UpdateNoteInput;
 import com.teoware.refapp.dao.dto.UpdateNoteStatusInput;
@@ -170,6 +173,14 @@ public class TestDataFactory {
 		return new CreateUserAddressInput(userId, createUserJohn().getUserAddress());
 	}
 
+	public static CreateUserPasswordInput createCreateUserPasswordInputJohn() {
+		return createCreateUserPasswordInputJohn(new Id(0L));
+	}
+
+	public static CreateUserPasswordInput createCreateUserPasswordInputJohn(Id userId) {
+		return new CreateUserPasswordInput(userId, createUserPasswordJohn());
+	}
+
 	public static CreateUserInput createCreateUserInputJane() {
 		return new CreateUserInput(createUserJane().getUsername());
 	}
@@ -190,6 +201,14 @@ public class TestDataFactory {
 		return new CreateUserAddressInput(userId, createUserJane().getUserAddress());
 	}
 
+	public static CreateUserPasswordInput createCreateUserPasswordInputJane() {
+		return createCreateUserPasswordInputJane(new Id(0L));
+	}
+
+	public static CreateUserPasswordInput createCreateUserPasswordInputJane(Id userId) {
+		return new CreateUserPasswordInput(userId, createUserPasswordJane());
+	}
+
 	public static CreateUserInput createCreateUserInputJonah() {
 		return new CreateUserInput(createUserJonah().getUsername());
 	}
@@ -208,6 +227,14 @@ public class TestDataFactory {
 
 	public static CreateUserAddressInput createCreateUserAddressInputJonah(Id userId) {
 		return new CreateUserAddressInput(userId, createUserJonah().getUserAddress());
+	}
+
+	public static CreateUserPasswordInput createCreateUserPasswordInputJonah() {
+		return createCreateUserPasswordInputJonah(new Id(0L));
+	}
+
+	public static CreateUserPasswordInput createCreateUserPasswordInputJonah(Id userId) {
+		return new CreateUserPasswordInput(userId, createUserPasswordJonah());
 	}
 
 	public static UpdateUserInput createUpdateUserInputJohn() {
@@ -342,6 +369,18 @@ public class TestDataFactory {
 		return new ReadUserInput(createUsername("jonah.doe"));
 	}
 
+	public static ReadUserPasswordInput createReadUserPasswordInputJohn() {
+		return new ReadUserPasswordInput(new Id(0L));
+	}
+
+	public static ReadUserPasswordInput createReadUserPasswordInputJane() {
+		return new ReadUserPasswordInput(new Id(0L));
+	}
+
+	public static ReadUserPasswordInput createReadUserPasswordInputJonah() {
+		return new ReadUserPasswordInput(new Id(0L));
+	}
+
 	public static DeleteUserInput createDeleteUserInput() {
 		return createDeleteUserInput(new Id(0L));
 	}
@@ -415,6 +454,10 @@ public class TestDataFactory {
 
 	public static ReadNoteInput createReadNoteInput1() {
 		return new ReadNoteInput(createNote1().getTitle());
+	}
+
+	public static ReadNotesInput createReadNotesInput1() {
+		return new ReadNotesInput(new Id(0L));
 	}
 
 	public static UpdateNoteInput createUpdateNoteInput1() {

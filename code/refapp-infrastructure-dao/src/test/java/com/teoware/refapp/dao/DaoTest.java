@@ -66,9 +66,9 @@ public class DaoTest {
 	@Test
 	public void testBean() throws IntrospectionException {
 		dao.setPersistConnection(Boolean.FALSE);
-		assertFalse(dao.getPersistConnection());
+		assertFalse(dao.isPersistConnection());
 		dao.setPersistConnection(Boolean.TRUE);
-		assertTrue(dao.getPersistConnection());
+		assertTrue(dao.isPersistConnection());
 	}
 
 	@Test
