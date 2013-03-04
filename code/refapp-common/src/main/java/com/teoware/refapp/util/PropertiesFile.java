@@ -24,7 +24,8 @@ public class PropertiesFile extends Properties {
 	public void loadUsingClassLoader(String fileName) throws IOException {
 		URL url = ClassLoader.getSystemResource(fileName);
 		if (url == null) {
-			throw new FileNotFoundException("File '" + fileName + "' could not be found.");
+			throw new FileNotFoundException("File '" + fileName
+					+ "' could not be found.");
 		}
 		loadProperties(new FileInputStream(new File(url.getFile())));
 	}
@@ -64,58 +65,61 @@ public class PropertiesFile extends Properties {
 	}
 
 	public Integer getInteger(String key) {
-		return new Integer(super.getProperty(key));
+		return new Integer(get(key));
 	}
 
 	public Integer getInteger(String key, Integer defaultValue) {
-		return new Integer(super.getProperty(key, defaultValue.toString()));
+		return new Integer(get(key, defaultValue.toString()));
 	}
 
 	public Long getLong(String key) {
-		return new Long(super.getProperty(key));
+		return new Long(get(key));
 	}
 
 	public Long getLong(String key, Long defaultValue) {
-		return new Long(super.getProperty(key, defaultValue.toString()));
+		return new Long(get(key, defaultValue.toString()));
 	}
 
 	public Float getFloat(String key) {
-		return new Float(super.getProperty(key));
+		return new Float(get(key));
 	}
 
 	public Float getFloat(String key, Float defaultValue) {
-		return new Float(super.getProperty(key, defaultValue.toString()));
+		return new Float(get(key, defaultValue.toString()));
 	}
 
 	public Double getDouble(String key) {
-		return new Double(super.getProperty(key));
+		return new Double(get(key));
 	}
 
 	public Double getDouble(String key, Double defaultValue) {
-		return new Double(super.getProperty(key, defaultValue.toString()));
+		return new Double(get(key, defaultValue.toString()));
 	}
 
 	public Boolean getBoolean(String key) {
-		return new Boolean(super.getProperty(key));
+		return new Boolean(get(key));
 	}
 
 	public Boolean getBoolean(String key, Boolean defaultValue) {
-		return new Boolean(super.getProperty(key, defaultValue.toString()));
+		return new Boolean(get(key, defaultValue.toString()));
 	}
 
-	public static PropertiesFile createFromFile(String fileName) throws FileNotFoundException, IOException {
+	public static PropertiesFile createFromFile(String fileName)
+			throws FileNotFoundException, IOException {
 		PropertiesFile properties = new PropertiesFile();
 		properties.loadFromFile(fileName);
 		return properties;
 	}
 
-	public static PropertiesFile createFromClasspath(String fileName) throws IOException {
+	public static PropertiesFile createFromClasspath(String fileName)
+			throws IOException {
 		PropertiesFile properties = new PropertiesFile();
 		properties.loadFromClasspath(fileName);
 		return properties;
 	}
 
-	public static PropertiesFile createUsingClassLoader(String fileName) throws IOException {
+	public static PropertiesFile createUsingClassLoader(String fileName)
+			throws IOException {
 		PropertiesFile properties = new PropertiesFile();
 		properties.loadUsingClassLoader(fileName);
 		return properties;

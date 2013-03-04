@@ -14,6 +14,7 @@ ASADMIN_USER="admin"
 ASADMIN_PASSWORD_FILE="${FILE_PATH}/../conf/.asadmintruststore"
 
 DOMAIN="domain1"
+DOMAIN_FOLDER="${ASADMIN_HOME}/glassfish/domains/${DOMAIN}"
 ASADMIN_CMD="${ASADMIN_HOME}/bin/asadmin --user ${ASADMIN_USER} --passwordfile ${ASADMIN_PASSWORD_FILE}"
 
 MAVEN_CMD="${MAVEN_HOME}/bin/mvn"

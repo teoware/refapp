@@ -16,10 +16,10 @@ public class TaskServiceFacadeBean implements TaskServiceFacade {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private TaskService taskService;
+	private TaskService service;
 
 	@Override
 	public CreateTaskResponse createTask(CreateTaskRequest request) {
-		return taskService.createTask(request);
+		return service.createTask(request);
 	}
 }

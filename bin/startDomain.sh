@@ -7,7 +7,7 @@ FILE_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 . ${FILE_PATH}/env.sh
 test $? -ne 0 && echo "ERROR: Failed to load env variables" && exit 1
 
-bash -c "${ASADMIN_CMD} start-database" > /dev/null 2>&1
+bash -c "${ASADMIN_CMD} start-database" > ${ERROR_LOG} 2>&1
 test $? -ne 0 && echo "ERROR: Failed to start database" && exit 1
 
 bash -c "${ASADMIN_CMD} start-domain ${DOMAIN}" > ${ERROR_LOG} 2>&1
