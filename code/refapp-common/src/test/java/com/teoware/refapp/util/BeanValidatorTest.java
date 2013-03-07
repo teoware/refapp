@@ -26,4 +26,14 @@ public class BeanValidatorTest {
 
 		new BeanValidator().validate(bean, regex);
 	}
+	
+	@Test
+	public void test() {
+		int a = 9;
+		a(a);
+	}
+	
+	public void a(Object o) {
+		System.out.println(o.getClass().equals(Integer.class));
+	}
 }
