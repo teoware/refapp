@@ -2,11 +2,13 @@ package com.teoware.refapp.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -43,6 +45,7 @@ import com.teoware.refapp.dao.dto.UpdateNoteOutput;
 import com.teoware.refapp.dao.dto.UpdateNoteStatusInput;
 import com.teoware.refapp.dao.dto.UpdateNoteStatusOutput;
 import com.teoware.refapp.dao.test.TestResultSetFactory;
+import com.teoware.refapp.model.common.Id;
 import com.teoware.refapp.test.util.TestDataFactory;
 
 public class NoteDaoBeanTest {
@@ -99,7 +102,10 @@ public class NoteDaoBeanTest {
 
 		assertEquals(0, output.getRowsAffected());
 		assertEquals(0, output.getId().getId().intValue());
+		verify(connection).isClosed();
 		verify(connection).prepareStatement(anyString(), anyInt());
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test(expected = DaoException.class)
@@ -107,6 +113,8 @@ public class NoteDaoBeanTest {
 		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
 
 		dao.createNote(createInput);
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test
@@ -118,7 +126,35 @@ public class NoteDaoBeanTest {
 		CreateNoteDetailsOutput output = dao.createNoteDetails(createDetailsInput);
 
 		assertEquals(0, output.getRowsAffected());
+		verify(connection).isClosed();
 		verify(connection).prepareStatement(anyString(), anyInt());
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
+	}
+
+	@Test
+	public void testReadNoteId1() throws Exception {
+		ResultSet resultSet = TestResultSetFactory.createReadNoteId1ResultSet();
+
+		when(statement.executeQuery()).thenReturn(resultSet);
+		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
+
+		Id id = dao.readNoteId(readInput.getTitle());
+
+		assertNotNull(id);
+		verify(connection).isClosed();
+		verify(connection).prepareStatement(anyString(), anyInt());
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
+	}
+
+	@Test(expected = DaoException.class)
+	public void testReadNoteId1PrepareStatementThrowsDaoException() throws Exception {
+		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
+
+		dao.readNoteId(readInput.getTitle());
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test
@@ -131,7 +167,10 @@ public class NoteDaoBeanTest {
 		ReadNoteOutput output = dao.readNote(readInput);
 
 		assertEquals(1, output.getNoteList().size());
+		verify(connection).isClosed();
 		verify(connection).prepareStatement(anyString(), anyInt());
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test(expected = DaoException.class)
@@ -139,6 +178,8 @@ public class NoteDaoBeanTest {
 		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
 
 		dao.readNote(readInput);
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test
@@ -151,7 +192,10 @@ public class NoteDaoBeanTest {
 		ReadNoteOutput output = dao.readNotes(readAllInput);
 
 		assertEquals(1, output.getNoteList().size());
+		verify(connection).isClosed();
 		verify(connection).prepareStatement(anyString(), anyInt());
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test(expected = DaoException.class)
@@ -159,6 +203,8 @@ public class NoteDaoBeanTest {
 		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
 
 		dao.readNotes(readAllInput);
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test
@@ -170,7 +216,10 @@ public class NoteDaoBeanTest {
 		UpdateNoteOutput output = dao.updateNote(updateInput);
 
 		assertEquals(0, output.getRowsAffected());
+		verify(connection).isClosed();
 		verify(connection).prepareStatement(anyString(), anyInt());
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test
@@ -188,6 +237,8 @@ public class NoteDaoBeanTest {
 		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
 
 		dao.updateNote(updateInput);
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test
@@ -199,7 +250,10 @@ public class NoteDaoBeanTest {
 		UpdateNoteDetailsOutput output = dao.updateNoteDetails(updateDetailsInput);
 
 		assertEquals(0, output.getRowsAffected());
+		verify(connection).isClosed();
 		verify(connection).prepareStatement(anyString(), anyInt());
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test
@@ -221,7 +275,10 @@ public class NoteDaoBeanTest {
 		UpdateNoteStatusOutput output = dao.updateNoteStatus(updateStatusInput);
 
 		assertEquals(0, output.getRowsAffected());
+		verify(connection).isClosed();
 		verify(connection).prepareStatement(anyString(), anyInt());
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test
@@ -241,7 +298,10 @@ public class NoteDaoBeanTest {
 		DeleteNoteOutput output = dao.deleteNote(deleteInput);
 
 		assertEquals(0, output.getRowsAffected());
+		verify(connection).isClosed();
 		verify(connection).prepareStatement(anyString(), anyInt());
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test
@@ -251,7 +311,10 @@ public class NoteDaoBeanTest {
 		DeleteNoteDetailsOutput output = dao.deleteNoteDetails(deleteDetailsInput);
 
 		assertEquals(0, output.getRowsAffected());
+		verify(connection).isClosed();
 		verify(connection).prepareStatement(anyString(), anyInt());
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test
@@ -261,7 +324,10 @@ public class NoteDaoBeanTest {
 		DeleteNoteStatusOutput output = dao.deleteNoteStatus(deleteStatusInput);
 
 		assertEquals(0, output.getRowsAffected());
+		verify(connection).isClosed();
 		verify(connection).prepareStatement(anyString(), anyInt());
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test

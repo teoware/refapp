@@ -13,10 +13,9 @@ import com.teoware.refapp.model.enums.Status;
 
 public class MapperHelperTest {
 
-	@SuppressWarnings("static-access")
 	@Test
 	public void testMapGender() {
-		assertEquals(Gender.MALE, new MapperHelper().mapGender("MALE"));
+		assertEquals(Gender.MALE, MapperHelper.mapGender("MALE"));
 		assertEquals(Gender.FEMALE, MapperHelper.mapGender("FEMALE"));
 	}
 

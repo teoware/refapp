@@ -185,9 +185,12 @@ public class UserServiceBean extends Service implements UserService {
 			ReadUserOutput readUserOutput = userDao.readUser(readUserInput);
 			List<User> userList = readUserOutput.getUserList();
 
-			// TODO Sanity check if more than one user found
-
-			return new FindUserResponse(header, userList.get(0));
+			if (userList.size() == 0) {
+				return new FindUserResponse(header, null);
+			} else {
+				// TODO Sanity check if more than one user found
+				return new FindUserResponse(header, userList.get(0));
+			}
 		} catch (DaoException e) {
 			LOG.error(SERVICE_NAME + ": Find user operation failed.");
 			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
@@ -202,7 +205,7 @@ public class UserServiceBean extends Service implements UserService {
 
 		try {
 			Header header = request.getHeader();
-			
+
 			ReadUserOutput readUserOutput = userDao.readAllUsers();
 
 			return new ListUsersResponse(header, readUserOutput.getUserList());

@@ -74,6 +74,7 @@ import com.teoware.refapp.dao.dto.UpdateUserPasswordOutput;
 import com.teoware.refapp.dao.dto.UpdateUserStatusInput;
 import com.teoware.refapp.dao.dto.UpdateUserStatusOutput;
 import com.teoware.refapp.dao.metadata.JNDI;
+import com.teoware.refapp.dao.rowmapper.IdRowMapper;
 import com.teoware.refapp.dao.rowmapper.UserPasswordRowMapper;
 import com.teoware.refapp.dao.rowmapper.UserRowMapper;
 import com.teoware.refapp.dao.util.ChangeResult;
@@ -107,6 +108,7 @@ public class UserDaoBean extends Dao implements UserDao {
 	@Resource(mappedName = JNDI.REFAPP_DATASOURCE)
 	private DataSource dataSource;
 
+	private IdRowMapper idRowMapper = new IdRowMapper();
 	private UserRowMapper userRowMapper = new UserRowMapper();
 	private UserPasswordRowMapper userPasswordRowMapper = new UserPasswordRowMapper();
 
@@ -188,7 +190,7 @@ public class UserDaoBean extends Dao implements UserDao {
 	public ReadUserOutput readUser(ReadUserInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Read user operation invoked.");
 
-		SQL sql = new SQL.Builder().doSelect("*").from(USERS_VIEW).where(USERNAME_COLUMN_NAME).build();
+		SQL sql = new SQL.Builder().doSelectAll().from(USERS_VIEW).where(USERNAME_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(input.getUsername());
 		List<User> userList = super.read(sql, userRowMapper, parameters);
 		return new ReadUserOutput(userList);

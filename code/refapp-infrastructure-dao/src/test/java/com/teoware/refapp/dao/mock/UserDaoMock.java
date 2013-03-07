@@ -2,6 +2,7 @@ package com.teoware.refapp.dao.mock;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.teoware.refapp.dao.UserDaoBean;
@@ -11,17 +12,21 @@ public class UserDaoMock extends UserDaoBean {
 	private static final long serialVersionUID = 1L;
 
 	public UserDaoMock(Connection connection) {
-		super.connection = connection;
+		super.setConnection(connection);
 	}
 
 	@Override
 	protected Connection createOrReuseConnection() throws SQLException {
-		return super.connection;
+		return super.getConnection();
 	}
 
 	@Override
-	protected void closeConnection(PreparedStatement statement, boolean persistConnection) {
+	protected void closeConnection(ResultSet result, PreparedStatement statement, boolean persistConnection) {
 		try {
+			if (result != null) {
+				result.close();
+			}
+
 			if (statement != null) {
 				statement.close();
 			}
@@ -31,8 +36,8 @@ public class UserDaoMock extends UserDaoBean {
 	}
 
 	public void closeAll() throws SQLException {
-		if (super.connection != null) {
-			super.connection.close();
+		if (super.getConnection() != null) {
+			super.getConnection().close();
 		}
 	}
 }

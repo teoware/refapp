@@ -1,6 +1,7 @@
 package com.teoware.refapp.dao;
 
 import static com.teoware.refapp.dao.metadata.NoteTables.DESCRIPTION_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.NoteTables.ID_COLUMN_NAME;
 import static com.teoware.refapp.dao.metadata.NoteTables.NOTES_TABLE_NAME;
 import static com.teoware.refapp.dao.metadata.NoteTables.NOTES_VIEW_NAME;
 import static com.teoware.refapp.dao.metadata.NoteTables.NOTE_DETAILS_TABLE_NAME;
@@ -10,7 +11,6 @@ import static com.teoware.refapp.dao.metadata.NoteTables.STATUS_COLUMN_NAME;
 import static com.teoware.refapp.dao.metadata.NoteTables.TITLE_COLUMN_NAME;
 import static com.teoware.refapp.dao.metadata.NoteTables.USER_ID_COLUMN_NAME;
 import static com.teoware.refapp.dao.metadata.Schema.REFAPP_SCHEMA_NAME;
-import static com.teoware.refapp.dao.metadata.UserTables.ID_COLUMN_NAME;
 
 import java.util.List;
 
@@ -44,6 +44,7 @@ import com.teoware.refapp.dao.dto.UpdateNoteOutput;
 import com.teoware.refapp.dao.dto.UpdateNoteStatusInput;
 import com.teoware.refapp.dao.dto.UpdateNoteStatusOutput;
 import com.teoware.refapp.dao.metadata.JNDI;
+import com.teoware.refapp.dao.rowmapper.IdRowMapper;
 import com.teoware.refapp.dao.rowmapper.NoteRowMapper;
 import com.teoware.refapp.dao.util.ChangeResult;
 import com.teoware.refapp.dao.util.DaoHelper;
@@ -70,6 +71,7 @@ public class NoteDaoBean extends Dao implements NoteDao {
 	@Resource(mappedName = JNDI.REFAPP_DATASOURCE)
 	private DataSource dataSource;
 
+	private IdRowMapper idRowMapper = new IdRowMapper();
 	private NoteRowMapper noteRowMapper = new NoteRowMapper();
 
 	@PostConstruct
@@ -101,6 +103,15 @@ public class NoteDaoBean extends Dao implements NoteDao {
 	}
 
 	@Override
+	public Id readNoteId(Title title) throws DaoException {
+		LOG.info(DAO_NAME + ": Read note ID operation invoked.");
+
+		SQL sql = new SQL.Builder().doSelect(ID_COLUMN_NAME).from(NOTES_TABLE).where(TITLE_COLUMN_NAME).build();
+		Object[] parameters = DaoHelper.generateArray(title);
+		return super.read(sql, idRowMapper, parameters).get(0);
+	}
+
+	@Override
 	public ReadNoteOutput readNote(ReadNoteInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Read note operation invoked.");
 
@@ -118,15 +129,6 @@ public class NoteDaoBean extends Dao implements NoteDao {
 		Object[] parameters = DaoHelper.generateArray(input.getUserId());
 		List<Note> noteList = super.read(sql, noteRowMapper, parameters);
 		return new ReadNoteOutput(noteList);
-	}
-
-	@Override
-	public Id readNoteId(Title title) throws DaoException {
-		LOG.info(DAO_NAME + ": Read note ID operation invoked.");
-
-		SQL sql = new SQL.Builder().doSelect(ID_COLUMN_NAME).from(NOTES_TABLE).where(TITLE_COLUMN_NAME).build();
-		Object[] parameters = DaoHelper.generateArray(title);
-		return super.read(sql, idRowMapper, parameters).get(0);
 	}
 
 	@Override

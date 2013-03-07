@@ -7,6 +7,7 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -96,7 +97,10 @@ public class TaskDaoBeanTest {
 
 		assertEquals(0, output.getRowsAffected());
 		assertEquals(0, output.getId().getId().intValue());
+		verify(connection).isClosed();
 		verify(connection).prepareStatement(anyString(), anyInt());
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test(expected = DaoException.class)
@@ -104,6 +108,8 @@ public class TaskDaoBeanTest {
 		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
 
 		dao.createTask(createInput);
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test
@@ -115,7 +121,10 @@ public class TaskDaoBeanTest {
 		CreateTaskDetailsOutput output = dao.createTaskDetails(createDetailsInput);
 
 		assertEquals(0, output.getRowsAffected());
+		verify(connection).isClosed();
 		verify(connection).prepareStatement(anyString(), anyInt());
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test
@@ -128,7 +137,10 @@ public class TaskDaoBeanTest {
 		ReadTaskOutput output = dao.readTask(readInput);
 
 		assertEquals(1, output.getTaskList().size());
+		verify(connection).isClosed();
 		verify(connection).prepareStatement(anyString(), anyInt());
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test(expected = DaoException.class)
@@ -136,6 +148,8 @@ public class TaskDaoBeanTest {
 		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
 
 		dao.readTask(readInput);
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test
@@ -147,7 +161,10 @@ public class TaskDaoBeanTest {
 		UpdateTaskOutput output = dao.updateTask(updateInput);
 
 		assertEquals(0, output.getRowsAffected());
+		verify(connection).isClosed();
 		verify(connection).prepareStatement(anyString(), anyInt());
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test
@@ -165,6 +182,8 @@ public class TaskDaoBeanTest {
 		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
 
 		dao.updateTask(updateInput);
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test
@@ -176,7 +195,10 @@ public class TaskDaoBeanTest {
 		UpdateTaskDetailsOutput output = dao.updateTaskDetails(updateDetailsInput);
 
 		assertEquals(0, output.getRowsAffected());
+		verify(connection).isClosed();
 		verify(connection).prepareStatement(anyString(), anyInt());
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test
@@ -198,7 +220,10 @@ public class TaskDaoBeanTest {
 		UpdateTaskStatusOutput output = dao.updateTaskStatus(updateStatusInput);
 
 		assertEquals(0, output.getRowsAffected());
+		verify(connection).isClosed();
 		verify(connection).prepareStatement(anyString(), anyInt());
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test
@@ -218,7 +243,10 @@ public class TaskDaoBeanTest {
 		DeleteTaskOutput output = dao.deleteTask(deleteInput);
 
 		assertEquals(0, output.getRowsAffected());
+		verify(connection).isClosed();
 		verify(connection).prepareStatement(anyString(), anyInt());
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test
@@ -228,7 +256,10 @@ public class TaskDaoBeanTest {
 		DeleteTaskDetailsOutput output = dao.deleteTaskDetails(deleteDetailsInput);
 
 		assertEquals(0, output.getRowsAffected());
+		verify(connection).isClosed();
 		verify(connection).prepareStatement(anyString(), anyInt());
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test
@@ -238,7 +269,10 @@ public class TaskDaoBeanTest {
 		DeleteTaskStatusOutput output = dao.deleteTaskStatus(deleteStatusInput);
 
 		assertEquals(0, output.getRowsAffected());
+		verify(connection).isClosed();
 		verify(connection).prepareStatement(anyString(), anyInt());
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test

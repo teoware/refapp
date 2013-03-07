@@ -33,11 +33,11 @@ public interface NoteDao extends Serializable {
 
 	public CreateNoteDetailsOutput createNoteDetails(CreateNoteDetailsInput input) throws DaoException;
 
+	public Id readNoteId(Title title) throws DaoException;
+
 	public ReadNoteOutput readNote(ReadNoteInput input) throws DaoException;
 
 	public ReadNoteOutput readNotes(ReadNotesInput input) throws DaoException;
-
-	public Id readNoteId(Title title) throws DaoException;
 
 	public UpdateNoteOutput updateNote(UpdateNoteInput input) throws DaoException;
 

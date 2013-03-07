@@ -6,7 +6,10 @@ import com.teoware.refapp.model.enums.Gender;
 import com.teoware.refapp.model.enums.Status;
 import com.teoware.refapp.util.time.DateTimeConverter;
 
-public class MapperHelper {
+public final class MapperHelper {
+
+	private MapperHelper() {
+	}
 
 	public static Gender mapGender(String gender) {
 		return Gender.valueOf(gender);

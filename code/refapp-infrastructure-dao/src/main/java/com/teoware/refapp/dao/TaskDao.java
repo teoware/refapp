@@ -22,6 +22,8 @@ import com.teoware.refapp.dao.dto.UpdateTaskInput;
 import com.teoware.refapp.dao.dto.UpdateTaskOutput;
 import com.teoware.refapp.dao.dto.UpdateTaskStatusInput;
 import com.teoware.refapp.dao.dto.UpdateTaskStatusOutput;
+import com.teoware.refapp.model.common.Id;
+import com.teoware.refapp.model.common.Title;
 
 @Local
 public interface TaskDao extends Serializable {
@@ -30,7 +32,11 @@ public interface TaskDao extends Serializable {
 
 	public CreateTaskDetailsOutput createTaskDetails(CreateTaskDetailsInput input) throws DaoException;
 
+	public Id readTaskId(Title title) throws DaoException;
+
 	public ReadTaskOutput readTask(ReadTaskInput input) throws DaoException;
+
+	public ReadTaskOutput readTasks(ReadTaskInput input) throws DaoException;
 
 	public UpdateTaskOutput updateTask(UpdateTaskInput input) throws DaoException;
 

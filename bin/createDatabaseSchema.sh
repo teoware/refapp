@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "INFO: Creating database schama objects..."
+echo "INFO: Creating database schema objects..."
 
 FILE_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 

@@ -14,7 +14,15 @@ import com.teoware.refapp.model.user.UserDetails;
 import com.teoware.refapp.model.user.UserPassword;
 import com.teoware.refapp.model.user.UserStatus;
 
-public class BeanFactory {
+/**
+ * Utility factory class for creating rich domain objects.
+ * 
+ * @author thomas@teoware.com
+ */
+public final class BeanFactory {
+
+	private BeanFactory() {
+	}
 
 	public static Username createUsernameBean() {
 		Username username = new Username();

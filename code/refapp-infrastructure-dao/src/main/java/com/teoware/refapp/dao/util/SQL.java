@@ -1,10 +1,14 @@
 package com.teoware.refapp.dao.util;
 
 /**
- * Utility for building an SQL statement.
+ * Utility for building SQL statements.
  * 
+ * @author thomas@teoware.com
  */
 public class SQL {
+	
+private static final String COMMA = ", ";
+	private static final String PARAM_EQUALS = " = ?";
 
 	private String sql;
 
@@ -34,17 +38,21 @@ public class SQL {
 		}
 
 		public Builder column(String column) {
-			sql.append(" " + column);
+			space();
+			sql.append(column);
 			return this;
 		}
 
 		public Builder columns(String... columns) {
-			sql.append(" (" + join(columns, ", ") + ")");
+			left();
+			sql.append(join(columns, COMMA));
+			right();
 			return this;
 		}
 
 		public Builder values(int length) {
-			sql.append(" VALUES (" + params(length) + ")");
+			sql.append(" VALUES (" + params(length));
+			right();
 			return this;
 		}
 
@@ -60,12 +68,13 @@ public class SQL {
 		}
 
 		public Builder setColumn(String column) {
-			sql.append(" SET " + column + " = ?");
+			sql.append(" SET " + column);
+			param();
 			return this;
 		}
 
 		public Builder setColumns(String... columns) {
-			sql.append(" SET " + join(append(columns, " = ?"), ", "));
+			sql.append(" SET " + join(append(columns, PARAM_EQUALS), COMMA));
 			return this;
 		}
 
@@ -75,7 +84,8 @@ public class SQL {
 		}
 
 		public Builder doSelect(String... columns) {
-			sql.append("SELECT (" + join(columns, ", ") + ")");
+			sql.append("SELECT (" + join(columns, COMMA));
+			right();
 			return this;
 		}
 
@@ -96,12 +106,14 @@ public class SQL {
 
 		public Builder from(String table) {
 			from();
-			sql.append(" " + table);
+			space();
+			sql.append(table);
 			return this;
 		}
 
 		public Builder table(String table) {
-			sql.append(" " + table);
+			space();
+			sql.append(table);
 			return this;
 		}
 
@@ -112,32 +124,39 @@ public class SQL {
 
 		public Builder where(String column) {
 			where();
-			sql.append(" " + column + " = ?");
+			space();
+			sql.append(column);
+			param();
 			return this;
 		}
 
 		public Builder where(String... column) {
 			where();
-			sql.append(" (" + join(append(column, " = ?"), " AND ") + ")");
+			left();
+			sql.append(join(append(column, PARAM_EQUALS), " AND "));
+			right();
 			return this;
 		}
 
 		public Builder whereIn(String column, int count) {
 			where();
-			sql.append(" " + column);
+			space();
+			sql.append(column);
 			in(count);
 			return this;
 		}
 
 		public Builder whereLike(String column) {
 			where();
-			sql.append(" " + column);
+			space();
+			sql.append(column);
 			like();
 			return this;
 		}
 
 		public Builder in(int count) {
-			sql.append(" IN (" + params(count) + ")");
+			sql.append(" IN (" + params(count));
+			right();
 			return this;
 		}
 
@@ -153,12 +172,16 @@ public class SQL {
 
 		public Builder and(String column) {
 			and();
-			sql.append(" " + column + " = ?");
+			space();
+			sql.append(column);
+			param();
 			return this;
 		}
 
 		public Builder and(String... column) {
-			sql.append(" (" + join(append(column, " = ?"), " AND ") + ")");
+			left();
+			sql.append(join(append(column, PARAM_EQUALS), " AND "));
+			right();
 			return this;
 		}
 
@@ -169,13 +192,33 @@ public class SQL {
 
 		public Builder or(String column) {
 			or();
-			sql.append(" " + column + " = ?");
+			space();
+			sql.append(column);
+			param();
 			return this;
 		}
 
 		public Builder or(String... column) {
-			sql.append(" (" + join(append(column, " = ?"), " OR ") + ")");
+			left();
+			sql.append(join(append(column, PARAM_EQUALS), " OR "));
+			right();
 			return this;
+		}
+		
+		private void space() {
+			sql.append(" ");
+		}
+		
+		private void param() {
+			sql.append(PARAM_EQUALS);
+		}
+		
+		private void left() {
+			sql.append(" (");
+		}
+		
+		private void right() {
+			sql.append(")");
 		}
 
 		private String[] append(String[] strings, String append) {

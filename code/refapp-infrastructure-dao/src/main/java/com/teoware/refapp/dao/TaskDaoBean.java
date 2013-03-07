@@ -1,8 +1,9 @@
 package com.teoware.refapp.dao;
 
-import static com.teoware.refapp.dao.metadata.NoteTables.STATUS_COLUMN_NAME;
 import static com.teoware.refapp.dao.metadata.Schema.REFAPP_SCHEMA_NAME;
 import static com.teoware.refapp.dao.metadata.TaskTables.DESCRIPTION_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.TaskTables.ID_COLUMN_NAME;
+import static com.teoware.refapp.dao.metadata.TaskTables.STATUS_COLUMN_NAME;
 import static com.teoware.refapp.dao.metadata.TaskTables.TASKS_TABLE_NAME;
 import static com.teoware.refapp.dao.metadata.TaskTables.TASKS_VIEW_NAME;
 import static com.teoware.refapp.dao.metadata.TaskTables.TASK_DETAILS_TABLE_NAME;
@@ -10,7 +11,6 @@ import static com.teoware.refapp.dao.metadata.TaskTables.TASK_ID_COLUMN_NAME;
 import static com.teoware.refapp.dao.metadata.TaskTables.TASK_STATUS_TABLE_NAME;
 import static com.teoware.refapp.dao.metadata.TaskTables.TITLE_COLUMN_NAME;
 import static com.teoware.refapp.dao.metadata.TaskTables.USER_ID_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.UserTables.ID_COLUMN_NAME;
 
 import java.util.List;
 
@@ -43,11 +43,13 @@ import com.teoware.refapp.dao.dto.UpdateTaskOutput;
 import com.teoware.refapp.dao.dto.UpdateTaskStatusInput;
 import com.teoware.refapp.dao.dto.UpdateTaskStatusOutput;
 import com.teoware.refapp.dao.metadata.JNDI;
+import com.teoware.refapp.dao.rowmapper.IdRowMapper;
 import com.teoware.refapp.dao.rowmapper.TaskRowMapper;
 import com.teoware.refapp.dao.util.ChangeResult;
 import com.teoware.refapp.dao.util.DaoHelper;
 import com.teoware.refapp.dao.util.SQL;
 import com.teoware.refapp.model.common.Id;
+import com.teoware.refapp.model.common.Title;
 import com.teoware.refapp.model.task.Task;
 
 @Stateless
@@ -68,6 +70,7 @@ public class TaskDaoBean extends Dao implements TaskDao {
 	@Resource(mappedName = JNDI.REFAPP_DATASOURCE)
 	private DataSource dataSource;
 
+	private IdRowMapper idRowMapper = new IdRowMapper();
 	private TaskRowMapper taskRowMapper = new TaskRowMapper();
 
 	@PostConstruct
@@ -99,6 +102,12 @@ public class TaskDaoBean extends Dao implements TaskDao {
 	}
 
 	@Override
+	public Id readTaskId(Title title) throws DaoException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public ReadTaskOutput readTask(ReadTaskInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Read task operation invoked.");
 
@@ -106,6 +115,12 @@ public class TaskDaoBean extends Dao implements TaskDao {
 		Object[] parameters = DaoHelper.generateArray(input.getUsername().getUsername());
 		List<Task> taskList = super.read(sql, taskRowMapper, parameters);
 		return new ReadTaskOutput(taskList);
+	}
+
+	@Override
+	public ReadTaskOutput readTasks(ReadTaskInput input) throws DaoException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override

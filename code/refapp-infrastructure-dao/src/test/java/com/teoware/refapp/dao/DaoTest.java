@@ -10,6 +10,7 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -73,12 +74,13 @@ public class DaoTest {
 
 	@Test
 	public void testInitializeWithNull() throws SQLException {
-		dao.connection = null;
+		dao.setConnection(null);
 		when(dataSource.getConnection()).thenReturn(mock(Connection.class));
 		dao.initialize(dataSource);
 
 		assertNotNull(dao.createOrReuseConnection());
 		verify(dataSource).getConnection();
+		verifyNoMoreInteractions(dataSource);
 	}
 
 	@Test
@@ -93,6 +95,7 @@ public class DaoTest {
 		assertNotNull(con2);
 		assertFalse(con2.isClosed());
 		verify(dataSource).getConnection();
+		verifyNoMoreInteractions(dataSource);
 	}
 
 	@Test
@@ -101,6 +104,7 @@ public class DaoTest {
 		dao.closeConnection();
 
 		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test
@@ -114,7 +118,7 @@ public class DaoTest {
 	@Test
 	public void testCloseConnectionWithNull() throws SQLException {
 		dao.setPersistConnection(Boolean.FALSE);
-		dao.connection = null;
+		dao.setConnection(null);
 		dao.closeConnection();
 
 		verifyZeroInteractions(connection);

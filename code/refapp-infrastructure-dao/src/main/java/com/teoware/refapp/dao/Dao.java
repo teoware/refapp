@@ -13,7 +13,6 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.teoware.refapp.dao.rowmapper.IdRowMapper;
 import com.teoware.refapp.dao.rowmapper.RowMapper;
 import com.teoware.refapp.dao.util.ChangeResult;
 import com.teoware.refapp.dao.util.ConnectionHandler;
@@ -26,6 +25,7 @@ import com.teoware.refapp.model.common.Id;
 /**
  * Base DAO that holds functionality for common database operations.
  * 
+ * @author thomas@teoware.com
  */
 public abstract class Dao {
 
@@ -38,10 +38,8 @@ public abstract class Dao {
 	private static final String DELETE_ERROR_MESSAGE = "Delete operation failed.";
 
 	private DataSource dataSource;
-
-	protected Connection connection;
-	protected boolean persistConnection;
-	protected IdRowMapper idRowMapper = new IdRowMapper();
+	private Connection connection;
+	private boolean persistConnection;
 
 	protected void initialize(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -90,11 +88,13 @@ public abstract class Dao {
 
 	public int rowCount(String table) throws DaoException {
 		PreparedStatement statement = null;
-		String sql = "SELECT * FROM " + table;
+		ResultSet result = null;
+		SQL sql = new SQL.Builder().doSelectAll().from(table).build();
 		try {
 			createOrReuseConnection();
-			statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			ResultSet result = statement.executeQuery();
+			statement = connection.prepareStatement(sql.getSql(), ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY);
+			result = statement.executeQuery();
 			result.last();
 			int rowCount = result.getRow();
 			result.close();
@@ -103,16 +103,17 @@ public abstract class Dao {
 			LOG.error(e(READ_ERROR_MESSAGE, sql));
 			throw new DaoException(e(READ_ERROR_MESSAGE, sql), e.getCause());
 		} finally {
-			closeConnection(statement);
+			closeConnection(result, statement);
 		}
 	}
 
 	private <T> List<T> executeQuery(SQL sql, RowMapper<T> rowMapper, Object... parameters) throws DaoException {
 		LOG.debug("Executing SQL statement: " + sql.getSql());
 		PreparedStatement statement = null;
+		ResultSet result = null;
 		try {
 			statement = generatePreparedStatement(sql, parameters);
-			ResultSet result = statement.executeQuery();
+			result = statement.executeQuery();
 			int rowsExpected = 0;
 			ResultSetExtractor<List<T>> resultSetExtractor = new RowMapperResultSetExtractor<T>(rowMapper, rowsExpected);
 			return resultSetExtractor.extractData(result);
@@ -121,7 +122,7 @@ public abstract class Dao {
 		} catch (ParseException e) {
 			throw new DaoException(e.getMessage(), e);
 		} finally {
-			closeConnection(statement);
+			closeConnection(result, statement);
 		}
 	}
 
@@ -139,7 +140,7 @@ public abstract class Dao {
 			closeConnection(statement);
 		}
 	}
-	
+
 	private Id getGeneratedKey(PreparedStatement statement) {
 		try {
 			ResultSet rs = statement.getGeneratedKeys();
@@ -173,11 +174,19 @@ public abstract class Dao {
 	}
 
 	protected void closeConnection(PreparedStatement statement) {
-		closeConnection(statement, persistConnection);
+		closeConnection(null, statement, persistConnection);
 	}
 
-	protected void closeConnection(PreparedStatement statement, boolean persistConnection) {
+	protected void closeConnection(ResultSet result, PreparedStatement statement) {
+		closeConnection(result, statement, persistConnection);
+	}
+
+	protected void closeConnection(ResultSet result, PreparedStatement statement, boolean persistConnection) {
 		try {
+			if (result != null) {
+				result.close();
+			}
+
 			if (statement != null) {
 				statement.close();
 			}
@@ -186,6 +195,14 @@ public abstract class Dao {
 		} catch (SQLException e) {
 			// Ignore
 		}
+	}
+
+	public Connection getConnection() {
+		return connection;
+	}
+
+	public void setConnection(Connection connection) {
+		this.connection = connection;
 	}
 
 	public void setPersistConnection(boolean persistConnection) {
