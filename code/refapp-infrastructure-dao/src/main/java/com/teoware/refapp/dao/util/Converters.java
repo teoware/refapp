@@ -11,8 +11,8 @@ import java.util.Map;
 import org.joda.time.DateTime;
 
 import com.teoware.refapp.model.common.Id;
-import com.teoware.refapp.model.common.Title;
 import com.teoware.refapp.model.common.Username;
+import com.teoware.refapp.model.common.Uuid;
 import com.teoware.refapp.util.time.DateTimeConverter;
 import com.teoware.refapp.util.time.DateTimeUtils;
 
@@ -35,7 +35,7 @@ public final class Converters {
 		converters.put(GregorianCalendar.class, new TimestampConverter());
 		converters.put(Id.class, new IdConverter());
 		converters.put(Username.class, new UsernameConverter());
-		converters.put(Title.class, new TitleConverter());
+		converters.put(Uuid.class, new UuidConverter());
 	}
 
 	private Converters() {
@@ -171,10 +171,10 @@ public final class Converters {
 		}
 	}
 
-	public static class TitleConverter implements Converter<String> {
+	public static class UuidConverter implements Converter<String> {
 		@Override
 		public String convert(Object param) {
-			return ((Title) param).getTitle();
+			return ((Uuid) param).getUuid();
 		}
 
 		@Override

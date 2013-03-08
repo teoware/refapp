@@ -28,8 +28,8 @@ import org.mockito.Mock;
 
 import com.teoware.refapp.dao.util.Converters.Converter;
 import com.teoware.refapp.model.common.Id;
-import com.teoware.refapp.model.common.Title;
 import com.teoware.refapp.model.common.Username;
+import com.teoware.refapp.model.common.Uuid;
 
 public class ConvertersTest {
 
@@ -264,14 +264,14 @@ public class ConvertersTest {
 
 	@Test
 	public void testTitleConverter() throws SQLException {
-		Title param = new Title("whatever");
+		Uuid param = new Uuid("whatever");
 		Converter<?> conv = converters.get(param.getClass());
 
 		assertNotNull(conv);
 		Object obj = conv.convert(param);
 		assertNotNull(obj);
 		assertTrue(obj instanceof String);
-		assertEquals(param.getTitle(), obj.toString());
+		assertEquals(param.getUuid(), obj.toString());
 		conv.setParam(ps, param, 0);
 		verify(ps).setString(anyInt(), anyString());
 		verifyNoMoreInteractions(ps);
