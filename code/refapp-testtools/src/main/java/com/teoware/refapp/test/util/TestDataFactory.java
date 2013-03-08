@@ -25,6 +25,7 @@ import com.teoware.refapp.dao.dto.PurgeUsersInput;
 import com.teoware.refapp.dao.dto.ReadNoteInput;
 import com.teoware.refapp.dao.dto.ReadNotesInput;
 import com.teoware.refapp.dao.dto.ReadTaskInput;
+import com.teoware.refapp.dao.dto.ReadTasksInput;
 import com.teoware.refapp.dao.dto.ReadUserInput;
 import com.teoware.refapp.dao.dto.ReadUserPasswordInput;
 import com.teoware.refapp.dao.dto.UpdateNoteDetailsInput;
@@ -428,7 +429,8 @@ public class TestDataFactory {
 	public static Note createNote1() {
 		DateTime dateTime = DateTime.now();
 		Note note = BeanFactory.createNote();
-		note.getTitle().setTitle("Note 1");
+		note.getUuid().setUuid("a");
+		note.getNoteDetails().setTitle("Note 1");
 		note.getNoteDetails().setDescription("This is note 1");
 		note.getNoteStatus().setStatus(Status.NEW);
 		note.getNoteStatus().setCreated(dateTime);
@@ -441,7 +443,7 @@ public class TestDataFactory {
 	}
 
 	public static CreateNoteInput createCreateNoteInput1(Id userId) {
-		return new CreateNoteInput(userId, createNote1().getTitle());
+		return new CreateNoteInput(userId, createNote1().getUuid());
 	}
 
 	public static CreateNoteDetailsInput createCreateNoteDetailsInput1() {
@@ -453,7 +455,7 @@ public class TestDataFactory {
 	}
 
 	public static ReadNoteInput createReadNoteInput1() {
-		return new ReadNoteInput(createNote1().getTitle());
+		return new ReadNoteInput(createNote1().getUuid());
 	}
 
 	public static ReadNotesInput createReadNotesInput1() {
@@ -465,7 +467,7 @@ public class TestDataFactory {
 	}
 
 	public static UpdateNoteInput createUpdateNoteInput1(Id id) {
-		return new UpdateNoteInput(id, createNote1().getTitle());
+		return new UpdateNoteInput(id, createNote1().getUuid());
 	}
 
 	public static UpdateNoteDetailsInput createUpdateNoteDetailsInput1() {
@@ -511,7 +513,8 @@ public class TestDataFactory {
 	public static Task createTask1() {
 		DateTime dateTime = DateTime.now();
 		Task task = BeanFactory.createTask();
-		task.getTitle().setTitle("Task 1");
+		task.getUuid().setUuid("a");
+		task.getTaskDetails().setTitle("Task 1");
 		task.getTaskDetails().setDescription("This is task 1");
 		task.getTaskStatus().setStatus(Status.NEW);
 		task.getTaskStatus().setCreated(dateTime);
@@ -524,7 +527,7 @@ public class TestDataFactory {
 	}
 
 	public static CreateTaskInput createCreateTaskInput1(Id userId) {
-		return new CreateTaskInput(userId, createTask1().getTitle());
+		return new CreateTaskInput(userId, createTask1().getUuid());
 	}
 
 	public static CreateTaskDetailsInput createCreateTaskDetailsInput1() {
@@ -536,7 +539,11 @@ public class TestDataFactory {
 	}
 
 	public static ReadTaskInput createReadTaskInput1() {
-		return new ReadTaskInput(createUsername("john.doe"));
+		return new ReadTaskInput(createTask1().getUuid());
+	}
+
+	public static ReadTasksInput createReadTasksInput1() {
+		return new ReadTasksInput(new Id(0L));
 	}
 
 	public static UpdateTaskInput createUpdateTaskInput1() {
@@ -544,7 +551,7 @@ public class TestDataFactory {
 	}
 
 	public static UpdateTaskInput createUpdateTaskInput1(Id id) {
-		return new UpdateTaskInput(id, createTask1().getTitle());
+		return new UpdateTaskInput(id, createTask1().getUuid());
 	}
 
 	public static UpdateTaskDetailsInput createUpdateTaskDetailsInput1() {

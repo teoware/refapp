@@ -4,13 +4,13 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import com.teoware.refapp.model.base.BaseBody;
-import com.teoware.refapp.model.common.Title;
+import com.teoware.refapp.model.common.Uuid;
 
 public class Note extends BaseBody {
 
 	@NotNull
 	@Valid
-	private Title title;
+	private Uuid uuid;
 
 	@NotNull
 	@Valid
@@ -21,18 +21,18 @@ public class Note extends BaseBody {
 	public Note() {
 	}
 
-	public Note(Title title, NoteDetails noteDetails, NoteStatus noteStatus) {
-		this.title = title;
+	public Note(Uuid uuid, NoteDetails noteDetails, NoteStatus noteStatus) {
+		this.uuid = uuid;
 		this.noteDetails = noteDetails;
 		this.noteStatus = noteStatus;
 	}
 
-	public Title getTitle() {
-		return title;
+	public Uuid getUuid() {
+		return uuid;
 	}
 
-	public void setTitle(Title title) {
-		this.title = title;
+	public void setUuid(Uuid uuid) {
+		this.uuid = uuid;
 	}
 
 	public NoteDetails getNoteDetails() {

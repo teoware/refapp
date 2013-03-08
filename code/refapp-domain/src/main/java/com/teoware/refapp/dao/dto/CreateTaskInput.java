@@ -1,19 +1,19 @@
 package com.teoware.refapp.dao.dto;
 
 import com.teoware.refapp.model.common.Id;
-import com.teoware.refapp.model.common.Title;
+import com.teoware.refapp.model.common.Uuid;
 
 public class CreateTaskInput {
 
 	private Id userId;
-	private Title title;
+	private Uuid uuid;
 
 	public CreateTaskInput() {
 	}
 
-	public CreateTaskInput(Id userId, Title title) {
+	public CreateTaskInput(Id userId, Uuid uuid) {
 		this.setUserId(userId);
-		this.title = title;
+		this.setUuid(uuid);
 	}
 
 	public Id getUserId() {
@@ -24,11 +24,11 @@ public class CreateTaskInput {
 		this.userId = userId;
 	}
 
-	public Title getTitle() {
-		return title;
+	public Uuid getUuid() {
+		return uuid;
 	}
 
-	public void setTitle(Title title) {
-		this.title = title;
+	public void setUuid(Uuid uuid) {
+		this.uuid = uuid;
 	}
 }

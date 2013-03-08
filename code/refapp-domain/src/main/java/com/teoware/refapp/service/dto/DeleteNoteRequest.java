@@ -2,15 +2,15 @@ package com.teoware.refapp.service.dto;
 
 import com.teoware.refapp.model.Header;
 import com.teoware.refapp.model.base.BaseMessage;
-import com.teoware.refapp.model.common.Title;
+import com.teoware.refapp.model.common.Uuid;
 
-public class DeleteNoteRequest extends BaseMessage<Header, Title> {
+public class DeleteNoteRequest extends BaseMessage<Header, Uuid> {
 
-	public DeleteNoteRequest(Header header, Title title) {
-		super(header, title);
+	public DeleteNoteRequest(Header header, Uuid uuid) {
+		super(header, uuid);
 	}
 
-	public DeleteNoteRequest(Title title) {
-		this(Header.getInstance(), title);
+	public DeleteNoteRequest(Uuid uuid) {
+		this(Header.getInstance(), uuid);
 	}
 }

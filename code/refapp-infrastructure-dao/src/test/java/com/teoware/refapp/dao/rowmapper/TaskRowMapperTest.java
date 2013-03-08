@@ -35,18 +35,19 @@ public class TaskRowMapperTest {
 
 	@Test
 	public void testMapRow() throws SQLException, ParseException {
-		when(result.getString(anyString())).thenReturn("a", "b", "NEW");
+		when(result.getString(anyString())).thenReturn("a", "b", "c", "NEW");
 		when(result.getTimestamp(anyString())).thenReturn(new Timestamp(0), new Timestamp(1));
 
 		Task task = rowMapper.mapRow(result, 0);
 
-		assertEquals("a", task.getTitle().getTitle());
-		assertEquals("b", task.getTaskDetails().getDescription());
+		assertEquals("a", task.getUuid().getUuid());
+		assertEquals("b", task.getTaskDetails().getTitle());
+		assertEquals("c", task.getTaskDetails().getDescription());
 		assertEquals(Status.NEW, task.getTaskStatus().getStatus());
 		assertEquals(new Timestamp(0).getTime(), task.getTaskStatus().getCreated().getMillis());
 		assertEquals(new Timestamp(1).getTime(), task.getTaskStatus().getModified().getMillis());
 
-		verify(result, times(3)).getString(anyString());
+		verify(result, times(4)).getString(anyString());
 		verify(result, times(2)).getTimestamp(anyString());
 	}
 

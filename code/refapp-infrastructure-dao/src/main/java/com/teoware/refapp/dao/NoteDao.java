@@ -24,7 +24,7 @@ import com.teoware.refapp.dao.dto.UpdateNoteOutput;
 import com.teoware.refapp.dao.dto.UpdateNoteStatusInput;
 import com.teoware.refapp.dao.dto.UpdateNoteStatusOutput;
 import com.teoware.refapp.model.common.Id;
-import com.teoware.refapp.model.common.Title;
+import com.teoware.refapp.model.common.Uuid;
 
 @Local
 public interface NoteDao extends Serializable {
@@ -33,7 +33,7 @@ public interface NoteDao extends Serializable {
 
 	public CreateNoteDetailsOutput createNoteDetails(CreateNoteDetailsInput input) throws DaoException;
 
-	public Id readNoteId(Title title) throws DaoException;
+	public Id readNoteId(Uuid uuid) throws DaoException;
 
 	public ReadNoteOutput readNote(ReadNoteInput input) throws DaoException;
 

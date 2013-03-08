@@ -220,6 +220,7 @@ public final class TestResultSetFactory {
 	}
 
 	private static void populateNotesViewColumns(SimpleResultSet resultSet) {
+		resultSet.addColumn(NoteTables.UUID_COLUMN_NAME, Types.VARCHAR, 36, 0);
 		resultSet.addColumn(NoteTables.TITLE_COLUMN_NAME, Types.VARCHAR, 100, 0);
 		resultSet.addColumn(NoteTables.DESCRIPTION_COLUMN_NAME, Types.VARCHAR, 300, 0);
 		resultSet.addColumn(NoteTables.STATUS_COLUMN_NAME, Types.VARCHAR, 10, 0);
@@ -229,9 +230,9 @@ public final class TestResultSetFactory {
 
 	private static void populateNotesViewRow1(SimpleResultSet resultSet) {
 		Note note = TestDataFactory.createNote1();
-		resultSet.addRow(note.getTitle().getTitle(), note.getNoteDetails().getDescription(), note.getNoteStatus()
-				.getStatus().toString(), DateTimeConverter.toSqlTimestamp(note.getNoteStatus().getCreated()),
-				DateTimeConverter.toSqlTimestamp(note.getNoteStatus().getModified()));
+		resultSet.addRow(note.getUuid().getUuid(), note.getNoteDetails().getTitle(), note.getNoteDetails()
+				.getDescription(), note.getNoteStatus().getStatus().toString(), DateTimeConverter.toSqlTimestamp(note
+				.getNoteStatus().getCreated()), DateTimeConverter.toSqlTimestamp(note.getNoteStatus().getModified()));
 	}
 
 	public static ResultSet createReadNoteId1ResultSet() {
@@ -244,12 +245,12 @@ public final class TestResultSetFactory {
 	private static void populateNotesTableColumns(SimpleResultSet resultSet) {
 		resultSet.addColumn(NoteTables.ID_COLUMN_NAME, Types.BIGINT, 0, 0);
 		resultSet.addColumn(NoteTables.USER_ID_COLUMN_NAME, Types.BIGINT, 0, 0);
-		resultSet.addColumn(NoteTables.TITLE_COLUMN_NAME, Types.VARCHAR, 100, 0);
+		resultSet.addColumn(NoteTables.UUID_COLUMN_NAME, Types.VARCHAR, 100, 0);
 	}
 
 	private static void populateNotesTableRow1(SimpleResultSet resultSet) {
 		Note note = TestDataFactory.createNote1();
-		resultSet.addRow(1L, 1L, note.getTitle().getTitle());
+		resultSet.addRow(1L, 1L, note.getUuid().getUuid());
 	}
 
 	public static ResultSet createReadTask1ResultSet() {
@@ -260,6 +261,7 @@ public final class TestResultSetFactory {
 	}
 
 	private static void populateTasksViewColumns(SimpleResultSet resultSet) {
+		resultSet.addColumn(TaskTables.UUID_COLUMN_NAME, Types.VARCHAR, 36, 0);
 		resultSet.addColumn(TaskTables.TITLE_COLUMN_NAME, Types.VARCHAR, 100, 0);
 		resultSet.addColumn(TaskTables.DESCRIPTION_COLUMN_NAME, Types.VARCHAR, 300, 0);
 		resultSet.addColumn(TaskTables.STATUS_COLUMN_NAME, Types.VARCHAR, 10, 0);
@@ -269,8 +271,26 @@ public final class TestResultSetFactory {
 
 	private static void populateTasksViewRow1(SimpleResultSet resultSet) {
 		Task task = TestDataFactory.createTask1();
-		resultSet.addRow(task.getTitle().getTitle(), task.getTaskDetails().getDescription(), task.getTaskStatus()
-				.getStatus().toString(), DateTimeConverter.toSqlTimestamp(task.getTaskStatus().getCreated()),
-				DateTimeConverter.toSqlTimestamp(task.getTaskStatus().getModified()));
+		resultSet.addRow(task.getUuid().getUuid(), task.getTaskDetails().getTitle(), task.getTaskDetails()
+				.getDescription(), task.getTaskStatus().getStatus().toString(), DateTimeConverter.toSqlTimestamp(task
+				.getTaskStatus().getCreated()), DateTimeConverter.toSqlTimestamp(task.getTaskStatus().getModified()));
+	}
+
+	public static ResultSet createReadTaskId1ResultSet() {
+		SimpleResultSet resultSet = new SimpleResultSet();
+		populateTasksTableColumns(resultSet);
+		populateTasksTableRow1(resultSet);
+		return resultSet;
+	}
+
+	private static void populateTasksTableColumns(SimpleResultSet resultSet) {
+		resultSet.addColumn(TaskTables.ID_COLUMN_NAME, Types.BIGINT, 0, 0);
+		resultSet.addColumn(TaskTables.USER_ID_COLUMN_NAME, Types.BIGINT, 0, 0);
+		resultSet.addColumn(TaskTables.UUID_COLUMN_NAME, Types.VARCHAR, 100, 0);
+	}
+
+	private static void populateTasksTableRow1(SimpleResultSet resultSet) {
+		Task task = TestDataFactory.createTask1();
+		resultSet.addRow(1L, 1L, task.getUuid().getUuid());
 	}
 }

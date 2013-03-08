@@ -16,6 +16,7 @@ import com.teoware.refapp.dao.dto.DeleteTaskStatusInput;
 import com.teoware.refapp.dao.dto.DeleteTaskStatusOutput;
 import com.teoware.refapp.dao.dto.ReadTaskInput;
 import com.teoware.refapp.dao.dto.ReadTaskOutput;
+import com.teoware.refapp.dao.dto.ReadTasksInput;
 import com.teoware.refapp.dao.dto.UpdateTaskDetailsInput;
 import com.teoware.refapp.dao.dto.UpdateTaskDetailsOutput;
 import com.teoware.refapp.dao.dto.UpdateTaskInput;
@@ -23,7 +24,7 @@ import com.teoware.refapp.dao.dto.UpdateTaskOutput;
 import com.teoware.refapp.dao.dto.UpdateTaskStatusInput;
 import com.teoware.refapp.dao.dto.UpdateTaskStatusOutput;
 import com.teoware.refapp.model.common.Id;
-import com.teoware.refapp.model.common.Title;
+import com.teoware.refapp.model.common.Uuid;
 
 @Local
 public interface TaskDao extends Serializable {
@@ -32,11 +33,11 @@ public interface TaskDao extends Serializable {
 
 	public CreateTaskDetailsOutput createTaskDetails(CreateTaskDetailsInput input) throws DaoException;
 
-	public Id readTaskId(Title title) throws DaoException;
+	public Id readTaskId(Uuid uuid) throws DaoException;
 
 	public ReadTaskOutput readTask(ReadTaskInput input) throws DaoException;
 
-	public ReadTaskOutput readTasks(ReadTaskInput input) throws DaoException;
+	public ReadTaskOutput readTasks(ReadTasksInput input) throws DaoException;
 
 	public UpdateTaskOutput updateTask(UpdateTaskInput input) throws DaoException;
 

@@ -3,13 +3,13 @@ package com.teoware.refapp.model.task;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import com.teoware.refapp.model.common.Title;
+import com.teoware.refapp.model.common.Uuid;
 
 public class Task {
 
 	@NotNull
 	@Valid
-	private Title title;
+	private Uuid uuid;
 
 	@NotNull
 	@Valid
@@ -20,18 +20,18 @@ public class Task {
 	public Task() {
 	}
 
-	public Task(Title title, TaskDetails taskDetails, TaskStatus taskStatus) {
-		this.title = title;
+	public Task(Uuid uuid, TaskDetails taskDetails, TaskStatus taskStatus) {
+		this.uuid = uuid;
 		this.taskDetails = taskDetails;
 		this.taskStatus = taskStatus;
 	}
 
-	public Title getTitle() {
-		return title;
+	public Uuid getUuid() {
+		return uuid;
 	}
 
-	public void setTitle(Title title) {
-		this.title = title;
+	public void setUuid(Uuid uuid) {
+		this.uuid = uuid;
 	}
 
 	public TaskDetails getTaskDetails() {

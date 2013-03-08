@@ -9,11 +9,12 @@ public interface NoteTables {
 	static final String NOTES_TABLE_NAME = "NOTES";
 	static final String ID_COLUMN_NAME = "ID";
 	static final String USER_ID_COLUMN_NAME = "USER_ID";
-	static final String TITLE_COLUMN_NAME = "TITLE";
+	static final String UUID_COLUMN_NAME = "UUID";
 
 	// NOTE_DETAILS
 	static final String NOTE_DETAILS_TABLE_NAME = "NOTE_DETAILS";
 	static final String NOTE_ID_COLUMN_NAME = "NOTE_ID";
+	static final String TITLE_COLUMN_NAME = "TITLE";
 	static final String DESCRIPTION_COLUMN_NAME = "DESCRIPTION";
 
 	// NOTE_STATUS

@@ -9,11 +9,12 @@ public interface TaskTables {
 	static final String TASKS_TABLE_NAME = "TASKS";
 	static final String ID_COLUMN_NAME = "ID";
 	static final String USER_ID_COLUMN_NAME = "USER_ID";
-	static final String TITLE_COLUMN_NAME = "TITLE";
+	static final String UUID_COLUMN_NAME = "UUID";
 
 	// TASK_DETAILS
 	static final String TASK_DETAILS_TABLE_NAME = "TASK_DETAILS";
 	static final String TASK_ID_COLUMN_NAME = "TASK_ID";
+	static final String TITLE_COLUMN_NAME = "TITLE";
 	static final String DESCRIPTION_COLUMN_NAME = "DESCRIPTION";
 
 	// TASK_STATUS

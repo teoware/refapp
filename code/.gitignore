@@ -1,0 +1,6 @@
+/refapp-common
+/refapp-infrastructure-dao
+/refapp-domain
+/refapp-testtools
+/refapp-services-logic
+/refapp-services-facade

@@ -32,8 +32,8 @@ import com.teoware.refapp.dao.dto.UpdateNoteInput;
 import com.teoware.refapp.dao.dto.UpdateNoteOutput;
 import com.teoware.refapp.model.Header;
 import com.teoware.refapp.model.common.Id;
-import com.teoware.refapp.model.common.Title;
 import com.teoware.refapp.model.common.Username;
+import com.teoware.refapp.model.common.Uuid;
 import com.teoware.refapp.model.enums.Result;
 import com.teoware.refapp.model.note.Note;
 import com.teoware.refapp.service.dto.ChangeNoteRequest;
@@ -78,7 +78,7 @@ public class NoteServiceBean extends Service implements NoteService {
 
 			Id userId = userDao.readUserId(request.getUsername());
 
-			CreateNoteInput createNoteInput = new CreateNoteInput(userId, note.getTitle());
+			CreateNoteInput createNoteInput = new CreateNoteInput(userId, note.getUuid());
 			CreateNoteOutput createNoteOutput = noteDao.createNote(createNoteInput);
 			rowsAffected += createNoteOutput.getRowsAffected();
 
@@ -101,9 +101,9 @@ public class NoteServiceBean extends Service implements NoteService {
 
 		try {
 			Header header = request.getHeader();
-			Title title = request.getBody();
+			Uuid uuid = request.getBody();
 
-			ReadNoteInput input = new ReadNoteInput(title);
+			ReadNoteInput input = new ReadNoteInput(uuid);
 			ReadNoteOutput output = noteDao.readNote(input);
 			List<Note> noteList = output.getNoteList();
 
@@ -154,9 +154,9 @@ public class NoteServiceBean extends Service implements NoteService {
 
 			noteDao.persistConnection();
 
-			Id noteId = noteDao.readNoteId(note.getTitle());
+			Id noteId = noteDao.readNoteId(note.getUuid());
 
-			UpdateNoteInput updateNoteInput = new UpdateNoteInput(noteId, note.getTitle());
+			UpdateNoteInput updateNoteInput = new UpdateNoteInput(noteId, note.getUuid());
 			UpdateNoteOutput updateNoteOutput = noteDao.updateNote(updateNoteInput);
 			rowsAffected += updateNoteOutput.getRowsAffected();
 
@@ -181,11 +181,11 @@ public class NoteServiceBean extends Service implements NoteService {
 			int rowsAffected = 0;
 
 			Header header = request.getHeader();
-			Title title = request.getBody();
+			Uuid uuid = request.getBody();
 
 			noteDao.persistConnection();
 
-			Id noteId = noteDao.readNoteId(title);
+			Id noteId = noteDao.readNoteId(uuid);
 
 			DeleteNoteStatusInput deleteNoteStatusInput = new DeleteNoteStatusInput(noteId);
 			DeleteNoteStatusOutput deleteNoteStatusOutput = noteDao.deleteNoteStatus(deleteNoteStatusInput);

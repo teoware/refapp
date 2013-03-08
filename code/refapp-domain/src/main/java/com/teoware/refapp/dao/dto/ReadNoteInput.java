@@ -1,23 +1,23 @@
 package com.teoware.refapp.dao.dto;
 
-import com.teoware.refapp.model.common.Title;
+import com.teoware.refapp.model.common.Uuid;
 
 public class ReadNoteInput {
 
-	private Title title;
+	private Uuid uuid;
 
 	public ReadNoteInput() {
 	}
 
-	public ReadNoteInput(Title title) {
-		this.setTitle(title);
+	public ReadNoteInput(Uuid uuid) {
+		this.setUuid(uuid);
 	}
 
-	public Title getTitle() {
-		return title;
+	public Uuid getUuid() {
+		return uuid;
 	}
 
-	public void setTitle(Title title) {
-		this.title = title;
+	public void setUuid(Uuid uuid) {
+		this.uuid = uuid;
 	}
 }

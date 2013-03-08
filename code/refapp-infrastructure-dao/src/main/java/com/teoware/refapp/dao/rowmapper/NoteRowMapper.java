@@ -15,7 +15,8 @@ public class NoteRowMapper implements RowMapper<Note> {
 	public Note mapRow(ResultSet result, int rowCount) throws SQLException, ParseException {
 		Note note = BeanFactory.createNote();
 
-		note.getTitle().setTitle(result.getString(NoteTables.TITLE_COLUMN_NAME));
+		note.getUuid().setUuid(result.getString(NoteTables.UUID_COLUMN_NAME));
+		note.getNoteDetails().setTitle(result.getString(NoteTables.TITLE_COLUMN_NAME));
 		note.getNoteDetails().setDescription(result.getString(NoteTables.DESCRIPTION_COLUMN_NAME));
 		note.getNoteStatus().setStatus(MapperHelper.mapStatus(result.getString(NoteTables.STATUS_COLUMN_NAME)));
 		note.getNoteStatus().setCreated(MapperHelper.mapTimestamp(result.getTimestamp(NoteTables.CREATED_COLUMN_NAME)));

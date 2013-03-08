@@ -1,23 +1,23 @@
 package com.teoware.refapp.dao.dto;
 
-import com.teoware.refapp.model.common.Username;
+import com.teoware.refapp.model.common.Uuid;
 
 public class ReadTaskInput {
 
-	private Username username;
+	private Uuid uuid;
 
 	public ReadTaskInput() {
 	}
 
-	public ReadTaskInput(Username username) {
-		this.username = username;
+	public ReadTaskInput(Uuid uuid) {
+		this.setUuid(uuid);
 	}
 
-	public Username getUsername() {
-		return username;
+	public Uuid getUuid() {
+		return uuid;
 	}
 
-	public void setUsername(Username username) {
-		this.username = username;
+	public void setUuid(Uuid uuid) {
+		this.uuid = uuid;
 	}
 }

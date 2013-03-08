@@ -1,26 +1,26 @@
 package com.teoware.refapp.dao.dto;
 
 import com.teoware.refapp.model.common.Id;
-import com.teoware.refapp.model.common.Title;
+import com.teoware.refapp.model.common.Uuid;
 
 public class UpdateTaskInput extends ChangeInput {
 
-	private Title title;
+	private Uuid uuid;
 
 	public UpdateTaskInput() {
 		super();
 	}
 
-	public UpdateTaskInput(Id id, Title title) {
+	public UpdateTaskInput(Id id, Uuid uuid) {
 		super(id);
-		this.title = title;
+		this.setUuid(uuid);
 	}
 
-	public Title getTitle() {
-		return title;
+	public Uuid getUuid() {
+		return uuid;
 	}
 
-	public void setTitle(Title title) {
-		this.title = title;
+	public void setUuid(Uuid uuid) {
+		this.uuid = uuid;
 	}
 }

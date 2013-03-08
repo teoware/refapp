@@ -2,6 +2,7 @@ package com.teoware.refapp.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
@@ -36,6 +37,7 @@ import com.teoware.refapp.dao.dto.DeleteTaskStatusInput;
 import com.teoware.refapp.dao.dto.DeleteTaskStatusOutput;
 import com.teoware.refapp.dao.dto.ReadTaskInput;
 import com.teoware.refapp.dao.dto.ReadTaskOutput;
+import com.teoware.refapp.dao.dto.ReadTasksInput;
 import com.teoware.refapp.dao.dto.UpdateTaskDetailsInput;
 import com.teoware.refapp.dao.dto.UpdateTaskDetailsOutput;
 import com.teoware.refapp.dao.dto.UpdateTaskInput;
@@ -43,6 +45,7 @@ import com.teoware.refapp.dao.dto.UpdateTaskOutput;
 import com.teoware.refapp.dao.dto.UpdateTaskStatusInput;
 import com.teoware.refapp.dao.dto.UpdateTaskStatusOutput;
 import com.teoware.refapp.dao.test.TestResultSetFactory;
+import com.teoware.refapp.model.common.Id;
 import com.teoware.refapp.test.util.TestDataFactory;
 
 public class TaskDaoBeanTest {
@@ -65,6 +68,7 @@ public class TaskDaoBeanTest {
 	private CreateTaskInput createInput;
 	private CreateTaskDetailsInput createDetailsInput;
 	private ReadTaskInput readInput;
+	private ReadTasksInput readAllInput;
 	private UpdateTaskInput updateInput;
 	private UpdateTaskDetailsInput updateDetailsInput;
 	private UpdateTaskStatusInput updateStatusInput;
@@ -79,6 +83,7 @@ public class TaskDaoBeanTest {
 		createInput = TestDataFactory.createCreateTaskInput1();
 		createDetailsInput = TestDataFactory.createCreateTaskDetailsInput1();
 		readInput = TestDataFactory.createReadTaskInput1();
+		readAllInput = TestDataFactory.createReadTasksInput1();
 		updateInput = TestDataFactory.createUpdateTaskInput1();
 		updateDetailsInput = TestDataFactory.createUpdateTaskDetailsInput1();
 		updateStatusInput = TestDataFactory.createUpdateTaskStatusInput1();
@@ -128,6 +133,32 @@ public class TaskDaoBeanTest {
 	}
 
 	@Test
+	public void testReadTaskId1() throws Exception {
+		ResultSet resultSet = TestResultSetFactory.createReadTaskId1ResultSet();
+
+		when(statement.executeQuery()).thenReturn(resultSet);
+		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
+
+		Id id = dao.readTaskId(readInput.getUuid());
+
+		assertNotNull(id);
+		verify(connection).isClosed();
+		verify(connection).prepareStatement(anyString(), anyInt());
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
+	}
+
+	@Test(expected = DaoException.class)
+	public void testReadTaskId1PrepareStatementThrowsDaoException() throws Exception {
+		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
+
+		dao.readTaskId(readInput.getUuid());
+
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
+	}
+
+	@Test
 	public void testReadTask1() throws Exception {
 		ResultSet resultSet = TestResultSetFactory.createReadTask1ResultSet();
 
@@ -153,6 +184,32 @@ public class TaskDaoBeanTest {
 	}
 
 	@Test
+	public void testReadTasks() throws Exception {
+		ResultSet resultSet = TestResultSetFactory.createReadTask1ResultSet();
+
+		when(statement.executeQuery()).thenReturn(resultSet);
+		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
+
+		ReadTaskOutput output = dao.readTasks(readAllInput);
+
+		assertEquals(1, output.getTaskList().size());
+		verify(connection).isClosed();
+		verify(connection).prepareStatement(anyString(), anyInt());
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
+	}
+
+	@Test(expected = DaoException.class)
+	public void testReadTasksPrepareStatementThrowsDaoException() throws Exception {
+		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
+
+		dao.readTasks(readAllInput);
+
+		verify(connection).close();
+		verifyNoMoreInteractions(connection);
+	}
+
+	@Test
 	public void testUpdateTask1() throws Exception {
 		when(resultSet.next()).thenReturn(Boolean.TRUE).thenReturn(Boolean.FALSE);
 		when(statement.executeQuery()).thenReturn(resultSet);
@@ -169,7 +226,7 @@ public class TaskDaoBeanTest {
 
 	@Test
 	public void testUpdateTaskNull() throws Exception {
-		updateInput.setTitle(null);
+		updateInput.setUuid(null);
 
 		UpdateTaskOutput output = dao.updateTask(updateInput);
 
@@ -288,5 +345,6 @@ public class TaskDaoBeanTest {
 
 		assertFalse(dao.isPersistConnection());
 		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 }

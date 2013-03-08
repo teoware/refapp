@@ -139,7 +139,7 @@ public class NoteDaoBeanTest {
 		when(statement.executeQuery()).thenReturn(resultSet);
 		when(connection.prepareStatement(anyString(), anyInt())).thenReturn(statement);
 
-		Id id = dao.readNoteId(readInput.getTitle());
+		Id id = dao.readNoteId(readInput.getUuid());
 
 		assertNotNull(id);
 		verify(connection).isClosed();
@@ -152,7 +152,8 @@ public class NoteDaoBeanTest {
 	public void testReadNoteId1PrepareStatementThrowsDaoException() throws Exception {
 		doThrow(SQLException.class).when(connection).prepareStatement(anyString(), anyInt());
 
-		dao.readNoteId(readInput.getTitle());
+		dao.readNoteId(readInput.getUuid());
+
 		verify(connection).close();
 		verifyNoMoreInteractions(connection);
 	}
@@ -224,7 +225,7 @@ public class NoteDaoBeanTest {
 
 	@Test
 	public void testUpdateNoteNull() throws Exception {
-		updateInput.setTitle(null);
+		updateInput.setUuid(null);
 
 		UpdateNoteOutput output = dao.updateNote(updateInput);
 
@@ -343,5 +344,6 @@ public class NoteDaoBeanTest {
 
 		assertFalse(dao.isPersistConnection());
 		verify(connection).close();
+		verifyNoMoreInteractions(connection);
 	}
 }

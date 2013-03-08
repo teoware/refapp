@@ -1,19 +1,19 @@
 package com.teoware.refapp.dao.dto;
 
 import com.teoware.refapp.model.common.Id;
-import com.teoware.refapp.model.common.Title;
+import com.teoware.refapp.model.common.Uuid;
 
 public class CreateNoteInput {
 
 	private Id userId;
-	private Title title;
+	private Uuid uuid;
 
 	public CreateNoteInput() {
 	}
 
-	public CreateNoteInput(Id userId, Title title) {
+	public CreateNoteInput(Id userId, Uuid uuid) {
 		this.setUserId(userId);
-		this.title = title;
+		this.setUuid(uuid);
 	}
 
 	public Id getUserId() {
@@ -24,11 +24,11 @@ public class CreateNoteInput {
 		this.userId = userId;
 	}
 
-	public Title getTitle() {
-		return title;
+	public Uuid getUuid() {
+		return uuid;
 	}
 
-	public void setTitle(Title title) {
-		this.title = title;
+	public void setUuid(Uuid uuid) {
+		this.uuid = uuid;
 	}
 }

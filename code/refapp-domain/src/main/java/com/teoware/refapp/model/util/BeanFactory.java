@@ -1,7 +1,7 @@
 package com.teoware.refapp.model.util;
 
-import com.teoware.refapp.model.common.Title;
 import com.teoware.refapp.model.common.Username;
+import com.teoware.refapp.model.common.Uuid;
 import com.teoware.refapp.model.note.Note;
 import com.teoware.refapp.model.note.NoteDetails;
 import com.teoware.refapp.model.note.NoteStatus;
@@ -58,10 +58,10 @@ public final class BeanFactory {
 	}
 
 	public static Note createNote() {
-		return new Note(new Title(), new NoteDetails(), new NoteStatus());
+		return new Note(new Uuid(), new NoteDetails(), new NoteStatus());
 	}
 
 	public static Task createTask() {
-		return new Task(new Title(), new TaskDetails(), new TaskStatus());
+		return new Task(new Uuid(), new TaskDetails(), new TaskStatus());
 	}
 }

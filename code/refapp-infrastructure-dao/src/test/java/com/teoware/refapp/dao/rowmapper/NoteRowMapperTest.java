@@ -35,18 +35,19 @@ public class NoteRowMapperTest {
 
 	@Test
 	public void testMapRow() throws SQLException, ParseException {
-		when(result.getString(anyString())).thenReturn("a", "b", "NEW");
+		when(result.getString(anyString())).thenReturn("a", "b", "c", "NEW");
 		when(result.getTimestamp(anyString())).thenReturn(new Timestamp(0), new Timestamp(1));
 
 		Note note = rowMapper.mapRow(result, 0);
 
-		assertEquals("a", note.getTitle().getTitle());
-		assertEquals("b", note.getNoteDetails().getDescription());
+		assertEquals("a", note.getUuid().getUuid());
+		assertEquals("b", note.getNoteDetails().getTitle());
+		assertEquals("c", note.getNoteDetails().getDescription());
 		assertEquals(Status.NEW, note.getNoteStatus().getStatus());
 		assertEquals(new Timestamp(0).getTime(), note.getNoteStatus().getCreated().getMillis());
 		assertEquals(new Timestamp(1).getTime(), note.getNoteStatus().getModified().getMillis());
 
-		verify(result, times(3)).getString(anyString());
+		verify(result, times(4)).getString(anyString());
 		verify(result, times(2)).getTimestamp(anyString());
 	}
 
