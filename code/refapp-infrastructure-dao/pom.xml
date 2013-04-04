@@ -85,6 +85,12 @@
 			<artifactId>hsqldb</artifactId>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
 		<!-- Project -->
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
@@ -141,4 +147,8 @@
 			</plugin>
 		</plugins>
 	</build>
+	
+	<!-- PROFILES -->
+	<profiles>
+	</profiles>
 </project>

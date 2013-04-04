@@ -518,7 +518,7 @@
 			</activation>
 			
 			<properties>
-				<skip.intergration.test>true</skip.intergration.test>
+				<skip.intergration.tests>true</skip.intergration.tests>
 			</properties>
 		</profile>
 	</profiles>

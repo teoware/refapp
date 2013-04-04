@@ -1,17 +1,5 @@
 package com.teoware.refapp.dao;
 
-import static com.teoware.refapp.dao.metadata.Schema.REFAPP_SCHEMA_NAME;
-import static com.teoware.refapp.dao.metadata.TaskTables.DESCRIPTION_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.TaskTables.ID_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.TaskTables.STATUS_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.TaskTables.TASKS_TABLE_NAME;
-import static com.teoware.refapp.dao.metadata.TaskTables.TASKS_VIEW_NAME;
-import static com.teoware.refapp.dao.metadata.TaskTables.TASK_DETAILS_TABLE_NAME;
-import static com.teoware.refapp.dao.metadata.TaskTables.TASK_ID_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.TaskTables.TASK_STATUS_TABLE_NAME;
-import static com.teoware.refapp.dao.metadata.TaskTables.USER_ID_COLUMN_NAME;
-import static com.teoware.refapp.dao.metadata.TaskTables.UUID_COLUMN_NAME;
-
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -44,6 +32,8 @@ import com.teoware.refapp.dao.dto.UpdateTaskOutput;
 import com.teoware.refapp.dao.dto.UpdateTaskStatusInput;
 import com.teoware.refapp.dao.dto.UpdateTaskStatusOutput;
 import com.teoware.refapp.dao.metadata.JNDI;
+import com.teoware.refapp.dao.metadata.Schema;
+import com.teoware.refapp.dao.metadata.TaskTables;
 import com.teoware.refapp.dao.rowmapper.IdRowMapper;
 import com.teoware.refapp.dao.rowmapper.TaskRowMapper;
 import com.teoware.refapp.dao.util.ChangeResult;
@@ -63,10 +53,11 @@ public class TaskDaoBean extends Dao implements TaskDao {
 
 	private static final String DAO_NAME = "Task DAO";
 
-	public static final String TASKS_VIEW = REFAPP_SCHEMA_NAME + "." + TASKS_VIEW_NAME;
-	public static final String TASKS_TABLE = REFAPP_SCHEMA_NAME + "." + TASKS_TABLE_NAME;
-	public static final String TASK_STATUS_TABLE = REFAPP_SCHEMA_NAME + "." + TASK_STATUS_TABLE_NAME;
-	public static final String TASK_DETAILS_TABLE = REFAPP_SCHEMA_NAME + "." + TASK_DETAILS_TABLE_NAME;
+	public static final String TASKS_VIEW = Schema.REFAPP_SCHEMA_NAME + "." + TaskTables.TASKS_VIEW_NAME;
+	public static final String TASKS_TABLE = Schema.REFAPP_SCHEMA_NAME + "." + TaskTables.TASKS_TABLE_NAME;
+	public static final String TASK_STATUS_TABLE = Schema.REFAPP_SCHEMA_NAME + "." + TaskTables.TASK_STATUS_TABLE_NAME;
+	public static final String TASK_DETAILS_TABLE = Schema.REFAPP_SCHEMA_NAME + "."
+			+ TaskTables.TASK_DETAILS_TABLE_NAME;
 
 	@Resource(mappedName = JNDI.REFAPP_DATASOURCE)
 	private DataSource dataSource;
@@ -83,7 +74,8 @@ public class TaskDaoBean extends Dao implements TaskDao {
 	public CreateTaskOutput createTask(CreateTaskInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Create task operation invoked.");
 
-		SQL sql = new SQL.Builder().doInsert(TASKS_TABLE).columnValues(USER_ID_COLUMN_NAME, UUID_COLUMN_NAME).build();
+		SQL sql = new SQL.Builder().doInsert(TASKS_TABLE)
+				.columnValues(TaskTables.USER_ID_COLUMN_NAME, TaskTables.UUID_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(input.getUserId(), input.getUuid());
 		ChangeResult changeResult = super.create(sql, parameters);
 		int rowsAffected = changeResult.getRowsAffected();
@@ -96,7 +88,7 @@ public class TaskDaoBean extends Dao implements TaskDao {
 		LOG.info(DAO_NAME + ": Create task details operation invoked.");
 
 		SQL sql = new SQL.Builder().doInsert(TASK_DETAILS_TABLE)
-				.columnValues(TASK_ID_COLUMN_NAME, DESCRIPTION_COLUMN_NAME).build();
+				.columnValues(TaskTables.TASK_ID_COLUMN_NAME, TaskTables.DESCRIPTION_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(input.getId(), input.getTaskDetails().getDescription());
 		ChangeResult changeResult = super.create(sql, parameters);
 		return new CreateTaskDetailsOutput(changeResult.getRowsAffected());
@@ -106,7 +98,8 @@ public class TaskDaoBean extends Dao implements TaskDao {
 	public Id readTaskId(Uuid uuid) throws DaoException {
 		LOG.info(DAO_NAME + ": Read task ID operation invoked.");
 
-		SQL sql = new SQL.Builder().doSelect(ID_COLUMN_NAME).from(TASKS_TABLE).where(UUID_COLUMN_NAME).build();
+		SQL sql = new SQL.Builder().doSelect(TaskTables.ID_COLUMN_NAME).from(TASKS_TABLE)
+				.where(TaskTables.UUID_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(uuid);
 		return super.read(sql, idRowMapper, parameters).get(0);
 	}
@@ -115,7 +108,7 @@ public class TaskDaoBean extends Dao implements TaskDao {
 	public ReadTaskOutput readTask(ReadTaskInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Read task operation invoked.");
 
-		SQL sql = new SQL.Builder().doSelectAll().from(TASKS_VIEW).where(UUID_COLUMN_NAME).build();
+		SQL sql = new SQL.Builder().doSelectAll().from(TASKS_VIEW).where(TaskTables.UUID_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(input.getUuid());
 		List<Task> taskList = super.read(sql, taskRowMapper, parameters);
 		return new ReadTaskOutput(taskList);
@@ -125,7 +118,7 @@ public class TaskDaoBean extends Dao implements TaskDao {
 	public ReadTaskOutput readTasks(ReadTasksInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Read tasks operation invoked.");
 
-		SQL sql = new SQL.Builder().doSelectAll().from(TASKS_VIEW).where(USER_ID_COLUMN_NAME).build();
+		SQL sql = new SQL.Builder().doSelectAll().from(TASKS_VIEW).where(TaskTables.USER_ID_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(input.getUserId());
 		List<Task> taskList = super.read(sql, taskRowMapper, parameters);
 		return new ReadTaskOutput(taskList);
@@ -136,7 +129,8 @@ public class TaskDaoBean extends Dao implements TaskDao {
 		LOG.info(DAO_NAME + ": Update task operation invoked.");
 
 		if (input.getUuid() != null) {
-			SQL sql = new SQL.Builder().doUpdate(TASKS_TABLE).setColumn(UUID_COLUMN_NAME).where(ID_COLUMN_NAME).build();
+			SQL sql = new SQL.Builder().doUpdate(TASKS_TABLE).setColumn(TaskTables.UUID_COLUMN_NAME)
+					.where(TaskTables.ID_COLUMN_NAME).build();
 			Object[] parameters = DaoHelper.generateArray(input.getUuid(), input.getId());
 			ChangeResult changeResult = super.update(sql, parameters);
 			return new UpdateTaskOutput(changeResult.getRowsAffected());
@@ -150,8 +144,8 @@ public class TaskDaoBean extends Dao implements TaskDao {
 		LOG.info(DAO_NAME + ": Update task details operation invoked.");
 
 		if (input.getTaskDetails() != null) {
-			SQL sql = new SQL.Builder().doUpdate(TASK_DETAILS_TABLE).setColumn(DESCRIPTION_COLUMN_NAME)
-					.where(ID_COLUMN_NAME).build();
+			SQL sql = new SQL.Builder().doUpdate(TASK_DETAILS_TABLE).setColumn(TaskTables.DESCRIPTION_COLUMN_NAME)
+					.where(TaskTables.ID_COLUMN_NAME).build();
 			Object[] parameters = DaoHelper.generateArray(input.getTaskDetails().getDescription(), input.getId());
 			ChangeResult changeResult = super.update(sql, parameters);
 			return new UpdateTaskDetailsOutput(changeResult.getRowsAffected());
@@ -165,8 +159,8 @@ public class TaskDaoBean extends Dao implements TaskDao {
 		LOG.info(DAO_NAME + ": Update task status operation invoked.");
 
 		if (input.getTaskStatus() != null) {
-			SQL sql = new SQL.Builder().doUpdate(TASK_STATUS_TABLE).setColumn(STATUS_COLUMN_NAME).where(ID_COLUMN_NAME)
-					.build();
+			SQL sql = new SQL.Builder().doUpdate(TASK_STATUS_TABLE).setColumn(TaskTables.STATUS_COLUMN_NAME)
+					.where(TaskTables.ID_COLUMN_NAME).build();
 			Object[] parameters = DaoHelper.generateArray(input.getTaskStatus().getStatus(), input.getId());
 			ChangeResult changeResult = super.update(sql, parameters);
 			return new UpdateTaskStatusOutput(changeResult.getRowsAffected());
@@ -179,7 +173,7 @@ public class TaskDaoBean extends Dao implements TaskDao {
 	public DeleteTaskOutput deleteTask(DeleteTaskInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Delete task operation invoked.");
 
-		SQL sql = new SQL.Builder().doDelete(TASKS_TABLE).where(ID_COLUMN_NAME).build();
+		SQL sql = new SQL.Builder().doDelete(TASKS_TABLE).where(TaskTables.ID_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(input.getId());
 		ChangeResult changeResult = super.delete(sql, parameters);
 		return new DeleteTaskOutput(changeResult.getRowsAffected());
@@ -189,7 +183,7 @@ public class TaskDaoBean extends Dao implements TaskDao {
 	public DeleteTaskDetailsOutput deleteTaskDetails(DeleteTaskDetailsInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Delete task details operation invoked.");
 
-		SQL sql = new SQL.Builder().doDelete(TASK_DETAILS_TABLE).where(ID_COLUMN_NAME).build();
+		SQL sql = new SQL.Builder().doDelete(TASK_DETAILS_TABLE).where(TaskTables.ID_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(input.getId());
 		ChangeResult changeResult = super.delete(sql, parameters);
 		return new DeleteTaskDetailsOutput(changeResult.getRowsAffected());
@@ -199,7 +193,7 @@ public class TaskDaoBean extends Dao implements TaskDao {
 	public DeleteTaskStatusOutput deleteTaskStatus(DeleteTaskStatusInput input) throws DaoException {
 		LOG.info(DAO_NAME + ": Delete task status operation invoked.");
 
-		SQL sql = new SQL.Builder().doDelete(TASK_STATUS_TABLE).where(ID_COLUMN_NAME).build();
+		SQL sql = new SQL.Builder().doDelete(TASK_STATUS_TABLE).where(TaskTables.ID_COLUMN_NAME).build();
 		Object[] parameters = DaoHelper.generateArray(input.getId());
 		ChangeResult changeResult = super.delete(sql, parameters);
 		return new DeleteTaskStatusOutput(changeResult.getRowsAffected());

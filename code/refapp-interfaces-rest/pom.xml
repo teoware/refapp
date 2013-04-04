@@ -114,4 +114,8 @@
 			</plugin>
 		</plugins>
 	</build>
+	
+	<!-- PROFILES -->
+	<profiles>
+	</profiles>
 </project>
