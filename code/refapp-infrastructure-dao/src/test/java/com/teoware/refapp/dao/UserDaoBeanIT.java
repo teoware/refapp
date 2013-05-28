@@ -319,21 +319,10 @@ public class UserDaoBeanIT {
 	}
 
 	private static void cleanTables() throws DaoException {
-		if (userDao.rowCount(UserDaoBean.USERS_TABLE) > 0) {
-			userDao.delete(new SQL("DELETE FROM " + UserDaoBean.USERS_TABLE));
-		}
-
-		if (userDao.rowCount(UserDaoBean.USER_STATUS_TABLE) > 0) {
-			userDao.delete(new SQL("DELETE FROM " + UserDaoBean.USER_STATUS_TABLE));
-		}
-
-		if (userDao.rowCount(UserDaoBean.USER_ADDRESS_TABLE) > 0) {
-			userDao.delete(new SQL("DELETE FROM " + UserDaoBean.USER_ADDRESS_TABLE));
-		}
-
-		if (userDao.rowCount(UserDaoBean.USER_PASSWORD_TABLE) > 0) {
-			userDao.delete(new SQL("DELETE FROM " + UserDaoBean.USER_PASSWORD_TABLE));
-		}
+		userDao.delete(new SQL("DELETE FROM " + UserDaoBean.USERS_TABLE));
+		userDao.delete(new SQL("DELETE FROM " + UserDaoBean.USER_STATUS_TABLE));
+		userDao.delete(new SQL("DELETE FROM " + UserDaoBean.USER_ADDRESS_TABLE));
+		userDao.delete(new SQL("DELETE FROM " + UserDaoBean.USER_PASSWORD_TABLE));
 	}
 
 	public static void assertCreateUserJohn(User user) {

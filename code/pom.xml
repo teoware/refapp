@@ -396,6 +396,7 @@
 								<goal>verify</goal>
 							</goals>
 							<configuration>
+								<skip>${skip.intergration.tests}</skip>
 <!-- 								<groups>com.teoware.refapp.test.IntegrationTestGroup</groups> -->
 							</configuration>
 						</execution>

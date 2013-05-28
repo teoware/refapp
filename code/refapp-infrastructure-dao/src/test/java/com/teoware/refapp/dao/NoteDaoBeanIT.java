@@ -86,6 +86,7 @@ public class NoteDaoBeanIT {
 				userId = createUserOutput.getId();
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			fail(e.getMessage());
 		}
 	}
