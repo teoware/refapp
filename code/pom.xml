@@ -54,8 +54,8 @@
 		<version.hibernate-validator>4.2.0.Final</version.hibernate-validator>
 		<version.commons-validator>1.4.0</version.commons-validator>
 		<!-- Logging -->
-		<version.log4j>1.2.17</version.log4j>
-		<version.slf4j>1.6.2</version.slf4j>
+		<version.slf4j>1.7.5</version.slf4j>
+		<version.logback>1.0.13</version.logback>
 		<!-- Security -->
 		<version.bcprov-jdk16>1.46</version.bcprov-jdk16>
 		<version.commons-codec>1.7</version.commons-codec>
@@ -153,21 +153,21 @@
 			
 			<!-- Logging -->
 			<dependency>
-				<groupId>log4j</groupId>
-				<artifactId>log4j</artifactId>
-				<version>${version.log4j}</version>
-			</dependency>
-			
-			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
 				<version>${version.slf4j}</version>
 			</dependency>
 			
 			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-				<version>${version.slf4j}</version>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${version.logback}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-core</artifactId>
+				<version>${version.logback}</version>
 			</dependency>
 			
 			<!-- Security -->
