@@ -14,10 +14,10 @@ public class UserActivationJob extends BatchJob {
 	@Inject
 	private ActivatePendingUsersTask activatePendingUsersTask;
 
-	@Override
 	@PostConstruct
-	public void setup() {
-		addTask(1, getPendingUsersTask);
-		addTask(2, activatePendingUsersTask);
+	@Override
+	protected void setup() {
+		addTask(getPendingUsersTask);
+		addTask(activatePendingUsersTask);
 	}
 }
