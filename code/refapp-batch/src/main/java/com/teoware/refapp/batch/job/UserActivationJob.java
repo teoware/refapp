@@ -17,7 +17,7 @@ public class UserActivationJob extends BatchJob {
 	@PostConstruct
 	@Override
 	protected void setup() {
-		addTask(getPendingUsersTask);
-		addTask(activatePendingUsersTask);
+		add(getPendingUsersTask);
+		add(activatePendingUsersTask);
 	}
 }

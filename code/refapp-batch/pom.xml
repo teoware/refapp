@@ -83,6 +83,11 @@
 			<groupId>com.teoware.refapp</groupId>
 			<artifactId>refapp-common</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp-schedule</artifactId>
+		</dependency>
 	</dependencies>
 	
 	<!-- MAVEN PLUGINS -->

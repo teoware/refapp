@@ -13,6 +13,6 @@ public class ActivationBatch extends Batch {
 	@PostConstruct
 	@Override
 	protected void setup() {
-		addJob(userActivationJob);
+		add(userActivationJob);
 	}
 }

@@ -7,8 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.teoware.refapp.batch.job.BatchJob;
+import com.teoware.refapp.schedule.Runme;
 
-public abstract class Batch {
+public abstract class Batch extends Runme {
 
 	private static final Logger LOG = LoggerFactory.getLogger(Batch.class);
 
@@ -20,17 +21,18 @@ public abstract class Batch {
 
 	protected abstract void setup();
 
+	@Override
 	public void run() {
 		if (jobs.size() > 0) {
 			for (BatchJob job : jobs) {
-				runJob(job);
+				run(job);
 			}
 		} else {
 			LOG.warn("Job list empty. No jobs will run");
 		}
 	}
 
-	protected void addJob(BatchJob job) {
+	protected void add(BatchJob job) {
 		if (job != null) {
 			LOG.info("Adding new job {} to batch {}", job.name(), name());
 			jobs.add(job);
@@ -40,7 +42,7 @@ public abstract class Batch {
 		}
 	}
 
-	protected void runJob(BatchJob job) {
+	protected void run(BatchJob job) {
 		if (job != null) {
 			LOG.info("Batch {} running job {}", name(), job.name());
 			job.run();

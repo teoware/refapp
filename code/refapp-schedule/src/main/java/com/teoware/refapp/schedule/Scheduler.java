@@ -40,11 +40,11 @@ public abstract class Scheduler {
 
 	protected abstract ScheduleExpression schedule();
 
-	protected abstract Runnable runnable();
+	protected abstract Runme runnable();
 
 	public void start() {
 		try {
-			Runnable runnable = runnable();
+			Runme runnable = runnable();
 			LOG.info("Sheduler {} starting runnable {}", name(), runnable.name());
 			runnable.run();
 		} catch (Exception e) {

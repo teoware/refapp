@@ -6,7 +6,8 @@ import javax.ejb.Startup;
 import javax.inject.Inject;
 
 import com.teoware.refapp.batch.ActivationBatch;
-import com.teoware.refapp.batch.Batch;
+import com.teoware.refapp.schedule.Runme;
+import com.teoware.refapp.schedule.Scheduler;
 
 @Startup
 @Singleton
@@ -22,7 +23,7 @@ public class ActivationScheduler extends Scheduler {
 	}
 
 	@Override
-	protected Batch init() {
+	protected Runme runnable() {
 		return activationBatch;
 	}
 }

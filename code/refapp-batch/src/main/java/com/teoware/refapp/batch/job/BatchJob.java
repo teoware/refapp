@@ -6,6 +6,7 @@ import java.util.Queue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.teoware.refapp.batch.BatchException;
 import com.teoware.refapp.batch.task.BatchTask;
 import com.teoware.refapp.batch.task.TaskResult;
 import com.teoware.refapp.batch.task.TaskSetup;
@@ -26,27 +27,27 @@ public abstract class BatchJob {
 		if (tasks.size() > 0) {
 			TaskResult result = null;
 			for (BatchTask task : tasks) {
-				result = runTask(task, result);
-				if (terminateJob(result)) {
+				result = run(task, result);
+				if (terminate(result)) {
 					LOG.warn("Task {} initiated terminate action. Batch job {} will now exit", task.name(), name());
 					break;
 				}
 			}
 		} else {
-			LOG.warn("Task list empty. No batch tasks will run");
+			throw new BatchException("Task list empty. No batch tasks will run");
 		}
 	}
 
-	protected void addTask(BatchTask task) {
+	protected void add(BatchTask task) {
 		if (task != null) {
 			LOG.info("Adding new task {} to batch job {}", task.name(), name());
 			tasks.add(task);
 		} else {
-			LOG.warn("Unable to add batch task which is null");
+			throw new BatchException("Unable to add batch task which is null");
 		}
 	}
 
-	protected TaskResult runTask(BatchTask task, TaskResult previousResult) {
+	protected TaskResult run(BatchTask task, TaskResult previousResult) {
 		if (task != null) {
 			LOG.info("Batch job {} running task {}", name(), task.name());
 
@@ -58,12 +59,11 @@ public abstract class BatchJob {
 			task.run();
 			return task.result();
 		} else {
-			LOG.warn("Unable to run batch task which is null");
-			return null;
+			throw new BatchException("Unable to run batch task which is null");
 		}
 	}
 
-	private boolean terminateJob(TaskResult result) {
+	private boolean terminate(TaskResult result) {
 		return result != null && result.terminate();
 	}
 }

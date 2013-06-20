@@ -2,7 +2,6 @@ package com.teoware.refapp.timer;
 
 import javax.annotation.Resource;
 import javax.ejb.ScheduleExpression;
-import javax.ejb.Singleton;
 import javax.ejb.Timeout;
 import javax.ejb.TimerConfig;
 import javax.ejb.TimerService;
@@ -12,7 +11,6 @@ import org.slf4j.LoggerFactory;
 
 import com.teoware.refapp.schedule.Scheduler;
 
-@Singleton
 public class Timer {
 
 	private static final Logger LOG = LoggerFactory.getLogger(Timer.class);
@@ -43,7 +41,7 @@ public class Timer {
 			LOG.error("Unable to create timer that has no owning scheduler");
 			throw new TimerException("Unable to create timer that has no owning scheduler");
 		}
-		if (schedule != null) {
+		if (schedule == null) {
 			LOG.error("Unable to create timer that has no schedule");
 			throw new TimerException("Unable to create timer that has no schedule");
 		}
