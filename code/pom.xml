@@ -1,28 +1,29 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<groupId>com.teoware.refapp</groupId>
 	<artifactId>refapp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>refapp</name>
 	<description>Reference application parent project</description>
-	
+
 	<!-- PROPERTIES -->
 	<properties>
 		<app.name>refapp</app.name>
 		<app.release.version>${project.version}</app.release.version>
-		
+
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		
+
 		<downloadSources>true</downloadSources>
-        <downloadJavadocs>true</downloadJavadocs>
-		
+		<downloadJavadocs>true</downloadJavadocs>
+
 		<java.version>1.6</java.version>
 		<source.encoding>UTF-8</source.encoding>
 		<ejb.version>3.0</ejb.version>
 		<ear.version>5</ear.version>
-		
+
 		<!-- Plugins -->
 		<version.maven-clean-plugin>2.5</version.maven-clean-plugin>
 		<version.maven-compiler-plugin>2.5</version.maven-compiler-plugin>
@@ -40,7 +41,7 @@
 		<version.cxf-codegen-plugin>cxf-codegen-plugin</version.cxf-codegen-plugin>
 		<version.maven-sonar-plugin>2.0</version.maven-sonar-plugin>
 		<version.m2e.lifecycle-mapping>1.0.0</version.m2e.lifecycle-mapping>
-		
+
 		<!-- Dependencies -->
 		<!-- Java EE -->
 		<version.geronimo-jpa_2.0_spec>1.1</version.geronimo-jpa_2.0_spec>
@@ -68,7 +69,7 @@
 		<version.hsqldb>2.2.8</version.hsqldb>
 		<version.h2database.h2>1.3.168</version.h2database.h2>
 	</properties>
-	
+
 	<!-- MODULES -->
 	<modules>
 		<module>refapp-domain</module>
@@ -84,16 +85,57 @@
 		<module>refapp-testtools</module>
 		<module>refapp-ear</module>
 	</modules>
-	
+
 	<!-- REPOSITORIES -->
 	<repositories>
 	</repositories>
-	
+
 	<!-- PLUGIN REPOSITORIES -->
 	<pluginRepositories>
 	</pluginRepositories>
-	
+
 	<!-- DEPENDENCIES -->
+	<dependencies>
+		<!-- Java EE -->
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+		</dependency>
+
+		<!-- Utils -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
+
+		<!-- Logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+		</dependency>
+
+		<!-- Testing -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+		</dependency>
+	</dependencies>
+
 	<dependencyManagement>
 		<dependencies>
 			<!-- Java EE -->
@@ -103,99 +145,99 @@
 				<version>${version.geronimo-jpa_2.0_spec}</version>
 				<scope>provided</scope>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.apache.geronimo.specs</groupId>
 				<artifactId>geronimo-ejb_3.1_spec</artifactId>
 				<version>${version.geronimo-ejb_3.1_spec}</version>
 				<scope>provided</scope>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.apache.geronimo.specs</groupId>
 				<artifactId>geronimo-validation_1.0_spec</artifactId>
 				<version>${version.geronimo-validation_1.0_spec}</version>
 				<scope>provided</scope>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>javax</groupId>
 				<artifactId>javaee-api</artifactId>
 				<version>${version.javaee-api}</version>
 				<scope>provided</scope>
 			</dependency>
-			
+
 			<!-- Utils -->
 			<dependency>
 				<groupId>joda-time</groupId>
 				<artifactId>joda-time</artifactId>
 				<version>${version.joda-time}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>commons-io</groupId>
 				<artifactId>commons-io</artifactId>
 				<version>${version.commons-io}</version>
 			</dependency>
-			
+
 			<!-- Validation -->
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-validator</artifactId>
 				<version>${version.hibernate-validator}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>commons-validator</groupId>
 				<artifactId>commons-validator</artifactId>
 				<version>${version.commons-validator}</version>
 			</dependency>
-			
+
 			<!-- Logging -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
 				<version>${version.slf4j}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-classic</artifactId>
 				<version>${version.logback}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-core</artifactId>
 				<version>${version.logback}</version>
 			</dependency>
-			
+
 			<!-- Security -->
 			<dependency>
 				<groupId>org.bouncycastle</groupId>
 				<artifactId>bcprov-jdk16</artifactId>
 				<version>${version.bcprov-jdk16}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>commons-codec</groupId>
 				<artifactId>commons-codec</artifactId>
 				<version>${version.commons-codec}</version>
 			</dependency>
-			
+
 			<!-- Database -->
 			<dependency>
 				<groupId>org.apache.derby</groupId>
 				<artifactId>derby</artifactId>
 				<version>${version.derby}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.apache.derby</groupId>
 				<artifactId>derbyclient</artifactId>
 				<version>${version.derby}</version>
 			</dependency>
-			
+
 			<!-- Testing -->
 			<dependency>
 				<groupId>junit</groupId>
@@ -203,113 +245,113 @@
 				<version>${version.junit}</version>
 				<scope>test</scope>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.mockito</groupId>
-				<artifactId>mockito-core</artifactId>  
-				<version>${version.mockito}</version> 
+				<artifactId>mockito-core</artifactId>
+				<version>${version.mockito}</version>
 				<scope>test</scope>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.powermock</groupId>
 				<artifactId>powermock-module-junit4</artifactId>
 				<version>${version.powermock}</version>
 				<scope>test</scope>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.powermock</groupId>
 				<artifactId>powermock-api-mockito</artifactId>
 				<version>${version.powermock}</version>
 				<scope>test</scope>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.h2database</groupId>
 				<artifactId>h2</artifactId>
 				<version>${version.h2database.h2}</version>
 				<scope>test</scope>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.hsqldb</groupId>
 				<artifactId>hsqldb</artifactId>
 				<version>${version.hsqldb}</version>
 				<scope>test</scope>
 			</dependency>
-			
+
 			<!-- Project -->
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
 				<artifactId>refapp-domain</artifactId>
 				<version>${project.version}</version>
-<!-- 				<scope>provided</scope> -->
+				<!-- <scope>provided</scope> -->
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
 				<artifactId>refapp-common</artifactId>
 				<version>${project.version}</version>
-<!-- 				<scope>provided</scope> -->
+				<!-- <scope>provided</scope> -->
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
 				<artifactId>refapp-infrastructure-dao</artifactId>
 				<version>${project.version}</version>
-<!-- 				<scope>provided</scope> -->
+				<!-- <scope>provided</scope> -->
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
 				<artifactId>refapp-services-facade</artifactId>
 				<version>${project.version}</version>
-<!-- 				<scope>provided</scope> -->
+				<!-- <scope>provided</scope> -->
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
 				<artifactId>refapp-services-logic</artifactId>
 				<version>${project.version}</version>
-<!-- 				<scope>provided</scope> -->
+				<!-- <scope>provided</scope> -->
 			</dependency>
-						
+
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
 				<artifactId>refapp-interfaces-consumer</artifactId>
 				<version>${project.version}</version>
-<!-- 				<scope>provided</scope> -->
+				<!-- <scope>provided</scope> -->
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
 				<artifactId>refapp-interfaces-webui</artifactId>
 				<version>${project.version}</version>
-<!-- 				<scope>provided</scope> -->
+				<!-- <scope>provided</scope> -->
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
 				<artifactId>refapp-interfaces-rest</artifactId>
 				<version>${project.version}</version>
-<!-- 				<scope>provided</scope> -->
+				<!-- <scope>provided</scope> -->
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
 				<artifactId>refapp-schedule</artifactId>
 				<version>${project.version}</version>
-<!-- 				<scope>provided</scope> -->
+				<!-- <scope>provided</scope> -->
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
 				<artifactId>refapp-batch</artifactId>
 				<version>${project.version}</version>
-<!-- 				<scope>provided</scope> -->
+				<!-- <scope>provided</scope> -->
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
 				<artifactId>refapp-testtools</artifactId>
@@ -318,9 +360,61 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<!-- MAVEN PLUGINS -->
 	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ejb-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+			</plugin>
+		</plugins>
+
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -328,7 +422,7 @@
 					<artifactId>maven-clean-plugin</artifactId>
 					<version>${version.maven-clean-plugin}</version>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
@@ -339,7 +433,7 @@
 						<encoding>${source.encoding}</encoding>
 					</configuration>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
@@ -353,19 +447,19 @@
 						</execution>
 					</executions>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-dependency-plugin</artifactId>
 					<version>${version.maven-dependency-plugin}</version>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>build-helper-maven-plugin</artifactId>
 					<version>${version.build-helper-maven-plugin}</version>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
@@ -378,12 +472,12 @@
 								<goal>test</goal>
 							</goals>
 							<configuration>
-<!-- 								<groups>com.teoware.refapp.test.UnitTestGroup</groups> -->
+								<!-- <groups>com.teoware.refapp.test.UnitTestGroup</groups> -->
 							</configuration>
 						</execution>
 					</executions>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-failsafe-plugin</artifactId>
@@ -397,12 +491,12 @@
 							</goals>
 							<configuration>
 								<skip>${skip.intergration.tests}</skip>
-<!-- 								<groups>com.teoware.refapp.test.IntegrationTestGroup</groups> -->
+								<!-- <groups>com.teoware.refapp.test.IntegrationTestGroup</groups> -->
 							</configuration>
 						</execution>
 					</executions>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-ejb-plugin</artifactId>
@@ -411,13 +505,13 @@
 						<ejbVersion>${ejb.version}</ejbVersion>
 					</configuration>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
 					<version>${version.maven-jar-plugin}</version>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
@@ -426,7 +520,7 @@
 						<failOnMissingWebXml>false</failOnMissingWebXml>
 					</configuration>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-ear-plugin</artifactId>
@@ -436,7 +530,7 @@
 						<defaultLibBundleDir>lib</defaultLibBundleDir>
 					</configuration>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.jvnet.jaxb2.maven2</groupId>
 					<artifactId>maven-jaxb2-plugin</artifactId>
@@ -449,25 +543,25 @@
 						</execution>
 					</executions>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.jvnet.jax-ws-commons</groupId>
 					<artifactId>jaxws-maven-plugin</artifactId>
 					<version>${version.jaxws-maven-plugin}</version>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.apache.cxf</groupId>
 					<artifactId>cxf-codegen-plugin</artifactId>
 					<version>${version.cxf-codegen-plugin}</version>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>sonar-maven-plugin</artifactId>
 					<version>${version.maven-sonar-plugin}</version>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -488,7 +582,7 @@
 										<ignore />
 									</action>
 								</pluginExecution>
-								
+
 								<pluginExecution>
 									<pluginExecutionFilter>
 										<groupId>org.jvnet.jax-ws-commons</groupId>
@@ -509,7 +603,7 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-	
+
 	<!-- PROFILES -->
 	<profiles>
 		<profile>
@@ -517,7 +611,7 @@
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
-			
+
 			<properties>
 				<skip.intergration.tests>true</skip.intergration.tests>
 			</properties>

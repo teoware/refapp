@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -6,12 +7,12 @@
 		<artifactId>refapp</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	
+
 	<artifactId>refapp-domain</artifactId>
 	<packaging>jar</packaging>
 	<name>refapp-domain</name>
 	<description>Domain model objects</description>
-	
+
 	<!-- PROPERTIES -->
 	<properties>
 		<!-- JAXB -->
@@ -19,40 +20,23 @@
 		<jaxb.binding.directory>${project.basedir}/src/main/resources/binding</jaxb.binding.directory>
 		<jaxb.generate.directory>${project.basedir}/src/main/generated</jaxb.generate.directory>
 	</properties>
-	
+
 	<!-- MODULES -->
 	<modules>
 	</modules>
-	
+
 	<!-- REPOSITORIES -->
 	<repositories>
 	</repositories>
-	
+
 	<!-- PLUGIN REPOSITORIES -->
 	<pluginRepositories>
 	</pluginRepositories>
-	
+
 	<!-- DEPENDENCIES -->
 	<dependencies>
-		<!-- Java EE -->
-		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
-		</dependency>
-		
-		<!-- Utils -->
-		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
-		</dependency>
-		
-		<!-- Testing -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-		</dependency>
 	</dependencies>
-	
+
 	<!-- MAVEN PLUGINS -->
 	<build>
 		<plugins>
@@ -67,27 +51,7 @@
 					</filesets>
 				</configuration>
 			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-			</plugin>
-			
+
 			<plugin>
 				<groupId>org.jvnet.jaxb2.maven2</groupId>
 				<artifactId>maven-jaxb2-plugin</artifactId>
@@ -98,7 +62,7 @@
 					<generateDirectory>${jaxb.generate.directory}</generateDirectory>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.jvnet.jax-ws-commons</groupId>
 				<artifactId>jaxws-maven-plugin</artifactId>
@@ -108,19 +72,19 @@
 							<goal>wsimport</goal>
 						</goals>
 						<configuration>
-<!-- 							<wsdlLocation>http://.../*</wsdlLocation> -->
-<!-- 							<wsdlDirectory>${basedir}/src/main/resources/wsdl</wsdlDirectory> -->
-<!-- 							<wsdlFiles> -->
-<!-- 								<wsdlFile>Default.wsdl</wsdlFile> -->
-<!-- 							</wsdlFiles> -->
-<!-- 							<wsdlUrls> -->
-<!-- 								<wsdlUrl>http://localhost/ws/Default.ws?WSDL</wsdlUrl> -->
-<!-- 							</wsdlUrls> -->
+							<!-- <wsdlLocation>http://.../*</wsdlLocation> -->
+							<!-- <wsdlDirectory>${basedir}/src/main/resources/wsdl</wsdlDirectory> -->
+							<!-- <wsdlFiles> -->
+							<!-- <wsdlFile>Default.wsdl</wsdlFile> -->
+							<!-- </wsdlFiles> -->
+							<!-- <wsdlUrls> -->
+							<!-- <wsdlUrl>http://localhost/ws/Default.ws?WSDL</wsdlUrl> -->
+							<!-- </wsdlUrls> -->
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
@@ -139,19 +103,9 @@
 					</execution>
 				</executions>
 			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-failsafe-plugin</artifactId>
-			</plugin>
 		</plugins>
 	</build>
-	
+
 	<!-- PROFILES -->
 	<profiles>
 	</profiles>
