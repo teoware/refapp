@@ -7,9 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.teoware.refapp.batch.job.BatchJob;
-import com.teoware.refapp.schedule.Runme;
+import com.teoware.refapp.schedule.Runnable;
 
-public abstract class Batch extends Runme {
+public abstract class Batch extends Runnable {
 
 	private static final Logger LOG = LoggerFactory.getLogger(Batch.class);
 

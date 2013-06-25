@@ -2,6 +2,7 @@ package com.teoware.refapp.timer;
 
 import javax.annotation.Resource;
 import javax.ejb.ScheduleExpression;
+import javax.ejb.Singleton;
 import javax.ejb.Timeout;
 import javax.ejb.TimerConfig;
 import javax.ejb.TimerService;
@@ -11,45 +12,41 @@ import org.slf4j.LoggerFactory;
 
 import com.teoware.refapp.schedule.Scheduler;
 
+@Singleton
 public class Timer {
 
 	private static final Logger LOG = LoggerFactory.getLogger(Timer.class);
 
 	private Scheduler scheduler;
+	private ScheduleExpression scheduleExpression;
 	private TimerConfig config;
-	private ScheduleExpression schedule;
 	private javax.ejb.Timer timer;
 
 	@Resource
 	private TimerService timerService;
 
 	public void create() {
-		verify();
-
-		LOG.info("Creating timer {} with schedule {} {} {}", scheduler.name(), schedule.getHour(),
-				schedule.getMinute(), schedule.getSecond());
-		try {
-			timer = timerService.createCalendarTimer(schedule, config);
-		} catch (Exception e) {
-			LOG.error("An error occured when trying to create timer", e);
-			throw new TimerException("An error occured when trying to create timer", e);
+		if (verifyScheduler()) {
+			LOG.info("Creating timer for scheduer {} with schedule {} {} {}", scheduler.name(),
+					scheduleExpression.getHour(), scheduleExpression.getMinute(), scheduleExpression.getSecond());
+			try {
+				timer = timerService.createCalendarTimer(scheduleExpression, config);
+			} catch (Exception e) {
+				LOG.error("An error occured when trying to create timer", e);
+				throw new TimerException("An error occured when trying to create timer", e);
+			}
+		} else {
+			throw new TimerException("Scheduler not correctly configured. Unable to continue");
 		}
 	}
 
-	public void verify() {
-		if (scheduler == null) {
-			LOG.error("Unable to create timer that has no owning scheduler");
-			throw new TimerException("Unable to create timer that has no owning scheduler");
-		}
-		if (schedule == null) {
-			LOG.error("Unable to create timer that has no schedule");
-			throw new TimerException("Unable to create timer that has no schedule");
-		}
+	public boolean verifyScheduler() {
+		return scheduler != null && scheduleExpression != null;
 	}
 
 	@Timeout
-	private void start() {
-		scheduler.start();
+	private void timout(javax.ejb.Timer timer) {
+		scheduler.fire(timer);
 	}
 
 	public Scheduler getScheduler() {
@@ -60,20 +57,20 @@ public class Timer {
 		this.scheduler = scheduler;
 	}
 
+	public ScheduleExpression getScheduleExpression() {
+		return scheduleExpression;
+	}
+
+	public void setScheduleExpression(ScheduleExpression scheduleExpression) {
+		this.scheduleExpression = scheduleExpression;
+	}
+
 	public TimerConfig getConfig() {
 		return config;
 	}
 
 	public void setConfig(TimerConfig config) {
 		this.config = config;
-	}
-
-	public ScheduleExpression getSchedule() {
-		return schedule;
-	}
-
-	public void setSchedule(ScheduleExpression schedule) {
-		this.schedule = schedule;
 	}
 
 	public javax.ejb.Timer getTimer() {

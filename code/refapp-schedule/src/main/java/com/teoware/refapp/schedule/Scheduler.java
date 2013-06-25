@@ -21,7 +21,7 @@ public abstract class Scheduler {
 	public void timer() {
 		try {
 			timer.setScheduler(this);
-			timer.setSchedule(schedule());
+			timer.setScheduleExpression(schedule());
 			timer.setConfig(config());
 			timer.create();
 		} catch (Exception e) {
@@ -40,11 +40,11 @@ public abstract class Scheduler {
 
 	protected abstract ScheduleExpression schedule();
 
-	protected abstract Runme runnable();
+	protected abstract Runnable runnable();
 
-	public void start() {
+	public void fire(javax.ejb.Timer timer) {
 		try {
-			Runme runnable = runnable();
+			Runnable runnable = runnable();
 			LOG.info("Sheduler {} starting runnable {}", name(), runnable.name());
 			runnable.run();
 		} catch (Exception e) {

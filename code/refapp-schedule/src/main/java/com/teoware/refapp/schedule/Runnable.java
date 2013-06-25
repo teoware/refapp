@@ -1,6 +1,6 @@
 package com.teoware.refapp.schedule;
 
-public abstract class Runme {
+public abstract class Runnable {
 
 	public String name() {
 		return this.getClass().getSimpleName();
