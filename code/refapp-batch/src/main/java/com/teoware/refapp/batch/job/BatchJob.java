@@ -15,7 +15,7 @@ public abstract class BatchJob {
 
 	private static final Logger LOG = LoggerFactory.getLogger(BatchJob.class);
 
-	private Queue<BatchTask> tasks = new ArrayDeque<BatchTask>();
+	private Queue<BatchTask<?, ?>> tasks = new ArrayDeque<BatchTask<?, ?>>();
 
 	public String name() {
 		return this.getClass().getSimpleName();
@@ -25,8 +25,8 @@ public abstract class BatchJob {
 
 	public void run() {
 		if (tasks.size() > 0) {
-			TaskResult result = null;
-			for (BatchTask task : tasks) {
+			TaskResult<?> result = null;
+			for (BatchTask<?, ?> task : tasks) {
 				result = run(task, result);
 				if (terminate(result)) {
 					LOG.warn("Task {} initiated terminate action. Batch job {} will now exit", task.name(), name());
@@ -38,7 +38,7 @@ public abstract class BatchJob {
 		}
 	}
 
-	protected void add(BatchTask task) {
+	protected <T extends BatchTask<?, ?>> void add(T task) {
 		if (task != null) {
 			LOG.info("Adding new task {} to batch job {}", task.name(), name());
 			tasks.add(task);
@@ -47,11 +47,11 @@ public abstract class BatchJob {
 		}
 	}
 
-	protected TaskResult run(BatchTask task, TaskResult previousResult) {
+	protected TaskResult<?> run(BatchTask task, TaskResult previousResult) {
 		if (task != null) {
 			LOG.info("Batch job {} running task {}", name(), task.name());
 
-			TaskSetup setup = task.init();
+			TaskSetup<?> setup = task.init();
 			if (setup != null) {
 				setup.setPreviousResult(previousResult);
 				task.setup(setup);
@@ -63,7 +63,7 @@ public abstract class BatchJob {
 		}
 	}
 
-	private boolean terminate(TaskResult result) {
+	private boolean terminate(TaskResult<?> result) {
 		return result != null && result.terminate();
 	}
 }

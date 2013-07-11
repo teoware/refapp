@@ -7,7 +7,7 @@
 	</appender>
 
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>/var/log/refapp/refapp-batch.log</file>
+		<file>/tmp/refapp/refapp-batch.log</file>
 		<append>true</append>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<fileNamePattern>refapp-batch-%d{yyyy-MM-dd}.log</fileNamePattern>
@@ -17,7 +17,7 @@
 		</encoder>
 	</appender>
 
-	<logger name="com.teoware.refapp" level="DEBUG" additivity="false">
+	<logger name="com.teoware.refapp" level="INFO" additivity="false">
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="FILE" />
 	</logger>

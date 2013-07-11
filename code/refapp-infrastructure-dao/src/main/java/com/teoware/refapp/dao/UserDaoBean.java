@@ -37,6 +37,8 @@ import com.teoware.refapp.dao.dto.ReadUserInput;
 import com.teoware.refapp.dao.dto.ReadUserOutput;
 import com.teoware.refapp.dao.dto.ReadUserPasswordInput;
 import com.teoware.refapp.dao.dto.ReadUserPasswordOutput;
+import com.teoware.refapp.dao.dto.ReadUsersInput;
+import com.teoware.refapp.dao.dto.ReadUsersOutput;
 import com.teoware.refapp.dao.dto.UpdateUserAddressInput;
 import com.teoware.refapp.dao.dto.UpdateUserAddressOutput;
 import com.teoware.refapp.dao.dto.UpdateUserDetailsInput;
@@ -187,13 +189,13 @@ public class UserDaoBean extends Dao implements UserDao {
 	}
 
 	@Override
-	public ReadUserOutput readAllUsers() throws DaoException {
-		LOG.info(DAO_NAME + ": Read all users operation invoked.");
+	public ReadUsersOutput readUsers(ReadUsersInput input) throws DaoException {
+		LOG.info(DAO_NAME + ": Read users operation invoked.");
 
 		SQL sql = new SQL.Builder().doSelectAll().from(USERS_VIEW).where(UserTables.STATUS_COLUMN_NAME).build();
-		Object[] parameters = DaoHelper.generateArray(Status.ACTIVE);
+		Object[] parameters = DaoHelper.generateArray(input.getStatus());
 		List<User> userList = super.read(sql, userRowMapper, parameters);
-		return new ReadUserOutput(userList);
+		return new ReadUsersOutput(userList);
 	}
 
 	@Override

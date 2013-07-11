@@ -36,7 +36,6 @@ public abstract class Batch extends Runnable {
 		if (job != null) {
 			LOG.info("Adding new job {} to batch {}", job.name(), name());
 			jobs.add(job);
-
 		} else {
 			LOG.warn("Unable to add batch job which is null");
 		}

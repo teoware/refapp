@@ -28,6 +28,8 @@ import com.teoware.refapp.dao.dto.ReadUserInput;
 import com.teoware.refapp.dao.dto.ReadUserOutput;
 import com.teoware.refapp.dao.dto.ReadUserPasswordInput;
 import com.teoware.refapp.dao.dto.ReadUserPasswordOutput;
+import com.teoware.refapp.dao.dto.ReadUsersInput;
+import com.teoware.refapp.dao.dto.ReadUsersOutput;
 import com.teoware.refapp.dao.dto.UpdateUserAddressInput;
 import com.teoware.refapp.dao.dto.UpdateUserAddressOutput;
 import com.teoware.refapp.dao.dto.UpdateUserDetailsInput;
@@ -56,7 +58,7 @@ public interface UserDao extends Serializable {
 
 	public ReadUserOutput readUser(ReadUserInput input) throws DaoException;
 
-	public ReadUserOutput readAllUsers() throws DaoException;
+	public ReadUsersOutput readUsers(ReadUsersInput input) throws DaoException;
 
 	public ReadUserPasswordOutput readUserPassword(ReadUserPasswordInput input) throws DaoException;
 

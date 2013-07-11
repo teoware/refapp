@@ -32,6 +32,8 @@ import com.teoware.refapp.dao.dto.DeleteUserStatusInput;
 import com.teoware.refapp.dao.dto.DeleteUserStatusOutput;
 import com.teoware.refapp.dao.dto.ReadUserInput;
 import com.teoware.refapp.dao.dto.ReadUserOutput;
+import com.teoware.refapp.dao.dto.ReadUsersInput;
+import com.teoware.refapp.dao.dto.ReadUsersOutput;
 import com.teoware.refapp.dao.dto.UpdateUserAddressInput;
 import com.teoware.refapp.dao.dto.UpdateUserAddressOutput;
 import com.teoware.refapp.dao.dto.UpdateUserDetailsInput;
@@ -60,6 +62,8 @@ import com.teoware.refapp.service.dto.DeleteUserRequest;
 import com.teoware.refapp.service.dto.DeleteUserResponse;
 import com.teoware.refapp.service.dto.FindUserRequest;
 import com.teoware.refapp.service.dto.FindUserResponse;
+import com.teoware.refapp.service.dto.FindUsersRequest;
+import com.teoware.refapp.service.dto.FindUsersResponse;
 import com.teoware.refapp.service.dto.ListUsersRequest;
 import com.teoware.refapp.service.dto.ListUsersResponse;
 import com.teoware.refapp.service.dto.RegisterUserRequest;
@@ -205,12 +209,31 @@ public class UserServiceBean extends Service implements UserService {
 
 		try {
 			Header header = request.getHeader();
+			ReadUsersInput readUsersInput = new ReadUsersInput(Status.ACTIVE);
 
-			ReadUserOutput readUserOutput = userDao.readAllUsers();
+			ReadUsersOutput readUsersOutput = userDao.readUsers(readUsersInput);
 
-			return new ListUsersResponse(header, readUserOutput.getUserList());
+			return new ListUsersResponse(header, readUsersOutput.getUserList());
 		} catch (DaoException e) {
 			LOG.error(SERVICE_NAME + ": List users operation failed.");
+			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
+		} finally {
+			userDao.terminateConnection();
+		}
+	}
+
+	public FindUsersResponse findPendigUsers(FindUsersRequest request) throws ServiceException {
+		LOG.info(SERVICE_NAME + ": Find pending users operation invoked.");
+
+		try {
+			Header header = request.getHeader();
+			ReadUsersInput readUsersInput = new ReadUsersInput(Status.PENDING);
+
+			ReadUsersOutput readUsersOutput = userDao.readUsers(readUsersInput);
+
+			return new FindUsersResponse(header, readUsersOutput.getUserList());
+		} catch (DaoException e) {
+			LOG.error(SERVICE_NAME + ": Find pending users operation failed.");
 			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
 		} finally {
 			userDao.terminateConnection();

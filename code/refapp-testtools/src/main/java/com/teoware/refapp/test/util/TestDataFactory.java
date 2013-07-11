@@ -28,6 +28,7 @@ import com.teoware.refapp.dao.dto.ReadTaskInput;
 import com.teoware.refapp.dao.dto.ReadTasksInput;
 import com.teoware.refapp.dao.dto.ReadUserInput;
 import com.teoware.refapp.dao.dto.ReadUserPasswordInput;
+import com.teoware.refapp.dao.dto.ReadUsersInput;
 import com.teoware.refapp.dao.dto.UpdateNoteDetailsInput;
 import com.teoware.refapp.dao.dto.UpdateNoteInput;
 import com.teoware.refapp.dao.dto.UpdateNoteStatusInput;
@@ -368,6 +369,10 @@ public class TestDataFactory {
 
 	public static ReadUserInput createReadUserInputJonah() {
 		return new ReadUserInput(createUsername("jonah.doe"));
+	}
+
+	public static ReadUsersInput createReadUsersInput() {
+		return new ReadUsersInput(Status.ACTIVE);
 	}
 
 	public static ReadUserPasswordInput createReadUserPasswordInputJohn() {

@@ -52,6 +52,11 @@
 			<groupId>com.teoware.refapp</groupId>
 			<artifactId>refapp-schedule</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>com.teoware.refapp</groupId>
+			<artifactId>refapp-services-facade</artifactId>
+		</dependency>
 	</dependencies>
 
 	<!-- MAVEN PLUGINS -->

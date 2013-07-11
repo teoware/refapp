@@ -27,6 +27,8 @@ import com.teoware.refapp.dao.dto.ReadUserInput;
 import com.teoware.refapp.dao.dto.ReadUserOutput;
 import com.teoware.refapp.dao.dto.ReadUserPasswordInput;
 import com.teoware.refapp.dao.dto.ReadUserPasswordOutput;
+import com.teoware.refapp.dao.dto.ReadUsersInput;
+import com.teoware.refapp.dao.dto.ReadUsersOutput;
 import com.teoware.refapp.dao.dto.UpdateUserAddressInput;
 import com.teoware.refapp.dao.dto.UpdateUserAddressOutput;
 import com.teoware.refapp.dao.dto.UpdateUserDetailsInput;
@@ -248,7 +250,7 @@ public class UserDaoBeanIT {
 
 		assertEquals(12, rowsAffected);
 
-		ReadUserOutput readAllOutput = userDao.readAllUsers();
+		ReadUsersOutput readAllOutput = userDao.readUsers(null);
 		List<User> userList = readAllOutput.getUserList();
 
 		assertNotNull(userList);
@@ -311,7 +313,8 @@ public class UserDaoBeanIT {
 
 		assertEquals(1, rowsAffected);
 
-		ReadUserOutput readAllOutput = userDao.readAllUsers();
+		ReadUsersInput readInput = TestDataFactory.createReadUsersInput();
+		ReadUsersOutput readAllOutput = userDao.readUsers(readInput);
 		List<User> userList = readAllOutput.getUserList();
 
 		assertNotNull(userList);
