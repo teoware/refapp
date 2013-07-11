@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.teoware.refapp.batch.BatchException;
+import com.teoware.refapp.batch.task.ActivatePendingUsersResult;
 import com.teoware.refapp.model.enums.Result;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.service.ServiceException;
