@@ -1,5 +1,7 @@
 package com.teoware.refapp.batch.task;
 
+import java.lang.reflect.ParameterizedType;
+
 public abstract class TaskResult<T> {
 
 	protected T data;
@@ -16,5 +18,10 @@ public abstract class TaskResult<T> {
 
 	public boolean terminate() {
 		return terminate;
+	}
+
+	public Class<?> dataClass() {
+		ParameterizedType parameterizedType = (ParameterizedType) this.getClass().getGenericSuperclass();
+		return (Class<?>) parameterizedType.getActualTypeArguments()[0];
 	}
 }

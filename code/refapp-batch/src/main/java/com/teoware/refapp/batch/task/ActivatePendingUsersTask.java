@@ -1,5 +1,6 @@
 package com.teoware.refapp.batch.task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.teoware.refapp.batch.BatchException;
-import com.teoware.refapp.batch.task.ActivatePendingUsersResult;
 import com.teoware.refapp.model.enums.Result;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.service.ServiceException;
@@ -17,7 +17,7 @@ import com.teoware.refapp.service.dto.ActivateUserResponse;
 import com.teoware.refapp.service.facade.UserServiceFacade;
 import com.teoware.refapp.service.validation.ValidationException;
 
-public class ActivatePendingUsersTask extends BatchTask<Integer, List<User>> {
+public class ActivatePendingUsersTask extends BatchTask<List<User>, List<User>> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ActivatePendingUsersTask.class);
 
@@ -33,17 +33,18 @@ public class ActivatePendingUsersTask extends BatchTask<Integer, List<User>> {
 	public void run() {
 		try {
 			LOG.info("Activating pending users");
-			List<User> pendingUsersList = setup.getPreviousResult().data();
-			int activatedUsers = 0;
+			List<User> pendingUsersList = setup.data();
+			List<User> activatedUsers = new ArrayList<User>();
 			for (User pendingUser : pendingUsersList) {
 				LOG.info("Activating user '{}'", pendingUser.getUsername().getUsername());
 				ActivateUserRequest request = new ActivateUserRequest(pendingUser.getUsername());
 				ActivateUserResponse response = facade.activateUser(request);
 				if (Result.SUCCESS == response.getBody().getResult()) {
-					activatedUsers++;
+					activatedUsers.add(pendingUser);
 				}
 			}
-			result = new ActivatePendingUsersResult(activatedUsers, Boolean.FALSE);
+			boolean terminate = activatedUsers.size() == 0;
+			result = new ActivatePendingUsersResult(activatedUsers, terminate);
 		} catch (ServiceException e) {
 			throw new BatchException("Service error occured when activating pending users", e);
 		} catch (ValidationException e) {

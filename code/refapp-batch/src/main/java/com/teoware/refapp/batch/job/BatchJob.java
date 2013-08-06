@@ -1,7 +1,6 @@
 package com.teoware.refapp.batch.job;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
+import java.util.LinkedList;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +14,7 @@ public abstract class BatchJob {
 
 	private static final Logger LOG = LoggerFactory.getLogger(BatchJob.class);
 
-	private Queue<BatchTask<?, ?>> tasks = new ArrayDeque<BatchTask<?, ?>>();
+	private LinkedList<BatchTask> tasks = new LinkedList<BatchTask>();
 
 	public String name() {
 		return this.getClass().getSimpleName();
@@ -23,14 +22,17 @@ public abstract class BatchJob {
 
 	protected abstract void setup();
 
-	public void run() {
+	public <R, S> void run() {
 		if (tasks.size() > 0) {
-			TaskResult<?> result = null;
-			for (BatchTask<?, ?> task : tasks) {
-				result = run(task, result);
-				if (terminate(result)) {
-					LOG.warn("Task {} initiated terminate action. Batch job {} will now exit", task.name(), name());
-					break;
+			S data = null;
+			for (BatchTask<R, S> task : tasks) {
+				TaskResult<R> result = runTask(task, data);
+				if (result != null) {
+					if (result.terminate()) {
+						LOG.warn("Task {} initiated terminate action. Batch job {} will now exit", task.name(), name());
+						return;
+					}
+					data = (S) result.data();
 				}
 			}
 		} else {
@@ -38,7 +40,7 @@ public abstract class BatchJob {
 		}
 	}
 
-	protected <T extends BatchTask<?, ?>> void add(T task) {
+	protected void addTask(BatchTask<?, ?> task) {
 		if (task != null) {
 			LOG.info("Adding new task {} to batch job {}", task.name(), name());
 			tasks.add(task);
@@ -47,13 +49,12 @@ public abstract class BatchJob {
 		}
 	}
 
-	protected TaskResult<?> run(BatchTask task, TaskResult previousResult) {
+	protected <R, S> TaskResult<R> runTask(BatchTask<R, S> task, S data) {
 		if (task != null) {
 			LOG.info("Batch job {} running task {}", name(), task.name());
-
-			TaskSetup<?> setup = task.init();
+			TaskSetup<S> setup = task.init();
 			if (setup != null) {
-				setup.setPreviousResult(previousResult);
+				setup.init(data);
 				task.setup(setup);
 			}
 			task.run();
@@ -61,9 +62,5 @@ public abstract class BatchJob {
 		} else {
 			throw new BatchException("Unable to run batch task which is null");
 		}
-	}
-
-	private boolean terminate(TaskResult<?> result) {
-		return result != null && result.terminate();
 	}
 }

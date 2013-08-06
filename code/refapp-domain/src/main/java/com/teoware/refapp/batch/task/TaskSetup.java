@@ -2,13 +2,13 @@ package com.teoware.refapp.batch.task;
 
 public abstract class TaskSetup<T> {
 
-	protected TaskResult<T> previousResult;
+	protected T data;
 
-	public TaskResult<T> getPreviousResult() {
-		return previousResult;
+	public void init(T data) {
+		this.data = data;
 	}
 
-	public void setPreviousResult(TaskResult<T> previousResult) {
-		this.previousResult = previousResult;
+	public T data() {
+		return data;
 	}
 }

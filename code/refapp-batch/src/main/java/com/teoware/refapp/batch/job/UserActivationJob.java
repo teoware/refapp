@@ -5,6 +5,7 @@ import javax.inject.Inject;
 
 import com.teoware.refapp.batch.task.ActivatePendingUsersTask;
 import com.teoware.refapp.batch.task.GetPendingUsersTask;
+import com.teoware.refapp.batch.task.NotifyActivatedUsersTask;
 
 public class UserActivationJob extends BatchJob {
 
@@ -14,10 +15,14 @@ public class UserActivationJob extends BatchJob {
 	@Inject
 	private ActivatePendingUsersTask activatePendingUsersTask;
 
+	@Inject
+	private NotifyActivatedUsersTask notifyActivatedUsersTask;
+
 	@PostConstruct
 	@Override
 	protected void setup() {
-		add(getPendingUsersTask);
-		add(activatePendingUsersTask);
+		addTask(getPendingUsersTask);
+		addTask(activatePendingUsersTask);
+		addTask(notifyActivatedUsersTask);
 	}
 }

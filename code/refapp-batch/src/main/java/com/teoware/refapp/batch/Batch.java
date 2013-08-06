@@ -25,14 +25,14 @@ public abstract class Batch extends Runnable {
 	public void run() {
 		if (jobs.size() > 0) {
 			for (BatchJob job : jobs) {
-				run(job);
+				runJob(job);
 			}
 		} else {
 			LOG.warn("Job list empty. No jobs will run");
 		}
 	}
 
-	protected void add(BatchJob job) {
+	protected void addJob(BatchJob job) {
 		if (job != null) {
 			LOG.info("Adding new job {} to batch {}", job.name(), name());
 			jobs.add(job);
@@ -41,7 +41,7 @@ public abstract class Batch extends Runnable {
 		}
 	}
 
-	protected void run(BatchJob job) {
+	protected void runJob(BatchJob job) {
 		if (job != null) {
 			LOG.info("Batch {} running job {}", name(), job.name());
 			job.run();
