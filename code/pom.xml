@@ -84,6 +84,7 @@
 		<module>refapp-interfaces-webui</module>
 		<module>refapp-schedule</module>
 		<module>refapp-batch</module>
+		<module>refapp-batch-activation</module>
 		<module>refapp-testtools</module>
 		<module>refapp-ear</module>
 	</modules>

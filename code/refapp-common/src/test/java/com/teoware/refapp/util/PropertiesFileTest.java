@@ -27,19 +27,19 @@ public class PropertiesFileTest {
 	public void testCreateFromFile() throws IOException {
 		assertNotNull(PropertiesFile.createFromFile(
 				"src" + separator + "test" + separator + "resources" + separator + "properties" + separator
-						+ "test.properties").get("stringKey"));
+						+ "test.properties").getString("stringKey"));
 	}
 
 	@Test(expected = FileNotFoundException.class)
 	public void testCreateFromFileNoFileFound() throws IOException {
 		assertNotNull(PropertiesFile.createFromFile(
 				"src" + separator + "test" + separator + "resources" + separator + "properties" + separator
-						+ "notfound.properties").get("stringKey"));
+						+ "notfound.properties").getString("stringKey"));
 	}
 
 	@Test
 	public void testCreateFromClasspath() throws IOException {
-		assertNotNull(PropertiesFile.createFromClasspath("/properties/test.properties").get("stringKey"));
+		assertNotNull(PropertiesFile.createFromClasspath("/properties/test.properties").getString("stringKey"));
 	}
 
 	@Test
@@ -49,7 +49,7 @@ public class PropertiesFileTest {
 
 	@Test
 	public void testStringValue() {
-		String value = properties.get("stringKey");
+		String value = properties.getString("stringKey");
 
 		assertNotNull(value);
 		assertEquals("testValue", value);
@@ -57,7 +57,7 @@ public class PropertiesFileTest {
 
 	@Test
 	public void testStringAndDefaultValue() {
-		String value = properties.get("stringKey", "whatever");
+		String value = properties.getString("stringKey", "whatever");
 
 		assertNotNull(value);
 		assertEquals("testValue", value);
@@ -65,7 +65,7 @@ public class PropertiesFileTest {
 
 	@Test
 	public void testMissingStringValueButDefaultValue() {
-		String value = properties.get("missingKey", "whatever");
+		String value = properties.getString("missingKey", "whatever");
 
 		assertNotNull(value);
 		assertEquals("whatever", value);
@@ -193,7 +193,7 @@ public class PropertiesFileTest {
 
 	@Test
 	public void testVar1Value() {
-		String value = properties.get("varKey1");
+		String value = properties.getString("varKey1");
 
 		assertNotNull(value);
 		assertEquals("hey there", value);
@@ -201,7 +201,7 @@ public class PropertiesFileTest {
 
 	@Test
 	public void testVar2Value() {
-		String value = properties.get("varKey2");
+		String value = properties.getString("varKey2");
 
 		assertNotNull(value);
 		assertEquals("hey there mr.", value);

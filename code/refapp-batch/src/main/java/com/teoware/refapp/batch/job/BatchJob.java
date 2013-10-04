@@ -1,20 +1,20 @@
 package com.teoware.refapp.batch.job;
 
-import java.util.LinkedList;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.teoware.refapp.batch.BatchException;
+import com.teoware.refapp.batch.domain.TaskResult;
+import com.teoware.refapp.batch.domain.TaskSetup;
 import com.teoware.refapp.batch.task.BatchTask;
-import com.teoware.refapp.batch.task.TaskResult;
-import com.teoware.refapp.batch.task.TaskSetup;
+import com.teoware.refapp.batch.task.TaskTerminatedException;
+import com.teoware.refapp.batch.util.BatchTaskHandler;
 
 public abstract class BatchJob {
 
 	private static final Logger LOG = LoggerFactory.getLogger(BatchJob.class);
 
-	private LinkedList<BatchTask> tasks = new LinkedList<BatchTask>();
+	private BatchTaskHandler taskHandler = new BatchTaskHandler();
 
 	public String name() {
 		return this.getClass().getSimpleName();
@@ -22,45 +22,56 @@ public abstract class BatchJob {
 
 	protected abstract void setup();
 
-	public <R, S> void run() {
-		if (tasks.size() > 0) {
-			S data = null;
-			for (BatchTask<R, S> task : tasks) {
-				TaskResult<R> result = runTask(task, data);
-				if (result != null) {
-					if (result.terminate()) {
-						LOG.warn("Task {} initiated terminate action. Batch job {} will now exit", task.name(), name());
-						return;
-					}
-					data = (S) result.data();
-				}
-			}
+	protected void addTask(BatchTask<?> task) {
+		taskHandler.add(task);
+		LOG.info("Added new task {} to batch job {}", task.name(), name());
+	}
+
+	public void run() {
+		if (taskHandler.count() > 0) {
+			runTasks();
 		} else {
 			throw new BatchException("Task list empty. No batch tasks will run");
 		}
 	}
 
-	protected void addTask(BatchTask<?, ?> task) {
-		if (task != null) {
-			LOG.info("Adding new task {} to batch job {}", task.name(), name());
-			tasks.add(task);
-		} else {
-			throw new BatchException("Unable to add batch task which is null");
+	private void runTasks() {
+		TaskResult result = null;
+		for (BatchTask<?> task : taskHandler.list()) {
+			try {
+				result = runTask(task, result);
+			} catch (TaskTerminatedException e) {
+				LOG.warn("{}. Batch job {} will now exit", e.getMessage(), name());
+				return;
+			}
 		}
 	}
 
-	protected <R, S> TaskResult<R> runTask(BatchTask<R, S> task, S data) {
+	protected TaskResult runTask(BatchTask<?> task, TaskResult result) {
 		if (task != null) {
 			LOG.info("Batch job {} running task {}", name(), task.name());
-			TaskSetup<S> setup = task.init();
-			if (setup != null) {
-				setup.init(data);
-				task.setup(setup);
-			}
-			task.run();
-			return task.result();
+			TaskSetup setup = processSetup(task, result);
+			result = task.run(setup);
+			return processResult(task, result);
 		} else {
 			throw new BatchException("Unable to run batch task which is null");
+		}
+	}
+
+	private TaskSetup processSetup(BatchTask<?> task, TaskResult result) {
+		if (result != null) {
+			return task.setup(result.data());
+		} else {
+			return task.setup(null);
+		}
+	}
+
+	protected TaskResult processResult(BatchTask<?> task, TaskResult result) {
+		if (result != null && result.terminate()) {
+			String message = String.format("Task %s initiated terminate action", task.name());
+			throw new TaskTerminatedException(message);
+		} else {
+			return result;
 		}
 	}
 }

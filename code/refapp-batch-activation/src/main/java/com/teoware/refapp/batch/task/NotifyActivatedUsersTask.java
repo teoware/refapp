@@ -10,29 +10,34 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.teoware.refapp.batch.BatchException;
+import com.teoware.refapp.batch.domain.NotifyActivatedUsersResult;
+import com.teoware.refapp.batch.domain.NotifyActivatedUsersSetup;
+import com.teoware.refapp.batch.domain.TaskResult;
+import com.teoware.refapp.batch.domain.TaskSetup;
 import com.teoware.refapp.model.user.User;
 
-public class NotifyActivatedUsersTask extends BatchTask<Integer, List<User>> {
+public class NotifyActivatedUsersTask extends BatchTask<List<User>> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(NotifyActivatedUsersTask.class);
 
 	@Override
-	public TaskSetup<List<User>> init() {
-		return new NotifyActivatedUsersSetup();
+	public TaskSetup setup(Object data) {
+		List<User> activatedUsers = convert(data);
+		return new NotifyActivatedUsersSetup(activatedUsers);
 	}
 
 	@Override
-	public void run() {
+	public TaskResult run(TaskSetup setup) {
 		try {
 			LOG.info("Notifying activated users");
-			List<User> activatedUsers = setup.data();
+			List<User> activatedUsers = convert(setup.data());
 			Email email = createEmailClient();
 			int notifiedUsers = 0;
 			for (User activatedUser : activatedUsers) {
 				LOG.info("Notifying user '{}'", activatedUser.getUsername().getUsername());
 				sendEmailNotification(email, activatedUser);
 			}
-			result = new NotifyActivatedUsersResult(notifiedUsers, Boolean.FALSE);
+			return new NotifyActivatedUsersResult(notifiedUsers, Boolean.FALSE);
 		} catch (EmailException e) {
 			throw new BatchException("Email error occured when notifying activated users", e);
 		}

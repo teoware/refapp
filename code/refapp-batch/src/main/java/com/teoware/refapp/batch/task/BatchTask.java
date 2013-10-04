@@ -1,23 +1,25 @@
 package com.teoware.refapp.batch.task;
 
-public abstract class BatchTask<R, S> {
+import com.teoware.refapp.batch.BatchException;
+import com.teoware.refapp.batch.domain.TaskResult;
+import com.teoware.refapp.batch.domain.TaskSetup;
 
-	protected TaskSetup<S> setup;
-	protected TaskResult<R> result;
+public abstract class BatchTask<T> {
 
 	public String name() {
 		return this.getClass().getSimpleName();
 	}
 
-	public abstract TaskSetup<S> init();
-
-	public void setup(TaskSetup<S> setup) {
-		this.setup = setup;
+	@SuppressWarnings("unchecked")
+	protected T convert(Object data) {
+		try {
+			return (T) data;
+		} catch (ClassCastException e) {
+			throw new BatchException("Incorrect data type", e);
+		}
 	}
 
-	public abstract void run();
+	public abstract TaskSetup setup(Object data);
 
-	public TaskResult<R> result() {
-		return result;
-	}
+	public abstract TaskResult run(TaskSetup setup);
 }
