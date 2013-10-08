@@ -1,29 +1,29 @@
 package com.teoware.refapp.crypto;
 
-import org.bouncycastle.crypto.digests.SHA1Digest;
+import org.bouncycastle.crypto.digests.MD5Digest;
 
-public class SHA1 extends Digest {
+public class MD5 extends Digest {
 
-	private SHA1() {
+	private MD5() {
 	}
 
 	public static String encrypt(String secret) {
-		SHA1Digest digest = new SHA1Digest();
+		MD5Digest digest = new MD5Digest();
 		return encrypt(digest, secret);
 	}
 
 	public static String encrypt(String secret, String salt) {
-		SHA1Digest digest = new SHA1Digest();
+		MD5Digest digest = new MD5Digest();
 		return encrypt(digest, secret, salt);
 	}
 
 	public static boolean verify(String secret, String cipher) {
-		SHA1Digest digest = new SHA1Digest();
+		MD5Digest digest = new MD5Digest();
 		return verify(digest, secret, cipher);
 	}
 
 	public static boolean verify(String secret, String salt, String cipher) {
-		SHA1Digest digest = new SHA1Digest();
+		MD5Digest digest = new MD5Digest();
 		return verify(digest, secret, salt, cipher);
 	}
 }

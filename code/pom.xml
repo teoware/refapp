@@ -76,6 +76,7 @@
 	<modules>
 		<module>refapp-domain</module>
 		<module>refapp-common</module>
+		<module>refapp-testtools</module>
 		<module>refapp-infrastructure-dao</module>
 		<module>refapp-services-facade</module>
 		<module>refapp-services-logic</module>
@@ -85,7 +86,6 @@
 		<module>refapp-schedule</module>
 		<module>refapp-batch</module>
 		<module>refapp-batch-activation</module>
-		<module>refapp-testtools</module>
 		<module>refapp-ear</module>
 	</modules>
 

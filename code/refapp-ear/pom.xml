@@ -90,7 +90,7 @@
 
 		<dependency>
 			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-batch</artifactId>
+			<artifactId>refapp-batch-activation</artifactId>
 			<type>war</type>
 			<version>${project.version}</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
@@ -154,7 +154,7 @@
 
 						<webModule>
 							<groupId>com.teoware.refapp</groupId>
-							<artifactId>refapp-batch</artifactId>
+							<artifactId>refapp-batch-activation</artifactId>
 							<unpack>${explode.ear.modules}</unpack>
 						</webModule>
 					</modules>
