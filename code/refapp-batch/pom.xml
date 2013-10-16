@@ -31,17 +31,6 @@
 
 	<!-- DEPENDENCIES -->
 	<dependencies>
-		<!-- Java EE -->
-		<dependency>
-			<groupId>org.apache.geronimo.specs</groupId>
-			<artifactId>geronimo-jpa_2.0_spec</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.geronimo.specs</groupId>
-			<artifactId>geronimo-validation_1.0_spec</artifactId>
-		</dependency>
-
 		<!-- Network -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>

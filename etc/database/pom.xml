@@ -1,41 +1,46 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
-	<groupId>com.teoware.refapp</groupId>
+
+	<parent>
+		<groupId>com.teoware.refapp</groupId>
+		<artifactId>etc</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
 	<artifactId>database</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>database</name>
 	<description>Database scripts</description>
-	
+
 	<!-- PROPERTIES -->
 	<properties>
 		<java.version>1.6</java.version>
 		<source.encoding>UTF-8</source.encoding>
-		
+
 		<!-- Plugins -->
 		<version.maven-compiler-plugin>2.3.2</version.maven-compiler-plugin>
 		<version.sql-maven-plugin>1.5</version.sql-maven-plugin>
 		<version.m2e.lifecycle-mapping>1.0.0</version.m2e.lifecycle-mapping>
-		
+
 		<!-- Dependencies -->
 		<version.derby>10.8.2.2</version.derby>
 		<version.derbyclient>10.8.2.2</version.derbyclient>
 	</properties>
-	
+
 	<!-- MODULES -->
 	<modules>
 		<module>database-derby</module>
 	</modules>
-	
+
 	<!-- REPOSITORIES -->
 	<repositories>
 	</repositories>
-	
+
 	<!-- PLUGIN REPOSITORIES -->
 	<pluginRepositories>
 	</pluginRepositories>
-	
+
 	<!-- DEPENDENCIES -->
 	<dependencyManagement>
 		<dependencies>
@@ -45,7 +50,7 @@
 				<artifactId>derby</artifactId>
 				<version>${version.derby}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.apache.derby</groupId>
 				<artifactId>derbyclient</artifactId>
@@ -53,7 +58,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -67,7 +72,7 @@
 						<encoding>${source.encoding}</encoding>
 					</configuration>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>sql-maven-plugin</artifactId>
@@ -83,7 +88,7 @@
 						</fileset>
 					</configuration>
 				</plugin>
-				
+
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -111,7 +116,7 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-	
+
 	<!-- PROFILES -->
 	<profiles>
 	</profiles>

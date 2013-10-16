@@ -1,16 +1,17 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
 		<groupId>com.teoware.refapp</groupId>
 		<artifactId>database</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	
+
 	<artifactId>database-derby</artifactId>
 	<name>database-derby</name>
 	<description>Derby database scripts</description>
-	
+
 	<!-- PROPERTIES -->
 	<properties>
 		<!-- Derby connection properties -->
@@ -19,40 +20,40 @@
 		<derby.database>refapp</derby.database>
 		<derby.username>refapp</derby.username>
 		<derby.password>abcd1234</derby.password>
-		
+
 		<derby.skip.tests>false</derby.skip.tests>
-		
+
 		<sql.file.root>${project.basedir}/src/main/resources/sql</sql.file.root>
 		<sql.test.file.root>${project.basedir}/src/test/resources/sql</sql.test.file.root>
 	</properties>
-	
+
 	<!-- MODULES -->
 	<modules>
 	</modules>
-	
+
 	<!-- REPOSITORIES -->
 	<repositories>
 	</repositories>
-	
+
 	<!-- PLUGIN REPOSITORIES -->
 	<pluginRepositories>
 	</pluginRepositories>
-	
+
 	<!-- DEPENDENCIES -->
 	<dependencies>
 	</dependencies>
-	
+
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>sql-maven-plugin</artifactId>
-				
+
 				<dependencies>
 					<dependency>
 						<groupId>org.apache.derby</groupId>
@@ -60,7 +61,7 @@
 						<version>${version.derbyclient}</version>
 					</dependency>
 				</dependencies>
-				
+
 				<!-- common configuration shared by all executions -->
 				<configuration>
 					<driver>org.apache.derby.jdbc.ClientDriver</driver>
@@ -84,7 +85,7 @@
 							<onError>continue</onError>
 						</configuration>
 					</execution>
-					
+
 					<!-- Create all sequences -->
 					<execution>
 						<id>create-sequences</id>
@@ -98,7 +99,7 @@
 							</fileset>
 						</configuration>
 					</execution>
-					
+
 					<!-- Create all tables -->
 					<execution>
 						<id>create-tables</id>
@@ -112,7 +113,7 @@
 							</fileset>
 						</configuration>
 					</execution>
-					
+
 					<!-- Create all indexes -->
 					<execution>
 						<id>create-indexes</id>
@@ -126,7 +127,7 @@
 							</fileset>
 						</configuration>
 					</execution>
-					
+
 					<!-- Create all triggers -->
 					<execution>
 						<id>create-triggers</id>
@@ -140,7 +141,7 @@
 							</fileset>
 						</configuration>
 					</execution>
-					
+
 					<!-- Create all views -->
 					<execution>
 						<id>create-views</id>
@@ -154,7 +155,7 @@
 							</fileset>
 						</configuration>
 					</execution>
-					
+
 					<!-- Insert all data -->
 					<execution>
 						<id>insert-data</id>
@@ -168,7 +169,7 @@
 							</fileset>
 						</configuration>
 					</execution>
-					
+
 					<!-- Insert dummy data, for test only -->
 					<execution>
 						<id>insert-dummy-data</id>
