@@ -4,7 +4,6 @@ import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -15,10 +14,9 @@ public class DateTimeAdapterTest {
 
 	@BeforeClass
 	public static void oneTimeSetUp() throws Exception {
-		parseDateTimeString = "2012-01-01T01:01:01.000+01:00";
+		parseDateTimeString = "2012-01-01T01:01:01.000";
 		dateTime = new DateTime().withYear(1999).withMonthOfYear(12).withDayOfMonth(12).withHourOfDay(12)
-				.withMinuteOfHour(12).withSecondOfMinute(12).withMillisOfSecond(0)
-				.withZone(DateTimeZone.forID("Europe/Oslo"));
+				.withMinuteOfHour(12).withSecondOfMinute(12).withMillisOfSecond(0);
 	}
 
 	@Test
@@ -46,7 +44,7 @@ public class DateTimeAdapterTest {
 	@Test
 	public void testParseTimeStringThrowsIllegalArgumentException() throws Exception {
 		try {
-			DateTimeAdapter.parse("01:01:01.000+01:00");
+			DateTimeAdapter.parse("01:01:01.000");
 		} catch (Exception e) {
 			assertTrue(e instanceof IllegalArgumentException);
 		}
@@ -56,6 +54,6 @@ public class DateTimeAdapterTest {
 	public void testPrintDateTimeSuccessfully() throws Exception {
 		String dateString = DateTimeAdapter.print(dateTime);
 
-		assertEquals("1999-12-12T12:12:12.000+01:00", dateString);
+		assertEquals("1999-12-12T12:12:12.000", dateString);
 	}
 }
