@@ -74,26 +74,26 @@
 		<!-- <version>${project.version}</version>$NO-MVN-MAN-VER$ -->
 		<!-- </dependency> -->
 
-		<dependency>
-			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-interfaces-rest</artifactId>
-			<type>war</type>
-			<version>${project.version}</version><!--$NO-MVN-MAN-VER$ -->
-		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>com.teoware.refapp</groupId> -->
+		<!-- <artifactId>refapp-interfaces-rest</artifactId> -->
+		<!-- <type>war</type> -->
+		<!-- <version>${project.version}</version>$NO-MVN-MAN-VER$ -->
+		<!-- </dependency> -->
 
-		<dependency>
-			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-interfaces-webui</artifactId>
-			<type>war</type>
-			<version>${project.version}</version><!--$NO-MVN-MAN-VER$ -->
-		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>com.teoware.refapp</groupId> -->
+		<!-- <artifactId>refapp-interfaces-webui</artifactId> -->
+		<!-- <type>war</type> -->
+		<!-- <version>${project.version}</version>$NO-MVN-MAN-VER$ -->
+		<!-- </dependency> -->
 
-		<dependency>
-			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-batch-activation</artifactId>
-			<type>war</type>
-			<version>${project.version}</version><!--$NO-MVN-MAN-VER$ -->
-		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>com.teoware.refapp</groupId> -->
+		<!-- <artifactId>refapp-batch-activation</artifactId> -->
+		<!-- <type>war</type> -->
+		<!-- <version>${project.version}</version>$NO-MVN-MAN-VER$ -->
+		<!-- </dependency> -->
 	</dependencies>
 
 	<!-- MAVEN PLUGINS -->
@@ -140,23 +140,23 @@
 						<!-- <unpack>${explode.ear.modules}</unpack> -->
 						<!-- </jarModule> -->
 
-						<webModule>
-							<groupId>com.teoware.refapp</groupId>
-							<artifactId>refapp-interfaces-rest</artifactId>
-							<unpack>${explode.ear.modules}</unpack>
-						</webModule>
+						<!-- <webModule> -->
+						<!-- <groupId>com.teoware.refapp</groupId> -->
+						<!-- <artifactId>refapp-interfaces-rest</artifactId> -->
+						<!-- <unpack>${explode.ear.modules}</unpack> -->
+						<!-- </webModule> -->
 
-						<webModule>
-							<groupId>com.teoware.refapp</groupId>
-							<artifactId>refapp-interfaces-webui</artifactId>
-							<unpack>${explode.ear.modules}</unpack>
-						</webModule>
+						<!-- <webModule> -->
+						<!-- <groupId>com.teoware.refapp</groupId> -->
+						<!-- <artifactId>refapp-interfaces-webui</artifactId> -->
+						<!-- <unpack>${explode.ear.modules}</unpack> -->
+						<!-- </webModule> -->
 
-						<webModule>
-							<groupId>com.teoware.refapp</groupId>
-							<artifactId>refapp-batch-activation</artifactId>
-							<unpack>${explode.ear.modules}</unpack>
-						</webModule>
+						<!-- <webModule> -->
+						<!-- <groupId>com.teoware.refapp</groupId> -->
+						<!-- <artifactId>refapp-batch-activation</artifactId> -->
+						<!-- <unpack>${explode.ear.modules}</unpack> -->
+						<!-- </webModule> -->
 					</modules>
 				</configuration>
 			</plugin>

@@ -1,15 +1,11 @@
 package com.teoware.refapp.batch.schedule;
 
 import javax.ejb.ScheduleExpression;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
 
 import com.teoware.refapp.batch.Batch;
 import com.teoware.refapp.schedule.Runnable;
 import com.teoware.refapp.schedule.Scheduler;
 
-@Startup
-@Singleton
 public abstract class BatchScheduler extends Scheduler {
 
 	private Batch batch;

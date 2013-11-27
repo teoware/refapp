@@ -14,18 +14,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import com.teoware.refapp.service.ServiceException;
-import com.teoware.refapp.service.validation.Validate;
-import com.teoware.refapp.service.validation.ValidationInterceptor;
 import com.teoware.refapp.service.validation.group.ValidationGroup;
-import com.teoware.refapp.service.validation.util.ServiceFacade;
 
 public class ValidationInterceptorTest {
 
 	@InjectMocks
 	private ValidationInterceptor validationInterceptor = new ValidationInterceptor();
-
-	@Mock
-	private ServiceFacade serviceFacade;
 
 	@Mock
 	private InvocationContext context;

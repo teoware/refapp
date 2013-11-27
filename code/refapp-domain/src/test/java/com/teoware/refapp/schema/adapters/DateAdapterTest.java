@@ -1,6 +1,8 @@
 package com.teoware.refapp.schema.adapters;
 
 import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.joda.time.DateTime;
 import org.junit.BeforeClass;
@@ -27,15 +29,26 @@ public class DateAdapterTest {
 		assertEquals(1, date.getDayOfMonth());
 	}
 
-	@SuppressWarnings("static-access")
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testParseDateTimeStringThrowsIllegalArgumentException() throws Exception {
-		new DateAdapter().parse("2012-01-01T01:01:01.000+01:00");
+		try {
+			DateAdapter.parse("2012-01-01T01:01:01.000+01:00");
+
+			fail("Should throw exception");
+		} catch (Exception e) {
+			assertTrue(e instanceof IllegalArgumentException);
+		}
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testParseTimeStringThrowsIllegalArgumentException() throws Exception {
-		DateAdapter.parse("01:01:01.000+01:00");
+		try {
+			DateAdapter.parse("01:01:01.000+01:00");
+
+			fail("Should throw exception");
+		} catch (Exception e) {
+			assertTrue(e instanceof IllegalArgumentException);
+		}
 	}
 
 	@Test

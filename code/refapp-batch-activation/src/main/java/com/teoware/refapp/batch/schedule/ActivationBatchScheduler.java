@@ -1,10 +1,14 @@
 package com.teoware.refapp.batch.schedule;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.inject.Inject;
 
 import com.teoware.refapp.batch.ActivationBatch;
 
+@Startup
+@Singleton
 public class ActivationBatchScheduler extends BatchScheduler {
 
 	@Inject

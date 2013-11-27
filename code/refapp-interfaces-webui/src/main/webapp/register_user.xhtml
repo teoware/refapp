@@ -1,66 +1,79 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition template="templates/common.xhtml">
 
 	<ui:param name="controller" value="#{registerUserControllerBean}" />
 	<ui:param name="vo" value="#{controller.vo}" />
-	
+
 	<ui:define name="content">
 		<a href="#{request.contextPath}/users.xhtml">&larr; Home</a>
 		<h2>#{controller.pageTitle}</h2>
 		<h:form id="registerUserForm">
-			<h:panelGrid columnClasses="formLabel, formItem" columns="2">
+			<h:panelGrid columnClasses="formLabel, formItem" columns="3">
 				<h:outputLabel id="usernameLabel" for="username" value="Username: " />
 				<h:inputText id="username" value="#{vo.user.username.username}" />
-				
+				<h:message for="username" style="color: red; font-size: 8pt" />
+
 				<h:outputLabel id="passwordLabel" for="password" value="Password: " />
 				<h:inputText id="password" value="#{vo.userPassword.password}" />
-				
+				<h:message for="password" />
+
 				<h:outputLabel id="confirmPasswordLabel" for="confirmPassword" value="Confirm password: " />
 				<h:inputText id="confirmPassword" value="#{controller.confirmPassword}" />
-				
+				<h:message for="confirmPassword" />
+
+				<h:outputText style="padding: 5px" />
 				<h:outputText style="padding: 5px" />
 				<h:outputText style="padding: 5px" />
 
 				<h:outputLabel id="firstNameLabel" for="firstName" value="First name: " />
 				<h:inputText id="firstName" value="#{vo.user.userDetails.firstName}" />
-				
+				<h:message for="firstName" />
+
 				<h:outputLabel id="lastNameLabel" for="lastName" value="Last name: " />
 				<h:inputText id="lastName" value="#{vo.user.userDetails.lastName}" />
-				
+				<h:message for="lastName" />
+
 				<h:outputLabel id="emailLabel" for="email" value="Email: " />
 				<h:inputText id="email" value="#{vo.user.userDetails.email}" />
-				
+				<h:message for="email" />
+
 				<h:outputLabel id="phoneLabel" for="phone" value="Phone: " />
 				<h:inputText id="phone" value="#{vo.user.userDetails.phone}" />
-				
+				<h:message for="phone" />
+
 				<h:outputText style="padding: 5px" />
 				<h:outputText style="padding: 5px" />
-			
+				<h:outputText style="padding: 5px" />
+
 				<h:outputLabel id="addressLabel" for="address" value="Address: " />
 				<h:inputText id="address" value="#{vo.user.userAddress.address}" />
-				
+				<h:outputText style="padding: 5px" />
+
 				<h:outputLabel id="postalCodeLabel" for="postalCode" value="Postal code: " />
 				<h:inputText id="postalCode" value="#{vo.user.userAddress.postalCode}" />
-				
+				<h:outputText style="padding: 5px" />
+
 				<h:outputLabel id="municipalityLabel" for="municipality" value="Municipality: " />
 				<h:inputText id="municipality" value="#{vo.user.userAddress.municipality}" />
-				
+				<h:outputText style="padding: 5px" />
+
 				<h:outputLabel id="regionLabel" for="region" value="Region: " />
 				<h:inputText id="region" value="#{vo.user.userAddress.region}" />
-				
+				<h:outputText style="padding: 5px" />
+
 				<h:outputLabel id="countryLabel" for="country" value="Country: " />
 				<h:inputText id="country" value="#{vo.user.userAddress.country}" />
-				
+				<h:outputText style="padding: 5px" />
+
 				<h:outputText style="padding: 5px" />
 				<h:outputText style="padding: 5px" />
-			
+				<h:outputText style="padding: 5px" />
+
 				<f:facet name="footer">
 					<h:commandButton id="registerButton" type="submit" value="Register" action="#{controller.onClickRegisterButton}" />
 				</f:facet>

@@ -1,6 +1,8 @@
 package com.teoware.refapp.schema.adapters;
 
 import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -17,7 +19,7 @@ public class TimeAdapterTest {
 		parseTimeString = "01:01:01.000+01:00";
 		printTime = new DateTime().withYear(1999).withMonthOfYear(12).withDayOfMonth(12).withHourOfDay(12)
 				.withMinuteOfHour(12).withSecondOfMinute(12).withMillisOfSecond(0)
-				.withZone(DateTimeZone.forOffsetHours(1));
+				.withZone(DateTimeZone.forID("Europe/Oslo"));
 	}
 
 	@Test
@@ -30,15 +32,26 @@ public class TimeAdapterTest {
 		assertEquals(0, date.getMillisOfSecond());
 	}
 
-	@SuppressWarnings("static-access")
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testParseDateTimeStringThrowsIllegalArgumentException() throws Exception {
-		new TimeAdapter().parse("2012-01-01T01:01:01.000+01:00");
+		try {
+			TimeAdapter.parse("2012-01-01T01:01:01.000+01:00");
+
+			fail("Should throw exception");
+		} catch (Exception e) {
+			assertTrue(e instanceof IllegalArgumentException);
+		}
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testParseDateStringThrowsIllegalArgumentException() throws Exception {
-		TimeAdapter.parse("2012-01-01");
+		try {
+			TimeAdapter.parse("2012-01-01");
+
+			fail("Should throw exception");
+		} catch (Exception e) {
+			assertTrue(e instanceof IllegalArgumentException);
+		}
 	}
 
 	@Test

@@ -4,7 +4,10 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
-public class DateAdapter {
+public final class DateAdapter {
+
+	private DateAdapter() {
+	}
 
 	public static DateTime parse(String date) throws Exception {
 		DateTimeFormatter formatter = ISODateTimeFormat.date();

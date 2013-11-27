@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.ejb.EJB;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 import javax.validation.ConstraintViolation;
@@ -16,14 +15,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.teoware.refapp.service.ServiceException;
-import com.teoware.refapp.service.validation.Validate;
 import com.teoware.refapp.service.validation.group.ValidationGroup;
-import com.teoware.refapp.service.validation.util.ServiceFacade;
-import com.teoware.refapp.service.validation.util.ServiceFacadeHolder;
 
 /**
- * EJB 3 Interceptor to validate method parameters which is marked with {@link Validate}. Calls {@link ValidationUtils}
- * for validation processing.
+ * EJB 3 Interceptor to validate method parameters which is marked with
+ * {@link Validate}. Calls {@link ValidationUtils} for validation processing.
  * 
  * @author thomas@teoware.com
  * 
@@ -31,9 +27,6 @@ import com.teoware.refapp.service.validation.util.ServiceFacadeHolder;
 public class ValidationInterceptor {
 
 	private final Logger LOG = LoggerFactory.getLogger(ValidationInterceptor.class);
-
-	@EJB
-	private ServiceFacade serviceFacade;
 
 	@AroundInvoke
 	public Object validate(InvocationContext context) throws Exception {
@@ -87,8 +80,6 @@ public class ValidationInterceptor {
 			throws ValidationException, ServiceException {
 		final Set<ConstraintViolation<?>> errors = new HashSet<ConstraintViolation<?>>();
 
-		ServiceFacadeHolder.setServiceFacade(serviceFacade);
-
 		for (Object param : annotatedParams) {
 			try {
 				ValidationUtils.validate(param, group);
@@ -129,7 +120,7 @@ public class ValidationInterceptor {
 		buf.append("Validation.");
 
 		System.out.println(buf);
-		
+
 		return buf.toString();
 	}
 }
