@@ -7,8 +7,8 @@ import java.util.TimeZone;
 import org.joda.time.DateTime;
 
 /**
- * Utility class for converting between basic Java date/time objects, and for converting to/from a date/time formatted
- * strings.
+ * Utility class for converting between basic Java date/time objects, and for
+ * converting to/from a date/time formatted strings.
  * 
  * @author thomas@teoware.com
  * 
@@ -68,19 +68,19 @@ public final class DateTimeUtils {
 	}
 
 	public static Date timestampToDate(String timestampString) {
-		return stringToDate(timestampString, DateTimeParser.TIMESTAMP_PATTERN);
+		return stringToDate(timestampString, DateTimeParser.DATETIME_PATTERN);
 	}
 
 	public static String dateToTimestamp(Date date) {
-		return dateToString(date, DateTimeParser.TIMESTAMP_PATTERN);
+		return dateToString(date, DateTimeParser.DATETIME_PATTERN);
 	}
 
 	public static Calendar timestampToCalendar(String dateString) {
-		return stringToCalendar(dateString, DateTimeParser.TIMESTAMP_PATTERN);
+		return stringToCalendar(dateString, DateTimeParser.DATETIME_PATTERN);
 	}
 
 	public static String calendarToTimestamp(Calendar calendar) {
-		return calendarToString(calendar, DateTimeParser.TIMESTAMP_PATTERN);
+		return calendarToString(calendar, DateTimeParser.DATETIME_PATTERN);
 	}
 
 	public static java.sql.Date dateToSqlDate(Date date) {
@@ -178,7 +178,7 @@ public final class DateTimeUtils {
 	}
 
 	public static java.sql.Timestamp stringToSqlTimestamp(String dateString) {
-		return stringToSqlTimestamp(dateString, DateTimeParser.TIMESTAMP_PATTERN);
+		return stringToSqlTimestamp(dateString, DateTimeParser.DATETIME_PATTERN);
 	}
 
 	public static java.sql.Timestamp stringToSqlTimestamp(String dateString, String pattern) {
@@ -186,7 +186,7 @@ public final class DateTimeUtils {
 	}
 
 	public static String sqlTimestampToString(java.sql.Timestamp timestamp) {
-		return sqlTimestampToString(timestamp, DateTimeParser.TIMESTAMP_PATTERN);
+		return sqlTimestampToString(timestamp, DateTimeParser.DATETIME_PATTERN);
 	}
 
 	public static String sqlTimestampToString(java.sql.Timestamp timestamp, String pattern) {

@@ -106,7 +106,7 @@ public class DateTimeUtilsTest {
 
 	@Test
 	public void testTimestampToDate() {
-		Date date = DateTimeUtils.timestampToDate("1970-01-01 12:13:14.500");
+		Date date = DateTimeUtils.timestampToDate("1970-01-01T12:13:14.500");
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 
@@ -127,12 +127,12 @@ public class DateTimeUtilsTest {
 
 		String str = DateTimeUtils.dateToTimestamp(cal.getTime());
 
-		assertEquals("1970-01-01 12:11:10.123", str);
+		assertEquals("1970-01-01T12:11:10.123", str);
 	}
 
 	@Test
 	public void testTimestampToCalendar() {
-		Calendar cal = DateTimeUtils.timestampToCalendar("1970-01-01 06:07:08.999");
+		Calendar cal = DateTimeUtils.timestampToCalendar("1970-01-01T06:07:08.999");
 
 		assertEquals(1970, cal.get(Calendar.YEAR));
 		assertEquals(Calendar.JANUARY, cal.get(Calendar.MONTH));
@@ -151,7 +151,7 @@ public class DateTimeUtilsTest {
 
 		String str = DateTimeUtils.calendarToTimestamp(cal);
 
-		assertEquals("1970-01-01 03:10:00.101", str);
+		assertEquals("1970-01-01T03:10:00.101", str);
 	}
 
 	@Test
@@ -285,7 +285,7 @@ public class DateTimeUtilsTest {
 	@Test
 	public void testStringToSqlTime() {
 		java.sql.Time sqlTime = new java.sql.Time(offsetInMillis());
-		java.sql.Time sqlTime2 = DateTimeUtils.stringToSqlTime("00:00:00");
+		java.sql.Time sqlTime2 = DateTimeUtils.stringToSqlTime("00:00:00.000");
 
 		assertEquals(sqlTime.getTime(), sqlTime2.getTime());
 	}
@@ -295,13 +295,13 @@ public class DateTimeUtilsTest {
 		java.sql.Time sqlTime = new java.sql.Time(offsetInMillis());
 		String str = DateTimeUtils.sqlTimeToString(sqlTime);
 
-		assertEquals("00:00:00", str);
+		assertEquals("00:00:00.000", str);
 	}
 
 	@Test
 	public void testStringToSqlTimestamp() {
 		java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(offsetInMillis());
-		java.sql.Timestamp sqlTimestamp2 = DateTimeUtils.stringToSqlTimestamp("1970-01-01 00:00:00.000");
+		java.sql.Timestamp sqlTimestamp2 = DateTimeUtils.stringToSqlTimestamp("1970-01-01T00:00:00.000");
 
 		assertEquals(sqlTimestamp.getTime(), sqlTimestamp2.getTime());
 	}
@@ -311,7 +311,7 @@ public class DateTimeUtilsTest {
 		java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(offsetInMillis());
 		String str = DateTimeUtils.sqlTimestampToString(sqlTimestamp);
 
-		assertEquals("1970-01-01 00:00:00.000", str);
+		assertEquals("1970-01-01T00:00:00.000", str);
 	}
 
 	private int offsetInMillis() {
