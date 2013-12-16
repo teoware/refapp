@@ -39,10 +39,8 @@
 		<version.build-helper-maven-plugin>1.7</version.build-helper-maven-plugin>
 		<version.maven-surefire-plugin>2.12.2</version.maven-surefire-plugin>
 		<version.maven-failsafe-plugin>2.12.4</version.maven-failsafe-plugin>
-		<version.maven-ejb-plugin>2.3</version.maven-ejb-plugin>
 		<version.maven-jar-plugin>2.4</version.maven-jar-plugin>
-		<version.maven-war-plugin>2.2</version.maven-war-plugin>
-		<version.maven-ear-plugin>2.7</version.maven-ear-plugin>
+		<version.maven-war-plugin>2.4</version.maven-war-plugin>
 		<version.maven-jaxb2-plugin>0.8.2</version.maven-jaxb2-plugin>
 		<version.jaxws-maven-plugin>2.2</version.jaxws-maven-plugin>
 		<version.cxf-codegen-plugin>cxf-codegen-plugin</version.cxf-codegen-plugin>
@@ -77,12 +75,10 @@
 		<module>refapp-services-facade</module>
 		<module>refapp-services-logic</module>
 		<module>refapp-interfaces-consumer</module>
-		<module>refapp-interfaces-rest</module>
 		<module>refapp-interfaces-webui</module>
 		<module>refapp-schedule</module>
 		<module>refapp-batch</module>
 		<module>refapp-batch-activation</module>
-		<module>refapp-ear</module>
 	</modules>
 
 	<!-- REPOSITORIES -->
@@ -269,20 +265,6 @@
 
 			<dependency>
 				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp-interfaces-webui</artifactId>
-				<version>${project.version}</version>
-				<!-- <scope>provided</scope> -->
-			</dependency>
-
-			<dependency>
-				<groupId>com.teoware.refapp</groupId>
-				<artifactId>refapp-interfaces-rest</artifactId>
-				<version>${project.version}</version>
-				<!-- <scope>provided</scope> -->
-			</dependency>
-
-			<dependency>
-				<groupId>com.teoware.refapp</groupId>
 				<artifactId>refapp-schedule</artifactId>
 				<version>${project.version}</version>
 				<!-- <scope>provided</scope> -->
@@ -345,11 +327,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-ejb-plugin</artifactId>
 			</plugin>
 
 			<plugin>
@@ -442,15 +419,6 @@
 
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-ejb-plugin</artifactId>
-					<version>${version.maven-ejb-plugin}</version>
-					<configuration>
-						<ejbVersion>${ejb.version}</ejbVersion>
-					</configuration>
-				</plugin>
-
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
 					<version>${version.maven-jar-plugin}</version>
 				</plugin>
@@ -461,16 +429,6 @@
 					<version>${version.maven-war-plugin}</version>
 					<configuration>
 						<failOnMissingWebXml>false</failOnMissingWebXml>
-					</configuration>
-				</plugin>
-
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-ear-plugin</artifactId>
-					<version>${version.maven-ear-plugin}</version>
-					<configuration>
-						<version>${ear.version}</version>
-						<defaultLibBundleDir>lib</defaultLibBundleDir>
 					</configuration>
 				</plugin>
 

@@ -9,7 +9,7 @@
 	</parent>
 
 	<artifactId>refapp-infrastructure-dao</artifactId>
-	<packaging>ejb</packaging>
+	<packaging>jar</packaging>
 	<name>refapp-infrastructure-dao</name>
 	<description>Data access layer</description>
 

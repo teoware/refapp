@@ -9,7 +9,7 @@
 	</parent>
 
 	<artifactId>refapp-services-logic</artifactId>
-	<packaging>ejb</packaging>
+	<packaging>jar</packaging>
 	<name>refapp-services-logic</name>
 	<description>Business logic service layer</description>
 

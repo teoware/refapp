@@ -9,7 +9,7 @@
 	</parent>
 
 	<artifactId>refapp-services-facade</artifactId>
-	<packaging>ejb</packaging>
+	<packaging>jar</packaging>
 	<name>refapp-services-facade</name>
 	<description>Business logic facade layer</description>
 
