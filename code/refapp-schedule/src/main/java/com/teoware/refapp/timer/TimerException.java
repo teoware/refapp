@@ -4,21 +4,21 @@ import com.teoware.refapp.RefappException;
 
 public class TimerException extends RefappException {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public TimerException() {
-		super();
-	}
+    public TimerException() {
+        super();
+    }
 
-	public TimerException(String message, Throwable cause) {
-		super(message, cause);
-	}
+    public TimerException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
-	public TimerException(String message) {
-		super(message);
-	}
+    public TimerException(String message) {
+        super(message);
+    }
 
-	public TimerException(Throwable cause) {
-		super(cause);
-	}
+    public TimerException(Throwable cause) {
+        super(cause);
+    }
 }

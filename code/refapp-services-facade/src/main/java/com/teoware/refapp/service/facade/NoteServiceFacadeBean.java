@@ -22,38 +22,38 @@ import com.teoware.refapp.service.dto.ListNotesResponse;
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 public class NoteServiceFacadeBean implements NoteServiceFacade {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Inject
-	private NoteService service;
+    @Inject
+    private NoteService service;
 
-	@Override
-	public CreateNoteResponse createNote(CreateNoteRequest request)
-			throws ServiceException {
-		return service.createNote(request);
-	}
+    @Override
+    public CreateNoteResponse createNote(CreateNoteRequest request)
+            throws ServiceException {
+        return service.createNote(request);
+    }
 
-	@Override
-	public FindNoteResponse findNote(FindNoteRequest request)
-			throws ServiceException {
-		return service.findNote(request);
-	}
+    @Override
+    public FindNoteResponse findNote(FindNoteRequest request)
+            throws ServiceException {
+        return service.findNote(request);
+    }
 
-	@Override
-	public ListNotesResponse listNotes(ListNotesRequest request)
-			throws ServiceException {
-		return service.listNotes(request);
-	}
+    @Override
+    public ListNotesResponse listNotes(ListNotesRequest request)
+            throws ServiceException {
+        return service.listNotes(request);
+    }
 
-	@Override
-	public ChangeNoteResponse changeNote(ChangeNoteRequest request)
-			throws ServiceException {
-		return service.changeNote(request);
-	}
+    @Override
+    public ChangeNoteResponse changeNote(ChangeNoteRequest request)
+            throws ServiceException {
+        return service.changeNote(request);
+    }
 
-	@Override
-	public DeleteNoteResponse deleteNote(DeleteNoteRequest request)
-			throws ServiceException {
-		return service.deleteNote(request);
-	}
+    @Override
+    public DeleteNoteResponse deleteNote(DeleteNoteRequest request)
+            throws ServiceException {
+        return service.deleteNote(request);
+    }
 }

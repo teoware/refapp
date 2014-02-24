@@ -6,7 +6,7 @@ import com.teoware.refapp.model.common.OperationResult;
 
 public class RegisterUserResponse extends BaseMessage<Header, OperationResult> {
 
-	public RegisterUserResponse(Header header, OperationResult body) {
-		super(header, body);
-	}
+    public RegisterUserResponse(Header header, OperationResult body) {
+        super(header, body);
+    }
 }

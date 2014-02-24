@@ -4,21 +4,21 @@ import com.teoware.refapp.model.Header;
 
 public class ListUsersRequest {
 
-	private Header header;
+    private Header header;
 
-	public ListUsersRequest() {
-		this.setHeader(Header.getInstance());
-	}
+    public ListUsersRequest() {
+        this.setHeader(Header.getInstance());
+    }
 
-	public ListUsersRequest(Header header) {
-		this.setHeader(header);
-	}
+    public ListUsersRequest(Header header) {
+        this.setHeader(header);
+    }
 
-	public Header getHeader() {
-		return header;
-	}
+    public Header getHeader() {
+        return header;
+    }
 
-	public void setHeader(Header header) {
-		this.header = header;
-	}
+    public void setHeader(Header header) {
+        this.header = header;
+    }
 }

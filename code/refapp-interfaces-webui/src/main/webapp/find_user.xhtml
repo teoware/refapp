@@ -2,32 +2,32 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
 
-<ui:composition template="templates/common.xhtml">
-	
-	<ui:param name="controller" value="#{findUserControllerBean}" />
-	<ui:param name="vo" value="#{controller.vo}" />
-	
-	<ui:define name="content">
-		<a href="#{request.contextPath}/users.xhtml">&larr; Home</a>
-		<h2>#{controller.pageTitle}</h2>
-		<h:form>
-			<h:panelGrid columnClasses="formLabel, formItem" columns="2">
-				<h:outputLabel id="usernameLabel" for="username" value="Username:" />
-				<h:inputText id="username" value="#{vo.username}" />
-				
-				<f:facet name="footer">
-					<h:commandButton value="Find" type="submit" action="#{controller.onClickFindButton}" />
-				</f:facet>
-			</h:panelGrid>
-		</h:form>
-		<h:outputLabel value="#{controller.user.userDetails.firstName} #{controller.user.userDetails.lastName}" rendered="#{controller.hasUser()}" />
-		<h4>Debug: #{controller.debug}</h4>
-	</ui:define>
+    <ui:composition template="templates/common.xhtml">
 
-</ui:composition>
+        <ui:param name="controller" value="#{findUserControllerBean}" />
+        <ui:param name="vo" value="#{controller.vo}" />
+
+        <ui:define name="content">
+            <a href="#{request.contextPath}/users.xhtml">&larr; Home</a>
+            <h2>#{controller.pageTitle}</h2>
+            <h:form>
+                <h:panelGrid columnClasses="formLabel, formItem" columns="2">
+                    <h:outputLabel id="usernameLabel" for="username" value="Username:" />
+                    <h:inputText id="username" value="#{vo.username}" />
+
+                    <f:facet name="footer">
+                        <h:commandButton value="Find" type="submit" action="#{controller.onClickFindButton}" />
+                    </f:facet>
+                </h:panelGrid>
+            </h:form>
+            <h:outputLabel value="#{controller.user.userDetails.firstName} #{controller.user.userDetails.lastName}" rendered="#{controller.hasUser()}" />
+            <h4>Debug: #{controller.debug}</h4>
+        </ui:define>
+
+    </ui:composition>
 
 </html>

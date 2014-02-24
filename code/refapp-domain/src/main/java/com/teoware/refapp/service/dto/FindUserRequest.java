@@ -6,11 +6,11 @@ import com.teoware.refapp.model.common.Username;
 
 public class FindUserRequest extends BaseMessage<Header, Username> {
 
-	public FindUserRequest(Header header, Username username) {
-		super(header, username);
-	}
+    public FindUserRequest(Header header, Username username) {
+        super(header, username);
+    }
 
-	public FindUserRequest(Username username) {
-		this(Header.getInstance(), username);
-	}
+    public FindUserRequest(Username username) {
+        this(Header.getInstance(), username);
+    }
 }

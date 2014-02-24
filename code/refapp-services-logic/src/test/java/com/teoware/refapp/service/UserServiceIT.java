@@ -7,21 +7,20 @@ import org.junit.BeforeClass;
 
 public class UserServiceIT {
 
-	// private InitialContext context;
+    // private InitialContext context;
+    @BeforeClass
+    public static void setUpBeforeClass() throws Exception {
+    }
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
+    @AfterClass
+    public static void tearDownAfterClass() throws Exception {
+    }
 
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
+    @Before
+    public void setUp() throws Exception {
+    }
 
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
+    @After
+    public void tearDown() throws Exception {
+    }
 }

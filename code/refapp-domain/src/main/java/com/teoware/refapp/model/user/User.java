@@ -8,49 +8,49 @@ import com.teoware.refapp.model.common.Username;
 
 public class User extends BaseBody {
 
-	@NotNull
-	@Valid
-	protected Username username;
-	
-	@NotNull
-	@Valid
-	protected UserDetails userDetails;
-	
-	@NotNull
-	@Valid
-	protected UserAddress userAddress;
-	
-	protected UserStatus userStatus;
+    @NotNull
+    @Valid
+    protected Username username;
 
-	public Username getUsername() {
-		return username;
-	}
+    @NotNull
+    @Valid
+    protected UserDetails userDetails;
 
-	public void setUsername(Username username) {
-		this.username = username;
-	}
+    @NotNull
+    @Valid
+    protected UserAddress userAddress;
 
-	public UserDetails getUserDetails() {
-		return userDetails;
-	}
+    protected UserStatus userStatus;
 
-	public void setUserDetails(UserDetails userDetails) {
-		this.userDetails = userDetails;
-	}
+    public Username getUsername() {
+        return username;
+    }
 
-	public UserAddress getUserAddress() {
-		return userAddress;
-	}
+    public void setUsername(Username username) {
+        this.username = username;
+    }
 
-	public void setUserAddress(UserAddress userAddress) {
-		this.userAddress = userAddress;
-	}
+    public UserDetails getUserDetails() {
+        return userDetails;
+    }
 
-	public UserStatus getUserStatus() {
-		return userStatus;
-	}
+    public void setUserDetails(UserDetails userDetails) {
+        this.userDetails = userDetails;
+    }
 
-	public void setUserStatus(UserStatus userStatus) {
-		this.userStatus = userStatus;
-	}
+    public UserAddress getUserAddress() {
+        return userAddress;
+    }
+
+    public void setUserAddress(UserAddress userAddress) {
+        this.userAddress = userAddress;
+    }
+
+    public UserStatus getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(UserStatus userStatus) {
+        this.userStatus = userStatus;
+    }
 }

@@ -13,7 +13,6 @@ import java.text.ParseException;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -36,84 +35,83 @@ import com.teoware.refapp.web.consumer.vo.RegisterUserRequestVO;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(PasswordHandler.class)
-@Category(com.teoware.refapp.test.UnitTestGroup.class)
 public class UserServiceConsumerTest {
 
-	@InjectMocks
-	private UserServiceConsumerBean serviceConsumer;
+    @InjectMocks
+    private UserServiceConsumerBean serviceConsumer;
 
-	@Mock
-	private UserServiceFacade serviceFacade;
+    @Mock
+    private UserServiceFacade serviceFacade;
 
-	@Before
-	public void setUp() throws Exception {
-		initMocks(this);
-	}
+    @Before
+    public void setUp() throws Exception {
+        initMocks(this);
+    }
 
-	@Test
-	public void testRegisterUserIsSuccessful() throws ParseException, ValidationException, ServiceException,
-			UnsupportedEncodingException {
-		when(serviceFacade.registerUser(any(RegisterUserRequest.class))).thenReturn(mock(RegisterUserResponse.class));
-		RegisterUserRequestVO vo = mock(RegisterUserRequestVO.class);
-		when(vo.getUserPassword()).thenReturn(mock(UserPassword.class));
-		mockStatic(PasswordHandler.class);
-		when(PasswordHandler.encryptPassword(anyString(), anyString())).thenReturn("abcd");
+    @Test
+    public void testRegisterUserIsSuccessful() throws ParseException, ValidationException, ServiceException,
+            UnsupportedEncodingException {
+        when(serviceFacade.registerUser(any(RegisterUserRequest.class))).thenReturn(mock(RegisterUserResponse.class));
+        RegisterUserRequestVO vo = mock(RegisterUserRequestVO.class);
+        when(vo.getUserPassword()).thenReturn(mock(UserPassword.class));
+        mockStatic(PasswordHandler.class);
+        when(PasswordHandler.encryptPassword(anyString(), anyString())).thenReturn("abcd");
 
-		serviceConsumer.registerUser(vo);
+        serviceConsumer.registerUser(vo);
 
-		verify(serviceFacade).registerUser(any(RegisterUserRequest.class));
-	}
+        verify(serviceFacade).registerUser(any(RegisterUserRequest.class));
+    }
 
-	@Test(expected = RuntimeException.class)
-	public void testRegisterUserThrowsValidationException() throws ValidationException, ServiceException {
-		when(serviceFacade.registerUser(any(RegisterUserRequest.class))).thenThrow(mock(ValidationException.class));
+    @Test(expected = RuntimeException.class)
+    public void testRegisterUserThrowsValidationException() throws ValidationException, ServiceException {
+        when(serviceFacade.registerUser(any(RegisterUserRequest.class))).thenThrow(mock(ValidationException.class));
 
-		serviceConsumer.registerUser(mock(RegisterUserRequestVO.class));
-	}
+        serviceConsumer.registerUser(mock(RegisterUserRequestVO.class));
+    }
 
-	@Test(expected = RuntimeException.class)
-	public void testRegisterUserThrowsServiceException() throws ValidationException, ServiceException {
-		when(serviceFacade.registerUser(any(RegisterUserRequest.class))).thenThrow(mock(ServiceException.class));
+    @Test(expected = RuntimeException.class)
+    public void testRegisterUserThrowsServiceException() throws ValidationException, ServiceException {
+        when(serviceFacade.registerUser(any(RegisterUserRequest.class))).thenThrow(mock(ServiceException.class));
 
-		serviceConsumer.registerUser(mock(RegisterUserRequestVO.class));
-	}
+        serviceConsumer.registerUser(mock(RegisterUserRequestVO.class));
+    }
 
-	@Test
-	public void testFindUserIsSuccessful() throws ParseException, ValidationException, ServiceException {
-		when(serviceFacade.findUser(any(FindUserRequest.class))).thenReturn(mock(FindUserResponse.class));
+    @Test
+    public void testFindUserIsSuccessful() throws ParseException, ValidationException, ServiceException {
+        when(serviceFacade.findUser(any(FindUserRequest.class))).thenReturn(mock(FindUserResponse.class));
 
-		serviceConsumer.findUser(mock(FindUserRequestVO.class));
+        serviceConsumer.findUser(mock(FindUserRequestVO.class));
 
-		verify(serviceFacade).findUser(any(FindUserRequest.class));
-	}
+        verify(serviceFacade).findUser(any(FindUserRequest.class));
+    }
 
-	@Test(expected = RuntimeException.class)
-	public void testFindUserThrowsValidationException() throws ValidationException, ServiceException {
-		when(serviceFacade.findUser(any(FindUserRequest.class))).thenThrow(mock(ValidationException.class));
+    @Test(expected = RuntimeException.class)
+    public void testFindUserThrowsValidationException() throws ValidationException, ServiceException {
+        when(serviceFacade.findUser(any(FindUserRequest.class))).thenThrow(mock(ValidationException.class));
 
-		serviceConsumer.findUser(mock(FindUserRequestVO.class));
-	}
+        serviceConsumer.findUser(mock(FindUserRequestVO.class));
+    }
 
-	@Test(expected = RuntimeException.class)
-	public void testFindUserThrowsServiceException() throws ValidationException, ServiceException {
-		when(serviceFacade.findUser(any(FindUserRequest.class))).thenThrow(mock(ServiceException.class));
+    @Test(expected = RuntimeException.class)
+    public void testFindUserThrowsServiceException() throws ValidationException, ServiceException {
+        when(serviceFacade.findUser(any(FindUserRequest.class))).thenThrow(mock(ServiceException.class));
 
-		serviceConsumer.findUser(mock(FindUserRequestVO.class));
-	}
+        serviceConsumer.findUser(mock(FindUserRequestVO.class));
+    }
 
-	@Test
-	public void testListUsersIsSuccessful() throws ParseException, ValidationException, ServiceException {
-		when(serviceFacade.listUsers(any(ListUsersRequest.class))).thenReturn(mock(ListUsersResponse.class));
+    @Test
+    public void testListUsersIsSuccessful() throws ParseException, ValidationException, ServiceException {
+        when(serviceFacade.listUsers(any(ListUsersRequest.class))).thenReturn(mock(ListUsersResponse.class));
 
-		serviceConsumer.listUsers();
+        serviceConsumer.listUsers();
 
-		verify(serviceFacade).listUsers(any(ListUsersRequest.class));
-	}
+        verify(serviceFacade).listUsers(any(ListUsersRequest.class));
+    }
 
-	@Test(expected = RuntimeException.class)
-	public void testListUsersThrowsServiceException() throws ValidationException, ServiceException {
-		when(serviceFacade.listUsers(any(ListUsersRequest.class))).thenThrow(mock(ServiceException.class));
+    @Test(expected = RuntimeException.class)
+    public void testListUsersThrowsServiceException() throws ValidationException, ServiceException {
+        when(serviceFacade.listUsers(any(ListUsersRequest.class))).thenThrow(mock(ServiceException.class));
 
-		serviceConsumer.listUsers();
-	}
+        serviceConsumer.listUsers();
+    }
 }

@@ -26,21 +26,21 @@ import com.teoware.refapp.service.dto.SuspendUserResponse;
 @Local
 public interface UserService extends Serializable {
 
-	public RegisterUserResponse registerUser(RegisterUserRequest request) throws ServiceException;
+    public RegisterUserResponse registerUser(RegisterUserRequest request) throws ServiceException;
 
-	public ActivateUserResponse activateUser(ActivateUserRequest request) throws ServiceException;
+    public ActivateUserResponse activateUser(ActivateUserRequest request) throws ServiceException;
 
-	public SuspendUserResponse suspendUser(SuspendUserRequest request) throws ServiceException;
+    public SuspendUserResponse suspendUser(SuspendUserRequest request) throws ServiceException;
 
-	public FindUserResponse findUser(FindUserRequest request) throws ServiceException;
+    public FindUserResponse findUser(FindUserRequest request) throws ServiceException;
 
-	public ListUsersResponse listUsers(ListUsersRequest request) throws ServiceException;
+    public ListUsersResponse listUsers(ListUsersRequest request) throws ServiceException;
 
-	public FindUsersResponse findPendigUsers(FindUsersRequest request) throws ServiceException;
+    public FindUsersResponse findPendigUsers(FindUsersRequest request) throws ServiceException;
 
-	public ChangeUserResponse changeUser(ChangeUserRequest request) throws ServiceException;
+    public ChangeUserResponse changeUser(ChangeUserRequest request) throws ServiceException;
 
-	public ChangeUserPasswordResponse changeUserPassword(ChangeUserPasswordRequest request) throws ServiceException;
+    public ChangeUserPasswordResponse changeUserPassword(ChangeUserPasswordRequest request) throws ServiceException;
 
-	public DeleteUserResponse deleteUser(DeleteUserRequest request) throws ServiceException;
+    public DeleteUserResponse deleteUser(DeleteUserRequest request) throws ServiceException;
 }

@@ -8,46 +8,46 @@ import com.teoware.refapp.model.common.Uuid;
 
 public class Note extends BaseBody {
 
-	@NotNull
-	@Valid
-	private Uuid uuid;
+    @NotNull
+    @Valid
+    private Uuid uuid;
 
-	@NotNull
-	@Valid
-	private NoteDetails noteDetails;
+    @NotNull
+    @Valid
+    private NoteDetails noteDetails;
 
-	private NoteStatus noteStatus;
+    private NoteStatus noteStatus;
 
-	public Note() {
-	}
+    public Note() {
+    }
 
-	public Note(Uuid uuid, NoteDetails noteDetails, NoteStatus noteStatus) {
-		this.uuid = uuid;
-		this.noteDetails = noteDetails;
-		this.noteStatus = noteStatus;
-	}
+    public Note(Uuid uuid, NoteDetails noteDetails, NoteStatus noteStatus) {
+        this.uuid = uuid;
+        this.noteDetails = noteDetails;
+        this.noteStatus = noteStatus;
+    }
 
-	public Uuid getUuid() {
-		return uuid;
-	}
+    public Uuid getUuid() {
+        return uuid;
+    }
 
-	public void setUuid(Uuid uuid) {
-		this.uuid = uuid;
-	}
+    public void setUuid(Uuid uuid) {
+        this.uuid = uuid;
+    }
 
-	public NoteDetails getNoteDetails() {
-		return noteDetails;
-	}
+    public NoteDetails getNoteDetails() {
+        return noteDetails;
+    }
 
-	public void setNoteDetails(NoteDetails noteDetails) {
-		this.noteDetails = noteDetails;
-	}
+    public void setNoteDetails(NoteDetails noteDetails) {
+        this.noteDetails = noteDetails;
+    }
 
-	public NoteStatus getNoteStatus() {
-		return noteStatus;
-	}
+    public NoteStatus getNoteStatus() {
+        return noteStatus;
+    }
 
-	public void setNoteStatus(NoteStatus noteStatus) {
-		this.noteStatus = noteStatus;
-	}
+    public void setNoteStatus(NoteStatus noteStatus) {
+        this.noteStatus = noteStatus;
+    }
 }

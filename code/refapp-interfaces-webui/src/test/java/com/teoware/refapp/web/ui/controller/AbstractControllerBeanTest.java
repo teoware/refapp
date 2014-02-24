@@ -15,33 +15,33 @@ import com.teoware.refapp.web.ui.util.Globalization;
 
 public class AbstractControllerBeanTest {
 
-	@InjectMocks
-	private AbstractControllerBean controller = new AbstractControllerBean() {
-		@Override
-		public String getPageTitle() {
-			return "";
-		}
-	};
+    @InjectMocks
+    private AbstractControllerBean controller = new AbstractControllerBean() {
+        @Override
+        public String getPageTitle() {
+            return "";
+        }
+    };
 
-	@Mock
-	protected Globalization globalization;
+    @Mock
+    protected Globalization globalization;
 
-	@Before
-	public void setUp() throws Exception {
-		initMocks(this);
-		when(globalization.dict(anyString())).thenReturn("RefApp");
-	}
+    @Before
+    public void setUp() throws Exception {
+        initMocks(this);
+        when(globalization.dict(anyString())).thenReturn("RefApp");
+    }
 
-	@Test
-	public void testTitle() {
-		assertNotNull(controller.getTitle());
-		assertTrue(controller.getTitle().startsWith("RefApp"));
-	}
+    @Test
+    public void testTitle() {
+        assertNotNull(controller.getTitle());
+        assertTrue(controller.getTitle().startsWith("RefApp"));
+    }
 
-	@Test
-	public void testGetStackTrace() {
-		String e = controller.getStackTrace(new Exception());
+    @Test
+    public void testGetStackTrace() {
+        String e = controller.getStackTrace(new Exception());
 
-		assertNotNull(e);
-	}
+        assertNotNull(e);
+    }
 }

@@ -19,35 +19,35 @@ import com.teoware.refapp.service.dto.ListTasksResponse;
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class TaskServiceBean extends Service implements TaskService {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Override
-	public CreateTaskResponse createTask(CreateTaskRequest request) {
-		// TODO
-		return null;
-	}
+    @Override
+    public CreateTaskResponse createTask(CreateTaskRequest request) {
+        // TODO
+        return null;
+    }
 
-	@Override
-	public FindTaskResponse findTask(FindTaskRequest request) throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public FindTaskResponse findTask(FindTaskRequest request) throws ServiceException {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public ListTasksResponse listTasks(ListTasksRequest request) throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public ListTasksResponse listTasks(ListTasksRequest request) throws ServiceException {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public ChangeTaskResponse changeTask(ChangeTaskRequest request) throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public ChangeTaskResponse changeTask(ChangeTaskRequest request) throws ServiceException {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public DeleteTaskResponse deleteTask(DeleteTaskRequest request) throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public DeleteTaskResponse deleteTask(DeleteTaskRequest request) throws ServiceException {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

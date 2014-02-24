@@ -6,5 +6,5 @@ import java.text.ParseException;
 
 public interface ResultSetExtractor<T> {
 
-	T extractData(ResultSet result) throws SQLException, ParseException;
+    T extractData(ResultSet result) throws SQLException, ParseException;
 }

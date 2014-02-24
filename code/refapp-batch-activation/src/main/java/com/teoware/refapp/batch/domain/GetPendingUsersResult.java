@@ -6,7 +6,7 @@ import com.teoware.refapp.model.user.User;
 
 public class GetPendingUsersResult extends TaskResult {
 
-	public GetPendingUsersResult(List<User> pendingUsersList, Boolean terminate) {
-		super(pendingUsersList, terminate);
-	}
+    public GetPendingUsersResult(List<User> pendingUsersList, Boolean terminate) {
+        super(pendingUsersList, terminate);
+    }
 }

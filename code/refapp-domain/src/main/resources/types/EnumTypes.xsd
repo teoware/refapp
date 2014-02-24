@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0">
-	<xs:include schemaLocation="BaseTypes.xsd" />
+    <xs:include schemaLocation="BaseTypes.xsd" />
 
-	<xs:simpleType name="GenderType">
-		<xs:restriction base="an6">
-			<xs:minLength value="4" />
-			<xs:enumeration value="MALE" />
-			<xs:enumeration value="FEMALE" />
-		</xs:restriction>
-	</xs:simpleType>
+    <xs:simpleType name="GenderType">
+        <xs:restriction base="an6">
+            <xs:minLength value="4" />
+            <xs:enumeration value="MALE" />
+            <xs:enumeration value="FEMALE" />
+        </xs:restriction>
+    </xs:simpleType>
 
 </xs:schema>

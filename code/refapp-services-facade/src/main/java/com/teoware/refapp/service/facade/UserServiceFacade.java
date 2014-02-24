@@ -28,22 +28,22 @@ import com.teoware.refapp.service.validation.ValidationException;
 @Local
 public interface UserServiceFacade extends Serializable {
 
-	public RegisterUserResponse registerUser(RegisterUserRequest request) throws ValidationException, ServiceException;
+    public RegisterUserResponse registerUser(RegisterUserRequest request) throws ValidationException, ServiceException;
 
-	public ActivateUserResponse activateUser(ActivateUserRequest request) throws ValidationException, ServiceException;
+    public ActivateUserResponse activateUser(ActivateUserRequest request) throws ValidationException, ServiceException;
 
-	public SuspendUserResponse suspendUser(SuspendUserRequest request) throws ValidationException, ServiceException;
+    public SuspendUserResponse suspendUser(SuspendUserRequest request) throws ValidationException, ServiceException;
 
-	public FindUserResponse findUser(FindUserRequest request) throws ValidationException, ServiceException;
+    public FindUserResponse findUser(FindUserRequest request) throws ValidationException, ServiceException;
 
-	public ListUsersResponse listUsers(ListUsersRequest request) throws ServiceException;
+    public ListUsersResponse listUsers(ListUsersRequest request) throws ServiceException;
 
-	public FindUsersResponse findPendigUsers(FindUsersRequest request) throws ServiceException;
+    public FindUsersResponse findPendigUsers(FindUsersRequest request) throws ServiceException;
 
-	public ChangeUserResponse changeUser(ChangeUserRequest request) throws ValidationException, ServiceException;
+    public ChangeUserResponse changeUser(ChangeUserRequest request) throws ValidationException, ServiceException;
 
-	public ChangeUserPasswordResponse changeUserPassword(ChangeUserPasswordRequest request) throws ValidationException,
-			ServiceException;
+    public ChangeUserPasswordResponse changeUserPassword(ChangeUserPasswordRequest request) throws ValidationException,
+            ServiceException;
 
-	public DeleteUserResponse deleteUser(DeleteUserRequest request) throws ValidationException, ServiceException;
+    public DeleteUserResponse deleteUser(DeleteUserRequest request) throws ValidationException, ServiceException;
 }

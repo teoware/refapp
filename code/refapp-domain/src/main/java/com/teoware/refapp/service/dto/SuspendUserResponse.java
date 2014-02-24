@@ -6,7 +6,7 @@ import com.teoware.refapp.model.common.OperationResult;
 
 public class SuspendUserResponse extends BaseMessage<Header, OperationResult> {
 
-	public SuspendUserResponse(Header header, OperationResult body) {
-		super(header, body);
-	}
+    public SuspendUserResponse(Header header, OperationResult body) {
+        super(header, body);
+    }
 }

@@ -1,66 +1,66 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>com.teoware.refapp</groupId>
-		<artifactId>refapp</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <groupId>com.teoware.refapp</groupId>
+        <artifactId>refapp</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
 
-	<artifactId>refapp-batch</artifactId>
-	<packaging>jar</packaging>
-	<name>refapp-batch</name>
-	<description>Module for batch infrastructure</description>
+    <artifactId>refapp-batch</artifactId>
+    <packaging>jar</packaging>
+    <name>refapp-batch</name>
+    <description>Module for batch infrastructure</description>
 
-	<!-- PROPERTIES -->
-	<properties>
-	</properties>
+    <!-- PROPERTIES -->
+    <properties>
+    </properties>
 
-	<!-- MODULES -->
-	<modules>
-	</modules>
+    <!-- MODULES -->
+    <modules>
+    </modules>
 
-	<!-- REPOSITORIES -->
-	<repositories>
-	</repositories>
+    <!-- REPOSITORIES -->
+    <repositories>
+    </repositories>
 
-	<!-- PLUGIN REPOSITORIES -->
-	<pluginRepositories>
-	</pluginRepositories>
+    <!-- PLUGIN REPOSITORIES -->
+    <pluginRepositories>
+    </pluginRepositories>
 
-	<!-- DEPENDENCIES -->
-	<dependencies>
-		<!-- Network -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-email</artifactId>
-		</dependency>
+    <!-- DEPENDENCIES -->
+    <dependencies>
+        <!-- Network -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-email</artifactId>
+        </dependency>
 
-		<!-- Project -->
-		<dependency>
-			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-common</artifactId>
-		</dependency>
+        <!-- Project -->
+        <dependency>
+            <groupId>com.teoware.refapp</groupId>
+            <artifactId>refapp-common</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-schedule</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>com.teoware.refapp</groupId>
+            <artifactId>refapp-schedule</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-services-facade</artifactId>
-		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>com.teoware.refapp</groupId>
+            <artifactId>refapp-services-facade</artifactId>
+        </dependency>
+    </dependencies>
 
-	<!-- MAVEN PLUGINS -->
-	<build>
-		<plugins>
-		</plugins>
-	</build>
+    <!-- MAVEN PLUGINS -->
+    <build>
+        <plugins>
+        </plugins>
+    </build>
 
-	<!-- PROFILES -->
-	<profiles>
-	</profiles>
+    <!-- PROFILES -->
+    <profiles>
+    </profiles>
 </project>

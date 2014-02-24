@@ -9,13 +9,13 @@ import com.teoware.refapp.model.user.UserPassword;
 
 public class UserPasswordRowMapper implements RowMapper<UserPassword> {
 
-	@Override
-	public UserPassword mapRow(ResultSet result, int rowCount) throws SQLException, ParseException {
-		UserPassword authorPassword = new UserPassword();
+    @Override
+    public UserPassword mapRow(ResultSet result, int rowCount) throws SQLException, ParseException {
+        UserPassword authorPassword = new UserPassword();
 
-		authorPassword.setPassword(result.getString(UserTables.PASSWORD_COLUMN_NAME));
-		authorPassword.setSalt(result.getString(UserTables.SALT_COLUMN_NAME));
+        authorPassword.setPassword(result.getString(UserTables.PASSWORD_COLUMN_NAME));
+        authorPassword.setSalt(result.getString(UserTables.SALT_COLUMN_NAME));
 
-		return authorPassword;
-	}
+        return authorPassword;
+    }
 }

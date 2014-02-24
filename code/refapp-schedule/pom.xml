@@ -1,50 +1,50 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>com.teoware.refapp</groupId>
-		<artifactId>refapp</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <groupId>com.teoware.refapp</groupId>
+        <artifactId>refapp</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
 
-	<artifactId>refapp-schedule</artifactId>
-	<packaging>jar</packaging>
-	<name>refapp-schedule</name>
-	<description>Module for scheduling and timing behaviour</description>
+    <artifactId>refapp-schedule</artifactId>
+    <packaging>jar</packaging>
+    <name>refapp-schedule</name>
+    <description>Module for scheduling and timing behaviour</description>
 
-	<!-- PROPERTIES -->
-	<properties>
-	</properties>
+    <!-- PROPERTIES -->
+    <properties>
+    </properties>
 
-	<!-- MODULES -->
-	<modules>
-	</modules>
+    <!-- MODULES -->
+    <modules>
+    </modules>
 
-	<!-- REPOSITORIES -->
-	<repositories>
-	</repositories>
+    <!-- REPOSITORIES -->
+    <repositories>
+    </repositories>
 
-	<!-- PLUGIN REPOSITORIES -->
-	<pluginRepositories>
-	</pluginRepositories>
+    <!-- PLUGIN REPOSITORIES -->
+    <pluginRepositories>
+    </pluginRepositories>
 
-	<!-- DEPENDENCIES -->
-	<dependencies>
-		<!-- Project -->
-		<dependency>
-			<groupId>com.teoware.refapp</groupId>
-			<artifactId>refapp-common</artifactId>
-		</dependency>
-	</dependencies>
+    <!-- DEPENDENCIES -->
+    <dependencies>
+        <!-- Project -->
+        <dependency>
+            <groupId>com.teoware.refapp</groupId>
+            <artifactId>refapp-common</artifactId>
+        </dependency>
+    </dependencies>
 
-	<!-- MAVEN PLUGINS -->
-	<build>
-		<plugins>
-		</plugins>
-	</build>
+    <!-- MAVEN PLUGINS -->
+    <build>
+        <plugins>
+        </plugins>
+    </build>
 
-	<!-- PROFILES -->
-	<profiles>
-	</profiles>
+    <!-- PROFILES -->
+    <profiles>
+    </profiles>
 </project>

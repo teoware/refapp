@@ -75,277 +75,277 @@ import com.teoware.refapp.service.dto.SuspendUserResponse;
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class UserServiceBean extends Service implements UserService {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private static final Logger LOG = LoggerFactory.getLogger(UserServiceBean.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UserServiceBean.class);
 
-	private static final String SERVICE_NAME = "User service";
-	private static final String DAO_EXCEPTION_MESSAGE = "DAO exception";
+    private static final String SERVICE_NAME = "User service";
+    private static final String DAO_EXCEPTION_MESSAGE = "DAO exception";
 
-	@Inject
-	protected UserDao userDao;
+    @Inject
+    protected UserDao userDao;
 
-	@Override
-	public RegisterUserResponse registerUser(RegisterUserRequest request) throws ServiceException {
-		LOG.info(SERVICE_NAME + ": Register user operation invoked.");
+    @Override
+    public RegisterUserResponse registerUser(RegisterUserRequest request) throws ServiceException {
+        LOG.info(SERVICE_NAME + ": Register user operation invoked.");
 
-		try {
-			int rowsAffected = 0;
+        try {
+            int rowsAffected = 0;
 
-			Header header = request.getHeader();
-			User user = request.getBody();
-			UserPassword userPassword = request.getUserPassword();
+            Header header = request.getHeader();
+            User user = request.getBody();
+            UserPassword userPassword = request.getUserPassword();
 
-			userDao.persistConnection();
+            userDao.persistConnection();
 
-			CreateUserInput createUserInput = new CreateUserInput(user.getUsername());
-			CreateUserOutput createUserOutput = userDao.createUser(createUserInput);
-			Id userId = createUserOutput.getId();
-			rowsAffected += createUserOutput.getRowsAffected();
+            CreateUserInput createUserInput = new CreateUserInput(user.getUsername());
+            CreateUserOutput createUserOutput = userDao.createUser(createUserInput);
+            Id userId = createUserOutput.getId();
+            rowsAffected += createUserOutput.getRowsAffected();
 
-			CreateUserDetailsInput createUserDetailsInput = new CreateUserDetailsInput(userId, user.getUserDetails());
-			CreateUserDetailsOutput createUserDetailsOutput = userDao.createUserDetails(createUserDetailsInput);
-			rowsAffected += createUserDetailsOutput.getRowsAffected();
+            CreateUserDetailsInput createUserDetailsInput = new CreateUserDetailsInput(userId, user.getUserDetails());
+            CreateUserDetailsOutput createUserDetailsOutput = userDao.createUserDetails(createUserDetailsInput);
+            rowsAffected += createUserDetailsOutput.getRowsAffected();
 
-			CreateUserAddressInput createUserAddressInput = new CreateUserAddressInput(userId, user.getUserAddress());
-			CreateUserAddressOutput createUserAddressOutput = userDao.createUserAddress(createUserAddressInput);
-			rowsAffected += createUserAddressOutput.getRowsAffected();
+            CreateUserAddressInput createUserAddressInput = new CreateUserAddressInput(userId, user.getUserAddress());
+            CreateUserAddressOutput createUserAddressOutput = userDao.createUserAddress(createUserAddressInput);
+            rowsAffected += createUserAddressOutput.getRowsAffected();
 
-			CreateUserPasswordInput createUserPasswordInput = new CreateUserPasswordInput(createUserOutput.getId(),
-					userPassword);
-			CreateUserPasswordOutput createUserPasswordOutput = userDao.createUserPassword(createUserPasswordInput);
-			rowsAffected += createUserPasswordOutput.getRowsAffected();
+            CreateUserPasswordInput createUserPasswordInput = new CreateUserPasswordInput(createUserOutput.getId(),
+                    userPassword);
+            CreateUserPasswordOutput createUserPasswordOutput = userDao.createUserPassword(createUserPasswordInput);
+            rowsAffected += createUserPasswordOutput.getRowsAffected();
 
-			return new RegisterUserResponse(header, createOperationResult(Result.SUCCESS, rowsAffected));
-		} catch (DaoException e) {
-			LOG.error(SERVICE_NAME + ": Register user operation failed.");
-			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
-		} finally {
-			userDao.terminateConnection();
-		}
-	}
+            return new RegisterUserResponse(header, createOperationResult(Result.SUCCESS, rowsAffected));
+        } catch (DaoException e) {
+            LOG.error(SERVICE_NAME + ": Register user operation failed.");
+            throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
+        } finally {
+            userDao.terminateConnection();
+        }
+    }
 
-	@Override
-	public ActivateUserResponse activateUser(ActivateUserRequest request) throws ServiceException {
-		LOG.info(SERVICE_NAME + ": Activate user operation invoked.");
+    @Override
+    public ActivateUserResponse activateUser(ActivateUserRequest request) throws ServiceException {
+        LOG.info(SERVICE_NAME + ": Activate user operation invoked.");
 
-		try {
-			Header header = request.getHeader();
-			Username username = request.getBody();
+        try {
+            Header header = request.getHeader();
+            Username username = request.getBody();
 
-			userDao.persistConnection();
+            userDao.persistConnection();
 
-			Id userId = userDao.readUserId(username);
+            Id userId = userDao.readUserId(username);
 
-			UpdateUserStatusInput updateUserStatusInput = new UpdateUserStatusInput(userId, new UserStatus(
-					Status.ACTIVE, null, null));
-			UpdateUserStatusOutput updateUserStatusOutput = userDao.updateUserStatus(updateUserStatusInput);
-			int rowsAffected = updateUserStatusOutput.getRowsAffected();
+            UpdateUserStatusInput updateUserStatusInput = new UpdateUserStatusInput(userId, new UserStatus(
+                    Status.ACTIVE, null, null));
+            UpdateUserStatusOutput updateUserStatusOutput = userDao.updateUserStatus(updateUserStatusInput);
+            int rowsAffected = updateUserStatusOutput.getRowsAffected();
 
-			return new ActivateUserResponse(header, createOperationResult(Result.SUCCESS, rowsAffected));
-		} catch (DaoException e) {
-			LOG.error(SERVICE_NAME + ": Activate user operation failed.");
-			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
-		} finally {
-			userDao.terminateConnection();
-		}
-	}
+            return new ActivateUserResponse(header, createOperationResult(Result.SUCCESS, rowsAffected));
+        } catch (DaoException e) {
+            LOG.error(SERVICE_NAME + ": Activate user operation failed.");
+            throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
+        } finally {
+            userDao.terminateConnection();
+        }
+    }
 
-	@Override
-	public SuspendUserResponse suspendUser(SuspendUserRequest request) throws ServiceException {
-		LOG.info(SERVICE_NAME + ": Suspend user operation invoked.");
+    @Override
+    public SuspendUserResponse suspendUser(SuspendUserRequest request) throws ServiceException {
+        LOG.info(SERVICE_NAME + ": Suspend user operation invoked.");
 
-		try {
-			Header header = request.getHeader();
-			Username username = request.getBody();
+        try {
+            Header header = request.getHeader();
+            Username username = request.getBody();
 
-			userDao.persistConnection();
+            userDao.persistConnection();
 
-			Id userId = userDao.readUserId(username);
+            Id userId = userDao.readUserId(username);
 
-			UpdateUserStatusInput updateUserStatusInput = new UpdateUserStatusInput(userId, new UserStatus(
-					Status.SUSPENDED, null, null));
-			UpdateUserStatusOutput updateUserStatusOutput = userDao.updateUserStatus(updateUserStatusInput);
-			int rowsAffected = updateUserStatusOutput.getRowsAffected();
+            UpdateUserStatusInput updateUserStatusInput = new UpdateUserStatusInput(userId, new UserStatus(
+                    Status.SUSPENDED, null, null));
+            UpdateUserStatusOutput updateUserStatusOutput = userDao.updateUserStatus(updateUserStatusInput);
+            int rowsAffected = updateUserStatusOutput.getRowsAffected();
 
-			return new SuspendUserResponse(header, createOperationResult(Result.SUCCESS, rowsAffected));
-		} catch (DaoException e) {
-			LOG.error(SERVICE_NAME + ": Suspend user operation failed.");
-			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
-		} finally {
-			userDao.terminateConnection();
-		}
-	}
+            return new SuspendUserResponse(header, createOperationResult(Result.SUCCESS, rowsAffected));
+        } catch (DaoException e) {
+            LOG.error(SERVICE_NAME + ": Suspend user operation failed.");
+            throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
+        } finally {
+            userDao.terminateConnection();
+        }
+    }
 
-	@Override
-	public FindUserResponse findUser(FindUserRequest request) throws ServiceException {
-		LOG.info(SERVICE_NAME + ": Find user operation invoked.");
+    @Override
+    public FindUserResponse findUser(FindUserRequest request) throws ServiceException {
+        LOG.info(SERVICE_NAME + ": Find user operation invoked.");
 
-		try {
-			Header header = request.getHeader();
-			Username username = request.getBody();
+        try {
+            Header header = request.getHeader();
+            Username username = request.getBody();
 
-			ReadUserInput readUserInput = new ReadUserInput(username);
-			ReadUserOutput readUserOutput = userDao.readUser(readUserInput);
-			List<User> userList = readUserOutput.getUserList();
+            ReadUserInput readUserInput = new ReadUserInput(username);
+            ReadUserOutput readUserOutput = userDao.readUser(readUserInput);
+            List<User> userList = readUserOutput.getUserList();
 
-			if (userList.size() == 0) {
-				return new FindUserResponse(header, null);
-			} else {
-				// TODO Sanity check if more than one user found
-				return new FindUserResponse(header, userList.get(0));
-			}
-		} catch (DaoException e) {
-			LOG.error(SERVICE_NAME + ": Find user operation failed.");
-			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
-		} finally {
-			userDao.terminateConnection();
-		}
-	}
+            if (userList.size() == 0) {
+                return new FindUserResponse(header, null);
+            } else {
+                // TODO Sanity check if more than one user found
+                return new FindUserResponse(header, userList.get(0));
+            }
+        } catch (DaoException e) {
+            LOG.error(SERVICE_NAME + ": Find user operation failed.");
+            throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
+        } finally {
+            userDao.terminateConnection();
+        }
+    }
 
-	@Override
-	public ListUsersResponse listUsers(ListUsersRequest request) throws ServiceException {
-		LOG.info(SERVICE_NAME + ": List users operation invoked.");
+    @Override
+    public ListUsersResponse listUsers(ListUsersRequest request) throws ServiceException {
+        LOG.info(SERVICE_NAME + ": List users operation invoked.");
 
-		try {
-			Header header = request.getHeader();
-			ReadUsersInput readUsersInput = new ReadUsersInput(Status.ACTIVE);
+        try {
+            Header header = request.getHeader();
+            ReadUsersInput readUsersInput = new ReadUsersInput(Status.ACTIVE);
 
-			ReadUsersOutput readUsersOutput = userDao.readUsers(readUsersInput);
+            ReadUsersOutput readUsersOutput = userDao.readUsers(readUsersInput);
 
-			return new ListUsersResponse(header, readUsersOutput.getUserList());
-		} catch (DaoException e) {
-			LOG.error(SERVICE_NAME + ": List users operation failed.");
-			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
-		} finally {
-			userDao.terminateConnection();
-		}
-	}
+            return new ListUsersResponse(header, readUsersOutput.getUserList());
+        } catch (DaoException e) {
+            LOG.error(SERVICE_NAME + ": List users operation failed.");
+            throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
+        } finally {
+            userDao.terminateConnection();
+        }
+    }
 
-	public FindUsersResponse findPendigUsers(FindUsersRequest request) throws ServiceException {
-		LOG.info(SERVICE_NAME + ": Find pending users operation invoked.");
+    public FindUsersResponse findPendigUsers(FindUsersRequest request) throws ServiceException {
+        LOG.info(SERVICE_NAME + ": Find pending users operation invoked.");
 
-		try {
-			Header header = request.getHeader();
-			ReadUsersInput readUsersInput = new ReadUsersInput(Status.PENDING);
+        try {
+            Header header = request.getHeader();
+            ReadUsersInput readUsersInput = new ReadUsersInput(Status.PENDING);
 
-			ReadUsersOutput readUsersOutput = userDao.readUsers(readUsersInput);
+            ReadUsersOutput readUsersOutput = userDao.readUsers(readUsersInput);
 
-			return new FindUsersResponse(header, readUsersOutput.getUserList());
-		} catch (DaoException e) {
-			LOG.error(SERVICE_NAME + ": Find pending users operation failed.");
-			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
-		} finally {
-			userDao.terminateConnection();
-		}
-	}
+            return new FindUsersResponse(header, readUsersOutput.getUserList());
+        } catch (DaoException e) {
+            LOG.error(SERVICE_NAME + ": Find pending users operation failed.");
+            throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
+        } finally {
+            userDao.terminateConnection();
+        }
+    }
 
-	@Override
-	public ChangeUserResponse changeUser(ChangeUserRequest request) throws ServiceException {
-		LOG.info(SERVICE_NAME + ": Change user operation invoked.");
+    @Override
+    public ChangeUserResponse changeUser(ChangeUserRequest request) throws ServiceException {
+        LOG.info(SERVICE_NAME + ": Change user operation invoked.");
 
-		try {
-			int rowsAffected = 0;
+        try {
+            int rowsAffected = 0;
 
-			Header header = request.getHeader();
-			User user = request.getBody();
+            Header header = request.getHeader();
+            User user = request.getBody();
 
-			userDao.persistConnection();
+            userDao.persistConnection();
 
-			Id userId = userDao.readUserId(user.getUsername());
+            Id userId = userDao.readUserId(user.getUsername());
 
-			UpdateUserInput updateUserInput = new UpdateUserInput(userId, request.getUsername());
-			UpdateUserOutput updateUserOutput = userDao.updateUser(updateUserInput);
-			rowsAffected += updateUserOutput.getRowsAffected();
+            UpdateUserInput updateUserInput = new UpdateUserInput(userId, request.getUsername());
+            UpdateUserOutput updateUserOutput = userDao.updateUser(updateUserInput);
+            rowsAffected += updateUserOutput.getRowsAffected();
 
-			UpdateUserDetailsInput updateUserDetailsInput = new UpdateUserDetailsInput(userId, request.getBody()
-					.getUserDetails());
-			UpdateUserDetailsOutput updateUserDetailsOutput = userDao.updateUserDetails(updateUserDetailsInput);
-			rowsAffected += updateUserDetailsOutput.getRowsAffected();
+            UpdateUserDetailsInput updateUserDetailsInput = new UpdateUserDetailsInput(userId, request.getBody()
+                    .getUserDetails());
+            UpdateUserDetailsOutput updateUserDetailsOutput = userDao.updateUserDetails(updateUserDetailsInput);
+            rowsAffected += updateUserDetailsOutput.getRowsAffected();
 
-			UpdateUserStatusInput updateUserStatusInput = new UpdateUserStatusInput(userId, request.getBody()
-					.getUserStatus());
-			UpdateUserStatusOutput updateUserStatusOutput = userDao.updateUserStatus(updateUserStatusInput);
-			rowsAffected += updateUserStatusOutput.getRowsAffected();
+            UpdateUserStatusInput updateUserStatusInput = new UpdateUserStatusInput(userId, request.getBody()
+                    .getUserStatus());
+            UpdateUserStatusOutput updateUserStatusOutput = userDao.updateUserStatus(updateUserStatusInput);
+            rowsAffected += updateUserStatusOutput.getRowsAffected();
 
-			UpdateUserAddressInput updateUserAddressInput = new UpdateUserAddressInput(userId, request.getBody()
-					.getUserAddress());
-			UpdateUserAddressOutput updateUserAddressOutput = userDao.updateUserAddress(updateUserAddressInput);
-			rowsAffected += updateUserAddressOutput.getRowsAffected();
+            UpdateUserAddressInput updateUserAddressInput = new UpdateUserAddressInput(userId, request.getBody()
+                    .getUserAddress());
+            UpdateUserAddressOutput updateUserAddressOutput = userDao.updateUserAddress(updateUserAddressInput);
+            rowsAffected += updateUserAddressOutput.getRowsAffected();
 
-			return new ChangeUserResponse(header, createOperationResult(Result.SUCCESS, rowsAffected));
-		} catch (DaoException e) {
-			LOG.error(SERVICE_NAME + ": Change user operation failed.");
-			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
-		} finally {
-			userDao.terminateConnection();
-		}
-	}
+            return new ChangeUserResponse(header, createOperationResult(Result.SUCCESS, rowsAffected));
+        } catch (DaoException e) {
+            LOG.error(SERVICE_NAME + ": Change user operation failed.");
+            throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
+        } finally {
+            userDao.terminateConnection();
+        }
+    }
 
-	@Override
-	public ChangeUserPasswordResponse changeUserPassword(ChangeUserPasswordRequest request) throws ServiceException {
-		LOG.info(SERVICE_NAME + ": Change user password operation invoked.");
+    @Override
+    public ChangeUserPasswordResponse changeUserPassword(ChangeUserPasswordRequest request) throws ServiceException {
+        LOG.info(SERVICE_NAME + ": Change user password operation invoked.");
 
-		try {
-			Header header = request.getHeader();
-			UserPassword userPassword = request.getBody();
-			Username username = request.getUsername();
+        try {
+            Header header = request.getHeader();
+            UserPassword userPassword = request.getBody();
+            Username username = request.getUsername();
 
-			Id userId = userDao.readUserId(username);
+            Id userId = userDao.readUserId(username);
 
-			UpdateUserPasswordInput input = new UpdateUserPasswordInput(userId, userPassword);
-			UpdateUserPasswordOutput output = userDao.updateUserPassword(input);
-			int rowsAffected = output.getRowsAffected();
+            UpdateUserPasswordInput input = new UpdateUserPasswordInput(userId, userPassword);
+            UpdateUserPasswordOutput output = userDao.updateUserPassword(input);
+            int rowsAffected = output.getRowsAffected();
 
-			return new ChangeUserPasswordResponse(header, createOperationResult(Result.SUCCESS, rowsAffected));
-		} catch (DaoException e) {
-			LOG.error(SERVICE_NAME + ": Change user password operation failed.");
-			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
-		} finally {
-			userDao.terminateConnection();
-		}
-	}
+            return new ChangeUserPasswordResponse(header, createOperationResult(Result.SUCCESS, rowsAffected));
+        } catch (DaoException e) {
+            LOG.error(SERVICE_NAME + ": Change user password operation failed.");
+            throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
+        } finally {
+            userDao.terminateConnection();
+        }
+    }
 
-	@Override
-	public DeleteUserResponse deleteUser(DeleteUserRequest request) throws ServiceException {
-		LOG.info(SERVICE_NAME + ": Delete user operation invoked.");
+    @Override
+    public DeleteUserResponse deleteUser(DeleteUserRequest request) throws ServiceException {
+        LOG.info(SERVICE_NAME + ": Delete user operation invoked.");
 
-		try {
-			int rowsAffected = 0;
+        try {
+            int rowsAffected = 0;
 
-			Header header = request.getHeader();
-			Username username = request.getBody();
+            Header header = request.getHeader();
+            Username username = request.getBody();
 
-			userDao.persistConnection();
+            userDao.persistConnection();
 
-			Id userId = userDao.readUserId(username);
+            Id userId = userDao.readUserId(username);
 
-			DeleteUserPasswordInput deleteUserPasswordInput = new DeleteUserPasswordInput(userId);
-			DeleteUserPasswordOutput deleteUserPasswordOutput = userDao.deleteUserPassword(deleteUserPasswordInput);
-			rowsAffected += deleteUserPasswordOutput.getRowsAffected();
+            DeleteUserPasswordInput deleteUserPasswordInput = new DeleteUserPasswordInput(userId);
+            DeleteUserPasswordOutput deleteUserPasswordOutput = userDao.deleteUserPassword(deleteUserPasswordInput);
+            rowsAffected += deleteUserPasswordOutput.getRowsAffected();
 
-			DeleteUserAddressInput deleteUserAddressInput = new DeleteUserAddressInput(userId);
-			DeleteUserAddressOutput deleteUserAddressOutput = userDao.deleteUserAddress(deleteUserAddressInput);
-			rowsAffected += deleteUserAddressOutput.getRowsAffected();
+            DeleteUserAddressInput deleteUserAddressInput = new DeleteUserAddressInput(userId);
+            DeleteUserAddressOutput deleteUserAddressOutput = userDao.deleteUserAddress(deleteUserAddressInput);
+            rowsAffected += deleteUserAddressOutput.getRowsAffected();
 
-			DeleteUserStatusInput deleteUserStatusInput = new DeleteUserStatusInput(userId);
-			DeleteUserStatusOutput deleteUserStatusOutput = userDao.deleteUserStatus(deleteUserStatusInput);
-			rowsAffected += deleteUserStatusOutput.getRowsAffected();
+            DeleteUserStatusInput deleteUserStatusInput = new DeleteUserStatusInput(userId);
+            DeleteUserStatusOutput deleteUserStatusOutput = userDao.deleteUserStatus(deleteUserStatusInput);
+            rowsAffected += deleteUserStatusOutput.getRowsAffected();
 
-			DeleteUserDetailsInput deleteUserDetailsInput = new DeleteUserDetailsInput(userId);
-			DeleteUserDetailsOutput deleteUserDetailsOutput = userDao.deleteUserDetails(deleteUserDetailsInput);
-			rowsAffected += deleteUserDetailsOutput.getRowsAffected();
+            DeleteUserDetailsInput deleteUserDetailsInput = new DeleteUserDetailsInput(userId);
+            DeleteUserDetailsOutput deleteUserDetailsOutput = userDao.deleteUserDetails(deleteUserDetailsInput);
+            rowsAffected += deleteUserDetailsOutput.getRowsAffected();
 
-			DeleteUserInput deleteUserInput = new DeleteUserInput(userId);
-			DeleteUserOutput deleteUserOutput = userDao.deleteUser(deleteUserInput);
-			rowsAffected += deleteUserOutput.getRowsAffected();
+            DeleteUserInput deleteUserInput = new DeleteUserInput(userId);
+            DeleteUserOutput deleteUserOutput = userDao.deleteUser(deleteUserInput);
+            rowsAffected += deleteUserOutput.getRowsAffected();
 
-			return new DeleteUserResponse(header, createOperationResult(Result.SUCCESS, rowsAffected));
-		} catch (DaoException e) {
-			LOG.error(SERVICE_NAME + ": Delete user operation failed.");
-			throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
-		} finally {
-			userDao.terminateConnection();
-		}
-	}
+            return new DeleteUserResponse(header, createOperationResult(Result.SUCCESS, rowsAffected));
+        } catch (DaoException e) {
+            LOG.error(SERVICE_NAME + ": Delete user operation failed.");
+            throw new ServiceException(DAO_EXCEPTION_MESSAGE, e);
+        } finally {
+            userDao.terminateConnection();
+        }
+    }
 }

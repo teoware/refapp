@@ -6,7 +6,7 @@ import com.teoware.refapp.model.common.OperationResult;
 
 public class CreateNoteResponse extends BaseMessage<Header, OperationResult> {
 
-	public CreateNoteResponse(Header header, OperationResult body) {
-		super(header, body);
-	}
+    public CreateNoteResponse(Header header, OperationResult body) {
+        super(header, body);
+    }
 }

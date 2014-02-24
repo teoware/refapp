@@ -11,12 +11,12 @@ import com.teoware.refapp.batch.ActivationBatch;
 @Singleton
 public class ActivationBatchScheduler extends BatchScheduler {
 
-	@Inject
-	private ActivationBatch activationBatch;
+    @Inject
+    private ActivationBatch activationBatch;
 
-	@PostConstruct
-	@Override
-	public void setup() {
-		setup(activationBatch, new Schedule("*", "*/15", "0"));
-	}
+    @PostConstruct
+    @Override
+    public void setup() {
+        setup(activationBatch, new Schedule("*", "*/15", "0"));
+    }
 }

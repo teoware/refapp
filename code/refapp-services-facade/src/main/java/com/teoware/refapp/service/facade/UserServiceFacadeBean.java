@@ -41,71 +41,71 @@ import com.teoware.refapp.service.validation.group.SuspendUserRequestGroup;
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 public class UserServiceFacadeBean implements UserServiceFacade {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Inject
-	private UserService service;
+    @Inject
+    private UserService service;
 
-	@Interceptors({ ValidationInterceptor.class })
-	@Validate(RegisterUserRequestGroup.class)
-	@Override
-	public RegisterUserResponse registerUser(@Validate RegisterUserRequest request) throws ValidationException,
-			ServiceException {
-		return service.registerUser(request);
-	}
+    @Interceptors({ValidationInterceptor.class})
+    @Validate(RegisterUserRequestGroup.class)
+    @Override
+    public RegisterUserResponse registerUser(@Validate RegisterUserRequest request) throws ValidationException,
+            ServiceException {
+        return service.registerUser(request);
+    }
 
-	@Interceptors({ ValidationInterceptor.class })
-	@Validate(ActivateUserRequestGroup.class)
-	@Override
-	public ActivateUserResponse activateUser(@Validate ActivateUserRequest request) throws ValidationException,
-			ServiceException {
-		return service.activateUser(request);
-	}
+    @Interceptors({ValidationInterceptor.class})
+    @Validate(ActivateUserRequestGroup.class)
+    @Override
+    public ActivateUserResponse activateUser(@Validate ActivateUserRequest request) throws ValidationException,
+            ServiceException {
+        return service.activateUser(request);
+    }
 
-	@Interceptors({ ValidationInterceptor.class })
-	@Validate(SuspendUserRequestGroup.class)
-	@Override
-	public SuspendUserResponse suspendUser(@Validate SuspendUserRequest request) throws ValidationException,
-			ServiceException {
-		return service.suspendUser(request);
-	}
+    @Interceptors({ValidationInterceptor.class})
+    @Validate(SuspendUserRequestGroup.class)
+    @Override
+    public SuspendUserResponse suspendUser(@Validate SuspendUserRequest request) throws ValidationException,
+            ServiceException {
+        return service.suspendUser(request);
+    }
 
-	@Interceptors({ ValidationInterceptor.class })
-	@Validate(FindUserRequestGroup.class)
-	@Override
-	public FindUserResponse findUser(FindUserRequest request) throws ValidationException, ServiceException {
-		return service.findUser(request);
-	}
+    @Interceptors({ValidationInterceptor.class})
+    @Validate(FindUserRequestGroup.class)
+    @Override
+    public FindUserResponse findUser(FindUserRequest request) throws ValidationException, ServiceException {
+        return service.findUser(request);
+    }
 
-	@Override
-	public ListUsersResponse listUsers(ListUsersRequest request) throws ServiceException {
-		return service.listUsers(request);
-	}
+    @Override
+    public ListUsersResponse listUsers(ListUsersRequest request) throws ServiceException {
+        return service.listUsers(request);
+    }
 
-	@Override
-	public FindUsersResponse findPendigUsers(FindUsersRequest request) throws ServiceException {
-		return service.findPendigUsers(request);
-	}
+    @Override
+    public FindUsersResponse findPendigUsers(FindUsersRequest request) throws ServiceException {
+        return service.findPendigUsers(request);
+    }
 
-	@Interceptors({ ValidationInterceptor.class })
-	@Validate(ChangeUserRequestGroup.class)
-	@Override
-	public ChangeUserResponse changeUser(ChangeUserRequest request) throws ValidationException, ServiceException {
-		return service.changeUser(request);
-	}
+    @Interceptors({ValidationInterceptor.class})
+    @Validate(ChangeUserRequestGroup.class)
+    @Override
+    public ChangeUserResponse changeUser(ChangeUserRequest request) throws ValidationException, ServiceException {
+        return service.changeUser(request);
+    }
 
-	@Interceptors({ ValidationInterceptor.class })
-	@Validate(ChangeUserPasswordRequestGroup.class)
-	@Override
-	public ChangeUserPasswordResponse changeUserPassword(ChangeUserPasswordRequest request) throws ValidationException,
-			ServiceException {
-		return service.changeUserPassword(request);
-	}
+    @Interceptors({ValidationInterceptor.class})
+    @Validate(ChangeUserPasswordRequestGroup.class)
+    @Override
+    public ChangeUserPasswordResponse changeUserPassword(ChangeUserPasswordRequest request) throws ValidationException,
+            ServiceException {
+        return service.changeUserPassword(request);
+    }
 
-	@Interceptors({ ValidationInterceptor.class })
-	@Validate(DeleteUserRequestGroup.class)
-	@Override
-	public DeleteUserResponse deleteUser(DeleteUserRequest request) throws ValidationException, ServiceException {
-		return service.deleteUser(request);
-	}
+    @Interceptors({ValidationInterceptor.class})
+    @Validate(DeleteUserRequestGroup.class)
+    @Override
+    public DeleteUserResponse deleteUser(DeleteUserRequest request) throws ValidationException, ServiceException {
+        return service.deleteUser(request);
+    }
 }

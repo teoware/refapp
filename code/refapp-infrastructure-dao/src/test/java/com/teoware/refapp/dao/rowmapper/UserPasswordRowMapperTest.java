@@ -21,38 +21,38 @@ import com.teoware.refapp.model.user.UserPassword;
 
 public class UserPasswordRowMapperTest {
 
-	@InjectMocks
-	private UserPasswordRowMapper rowMapper;
+    @InjectMocks
+    private UserPasswordRowMapper rowMapper;
 
-	@Mock
-	private ResultSet result;
+    @Mock
+    private ResultSet result;
 
-	@Before
-	public void setUp() {
-		initMocks(this);
-	}
+    @Before
+    public void setUp() {
+        initMocks(this);
+    }
 
-	@Test
-	public void testMapRow() throws SQLException, ParseException {
-		String pwd = "pwd";
-		String salt = "salt";
-		when(result.getString(anyString())).thenReturn(pwd, salt);
+    @Test
+    public void testMapRow() throws SQLException, ParseException {
+        String pwd = "pwd";
+        String salt = "salt";
+        when(result.getString(anyString())).thenReturn(pwd, salt);
 
-		UserPassword userPwd = rowMapper.mapRow(result, 0);
+        UserPassword userPwd = rowMapper.mapRow(result, 0);
 
-		assertNotNull(userPwd);
-		assertEquals(pwd, userPwd.getPassword());
-		assertEquals(salt, userPwd.getSalt());
+        assertNotNull(userPwd);
+        assertEquals(pwd, userPwd.getPassword());
+        assertEquals(salt, userPwd.getSalt());
 
-		verify(result, times(2)).getString(anyString());
-	}
+        verify(result, times(2)).getString(anyString());
+    }
 
-	@Test(expected = SQLException.class)
-	public void testMapRowThrowsSqlException() throws SQLException, ParseException {
-		when(result.getString(anyString())).thenThrow(new SQLException());
+    @Test(expected = SQLException.class)
+    public void testMapRowThrowsSqlException() throws SQLException, ParseException {
+        when(result.getString(anyString())).thenThrow(new SQLException());
 
-		rowMapper.mapRow(result, 0);
+        rowMapper.mapRow(result, 0);
 
-		verify(result).getString(anyString());
-	}
+        verify(result).getString(anyString());
+    }
 }

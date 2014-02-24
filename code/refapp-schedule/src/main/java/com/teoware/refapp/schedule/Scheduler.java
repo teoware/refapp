@@ -12,44 +12,44 @@ import com.teoware.refapp.timer.Timer;
 
 public abstract class Scheduler {
 
-	private static final Logger LOG = LoggerFactory.getLogger(Scheduler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Scheduler.class);
 
-	@Inject
-	private Timer timer;
+    @Inject
+    private Timer timer;
 
-	@PostConstruct
-	public void timer() {
-		try {
-			timer.setScheduler(this);
-			timer.setScheduleExpression(schedule());
-			timer.setConfig(config());
-			timer.create();
-		} catch (Exception e) {
-			LOG.error("An error occured when trying to create timer", e);
-			throw new SchedulerException("An error occured when trying to create timer", e);
-		}
-	}
+    @PostConstruct
+    public void timer() {
+        try {
+            timer.setScheduler(this);
+            timer.setScheduleExpression(schedule());
+            timer.setConfig(config());
+            timer.create();
+        } catch (Exception e) {
+            LOG.error("An error occured when trying to create timer", e);
+            throw new SchedulerException("An error occured when trying to create timer", e);
+        }
+    }
 
-	public String name() {
-		return this.getClass().getSimpleName();
-	}
+    public String name() {
+        return this.getClass().getSimpleName();
+    }
 
-	protected TimerConfig config() {
-		return null;
-	}
+    protected TimerConfig config() {
+        return null;
+    }
 
-	protected abstract ScheduleExpression schedule();
+    protected abstract ScheduleExpression schedule();
 
-	protected abstract Runnable runnable();
+    protected abstract Runnable runnable();
 
-	public void fire(javax.ejb.Timer timer) {
-		try {
-			Runnable runnable = runnable();
-			LOG.info("Sheduler {} starting runnable {}", name(), runnable.name());
-			runnable.run();
-		} catch (Exception e) {
-			LOG.error("An error occured when starting runnable", e);
-			throw new SchedulerException("An error occured when starting runnable", e);
-		}
-	}
+    public void fire(javax.ejb.Timer timer) {
+        try {
+            Runnable runnable = runnable();
+            LOG.info("Sheduler {} starting runnable {}", name(), runnable.name());
+            runnable.run();
+        } catch (Exception e) {
+            LOG.error("An error occured when starting runnable", e);
+            throw new SchedulerException("An error occured when starting runnable", e);
+        }
+    }
 }

@@ -10,7 +10,6 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
@@ -29,66 +28,65 @@ import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.service.dto.RegisterUserRequest;
 import com.teoware.refapp.service.dto.RegisterUserResponse;
 
-@Category(com.teoware.refapp.test.UnitTestGroup.class)
 public class UserServiceTest {
 
-	@InjectMocks
-	private UserServiceBean userService;
+    @InjectMocks
+    private UserServiceBean userService;
 
-	@Mock
-	private RegisterUserRequest registerUserRequest;
+    @Mock
+    private RegisterUserRequest registerUserRequest;
 
-	@Mock
-	private User user;
+    @Mock
+    private User user;
 
-	@Mock
-	private UserDao userDao;
+    @Mock
+    private UserDao userDao;
 
-	@Mock
-	private CreateUserOutput createUserOutput;
+    @Mock
+    private CreateUserOutput createUserOutput;
 
-	@Mock
-	private CreateUserDetailsOutput createUserInfoOutput;
+    @Mock
+    private CreateUserDetailsOutput createUserInfoOutput;
 
-	@Mock
-	private CreateUserAddressOutput createUserAddressOutput;
+    @Mock
+    private CreateUserAddressOutput createUserAddressOutput;
 
-	@Mock
-	private CreateUserPasswordOutput createUserPasswordOutput;
+    @Mock
+    private CreateUserPasswordOutput createUserPasswordOutput;
 
-	@Before
-	public void setUp() {
-		initMocks(this);
-		when(registerUserRequest.getBody()).thenReturn(user);
-	}
+    @Before
+    public void setUp() {
+        initMocks(this);
+        when(registerUserRequest.getBody()).thenReturn(user);
+    }
 
-	@Test
-	public void testRegisterUserResponseNotNull() {
-		try {
-			when(userDao.createUser(any(CreateUserInput.class))).thenReturn(createUserOutput);
-			when(userDao.createUserDetails(any(CreateUserDetailsInput.class))).thenReturn(createUserInfoOutput);
-			when(userDao.createUserAddress(any(CreateUserAddressInput.class))).thenReturn(createUserAddressOutput);
-			when(userDao.createUserPassword(any(CreateUserPasswordInput.class))).thenReturn(createUserPasswordOutput);
+    @Test
+    public void testRegisterUserResponseNotNull() {
+        try {
+            when(userDao.createUser(any(CreateUserInput.class))).thenReturn(createUserOutput);
+            when(userDao.createUserDetails(any(CreateUserDetailsInput.class))).thenReturn(createUserInfoOutput);
+            when(userDao.createUserAddress(any(CreateUserAddressInput.class))).thenReturn(createUserAddressOutput);
+            when(userDao.createUserPassword(any(CreateUserPasswordInput.class))).thenReturn(createUserPasswordOutput);
 
-			RegisterUserResponse registerUserResponse = userService.registerUser(registerUserRequest);
+            RegisterUserResponse registerUserResponse = userService.registerUser(registerUserRequest);
 
-			verify(userDao).createUser(any(CreateUserInput.class));
-			verify(userDao).createUserPassword(any(CreateUserPasswordInput.class));
+            verify(userDao).createUser(any(CreateUserInput.class));
+            verify(userDao).createUserPassword(any(CreateUserPasswordInput.class));
 
-			assertNotNull(registerUserResponse);
-			assertNotNull(registerUserResponse.getBody());
-			assertNotNull(registerUserResponse.getBody().getResult());
-			assertEquals(Result.SUCCESS, registerUserResponse.getBody().getResult());
-		} catch (Throwable t) {
-			t.printStackTrace();
-			fail(t.getMessage());
-		}
-	}
+            assertNotNull(registerUserResponse);
+            assertNotNull(registerUserResponse.getBody());
+            assertNotNull(registerUserResponse.getBody().getResult());
+            assertEquals(Result.SUCCESS, registerUserResponse.getBody().getResult());
+        } catch (Throwable t) {
+            t.printStackTrace();
+            fail(t.getMessage());
+        }
+    }
 
-	@Test(expected = ServiceException.class)
-	public void testRegisterUserThrowsServiceException() throws DaoException, ServiceException {
-		when(userDao.createUser(any(CreateUserInput.class))).thenThrow(new DaoException());
+    @Test(expected = ServiceException.class)
+    public void testRegisterUserThrowsServiceException() throws DaoException, ServiceException {
+        when(userDao.createUser(any(CreateUserInput.class))).thenThrow(new DaoException());
 
-		userService.registerUser(registerUserRequest);
-	}
+        userService.registerUser(registerUserRequest);
+    }
 }

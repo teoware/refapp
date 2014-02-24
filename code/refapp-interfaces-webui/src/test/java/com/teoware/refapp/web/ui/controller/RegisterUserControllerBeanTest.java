@@ -26,58 +26,58 @@ import com.teoware.refapp.web.ui.util.Globalization;
 
 public class RegisterUserControllerBeanTest {
 
-	@InjectMocks
-	RegisterUserControllerBean controller;
+    @InjectMocks
+    RegisterUserControllerBean controller;
 
-	@Mock
-	protected Globalization globalization;
-	
-	@Mock
-	private UserServiceConsumer consumer;
+    @Mock
+    protected Globalization globalization;
 
-	@Mock
-	private RegisterUserRequestVO vo;
+    @Mock
+    private UserServiceConsumer consumer;
 
-	@Mock
-	private User user;
+    @Mock
+    private RegisterUserRequestVO vo;
 
-	@Mock
-	private UserDetails userInfo;
+    @Mock
+    private User user;
 
-	@Mock
-	private UserAddress userAddress;
+    @Mock
+    private UserDetails userInfo;
 
-	@Mock
-	private UserPassword userPassword;
+    @Mock
+    private UserAddress userAddress;
 
-	@Before
-	public void setUp() throws Exception {
-		initMocks(this);
-		when(globalization.dict(anyString())).thenReturn("RefApp");
-		when(vo.getUser()).thenReturn(user);
-		when(user.getUserDetails()).thenReturn(userInfo);
-		when(user.getUserAddress()).thenReturn(userAddress);
-		when(vo.getUserPassword()).thenReturn(userPassword);
-	}
+    @Mock
+    private UserPassword userPassword;
 
-	@Test
-	public void testGettersAndSetters() throws IntrospectionException {
-		JavaBeanTester.test(RegisterUserControllerBean.class);
-	}
+    @Before
+    public void setUp() throws Exception {
+        initMocks(this);
+        when(globalization.dict(anyString())).thenReturn("RefApp");
+        when(vo.getUser()).thenReturn(user);
+        when(user.getUserDetails()).thenReturn(userInfo);
+        when(user.getUserAddress()).thenReturn(userAddress);
+        when(vo.getUserPassword()).thenReturn(userPassword);
+    }
 
-	@Test
-	public void testTitle() {
-		assertNotNull(controller.getTitle());
-		assertTrue(controller.getTitle().startsWith("RefApp"));
-	}
+    @Test
+    public void testGettersAndSetters() throws IntrospectionException {
+        JavaBeanTester.test(RegisterUserControllerBean.class);
+    }
 
-	@Test
-	public void testOnClickRegisterButtonCreatesUser() {
-		when(userPassword.getPassword()).thenReturn("whatever");
-		controller.setConfirmPassword("whatever");
+    @Test
+    public void testTitle() {
+        assertNotNull(controller.getTitle());
+        assertTrue(controller.getTitle().startsWith("RefApp"));
+    }
 
-		controller.onClickRegisterButton();
+    @Test
+    public void testOnClickRegisterButtonCreatesUser() {
+        when(userPassword.getPassword()).thenReturn("whatever");
+        controller.setConfirmPassword("whatever");
 
-		verify(consumer).registerUser(any(RegisterUserRequestVO.class));
-	}
+        controller.onClickRegisterButton();
+
+        verify(consumer).registerUser(any(RegisterUserRequestVO.class));
+    }
 }

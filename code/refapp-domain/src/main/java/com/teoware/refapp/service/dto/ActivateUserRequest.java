@@ -6,11 +6,11 @@ import com.teoware.refapp.model.common.Username;
 
 public class ActivateUserRequest extends BaseMessage<Header, Username> {
 
-	public ActivateUserRequest(Header header, Username userName) {
-		super(header, userName);
-	}
-	
-	public ActivateUserRequest(Username userName) {
-		this(Header.getInstance(), userName);
-	}
+    public ActivateUserRequest(Header header, Username userName) {
+        super(header, userName);
+    }
+
+    public ActivateUserRequest(Username userName) {
+        this(Header.getInstance(), userName);
+    }
 }

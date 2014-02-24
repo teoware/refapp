@@ -6,7 +6,7 @@ import com.teoware.refapp.model.common.OperationResult;
 
 public class ActivateUserResponse extends BaseMessage<Header, OperationResult> {
 
-	public ActivateUserResponse(Header header, OperationResult body) {
-		super(header, body);
-	}
+    public ActivateUserResponse(Header header, OperationResult body) {
+        super(header, body);
+    }
 }

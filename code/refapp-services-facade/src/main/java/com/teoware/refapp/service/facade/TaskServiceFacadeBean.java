@@ -13,13 +13,13 @@ import com.teoware.refapp.service.dto.CreateTaskResponse;
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 public class TaskServiceFacadeBean implements TaskServiceFacade {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Inject
-	private TaskService service;
+    @Inject
+    private TaskService service;
 
-	@Override
-	public CreateTaskResponse createTask(CreateTaskRequest request) {
-		return service.createTask(request);
-	}
+    @Override
+    public CreateTaskResponse createTask(CreateTaskRequest request) {
+        return service.createTask(request);
+    }
 }

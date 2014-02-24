@@ -16,51 +16,51 @@ import org.junit.Test;
 
 public class ConnectionHandlerTest {
 
-	@Test
-	public void testCreateConnection() throws SQLException {
-		DataSource dataSource = mock(DataSource.class);
-		Connection connection = mock(Connection.class);
+    @Test
+    public void testCreateConnection() throws SQLException {
+        DataSource dataSource = mock(DataSource.class);
+        Connection connection = mock(Connection.class);
 
-		when(dataSource.getConnection()).thenReturn(connection);
+        when(dataSource.getConnection()).thenReturn(connection);
 
-		ConnectionHandler.createConnection(dataSource);
+        ConnectionHandler.createConnection(dataSource);
 
-		verify(dataSource, times(1)).getConnection();
-	}
+        verify(dataSource, times(1)).getConnection();
+    }
 
-	@Test(expected = SQLException.class)
-	public void testCreateConnectionThrowsSQLException() throws SQLException {
-		DataSource dataSource = mock(DataSource.class);
+    @Test(expected = SQLException.class)
+    public void testCreateConnectionThrowsSQLException() throws SQLException {
+        DataSource dataSource = mock(DataSource.class);
 
-		doThrow(SQLException.class).when(dataSource).getConnection();
+        doThrow(SQLException.class).when(dataSource).getConnection();
 
-		ConnectionHandler.createConnection(dataSource);
-	}
+        ConnectionHandler.createConnection(dataSource);
+    }
 
-	@Test
-	public void testCloseConnection() throws SQLException {
-		Connection connection = mock(Connection.class);
+    @Test
+    public void testCloseConnection() throws SQLException {
+        Connection connection = mock(Connection.class);
 
-		ConnectionHandler.closeConnection(connection, false);
+        ConnectionHandler.closeConnection(connection, false);
 
-		verify(connection, times(1)).close();
-	}
+        verify(connection, times(1)).close();
+    }
 
-	@Test
-	public void testCloseConnectionWithPersist() throws SQLException {
-		Connection connection = mock(Connection.class);
+    @Test
+    public void testCloseConnectionWithPersist() throws SQLException {
+        Connection connection = mock(Connection.class);
 
-		ConnectionHandler.closeConnection(connection, true);
+        ConnectionHandler.closeConnection(connection, true);
 
-		verifyZeroInteractions(connection);
-	}
+        verifyZeroInteractions(connection);
+    }
 
-	@Test(expected = SQLException.class)
-	public void testCloseConnectionThrowsSQLException() throws SQLException {
-		Connection connection = mock(Connection.class);
+    @Test(expected = SQLException.class)
+    public void testCloseConnectionThrowsSQLException() throws SQLException {
+        Connection connection = mock(Connection.class);
 
-		doThrow(SQLException.class).when(connection).close();
+        doThrow(SQLException.class).when(connection).close();
 
-		ConnectionHandler.closeConnection(connection, false);
-	}
+        ConnectionHandler.closeConnection(connection, false);
+    }
 }

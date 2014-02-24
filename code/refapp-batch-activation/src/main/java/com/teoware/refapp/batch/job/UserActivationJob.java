@@ -9,20 +9,20 @@ import com.teoware.refapp.batch.task.NotifyActivatedUsersTask;
 
 public class UserActivationJob extends BatchJob {
 
-	@Inject
-	private GetPendingUsersTask getPendingUsersTask;
+    @Inject
+    private GetPendingUsersTask getPendingUsersTask;
 
-	@Inject
-	private ActivatePendingUsersTask activatePendingUsersTask;
+    @Inject
+    private ActivatePendingUsersTask activatePendingUsersTask;
 
-	@Inject
-	private NotifyActivatedUsersTask notifyActivatedUsersTask;
+    @Inject
+    private NotifyActivatedUsersTask notifyActivatedUsersTask;
 
-	@PostConstruct
-	@Override
-	protected void setup() {
-		addTask(getPendingUsersTask);
-		addTask(activatePendingUsersTask);
-		addTask(notifyActivatedUsersTask);
-	}
+    @PostConstruct
+    @Override
+    protected void setup() {
+        addTask(getPendingUsersTask);
+        addTask(activatePendingUsersTask);
+        addTask(notifyActivatedUsersTask);
+    }
 }

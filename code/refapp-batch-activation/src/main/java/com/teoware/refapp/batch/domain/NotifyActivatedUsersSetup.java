@@ -6,7 +6,7 @@ import com.teoware.refapp.model.user.User;
 
 public class NotifyActivatedUsersSetup extends TaskSetup {
 
-	public NotifyActivatedUsersSetup(List<User> data) {
-		super(data);
-	}
+    public NotifyActivatedUsersSetup(List<User> data) {
+        super(data);
+    }
 }

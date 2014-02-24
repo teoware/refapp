@@ -16,52 +16,52 @@ import com.teoware.refapp.model.user.UserStatus;
 
 /**
  * Utility factory class for creating rich domain objects.
- * 
+ *
  * @author thomas@teoware.com
  */
 public final class BeanFactory {
 
-	private BeanFactory() {
-	}
+    private BeanFactory() {
+    }
 
-	public static Username createUsernameBean() {
-		Username username = new Username();
-		return username;
-	}
+    public static Username createUsernameBean() {
+        Username username = new Username();
+        return username;
+    }
 
-	public static UserDetails createUserInfoBean() {
-		UserDetails userInfo = new UserDetails();
-		return userInfo;
-	}
+    public static UserDetails createUserInfoBean() {
+        UserDetails userInfo = new UserDetails();
+        return userInfo;
+    }
 
-	public static UserAddress createUserAddressBean() {
-		UserAddress userAddress = new UserAddress();
-		return userAddress;
-	}
+    public static UserAddress createUserAddressBean() {
+        UserAddress userAddress = new UserAddress();
+        return userAddress;
+    }
 
-	public static UserStatus createUserStatusBean() {
-		UserStatus userStatus = new UserStatus();
-		return userStatus;
-	}
+    public static UserStatus createUserStatusBean() {
+        UserStatus userStatus = new UserStatus();
+        return userStatus;
+    }
 
-	public static User createUserBean() {
-		User user = new User();
-		user.setUsername(createUsernameBean());
-		user.setUserDetails(createUserInfoBean());
-		user.setUserAddress(createUserAddressBean());
-		user.setUserStatus(createUserStatusBean());
-		return user;
-	}
+    public static User createUserBean() {
+        User user = new User();
+        user.setUsername(createUsernameBean());
+        user.setUserDetails(createUserInfoBean());
+        user.setUserAddress(createUserAddressBean());
+        user.setUserStatus(createUserStatusBean());
+        return user;
+    }
 
-	public static UserPassword createUserPasswordBean() {
-		return new UserPassword();
-	}
+    public static UserPassword createUserPasswordBean() {
+        return new UserPassword();
+    }
 
-	public static Note createNote() {
-		return new Note(new Uuid(), new NoteDetails(), new NoteStatus());
-	}
+    public static Note createNote() {
+        return new Note(new Uuid(), new NoteDetails(), new NoteStatus());
+    }
 
-	public static Task createTask() {
-		return new Task(new Uuid(), new TaskDetails(), new TaskStatus());
-	}
+    public static Task createTask() {
+        return new Task(new Uuid(), new TaskDetails(), new TaskStatus());
+    }
 }

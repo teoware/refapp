@@ -6,11 +6,11 @@ import com.teoware.refapp.model.common.Username;
 
 public class ListNotesRequest extends BaseMessage<Header, Username> {
 
-	public ListNotesRequest(Header header, Username username) {
-		super(header, username);
-	}
+    public ListNotesRequest(Header header, Username username) {
+        super(header, username);
+    }
 
-	public ListNotesRequest(Username username) {
-		this(Header.getInstance(), username);
-	}
+    public ListNotesRequest(Username username) {
+        this(Header.getInstance(), username);
+    }
 }

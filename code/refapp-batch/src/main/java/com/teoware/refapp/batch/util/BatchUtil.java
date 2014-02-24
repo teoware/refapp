@@ -6,10 +6,10 @@ import java.util.TreeSet;
 
 public final class BatchUtil {
 
-	private BatchUtil() {
-	}
+    private BatchUtil() {
+    }
 
-	public static SortedSet<Integer> createSortedSet(Set<Integer> set) {
-		return new TreeSet<Integer>(set);
-	}
+    public static SortedSet<Integer> createSortedSet(Set<Integer> set) {
+        return new TreeSet<Integer>(set);
+    }
 }

@@ -7,46 +7,46 @@ import com.teoware.refapp.model.common.Uuid;
 
 public class Task {
 
-	@NotNull
-	@Valid
-	private Uuid uuid;
+    @NotNull
+    @Valid
+    private Uuid uuid;
 
-	@NotNull
-	@Valid
-	private TaskDetails taskDetails;
+    @NotNull
+    @Valid
+    private TaskDetails taskDetails;
 
-	private TaskStatus taskStatus;
+    private TaskStatus taskStatus;
 
-	public Task() {
-	}
+    public Task() {
+    }
 
-	public Task(Uuid uuid, TaskDetails taskDetails, TaskStatus taskStatus) {
-		this.uuid = uuid;
-		this.taskDetails = taskDetails;
-		this.taskStatus = taskStatus;
-	}
+    public Task(Uuid uuid, TaskDetails taskDetails, TaskStatus taskStatus) {
+        this.uuid = uuid;
+        this.taskDetails = taskDetails;
+        this.taskStatus = taskStatus;
+    }
 
-	public Uuid getUuid() {
-		return uuid;
-	}
+    public Uuid getUuid() {
+        return uuid;
+    }
 
-	public void setUuid(Uuid uuid) {
-		this.uuid = uuid;
-	}
+    public void setUuid(Uuid uuid) {
+        this.uuid = uuid;
+    }
 
-	public TaskDetails getTaskDetails() {
-		return taskDetails;
-	}
+    public TaskDetails getTaskDetails() {
+        return taskDetails;
+    }
 
-	public void setTaskDetails(TaskDetails taskDetails) {
-		this.taskDetails = taskDetails;
-	}
+    public void setTaskDetails(TaskDetails taskDetails) {
+        this.taskDetails = taskDetails;
+    }
 
-	public TaskStatus getTaskStatus() {
-		return taskStatus;
-	}
+    public TaskStatus getTaskStatus() {
+        return taskStatus;
+    }
 
-	public void setTaskStatus(TaskStatus taskStatus) {
-		this.taskStatus = taskStatus;
-	}
+    public void setTaskStatus(TaskStatus taskStatus) {
+        this.taskStatus = taskStatus;
+    }
 }

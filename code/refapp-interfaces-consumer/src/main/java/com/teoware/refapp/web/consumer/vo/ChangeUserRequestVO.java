@@ -5,27 +5,27 @@ import com.teoware.refapp.model.user.User;
 
 public class ChangeUserRequestVO {
 
-	private User user;
-	private Username username;
+    private User user;
+    private Username username;
 
-	public ChangeUserRequestVO(User user, Username username) {
-		this.user = user;
-		this.username = username;
-	}
+    public ChangeUserRequestVO(User user, Username username) {
+        this.user = user;
+        this.username = username;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public Username getUsername() {
-		return username;
-	}
+    public Username getUsername() {
+        return username;
+    }
 
-	public void setUsername(Username username) {
-		this.username = username;
-	}
+    public void setUsername(Username username) {
+        this.username = username;
+    }
 }

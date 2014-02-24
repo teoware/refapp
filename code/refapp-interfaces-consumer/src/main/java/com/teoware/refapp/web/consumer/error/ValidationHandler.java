@@ -11,17 +11,17 @@ import com.teoware.refapp.service.validation.ValidationException;
 
 public class ValidationHandler {
 
-	private static final Logger LOG = LoggerFactory.getLogger(ValidationHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ValidationHandler.class);
 
-	public static void handle(ValidationException e) {
-		LOG.error("Validation error occured", e);
+    public static void handle(ValidationException e) {
+        LOG.error("Validation error occured", e);
 
-		Set<? extends ConstraintViolation<?>> cvSet = e.getConstraintViolations();
-		for (ConstraintViolation<?> cv : cvSet) {
-			LOG.error("VE: " + cv.getMessage() + " : " + cv.getRootBean().getClass().getName() + " : "
-					+ cv.getPropertyPath().toString());
-		}
+        Set<? extends ConstraintViolation<?>> cvSet = e.getConstraintViolations();
+        for (ConstraintViolation<?> cv : cvSet) {
+            LOG.error("VE: " + cv.getMessage() + " : " + cv.getRootBean().getClass().getName() + " : "
+                    + cv.getPropertyPath().toString());
+        }
 
-		throw new RuntimeException(e.getMessage(), e);
-	}
+        throw new RuntimeException(e.getMessage(), e);
+    }
 }

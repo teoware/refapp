@@ -7,10 +7,10 @@ import com.teoware.refapp.service.ServiceException;
 
 public class ErrorHandler {
 
-	private static final Logger LOG = LoggerFactory.getLogger(ErrorHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ErrorHandler.class);
 
-	public static void handle(ServiceException e) {
-		LOG.error("Service error occured", e);
-		throw new RuntimeException(e);
-	}
+    public static void handle(ServiceException e) {
+        LOG.error("Service error occured", e);
+        throw new RuntimeException(e);
+    }
 }

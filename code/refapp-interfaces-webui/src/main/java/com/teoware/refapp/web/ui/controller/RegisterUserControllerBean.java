@@ -20,61 +20,61 @@ import com.teoware.refapp.web.consumer.vo.RegisterUserRequestVO;
 @RequestScoped
 public class RegisterUserControllerBean extends AbstractControllerBean implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private RegisterUserRequestVO vo;
-	private String confirmPassword;
+    private RegisterUserRequestVO vo;
+    private String confirmPassword;
 
-	@Inject
-	UserServiceConsumer consumer;
+    @Inject
+    UserServiceConsumer consumer;
 
-	@PostConstruct
-	private void init() {
-		User user = BeanFactory.createUserBean();
-		UserPassword userPassword = BeanFactory.createUserPasswordBean();
-		vo = new RegisterUserRequestVO(user, userPassword);
+    @PostConstruct
+    private void init() {
+        User user = BeanFactory.createUserBean();
+        UserPassword userPassword = BeanFactory.createUserPasswordBean();
+        vo = new RegisterUserRequestVO(user, userPassword);
 
-	}
+    }
 
-	public void onClickRegisterButton() {
-		setDebug("onClickRegisterButton");
-		if (!vo.getUserPassword().getPassword().equals(confirmPassword)) {
-			setDebug("Password error!");
-		} else {
-			processRegisterUserRequest();
-			consumer.registerUser(vo);
-		}
-	}
+    public void onClickRegisterButton() {
+        setDebug("onClickRegisterButton");
+        if (!vo.getUserPassword().getPassword().equals(confirmPassword)) {
+            setDebug("Password error!");
+        } else {
+            processRegisterUserRequest();
+            consumer.registerUser(vo);
+        }
+    }
 
-	private void processRegisterUserRequest() {
-		vo.getUser().getUserDetails().setGender(Gender.MALE);
-		vo.getUser().getUserDetails().setBirthDate(new DateTime());
+    private void processRegisterUserRequest() {
+        vo.getUser().getUserDetails().setGender(Gender.MALE);
+        vo.getUser().getUserDetails().setBirthDate(new DateTime());
 
-		vo.getUser().getUserAddress().setAddress("Abc street 1");
-		vo.getUser().getUserAddress().setPostalCode("1234");
-		vo.getUser().getUserAddress().setMunicipality("Oslo");
-		vo.getUser().getUserAddress().setRegion("Oslo");
-		vo.getUser().getUserAddress().setCountry("Norway");
-	}
+        vo.getUser().getUserAddress().setAddress("Abc street 1");
+        vo.getUser().getUserAddress().setPostalCode("1234");
+        vo.getUser().getUserAddress().setMunicipality("Oslo");
+        vo.getUser().getUserAddress().setRegion("Oslo");
+        vo.getUser().getUserAddress().setCountry("Norway");
+    }
 
-	public RegisterUserRequestVO getVo() {
-		return vo;
-	}
+    public RegisterUserRequestVO getVo() {
+        return vo;
+    }
 
-	public void setVo(RegisterUserRequestVO vo) {
-		this.vo = vo;
-	}
+    public void setVo(RegisterUserRequestVO vo) {
+        this.vo = vo;
+    }
 
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
 
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
-	}
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
 
-	@Override
-	public String getPageTitle() {
-		return super.dict("page.register_user.title");
-	}
+    @Override
+    public String getPageTitle() {
+        return super.dict("page.register_user.title");
+    }
 }

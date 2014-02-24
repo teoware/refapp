@@ -18,19 +18,19 @@ import com.teoware.refapp.web.consumer.vo.SuspendUserResponseVO;
 
 public interface UserServiceConsumer {
 
-	public RegisterUserResponseVO registerUser(RegisterUserRequestVO vo);
+    public RegisterUserResponseVO registerUser(RegisterUserRequestVO vo);
 
-	public ActivateUserResponseVO activateUser(ActivateUserRequestVO vo);
+    public ActivateUserResponseVO activateUser(ActivateUserRequestVO vo);
 
-	public SuspendUserResponseVO suspendUser(SuspendUserRequestVO vo);
+    public SuspendUserResponseVO suspendUser(SuspendUserRequestVO vo);
 
-	public FindUserResponseVO findUser(FindUserRequestVO vo);
+    public FindUserResponseVO findUser(FindUserRequestVO vo);
 
-	public ListUsersVO listUsers();
+    public ListUsersVO listUsers();
 
-	public ChangeUserResponseVO changeUser(ChangeUserRequestVO vo);
+    public ChangeUserResponseVO changeUser(ChangeUserRequestVO vo);
 
-	public ChangeUserPasswordResponseVO changeUserPassword(ChangeUserPasswordRequestVO vo);
+    public ChangeUserPasswordResponseVO changeUserPassword(ChangeUserPasswordRequestVO vo);
 
-	public DeleteUserResponseVO deleteUser(DeleteUserRequestVO vo);
+    public DeleteUserResponseVO deleteUser(DeleteUserRequestVO vo);
 }

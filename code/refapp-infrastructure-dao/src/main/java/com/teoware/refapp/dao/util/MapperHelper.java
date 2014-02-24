@@ -8,26 +8,26 @@ import com.teoware.refapp.util.time.DateTimeConverter;
 
 public final class MapperHelper {
 
-	private MapperHelper() {
-	}
+    private MapperHelper() {
+    }
 
-	public static Gender mapGender(String gender) {
-		return Gender.valueOf(gender);
-	}
+    public static Gender mapGender(String gender) {
+        return Gender.valueOf(gender);
+    }
 
-	public static Status mapStatus(String status) {
-		return Status.valueOf(status);
-	}
+    public static Status mapStatus(String status) {
+        return Status.valueOf(status);
+    }
 
-	public static DateTime mapDate(java.sql.Date date) {
-		return DateTimeConverter.fromSqlDate(date);
-	}
+    public static DateTime mapDate(java.sql.Date date) {
+        return DateTimeConverter.fromSqlDate(date);
+    }
 
-	public static DateTime mapTime(java.sql.Time time) {
-		return DateTimeConverter.fromSqlTime(time);
-	}
+    public static DateTime mapTime(java.sql.Time time) {
+        return DateTimeConverter.fromSqlTime(time);
+    }
 
-	public static DateTime mapTimestamp(java.sql.Timestamp timestamp) {
-		return DateTimeConverter.fromSqlTimestamp(timestamp);
-	}
+    public static DateTime mapTimestamp(java.sql.Timestamp timestamp) {
+        return DateTimeConverter.fromSqlTimestamp(timestamp);
+    }
 }

@@ -1,148 +1,148 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.teoware.refapp</groupId>
-	<artifactId>parent</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
-	<name>parent</name>
-	<description>Super parent POM</description>
+    <groupId>com.teoware.refapp</groupId>
+    <artifactId>parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>parent</name>
+    <description>Super parent POM</description>
 
-	<inceptionYear>2012</inceptionYear>
+    <inceptionYear>2012</inceptionYear>
 
-	<organization>
-		<name>teoware</name>
-		<url>http://teoware.com</url>
-	</organization>
+    <organization>
+        <name>teoware</name>
+        <url>http://teoware.com</url>
+    </organization>
 
-	<developers>
-		<developer>
-			<name>onlyteo</name>
-			<organization>onlyteo.com</organization>
-			<organizationUrl>http://onlyteo.com</organizationUrl>
-		</developer>
-	</developers>
+    <developers>
+        <developer>
+            <name>onlyteo</name>
+            <organization>onlyteo.com</organization>
+            <organizationUrl>http://onlyteo.com</organizationUrl>
+        </developer>
+    </developers>
 
-	<licenses>
-		<license>
-			<name>The Apache Software License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
-	<scm>
-		<connection>scm:git:git@github.com:teoware/refapp.git</connection>
-		<url>scm:git:git@github.com:teoware/refapp.git</url>
-		<developerConnection>scm:git:git@github.com:teoware/refapp.git</developerConnection>
-		<tag>HEAD</tag>
-	</scm>
+    <scm>
+        <connection>scm:git:git@github.com:teoware/refapp.git</connection>
+        <url>scm:git:git@github.com:teoware/refapp.git</url>
+        <developerConnection>scm:git:git@github.com:teoware/refapp.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
 
-	<!-- PROPERTIES -->
-	<properties>
-		<!-- Dependencies -->
-		<!-- Utils -->
-		<version.joda-time>2.1</version.joda-time>
+    <!-- PROPERTIES -->
+    <properties>
+        <!-- Dependencies -->
+        <!-- Utils -->
+        <version.joda-time>2.1</version.joda-time>
 
-		<!-- Logging -->
-		<version.slf4j>1.7.5</version.slf4j>
-		<version.logback>1.0.13</version.logback>
+        <!-- Logging -->
+        <version.slf4j>1.7.5</version.slf4j>
+        <version.logback>1.0.13</version.logback>
 
-		<!-- Testing -->
-		<version.junit>4.9</version.junit>
-		<version.mockito>1.9.0</version.mockito>
+        <!-- Testing -->
+        <version.junit>4.9</version.junit>
+        <version.mockito>1.9.0</version.mockito>
 
-		<!-- Java EE -->
-		<version.glassfish-embedded-all>3.2-b06</version.glassfish-embedded-all>
-		<version.javaee-api>6.0</version.javaee-api>
-	</properties>
+        <!-- Java EE -->
+        <version.glassfish-embedded-all>3.2-b06</version.glassfish-embedded-all>
+        <version.javaee-api>6.0</version.javaee-api>
+    </properties>
 
-	<!-- MODULES -->
-	<modules>
-		<module>etc</module>
-		<module>code</module>
-	</modules>
+    <!-- MODULES -->
+    <modules>
+        <module>etc</module>
+        <module>code</module>
+    </modules>
 
-	<!-- REPOSITORIES -->
-	<repositories>
-	</repositories>
+    <!-- REPOSITORIES -->
+    <repositories>
+    </repositories>
 
-	<!-- PLUGIN REPOSITORIES -->
-	<pluginRepositories>
-	</pluginRepositories>
+    <!-- PLUGIN REPOSITORIES -->
+    <pluginRepositories>
+    </pluginRepositories>
 
-	<!-- DEPENDENCIES -->
-	<dependencies>
-	</dependencies>
+    <!-- DEPENDENCIES -->
+    <dependencies>
+    </dependencies>
 
-	<dependencyManagement>
-		<dependencies>
-			<!-- Utils -->
-			<dependency>
-				<groupId>joda-time</groupId>
-				<artifactId>joda-time</artifactId>
-				<version>${version.joda-time}</version>
-			</dependency>
+    <dependencyManagement>
+        <dependencies>
+            <!-- Utils -->
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>${version.joda-time}</version>
+            </dependency>
 
-			<!-- Logging -->
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>${version.slf4j}</version>
-			</dependency>
+            <!-- Logging -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${version.slf4j}</version>
+            </dependency>
 
-			<dependency>
-				<groupId>ch.qos.logback</groupId>
-				<artifactId>logback-classic</artifactId>
-				<version>${version.logback}</version>
-			</dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${version.logback}</version>
+            </dependency>
 
-			<dependency>
-				<groupId>ch.qos.logback</groupId>
-				<artifactId>logback-core</artifactId>
-				<version>${version.logback}</version>
-			</dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${version.logback}</version>
+            </dependency>
 
-			<!-- Testing -->
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>${version.junit}</version>
-				<scope>test</scope>
-			</dependency>
+            <!-- Testing -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${version.junit}</version>
+                <scope>test</scope>
+            </dependency>
 
-			<dependency>
-				<groupId>org.mockito</groupId>
-				<artifactId>mockito-core</artifactId>
-				<version>${version.mockito}</version>
-				<scope>test</scope>
-			</dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${version.mockito}</version>
+                <scope>test</scope>
+            </dependency>
 
-			<!-- Java EE -->
-			<dependency>
-				<groupId>org.glassfish.extras</groupId>
-				<artifactId>glassfish-embedded-all</artifactId>
-				<version>${version.glassfish-embedded-all}</version>
-				<scope>provided</scope>
-			</dependency>
+            <!-- Java EE -->
+            <dependency>
+                <groupId>org.glassfish.extras</groupId>
+                <artifactId>glassfish-embedded-all</artifactId>
+                <version>${version.glassfish-embedded-all}</version>
+                <scope>provided</scope>
+            </dependency>
 
-			<dependency>
-				<groupId>javax</groupId>
-				<artifactId>javaee-api</artifactId>
-				<version>${version.javaee-api}</version>
-				<scope>provided</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+            <dependency>
+                <groupId>javax</groupId>
+                <artifactId>javaee-api</artifactId>
+                <version>${version.javaee-api}</version>
+                <scope>provided</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-	<!-- MAVEN PLUGINS -->
-	<build>
-		<plugins>
-		</plugins>
-	</build>
+    <!-- MAVEN PLUGINS -->
+    <build>
+        <plugins>
+        </plugins>
+    </build>
 
-	<!-- PROFILES -->
-	<profiles>
-	</profiles>
+    <!-- PROFILES -->
+    <profiles>
+    </profiles>
 </project>

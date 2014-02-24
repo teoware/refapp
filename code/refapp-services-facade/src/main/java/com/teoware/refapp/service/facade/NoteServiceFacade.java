@@ -19,14 +19,14 @@ import com.teoware.refapp.service.dto.ListNotesResponse;
 @Local
 public interface NoteServiceFacade extends Serializable {
 
-	public CreateNoteResponse createNote(CreateNoteRequest request) throws ServiceException;
-	
-	public FindNoteResponse findNote(FindNoteRequest request) throws ServiceException;
+    public CreateNoteResponse createNote(CreateNoteRequest request) throws ServiceException;
 
-	public ListNotesResponse listNotes(ListNotesRequest request) throws ServiceException;
+    public FindNoteResponse findNote(FindNoteRequest request) throws ServiceException;
 
-	public ChangeNoteResponse changeNote(ChangeNoteRequest request) throws ServiceException;
+    public ListNotesResponse listNotes(ListNotesRequest request) throws ServiceException;
 
-	public DeleteNoteResponse deleteNote(DeleteNoteRequest request)
-			throws ServiceException;
+    public ChangeNoteResponse changeNote(ChangeNoteRequest request) throws ServiceException;
+
+    public DeleteNoteResponse deleteNote(DeleteNoteRequest request)
+            throws ServiceException;
 }

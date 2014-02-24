@@ -7,22 +7,22 @@ import com.teoware.refapp.model.note.Note;
 
 public class CreateNoteRequest extends BaseMessage<Header, Note> {
 
-	private Username username;
+    private Username username;
 
-	public CreateNoteRequest(Header header, Note body, Username username) {
-		super(header, body);
-		this.setUsername(username);
-	}
+    public CreateNoteRequest(Header header, Note body, Username username) {
+        super(header, body);
+        this.setUsername(username);
+    }
 
-	public CreateNoteRequest(Note body, Username username) {
-		this(Header.getInstance(), body, username);
-	}
+    public CreateNoteRequest(Note body, Username username) {
+        this(Header.getInstance(), body, username);
+    }
 
-	public Username getUsername() {
-		return username;
-	}
+    public Username getUsername() {
+        return username;
+    }
 
-	public void setUsername(Username username) {
-		this.username = username;
-	}
+    public void setUsername(Username username) {
+        this.username = username;
+    }
 }

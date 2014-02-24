@@ -7,9 +7,9 @@ import com.teoware.refapp.service.dto.RegisterUserRequest;
 
 public class ServiceBeanFactory {
 
-	public static RegisterUserRequest createRegisterUserRequestBean() {
-		User user = BeanFactory.createUserBean();
-		UserPassword userPassword = BeanFactory.createUserPasswordBean();
-		return new RegisterUserRequest(user, userPassword);
-	}
+    public static RegisterUserRequest createRegisterUserRequestBean() {
+        User user = BeanFactory.createUserBean();
+        UserPassword userPassword = BeanFactory.createUserPasswordBean();
+        return new RegisterUserRequest(user, userPassword);
+    }
 }

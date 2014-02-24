@@ -7,12 +7,12 @@ import com.teoware.refapp.batch.job.UserActivationJob;
 
 public class ActivationBatch extends Batch {
 
-	@Inject
-	private UserActivationJob userActivationJob;
+    @Inject
+    private UserActivationJob userActivationJob;
 
-	@PostConstruct
-	@Override
-	protected void setup() {
-		addJob(userActivationJob);
-	}
+    @PostConstruct
+    @Override
+    protected void setup() {
+        addJob(userActivationJob);
+    }
 }

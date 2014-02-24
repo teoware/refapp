@@ -6,7 +6,7 @@ import com.teoware.refapp.model.common.OperationResult;
 
 public class DeleteNoteResponse extends BaseMessage<Header, OperationResult> {
 
-	public DeleteNoteResponse(Header header, OperationResult body) {
-		super(header, body);
-	}
+    public DeleteNoteResponse(Header header, OperationResult body) {
+        super(header, body);
+    }
 }

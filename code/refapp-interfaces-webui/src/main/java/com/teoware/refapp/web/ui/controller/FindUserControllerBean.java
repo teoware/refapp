@@ -16,47 +16,47 @@ import com.teoware.refapp.web.consumer.vo.FindUserResponseVO;
 @RequestScoped
 public class FindUserControllerBean extends AbstractControllerBean implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private FindUserRequestVO vo;
-	private User user;
+    private FindUserRequestVO vo;
+    private User user;
 
-	@Inject
-	UserServiceConsumer consumer;
+    @Inject
+    UserServiceConsumer consumer;
 
-	@PostConstruct
-	private void init() {
-		setVo(new FindUserRequestVO());
-	}
+    @PostConstruct
+    private void init() {
+        setVo(new FindUserRequestVO());
+    }
 
-	public void onClickFindButton() {
-		setDebug("onClickFindButton");
-		FindUserResponseVO responseVO = consumer.findUser(vo);
-		user = responseVO.getUser();
-	}
+    public void onClickFindButton() {
+        setDebug("onClickFindButton");
+        FindUserResponseVO responseVO = consumer.findUser(vo);
+        user = responseVO.getUser();
+    }
 
-	public FindUserRequestVO getVo() {
-		return vo;
-	}
+    public FindUserRequestVO getVo() {
+        return vo;
+    }
 
-	public void setVo(FindUserRequestVO vo) {
-		this.vo = vo;
-	}
+    public void setVo(FindUserRequestVO vo) {
+        this.vo = vo;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public boolean hasUser() {
-		return user != null;
-	}
+    public boolean hasUser() {
+        return user != null;
+    }
 
-	@Override
-	public String getPageTitle() {
-		return super.dict("page.find_user.title");
-	}
+    @Override
+    public String getPageTitle() {
+        return super.dict("page.find_user.title");
+    }
 }

@@ -9,35 +9,35 @@ import com.teoware.refapp.dao.UserDaoBean;
 
 public class UserDaoMock extends UserDaoBean {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public UserDaoMock(Connection connection) {
-		super.setConnection(connection);
-	}
+    public UserDaoMock(Connection connection) {
+        super.setConnection(connection);
+    }
 
-	@Override
-	protected Connection createOrReuseConnection() throws SQLException {
-		return super.getConnection();
-	}
+    @Override
+    protected Connection createOrReuseConnection() throws SQLException {
+        return super.getConnection();
+    }
 
-	@Override
-	protected void closeConnection(ResultSet result, PreparedStatement statement, boolean persistConnection) {
-		try {
-			if (result != null) {
-				result.close();
-			}
+    @Override
+    protected void closeConnection(ResultSet result, PreparedStatement statement, boolean persistConnection) {
+        try {
+            if (result != null) {
+                result.close();
+            }
 
-			if (statement != null) {
-				statement.close();
-			}
-		} catch (SQLException e) {
-			// Ignore
-		}
-	}
+            if (statement != null) {
+                statement.close();
+            }
+        } catch (SQLException e) {
+            // Ignore
+        }
+    }
 
-	public void closeAll() throws SQLException {
-		if (super.getConnection() != null) {
-			super.getConnection().close();
-		}
-	}
+    public void closeAll() throws SQLException {
+        if (super.getConnection() != null) {
+            super.getConnection().close();
+        }
+    }
 }

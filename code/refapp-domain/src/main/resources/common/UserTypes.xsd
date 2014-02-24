@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema targetNamespace="http://refapp.teoware.com/domain" xmlns="http://refapp.teoware.com/domain" xmlns:enum="http://refapp.teoware.com/domain/enums" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0">
-	<xs:include schemaLocation="../types/CommonTypes.xsd" />
-<!-- 	<xs:include schemaLocation="../types/EnumTypes.xsd" /> -->
+    <xs:include schemaLocation="../types/CommonTypes.xsd" />
+    <!-- 	<xs:include schemaLocation="../types/EnumTypes.xsd" /> -->
 
-	<xs:complexType name="UserType">
-		<xs:sequence>
-			<xs:element name="userDetails" type="UserDetailsType" minOccurs="1" maxOccurs="1" />
-			<xs:element name="userAddress" type="UserAddressType" minOccurs="1" maxOccurs="1" />
-			<xs:element name="userPassword" type="UserPasswordType" minOccurs="1" maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
+    <xs:complexType name="UserType">
+        <xs:sequence>
+            <xs:element name="userDetails" type="UserDetailsType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="userAddress" type="UserAddressType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="userPassword" type="UserPasswordType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
 
-	<xs:complexType name="UserPasswordType">
-		<xs:sequence>
-			<xs:element name="password" type="PasswordType" minOccurs="1" maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
+    <xs:complexType name="UserPasswordType">
+        <xs:sequence>
+            <xs:element name="password" type="PasswordType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
 
-	<xs:complexType name="UserDetailsType">
-		<xs:sequence>
-			<xs:element name="username" type="UsernameType" minOccurs="1" maxOccurs="1" />
-			<xs:element name="firstName" type="NameType" minOccurs="1" maxOccurs="1" />
-			<xs:element name="lastName" type="NameType" minOccurs="1" maxOccurs="1" />
-			<xs:element name="birthDate" type="DateType" minOccurs="1" maxOccurs="1" />
-<!-- 			<xs:element name="gender" type="GenderType" minOccurs="1" maxOccurs="1" /> -->
-			<xs:element name="email" type="EmailType" minOccurs="1" maxOccurs="1" />
-			<xs:element name="phone" type="PhoneNumberType" minOccurs="1" maxOccurs="1" />
-			<xs:element name="created" type="TimestampType" minOccurs="1" maxOccurs="1" />
-			<xs:element name="modified" type="TimestampType" minOccurs="1" maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
+    <xs:complexType name="UserDetailsType">
+        <xs:sequence>
+            <xs:element name="username" type="UsernameType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="firstName" type="NameType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="lastName" type="NameType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="birthDate" type="DateType" minOccurs="1" maxOccurs="1" />
+            <!-- 			<xs:element name="gender" type="GenderType" minOccurs="1" maxOccurs="1" /> -->
+            <xs:element name="email" type="EmailType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="phone" type="PhoneNumberType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="created" type="TimestampType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="modified" type="TimestampType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
 
-	<xs:complexType name="UserAddressType">
-		<xs:sequence>
-			<xs:element name="address" type="NameType" minOccurs="1" maxOccurs="1" />
-			<xs:element name="postalCode" type="xs:string" minOccurs="1" maxOccurs="1" />
-			<xs:element name="municipality" type="NameType" minOccurs="1" maxOccurs="1" />
-			<xs:element name="region" type="NameType" minOccurs="1" maxOccurs="1" />
-			<xs:element name="country" type="NameType" minOccurs="1" maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
+    <xs:complexType name="UserAddressType">
+        <xs:sequence>
+            <xs:element name="address" type="NameType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="postalCode" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="municipality" type="NameType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="region" type="NameType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="country" type="NameType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
 </xs:schema>

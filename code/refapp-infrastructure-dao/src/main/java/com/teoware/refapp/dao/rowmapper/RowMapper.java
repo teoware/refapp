@@ -6,5 +6,5 @@ import java.text.ParseException;
 
 public interface RowMapper<T> {
 
-	T mapRow(ResultSet result, int rowCount) throws SQLException, ParseException;
+    T mapRow(ResultSet result, int rowCount) throws SQLException, ParseException;
 }

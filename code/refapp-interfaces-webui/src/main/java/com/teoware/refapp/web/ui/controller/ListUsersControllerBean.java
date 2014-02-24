@@ -18,28 +18,28 @@ import com.teoware.refapp.web.consumer.vo.ListUsersVO;
 @RequestScoped
 public class ListUsersControllerBean extends AbstractControllerBean implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private static final Logger LOG = LoggerFactory.getLogger(ListUsersControllerBean.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ListUsersControllerBean.class);
 
-	private List<User> userList;
+    private List<User> userList;
 
-	@Inject
-	UserServiceConsumer consumer;
+    @Inject
+    UserServiceConsumer consumer;
 
-	public void doLoadUserList() {
-		LOG.debug("Loading user list");
-		ListUsersVO vo = consumer.listUsers();
-		userList = vo.getUserList();
-		debug = "Size: " + userList.size();
-	}
+    public void doLoadUserList() {
+        LOG.debug("Loading user list");
+        ListUsersVO vo = consumer.listUsers();
+        userList = vo.getUserList();
+        debug = "Size: " + userList.size();
+    }
 
-	public List<User> getUserList() {
-		return userList;
-	}
+    public List<User> getUserList() {
+        return userList;
+    }
 
-	@Override
-	public String getPageTitle() {
-		return super.dict("page.list_users.title");
-	}
+    @Override
+    public String getPageTitle() {
+        return super.dict("page.list_users.title");
+    }
 }

@@ -18,45 +18,45 @@ import com.teoware.refapp.model.user.User;
 
 public class NotifyActivatedUsersTask extends BatchTask<List<User>> {
 
-	private static final Logger LOG = LoggerFactory.getLogger(NotifyActivatedUsersTask.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NotifyActivatedUsersTask.class);
 
-	@Override
-	public TaskSetup setup(Object data) {
-		List<User> activatedUsers = convert(data);
-		return new NotifyActivatedUsersSetup(activatedUsers);
-	}
+    @Override
+    public TaskSetup setup(Object data) {
+        List<User> activatedUsers = convert(data);
+        return new NotifyActivatedUsersSetup(activatedUsers);
+    }
 
-	@Override
-	public TaskResult run(TaskSetup setup) {
-		try {
-			LOG.info("Notifying activated users");
-			List<User> activatedUsers = convert(setup.data());
-			Email email = createEmailClient();
-			int notifiedUsers = 0;
-			for (User activatedUser : activatedUsers) {
-				LOG.info("Notifying user '{}'", activatedUser.getUsername().getUsername());
-				sendEmailNotification(email, activatedUser);
-			}
-			return new NotifyActivatedUsersResult(notifiedUsers, Boolean.FALSE);
-		} catch (EmailException e) {
-			throw new BatchException("Email error occured when notifying activated users", e);
-		}
-	}
+    @Override
+    public TaskResult run(TaskSetup setup) {
+        try {
+            LOG.info("Notifying activated users");
+            List<User> activatedUsers = convert(setup.data());
+            Email email = createEmailClient();
+            int notifiedUsers = 0;
+            for (User activatedUser : activatedUsers) {
+                LOG.info("Notifying user '{}'", activatedUser.getUsername().getUsername());
+                sendEmailNotification(email, activatedUser);
+            }
+            return new NotifyActivatedUsersResult(notifiedUsers, Boolean.FALSE);
+        } catch (EmailException e) {
+            throw new BatchException("Email error occured when notifying activated users", e);
+        }
+    }
 
-	private Email createEmailClient() {
-		Email email = new SimpleEmail();
-		email.setHostName("mail.teoware.com");
-		email.setSmtpPort(25);
-		email.setAuthenticator(new DefaultAuthenticator("no-reply@teoware.com", "cesium55"));
-		// email.setSSLOnConnect(true);
-		return email;
-	}
+    private Email createEmailClient() {
+        Email email = new SimpleEmail();
+        email.setHostName("mail.teoware.com");
+        email.setSmtpPort(25);
+        email.setAuthenticator(new DefaultAuthenticator("no-reply@teoware.com", "cesium55"));
+        // email.setSSLOnConnect(true);
+        return email;
+    }
 
-	private void sendEmailNotification(Email email, User user) throws EmailException {
-		email.setFrom("no-reply@teoware.com");
-		email.setSubject("RefApp User Account Activation");
-		email.setMsg("Your RefApp user account has been activated.");
-		email.addTo(user.getUserDetails().getEmail());
-		email.send();
-	}
+    private void sendEmailNotification(Email email, User user) throws EmailException {
+        email.setFrom("no-reply@teoware.com");
+        email.setSubject("RefApp User Account Activation");
+        email.setMsg("Your RefApp user account has been activated.");
+        email.addTo(user.getUserDetails().getEmail());
+        email.send();
+    }
 }

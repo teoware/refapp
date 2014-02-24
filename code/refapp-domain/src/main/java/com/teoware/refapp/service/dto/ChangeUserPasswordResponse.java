@@ -6,7 +6,7 @@ import com.teoware.refapp.model.common.OperationResult;
 
 public class ChangeUserPasswordResponse extends BaseMessage<Header, OperationResult> {
 
-	public ChangeUserPasswordResponse(Header header, OperationResult body) {
-		super(header, body);
-	}
+    public ChangeUserPasswordResponse(Header header, OperationResult body) {
+        super(header, body);
+    }
 }

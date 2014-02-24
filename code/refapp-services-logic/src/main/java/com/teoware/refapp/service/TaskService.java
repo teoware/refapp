@@ -18,13 +18,13 @@ import com.teoware.refapp.service.dto.ListTasksResponse;
 @Local
 public interface TaskService extends Serializable {
 
-	public CreateTaskResponse createTask(CreateTaskRequest request);
+    public CreateTaskResponse createTask(CreateTaskRequest request);
 
-	public FindTaskResponse findTask(FindTaskRequest request) throws ServiceException;
+    public FindTaskResponse findTask(FindTaskRequest request) throws ServiceException;
 
-	public ListTasksResponse listTasks(ListTasksRequest request) throws ServiceException;
+    public ListTasksResponse listTasks(ListTasksRequest request) throws ServiceException;
 
-	public ChangeTaskResponse changeTask(ChangeTaskRequest request) throws ServiceException;
+    public ChangeTaskResponse changeTask(ChangeTaskRequest request) throws ServiceException;
 
-	public DeleteTaskResponse deleteTask(DeleteTaskRequest request) throws ServiceException;
+    public DeleteTaskResponse deleteTask(DeleteTaskRequest request) throws ServiceException;
 }

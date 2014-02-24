@@ -4,17 +4,17 @@ import java.util.Calendar;
 
 public class Timestamp {
 
-	private Calendar timestamp;
+    private Calendar timestamp;
 
-	public Timestamp(Calendar timestamp) {
-		this.timestamp = timestamp;
-	}
+    public Timestamp(Calendar timestamp) {
+        this.timestamp = timestamp;
+    }
 
-	public Calendar getTimestamp() {
-		return timestamp;
-	}
+    public Calendar getTimestamp() {
+        return timestamp;
+    }
 
-	public static Timestamp getInstance() {
-		return new Timestamp(Calendar.getInstance());
-	}
+    public static Timestamp getInstance() {
+        return new Timestamp(Calendar.getInstance());
+    }
 }

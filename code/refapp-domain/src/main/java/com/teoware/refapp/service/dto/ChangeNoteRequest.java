@@ -6,7 +6,7 @@ import com.teoware.refapp.model.note.Note;
 
 public class ChangeNoteRequest extends BaseMessage<Header, Note> {
 
-	public ChangeNoteRequest(Header header, Note body) {
-		super(header, body);
-	}
+    public ChangeNoteRequest(Header header, Note body) {
+        super(header, body);
+    }
 }

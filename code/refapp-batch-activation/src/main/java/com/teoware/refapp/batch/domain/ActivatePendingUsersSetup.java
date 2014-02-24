@@ -6,7 +6,7 @@ import com.teoware.refapp.model.user.User;
 
 public class ActivatePendingUsersSetup extends TaskSetup {
 
-	public ActivatePendingUsersSetup(List<User> data) {
-		super(data);
-	}
+    public ActivatePendingUsersSetup(List<User> data) {
+        super(data);
+    }
 }

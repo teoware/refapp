@@ -9,8 +9,8 @@ import com.teoware.refapp.model.common.Id;
 
 public class IdRowMapper implements RowMapper<Id> {
 
-	@Override
-	public Id mapRow(ResultSet result, int rowCount) throws SQLException, ParseException {
-		return new Id(result.getLong(UserTables.ID_COLUMN_NAME));
-	}
+    @Override
+    public Id mapRow(ResultSet result, int rowCount) throws SQLException, ParseException {
+        return new Id(result.getLong(UserTables.ID_COLUMN_NAME));
+    }
 }

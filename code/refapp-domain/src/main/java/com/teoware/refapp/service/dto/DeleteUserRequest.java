@@ -6,11 +6,11 @@ import com.teoware.refapp.model.common.Username;
 
 public class DeleteUserRequest extends BaseMessage<Header, Username> {
 
-	public DeleteUserRequest(Header header, Username userName) {
-		super(header, userName);
-	}
-	
-	public DeleteUserRequest(Username userName) {
-		this(Header.getInstance(), userName);
-	}
+    public DeleteUserRequest(Header header, Username userName) {
+        super(header, userName);
+    }
+
+    public DeleteUserRequest(Username userName) {
+        this(Header.getInstance(), userName);
+    }
 }

@@ -25,38 +25,38 @@ import com.teoware.refapp.web.ui.util.Globalization;
 
 public class FindUserControllerBeanTest {
 
-	@InjectMocks
-	FindUserControllerBean controller;
+    @InjectMocks
+    FindUserControllerBean controller;
 
-	@Mock
-	protected Globalization globalization;
-	
-	@Mock
-	private UserServiceConsumer consumer;
+    @Mock
+    protected Globalization globalization;
 
-	@Before
-	public void setUp() throws Exception {
-		initMocks(this);
-		when(globalization.dict(anyString())).thenReturn("RefApp");
-	}
+    @Mock
+    private UserServiceConsumer consumer;
 
-	@Test
-	public void testGettersAndSetters() throws IntrospectionException {
-		JavaBeanTester.test(FindUserControllerBean.class);
-	}
+    @Before
+    public void setUp() throws Exception {
+        initMocks(this);
+        when(globalization.dict(anyString())).thenReturn("RefApp");
+    }
 
-	@Test
-	public void testTitle() {
-		assertNotNull(controller.getTitle());
-		assertTrue(controller.getTitle().startsWith("RefApp"));
-	}
+    @Test
+    public void testGettersAndSetters() throws IntrospectionException {
+        JavaBeanTester.test(FindUserControllerBean.class);
+    }
 
-	@Test
-	public void testOnClickRegisterButtonCreatesUser() {
-		Mockito.when(consumer.findUser(any(FindUserRequestVO.class))).thenReturn(new FindUserResponseVO(new User()));
+    @Test
+    public void testTitle() {
+        assertNotNull(controller.getTitle());
+        assertTrue(controller.getTitle().startsWith("RefApp"));
+    }
 
-		controller.onClickFindButton();
+    @Test
+    public void testOnClickRegisterButtonCreatesUser() {
+        Mockito.when(consumer.findUser(any(FindUserRequestVO.class))).thenReturn(new FindUserResponseVO(new User()));
 
-		verify(consumer).findUser(any(FindUserRequestVO.class));
-	}
+        controller.onClickFindButton();
+
+        verify(consumer).findUser(any(FindUserRequestVO.class));
+    }
 }

@@ -6,7 +6,7 @@ import com.teoware.refapp.model.note.Note;
 
 public class FindNoteResponse extends BaseMessage<Header, Note> {
 
-	public FindNoteResponse(Header header, Note body) {
-		super(header, body);
-	}
+    public FindNoteResponse(Header header, Note body) {
+        super(header, body);
+    }
 }

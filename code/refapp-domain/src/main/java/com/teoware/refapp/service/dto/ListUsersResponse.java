@@ -7,19 +7,19 @@ import com.teoware.refapp.model.user.User;
 
 public class ListUsersResponse {
 
-	private Header header;
-	private List<User> userList;
+    private Header header;
+    private List<User> userList;
 
-	public ListUsersResponse(Header header, List<User> userList) {
-		this.header = header;
-		this.userList = userList;
-	}
+    public ListUsersResponse(Header header, List<User> userList) {
+        this.header = header;
+        this.userList = userList;
+    }
 
-	public Header getHeader() {
-		return header;
-	}
+    public Header getHeader() {
+        return header;
+    }
 
-	public List<User> getBody() {
-		return userList;
-	}
+    public List<User> getBody() {
+        return userList;
+    }
 }

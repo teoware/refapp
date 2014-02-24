@@ -25,119 +25,119 @@ import com.teoware.refapp.model.enums.Status;
 
 public class DaoHelperTest {
 
-	@Mock
-	private PreparedStatement statement;
+    @Mock
+    private PreparedStatement statement;
 
-	@Before
-	public void setUp() {
-		initMocks(this);
-	}
+    @Before
+    public void setUp() {
+        initMocks(this);
+    }
 
-	@Test
-	public void testPrivateConstructor() throws Exception {
-		Constructor<DaoHelper> constructor = DaoHelper.class.getDeclaredConstructor();
-		assertFalse(constructor.isAccessible());
-		constructor.setAccessible(true);
-		assertNotNull(constructor.newInstance());
-	}
+    @Test
+    public void testPrivateConstructor() throws Exception {
+        Constructor<DaoHelper> constructor = DaoHelper.class.getDeclaredConstructor();
+        assertFalse(constructor.isAccessible());
+        constructor.setAccessible(true);
+        assertNotNull(constructor.newInstance());
+    }
 
-	@Test
-	public void testProcessParameterWithNull() throws SQLException {
-		DaoHelper.processParameter(statement, null, 1);
+    @Test
+    public void testProcessParameterWithNull() throws SQLException {
+        DaoHelper.processParameter(statement, null, 1);
 
-		verify(statement).setObject(anyInt(), anyObject());
-		verifyNoMoreInteractions(statement);
-	}
+        verify(statement).setObject(anyInt(), anyObject());
+        verifyNoMoreInteractions(statement);
+    }
 
-	@Test
-	public void testProcessParameterWithEnum() throws SQLException {
-		DaoHelper.processParameter(statement, Status.ACTIVE, 1);
+    @Test
+    public void testProcessParameterWithEnum() throws SQLException {
+        DaoHelper.processParameter(statement, Status.ACTIVE, 1);
 
-		verify(statement).setString(anyInt(), anyString());
-		verifyNoMoreInteractions(statement);
-	}
+        verify(statement).setString(anyInt(), anyString());
+        verifyNoMoreInteractions(statement);
+    }
 
-	@Test
-	public void testProcessParameterWithString() throws SQLException {
-		DaoHelper.processParameter(statement, "abcd", 1);
+    @Test
+    public void testProcessParameterWithString() throws SQLException {
+        DaoHelper.processParameter(statement, "abcd", 1);
 
-		verify(statement).setString(anyInt(), anyString());
-		verifyNoMoreInteractions(statement);
-	}
+        verify(statement).setString(anyInt(), anyString());
+        verifyNoMoreInteractions(statement);
+    }
 
-	@Test
-	public void testProcessParameterWithCharSeq() throws SQLException {
-		CharSequence cs = "abcd";
-		DaoHelper.processParameter(statement, cs, 1);
+    @Test
+    public void testProcessParameterWithCharSeq() throws SQLException {
+        CharSequence cs = "abcd";
+        DaoHelper.processParameter(statement, cs, 1);
 
-		verify(statement).setString(anyInt(), anyString());
-		verifyNoMoreInteractions(statement);
-	}
+        verify(statement).setString(anyInt(), anyString());
+        verifyNoMoreInteractions(statement);
+    }
 
-	@Test
-	public void testProcessParameterWithInt() throws SQLException {
-		DaoHelper.processParameter(statement, 1, 1);
+    @Test
+    public void testProcessParameterWithInt() throws SQLException {
+        DaoHelper.processParameter(statement, 1, 1);
 
-		verify(statement).setInt(anyInt(), anyInt());
-		verifyNoMoreInteractions(statement);
-	}
+        verify(statement).setInt(anyInt(), anyInt());
+        verifyNoMoreInteractions(statement);
+    }
 
-	@Test
-	public void testProcessParameterWithLong() throws SQLException {
-		DaoHelper.processParameter(statement, 1L, 1);
+    @Test
+    public void testProcessParameterWithLong() throws SQLException {
+        DaoHelper.processParameter(statement, 1L, 1);
 
-		verify(statement).setLong(anyInt(), anyLong());
-		verifyNoMoreInteractions(statement);
-	}
+        verify(statement).setLong(anyInt(), anyLong());
+        verifyNoMoreInteractions(statement);
+    }
 
-	@Test
-	public void testProcessParameterWithFloat() throws SQLException {
-		DaoHelper.processParameter(statement, 1F, 1);
+    @Test
+    public void testProcessParameterWithFloat() throws SQLException {
+        DaoHelper.processParameter(statement, 1F, 1);
 
-		verify(statement).setBigDecimal(anyInt(), any(BigDecimal.class));
-		verifyNoMoreInteractions(statement);
-	}
+        verify(statement).setBigDecimal(anyInt(), any(BigDecimal.class));
+        verifyNoMoreInteractions(statement);
+    }
 
-	@Test
-	public void testProcessParameterWithDouble() throws SQLException {
-		DaoHelper.processParameter(statement, 1D, 1);
+    @Test
+    public void testProcessParameterWithDouble() throws SQLException {
+        DaoHelper.processParameter(statement, 1D, 1);
 
-		verify(statement).setBigDecimal(anyInt(), any(BigDecimal.class));
-		verifyNoMoreInteractions(statement);
-	}
+        verify(statement).setBigDecimal(anyInt(), any(BigDecimal.class));
+        verifyNoMoreInteractions(statement);
+    }
 
-	@Test
-	public void testProcessParameterWithDate() throws SQLException {
-		DaoHelper.processParameter(statement, new java.util.Date(), 1);
+    @Test
+    public void testProcessParameterWithDate() throws SQLException {
+        DaoHelper.processParameter(statement, new java.util.Date(), 1);
 
-		verify(statement).setDate(anyInt(), any(java.sql.Date.class));
-		verifyNoMoreInteractions(statement);
-	}
+        verify(statement).setDate(anyInt(), any(java.sql.Date.class));
+        verifyNoMoreInteractions(statement);
+    }
 
-	@Test
-	public void testProcessParameterWithCalendar() throws SQLException {
-		DaoHelper.processParameter(statement, Calendar.getInstance(), 1);
+    @Test
+    public void testProcessParameterWithCalendar() throws SQLException {
+        DaoHelper.processParameter(statement, Calendar.getInstance(), 1);
 
-		verify(statement).setTimestamp(anyInt(), any(java.sql.Timestamp.class));
-		verifyNoMoreInteractions(statement);
-	}
+        verify(statement).setTimestamp(anyInt(), any(java.sql.Timestamp.class));
+        verifyNoMoreInteractions(statement);
+    }
 
-	@Test
-	public void testProcessParameterWithObject() throws SQLException {
-		DaoHelper.processParameter(statement, new Object(), 1);
+    @Test
+    public void testProcessParameterWithObject() throws SQLException {
+        DaoHelper.processParameter(statement, new Object(), 1);
 
-		verify(statement).setObject(anyInt(), anyObject());
-		verifyNoMoreInteractions(statement);
-	}
+        verify(statement).setObject(anyInt(), anyObject());
+        verifyNoMoreInteractions(statement);
+    }
 
-	@Test
-	public void testProcessParameterWithDummyClass() throws SQLException {
-		DaoHelper.processParameter(statement, new DummyClass(), 1);
+    @Test
+    public void testProcessParameterWithDummyClass() throws SQLException {
+        DaoHelper.processParameter(statement, new DummyClass(), 1);
 
-		verify(statement).setObject(anyInt(), anyObject());
-		verifyNoMoreInteractions(statement);
-	}
+        verify(statement).setObject(anyInt(), anyObject());
+        verifyNoMoreInteractions(statement);
+    }
 
-	public class DummyClass {
-	}
+    public class DummyClass {
+    }
 }

@@ -23,36 +23,36 @@ import com.teoware.refapp.web.ui.util.Globalization;
 
 public class ListUsersControllerBeanTest {
 
-	@InjectMocks
-	ListUsersControllerBean controller;
+    @InjectMocks
+    ListUsersControllerBean controller;
 
-	@Mock
-	protected Globalization globalization;
-	
-	@Mock
-	private UserServiceConsumer consumer;
+    @Mock
+    protected Globalization globalization;
 
-	@Before
-	public void setUp() throws Exception {
-		initMocks(this);
-		when(globalization.dict(anyString())).thenReturn("RefApp");
-	}
+    @Mock
+    private UserServiceConsumer consumer;
 
-	@Test
-	public void testTitle() {
-		assertNotNull(controller.getTitle());
-		assertTrue(controller.getTitle().startsWith("RefApp"));
-	}
+    @Before
+    public void setUp() throws Exception {
+        initMocks(this);
+        when(globalization.dict(anyString())).thenReturn("RefApp");
+    }
 
-	@Test
-	public void testDoLoadUserList() {
-		when(consumer.listUsers()).thenReturn(new ListUsersVO(new ArrayList<User>()));
+    @Test
+    public void testTitle() {
+        assertNotNull(controller.getTitle());
+        assertTrue(controller.getTitle().startsWith("RefApp"));
+    }
 
-		controller.doLoadUserList();
+    @Test
+    public void testDoLoadUserList() {
+        when(consumer.listUsers()).thenReturn(new ListUsersVO(new ArrayList<User>()));
 
-		verify(consumer).listUsers();
+        controller.doLoadUserList();
 
-		assertNotNull(controller.getUserList());
-		assertEquals(0, controller.getUserList().size());
-	}
+        verify(consumer).listUsers();
+
+        assertNotNull(controller.getUserList());
+        assertEquals(0, controller.getUserList().size());
+    }
 }

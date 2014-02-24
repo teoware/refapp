@@ -19,27 +19,27 @@ import com.teoware.refapp.service.facade.UserServiceFacade;
 
 public class GetPendingUsersTask extends BatchTask<List<User>> {
 
-	private static final Logger LOG = LoggerFactory.getLogger(GetPendingUsersTask.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GetPendingUsersTask.class);
 
-	@Inject
-	private UserServiceFacade userServiceFacade;
+    @Inject
+    private UserServiceFacade userServiceFacade;
 
-	@Override
-	public TaskSetup setup(Object data) {
-		return null;
-	}
+    @Override
+    public TaskSetup setup(Object data) {
+        return null;
+    }
 
-	@Override
-	public TaskResult run(TaskSetup setup) {
-		try {
-			LOG.info("Getting pending users");
-			FindUsersResponse response = userServiceFacade.findPendigUsers(new FindUsersRequest());
-			List<User> pendingUsersList = response.getBody();
-			boolean terminate = pendingUsersList.size() == 0;
-			LOG.info("{} pending user(s) found", pendingUsersList.size());
-			return new GetPendingUsersResult(pendingUsersList, terminate);
-		} catch (ServiceException e) {
-			throw new BatchException("Service error occured when finding pending users", e);
-		}
-	}
+    @Override
+    public TaskResult run(TaskSetup setup) {
+        try {
+            LOG.info("Getting pending users");
+            FindUsersResponse response = userServiceFacade.findPendigUsers(new FindUsersRequest());
+            List<User> pendingUsersList = response.getBody();
+            boolean terminate = pendingUsersList.size() == 0;
+            LOG.info("{} pending user(s) found", pendingUsersList.size());
+            return new GetPendingUsersResult(pendingUsersList, terminate);
+        } catch (ServiceException e) {
+            throw new BatchException("Service error occured when finding pending users", e);
+        }
+    }
 }

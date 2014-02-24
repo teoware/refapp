@@ -11,41 +11,41 @@ import com.teoware.refapp.web.ui.util.Globalization;
 
 public abstract class AbstractControllerBean {
 
-	protected String debug;
+    protected String debug;
 
-	@Inject
-	protected Globalization globalization;
+    @Inject
+    protected Globalization globalization;
 
-	public String getTitle() {
-		return dict("app.title");
-	}
+    public String getTitle() {
+        return dict("app.title");
+    }
 
-	public abstract String getPageTitle();
+    public abstract String getPageTitle();
 
-	public String getFullTitle() {
-		return getTitle() + spacer + getPageTitle();
-	}
+    public String getFullTitle() {
+        return getTitle() + spacer + getPageTitle();
+    }
 
-	public String getPageFooter() {
-		return dict("page.common.footer");
-	}
+    public String getPageFooter() {
+        return dict("page.common.footer");
+    }
 
-	protected String getStackTrace(Exception e) {
-		StringWriter stringWriter = new StringWriter();
-		PrintWriter printWriter = new PrintWriter(stringWriter);
-		e.printStackTrace(printWriter);
-		return stringWriter.toString();
-	}
+    protected String getStackTrace(Exception e) {
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWriter);
+        e.printStackTrace(printWriter);
+        return stringWriter.toString();
+    }
 
-	public String getDebug() {
-		return debug;
-	}
+    public String getDebug() {
+        return debug;
+    }
 
-	public void setDebug(String debug) {
-		this.debug = debug;
-	}
+    public void setDebug(String debug) {
+        this.debug = debug;
+    }
 
-	public String dict(String key) {
-		return globalization.dict(key);
-	}
+    public String dict(String key) {
+        return globalization.dict(key);
+    }
 }

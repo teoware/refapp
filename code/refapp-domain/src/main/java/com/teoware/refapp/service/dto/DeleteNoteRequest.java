@@ -6,11 +6,11 @@ import com.teoware.refapp.model.common.Uuid;
 
 public class DeleteNoteRequest extends BaseMessage<Header, Uuid> {
 
-	public DeleteNoteRequest(Header header, Uuid uuid) {
-		super(header, uuid);
-	}
+    public DeleteNoteRequest(Header header, Uuid uuid) {
+        super(header, uuid);
+    }
 
-	public DeleteNoteRequest(Uuid uuid) {
-		this(Header.getInstance(), uuid);
-	}
+    public DeleteNoteRequest(Uuid uuid) {
+        this(Header.getInstance(), uuid);
+    }
 }

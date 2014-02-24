@@ -10,20 +10,20 @@ import com.teoware.refapp.model.user.UserPassword;
 
 public class RegisterUserRequest extends BaseMessage<Header, User> {
 
-	@NotNull
-	@Valid
-	private UserPassword userPassword;
+    @NotNull
+    @Valid
+    private UserPassword userPassword;
 
-	public RegisterUserRequest(Header header, User user, UserPassword userPassword) {
-		super(header, user);
-		this.userPassword = userPassword;
-	}
+    public RegisterUserRequest(Header header, User user, UserPassword userPassword) {
+        super(header, user);
+        this.userPassword = userPassword;
+    }
 
-	public RegisterUserRequest(User user, UserPassword userPassword) {
-		this(Header.getInstance(), user, userPassword);
-	}
+    public RegisterUserRequest(User user, UserPassword userPassword) {
+        this(Header.getInstance(), user, userPassword);
+    }
 
-	public UserPassword getUserPassword() {
-		return userPassword;
-	}
+    public UserPassword getUserPassword() {
+        return userPassword;
+    }
 }

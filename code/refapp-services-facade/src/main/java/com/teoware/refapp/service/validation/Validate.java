@@ -11,9 +11,9 @@ import java.lang.annotation.Target;
 import com.teoware.refapp.service.validation.group.ValidationGroup;
 
 @Documented
-@Retention( RUNTIME )
-@Target( { PARAMETER, METHOD } )
+@Retention(RUNTIME)
+@Target({PARAMETER, METHOD})
 public @interface Validate {
 
-	Class<? extends ValidationGroup> value() default ValidationGroup.class;
+    Class<? extends ValidationGroup> value() default ValidationGroup.class;
 }
