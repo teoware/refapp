@@ -7,7 +7,7 @@ public class Globalization {
 
     public static final String spacer = " - ";
 
-    private static Map<String, String> dict;
+    private static final Map<String, String> dict;
 
     static {
         dict = new HashMap<String, String>();

@@ -11,6 +11,6 @@ public class ErrorHandler {
 
     public static void handle(ServiceException e) {
         LOG.error("Service error occured", e);
-        throw new RuntimeException(e);
+        throw new ConsumerException("Service error occured", e);
     }
 }

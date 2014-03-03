@@ -3,8 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:h="http://java.sun.com/jsf/html">
 
     <h:head>
         <title><ui:insert name="head-title">#{controller.fullTitle}</ui:insert></title>
@@ -14,22 +13,26 @@
 
     <h:body>
 
-        <div id="header">
-            <ui:insert name="header">
-                <ui:include src="header.xhtml" />
-            </ui:insert>
-        </div>
+        <div id="page" class="page">
 
-        <div id="content">
-            <ui:insert name="content">
-                <ui:include src="content.xhtml" />
-            </ui:insert>
-        </div>
+            <div id="header" class="header region">
+                <ui:insert name="header">
+                    <ui:include src="header.xhtml" />
+                </ui:insert>
+            </div>
 
-        <div id="footer">
-            <ui:insert name="footer">
-                <ui:include src="footer.xhtml" />
-            </ui:insert>
+            <div id="content" class="content region">
+                <ui:insert name="content">
+                    <ui:include src="content.xhtml" />
+                </ui:insert>
+            </div>
+
+            <div id="footer" class="footer region">
+                <ui:insert name="footer">
+                    <ui:include src="footer.xhtml" />
+                </ui:insert>
+            </div>
+
         </div>
 
     </h:body>
