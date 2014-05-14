@@ -1,192 +1,192 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>com.teoware.refapp</groupId>
-		<artifactId>database</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <groupId>com.teoware.refapp</groupId>
+        <artifactId>database</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
 
-	<artifactId>database-derby</artifactId>
-	<name>database-derby</name>
-	<description>Derby database scripts</description>
+    <artifactId>database-derby</artifactId>
+    <name>database-derby</name>
+    <description>Derby database scripts</description>
 
-	<!-- PROPERTIES -->
-	<properties>
-		<!-- Derby connection properties -->
-		<derby.host>localhost</derby.host>
-		<derby.port>1527</derby.port>
-		<derby.database>refapp</derby.database>
-		<derby.username>refapp</derby.username>
-		<derby.password>abcd1234</derby.password>
+    <!-- PROPERTIES -->
+    <properties>
+        <!-- Derby connection properties -->
+        <derby.host>localhost</derby.host>
+        <derby.port>1527</derby.port>
+        <derby.database>refapp</derby.database>
+        <derby.username>refapp</derby.username>
+        <derby.password>abcd1234</derby.password>
 
-		<derby.skip.tests>false</derby.skip.tests>
+        <derby.skip.tests>false</derby.skip.tests>
 
-		<sql.file.root>${project.basedir}/src/main/resources/sql</sql.file.root>
-		<sql.test.file.root>${project.basedir}/src/test/resources/sql</sql.test.file.root>
-	</properties>
+        <sql.file.root>${project.basedir}/src/main/resources/sql</sql.file.root>
+        <sql.test.file.root>${project.basedir}/src/test/resources/sql</sql.test.file.root>
+    </properties>
 
-	<!-- MODULES -->
-	<modules>
-	</modules>
+    <!-- MODULES -->
+    <modules>
+    </modules>
 
-	<!-- REPOSITORIES -->
-	<repositories>
-	</repositories>
+    <!-- REPOSITORIES -->
+    <repositories>
+    </repositories>
 
-	<!-- PLUGIN REPOSITORIES -->
-	<pluginRepositories>
-	</pluginRepositories>
+    <!-- PLUGIN REPOSITORIES -->
+    <pluginRepositories>
+    </pluginRepositories>
 
-	<!-- DEPENDENCIES -->
-	<dependencies>
-	</dependencies>
+    <!-- DEPENDENCIES -->
+    <dependencies>
+    </dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-			</plugin>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
 
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>sql-maven-plugin</artifactId>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sql-maven-plugin</artifactId>
 
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.derby</groupId>
-						<artifactId>derbyclient</artifactId>
-						<version>${version.derbyclient}</version>
-					</dependency>
-				</dependencies>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.derby</groupId>
+                        <artifactId>derbyclient</artifactId>
+                        <version>${version.derbyclient}</version>
+                    </dependency>
+                </dependencies>
 
-				<!-- common configuration shared by all executions -->
-				<configuration>
-					<driver>org.apache.derby.jdbc.ClientDriver</driver>
-					<url>jdbc:derby://${derby.host}:${derby.port}/${derby.database}</url>
-					<username>${derby.username}</username>
-					<password>${derby.password}</password>
-				</configuration>
+                <!-- common configuration shared by all executions -->
+                <configuration>
+                    <driver>org.apache.derby.jdbc.ClientDriver</driver>
+                    <url>jdbc:derby://${derby.host}:${derby.port}/${derby.database}</url>
+                    <username>${derby.username}</username>
+                    <password>${derby.password}</password>
+                </configuration>
 
-				<executions>
-					<!-- Clean all objects -->
-					<execution>
-						<id>clean-all</id>
-						<phase>clean</phase>
-						<goals>
-							<goal>execute</goal>
-						</goals>
-						<configuration>
-							<fileset>
-								<basedir>${sql.file.root}/clean</basedir>
-							</fileset>
-							<onError>continue</onError>
-						</configuration>
-					</execution>
+                <executions>
+                    <!-- Clean all objects -->
+                    <execution>
+                        <id>clean-all</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <fileset>
+                                <basedir>${sql.file.root}/clean</basedir>
+                            </fileset>
+                            <onError>continue</onError>
+                        </configuration>
+                    </execution>
 
-					<!-- Create all sequences -->
-					<execution>
-						<id>create-sequences</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>execute</goal>
-						</goals>
-						<configuration>
-							<fileset>
-								<basedir>${sql.file.root}/sequences</basedir>
-							</fileset>
-						</configuration>
-					</execution>
+                    <!-- Create all sequences -->
+                    <execution>
+                        <id>create-sequences</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <fileset>
+                                <basedir>${sql.file.root}/sequences</basedir>
+                            </fileset>
+                        </configuration>
+                    </execution>
 
-					<!-- Create all tables -->
-					<execution>
-						<id>create-tables</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>execute</goal>
-						</goals>
-						<configuration>
-							<fileset>
-								<basedir>${sql.file.root}/tables</basedir>
-							</fileset>
-						</configuration>
-					</execution>
+                    <!-- Create all tables -->
+                    <execution>
+                        <id>create-tables</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <fileset>
+                                <basedir>${sql.file.root}/tables</basedir>
+                            </fileset>
+                        </configuration>
+                    </execution>
 
-					<!-- Create all indexes -->
-					<execution>
-						<id>create-indexes</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>execute</goal>
-						</goals>
-						<configuration>
-							<fileset>
-								<basedir>${sql.file.root}/indexes</basedir>
-							</fileset>
-						</configuration>
-					</execution>
+                    <!-- Create all indexes -->
+                    <execution>
+                        <id>create-indexes</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <fileset>
+                                <basedir>${sql.file.root}/indexes</basedir>
+                            </fileset>
+                        </configuration>
+                    </execution>
 
-					<!-- Create all triggers -->
-					<execution>
-						<id>create-triggers</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>execute</goal>
-						</goals>
-						<configuration>
-							<fileset>
-								<basedir>${sql.file.root}/triggers</basedir>
-							</fileset>
-						</configuration>
-					</execution>
+                    <!-- Create all triggers -->
+                    <execution>
+                        <id>create-triggers</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <fileset>
+                                <basedir>${sql.file.root}/triggers</basedir>
+                            </fileset>
+                        </configuration>
+                    </execution>
 
-					<!-- Create all views -->
-					<execution>
-						<id>create-views</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>execute</goal>
-						</goals>
-						<configuration>
-							<fileset>
-								<basedir>${sql.file.root}/views</basedir>
-							</fileset>
-						</configuration>
-					</execution>
+                    <!-- Create all views -->
+                    <execution>
+                        <id>create-views</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <fileset>
+                                <basedir>${sql.file.root}/views</basedir>
+                            </fileset>
+                        </configuration>
+                    </execution>
 
-					<!-- Insert all data -->
-					<execution>
-						<id>insert-data</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>execute</goal>
-						</goals>
-						<configuration>
-							<fileset>
-								<basedir>${sql.file.root}/data</basedir>
-							</fileset>
-						</configuration>
-					</execution>
+                    <!-- Insert all data -->
+                    <execution>
+                        <id>insert-data</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <fileset>
+                                <basedir>${sql.file.root}/data</basedir>
+                            </fileset>
+                        </configuration>
+                    </execution>
 
-					<!-- Insert dummy data, for test only -->
-					<execution>
-						<id>insert-dummy-data</id>
-						<phase>test</phase>
-						<goals>
-							<goal>execute</goal>
-						</goals>
-						<configuration>
-							<fileset>
-								<basedir>${sql.test.file.root}/data/insert</basedir>
-							</fileset>
-							<onError>continue</onError>
-							<skip>${derby.skip.tests}</skip>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+                    <!-- Insert dummy data, for test only -->
+                    <execution>
+                        <id>insert-dummy-data</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <fileset>
+                                <basedir>${sql.test.file.root}/data/insert</basedir>
+                            </fileset>
+                            <onError>continue</onError>
+                            <skip>${derby.skip.tests}</skip>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

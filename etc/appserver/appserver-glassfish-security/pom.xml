@@ -1,64 +1,64 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>com.teoware.refapp</groupId>
-		<artifactId>appserver</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <groupId>com.teoware.refapp</groupId>
+        <artifactId>refapp-appserver</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
 
-	<artifactId>appserver-glassfish-security</artifactId>
-	<packaging>jar</packaging>
-	<name>appserver-glassfish-security</name>
-	<description>Glassfish security project</description>
+    <artifactId>appserver-glassfish-security</artifactId>
+    <packaging>jar</packaging>
+    <name>appserver-glassfish-security</name>
+    <description>Glassfish security project</description>
 
-	<!-- PROPERTIES -->
-	<properties>
-	</properties>
+    <!-- PROPERTIES -->
+    <properties>
+    </properties>
 
-	<!-- MODULES -->
-	<modules>
-	</modules>
+    <!-- MODULES -->
+    <modules>
+    </modules>
 
-	<!-- REPOSITORIES -->
-	<repositories>
-	</repositories>
+    <!-- REPOSITORIES -->
+    <repositories>
+    </repositories>
 
-	<!-- PLUGIN REPOSITORIES -->
-	<pluginRepositories>
-	</pluginRepositories>
+    <!-- PLUGIN REPOSITORIES -->
+    <pluginRepositories>
+    </pluginRepositories>
 
-	<!-- DEPENDENCIES -->
-	<dependencies>
-		<!-- Java EE -->
-		<dependency>
-			<groupId>org.glassfish.extras</groupId>
-			<artifactId>glassfish-embedded-all</artifactId>
-		</dependency>
+    <!-- DEPENDENCIES -->
+    <dependencies>
+        <!-- Java EE -->
+        <dependency>
+            <groupId>org.glassfish.extras</groupId>
+            <artifactId>glassfish-embedded-all</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
-		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+        </dependency>
+    </dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-clean-plugin</artifactId>
-			</plugin>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+            </plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
 
-			<plugin>
-				<groupId>org.codehaus.cargo</groupId>
-				<artifactId>cargo-maven2-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven2-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

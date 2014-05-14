@@ -1,110 +1,111 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	
-	<parent>
-		<groupId>com.teoware.refapp</groupId>
-		<artifactId>appserver</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
-	
-	<artifactId>appserver-glassfish</artifactId>
-	<packaging>pom</packaging>
-	<name>appserver-glassfish</name>
-	<description>Glassfish appserver control</description>
-	
-	<!-- PROPERTIES -->
-	<properties>
-		<!-- Glassfish -->
-		<glassfish.username>admin</glassfish.username>
-		<glassfish.passwordfile.path>${user.home}</glassfish.passwordfile.path>
-		<glassfish.passwordfile.name>.asadmintruststore</glassfish.passwordfile.name>
-		<glassfish.passwordfile>${glassfish.passwordfile.path}/${glassfish.passwordfile.name}</glassfish.passwordfile>
-	</properties>
-	
-	<!-- MODULES -->
-	<modules>
-	</modules>
-	
-	<!-- REPOSITORIES -->
-	<repositories>
-	</repositories>
-	
-	<!-- PLUGIN REPOSITORIES -->
-	<pluginRepositories>
-	</pluginRepositories>
-	
-	<!-- DEPENDENCIES -->
-	<dependencies>
-	</dependencies>
-	
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-clean-plugin</artifactId>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.glassfish.maven.plugin</groupId>
-				<artifactId>maven-glassfish-plugin</artifactId>
-				<configuration>
-					<user>${glassfish.username}</user>
-					<passFile>${glassfish.passwordfile}</passFile>
-					<domain>
-						<name>${glassfish.domain}</name>
-						<httpPort>${glassfish.httpPort}</httpPort>
-						<adminPort>${glassfish.adminPort}</adminPort>
-					</domain>
-					
-					<skip>false</skip>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.codeartisans.asadmin</groupId>
-				<artifactId>asadmin-maven-plugin</artifactId>
-				<configuration>
-					<glassfishHome>${glassfish.home}</glassfishHome>
-					<domain>${glassfish.domain}</domain>
-					<host>${glassfish.host}</host>
-					<port>${glassfish.adminPort}</port>
-					<user>${glassfish.username}</user>
-					<passwordfile>${glassfish.passwordfile}</passwordfile>
-					
-					<!-- Deployment -->
-					<appName>${deploy.name}</appName>
-					<appArchive>${deploy.archive}</appArchive>
-					<contextRoot>${deploy.contextroot}</contextRoot>
-					
-					<!-- JDBC connection pool -->
-					<poolName>${derby.connectionpool.name}</poolName>
-					<poolDataSource>${derby.connectionpool.datasource}</poolDataSource>
-					<restype>${derby.connectionpool.resource.type}</restype>
-					<poolProperties>
-						<User>${derby.username}</User>
-						<Password>${derby.password}</Password>
-						<DatabaseName>${derby.database.name}</DatabaseName>
-						<ServerName>${derby.server.name}</ServerName>
-						<PortNumber>${derby.server.port}</PortNumber>
-						<connectionAttributes>${derby.connection.attributes}</connectionAttributes>
-					</poolProperties>
-					
-					<!-- JDBC resource -->
-					<resourceName>${derby.jdbc.resource.name}</resourceName>
-					
-					<skip>false</skip>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.codehaus.cargo</groupId>
-				<artifactId>cargo-maven2-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.teoware.refapp</groupId>
+        <artifactId>refapp-appserver</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>appserver-glassfish</artifactId>
+    <packaging>pom</packaging>
+    <name>appserver-glassfish</name>
+    <description>Glassfish appserver control</description>
+
+    <!-- PROPERTIES -->
+    <properties>
+        <!-- Glassfish -->
+        <glassfish.username>admin</glassfish.username>
+        <glassfish.passwordfile.path>${user.home}</glassfish.passwordfile.path>
+        <glassfish.passwordfile.name>.asadmintruststore</glassfish.passwordfile.name>
+        <glassfish.passwordfile>${glassfish.passwordfile.path}/${glassfish.passwordfile.name}</glassfish.passwordfile>
+    </properties>
+
+    <!-- MODULES -->
+    <modules>
+    </modules>
+
+    <!-- REPOSITORIES -->
+    <repositories>
+    </repositories>
+
+    <!-- PLUGIN REPOSITORIES -->
+    <pluginRepositories>
+    </pluginRepositories>
+
+    <!-- DEPENDENCIES -->
+    <dependencies>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.glassfish.maven.plugin</groupId>
+                <artifactId>maven-glassfish-plugin</artifactId>
+                <configuration>
+                    <user>${glassfish.username}</user>
+                    <passFile>${glassfish.passwordfile}</passFile>
+                    <domain>
+                        <name>${glassfish.domain}</name>
+                        <httpPort>${glassfish.httpPort}</httpPort>
+                        <adminPort>${glassfish.adminPort}</adminPort>
+                    </domain>
+
+                    <skip>false</skip>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codeartisans.asadmin</groupId>
+                <artifactId>asadmin-maven-plugin</artifactId>
+                <configuration>
+                    <glassfishHome>${glassfish.home}</glassfishHome>
+                    <domain>${glassfish.domain}</domain>
+                    <host>${glassfish.host}</host>
+                    <port>${glassfish.adminPort}</port>
+                    <user>${glassfish.username}</user>
+                    <passwordfile>${glassfish.passwordfile}</passwordfile>
+
+                    <!-- Deployment -->
+                    <appName>${deploy.name}</appName>
+                    <appArchive>${deploy.archive}</appArchive>
+                    <contextRoot>${deploy.contextroot}</contextRoot>
+
+                    <!-- JDBC connection pool -->
+                    <poolName>${derby.connectionpool.name}</poolName>
+                    <poolDataSource>${derby.connectionpool.datasource}</poolDataSource>
+                    <restype>${derby.connectionpool.resource.type}</restype>
+                    <poolProperties>
+                        <User>${derby.username}</User>
+                        <Password>${derby.password}</Password>
+                        <DatabaseName>${derby.database.name}</DatabaseName>
+                        <ServerName>${derby.server.name}</ServerName>
+                        <PortNumber>${derby.server.port}</PortNumber>
+                        <connectionAttributes>${derby.connection.attributes}</connectionAttributes>
+                    </poolProperties>
+
+                    <!-- JDBC resource -->
+                    <resourceName>${derby.jdbc.resource.name}</resourceName>
+
+                    <skip>false</skip>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven2-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

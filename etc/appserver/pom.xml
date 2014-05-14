@@ -1,188 +1,188 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>com.teoware.refapp</groupId>
-		<artifactId>etc</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <groupId>com.teoware.refapp</groupId>
+        <artifactId>refapp-etc</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
 
-	<artifactId>appserver</artifactId>
-	<packaging>pom</packaging>
-	<name>appserver</name>
-	<description>Appserver control</description>
+    <artifactId>refapp-appserver</artifactId>
+    <packaging>pom</packaging>
+    <name>appserver</name>
+    <description>Appserver control</description>
 
-	<!-- PROPERTIES -->
-	<properties>
-		<java.version>1.6</java.version>
-		<source.encoding>UTF-8</source.encoding>
+    <!-- PROPERTIES -->
+    <properties>
+        <java.version>1.6</java.version>
+        <source.encoding>UTF-8</source.encoding>
 
-		<!-- Env -->
-		<user.home>${env.HOME}</user.home>
+        <!-- Env -->
+        <user.home>${env.HOME}</user.home>
 
-		<!-- Deployment -->
-		<deploy.name>refapp</deploy.name>
-		<deploy.archive.path>../../code/refapp-ear/target</deploy.archive.path>
-		<deploy.archive.name>refapp-ear-0.0.1-SNAPSHOT.ear</deploy.archive.name>
-		<deploy.archive>${deploy.archive.path}/${deploy.archive.name}</deploy.archive>
-		<deploy.contextroot>refapp</deploy.contextroot>
+        <!-- Deployment -->
+        <deploy.name>refapp</deploy.name>
+        <deploy.archive.path>../../code/refapp-ear/target</deploy.archive.path>
+        <deploy.archive.name>refapp-ear-0.0.1-SNAPSHOT.ear</deploy.archive.name>
+        <deploy.archive>${deploy.archive.path}/${deploy.archive.name}</deploy.archive>
+        <deploy.contextroot>refapp</deploy.contextroot>
 
-		<!-- Glassfish -->
-		<glassfish.home>${env.GLASSFISH_HOME}</glassfish.home>
-		<glassfish.domain>domain1</glassfish.domain>
-		<glassfish.host>localhost</glassfish.host>
-		<glassfish.httpPort>8080</glassfish.httpPort>
-		<glassfish.adminPort>4848</glassfish.adminPort>
+        <!-- Glassfish -->
+        <glassfish.home>${env.GLASSFISH_HOME}</glassfish.home>
+        <glassfish.domain>domain1</glassfish.domain>
+        <glassfish.host>localhost</glassfish.host>
+        <glassfish.httpPort>8080</glassfish.httpPort>
+        <glassfish.adminPort>4848</glassfish.adminPort>
 
-		<!-- Derby database settings -->
-		<derby.database.name>refapp</derby.database.name>
-		<derby.server.name>localhost</derby.server.name>
-		<derby.server.port>1527</derby.server.port>
-		<derby.username>refapp</derby.username>
-		<derby.password>abcd1234</derby.password>
-		<derby.connection.attributes>;create\=true</derby.connection.attributes>
-		<derby.connectionpool.name>RefappDerbyPool</derby.connectionpool.name>
-		<derby.connectionpool.datasource>org.apache.derby.jdbc.ClientDataSource</derby.connectionpool.datasource>
-		<derby.connectionpool.resource.type>javax.sql.DataSource</derby.connectionpool.resource.type>
-		<derby.jdbc.resource.name>jdbc/refapp</derby.jdbc.resource.name>
+        <!-- Derby database settings -->
+        <derby.database.name>refapp</derby.database.name>
+        <derby.server.name>localhost</derby.server.name>
+        <derby.server.port>1527</derby.server.port>
+        <derby.username>refapp</derby.username>
+        <derby.password>abcd1234</derby.password>
+        <derby.connection.attributes>;create\=true</derby.connection.attributes>
+        <derby.connectionpool.name>RefappDerbyPool</derby.connectionpool.name>
+        <derby.connectionpool.datasource>org.apache.derby.jdbc.ClientDataSource</derby.connectionpool.datasource>
+        <derby.connectionpool.resource.type>javax.sql.DataSource</derby.connectionpool.resource.type>
+        <derby.jdbc.resource.name>jdbc/refapp</derby.jdbc.resource.name>
 
-		<!-- Plugins -->
-		<version.maven-clean-plugin>2.5</version.maven-clean-plugin>
-		<version.maven-compiler-plugin>2.5</version.maven-compiler-plugin>
-		<version.maven-glassfish-plugin>2.1</version.maven-glassfish-plugin>
-		<version.asadmin-maven-plugin>0.9</version.asadmin-maven-plugin>
-		<version.cargo-maven2-plugin>1.2.4</version.cargo-maven2-plugin>
+        <!-- Plugins -->
+        <version.maven-clean-plugin>2.5</version.maven-clean-plugin>
+        <version.maven-compiler-plugin>2.5</version.maven-compiler-plugin>
+        <version.maven-glassfish-plugin>2.1</version.maven-glassfish-plugin>
+        <version.asadmin-maven-plugin>0.9</version.asadmin-maven-plugin>
+        <version.cargo-maven2-plugin>1.2.4</version.cargo-maven2-plugin>
 
-		<!-- Dependencies -->
-	</properties>
+        <!-- Dependencies -->
+    </properties>
 
-	<!-- MODULES -->
-	<modules>
-		<module>appserver-glassfish</module>
-		<module>appserver-glassfish-security</module>
-	</modules>
+    <!-- MODULES -->
+    <modules>
+        <module>appserver-glassfish</module>
+        <module>appserver-glassfish-security</module>
+    </modules>
 
-	<!-- REPOSITORIES -->
-	<repositories>
-	</repositories>
+    <!-- REPOSITORIES -->
+    <repositories>
+    </repositories>
 
-	<!-- PLUGIN REPOSITORIES -->
-	<pluginRepositories>
-	</pluginRepositories>
+    <!-- PLUGIN REPOSITORIES -->
+    <pluginRepositories>
+    </pluginRepositories>
 
-	<!-- DEPENDENCIES -->
-	<dependencyManagement>
-		<dependencies>
-		</dependencies>
-	</dependencyManagement>
+    <!-- DEPENDENCIES -->
+    <dependencyManagement>
+        <dependencies>
+        </dependencies>
+    </dependencyManagement>
 
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-clean-plugin</artifactId>
-					<version>${version.maven-clean-plugin}</version>
-				</plugin>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${version.maven-clean-plugin}</version>
+                </plugin>
 
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>${version.maven-compiler-plugin}</version>
-					<configuration>
-						<source>${java.version}</source>
-						<target>${java.version}</target>
-						<encoding>${source.encoding}</encoding>
-					</configuration>
-				</plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${version.maven-compiler-plugin}</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <encoding>${source.encoding}</encoding>
+                    </configuration>
+                </plugin>
 
-				<plugin>
-					<groupId>org.glassfish.maven.plugin</groupId>
-					<artifactId>maven-glassfish-plugin</artifactId>
-					<version>${version.maven-glassfish-plugin}</version>
-					<configuration>
-						<skip>true</skip>
-					</configuration>
-				</plugin>
+                <plugin>
+                    <groupId>org.glassfish.maven.plugin</groupId>
+                    <artifactId>maven-glassfish-plugin</artifactId>
+                    <version>${version.maven-glassfish-plugin}</version>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
 
-				<plugin>
-					<groupId>org.codeartisans.asadmin</groupId>
-					<artifactId>asadmin-maven-plugin</artifactId>
-					<version>${version.asadmin-maven-plugin}</version>
-					<configuration>
-						<skip>true</skip>
-					</configuration>
-				</plugin>
+                <plugin>
+                    <groupId>org.codeartisans.asadmin</groupId>
+                    <artifactId>asadmin-maven-plugin</artifactId>
+                    <version>${version.asadmin-maven-plugin}</version>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
 
-				<plugin>
-					<groupId>org.codehaus.cargo</groupId>
-					<artifactId>cargo-maven2-plugin</artifactId>
-					<version>${version.cargo-maven2-plugin}</version>
-					<configuration>
-						<!-- <container> -->
-						<!-- <containerId>glassfish3x</containerId> -->
-						<!-- <type>installed</type> -->
-						<!-- <home>${glassfish.home}</home> -->
-						<!-- </container> -->
-						<!-- <configuration> -->
-						<!-- <type>standalone</type> -->
-						<!-- <properties> -->
-						<!-- <cargo.hostname>${glassfish.host}</cargo.hostname> -->
-						<!-- <cargo.servlet.port>${glassfish.httpPort}</cargo.servlet.port> -->
-						<!-- </properties> -->
-						<!-- </configuration> -->
-						<deployables>
-							<deployable>
-								<groupId>com.teoware.refapp</groupId>
-								<artifactId>refapp-ear</artifactId>
-								<type>ear</type>
-								<location>../../code/refapp-ear</location>
-							</deployable>
-						</deployables>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
+                <plugin>
+                    <groupId>org.codehaus.cargo</groupId>
+                    <artifactId>cargo-maven2-plugin</artifactId>
+                    <version>${version.cargo-maven2-plugin}</version>
+                    <configuration>
+                        <!-- <container> -->
+                        <!-- <containerId>glassfish3x</containerId> -->
+                        <!-- <type>installed</type> -->
+                        <!-- <home>${glassfish.home}</home> -->
+                        <!-- </container> -->
+                        <!-- <configuration> -->
+                        <!-- <type>standalone</type> -->
+                        <!-- <properties> -->
+                        <!-- <cargo.hostname>${glassfish.host}</cargo.hostname> -->
+                        <!-- <cargo.servlet.port>${glassfish.httpPort}</cargo.servlet.port> -->
+                        <!-- </properties> -->
+                        <!-- </configuration> -->
+                        <deployables>
+                            <deployable>
+                                <groupId>com.teoware.refapp</groupId>
+                                <artifactId>refapp-ear</artifactId>
+                                <type>ear</type>
+                                <location>../../code/refapp-ear</location>
+                            </deployable>
+                        </deployables>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
-	<!-- PROFILES -->
-	<profiles>
-		<profile>
-			<id>glassfish</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
+    <!-- PROFILES -->
+    <profiles>
+        <profile>
+            <id>glassfish</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
 
-			<modules>
-				<module>appserver-glassfish</module>
-			</modules>
+            <modules>
+                <module>appserver-glassfish</module>
+            </modules>
 
-			<build>
-				<pluginManagement>
-					<plugins>
-						<plugin>
-							<groupId>org.codehaus.cargo</groupId>
-							<artifactId>cargo-maven2-plugin</artifactId>
-							<configuration>
-								<container>
-									<containerId>glassfish3x</containerId>
-								</container>
-								<configuration>
-									<type>existing</type>
-									<home>${glassfish.home}</home>
-									<properties>
-										<cargo.hostname>${glassfish.host}</cargo.hostname>
-										<cargo.servlet.port>${glassfish.httpPort}</cargo.servlet.port>
-										<cargo.remote.username>admin</cargo.remote.username>
-										<cargo.remote.password>abcd1234</cargo.remote.password>
-									</properties>
-								</configuration>
-							</configuration>
-						</plugin>
-					</plugins>
-				</pluginManagement>
-			</build>
-		</profile>
-	</profiles>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.codehaus.cargo</groupId>
+                            <artifactId>cargo-maven2-plugin</artifactId>
+                            <configuration>
+                                <container>
+                                    <containerId>glassfish3x</containerId>
+                                </container>
+                                <configuration>
+                                    <type>existing</type>
+                                    <home>${glassfish.home}</home>
+                                    <properties>
+                                        <cargo.hostname>${glassfish.host}</cargo.hostname>
+                                        <cargo.servlet.port>${glassfish.httpPort}</cargo.servlet.port>
+                                        <cargo.remote.username>admin</cargo.remote.username>
+                                        <cargo.remote.password>abcd1234</cargo.remote.password>
+                                    </properties>
+                                </configuration>
+                            </configuration>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+    </profiles>
 </project>

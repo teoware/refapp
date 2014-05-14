@@ -1,25 +1,20 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/page.xhtml">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:param name="controller" value="#{defaultControllerBean}" />
 
-    <ui:composition template="templates/common.xhtml">
+    <ui:define name="content">
+        <div class="page-content page-part">
+            <a href="#{request.contextPath}/">Home</a>
+            <h2>#{controller.pageTitle}</h2>
+            <ul>
+                <li><a href="#{request.contextPath}/register_user.xhtml">Register</a></li>
+                <li><a href="#{request.contextPath}/list_users.xhtml">List</a></li>
+                <li><a href="#{request.contextPath}/find_user.xhtml">Find</a></li>
+            </ul>
+        </div>
+    </ui:define>
 
-        <ui:param name="controller" value="#{defaultControllerBean}" />
-
-        <ui:define name="content">
-            <div class="page-content page-part">
-                <a href="#{request.contextPath}/">&larr; Home</a>
-                <h2>#{controller.pageTitle}</h2>
-                <ul>
-                    <li><a href="register_user.xhtml">Register</a></li>
-                    <li><a href="list_users.xhtml">List</a></li>
-                    <li><a href="find_user.xhtml">Find</a></li>
-                </ul>
-            </div>
-        </ui:define>
-
-    </ui:composition>
-
-</html>
+</ui:composition>

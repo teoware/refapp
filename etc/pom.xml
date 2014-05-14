@@ -1,47 +1,47 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>com.teoware.refapp</groupId>
-		<artifactId>parent</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <groupId>com.teoware.refapp</groupId>
+        <artifactId>refapp-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
 
-	<artifactId>etc</artifactId>
-	<packaging>pom</packaging>
-	<name>etc</name>
-	<description>Environment and support POM</description>
+    <artifactId>refapp-etc</artifactId>
+    <packaging>pom</packaging>
+    <name>refapp-etc</name>
+    <description>Environment and support POM</description>
 
-	<!-- PROPERTIES -->
-	<properties>
-	</properties>
+    <!-- PROPERTIES -->
+    <properties>
+    </properties>
 
-	<!-- MODULES -->
-	<modules>
-		<module>appserver</module>
-		<module>database</module>
-	</modules>
+    <!-- MODULES -->
+    <modules>
+        <module>appserver</module>
+        <module>database</module>
+    </modules>
 
-	<!-- REPOSITORIES -->
-	<repositories>
-	</repositories>
+    <!-- REPOSITORIES -->
+    <repositories>
+    </repositories>
 
-	<!-- PLUGIN REPOSITORIES -->
-	<pluginRepositories>
-	</pluginRepositories>
+    <!-- PLUGIN REPOSITORIES -->
+    <pluginRepositories>
+    </pluginRepositories>
 
-	<!-- DEPENDENCIES -->
-	<dependencies>
-	</dependencies>
+    <!-- DEPENDENCIES -->
+    <dependencies>
+    </dependencies>
 
-	<!-- MAVEN PLUGINS -->
-	<build>
-		<plugins>
-		</plugins>
-	</build>
+    <!-- MAVEN PLUGINS -->
+    <build>
+        <plugins>
+        </plugins>
+    </build>
 
-	<!-- PROFILES -->
-	<profiles>
-	</profiles>
+    <!-- PROFILES -->
+    <profiles>
+    </profiles>
 </project>

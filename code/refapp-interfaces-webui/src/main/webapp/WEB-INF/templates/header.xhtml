@@ -1,0 +1,12 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <div class="page-header page-part">
+        <div class="page-header-title"><ui:insert name="page-title">#{controller.title}</ui:insert></div>
+        <ui:insert name="page-menu">
+            <ui:include src="menu.xhtml" />
+        </ui:insert>
+    </div>
+
+</ui:composition>

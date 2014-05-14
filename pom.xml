@@ -3,10 +3,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.teoware.refapp</groupId>
-    <artifactId>parent</artifactId>
+    <artifactId>refapp-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>parent</name>
+    <name>refapp-parent</name>
     <description>Super parent POM</description>
 
     <inceptionYear>2012</inceptionYear>
@@ -95,12 +95,6 @@
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>${version.logback}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-core</artifactId>
                 <version>${version.logback}</version>
             </dependency>
 

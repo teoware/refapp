@@ -1,0 +1,19 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:param name="home-active" value=" a" />
+    <ui:param name="users-active" value="" />
+
+    <div class="page-header-menu">
+        <ul class="menu">
+            <li class="home-menu-item menu-item#{home-active}">
+                <a class="home-menu-link menu-link#{home-active}" href="#{request.contextPath}/">Home</a>
+            </li>
+            <li class="users-menu-item menu-item#{users-active}">
+                <a class="users-menu-link menu-link#{users-active}" href="#{request.contextPath}/users.xhtml">Users</a>
+            </li>
+        </ul>
+    </div>
+
+</ui:composition>

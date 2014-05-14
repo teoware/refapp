@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html">
 
     <h:head>
         <title><ui:insert name="head-title">#{controller.fullTitle}</ui:insert></title>
-        <h:outputStylesheet library="css" name="common.css" />
-        <h:outputStylesheet library="css" name="normalize.css" />
+        <ui:include src="metadata.xhtml" />
     </h:head>
 
     <h:body>
 
         <div id="page" class="page">
 
-            <div id="header" class="header region">
+            <div id="header" class="header-region region clearfix">
                 <ui:insert name="header">
                     <ui:include src="header.xhtml" />
                 </ui:insert>
             </div>
 
-            <div id="content" class="content region">
+            <div id="content" class="content-region region clearfix">
                 <ui:insert name="content">
                     <ui:include src="content.xhtml" />
                 </ui:insert>
             </div>
 
-            <div id="footer" class="footer region">
+            <div id="footer" class="footer-region region clearfix">
                 <ui:insert name="footer">
                     <ui:include src="footer.xhtml" />
                 </ui:insert>
