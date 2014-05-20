@@ -4,12 +4,12 @@
 
     <parent>
         <groupId>com.teoware.refapp</groupId>
-        <artifactId>database</artifactId>
+        <artifactId>refapp-database</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>database-derby</artifactId>
-    <name>database-derby</name>
+    <artifactId>refapp-database-derby</artifactId>
+    <name>refapp-database-derby</name>
     <description>Derby database scripts</description>
 
     <!-- PROPERTIES -->

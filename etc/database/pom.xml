@@ -8,9 +8,9 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>database</artifactId>
+    <artifactId>refapp-database</artifactId>
     <packaging>pom</packaging>
-    <name>database</name>
+    <name>refapp-database</name>
     <description>Database scripts</description>
 
     <!-- PROPERTIES -->
