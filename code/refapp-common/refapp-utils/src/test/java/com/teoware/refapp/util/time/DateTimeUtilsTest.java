@@ -1,13 +1,13 @@
 package com.teoware.refapp.util.time;
 
-import static org.junit.Assert.assertEquals;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.junit.Test;
 
 import java.util.Calendar;
 import java.util.Date;
 
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class DateTimeUtilsTest {
 
@@ -276,7 +276,7 @@ public class DateTimeUtilsTest {
 
     @Test
     public void testSqlDateToString() {
-        java.sql.Date sqlDate = new java.sql.Date(0);
+        java.sql.Date sqlDate = new java.sql.Date(offsetInMillis());
         String str = DateTimeUtils.sqlDateToString(sqlDate);
 
         assertEquals("1970-01-01", str);
@@ -315,7 +315,6 @@ public class DateTimeUtilsTest {
     }
 
     private int offsetInMillis() {
-        int offset = DateTimeZone.UTC.getOffset(0) - DateTime.now().getZone().getOffset(0);
-        return offset;
+        return DateTimeZone.UTC.getOffset(0) - DateTime.now().getZone().getOffset(0);
     }
 }

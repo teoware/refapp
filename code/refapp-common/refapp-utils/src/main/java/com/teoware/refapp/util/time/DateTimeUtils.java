@@ -1,20 +1,20 @@
 package com.teoware.refapp.util.time;
 
+import org.joda.time.DateTime;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
-
-import org.joda.time.DateTime;
 
 /**
  * Utility class for converting between basic Java date/time objects, and for
  * converting to/from a date/time formatted strings.
  *
  * @author thomas@teoware.com
- *
  */
 public final class DateTimeUtils {
 
+    public static final int EPOC_MILLIS = 0;
     public static final int SECOND_IN_MILLIS = 1000;
     public static final int MINUTE_IN_MILLIS = SECOND_IN_MILLIS * 60;
     public static final int HOUR_IN_MILLIS = MINUTE_IN_MILLIS * 60;
