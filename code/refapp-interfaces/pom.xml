@@ -8,15 +8,15 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>refapp-batch</artifactId>
+    <artifactId>refapp-interfaces</artifactId>
     <packaging>pom</packaging>
-    <name>refapp-batch</name>
-    <description>Parent module for batch</description>
+    <name>refapp-interfaces</name>
+    <description>Parent module for interfaces</description>
 
     <!-- MODULES -->
     <modules>
-        <module>refapp-batch-common</module>
-        <module>refapp-batch-activation</module>
+        <module>refapp-interfaces-consumer</module>
+        <module>refapp-interfaces-webui</module>
     </modules>
 
     <!-- DEPENDENCIES -->
@@ -37,7 +37,7 @@
         <dependencies>
             <dependency>
                 <groupId>com.teoware.refapp</groupId>
-                <artifactId>refapp-batch-common</artifactId>
+                <artifactId>refapp-interfaces-consumer</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

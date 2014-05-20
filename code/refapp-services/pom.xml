@@ -8,15 +8,15 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>refapp-batch</artifactId>
+    <artifactId>refapp-services</artifactId>
     <packaging>pom</packaging>
-    <name>refapp-batch</name>
-    <description>Parent module for batch</description>
+    <name>refapp-services</name>
+    <description>Parent module for services</description>
 
     <!-- MODULES -->
     <modules>
-        <module>refapp-batch-common</module>
-        <module>refapp-batch-activation</module>
+        <module>refapp-services-facade</module>
+        <module>refapp-services-logic</module>
     </modules>
 
     <!-- DEPENDENCIES -->
@@ -37,7 +37,7 @@
         <dependencies>
             <dependency>
                 <groupId>com.teoware.refapp</groupId>
-                <artifactId>refapp-batch-common</artifactId>
+                <artifactId>refapp-services-logic</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

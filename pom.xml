@@ -64,18 +64,7 @@
         <module>code</module>
     </modules>
 
-    <!-- REPOSITORIES -->
-    <repositories>
-    </repositories>
-
-    <!-- PLUGIN REPOSITORIES -->
-    <pluginRepositories>
-    </pluginRepositories>
-
     <!-- DEPENDENCIES -->
-    <dependencies>
-    </dependencies>
-
     <dependencyManagement>
         <dependencies>
             <!-- Utils -->
@@ -119,6 +108,12 @@
                 <artifactId>glassfish-embedded-all</artifactId>
                 <version>${version.glassfish-embedded-all}</version>
                 <scope>provided</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <dependency>
@@ -129,14 +124,4 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <!-- MAVEN PLUGINS -->
-    <build>
-        <plugins>
-        </plugins>
-    </build>
-
-    <!-- PROFILES -->
-    <profiles>
-    </profiles>
 </project>

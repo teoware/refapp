@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.teoware.refapp</groupId>
+        <artifactId>refapp-batch</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>refapp-batch-activation</artifactId>
+    <packaging>war</packaging>
+    <name>refapp-batch-activation</name>
+    <description>Module for activation batch</description>
+
+    <!-- DEPENDENCIES -->
+    <dependencies>
+        <!-- Java EE -->
+        <dependency>
+            <groupId>org.glassfish.extras</groupId>
+            <artifactId>glassfish-embedded-all</artifactId>
+        </dependency>
+
+        <!-- Network -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-email</artifactId>
+        </dependency>
+
+        <!-- Project -->
+        <dependency>
+            <groupId>com.teoware.refapp</groupId>
+            <artifactId>refapp-domain</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.teoware.refapp</groupId>
+            <artifactId>refapp-schedule</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.teoware.refapp</groupId>
+            <artifactId>refapp-batch-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.teoware.refapp</groupId>
+            <artifactId>refapp-services-facade</artifactId>
+        </dependency>
+    </dependencies>
+</project>

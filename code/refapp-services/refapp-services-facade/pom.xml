@@ -4,27 +4,38 @@
 
     <parent>
         <groupId>com.teoware.refapp</groupId>
-        <artifactId>refapp</artifactId>
+        <artifactId>refapp-services</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>refapp-schedule</artifactId>
+    <artifactId>refapp-services-facade</artifactId>
     <packaging>jar</packaging>
-    <name>refapp-schedule</name>
-    <description>Module for scheduling and timing behaviour</description>
+    <name>refapp-services-facade</name>
+    <description>Business logic facade layer</description>
 
     <!-- DEPENDENCIES -->
     <dependencies>
+        <!-- Java EE -->
+        <dependency>
+            <groupId>org.glassfish.extras</groupId>
+            <artifactId>glassfish-embedded-all</artifactId>
+        </dependency>
+
+        <!-- Validation -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+
         <!-- Project -->
         <dependency>
             <groupId>com.teoware.refapp</groupId>
-            <artifactId>refapp-utils</artifactId>
+            <artifactId>refapp-domain</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.teoware.refapp</groupId>
-            <artifactId>refapp-testtools</artifactId>
-            <!-- Test scope -->
+            <artifactId>refapp-services-logic</artifactId>
         </dependency>
     </dependencies>
 </project>

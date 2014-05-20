@@ -8,15 +8,14 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>refapp-batch</artifactId>
+    <artifactId>refapp-infrastructure</artifactId>
     <packaging>pom</packaging>
-    <name>refapp-batch</name>
-    <description>Parent module for batch</description>
+    <name>refapp-infrastructure</name>
+    <description>Parent module for infrastructure</description>
 
     <!-- MODULES -->
     <modules>
-        <module>refapp-batch-common</module>
-        <module>refapp-batch-activation</module>
+        <module>refapp-infrastructure-dao</module>
     </modules>
 
     <!-- DEPENDENCIES -->
@@ -32,14 +31,4 @@
             <!-- Test scope -->
         </dependency>
     </dependencies>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.teoware.refapp</groupId>
-                <artifactId>refapp-batch-common</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 </project>

@@ -21,23 +21,16 @@
         <jaxb.generate.directory>${project.basedir}/src/main/generated</jaxb.generate.directory>
     </properties>
 
-    <!-- MODULES -->
-    <modules>
-    </modules>
-
-    <!-- REPOSITORIES -->
-    <repositories>
-    </repositories>
-
-    <!-- PLUGIN REPOSITORIES -->
-    <pluginRepositories>
-    </pluginRepositories>
-
     <!-- DEPENDENCIES -->
     <dependencies>
+        <dependency>
+            <groupId>com.teoware.refapp</groupId>
+            <artifactId>refapp-testtools</artifactId>
+            <!-- Test scope -->
+        </dependency>
     </dependencies>
 
-    <!-- MAVEN PLUGINS -->
+    <!-- MAVEN BUILD AND PLUGINS -->
     <build>
         <plugins>
             <plugin>
@@ -105,8 +98,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <!-- PROFILES -->
-    <profiles>
-    </profiles>
 </project>

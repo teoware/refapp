@@ -9,66 +9,13 @@
     </parent>
 
     <artifactId>refapp-common</artifactId>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
     <name>refapp-common</name>
-    <description>Module for common functionality and utils</description>
-
-    <!-- PROPERTIES -->
-    <properties>
-    </properties>
+    <description>Parent module for common modules</description>
 
     <!-- MODULES -->
     <modules>
+        <module>refapp-testtools</module>
+        <module>refapp-utils</module>
     </modules>
-
-    <!-- REPOSITORIES -->
-    <repositories>
-    </repositories>
-
-    <!-- PLUGIN REPOSITORIES -->
-    <pluginRepositories>
-    </pluginRepositories>
-
-    <!-- DEPENDENCIES -->
-    <dependencies>
-        <!-- Security -->
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk16</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-        </dependency>
-
-        <!-- Testing -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <scope>compile</scope>
-        </dependency>
-
-        <!-- Project -->
-        <dependency>
-            <groupId>com.teoware.refapp</groupId>
-            <artifactId>refapp-domain</artifactId>
-        </dependency>
-    </dependencies>
-
-    <!-- MAVEN PLUGINS -->
-    <build>
-        <plugins>
-        </plugins>
-    </build>
-
-    <!-- PROFILES -->
-    <profiles>
-    </profiles>
 </project>

@@ -4,27 +4,26 @@
 
     <parent>
         <groupId>com.teoware.refapp</groupId>
-        <artifactId>refapp</artifactId>
+        <artifactId>refapp-interfaces</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>refapp-schedule</artifactId>
-    <packaging>jar</packaging>
-    <name>refapp-schedule</name>
-    <description>Module for scheduling and timing behaviour</description>
+    <artifactId>refapp-interfaces-webui</artifactId>
+    <packaging>war</packaging>
+    <name>refapp-interfaces-webui</name>
+    <description>Web presentation layer</description>
 
     <!-- DEPENDENCIES -->
     <dependencies>
         <!-- Project -->
         <dependency>
             <groupId>com.teoware.refapp</groupId>
-            <artifactId>refapp-utils</artifactId>
+            <artifactId>refapp-domain</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.teoware.refapp</groupId>
-            <artifactId>refapp-testtools</artifactId>
-            <!-- Test scope -->
+            <artifactId>refapp-interfaces-consumer</artifactId>
         </dependency>
     </dependencies>
 </project>

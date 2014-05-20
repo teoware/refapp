@@ -4,27 +4,37 @@
 
     <parent>
         <groupId>com.teoware.refapp</groupId>
-        <artifactId>refapp</artifactId>
+        <artifactId>refapp-interfaces</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>refapp-schedule</artifactId>
+    <artifactId>refapp-interfaces-consumer</artifactId>
     <packaging>jar</packaging>
-    <name>refapp-schedule</name>
-    <description>Module for scheduling and timing behaviour</description>
+    <name>refapp-interfaces-consumer</name>
+    <description>Service consumer for interface layer</description>
 
     <!-- DEPENDENCIES -->
     <dependencies>
+        <!-- Testing -->
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito</artifactId>
+        </dependency>
+
         <!-- Project -->
         <dependency>
             <groupId>com.teoware.refapp</groupId>
-            <artifactId>refapp-utils</artifactId>
+            <artifactId>refapp-domain</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.teoware.refapp</groupId>
-            <artifactId>refapp-testtools</artifactId>
-            <!-- Test scope -->
+            <artifactId>refapp-services-facade</artifactId>
         </dependency>
     </dependencies>
 </project>
