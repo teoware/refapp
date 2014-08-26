@@ -17,5 +17,6 @@
     <modules>
         <module>refapp-testtools</module>
         <module>refapp-utils</module>
+        <module>refapp-crypto</module>
     </modules>
 </project>

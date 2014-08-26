@@ -9,6 +9,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import com.teoware.refapp.properties.PropertiesFile;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

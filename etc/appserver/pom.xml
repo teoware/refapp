@@ -52,9 +52,9 @@
         <version.maven-compiler-plugin>2.5</version.maven-compiler-plugin>
         <version.maven-glassfish-plugin>2.1</version.maven-glassfish-plugin>
         <version.asadmin-maven-plugin>0.9</version.asadmin-maven-plugin>
-        <version.cargo-maven2-plugin>1.2.4</version.cargo-maven2-plugin>
 
         <!-- Dependencies -->
+        <version.refapp-utils>0.0.1-SNAPSHOT</version.refapp-utils>
     </properties>
 
     <!-- MODULES -->
@@ -74,6 +74,11 @@
     <!-- DEPENDENCIES -->
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.teoware.refapp</groupId>
+                <artifactId>refapp-utils</artifactId>
+                <version>${version.refapp-utils}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -114,75 +119,7 @@
                         <skip>true</skip>
                     </configuration>
                 </plugin>
-
-                <plugin>
-                    <groupId>org.codehaus.cargo</groupId>
-                    <artifactId>cargo-maven2-plugin</artifactId>
-                    <version>${version.cargo-maven2-plugin}</version>
-                    <configuration>
-                        <!-- <container> -->
-                        <!-- <containerId>glassfish3x</containerId> -->
-                        <!-- <type>installed</type> -->
-                        <!-- <home>${glassfish.home}</home> -->
-                        <!-- </container> -->
-                        <!-- <configuration> -->
-                        <!-- <type>standalone</type> -->
-                        <!-- <properties> -->
-                        <!-- <cargo.hostname>${glassfish.host}</cargo.hostname> -->
-                        <!-- <cargo.servlet.port>${glassfish.httpPort}</cargo.servlet.port> -->
-                        <!-- </properties> -->
-                        <!-- </configuration> -->
-                        <deployables>
-                            <deployable>
-                                <groupId>com.teoware.refapp</groupId>
-                                <artifactId>refapp-ear</artifactId>
-                                <type>ear</type>
-                                <location>../../code/refapp-ear</location>
-                            </deployable>
-                        </deployables>
-                    </configuration>
-                </plugin>
             </plugins>
         </pluginManagement>
     </build>
-
-    <!-- PROFILES -->
-    <profiles>
-        <profile>
-            <id>glassfish</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-
-            <modules>
-                <module>appserver-glassfish</module>
-            </modules>
-
-            <build>
-                <pluginManagement>
-                    <plugins>
-                        <plugin>
-                            <groupId>org.codehaus.cargo</groupId>
-                            <artifactId>cargo-maven2-plugin</artifactId>
-                            <configuration>
-                                <container>
-                                    <containerId>glassfish3x</containerId>
-                                </container>
-                                <configuration>
-                                    <type>existing</type>
-                                    <home>${glassfish.home}</home>
-                                    <properties>
-                                        <cargo.hostname>${glassfish.host}</cargo.hostname>
-                                        <cargo.servlet.port>${glassfish.httpPort}</cargo.servlet.port>
-                                        <cargo.remote.username>admin</cargo.remote.username>
-                                        <cargo.remote.password>abcd1234</cargo.remote.password>
-                                    </properties>
-                                </configuration>
-                            </configuration>
-                        </plugin>
-                    </plugins>
-                </pluginManagement>
-            </build>
-        </profile>
-    </profiles>
 </project>

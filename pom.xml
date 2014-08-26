@@ -27,7 +27,7 @@
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -41,6 +41,22 @@
 
     <!-- PROPERTIES -->
     <properties>
+        <app.name>refapp</app.name>
+        <app.release.version>${project.version}</app.release.version>
+
+        <downloadSources>true</downloadSources>
+        <downloadJavadocs>true</downloadJavadocs>
+
+        <java.version>1.6</java.version>
+        <source.encoding>UTF-8</source.encoding>
+        <ejb.version>3.0</ejb.version>
+        <ear.version>5</ear.version>
+
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+
+        <project.build.sourceEncoding>${source.encoding}</project.build.sourceEncoding>
+        
         <!-- Dependencies -->
         <!-- Utils -->
         <version.joda-time>2.1</version.joda-time>

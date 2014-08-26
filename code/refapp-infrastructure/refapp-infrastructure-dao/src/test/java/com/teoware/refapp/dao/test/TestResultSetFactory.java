@@ -12,7 +12,7 @@ import com.teoware.refapp.model.note.Note;
 import com.teoware.refapp.model.task.Task;
 import com.teoware.refapp.model.user.User;
 import com.teoware.refapp.model.user.UserPassword;
-import com.teoware.refapp.util.time.DateTimeConverter;
+import com.teoware.refapp.time.DateTimeConverter;
 
 public final class TestResultSetFactory {
 

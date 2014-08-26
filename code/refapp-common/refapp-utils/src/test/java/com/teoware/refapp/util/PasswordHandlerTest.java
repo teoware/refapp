@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.UnsupportedEncodingException;
 
+import com.teoware.refapp.auth.PasswordHandler;
 import org.junit.Test;
 
 public class PasswordHandlerTest {

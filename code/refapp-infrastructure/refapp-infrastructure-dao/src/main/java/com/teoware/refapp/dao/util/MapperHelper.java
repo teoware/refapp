@@ -4,7 +4,7 @@ import org.joda.time.DateTime;
 
 import com.teoware.refapp.model.enums.Gender;
 import com.teoware.refapp.model.enums.Status;
-import com.teoware.refapp.util.time.DateTimeConverter;
+import com.teoware.refapp.time.DateTimeConverter;
 
 public final class MapperHelper {
 

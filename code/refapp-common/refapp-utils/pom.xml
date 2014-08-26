@@ -15,17 +15,6 @@
 
     <!-- DEPENDENCIES -->
     <dependencies>
-        <!-- Security -->
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk16</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-        </dependency>
-
         <!-- Project -->
         <dependency>
             <groupId>com.teoware.refapp</groupId>
@@ -36,6 +25,11 @@
             <groupId>com.teoware.refapp</groupId>
             <artifactId>refapp-testtools</artifactId>
             <!-- Test scope -->
+        </dependency>
+
+        <dependency>
+            <groupId>com.teoware.refapp</groupId>
+            <artifactId>refapp-crypto</artifactId>
         </dependency>
     </dependencies>
 </project>

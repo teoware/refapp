@@ -5,27 +5,45 @@ import com.sun.enterprise.security.auth.realm.BadRealmException;
 import com.sun.enterprise.security.auth.realm.InvalidOperationException;
 import com.sun.enterprise.security.auth.realm.NoSuchRealmException;
 import com.sun.enterprise.security.auth.realm.NoSuchUserException;
+import com.teoware.refapp.auth.PasswordHandler;
+import com.teoware.refapp.glassfish.security.domain.User;
 
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Properties;
-import java.util.logging.Level;
+import java.util.Vector;
+import java.util.logging.Logger;
+
+import static java.util.logging.Level.INFO;
+import static java.util.logging.Level.SEVERE;
 
 public class RefappRealm extends AppservRealm {
 
-    private static final String REALM_NAME = "RefappRealm";
+    private static final Logger LOGGER = Logger.getLogger(RefappRealm.class.getName());
     private static final String REALM_READABLE_NAME = "Refapp Realm";
-    private static final String REALM_JDBC_JNDI = "jdbc/refapp";
     private static final String REALM_JAAS_CONTEXT_KEY = "jaas-context";
-    private static final String REALM_DATASOURCE_KEY = "dataSource";
+    private static final String REALM_DATASOURCE_KEY = "data-source";
 
-    private String jaasContexName;
-    private String dataSource;
+    public RefappRealm() {
+        LOGGER.log(INFO, "RefappRealm constructed");
+    }
 
     @Override
-    protected void init(Properties props) throws BadRealmException, NoSuchRealmException {
-        _logger.fine("init()");
-        jaasContexName = props.getProperty(REALM_JAAS_CONTEXT_KEY, REALM_NAME);
-        dataSource = props.getProperty(REALM_DATASOURCE_KEY, REALM_JDBC_JNDI);
+    protected void init(Properties properties) throws BadRealmException, NoSuchRealmException {
+        LOGGER.log(INFO, "RefappRealm init()");
+        setRealmProperties(properties, REALM_JAAS_CONTEXT_KEY, REALM_DATASOURCE_KEY);
+    }
+
+    private void setRealmProperties(Properties properties, String... keys) {
+        for (String key : keys) {
+            String value = properties.getProperty(key);
+            if (value != null) {
+                LOGGER.log(INFO, "RefappRealm setting property {0}={1}", new Object[]{key, value});
+                setProperty(key, value);
+            } else {
+                LOGGER.log(SEVERE, "RefappRealm no property found for key {0}", key);
+            }
+        }
     }
 
     @Override
@@ -34,35 +52,23 @@ public class RefappRealm extends AppservRealm {
     }
 
     @Override
-    public synchronized String getJAASContext() {
-        return jaasContexName;
+    public Enumeration<String> getGroupNames(String username) throws InvalidOperationException, NoSuchUserException {
+        SecurityStore store = createSecurityStore();
+        List<String> groups = store.getUserGroups(username);
+        return new Vector<String>(groups).elements();
     }
 
-    @Override
-    public Enumeration<?> getGroupNames(String string) throws InvalidOperationException, NoSuchUserException {
-        return null;
-    }
-
-    public String[] authenticate(String username, String password) throws Exception {
-        SecurityStore store = new SecurityStore(dataSource);
-
-        String salt = store.getSalt(username);
-
-        String[] result = null;
-
-        if (salt != null) {
-            byte[] saltBytes = Base64.decode(salt);
-
-            byte[] passwordBytes = Digest.digest(password, saltBytes);
-
-            String passwordHash = Base64.encode(passwordBytes);
-            _logger.log(Level.FINE, "PWD Generated {0}", passwordHash);
-
-            if (store.validateUser(username, passwordHash)) {
-                result = new String[1];
-                result[0] = "ValidUser";
-            }
+    public boolean doAuthenticate(String username, String password) {
+        SecurityStore store = createSecurityStore();
+        User user = store.getUser(username);
+        if (user != null) {
+            return PasswordHandler.verifyPassword(password, user.getSalt(), user.getPassword());
         }
-        return result;
+        return Boolean.FALSE;
+    }
+
+    private SecurityStore createSecurityStore() {
+        String dataSource = getProperty(REALM_DATASOURCE_KEY);
+        return new SecurityStore(dataSource);
     }
 }

@@ -15,22 +15,6 @@
 
     <!-- PROPERTIES -->
     <properties>
-        <app.name>refapp</app.name>
-        <app.release.version>${project.version}</app.release.version>
-
-        <downloadSources>true</downloadSources>
-        <downloadJavadocs>true</downloadJavadocs>
-
-        <java.version>1.6</java.version>
-        <source.encoding>UTF-8</source.encoding>
-        <ejb.version>3.0</ejb.version>
-        <ear.version>5</ear.version>
-
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-
-        <project.build.sourceEncoding>${source.encoding}</project.build.sourceEncoding>
-
         <!-- Plugins -->
         <version.maven-clean-plugin>2.5</version.maven-clean-plugin>
         <version.maven-compiler-plugin>2.5</version.maven-compiler-plugin>
@@ -56,7 +40,7 @@
         <!-- Network -->
         <version.commons-email>1.3.1</version.commons-email>
         <!-- Security -->
-        <version.bcprov-jdk16>1.46</version.bcprov-jdk16>
+        <version.bouncycastle>1.46</version.bouncycastle>
         <version.commons-codec>1.7</version.commons-codec>
         <!-- Database -->
         <version.derby>10.8.2.2</version.derby>
@@ -136,7 +120,7 @@
             <dependency>
                 <groupId>org.bouncycastle</groupId>
                 <artifactId>bcprov-jdk16</artifactId>
-                <version>${version.bcprov-jdk16}</version>
+                <version>${version.bouncycastle}</version>
             </dependency>
 
             <dependency>
@@ -197,6 +181,12 @@
             <dependency>
                 <groupId>com.teoware.refapp</groupId>
                 <artifactId>refapp-utils</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.teoware.refapp</groupId>
+                <artifactId>refapp-crypto</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

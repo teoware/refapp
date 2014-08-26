@@ -2,6 +2,7 @@ package com.teoware.refapp.util.time;
 
 import static org.junit.Assert.assertEquals;
 
+import com.teoware.refapp.time.DateTimeAdapter;
 import org.joda.time.DateTime;
 import org.junit.Test;
 

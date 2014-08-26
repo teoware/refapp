@@ -3,9 +3,10 @@ package com.teoware.refapp.util;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.teoware.refapp.validation.BeanValidator;
 import org.junit.Test;
 
-import com.teoware.refapp.util.BeanValidator.ValidationException;
+import com.teoware.refapp.validation.BeanValidator.ValidationException;
 
 public class BeanValidatorTest {
 

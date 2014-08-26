@@ -29,7 +29,7 @@ import com.teoware.refapp.service.dto.RegisterUserRequest;
 import com.teoware.refapp.service.dto.RegisterUserResponse;
 import com.teoware.refapp.service.facade.UserServiceFacade;
 import com.teoware.refapp.service.validation.ValidationException;
-import com.teoware.refapp.util.PasswordHandler;
+import com.teoware.refapp.auth.PasswordHandler;
 import com.teoware.refapp.web.consumer.vo.FindUserRequestVO;
 import com.teoware.refapp.web.consumer.vo.RegisterUserRequestVO;
 

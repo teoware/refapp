@@ -41,6 +41,11 @@
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.teoware.refapp</groupId>
+            <artifactId>refapp-utils</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -56,8 +61,8 @@
             </plugin>
 
             <plugin>
-                <groupId>org.codehaus.cargo</groupId>
-                <artifactId>cargo-maven2-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

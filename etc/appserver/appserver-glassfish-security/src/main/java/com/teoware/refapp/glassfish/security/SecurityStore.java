@@ -1,5 +1,7 @@
 package com.teoware.refapp.glassfish.security;
 
+import com.teoware.refapp.glassfish.security.domain.User;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -8,12 +10,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SecurityStore {
 
     private final static Logger LOGGER = Logger.getLogger(SecurityStore.class.getName());
+    private final static String AUTH_USER_V_SQL = "SELECT * FROM auth_users_v WHERE username = ?;";
+    private final static String AUTH_GROUPS_V_SQL = "SELECT groupname FROM auth_groups_v WHERE username = ?;";
+    private final static String GROUPS_SQL = "SELECT groupname FROM groups;";
 
     private DataSource dataSource;
 
@@ -21,96 +29,75 @@ public class SecurityStore {
         dataSource = lookupDataSource(dataSourceName);
     }
 
-    public void addUser(String username, String salt, String password) {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = createConnection();
-            statement = connection.prepareStatement(SQL.ADD_USER);
-            statement.setString(1, username);
-            statement.setString(2, salt);
-            statement.setString(3, password);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE, "Create User failed", e);
-        } finally {
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                // Ignore
-            }
-        }
-    }
-
-    public String getSalt(String username) {
+    public User getUser(String username) {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet result = null;
-        String salt = null;
+        User user = null;
         try {
             connection = createConnection();
-            statement = connection.prepareStatement(SQL.SALT_FOR_USER);
+            statement = connection.prepareStatement(AUTH_USER_V_SQL);
             statement.setString(1, username);
             result = statement.executeQuery();
             if (result.next()) {
-                salt = result.getString(1);
+                user = new User();
+                user.setUsername(result.getString(1));
+                user.setPassword(result.getString(2));
+                user.setSalt(result.getString(3));
             }
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "User not found", e);
         } finally {
-            try {
-                if (result != null) {
-                    result.close();
-                }
-                if (statement != null) {
-                    statement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                // Ignore
-            }
+            close(result);
+            close(statement);
+            close(connection);
         }
-        return salt;
+        return user;
     }
 
-    public boolean validateUser(String name, String password) {
+    public List<String> getUserGroups(String username) {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet result = null;
+        List<String> groups = new ArrayList<String>();
         try {
             connection = createConnection();
-            statement = connection.prepareStatement(SQL.VERIFY_USER);
-            statement.setString(1, name);
-            statement.setString(2, password);
+            statement = connection.prepareStatement(AUTH_GROUPS_V_SQL);
+            statement.setString(1, username);
             result = statement.executeQuery();
             if (result.next()) {
-                return true;
+                groups.add(result.getString(1));
             }
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "User validation failed", e);
         } finally {
-            try {
-                if (result != null) {
-                    result.close();
-                }
-                if (statement != null) {
-                    statement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                // Ignore
-            }
+            close(result);
+            close(statement);
+            close(connection);
         }
-        return false;
+        return groups;
+    }
+
+    public List<String> getAllGroups() {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        List<String> groups = new ArrayList<String>();
+        try {
+            connection = createConnection();
+            statement = connection.prepareStatement(GROUPS_SQL);
+            result = statement.executeQuery();
+            if (result.next()) {
+                groups.add(result.getString(1));
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "User validation failed", e);
+        } finally {
+            close(result);
+            close(statement);
+            close(connection);
+        }
+        return groups;
     }
 
     private Connection createConnection() {
@@ -140,5 +127,35 @@ public class SecurityStore {
             }
         }
         return null;
+    }
+
+    private void close(Connection connection) {
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                // Ignore
+            }
+        }
+    }
+
+    private void close(Statement statement) {
+        if (statement != null) {
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                // Ignore
+            }
+        }
+    }
+
+    private void close(ResultSet result) {
+        if (result != null) {
+            try {
+                result.close();
+            } catch (SQLException e) {
+                // Ignore
+            }
+        }
     }
 }

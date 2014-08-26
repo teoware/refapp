@@ -24,7 +24,7 @@ import com.teoware.refapp.service.dto.SuspendUserRequest;
 import com.teoware.refapp.service.dto.SuspendUserResponse;
 import com.teoware.refapp.service.facade.UserServiceFacade;
 import com.teoware.refapp.service.validation.ValidationException;
-import com.teoware.refapp.util.PasswordHandler;
+import com.teoware.refapp.auth.PasswordHandler;
 import com.teoware.refapp.web.consumer.error.ErrorHandler;
 import com.teoware.refapp.web.consumer.error.ValidationHandler;
 import com.teoware.refapp.web.consumer.vo.ActivateUserRequestVO;
